@@ -1,117 +1,117 @@
-/** NeuroSurge scene: virtual keyboard, gaze and click input state.
- *
- * WASD, Space, pointer yaw/pitch and clicks are VIRTUAL game-control inputs only. They are not real
- * neural stimulation, brain writing or neural decoding, and nothing here is a measured quantity.
- *
- * The core is DOM-free and runs in Node tests. State is plain, serializable data:
- *   { keys: { KeyW, KeyA, KeyS, KeyD, Space: boolean }, yaw: radians, pitch: radians, lookMs: number | null,
- *     events: [], ui: [], look: { sensitivity: number, invertY: boolean }, space: (the Space gesture, SPACE_GESTURE) }
- * `look` (A1-activation round 1) holds the player's look settings: `sensitivity` multiplies the base
- * sensitivityRadPerPx (1 = 0.0038 rad/px) and `invertY` flips the vertical look direction. A state without
- * `look` (older callers) uses the reducer defaults.
- *
- * U1-controls round 2. Two event queues, so a consumer that only understands the game events keeps working:
- *   events  the GAME queue, drained by drainEvents(): { type: 'click', timeMs? }
- *           | R558 (user Message 40) the Space key, read as gestures (SPACE_GESTURE): { type: 'grasp', down, behind?,
- *           safety?, timeMs? } (a hold or tap takes hold / lets go) and { type: 'turn', phase: 'step' | 'hold' | 'stop',
- *           safety?, timeMs? } (a double tap turns every limb once; held, the turn goes on slowly; let go, it stops).
- *           A release or stop produced by a safety release (blur, focus/visibility loss, Ctrl/Meta chord, pointer-lock
- *           change, Esc) carries `safety: true`. The raw { type: 'space' } key event of earlier rounds is no longer queued.
- *   ui      the UI queue, drained by drainUiEvents(): { type: 'escape' } (Esc keydown), { type: 'lock', locked }
- *           (every real pointer-lock change), and the overlay commands { type: 'orbit', dir }, { type: 'reset' },
- *           { type: 'resume' }, { type: 'pause' } (from uiCommand / `data-ns-ui` buttons). Each carries timeMs when known.
- *           ns-actions createActivity().step accepts every one of these events directly (instructions, pause,
- *           orbit and Reset body live in the activity state).
- *           21 November 2026 (EMAP): { type: 'emap' } (the map key, EMAP_CODE = M) asks for the electrical map on or
- *           off (ns-emap; a page command like 'detail': ns-app toggles it through bindDom's options.onEmap).
- *           R4-arm: { type: 'detail' } (the information key, DETAIL_CODE = R) asks the information panel to show or hide
- *           its More detail section. It is a page (panel) command, NOT an activity event: do not pass it to
- *           ns-actions step (which refuses unknown types); ns-app opens or closes the panel section instead (bindDom
- *           options.onDetail). Like every control it is a virtual game input: it reads nothing from the body or brain.
- * R558 (Message 40): the Space gestures (hold, tap, double tap, double tap and hold) are recognised HERE, on the input's
- * own times (timeMs), by a small pure state machine in the controls state (`space`; see SPACE_GESTURE). A hold or a tap
- * takes hold at the press itself (no wait for a possible second tap); the one timed decision without an input, "the
- * double tap is still held", is made by tickSpace(state, nowMs), which the game calls once per frame. The game tells the
- * machine what it holds and whether a turn still runs with noteSpace(state, { holding, turning }) after each frame.
- *
- * Clocks (browser-findings repair R2): every queued event carries `timeMs`, the monotonic performance-timeline time of
- * the real input (DOM event.timeStamp when it is on that timeline, else performance.now() in the handler), and
- * `lookMs` is the time of the latest look movement. ns-app places each input at its own time inside the frame
- * interval, so the 1 s pulse and the release window are measured from the input itself. Held W/A/S/D keys are an
- * aggregate STATE (axes), not events: there is no per-key causal trace of the reach movement and none is fabricated.
- * Every reducer returns a NEW state object when something changes (the same object when nothing
- * changes) and never mutates its input. drainEvents(state) is the single consuming operation: it
- * returns the queued events and empties that state's queue in place, so each event is delivered once.
- *
- * Sign conventions: yaw is left-positive about +y and pitch is up-positive, matching the ns-brain
- * camera gaze direction (-sin(yaw)cos(pitch), sin(pitch), -cos(yaw)cos(pitch)). Pointer right
- * (dx > 0) therefore turns the view right, and pointer down (dy > 0, screen y grows downwards)
- * tilts it down (up when invertY is set).
- *
- * R5-input (round 5, R20 / R22 / R23; lead decisions D16, D18, D19). Added state, all plain data (a state from an older
- * caller without these fields is read with the defaults):
- *   view key  E (VIEW_CODE) queues { type: 'view', seq } on the UI queue: a REQUEST to switch first person <-> third
- *           person. The camera owner decides (ns-camera toggleView, R5-camera: it may refuse, e.g. while Space drags the
- *           brain) and keeps the view state; the controls keep ONE look (state.yaw / state.pitch = the look of the active
- *           camera). On a switch the app hands the controls the camera's look with setLook (ns-camera controlsLook: the
- *           default third-person look, or the stored first-person look EXACTLY on the way back) and, optionally, the
- *           third-person pitch range with setPitchLimits (same effect as ns-camera constrainLook every frame). The mouse
- *           then turns that look with the same sensitivity and invert-Y in both views (third person: the camera boom
- *           about the body, any yaw).
- *   pitchLimits { min, max (radians), minDeg, maxDeg } | null: the pitch range pointerMove keeps (null = +/- pitchLimitDeg).
- *   pointer { x, y, timeMs } | null: the free mouse pointer in canvas CSS px (only while the pointer is NOT captured;
- *           null while captured or outside the canvas), so the 3D orbit arrows can be hovered and pressed with a free
- *           mouse (arrowPickPoint).
- *   button  { down, seq, downMs, upMs, via, x, y }: any mouse / trackpad button. seq counts presses (a press while a
- *           button is already down is the same gesture and does not count); via 'crosshair' (captured) | 'pointer'
- *           (free mouse); x / y the free pointer at the press (null when captured). Every safety release (blur,
- *           visibility, pointer-lock change, Ctrl/Meta chord, Esc) lets the button go, so no arrow hold can stick.
- * UI queue additions: { type: 'view', seq } after each E press (a camera command like 'detail', NOT an ns-actions
- * activity event: do not pass it to createActivity().step).
- * Arrows: stepArrowInput is a pure per-frame state machine for the 3D compass arrows of the brain and of the mirror
- * body (target 'brain' | 'mirror'): hover, press, hold and release from a ray pick (resolveArrowHit) and the button
- * state; a press on an arrow is one full orbit step, a held press orbits continuously after ARROW_HOLD.delayMs; the
- * brain in front of a mirror arrow blocks it (reported, never orbited). Nothing orbits without a press that began on
- * an arrow (never autonomous). Every one of these is a virtual game input as well.
- *
- * bindDom is the only function that touches the DOM; only ns-app calls it.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { DEG, clamp } from './ns-math.mjs';
 
-/** The control codes (KeyboardEvent.code values, layout-independent). R558 (user Message 40: "So holding the spacebar,
- * get rid of F. Holding the spacebar should again be grasping"): there is no F key any more; Space grasps and turns
- * (SPACE_GESTURE). A plain F is now an ordinary key the game ignores (not prevented). */
+
+
+
 export const CONTROL_CODES = Object.freeze(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space']);
-/** R558 (Message 40): the grasp key is Space (SPACE_GESTURE). Kept as names so older readers find the key. */
+
 export const GRASP_CODE = 'Space';
 /** The grasp key's label for the Esc page controls list and the key cap ("Space"). */
 export const GRASP_KEY_LABEL = 'Space';
 
-/** R558 (user Messages 33 and 34: "You should be able to grasp-move items even if they are behind another item." ...
- * "Same for the other controls of course."). Every control acts by default on what you SEE at the crosshair (or under
- * the free pointer); the brain's clear glass is see-through, so what is behind clear glass is what you see. A lead
- * decision refines this: the look reaches a motor area through your own body and the mirror body, and every control
- * then acts on what the look names (the area: the brain). ONE reach-behind gesture, the same for every control, acts on
- * the OTHER item on the line of sight (the next item behind the default one, or the body part in front of the area the
- * look names): HOLD SHIFT while you press. Shift + F holds, Shift + click switches on / taps, Shift + press-and-drag
- * turns, and Shift + a press on an arrow tip acts on what is behind the tip (ns-app controlTargets). Only the moment of
- * the press counts: Shift can be let go once F or the button is down (the hold or the turn goes on), so it never has to
- * be held for long.
- * Why Shift (design decision, alternatives weighed):
- *  - It is free: no control uses it (W/A/S/D, Space, E, the information key R, the map key M, the number keys, the
- *    left and right arrows, Esc and the mouse), and a plain Shift has no browser or
- *    page meaning on the canvas. Ctrl / Meta (Cmd) start browser chords and release every key (CHORD_MODIFIER_CODES;
- *    Ctrl+click is a right click on macOS), and Alt alone opens the browser menu bar on Windows and Linux.
- *  - It is ONE rule for every control, which a timing gesture cannot be: a quick second click already restarts
- *    (recharges) a glowing area, a quick second press on an arrow tip is a second turn step, a quick second press of
- *    F would first take hold of the front item (and could move it) before the second press took the one behind, and a
- *    press-and-drag cannot be doubled at all. A held modifier changes nothing about the first press itself.
- *  - It is how "the other one" is reached in many programs (Shift-click), and it is shown on every page that lists keys.
- * Trade-offs: it needs a second hand on the keyboard (the left hand is there anyway for W/A/S/D and F); Shift + W/A/S/D
- * still move as usual (keys are read by position, not by letter); on Windows, pressing Shift five times in a row can
- * open the Sticky Keys question (only a quick string of presses does; one press per reach does not).
- * The press is marked `behind: true` (on the click, grasp and drag events and the button state); ns-app decides what
- * is behind. state.reach is true while Shift is held, only so the HUD can name the item behind ahead of the press. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const REACH_CODES = Object.freeze(['ShiftLeft', 'ShiftRight']);
 /** The reach-behind key's label for the Esc page controls list and the key cap ("Shift"). */
 export const REACH_KEY_LABEL = 'Shift';
@@ -133,44 +133,44 @@ export const UI_QUEUE_LIMIT = 32;
 /** Non-game keys bound by bindDom (KeyboardEvent.code). Escape toggles the instructions/controls overlay. */
 export const UI_CODES = Object.freeze(['Escape']);
 
-/** The information key (KeyboardEvent.code, layout independent): R for "read information" (user Message 48: "the key R
- * should replace the I key for information ... read information"). With the mouse captured there is no cursor to click
- * the panel's More detail line, so this key steps the information through its three states (ns-app toggleInfoDetail):
- * the side cards (the start), the side cards with More detail and the colour key, and everything hidden. No other
- * control uses R (W/A/S/D, E, Space, Shift, Esc and the mouse), and a plain R means nothing to the browser (Ctrl/Meta
- * chords such as Ctrl+R, reload, are left to the browser by the chord rule). A UI key, not one of CONTROL_CODES: it
- * never moves the arm or any body part. */
+
+
+
+
+
+
+
 export const DETAIL_CODE = 'KeyR';
 /** The information key's label for the Esc page controls list and the key cap ("R"). */
 export const DETAIL_KEY_LABEL = 'R';
 
-/** 21 November 2026 (EMAP, section 192; the owner: "let's try an electrical mapping view, like you see in functional
- * neuroscience, connectomic live maps, dynamic maps"): the map key (KeyboardEvent.code, layout independent): M shows
- * the electrical map over the picture and hides it again (ns-emap; ns-app toggleEmap). No other control uses M (W/A/S/D,
- * Space, E, R, the numbers, the arrows, Shift, Esc and the mouse), and a plain M means nothing to the browser (it is
- * prevented, so a browser's find-as-you-type cannot take it; Ctrl / Meta chords and Alt + M are left to the browser).
- * Not auto-repeat (holding M toggles once), not inside a text field. A UI key like the information key, not one of
- * CONTROL_CODES: it moves nothing, changes no camera and no control, and releases no held key. */
+
+
+
+
+
+
+
 export const EMAP_CODE = 'KeyM';
 /** The map key's label for the Esc page controls list and the key cap ("M"). */
 export const EMAP_KEY_LABEL = 'M';
 
-/** R5-input (R22, D18): the view key (KeyboardEvent.code, layout independent): E asks to switch between the first-person
- * view and the third-person view and back (the camera owner, ns-camera, does the switch). No other control uses it
- * (W/A/S/D, Space, I, Esc and the mouse), a plain E has no browser meaning (it is prevented, so a browser's
- * find-as-you-type cannot take it), and Ctrl/Meta chords
- * (Ctrl+E is the search bar in Chrome) and Alt+E (the browser menu on Windows and Linux) are left to the browser. Not
- * auto-repeat (holding E toggles once), not inside a text field. A UI key, not one of CONTROL_CODES: it never moves the
- * arm or any body part and releases no held key (W/A/S/D, Space and double-tap Space keep working in both views). */
+
+
+
+
+
+
+
 export const VIEW_CODE = 'KeyE';
 /** The view key's label for the Esc page controls list, the intro and the key cap ("E"). */
 export const VIEW_KEY_LABEL = 'E';
 
-/** R558 (Messages 55 and 56, "easier to use", "a learning tool"): the movement keys. The information card lists the
- * movements of the motor area being looked at (or the last one looked at), each with a number; pressing that number
- * does that movement, the same as a click on that part of the area. The number row and the number pad both count
- * (KeyboardEvent.code, layout independent). UI keys, not CONTROL_CODES: they hold nothing down and auto-repeat is
- * ignored. Ctrl/Meta chords (Ctrl+1 switches tabs) and Alt chords are left to the browser. */
+
+
+
+
+
 export const MOVE_CODES = Object.freeze(['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9']);
 /** 1..9 for a movement key (number row or number pad), else 0. */
 export function moveKeyNumber(code) {
@@ -178,20 +178,41 @@ export function moveKeyNumber(code) {
   return m ? Number(m[1]) : 0;
 }
 
-/** R558 (Messages 55 and 56): the area keys. The motor areas are small and lie side by side along the strip, so the
- * left and right arrow keys move the look exactly one area along it (to the next area on that side on the screen), in
- * body-map order: a walk along the motor homunculus. UI keys like the movement keys; a held key repeats, but no faster
- * than AREA_KEY_REPEAT_MS, so each area on the way is seen. The app does the step (and only while playing). */
+
+
+
+
 export const AREA_CODES = Object.freeze(['ArrowLeft', 'ArrowRight']);
-/** The shortest time (ms) between two steps of a held area key. Display choice: about five areas a second.
- * 22 November 2026 (LOOK2 second pass; the owner, Message 133: no flicker): 180 -> 270, about 3.7 steps a second with a
- * usual 33 ms key repeat (one step every 297 ms). Each step moves the whole view by one block, and at 5 steps a second
- * the view's own jump made pixels rise and fall 4 or more times a second (a check: hiding the look's glow during the
- * walk changed nothing); below 4 steps a second no pixel can. */
+
+
+
+
+
 export const AREA_KEY_REPEAT_MS = 270;
 /** -1 (toward the screen's left) or +1 (right) for an area key, else 0. */
 export function areaKeyDir(code) {
   return code === 'ArrowLeft' ? -1 : code === 'ArrowRight' ? 1 : 0;
+}
+
+/** 25 November 2026 (hunt of update 78, finding 3: with the keyboard alone no key turned the look, so a keyboard player
+ * could not raise or lower the chosen limb, do the tutorial's look step, or bring the mark onto the mirror body). The
+ * look keys: Arrow Up and Arrow Down turn the look up or down by stepDeg a press, as a drag of the view does (the
+ * look's time is the press's own: a look of the player's, which the eye view's chosen limb follows). Never with
+ * invert-Y or the look speed: the key names a direction on the screen and a fixed step. A held key repeats no faster
+ * than repeatMs, the area keys' pace (a step moves the whole picture, as an area key's does; below about 4 steps a
+ * second no pixel flickers).
+ * stepDeg 3, a display choice. The limb: the look that carries the chosen limb in the eye view covers its range from
+ * where it was chosen to either end in 18 degrees (ns-app LIMB_AIM_HALF_SWEEP_RAD), so a press moves it a sixth of
+ * the way (a leg's foot 8 to 29 cm, past the tutorial's 2.5 cm) and six presses take it to the end. The aim: a press
+ * moves the picture 48 px at 1600 by 900 and 32 px at 800 by 600, less than the mirror body's trunk or legs are tall,
+ * so the mark can be put on it (from the start look, four presses up). A smaller step needed more presses than a
+ * newcomer makes for "a little" and turned a held key's look slowly (2 degrees: 7 degrees a second); the area keys
+ * aim at the motor areas themselves. */
+export const LOOK_CODES = Object.freeze(['ArrowUp', 'ArrowDown']);
+export const LOOK_KEY = Object.freeze({ stepDeg: 3, repeatMs: AREA_KEY_REPEAT_MS });
+/** +1 (look up) or -1 (look down) for a look key, else 0. */
+export function lookKeyDir(code) {
+  return code === 'ArrowUp' ? 1 : code === 'ArrowDown' ? -1 : 0;
 }
 
 /** R5-input (D16, D19): targets of the 3D compass arrows: the brain's four and the mirror body's four. */
@@ -211,56 +232,56 @@ export const ARROW_BLOCKERS = Object.freeze(['brain']);
 export const ARROW_HOLD = Object.freeze({ delayMs: 300, everyMs: 100, stepDeg: 1.2, maxStepsPerFrame: 5 });
 /** R5-input: how a press reached an arrow: the crosshair (pointer captured) or the free mouse pointer. */
 export const ARROW_PRESS_VIA = Object.freeze(['crosshair', 'pointer']);
-/** R5-input (D19): a SUGGESTED plain hint for a look or a press on a mirror-body arrow that the brain covers (the text
- * owner, ns-text, may word it differently; keep it this plain). */
+
+
 export const ARROW_COVERED_HINT = 'The brain is in the way. Look at the brain and hold Space to move it aside. ' +
   'Then use these arrows.';
 
-/** Double-tap window (ms, press to press): a second Space press within this of the previous press (when that press was a
- * TAP, SPACE_GESTURE.tapMaxMs) is a DOUBLE TAP: one turn of all four limbs (R558, Message 40). A UI timing choice, not a
- * physiological constant.
- * R4-polish (R4-player 2.4): 350 -> 450 ms. A relaxed double tap (370-390 ms press to press, measured with real input)
- * did nothing and gave no feedback; desktop double-clicks usually allow about 500 ms. */
+
+
+
+
+
 export const DOUBLE_TAP_MS = 450;
 
-/**
- * R558 (user Message 40, which replaces the F key and the Space dance of Message 2): "I see now I gave confusing
- * instructions. So holding the spacebar, get rid of F. Holding the spacebar should again be grasping. And so should one
- * tap spacebar. But double tapping causes rotation, and double tapping and holding continues that rotation, but slowly."
- *
- * The four Space gestures (timings are UI choices, not physiological constants):
- *   HOLD        Space down for tapMaxMs (250 ms) or longer: take hold of what the crosshair is on (the brain, the mirror
- *               body or one of your limbs; the game picks it) AT THE PRESS, and let go at the key-up.
- *   TAP         Space down for less than tapMaxMs: take hold too (also at the press) and KEEP holding after the tap. The
- *               next single press lets go at ITS key-up (tap it, or hold it and let go: both let go), so "tap Space to
- *               let go" and "hold Space" never fight.
- *   DOUBLE TAP  a press within doubleTapMs (DOUBLE_TAP_MS, 450 ms, press to press) of a press that was a TAP: one turn
- *               step, every limb turns once ({ type: 'turn', phase: 'step' }, ns-dance). Whatever the first tap took is
- *               let go first ({ type: 'grasp', down: false } just before the step).
- *   DOUBLE TAP AND HOLD  that second press is still down tapMaxMs after it began ({ type: 'turn', phase: 'hold' }, sent
- *               by tickSpace): the turn goes on, slowly, until the key-up ({ type: 'turn', phase: 'stop' }); then every
- *               limb stays where it is. A double tap released sooner is just the step, which ends by itself.
- * Why these numbers: a deliberate tap is short (typical key presses last about 0.1 s), so 0.25 s leaves room for a
- * relaxed tap while a hold is clearly longer; only a TAP can begin a double tap, so a hold followed by a quick press is
- * never read as one; and the same 0.25 s splits the double tap's own press into "step" and "step, then keep turning".
- * The 450 ms window is the measured relaxed double tap (see DOUBLE_TAP_MS). Taking hold at the press (and dropping it if
- * a second tap comes) keeps HOLD instant; the cost is that the first tap of a double tap takes hold for a moment (up to
- * 0.45 s) before the step lets go of it again, which moves nothing unless the look or W/A/S/D move it in that moment.
- *
- * Grasp and turn never run together:
- *  - a double tap always lets go of what is held before the step (above);
- *  - while a turn runs (the step, or the slow turn) a Space press does not take hold: a press made during a step waits,
- *    and takes hold as soon as the step has ended if Space is still down then; a tap made during a step takes nothing
- *    (it can still be the first tap of the next double tap). A grasp would fight the turn for the same limb joints.
- * Safety releases (blur, focus or visibility loss, pointer-lock change, Esc, a Ctrl/Meta chord): whatever Space holds is
- * let go ({ type: 'grasp', down: false, safety: true }), a turn whose key is down stops where it is ({ type: 'turn',
- * phase: 'stop', safety: true }), and the tap chain ends. A grasp kept by a tap is let go as well: every one of these
- * either pauses the game (and a pause lets go of every carry in the game anyway) or takes the keys away, and a let-go
- * item simply stays where it is, so dropping it is always safe, while keeping it would leave the controls and the game
- * disagreeing about what is held after the pause.
- * Shift (the reach-behind key of Messages 33 and 34, builder GR): keyDown(..., { behind: true }) marks the grasp
- * { behind: true }, so Shift + Space holds the item behind the one in front.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const SPACE_GESTURE = Object.freeze({ tapMaxMs: 250, doubleTapMs: DOUBLE_TAP_MS });
 /** The Space gesture's state (plain data, state.space):
  *   role     the current press: null (Space is up) | 'grasp' (it took hold) | 'release' (it lets go of a kept hold at
@@ -297,8 +318,8 @@ const UI_COMMAND_EVENTS = Object.freeze({
 export const LOCK_PENDING_MS = 2000;
 
 /** Default base look sensitivity (radians per pointer pixel) and the allowed range of the `sensitivity` multiplier. */
-// 17 November 2026 (user: "you should be able to move the head around much more and see other parts of the body, just as
-// you would in real life"): 0.0025 -> 0.0038 rad per pixel. The head's range was already the neck's and trunk's whole
+
+
 // range (120 degrees each way, 80 down, 70 up); on a trackpad it took about 840 pixels of travel to reach the end of the
 // turn, so in practice the far looks were out of reach. Now about 550. The Esc page's look speed still scales it.
 export const DEFAULT_SENSITIVITY_RAD_PER_PX = 0.0038;
@@ -325,7 +346,7 @@ function checkSensitivity(v) {
  * and invertY (default false); the last two are the initial `state.look` and can be changed with setLookOptions.
  * @returns {{ state, initialState, keyDown, keyUp, blur, releaseAll, pointerMove, click, axes, drainEvents,
  *   escape, lockChange, uiCommand, toggleDetail, toggleEmap, drainUiEvents, setLookOptions, lookOptions,
- *   toggleView, moveKey, areaKey, setLook, setPitchLimits, pitchLimits, pointerAt, pointerLeave, buttonDown, buttonUp, tap, buttonState,
+ *   toggleView, moveKey, areaKey, lookKey, setLook, setPitchLimits, pitchLimits, pointerAt, pointerLeave, buttonDown, buttonUp, tap, buttonState,
  *   sensitivityRadPerPx: number, pitchLimitRad: number, sensitivity: number, invertY: boolean }}
  *   `state` is a fresh initial state (as createActivity exposes its initial state); initialState()
  *   makes another.
@@ -389,7 +410,7 @@ export function createControls({
     return { ...state, look: next };
   }
 
-  // ---- R558 (user Message 40): the Space gestures (SPACE_GESTURE) -----------------------------------------------------
+
   /** The Space gesture state of a state (an older state without one reads as idle). */
   const spaceOf = state => {
     const sp = state && state.space;
@@ -441,10 +462,10 @@ export function createControls({
     }
   }
 
-  /** Press a control key. Repeats (keyboard auto-repeat) are idempotent; unknown codes are ignored. R558 (Message 40):
-   * Space is read as a gesture (SPACE_GESTURE) and queues 'grasp' / 'turn' events; opts.behind true (the reach-behind
-   * key, Shift, held at the press; Messages 33 and 34) marks its grasp { behind: true }. W/A/S/D queue nothing (they are
-   * the axes). */
+
+
+
+
   function keyDown(state, code, timeMs, opts = {}) {
     if (!isControlCode(code) || state.keys[code]) return state;
     const keys = { ...state.keys, [code]: true };
@@ -456,8 +477,8 @@ export function createControls({
     return { ...state, keys, space: r.space, events: events.length ? [...state.events, ...events] : state.events };
   }
 
-  /** R558 (Messages 33 and 34): the reach-behind key (REACH_CODES, Shift) is held (on true) or not. Only the HUD reads
-   * it (to name the item behind before the press); each press carries its own `behind` mark. */
+
+
   function setReach(state, on) {
     const v = on === true;
     return (state.reach === true) === v ? state : { ...state, reach: v };
@@ -472,14 +493,14 @@ export function createControls({
     return { ...state, keys, space: r.space, events: r.out.length ? [...state.events, ...r.out.map(ev => stamp(ev, timeMs))] : state.events };
   }
 
-  /**
-   * R558 (Message 40): the Space decisions that come from the passing of time, not from an input. Call once per frame
-   * with the frame's time (the same clock as the inputs) BEFORE draining the events:
-   *  - the double tap's press is still down tapMaxMs after it began: queue { type: 'turn', phase: 'hold' } (stamped at
-   *    that moment), so the turn goes on slowly;
-   *  - a press made while a turn ran is still down and the turn has ended (noteSpace): queue the grasp it waited for.
-   * Returns the same state when nothing is due.
-   */
+
+
+
+
+
+
+
+
   function tickSpace(state, nowMs) {
     const sp = spaceOf(state);
     if (!state.keys.Space || !Number.isFinite(nowMs)) return state;
@@ -493,13 +514,13 @@ export function createControls({
     return state;
   }
 
-  /**
-   * R558 (Message 40): the game's answer after a frame it has drawn: { holding } (something is held: one of your limbs,
-   * the brain or the mirror body) and { turning } (a limb turn still runs: a double tap's step or the slow turn). A hold
-   * kept from a tap that took nothing (or that the game let go of, e.g. Reset body) is forgotten, so the next tap takes
-   * hold again instead of "letting go" of nothing. Call it only after frames whose events the game really applied (a
-   * skipped frame hands its events on, and its answer would be out of date). Returns the same state when nothing changes.
-   */
+
+
+
+
+
+
+
   function noteSpace(state, { holding = false, turning = false } = {}) {
     const sp = spaceOf(state);
     const h = holding === true, tu = turning === true;
@@ -508,15 +529,15 @@ export function createControls({
     return { ...state, space: { ...sp, holding: h, turning: tu, sentTurn: false, grasp } };
   }
 
-  /** R558 (Message 40): a copy of the Space gesture state (SPACE_GESTURE; for the HUD and the drag rule). */
+
   function spaceGesture(state) {
     return { ...spaceOf(state) };
   }
 
-  /** Focus loss (and every other safety release): clear every key. R558 (Message 40): whatever Space holds (held or kept
-   * from a tap) is let go with one { type: 'grasp', down: false, safety: true }, a turn whose key is still down stops
-   * where it is with one { type: 'turn', phase: 'stop', safety: true }, and the tap chain ends (see SPACE_GESTURE).
-   * R5-input: a held mouse button is let go too (an orbit-arrow hold ends; the press count is kept). */
+
+
+
+
   function blur(state, timeMs) {
     const k = state.keys;
     const b = state.button;
@@ -619,14 +640,14 @@ export function createControls({
     return out;
   }
 
-  /** Pointer delta in pixels: yaw -= dx*rad, pitch -= dy*rad (pitch += dy*rad with invertY), where
-   * rad = sensitivityRadPerPx * state.look.sensitivity; pitch clamped to +/- pitchLimit.
-   * Non-finite deltas are ignored. Yaw is not wrapped or clamped.
-   * R5-input: the pitch range is state.pitchLimits when set (setPitchLimits, e.g. the third-person range), else
-   * +/- pitchLimit.
-   * 19 November 2026 (the owner: "The head should not be locked. The POV, perspective of view, should not be locked."):
-   * the pointer turns the look in every state, also while a grasp holds something (R17's hold-and-move mode, in which
-   * the movement was kept for the held item and the look stood still, is withdrawn). */
+
+
+
+
+
+
+
+
   function pointerMove(state, dx, dy, timeMs) {
     if (!Number.isFinite(dx) || !Number.isFinite(dy) || (dx === 0 && dy === 0)) return state;
     const { radPerPx, invertY: inv } = lookOptions(state);
@@ -637,6 +658,16 @@ export function createControls({
     return { ...state, yaw, pitch, lookMs: Number.isFinite(timeMs) ? timeMs : state.lookMs === undefined ? null : state.lookMs };
   }
 
+  /** 25 November 2026 (LOOK_KEY): a look key turns the look up (dir +1) or down (-1) by LOOK_KEY.stepDeg, inside the
+   * pitch range, as a look of the player's (lookMs = timeMs). At the end of the range nothing changes (the same state). */
+  function lookKey(state, dir, timeMs) {
+    if (dir !== -1 && dir !== 1) return state;
+    const lim = limitsOf(state);
+    const pitch = clamp(state.pitch + dir * LOOK_KEY.stepDeg * DEG, lim.min, lim.max);
+    if (pitch === state.pitch) return state;
+    return { ...state, pitch, lookMs: Number.isFinite(timeMs) ? timeMs : state.lookMs === undefined ? null : state.lookMs };
+  }
+
   /** R5-input (R22, D18): the E key: queue { type: 'view', seq } (a request to switch first person <-> third person;
    * the camera owner decides and answers with setLook). Releases nothing: W/A/S/D, Space and double-tap Space keep
    * working in both views. */
@@ -645,9 +676,9 @@ export function createControls({
     return pushUi({ ...state, viewSeq: seq }, { type: 'view', seq }, timeMs);
   }
 
-  /** R558 (Messages 55 and 56): a movement key (1..9): queue { type: 'move', n } on the UI queue, a REQUEST to do the
-   * n-th movement the information card lists. The app decides which motor area that is (the one looked at, else the
-   * last one) and ignores a number the list does not have. Holds nothing down; never touches the game queue. */
+
+
+
   function moveKey(state, n, timeMs) {
     if (!Number.isInteger(n) || n < 1 || n > 9) return state;
     return pushUi(state, { type: 'move', n }, timeMs);
@@ -660,9 +691,9 @@ export function createControls({
     return pushUi(state, { type: 'moveUp', n }, timeMs);
   }
 
-  /** R558 (Messages 55 and 56): an area key (AREA_CODES): queue { type: 'area', dir } on the UI queue, a REQUEST to move
-   * the look one motor area along the strip toward the screen's left (dir -1) or right (+1). The app finds that area
-   * and turns the look; the look itself is not changed here. Holds nothing down; never touches the game queue. */
+
+
+
   function areaKey(state, dir, timeMs, { held = false } = {}) {
     if (dir !== -1 && dir !== 1) return state;
     // (22 November 2026, LOOK2, ns-look-calm AREA_WALK_QUIET: `held` marks a step of the key's auto-repeat)
@@ -732,7 +763,7 @@ export function createControls({
 
   /** R5-input: a mouse / trackpad button went down. via 'crosshair' (captured) | 'pointer' (free mouse); x, y the free
    * pointer (canvas CSS px) or null. A press while a button is already down is the same gesture (unchanged state). */
-  // R558 (Messages 33 and 34): behind true = the press reached behind (REACH_CODES held): it is never an arrow-tip press
+
   // (the app acts on what is behind the tip instead).
   function buttonDown(state, timeMs, { via = 'crosshair', x = null, y = null, behind = false } = {}) {
     if (!ARROW_PRESS_VIA.includes(via)) fail('controls_button', `via must be one of ${ARROW_PRESS_VIA.join(', ')}`);
@@ -762,8 +793,8 @@ export function createControls({
     return { ...buttonOf(state) };
   }
 
-  /** Any mouse/trackpad button press: queue one click (re-triggers the action under the crosshair). R558 (Messages 33
-   * and 34): opts.behind true marks a click that reaches behind (REACH_CODES held): { type: 'click', behind: true }. */
+
+
   function click(state, timeMs, opts = {}) {
     if (state.events.length >= EVENT_QUEUE_LIMIT) return state;
     const event = { type: 'click' };
@@ -813,6 +844,7 @@ export function createControls({
     moveKeyUp,
     areaKey,
     areaKeyUp,
+    lookKey,
     setLook,
     setPitchLimits,
     pitchLimits,
@@ -825,9 +857,9 @@ export function createControls({
     // R558 (R31): press-and-drag on the brain or the mirror body
     dragStart, dragMove, dragEnd, takeDrag, dragState,
     // R17: hold-and-move (a grasp that holds an item takes the pointer movement)
-    // R558 (Messages 33 and 34): the reach-behind key
+
     setReach,
-    // R558 (Message 40): the Space gestures (SPACE_GESTURE)
+
     tickSpace, noteSpace, spaceGesture,
     sensitivityRadPerPx: sens,
     pitchLimitRad: pitchLimit,
@@ -1031,13 +1063,56 @@ function isPageControl(el) {
   return Boolean(el?.isContentEditable || el?.closest?.('button, input, select, textarea, summary, a[href]'));
 }
 
+function insideMovementPanel(el) {
+  return Boolean(el?.closest?.('#ns-motion-camera, .joint-overlay'));
+}
+
 /** Game toolbar buttons also accept the shortcuts that open the command and camera panels. */
 export function isPanelShortcut(event, code) {
   if (event.code !== code || event.defaultPrevented || event.repeat || event.isComposing ||
       event.ctrlKey || event.metaKey || event.altKey) return false;
   const target = event.target;
-  if (target?.isContentEditable || target?.closest?.('dialog[open]')) return false;
+  if (target?.isContentEditable || target?.closest?.('dialog[open]') || insideMovementPanel(target)) return false;
   return !isPageControl(target) || Boolean(target?.closest?.('[data-ns-panel-shortcuts] button:not(:disabled)'));
+}
+
+
+
+
+
+
+
+
+
+export function keyStaysWithControl(el, code) {
+  if (insideMovementPanel(el)) return true;
+  if (!isPageControl(el)) return false;
+  if (el.isContentEditable || el.closest?.('input, select, textarea')) return true;
+  if (el.closest?.('.ns-shell, dialog, [role="dialog"]')) return true;
+  return code === 'Enter' || code === 'NumpadEnter' || code === 'Space' || code === 'Tab';
+}
+
+
+
+
+
+
+
+
+export function keyScrollBox(el, axis = 'y') {
+  for (let node = el, depth = 0; node && depth < 40; node = node.parentElement, depth++) {
+    const doc = node.ownerDocument;
+    if (!doc || node === doc.body || node === doc.documentElement) return null;
+    let style = null;
+    try { style = doc.defaultView && typeof doc.defaultView.getComputedStyle === 'function' ? doc.defaultView.getComputedStyle(node) : null; } catch { style = null; }
+    const overflow = style ? (axis === 'x' ? style.overflowX : style.overflowY) : '';
+    if (overflow !== 'auto' && overflow !== 'scroll' && overflow !== 'overlay') continue;
+    const more = axis === 'x' ? node.scrollWidth - node.clientWidth : node.scrollHeight - node.clientHeight;
+    let drawn = false;
+    try { drawn = typeof node.getClientRects === 'function' && node.getClientRects().length > 0; } catch { drawn = false; }
+    if (more > 1 && drawn) return node;
+  }
+  return null;
 }
 
 /** The UI_COMMANDS entry named by the nearest data-ns-ui attribute from `el` up to (and including) `root`, else null. */
@@ -1124,10 +1199,10 @@ export function bindDom(target, controls, getState, setState, options = {}) {
   const { onLockChange = null, onLockError = null, onDetail = null, onEmap = null, onView = null, onBeforeSafetyRelease = null, arrowAt = null, dragTargetAt = null, sensitivity, invertY, dragToLook = true, uiRoot = null, allowPointerCapture = null, acceptPointerLock = null } = options;
   if (dragTargetAt !== null && typeof dragTargetAt !== 'function') fail('controls_dom', 'dragTargetAt must be a function that returns a drag target or null');
   const canDrag = dragTargetAt !== null && typeof controls.dragStart === 'function' && typeof controls.dragMove === 'function' && typeof controls.dragEnd === 'function';
-  /** R558: the item a new press would drag: asked of the game with the pointer's place, or (null, null) for the
-   * crosshair while the pointer is captured. Any failure means "nothing to drag" (the press is then an ordinary click).
-   * R558 (Messages 33 and 34): behind true = the press reaches behind (Shift held, REACH_CODES): the game answers with
-   * the item behind the one in front. */
+
+
+
+
   const dragTarget = (p, behind = false) => {
     if (!canDrag) return null;
     try {
@@ -1136,7 +1211,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
       return pick && DRAG_TARGETS.includes(pick.target) ? { target: pick.target, binding: pick } : null;
     } catch { return null; }
   };
-  /** R558 (Messages 33 and 34): Shift held at this input (the event's own modifier flag; a missing flag reads false). */
+
   const reachOf = e => Boolean(e && e.shiftKey === true);
   /** Keep state.reach (the HUD's preview of the item behind) in step with the Shift flag of a pointer event, so a
    * Shift pressed while the page had no focus is seen at the next mouse movement. */
@@ -1167,7 +1242,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
   }
 
   const added = [];
-  const on = (obj, type, fn) => { obj.addEventListener(type, fn); added.push([obj, type, fn]); };
+  const on = (obj, type, fn, capture = false) => { obj.addEventListener(type, fn, capture); added.push([obj, type, fn, capture]); };
   const perf = view.performance && typeof view.performance.now === 'function' ? view.performance : null;
   // Monotonic input time: the event's own timeStamp when it lies on the performance timeline (not in the future, not
   // implausibly old), else the handler time. Same clock as the frame loop's performance.now().
@@ -1183,11 +1258,13 @@ export function bindDom(target, controls, getState, setState, options = {}) {
     if (after !== before) setState(after);
   };
   const heldAreaKeys = new Set();
+  const heldLookKeys = new Set(); // (LOOK_KEY) the look keys whose press was taken, so their repeats may step on
   // Every safety release (blur, visibility, Esc, Ctrl / Meta chords, pointer-lock changes) and the app's own epoch
   // cancellation end the binding's private gesture flags too (a drag-to-look, an arrow hold, an item press-drag), so a
   // stale flag can never make the next press a turn or swallow its click.
   const cancelBoundInput = (at, discardQueued = false) => {
     heldAreaKeys.clear();
+    heldLookKeys.clear();
     clearPointerFlags();
     apply(s => controls.blur(discardQueued ? { ...s, events: [], ui: [] } : s, at));
   };
@@ -1278,6 +1355,18 @@ export function bindDom(target, controls, getState, setState, options = {}) {
   };
 
   let lastAreaKeyMs = NaN; // the time of the last accepted area key (AREA_KEY_REPEAT_MS)
+  let lastLookKeyMs = NaN; // the time of the last accepted look key (LOOK_KEY.repeatMs)
+  // (keyScrollBox) where the browser starts its own arrow-key scroll: the focused element, or with none focused (the
+  // body) the element of the last press anywhere on the page (a click on a long card, then Arrow Down, scrolls the card).
+  let pressNode = null;
+  const notePress = e => { pressNode = e && e.target ? e.target : null; };
+  on(doc, 'pointerdown', notePress, true);
+  on(doc, 'mousedown', notePress, true);
+  const scrollStart = e => {
+    const t = e && e.target;
+    if (t && t !== doc && t !== view && t !== doc.body && t !== doc.documentElement) return t;
+    return pressNode && pressNode.isConnected !== false ? pressNode : null;
+  };
   on(view, 'keydown', e => {
     const code = e.code;
     if (e.ctrlKey || e.metaKey || isChordModifier(code)) {
@@ -1293,7 +1382,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
       if (typeof controls.escape === 'function') apply(s => controls.escape(s, at));
       return;
     }
-    if (isPageControl(e.target)) return;
+    if (keyStaysWithControl(e.target, code)) return;
     if (code === DETAIL_CODE) {
       // The information key (R). Leave Alt chords to the browser.
       if (e.altKey) return;
@@ -1329,7 +1418,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
     }
     const moveN = moveKeyNumber(code);
     if (moveN > 0) {
-      // R558 (Messages 55 and 56): a movement key (1..9) asks for the n-th movement the information card lists. Not in
+
       // a text field or on a page control, and never with Alt (browser menus).
       if (e.altKey) return;
       e.preventDefault();
@@ -1342,7 +1431,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
     }
     const areaDir = areaKeyDir(code);
     if (areaDir !== 0) {
-      // R558 (Messages 55 and 56): an area key (left / right arrow) asks for the next motor area along the strip. Not in
+
       // a text field or on a page control, and never with Alt (browser history). The key is taken from the page only
       // when the request was accepted (while playing: the app's own gate), so on the start and Esc pages the arrows
       // still scroll. An accepted press repeats within the same hold; a repeat after a safety release must wait for
@@ -1362,8 +1451,31 @@ export function bindDom(target, controls, getState, setState, options = {}) {
       setState(after);
       return;
     }
+    const lookDir = lookKeyDir(code);
+    if (lookDir !== 0) {
+      // 25 November 2026 (LOOK_KEY): a look key (up / down arrow) turns the look a step, as the area keys step it: not
+      // in a text field or on a page control, never with Alt, taken from the page only when the game took the step
+      // (while playing), and a held key repeats at LOOK_KEY.repeatMs only within a hold whose press was taken.
+      // A box that scrolls, with the focus in it or last pressed (keyScrollBox: a long information card), keeps the key:
+      // the browser scrolls it, as it did before the key turned the look. A press on the picture gives the key back.
+      if (e.altKey || typeof controls.lookKey !== 'function') return;
+      if (keyScrollBox(scrollStart(e), 'y')) { heldLookKeys.delete(code); return; }
+      const at = eventTime(e);
+      if (e.repeat === true) {
+        if (!heldLookKeys.has(code)) return;
+        if (Number.isFinite(lastLookKeyMs) && Number.isFinite(at) && at - lastLookKeyMs < LOOK_KEY.repeatMs) { e.preventDefault(); return; }
+      }
+      const before = getState();
+      const after = controls.lookKey(before, lookDir, at);
+      if (after === before) return;
+      e.preventDefault();
+      heldLookKeys.add(code);
+      lastLookKeyMs = at;
+      setState(after);
+      return;
+    }
     if (isReachCode(code)) {
-      // R558 (Messages 33 and 34): Shift, the reach-behind key. Not prevented (a plain Shift has no page meaning, and a
+
       // focused page control keeps its own Shift behaviour); it only marks the presses made while it is held.
       if (e.repeat !== true && typeof controls.setReach === 'function') apply(s => controls.setReach(s, true));
       return;
@@ -1376,7 +1488,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
     const beforeKey = getState();
     const pointer = code === 'Space' && !isLocked() ? beforeKey.pointer : null;
     apply(s => controls.keyDown(s, code, at, { behind: reachOf(e), pointer }));
-    // 19 November 2026 (the owner: "After I move the brain up, the camera view [is] locked down"; a check: with the
+
     // pointer not captured the look followed the pointer only WHILE Space held something). One rule in every state:
     // a Space press the game accepted captures the pointer, exactly as a click on the picture does (a key press is a
     // user activation), so the look goes on following the pointer after the release. A browser that refuses the
@@ -1390,17 +1502,21 @@ export function bindDom(target, controls, getState, setState, options = {}) {
       if (typeof controls.areaKeyUp === 'function') apply(s => controls.areaKeyUp(s, eventTime(e)));
       return;
     }
+    if (heldLookKeys.delete(code)) return; // (LOOK_KEY) a look key's release ends nothing: each step is whole
     if (isChordModifier(code)) { releaseAll(e); return; }
     if (isReachCode(code)) { if (typeof controls.setReach === 'function') apply(s => controls.setReach(s, false)); return; }
     // 18 Nov (SMALL, M3): a movement key's release (a held key's movement stops there)
     const upN = moveKeyNumber(code);
     if (upN > 0) { if (typeof controls.moveKeyUp === 'function') apply(s => controls.moveKeyUp(s, upN, eventTime(e))); return; }
     if (!isControlCode(code)) return;
-    if (!isPageControl(e.target)) e.preventDefault();
+    if (!keyStaysWithControl(e.target, code)) e.preventDefault();
     const at = eventTime(e);
     apply(s => controls.keyUp(s, code, at));
   });
   on(view, 'blur', releaseAll);
+  on(doc, 'focusin', e => {
+    if (insideMovementPanel(e.target) && !insideMovementPanel(e.relatedTarget)) releaseAll(e);
+  });
   on(doc, 'visibilitychange', releaseAll);
   on(doc, 'pointerlockchange', e => {
     // A repeated captured notification is not a new input boundary. Keep held keys and the current gesture;
@@ -1508,7 +1624,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
     // Review fix: a second button pressed while a press-and-drag is held is ignored. It used to start the gesture
     // afresh, so letting go gave a click on top of the turn already made.
     if (pressDrag) return;
-    // R558 (Messages 33 and 34): Shift held at the press = the press reaches behind what is in front (its click, its
+
     // drag and its button state are marked; an arrow tip under the press is passed through to what is behind it).
     const behind = reachOf(e);
     syncReach(e);
@@ -1572,7 +1688,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
   });
   on(doc, 'mousemove', e => {
     if (mouseFromTouch(e)) return;
-    syncReach(e); // R558 (Messages 33 and 34): the HUD's preview of the item behind follows Shift
+    syncReach(e);
     const at = eventTime(e);
     // A missed release (it happened outside the page, or the browser dropped it): with no button down any more, the
     // gesture ends here, before any arrow / drag branch can return and keep it armed, and whether or not this event's
@@ -1634,7 +1750,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
   }
 
   function unbind() {
-    for (const [obj, type, fn] of added.splice(0)) obj.removeEventListener(type, fn);
+    for (const [obj, type, fn, capture] of added.splice(0)) obj.removeEventListener(type, fn, capture);
     dragging = false;
   }
   // The App owns pause/reset boundaries; only this binding can clear its private gesture flags.

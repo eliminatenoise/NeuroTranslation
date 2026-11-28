@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "bodyparts3d_cerebral_arteries_acquisition_record",
   "writer": "package VESSELS (18 November 2026)",
-  "authority": "Package brief VESSELS (owner, 18 November 2026: \"let's get the vascularity right, especially with the cerebral veins and etc. and for all other items as well\"): exactly the BodyParts3D vessel parts may be downloaded from the BodyParts3D site, with file ids, names and the licence recorded; nothing downloaded is executed.",
+  "authority": "Acquisition and verification of cerebral artery geometry from the BodyParts3D archive.",
   "method": "HTTP range requests against the official archive (serial, 1.5 s apart, no retries): HEAD for identity (ETag and size must equal the recorded ones), the end of central directory, the central directory, then each member's local header and compressed bytes; raw-deflate decompressed; ZIP CRC32 and uncompressed byte count must match the central directory; then sha256. The element list isa_element_parts.txt was fetched whole to name the members.",
   "licence_check": {
     "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
@@ -2276,7 +2276,7 @@
   "outputs": {
     "manifest": {
       "path": "CEREBRAL-ARTERIES-MESH-MANIFEST.json",
-      "sha256": "bf314c2e4da04ccd116993820bb845aa97428b0588fdbbc69e2c2291951c0595"
+      "sha256": "d10c7db17566f70e4d996f6a049c054383d74e18731ab3a44e557f75313c1490"
     },
     "meshes": 80,
     "bytes": 9235433

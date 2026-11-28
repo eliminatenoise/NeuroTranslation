@@ -1,33 +1,33 @@
-/** NeuroSurge: your own limbs meet each other and the trunk (18 November 2026, package CONTACT).
- *
- * Owner, 17 November: "And I asked for collision effects. And limb pushing limb effects"; 12 November: "And move one limb
- * into another will obviously move the other limbs (passively) by knocking them about ragdoll style."
- *
- * Pure maths, no DOM, no Three. Your body is covered by CONTACT BALLS, built once from the rig and its source meshes:
- *   - a limb segment (upper arm, forearm, hand, thigh, shank, foot) gets a chain of balls along the line between its two
- *     joint pivots: each ball sits at the centre of the slice of that segment's flesh (bones and muscles) around its
- *     station, with the radius inside which CONTACT.quantile of the slice's vertices lie;
- *   - the trunk gets rows of balls across it, one row per height band of the trunk's flesh (pelvis, belly, chest), each
- *     ball as deep as the band, carried by the vertebra at that height;
- *   - the head gets one ball.
- * A ball is a point of the source (anatomical) pose carried by its segment's matrix, so it follows every posture, the
- * spine's bend and the combined-range rule exactly as the drawn body does.
- *
- * Two balls of different limbs are in CONTACT when they are closer than their radii allow. The start posture is the
- * reference: a pair that overlaps there (a forearm resting on a thigh, the two thighs at the groin) may overlap that much
- * and no more (its `allow`), so the start posture is free of contact by definition and a limb resting on another stays
- * resting ON it, never sinks into it. Pairs that are joined in the body (a thigh at the pelvis, the upper arm at the
- * side of the chest, the head on the neck) are not tested.
- *
- * When a limb that moves meets one that does not, the still one is PUSHED: a few damped least-squares steps over its two
- * root joints (shoulder or hip: forward / back and out / in) move every ball of it that is in contact out along the
- * contact's normal, each joint inside its range and the combined-range rule (the caller's clamp). What the push cannot
- * clear (a joint at the end of its range, the pushed limb against a third part) stops the moving limb there: the largest
- * share of its move that adds no depth to any pair (holdShare).
- *
- * The balls are a coarse engineering cover of drawn display meshes for a game rule: not a measured body surface, not
- * tissue contact, not forces, not physics.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Display choices (millimetres and degrees unless named).
  *  quantile: a ball's radius holds this share of its slice's flesh vertices (the rest, the slice's farthest bulges, may

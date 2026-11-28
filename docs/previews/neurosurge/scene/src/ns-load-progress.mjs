@@ -1,23 +1,23 @@
-/** NeuroSurge loading bar (19 November 2026; the owner: "The game is currently broken as it just stays on the loading
- * page forever. There should be a loading progress bar as well to indicate the loading pages does not go on forever").
- *
- * One bar with a percentage for the WHOLE wait: the download (by bytes) and then every step the page takes to build
- * the game from the files (arm and brain, checking the body's files, the skeleton's joints, the pose, the muscle
- * layers, handing the body to the graphics card, the lift, the skin, the first picture). Each step has a share of the
- * bar equal to the time it is expected to take: the time it took on this computer the last time (kept in the
- * browser's storage), else a default. 100 % is the game's first picture.
- *
- * The page's own thread is busy for up to a few seconds inside a step, and nothing it draws can change meanwhile. So
- * while a step runs, the bar and the number move toward that step's end as an animation of `transform`, which the
- * browser's compositor plays without the page's thread; they stop short of the step's end until the step has really
- * finished. The bar therefore keeps moving, and it never shows more than has been done plus the step in hand.
- *
- * Nothing waits for ever: when no byte, no file and no step has advanced for LOAD_STALL_MS, or loading fails, a panel
- * says so in plain words with a "Try again" button. The watchdog and the panel live in ns-load-guard.mjs, the page's
- * first script, which needs no other file (they are passed on from here for those who import this module).
- *
- * createLoadModel is pure (testable in Node); createLoadBar makes DOM.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { LOAD_WORDS } from './ns-load-guard.mjs';
 export { LOAD_WORDS, LOAD_STALL_MS, showLoadFailure, createLoadWatch } from './ns-load-guard.mjs';
 

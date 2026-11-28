@@ -1,68 +1,68 @@
-/**
- * NeuroSurge: the limb turn of all four limbs (R558; the user's Message 2 as reshaped by Message 40). The module keeps
- * its old name ("dance") so saved notes and the activity state's field names stay valid.
- *
- * Message 2: "Holding the space bar now more slowly shifts pronation/supination / external/internal rotation and between
- * continuously like in a dance (think opening and closing up the body/limbs) simultaneously among all 4 limbs (though
- * not coordinatively as we'll get on later on). The current rotational direction of each limb's rotation depends on
- * previous actions."
- * Message 40 (newest; it gives Space back to the grasp): "Holding the spacebar should again be grasping. And so should
- * one tap spacebar. But double tapping causes rotation, and double tapping and holding continues that rotation, but
- * slowly." So the turn no longer runs on a held Space. It runs in two modes (ns-controls SPACE_GESTURE decides which):
- *   'step'  a DOUBLE TAP of Space: every limb makes ONE stroke to its next end (the forearms palm up <-> palm down, the
- *           upper arms and hips in <-> out), each limb its own next way (rule 2), then stops by itself.
- *   'hold'  a DOUBLE TAP AND HOLD: the step's strokes go on, slowly, stroke after stroke, while Space stays down; let go
- *           ('stop') and every limb stays exactly where it is. The old fast dance is gone.
- *
- * Pure module (browser and Node; no DOM, no imports). ns-actions keeps the state inside the activity state and calls
- * stepDance / observeDance; ns-app reads the joint angles back through the activity's own joint state.
- *
- * Limbs and joints (degrees, each in its own joint's convention; "open" = turned outward, "closed" = turned inward).
- * Since 17 November 2026 the far end of each limb LEADS and the near joint only FOLLOWS a little (see DANCE_LIMBS):
- *   leftArm   l_forearm       LEADS: the game arm's radius turn about the ulna (ns-arm forearm_pronation): open -80
- *                             palm up, closed +80 palm down (80 each way from thumb-up, the rig's own display range)
- *             l_shoulder_rot  the game arm's upper-arm turn (ns-arm rotation.humeralDeg). Since 18 November 2026 (late)
- *                             it has ends of its own (ARM_TURN.shoulder: outward on the underside, inward on the
- *                             overside) and turns after the forearm in each stroke (phase); it no longer only follows
- *                             14 degrees from where it is
- *   rightArm  r_pronation     LEADS: ns-body right forearm: open 0 (palm up, the anatomical source pose), closed 160
- *             r_shoulder_rot  likewise (ns-body right upper arm about its own long axis), the same ends
- *   leftLeg   leg_turn_L      LEADS (18 November 2026): ns-body's leg turn, the foot first, then the shank, then the
- *                             thigh (LEG_TURN): open +70 (the foot's line 90 degrees outward), closed -110 (90 inward)
- *             hip_rot_L       listed as a follower that turns nothing (DANCE_FOLLOW.hipDeg 0): the hip's share of the
- *                             turn is inside leg_turn
- *   rightLeg  leg_turn_R / hip_rot_R  likewise
- * A leader's ends are the joint's whole range as the game models it (ns-body BODY_JOINT_LIMITS, ns-rig
- * PRONATION_RANGE_DEG); a range passed in `ranges` can only narrow it.
- *
- * The rule (record of the design):
- *  1. Opening and closing. Each limb's leading joint moves between its two ends: palm up / sole outward ("opening"),
- *     palm down / sole inward ("closing"), and its follower turns a few degrees the same way with it. One stroke takes
- *     the limb's joints from where they are to their targets at the same moment, with a smooth start and stop (half a
- *     cosine), then the limb turns round.
- *  2. Direction from history. Each limb keeps the direction it last moved in, whatever moved it: an activation, a
- *     drag, a reset or the dance itself (observeDance watches the joint angles every step). When Space is pressed it
- *     carries on that way; a limb already at that end turns round at once. So a limb that an activation has just turned
- *     palm down goes back toward palm up first, and a dance that was stopped half way carries on the same way.
- *  3. Not coordinated. The four limbs are separate oscillators with their own tempo (DANCE.tempo; spaced so that no two
- *     stay in step) and their own direction and position, so they open and close at different moments.
- *  4. Speeds (Message 40). A double tap's step takes DANCE.stepStrokeS for a full end-to-end stroke at tempo 1, then the
- *     limb stops at that end (it is "done"). When the double tap is held, the strokes go on at DANCE.slowStrokeS: a
- *     stroke that is under way keeps its progress and only stretches its remaining time (startTurnHold / stepDance),
- *     so nothing jumps or restarts, it just slows down. Let go (stopDance) and every limb stays exactly where it is (the
- *     latch rule): only an opposing activation, a drag, another turn or Reset body moves it.
- *  6. Two sides (the owner, 18 November 2026: "we start the game in an underside view of the limbs. And of course, if
- *     you double tap, you'll get the overside. And then if you double tap and hold, you will continuously slowly switch
- *     between the two. But if you just double tap, it will be a quick switch."). The "open" ends are the UNDERSIDE view
- *     (palms up, soles outward: DANCE_UNDERSIDE, where the game starts); the "closed" ends are the OVERSIDE view. A
- *     double tap is a quick switch of ALL FOUR limbs together to the other side: the side most of them are not on (the
- *     mean openness of the four leading joints decides; a second double tap while the switch is still under way turns
- *     it round), every limb at the same speed (DANCE.stepStrokeS), a limb already on that side stays. This replaces
- *     rule 2 for the step only; the slow turn of a double tap held still goes on limb by limb with rules 2 and 3.
- *  5. Activity: each limb's level is its current turning speed (DANCE.glowFullSpeed of its range per second = level 1),
- *     for the brain areas of the turning limbs and their rotator muscles. Simulated, unitless display values.
- * Not measured motion, EMG, force or nerve signals; a game display rule.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Tuning (display choices; see the rule above).
  *  stepStrokeS / slowStrokeS  seconds for a full end-to-end stroke: a double tap's quick switch (0.4 s for every limb;
@@ -75,8 +75,8 @@
  *  followGlow                 a follower joint's share of that level (its turn is small and only accompanies the leader) */
 export const DANCE = Object.freeze({
   stepStrokeS: 0.4,
-  // 19 November 2026 (the owner: "it's far too slow. It needs to be quite a bit faster than that, but not as fast as would
-  // happen when you just double tap the spacebar and switch suddenly"): 2.6 s -> 1.0 s a stroke (the sudden switch is 0.4 s).
+
+
   slowStrokeS: 1.0,
   tempo: Object.freeze({ leftArm: 1.0, rightArm: 1.27, leftLeg: 0.86, rightLeg: 1.13 }),
   endEps: 0.004,
@@ -85,55 +85,55 @@ export const DANCE = Object.freeze({
   followGlow: 0.35
 });
 
-/** The four limbs and their joints (degrees in each joint's own convention).
- *
- * 17 November 2026 (user: "with pronation, supination / internal rotation, external rotation, you've gone way too far.
- * What I really want is for the wrist / ankle to be the main moving element instead of the massive movements ... where
- * really the hip or the shoulder with the elbow and the knee are leading the movement ... any elbow or knee movement
- * and minimal shoulder and hip movement follows from there. And really we're showing the overside muscles and then the
- * underside muscles."): the FIRST joint of each limb LEADS and makes the whole turn: the forearm (the wrist end turns
- * palm up <-> palm down, so the front and then the back of the forearm and hand are shown) and the ankle (the sole
- * turns outward <-> inward). The second joint only FOLLOWS: the upper arm and the thigh turn a few degrees the same
- * way, from wherever they are (`follow`: degrees for one whole stroke of the leader, signed toward "open"; lo / hi:
- * the follower's own joint range). A follower's open / closed below are only its nominal ends for speeds and history.
- * Nothing else in the limb is moved by the turn (elbow and knee keep their bend).
- */
-/* 18 November 2026 (the owner: "the ankles and the feet should be traveling the full 90 degrees either way"): each leg's
- * leader is now the leg's own turn (ns-body leg_turn_L / leg_turn_R, LEG_TURN): open +70 puts the foot's line 90 degrees
- * outward (the underside view), closed -110 puts it 90 degrees inward (the overside view); the rig shares the turn
- * between the foot (first), the shank at the soft knee and the thigh in the hip, so the hip's following is inside
- * that joint and the dance's own hip follower turns nothing (hipDeg 0; it stays listed so the hip's history and
- * touch-free range keep working).
- * 18 November 2026, late: the shoulders are not followers any more (ARM_TURN below); `shoulderDeg` (14) is gone. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const DANCE_FOLLOW = Object.freeze({ hipDeg: 0 });
-/** The leg turn's two ends in the limb switch (degrees of ns-body leg_turn; the foot's line rests 20 degrees outward at
- * 0). The owner, later on 18 November 2026: "Maybe let's make the foot turn 45 degrees and to have feet that are, you
- * know, completely flat when they're turned outward would be an extreme amount of flexibility. So just imagine a V
- * followed by an A when they're turned inward." So the feet end 45 degrees outward (open +25: the two feet make a V, the
- * underside view) and 45 degrees inward (closed -65: an A, the overside view), not the 90 degrees either way of the same
- * morning (+70 / -110; the joint itself still reaches those ends). */
+
+
+
+
+
+
 export const LEG_TURN_ENDS = Object.freeze({ open: 25, closed: -65, restOutDeg: 20 });
-/* 18 November 2026, late (the owner: "with the upper limbs, there should be quite a dramatic change in which muscles are
- * visible between the overside and underside. Because of the turnover or turn under of the limbs, including the
- * forelimbs and upper limbs. That's the whole point of limb rotation."): the WHOLE ARM turns over, not the forearm
- * alone. The upper arm is no longer a follower that turns 14 degrees from wherever it is: it has two ends of its own,
- * ARM_TURN.shoulder, and goes to them with the forearm, so on the underside the front of the upper arm (biceps,
- * brachialis) faces up with the palm, and on the overside its outer side and back (deltoid, triceps, brachioradialis)
- * face up with the back of the hand. The turn stays graded and led by the far end: the forearm makes the bigger turn
- * (160 degrees, palm up <-> palm down) and starts at once; the upper arm turns less (ARM_TURN.shoulder, inside the
- * shoulder's own range and the combined-range rule's narrowing with the arm raised: ns-body COMBINED_RANGE.shoulder,
- * mirrored here as SHOULDER_TURN_RANGE) and starts ARM_TURN.lag of the stroke later, finishing with it. Both ends sit
- * inside commonly quoted active ranges (outward about 90, inward about 70; display choices, not measured motion).
- *   shoulder  { open, closed }: degrees of the upper arm's turn about its own length (+ outward / external), the
- *             underside and the overside end, the same for both arms (ns-body r_shoulder_rot; the game arm's
- *             ns-arm rotation.humeralDeg)
- *   lag       the share of a stroke the upper arm starts after the forearm (and the forearm ends before the upper arm):
- *             the forearm turns over [0, 1 - lag] of the stroke, the upper arm over [lag, 1]
- *   glow      the upper arm's rotators light at this share of their turning level (the forearm's turners at the whole
- *             level): the turn is led by the far end in the activity shown too, and the large chest and back rotators
- *             (pectoralis major, latissimus dorsi) do not outshine the forearm (a display choice) */
-// 19 November 2026 (the owner: "You probably overdid it with the internal or medial rotation with the arms"; "probably
-// less elbow varus / valgus for external / internal rotation"): the overside end of the upper arm's turn is 25 degrees
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // inward (65 before). The forearm still turns the palm right over (160 degrees); with the upper arm turning 60 degrees
 // in all instead of 100 the slightly bent elbow no longer swings the forearm far out to the side and back (which read
 // as the elbow going varus and valgus).
@@ -217,7 +217,7 @@ export function createDance(angles) {
   return { limbs, seen, levels, mode: null, active: false };
 }
 
-/** The turn modes (Message 40): see the module comment. */
+
 export const TURN_MODES = Object.freeze(['step', 'hold']);
 const strokeSecondsFor = mode => (mode === 'step' ? DANCE.stepStrokeS : DANCE.slowStrokeS);
 
@@ -298,13 +298,13 @@ function newStroke(l, angles, dir, ranges, strokeS, tempo = DANCE.tempo[l]) {
   return { from, to, t: 0, T: (frac * strokeS) / tempo, frac };
 }
 
-/**
- * A DOUBLE TAP (Message 40, and rule 6 since 18 November 2026): a quick switch. All four limbs go to the SAME side:
- * the one most of them are not on now (the mean openness of the four leading joints at the angles last seen; at or
- * above one half counts as the underside, so the switch goes to the overside). A double tap while a switch is still
- * under way turns it round. A limb already on that side stays; a stroke under way is dropped and the limb starts
- * again from where it is. Returns a new state (`target`: 1 = to the underside / open ends, -1 = to the overside).
- */
+
+
+
+
+
+
+
 export function startTurnStep(dance) {
   let sum = 0;
   for (const l of DANCE_LIMB_IDS) { const j = DANCE_LIMBS[l][0]; sum += clamp(openness(j, dance.seen[j.id]), 0, 1); }
@@ -315,11 +315,11 @@ export function startTurnStep(dance) {
   return { ...dance, limbs, mode: 'step', active: true, target };
 }
 
-/**
- * Message 40: a DOUBLE TAP AND HOLD: the turn goes on slowly while Space stays down. A stroke under way slows down where
- * it is (stepDance stretches its remaining time, keeping its progress); limbs that have finished their step start their
- * next stroke at the slow speed. Returns a new state.
- */
+
+
+
+
+
 export function startTurnHold(dance) {
   const limbs = {};
   for (const l of DANCE_LIMB_IDS) limbs[l] = { ...dance.limbs[l], done: false };

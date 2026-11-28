@@ -1,26 +1,26 @@
-/** NeuroSurge: the ELECTRICAL MAP, the drawing (21 November 2026, section 192; the model and the owner's words are
- * in ns-emap.mjs).
- *
- * WHAT IS DRAWN. While the map is on (the M key): one clip-space quad that dims the finished picture (the dark
- * ground), then every wire of the model as a ribbon a few pixels wide and every mark as a small disc, in ONE geometry
- * with ONE shader, drawn twice: once in front of what is there, at full strength, and once where something stands in
- * front of the line, weaker, so the whole wiring is seen and the picture keeps its depth. Light never goes above
- * display white (the lines are screened onto the picture), so the map looks the same with and without the bloom pass.
- *
- * HOW IT IS CHEAP. Nothing is written per vertex after the build. A vertex carries its rest place, what it rides and
- * its coordinate along the route; the graphics card poses it from a small texture of world matrices (the "palette":
- * the big brain, then every segment of the mirror body and of your own body, the left game arm's included), and lights
- * it from two more small textures (which lit area has which wire, and each lit area's colour, level and start time)
- * and a clock. Per frame the processor multiplies about 250 matrices, steps the model's state machine and uploads a few
- * kilobytes; with the map off nothing exists and nothing runs. The outline pass, the picking and every existing
- * material are untouched.
- *
- * WHAT IT IS. A picture of the game's simulated, unitless signal on typical, simplified, hand-laid routes; slowed
- * down; not a recording and not traced from a scan (the meshes' names say so).
- *
- * THREE is injected (createEmapView); the shader texts are pure functions of the model's constants (emapShaders), so
- * Node can check them.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { EMAP, EMAP_FLAG, EMAP_MODE, buildEmapSteps, brainBoxesFromPositions, createEmapState, createEmapFrame, emapStep, emapLastVolley, EMAP_BRAIN_MESH } from './ns-emap.mjs';
 import { EMAP_STORM, createStorms, stepStorms, stormAt, stormActs, scanRampGlsl, restartStorms } from './ns-emap-storm.mjs';
 import { brainGapGlsl, brainGapUniformValue } from './ns-brain-gap.mjs';

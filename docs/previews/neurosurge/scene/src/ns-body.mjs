@@ -74,11 +74,11 @@ import { SEGMENTS as RIG_SEGMENTS, FOREARM_TWIST_CHAIN, FOREARM_TWIST_LEVELS, TW
 import { BODY_SHAPE, limbLengthField, trunkShapeField } from './ns-body-shape.mjs';
 export { BODY_SHAPE };
 
-/** Agreed non-left-arm joint ids (shared interface 2). R558 (Messages 14, 15 and 2: as many activation points as
- * possible, left-right symmetry, full ranges of motion) adds the right hand's own digit joints (each finger and the
- * thumb on its own, finger spread, thumb opposition), right wrist side-to-side bend, ankle inversion / eversion, the big
- * toe on its own, trunk side bend and turn, neck side bend, jaw side shift, the swallow (hyoid lift) and three more
- * face display ids. r_grasp / r_open stay as whole-hand ids (the 'seated' posture uses them; no map action does). */
+
+
+
+
+
 export const BODY_JOINT_IDS = Object.freeze([
   'hip_flex_L', 'hip_flex_R', 'hip_abd_L', 'hip_abd_R', 'knee_ext_L', 'knee_ext_R', 'ankle_dorsi_L', 'ankle_dorsi_R',
   'toe_flex_L', 'toe_flex_R',
@@ -87,11 +87,11 @@ export const BODY_JOINT_IDS = Object.freeze([
   'ankle_inv_L', 'ankle_inv_R', 'hallux_flex_L', 'hallux_flex_R', 'trunk_side', 'trunk_rot', 'neck_side', 'jaw_side',
   'hyoid_elev', 'nose_wrinkle', 'upper_lip', 'lower_lip',
   'r_wrist_dev', 'r_thumb_flex', 'r_thumb_opp', 'r_index_flex', 'r_middle_flex', 'r_ring_flex', 'r_little_flex', 'r_finger_spread',
-  // R558 (Space dance, Message 2): the right upper arm's own internal / external rotation and each hip's rotation about
+
   // the thigh's long axis (positive = external, outward, on both sides).
   'r_shoulder_rot', 'hip_rot_L', 'hip_rot_R',
-  // 18 November 2026 (the owner: "we want maximum posterior pelvic tilt with some degree of neck flexion so that you
-  // can look down upon your body"): the pelvis rolled under. A forward bend of the LOW back only (the five lumbar
+
+
   // joints, BODY_JOINT_SHARES.pelvic_tilt), so the start posture can flatten and reverse the low back's hollow while
   // the rib-bearing spine stays straight. A posture term: no motor area moves it; trunk_flex still bends the whole
   // back from wherever this leaves it.
@@ -102,36 +102,36 @@ export const BODY_JOINT_IDS = Object.freeze([
 
 const lim = (lo, hi) => Object.freeze([lo, hi]);
 
-/**
- * Rig limits in degrees from the source (anatomical) pose, using the sign conventions of ns-bodymap JOINT_SEMANTICS.
- * R558 (Message 2: "all movements and motions should be to their maximum anatomically feasible range of motion but
- * never beyond"): each limit is the full commonly quoted adult ACTIVE range (AAOS 1965 "Joint Motion: Method of
- * Measuring and Recording" table, with the AMA Guides where AAOS gives none or the task brief asked for the wider
- * value), not a game-safe fraction. Basis per joint:
- *   hip flexion 120 (AAOS; with a bent knee: HIP_KNEE_COUPLING caps it at 100 with a straight knee, the hamstrings'
- *     limit, and the game draws the knee giving way instead: passiveKneeAngles), extension 30 (AAOS; the map's
- *     extension action swings the thigh down and back to 20, inside it); abduction 45, adduction
- *     30 (AAOS; the map's adduction action stops at 0 so the legs never pass into each other); knee flexion 135
- *     (AAOS); ankle dorsiflexion 20, plantarflexion 50 (AAOS); foot inversion 35, eversion 15 (AAOS); lesser-toe MTP
- *     flexion 40, extension 40 (AAOS); big-toe MTP flexion 45, extension 70 (AAOS);
- *   trunk (thoracolumbar) flexion 80, extension 25, side bend 35 each way, rotation 45 each way (AAOS); neck flexion
- *     50, extension 60, rotation 80 each way (AMA), side bend 45 each way (AAOS / AMA); jaw opening 30 deg of
- *     mandibular rotation (with the 0.25 mm/deg forward glide about 40 mm between the incisors, a usual adult
- *     maximum), jaw side shift 10 mm each way (a usual adult lateral excursion);
- *   right shoulder flexion 180, extension 60, abduction 180 (AAOS); 19 November 2026 (the owner: the right arm is
- *     "unable to cross the body, the torso"): the sideways angle also goes 45 the other way, ACROSS the body (AAOS
- *     horizontal flexion 135 from the side line = 45 past straight forward), as far as the forward raise leaves room
- *     in front of the chest (COMBINED_RANGE.shoulder: none with the arm hanging at the side, where the trunk is in the
- *     way); elbow flexion 145 (between AAOS 150 and AMA 140;
- *     the forearm mesh meets the biceps mesh there); pronation 80 + supination 80 = 160 (AAOS); wrist flexion 80,
- *     extension 70, radial deviation 20, ulnar deviation 30 (AAOS); digits: see BODY_JOINT_SHARES (finger MCP 90 /
- *     PIP 105 / DIP 85, MCP hyperextension 30; thumb CMC opposition 40, MCP 50, IP 80, IP hyperextension 20; finger
- *     spread 20 at the index MCP).
- * They are not measured on this reference body or on the player. The facial ids are display amplitudes (-20..20, or
- * 0..20 where the opposite movement returns to rest), not joint rotations: the face-muscle packet colours the muscles,
- * and since 20 November 2026 the scene moves them by these levels (ns-face-move; see faceDisplayLevels). hyoid_elev is a display amplitude 0..20 that lifts the hyoid
- * bone up to 15 mm (HYOID_LIFT), the usual adult hyoid excursion in a swallow.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BODY_JOINT_LIMITS = Object.freeze({
   hip_flex_L: lim(-30, 120), hip_flex_R: lim(-30, 120),
   hip_abd_L: lim(-30, 45), hip_abd_R: lim(-30, 45),
@@ -160,34 +160,34 @@ export const BODY_JOINT_LIMITS = Object.freeze({
   leg_turn_L: lim(-110, 70), leg_turn_R: lim(-110, 70)
 });
 
-/**
- * 18 November 2026 (the owner: "when we mean underside, overside for the legs, really, the ankles and the feet should
- * be traveling the full 90 degrees either way"; earlier: "It's mainly the wrist and the ankle leading the movement, and
- * any elbow or knee movement and minimal shoulder and hip movement follows from there"; "make sure limbs can't be put
- * into impossible positions"). THE LEG TURN: one display joint per leg, leg_turn_L / leg_turn_R (degrees, positive =
- * the toes turn outward), that turns the leg about its own length as a graded twist:
- *   the FOOT turns first, under the ankle (the foot's turn in and out happens below the ankle bone, at the subtalar
- *     and midtarsal joints: textbook; typical textbook range of the whole foot's adduction / abduction about 30 to 45
- *     degrees inward and 15 to 25 outward, Kapandji; 40 and 15 here);
- *   then the SHANK turns at the bent ("soft") knee (the knee has no axial turn when locked straight and about 30
- *     degrees inward / 40 outward when bent: typical textbook range, Kapandji; 30 and 20 here, and the game's
- *     straight knee is drawn slightly bent);
- *   then the THIGH turns in the hip, inside the hip's own range (hip_rot limits and the combined-range rule; 40
- *     inward, 35 outward here).
- * At the ends the three add up to 110 inward and 70 outward. This reference body's feet rest about 20 degrees toe-out
- * (the line from the ankle to the second toe's joint, read off the bones: 20.4 right, 19.5 left), so the foot's own
- * line ends 90 degrees inward and 90 degrees outward of straight ahead. The inward end asks each joint for the whole
- * of its textbook range at once, which is more than most people reach lying down: a display choice the owner asked
- * for, not a measured range. `lead`: the fraction of the turn over which each part makes its share (the foot leads).
- * With the foot's turn comes a little tipping of the sole (inward turn with inversion, outward with eversion: the
- * foot's combined "supination / pronation", textbook), `solePerFootTurn` of the foot's share, inside ankle_inv's limits;
- * and at the knee a few degrees of varus with the shank turned in and valgus with it turned out (`kneeSidePerShankTurn`;
- * the owner: "joint varus/valgus during rotation").
- * Toes: when both feet turn in, the forefeet reach toward each other; the thighs part by what keeps `toeGapMm` between
- * them (at most `partMaxDeg` each) and come back as the feet turn out again (the owner: "as long as ... the toes and
- * the front of the feet don't merge into each other"). `forefootReach`: the toe tips' distance from the ankle as a
- * multiple of the ankle-to-ball distance.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LEG_TURN = Object.freeze({
   restToeOutDeg: 20,
   out: Object.freeze({ deg: 70, foot: 15, shank: 20, thigh: 35 }),
@@ -233,23 +233,23 @@ const FACE_FULL_DEG = 20;
  * about 1 to 2 cm, up and forward; 15 mm is a display choice inside that, not a measurement. */
 export const HYOID_LIFT = Object.freeze({ mm: 15, dir: Object.freeze([0, -0.45, 0.89]) });
 
-/** R558 (Message 2, "never beyond"): with the knee straight the hamstrings stop hip flexion at about 90-100 degrees (the
- * straight-leg limit; the brief's norm "about 90 with a straight knee", and the lead's straight-leg lift end of 100,
- * 10 degrees off the ground in long sitting); with the knee bent the hip flexes to 120. The hip flexion actually drawn is capped at
- * straightKneeMaxDeg + (bentKneeMaxDeg - straightKneeMaxDeg) * min(1, knee flexion / fullAtKneeFlexDeg). A two-joint
- * muscle rule of thumb for display, not a measured hamstring length. */
+
+
+
+
+
 export const HIP_KNEE_COUPLING = Object.freeze({ straightKneeMaxDeg: 100, bentKneeMaxDeg: 120, fullAtKneeFlexDeg: 90 });
 
-/**
- * 18 November 2026 (user: "Think about the shoulders rolled forward and the back convexly curved"; "see all of the
- * front of the torso at once without the chest pumping out but depressed down/inwards"; "Almost full kyphosis/flexion
- * of the spine"): the spine is one stage per vertebra. [segment, joint] from the sacrum up: the segment is the
- * vertebra ABOVE the joint. 'lumbar' is the fifth lumbar vertebra and 'thorax' the first thoracic vertebra (the names
- * the packets' hints and the rest of the game already use for the bottom and the top of the trunk: the neck and, through
- * the breastbone, both shoulder girdles hang from 'thorax'). Before, the five lumbar vertebrae were one rigid block
- * and the whole rib cage with its twelve vertebrae another, so a bent back was two sharp bends at the waist under a
- * straight chest.
- */
+
+
+
+
+
+
+
+
+
+
 export const SPINE_STAGES = Object.freeze([
   ['lumbar', 'lumbosacral'], ['l4', 'l4_l5'], ['l3', 'l3_l4'], ['l2', 'l2_l3'], ['l1', 'l1_l2'],
   ['t12', 'thoracolumbar'], ['t11', 't11_t12'], ['t10', 't10_t11'], ['t9', 't9_t10'], ['t8', 't8_t9'], ['t7', 't7_t8'],
@@ -274,36 +274,36 @@ const CARTILAGE_SEGMENTS = Object.freeze(['r', 'l'].flatMap(s => Array.from({ le
 // The base each shoulder girdle turns on (no bones of its own): the breastbone at the sternoclavicular joint and the
 // ribs under the shoulder blade, so the blade stays on the ribs when the upper back rounds or the trunk turns.
 const GIRDLE_BASES = Object.freeze(['r_gbase', 'l_gbase']);
-/**
- * 18 November 2026 (user: "No muscles or joints should be ... detached, dislocated"; with the kneecap on its track,
- * PATELLA_TRACK, the tendon above it has to come down the front of the thigh bone and round its end with it): the
- * front thigh muscles' WRAP. The tissue of the four heads of the quadriceps within zoneMm above the knee pivot slides
- * toward the knee as the knee bends, the lowest the whole way the kneecap goes and the highest not at all (a straight
- * line between: every part is stretched by the same factor, 1.4 at a fully bent knee), first straight down the shaft
- * and then round the end of the bone on the kneecap's own track. Four bone-less segments per side carry the frames of
- * the tissue that starts heightsMm above the pivot; a vertex between two heights is blended between their frames
- * (quadWrapWeights). The last height lies above where the turn begins at any knee angle, so between it and the top of
- * the zone the blend is an exact slide along the shaft. Display mechanics on one reference body, not measured tendon
- * excursion.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 // fadeMm (20 November 2026, with the longer thigh of ns-body-shape): just above the zone the plain weights of a
 // vertex may still give the kneecap or the shin a few per cent (on the longer thigh the kneecap is a vertex's second
 // nearest bone there more often than the pelvis); that share now grows from nothing at the top of the zone over fadeMm,
 // so the wrap's weights (the thigh alone at the top) and the plain ones meet without a step. Before, a step of 3 per
 // cent at the top of the zone stretched one edge of rectus femoris four times at a fully bent knee.
 export const QUAD_WRAP = Object.freeze({ zoneMm: 200, heightsMm: Object.freeze([15, 30, 45, 60]), easeMm: 12, fadeMm: 40 });
-/**
- * 18 November 2026 (the owner, 12 November: "the shoulder literally detaches ... and the socket rips open"; a check on
- * 18 November: needles and a bare joint at the right shoulder). The muscles that run from the trunk and the shoulder
- * blade to the upper arm (deltoid, the chest muscle, latissimus, the cuff) were blended straight between the blade's
- * frame and the upper arm's. With the arm raised those two frames stand up to 150 degrees apart, and a straight blend
- * of two frames that far apart pulls the middle of the muscle in toward the joint: the shoulder was drawn as a
- * pinched, twisted cone. One bone-less segment, `segment`, turns about the shoulder's centre by HALF of the upper
- * arm's turn against the blade; a vertex shared between another bone and the upper arm now goes other bone -> half
- * way -> upper arm (its share of the upper arm, w, becomes 2w of the half-way frame below one half, and 2w - 1 of the
- * upper arm above it), so no blend spans more than half the turn and the muscle wraps round the joint. Muscles that
- * also cross the elbow keep their own rule. Display mechanics, not measured soft-tissue motion.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 export const ARM_WRAP = Object.freeze({ segment: 'r_armwrap' });
 const QUAD_SEGMENTS = Object.freeze(['r', 'l'].map(s => Object.freeze(QUAD_WRAP.heightsMm.map((_, k) => `${s}_quad${k + 1}`))));
 /* 18 November 2026, later (a check: "the right shoulder blade stands off the ribs ... shows as a thin pointed sliver";
@@ -324,7 +324,7 @@ const spineShares = list => { const t = list.reduce((a, b) => a + b, 0); return 
 
 /** How one agreed joint id is shared between rig joints (documented approximations, not measured kinematics). */
 export const BODY_JOINT_SHARES = Object.freeze({
-  // 18 November 2026 (user: "the back convexly curved", "Almost full kyphosis/flexion of the spine"): the trunk's bend,
+
   // side bend and turn are shared between all seventeen joints from the sacrum to the first thoracic vertebra
   // (SPINE_STAGES), in proportion to commonly quoted ranges per level (after White and Panjabi's tables, rounded, cited
   // from memory): flexion most at L4-S1 and the thoracolumbar junction and least between the rib-bearing vertebrae,
@@ -365,7 +365,7 @@ export const BODY_JOINT_SHARES = Object.freeze({
   neck_rot: Object.freeze({ cervicothoracic: 0.5, atlanto_occipital: 0.5 }),
   neck_side: Object.freeze({ cervicothoracic: 0.8, atlanto_occipital: 0.2 }),
   // Net digit angle n = (r_grasp - r_open) + the digit's own id (r_index_flex, ...; the thumb's r_thumb_flex) in degrees.
-  // Flexion (n > 0) share, extension (n < 0) share, joint clamps [lo, hi]. R558 (Message 2): a full flexion n = 90
+
   // reaches MCP 90, PIP 104 (clamp 105) and DIP 85 (AAOS: MCP 90, PIP 100, DIP 90; the task brief: PIP 100-110, DIP
   // 80-90); n = -30 opens the MCP 30 into hyperextension with PIP straight and DIP 9 (active MCP hyperextension is
   // about 20-45 degrees; PIP has none). Thumb: MCP 50 (AAOS 50), IP 81 -> 80 (AAOS 80); n = -20 extends the IP 20
@@ -847,7 +847,7 @@ function treePath(a, b) {
   return [...ca.slice(0, ca.indexOf(lca) + 1), ...cb.slice(0, cb.indexOf(lca)).reverse()];
 }
 
-// R558 (Message 14): the big toe is its own segment (r_hallux / l_hallux), so it curls and lifts on its own. Its two
+
 // phalanges carry rig_hint r_toes / l_toes in the manifest; they are moved here by name. The big toe's long muscles
 // (flexor / extensor hallucis longus) end on it, so their distal attachment follows it (muscleCandidates).
 const HALLUX_BONE = /^(proximal|distal) phalanx of (right|left) big toe$/;
@@ -877,15 +877,15 @@ function boneSegmentFor(entry) {
   return null;
 }
 
-/**
- * R558 (Message 32: "The far right base of the neck muscles ... above the clavicles" stuck out): exact-ID extra candidate
- * segments of a muscle whose packet hint misses a bone it lies on. The face packet hints the platysma thorax -> mandible
- * only, so the posture bake left it where it was while the shoulder girdle under its lower border moved with the arm
- * held forward (right clavicle up to 17 mm, scapula up to 39 mm): its lower lateral corner then stood up to 17 mm off the
- * shoulder as a flat pointed wing above the right clavicle (the left girdle follows the left game arm, not the bake).
- * With the girdle as a candidate the lower border is skinned to the clavicle like the trapezius and pectoralis next to
- * it. Used only when the entry has exactly that id and name.
- */
+
+
+
+
+
+
+
+
+
 const MUSCLE_EXTRA_CANDIDATES = Object.freeze([
   Object.freeze({ id: 'zf-platysma-r', name: 'right platysma', segments: Object.freeze(['r_girdle']),
     basis: 'the lower border of the platysma lies on the clavicle and the fascia of the upper chest and shoulder' }),
@@ -907,23 +907,23 @@ const QUADRICEPS_RE = /\b(rectus femoris|vastus (lateralis|medialis|intermedius)
  * beside it, hinted to the digits, folded with the finger). The finger's middle and distal phalanges are candidates too.
  */
 const EXPANSION_RE = /\bextensor (indicis|digiti minimi)\b/;
-/**
- * 18 November 2026 (user: "No muscles ... should be pointy ..., detached"; the range-of-motion sweep's new measure of
- * stretched edges: in the belly wall, edges of under a millimetre were drawn up to 105 mm long as soon as the trunk
- * was bent away from the source pose, a band of shards across the belly). Cause: the nearest-two-bones rule
- * (continuousSkinWeights) keeps the two nearest candidates less the third, which is steady only where one bone is
- * clearly the third. The belly wall lies 60 to 100 mm from every bone, and its candidates were every vertebra, rib
- * and cartilage and the pelvis: wherever three of them were about equally far, neighbouring vertices took different
- * pairs with very different shares, and those bones stand far apart there once the trunk bends (the seventh cartilage
- * and the twelfth vertebra 57 mm, a rib and its own cartilage 25 mm, measured in the middle of the belly).
- * The muscles of the belly wall are skinned as a WALL instead (wallSkinWeights): the wall hangs between the front of
- * the rib cage, carried by ONE bone for every vertex (the breastbone), and the pelvis, shared smoothly by distance;
- * only close to a rib or cartilage does a vertex go with that bone (its attachment), and only where the pelvis has no
- * share. No vertebra is among their bones: these muscles are not attached to the vertebrae (the deep ones reach the
- * lumbar ones only through a sheet of fascia). The price: the lowest slips, on the floating ribs 11 and 12 (which
- * ride their vertebrae in this rig), follow the tenth rib, the breastbone and the pelvis; and away from the ribs the
- * wall follows the breastbone, not the rib beside it, a few millimetres apart at the ends of the trunk's range.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const WALL_SKIN = Object.freeze({ re: /\b(external oblique|internal abdominal oblique|transversus abdominis|rectus abdominis|pyramidalis)\b/, ribFullMm: 4, ribNoneMm: 22, pelvisFloor: 0.1 });
 /** 'l' / 'r' for a muscle entry that names its side ("left ...", "... of right ...", "....l", an id ending -l / -r), else null. */
 function muscleSideOf(entry) {
@@ -984,36 +984,36 @@ function muscleCandidates(entry) {
 // this file and are only read inside functions (after module evaluation).
 const REFERENCE_PACKET = 'bodyparts3d-fullbody-r1';
 
-/**
- * 18 November 2026 (user: "see all of the front of the torso at once without the chest pumping out but depressed
- * down/inwards"; "the back convexly curved"): the rib-cage linkage. With one segment per thoracic vertebra a rib cannot
- * simply ride its vertebra: the front ends of neighbouring ribs would pass through each other and tear off the
- * breastbone. So, as in a real chest, each rib 1 to 10 hangs between two things: its head and neck stay on its own
- * vertebra, its front end stays with the breastbone. Each linked segment has a few anchor points with a carrier segment
- * and a weight; its matrix for a pose is the least-squares rigid fit (Horn) of the anchor points to where their
- * carriers take them:
- *   breastbone   the sternal ends of the costal cartilages 1 to 7 of both sides, each carried by that rib's vertebra
- *                (where a rigid rib would hold it), weighted by RIB_LINK.sternumWeights: the first three pairs count
- *                twenty times the others, as the breastbone hangs from the upper ribs. So it goes with the top of
- *                the chest when the back rounds, and the lower ribs fold down to it: the chest sinks toward the
- *                pelvis instead of standing out. (With equal weights the fit turned the breastbone's lower end
- *                forward to take up the closing of the rib ends: the chest stood out, rib heads up to 6 mm off their
- *                vertebrae. Rigid with the first thoracic vertebra: rib heads up to 24 mm off.)
- *   rib 1 to 10  head and neck (carried by its vertebra) and front end (carried by the breastbone); the back counts
- *                RIB_LINK.backWeight times the front (the false ribs 8 to 10 falseBackWeight: they reach the breastbone
- *                only through the long shared cartilage), so the head stays on the vertebra and the rib turns about it;
- *   cartilage    its rib end (carried by its rib; the seventh also by the ribs 8 to 10 that join it) and its sternal
- *                end (carried by the breastbone);
- *   girdle base  (GIRDLE_BASES, no bone of its own) the shoulder blade's rib side on the ribs 2 to 8 it lies on, so
- *                the blade goes with the ribs under it when the upper back rounds or the trunk turns, and (lightly:
- *                girdleJointWeight) the collar bone's inner end on the breastbone;
- *   collar bone  (CLAVICLE_STRUTS) its inner end on the breastbone and its outer end on the girdle (the shoulder
- *                blade): a strut between the two, fitted after the girdles are placed.
- * At the source pose and whenever all carriers move together the fit is that common matrix exactly. Needs the bone
- * meshes; without them the linked segments ride their parents. Measured at the start posture (tests/spine.test.mjs
- * keeps looser bounds): rib heads within 4.4 mm of where their vertebra holds them (false ribs 6.9), cartilage ends
- * within 4 mm (the shared seventh 9). Display mechanics on one reference body, not measured rib kinematics.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const RIB_LINK = Object.freeze({ backReachMm: 28, frontReachMm: 14, endReachMm: 9, maxPoints: 10, backWeight: 4, falseBackWeight: 9, sternumWeights: Object.freeze([1, 1, 1, 0.05, 0.05, 0.05, 0.05]),
   girdleJointWeight: 0.5, strutEndReachMm: 14, girdleRibReachMm: 6, girdleRibMaxGapMm: 12, girdleRibWeights: Object.freeze([0.5, 0.5, 1, 2, 4, 6, 6]) });
 function buildRibLinks(segPos, girdle = null) {
@@ -1327,21 +1327,21 @@ function estimateJoints(bone, boneMesh, warn) {
   return J;
 }
 
-/**
- * 18 November 2026 (user: "No muscles or joints should be ... detached, dislocated"; the range-of-motion sweep: at a
- * fully bent knee the kneecap stood 21 mm farther from the shin, and the lower end of the front thigh muscle 32 mm):
- * the kneecap's track. A kneecap is held to the shin by the patellar ligament, which does not stretch, and it slides
- * down the groove at the front of the thigh bone and on between the two condyles as the knee bends. In this rig the
- * shin is a plain hinge about the knee pivot, so a ligament of fixed length means: the kneecap turns about that pivot
- * WITH the shin (perKneeFlex 1; before, 0.7 of the knee's angle about the same pivot, which is the usual figure for a
- * real knee whose shin also rolls and glides, but here it pulled the ligament 25 mm long). And because the end of the
- * thigh bone is not a circle about the pivot (the groove at the front stands some 12 mm farther out than the condyles
- * underneath), the kneecap also SINKS toward the pivot by just as much as keeps it resting on the bone: `sink` is that
- * distance in mm for every stepDeg of turn, found once from the bone meshes (patellaTrack). What is left over: the
- * ligament is up to about 10 mm longer in mid range (the sink takes the kneecap's lower end away from the shin's
- * tuberosity); it is drawn by the skinned lower end of the front thigh muscle, which bridges that. Display mechanics
- * of one reference body, not a measured patellar track.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const PATELLA_TRACK = Object.freeze({ perKneeFlex: 1, stepDeg: 5, maxDeg: 150, reachMm: 60, sampleMm: 1.5, axialBinMm: 2, angleBinDeg: 3 });
 /** The kneecap's inward slide (mm) for every PATELLA_TRACK.stepDeg of its turn about the knee axis, so that it keeps
  * the clearance from the thigh bone it has in the source pose. The thigh bone's outer surface is taken as a polar
@@ -1914,47 +1914,47 @@ function deepFreezeRig(v) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Targets and posing
 
-/**
- * 18 November 2026 (user: "Make sure clicking of the muscles does not result in impossible ranges of motions and
- * dislocations"; "test all major ranges of motions for plausibility"): the COMBINED-RANGE RULE. BODY_JOINT_LIMITS
- * bounds every joint angle on its own, so stacked movements could reach positions no body reaches (the arm raised 180
- * AND lifted 135 sideways came out pointing down with the upper arm twisted half a turn). A joint's range in one
- * direction is narrower when a neighbouring movement is already at its end; each row below narrows ONE end of ONE
- * joint's range, in a straight line, as another angle goes from `from` to `to` (degrees), from the full limit to
- * `least`. Every single movement of the body map still reaches its own full end. The directions are the ones the
- * standard texts describe (Kapandji, The Physiology of the Joints; the AAOS joint-motion tables); where they give a
- * figure it is quoted as a typical textbook range, and where they only describe the effect the amount is a display
- * choice and says so. None of it is measured on this reference body or on the player.
- *   knee by hip      the front thigh muscle crosses the hip and the knee: with the hip straight or extended the knee
- *                    bends less. Typical textbook range (Kapandji): active knee flexion about 140 with the hip flexed,
- *                    about 120 with the hip extended; here 135 (the rig's limit) falling to 120.
- *   thigh by trunk   lifting the thigh ends when it meets the belly and chest (the textbook reason hip flexion stops
- *                    near 120 with a bent knee: Kapandji). With the trunk already bent forward the two meet sooner:
- *                    the lift has the full 120 up to 45 degrees of trunk bend and 75 at the trunk's full 90 (a
- *                    display choice: at 80 + 110 the thigh lay over the chest with the knee at the chin and filled
- *                    the view from the eyes). This also closes a place where a limb could hide the whole view.
- *   hip turn-in      in deep hip flexion the neck of the thigh bone comes against the rim of the socket and inward
- *                    turning is the first movement lost (textbook description; 40 -> 25 is a display choice).
- *   hip turn-out, hip out   with the hip extended its ligaments are wound tight (the close-packed position): outward
- *                    turning and abduction have less room (textbook description; 45 -> 25 and 45 -> 30 are display
- *                    choices).
- *   neck tilt        the neck's joints couple a side bend with a turn: with the head turned to its end the side bend
- *                    has less room (textbook description; 45 -> 25 is a display choice). The neck's nod and turn are
- *                    NOT narrowed against each other here: the look uses both to their ends, and the eye camera rides
- *                    on the head.
- *   trunk side bend  less room with the trunk turned to its end (as the neck; 35 -> 25, a display choice). The
- *                    trunk's turn is NOT narrowed by its forward bend: the start posture holds the trunk far from
- *                    upright, and "Turn trunk" has to reach its end from there.
- *   wrist side bend  largest with the wrist straight and least when it is fully bent or bent back (Kapandji describes
- *                    the side movement as minimal there; radial 20 -> 8, ulnar 30 -> 12 are display choices).
- *   foot turn-in     with the foot pulled fully up the ankle bone is held tight in its mortise (close-packed):
- *                    inversion has less room (textbook description; 35 -> 20 is a display choice).
- *   finger spread    the knuckles' side ligaments are tight in flexion: fingers closed into a fist cannot be spread
- *                    (textbook fact; 20 -> 5 here).
- *   shoulder         see COMBINED_RANGE.shoulder.
- * `by` is a joint id, or one of: trunkBend (trunk_flex + pelvic_tilt), wristBend (r_wrist_flex - r_wrist_ext),
- * fingerCurl (the mean net flexion of the four fingers). `mag: true` uses the size of `by` whatever its sign.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const COMBINED_RANGE = Object.freeze({
   rows: Object.freeze([
     ...['L', 'R'].flatMap(S => [
@@ -2061,7 +2061,7 @@ export function clampBodyJointTargets(targets = {}) {
     cut('r_shoulder_flex', Math.max(applied.r_shoulder_flex, sh.flexMin));
     cut('r_shoulder_rot', clamp(applied.r_shoulder_rot, sh.rot[0], sh.rot[1]));
   }
-  // R558 (Message 2): the hip flexes less with a straight knee (HIP_KNEE_COUPLING); reported like any other clamp.
+
   const HK = HIP_KNEE_COUPLING;
   for (const S of ['L', 'R']) {
     const kneeFlex = Math.max(0, -applied[`knee_ext_${S}`]);
@@ -2089,35 +2089,35 @@ function checkRig(rig) {
  * in degrees about each thigh's long axis (positive = the toes turn toward the subject's right: external rotation of
  * the right hip, internal rotation of the left). Kept inside LIMB_TURN_LIMIT_DEG, which lies within commonly quoted
  * active hip rotation (about 30 to 45 degrees each way); not measured on this body. null = no turn. */
-/**
- * 18 November 2026 (user: "Think about the shoulders rolled forward and the back convexly curved"): a rounded back
- * comes with protracted shoulder girdles: the collar bone's outer end and the shoulder blade slide forward round the
- * rib cage. Each girdle (collar bone and shoulder blade, one rigid piece in this rig) turns about its sternoclavicular
- * joint by perTrunkFlex degrees per degree of trunk_flex, between minDeg (a back arched backward draws the shoulders
- * slightly back) and maxDeg. The axis runs from that joint through the centre of the sphere fitted to the ribs under
- * the shoulder blade (the joint record's rollAxis, from the bones), so the blade stays on the ribs as it goes round
- * them; without the bones it is the trunk's long axis. At the start posture's 80 degrees the roll is 16 degrees (70 and 14 before the third pass),
- * inside the commonly quoted 15 to 20 degrees of clavicular protraction: the shoulder comes forward about 3 cm, a
- * little outward and down. It follows the trunk joint only (not the trunk bend a steep look adds), so it changes when
- * the player bends or straightens the back and never with the look. A display coupling, not measured scapular
- * kinematics.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
 // (18 November 2026, later: perPelvicTilt. With the pelvis rolled under and the upper back straight (the start posture's
 // pelvic_tilt) the shoulders still sit forward, as on someone slumped back with the arms stretched out toward the
 // knees: 0.3 degrees per degree of pelvic tilt, 15.5 degrees at the start posture.)
 export const SHOULDER_ROLL = Object.freeze({ perTrunkFlex: 0.2, perPelvicTilt: 0.3, minDeg: -4, maxDeg: 16 });
-/**
- * 18 November 2026, third pass (user: "flat depressed chest ... You should be able to see your own shoulders and
- * stomach/abs"; the lead: "the head carried further forward over the chest"): a slumped, rounded back comes with the
- * head carried FORWARD: the lower neck bends forward and the head tips back on the top of the neck by the same angle,
- * so the head keeps its direction and moves forward (and a little down) over the chest. The angle is perTrunkFlex
- * degrees per degree of trunk_flex (16 degrees at the start posture's 80: the eyes about 3 cm further forward), 0 with a
- * straight or arched back. It follows the trunk joint only, never the look, like SHOULDER_ROLL. With it the eyes see
- * past the lower edge of the chest to the belly. The head's direction for every neck angle is unchanged (the two
- * angles cancel), so the look's own arithmetic (ns-app headPoseForLook) still holds. A display coupling inside what a
- * neck does (forward head posture), not measured cervical kinematics.
- */
-// (18 November 2026, late, package FLAT; the owner: "The neck looks a little funny, sort of like a giraffe neck":
+
+
+
+
+
+
+
+
+
+
+
+
 // perPelvicTilt 0.2 -> 0.08, so the slumped start posture carries the head 4.4 degrees forward instead of 11; the head
 // sits back over the shoulders and the neck no longer reaches forward as a long thin stalk on the mirror body and
 // from outside. The muscle-bulk package thickens the neck itself.)
@@ -2137,12 +2137,12 @@ function shoulderRollMatrix(rollDeg, joint, side) {
   return m4RotAbout(UP, -side * rollDeg, joint.point);
 }
 
-/**
- * 18 November 2026 (user: "you are gazing diagonally downwards"): in the reclined start posture the eyes are lowered in
- * the head by downDeg while the head is level or bowed; the lowering fades to nothing as the head tips back by
- * endAtHeadUpDeg (the look's own code: ns-app HEAD_LOOK eyeDownDeg, eyeDownForHead). Eyes lower about 40 degrees in the
- * head; 22 is a comfortable downward gaze. A display choice, not a measured gaze.
- */
+
+
+
+
+
+
 // (18 November 2026, later: 22 -> 30. With the pelvis rolled under and the neck already bent 40 of its 50 degrees in
 // the start posture, the eyes do more of the downward gaze: at the start look of 35 degrees the head is bowed only 5.)
 export const POSTURE_EYES = Object.freeze({ downDeg: 30, endAtHeadUpDeg: 40 });
@@ -2155,24 +2155,24 @@ function checkLimbTurn(t) {
   const R = one(t.hipRotDegR), L = one(t.hipRotDegL);
   return R === 0 && L === 0 ? null : { R, L };
 }
-/**
- * 18 November 2026 (the owner: "introduce subtle, natural, physiological details during movements, such as joint
- * varus/valgus during rotation"). Small coupled movements that come with a joint's own movement: display rules inside
- * the pose (never targets), each a share of an angle that is already there, each clamped inside the joint's own
- * limits and the combined-range rule, each exactly zero again when the movement is undone. Directions are textbook
- * (Kapandji, The Physiology of the Joints); the amounts are display choices, small enough to be felt more than seen,
- * and nothing is measured on this body.
- *   kneeUnlockDeg / kneeUnlockOverDeg   the shank turns inward as the knee leaves full extension (the reverse of the
- *                        "screw-home" turn that locks the straight knee; typical textbook amount 10 to 15 degrees
- *                        over the last 20 to 30 of extension; 6 over 30 here)
- *   ankleInvPerPlantar / ankleEvPerDorsi  pointing the foot comes with a little inversion, pulling it up with a little
- *                        eversion (the ankle's oblique axis; 0.2 of the angle: at most 10 and 4 degrees)
- *   wristUlnarPerFlex / wristRadialPerExt  the wrist drifts to the little-finger side as it bends and to the thumb side
- *                        as it bends back (the "dart-thrower's" line; 0.1 of the angle: at most 8 and 7 degrees)
- *   hipOutDeg / hipSpreadDeg over hipFrom .. hipTo   lifting the thigh high comes with a little outward turn and
- *                        spread (the thigh bone's neck clearing the socket's rim; 6 and 3 degrees by full flexion)
- * The knee's varus / valgus with the leg turn and the sole's tip with the foot's turn are in LEG_TURN.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const JOINT_COUPLINGS = Object.freeze({
   kneeUnlockDeg: 6, kneeUnlockOverDeg: 30, ankleInvPerPlantar: 0.2, ankleEvPerDorsi: 0.2,
   wristUlnarPerFlex: 0.1, wristRadialPerExt: 0.1, hipOutDeg: 6, hipSpreadDeg: 3, hipFrom: 60, hipTo: 120
@@ -2180,12 +2180,12 @@ export const JOINT_COUPLINGS = Object.freeze({
 /** The legs' turn as drawn (LEG_TURN, JOINT_COUPLINGS): per side { foot, shank, kneeSide, hipRot, abdExtra, headingOut }
  * in degrees. hipRot is the thigh's whole turn (hip_rot plus the turn's thigh share plus the high-flexion coupling),
  * kept inside the hip's range under the combined-range rule; abdExtra the thighs' parting plus the coupling. */
-/* 20 November 2026, evening (LIMBFREE; the owner: "The limb should never get stuck"): the thighs' parting used to be cut
- * off where it met the hip's sideways limit (min(spread, limit - lift)), so over the last few degrees of a lifted
- * thigh's sideways range the drawn leg did not move at all while the angle changed. The keys' joint solve, which feels
- * its way by small changes, found no way back from there (A could not bring a raised leg in again). The parting now
- * gives way smoothly toward the limit (spreadIn): at most `raw`, never past the limit, and the drawn lift still rises
- * with the angle all the way. Same sizes away from the limit. */
+
+
+
+
+
+
 const spreadIn = (raw, room) => (raw > 0 && room > 0 ? raw * smooth01(room / (2 * raw)) : 0);
 export function legTurnState(rig, A) {
   const out = {}, cp = JOINT_COUPLINGS;
@@ -2239,7 +2239,7 @@ function localMatrices(rig, A, limbTurn = null) {
   // The rib-cage linkage's segments are placed by fit in worldSegments (linkMatrix); without it they ride their parents.
   for (const seg of LINKED_SEGMENTS) out[seg] = m4I();
   for (const seg of CLAVICLE_STRUTS) out[seg] = m4I(); // placed by fit after the girdles (worldSegments); without it they ride their girdle
-  // R558 (user, Message 1: "The cursor now will control head/neck movement"; the eye camera rides on the head). The head
+
   // as a whole turns about the trunk's vertical (neck_rot) and then nods about its own turned side-to-side axis
   // (neck_flex), exactly the order of the camera's yaw and pitch, so the head points where the camera looks. Each joint
   // keeps its share of both angles: the lower neck (cervicothoracic) turns first and then bends; the skull joint takes
@@ -2304,7 +2304,7 @@ function localMatrices(rig, A, limbTurn = null) {
       out.r_girdle = J.r_sternoclavicular && g ? m4RotAbout(axis, g, J.r_sternoclavicular.point) : m4I();
       out.r_upperarm = angle > 1e-9 ? m4RotAbout(axis, angle - (J.r_sternoclavicular ? g : 0), gh.point) : m4I();
     }
-    // R558 (Space dance, Message 2): internal / external rotation about the humerus' own long axis (the shoulder centre to
+
     // the elbow centre in the rest frame), turned first, so the swing above carries it and the arm keeps its direction.
     // About that downward axis a positive angle turns the front of the arm toward the subject's right: outward
     // (external rotation) for this right arm. Its elevation, and so the shoulder-blade share above, do not change.
@@ -2325,7 +2325,7 @@ function localMatrices(rig, A, limbTurn = null) {
     const cp = JOINT_COUPLINGS, r = combinedRange('r_wrist_dev', A);
     out.r_hand = m4Mul(rot('r_wrist', 'flex', A.r_wrist_flex - A.r_wrist_ext), rot('r_wrist', 'dev', clamp(A.r_wrist_dev - cp.wristUlnarPerFlex * A.r_wrist_flex + cp.wristRadialPerExt * A.r_wrist_ext, Math.min(r[0], A.r_wrist_dev), Math.max(r[1], A.r_wrist_dev))));
   }
-  // R558 (Messages 14 / 15): every digit has its own net angle: the whole-hand ids (r_grasp - r_open) plus the digit's
+
   // own id, so the right hand bends each finger and the thumb on its own, like the left game hand.
   const whole = A.r_grasp - A.r_open;
   const share = (net, [f, e, lo, hi]) => clamp(net >= 0 ? f * net : e * net, lo, hi);
@@ -2501,21 +2501,21 @@ function fittedMatrix(f, mats) {
   return rigidFit(f.p, skinFitSamples(f, mats));
 }
 
-/**
- * R5-pronation (user note 2026-11-08T23:43Z, R27: "the rest of the body will follow correspondingly"): the slight
- * follow of the upper trunk and the left shoulder girdle when the left forearm turns (ns-arm ROTATION_COUPLING; ns-arm
- * bodyFollowFromCoupling turns fitHand(...).coupling into this option). Display mechanics, not measured motion.
- *  - trunkTwistDeg: the thorax turns by this many degrees about the vertical (source +z) axis through trunkAxisBp (mm;
- *    default the thoracolumbar joint); + = toward the subject's left (left shoulder back). The neck turns back by the
- *    same angle about the vertical axis through the cervicothoracic joint, so the head keeps its direction (it shifts by
- *    (R - I)(C - A), under 2 mm for the coupling's 1.5 deg), and the resting right arm turns back about the vertical
- *    through its shoulder joint, so it keeps its direction and only moves with the right shoulder (about 4 mm forward).
- *    Lumbar spine, pelvis and legs do not move.
- *  - leftGirdleShiftMm: the left shoulder girdle (virtual segment l_girdle, and l_upperarm with it) slides by this
- *    vector (source frame mm) relative to the thorax: the shoulder-blade retraction that goes with the outward turn of
- *    the upper arm. The left pectoralis major, trapezius and serratus anterior follow it through their l_girdle weights.
- * Limits (refused beyond): |trunkTwistDeg| <= 10, |leftGirdleShiftMm| <= 50.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const ARM_FOLLOW_LIMITS = Object.freeze({ trunkTwistDeg: 10, leftGirdleShiftMm: 50 });
 
 function checkArmFollow(af) {
@@ -2559,16 +2559,16 @@ function applyArmFollow(rig, local, af) {
   if (af.leftGirdleShiftMm) local.l_girdle = m4Mul(m4Trans(af.leftGirdleShiftMm), local.l_girdle);
 }
 
-/**
- * R558 (user, Messages 1 and 2: the cursor turns the head and neck; "using anatomically feasible movements, with
- * anatomically feasible range of motion, you should still be able to see all body parts whilst looking around"). When
- * a look goes past the neck's turning range the chest turns too: options.lookTwistDeg turns the thorax (and everything
- * it carries: neck, head, both shoulder girdles and the right arm) about the trunk's own long axis through the
- * thoracolumbar joint; + = toward the subject's left. The lumbar spine, pelvis and legs stay put, so the body keeps
- * sitting square on the ground. LOOK_TWIST_LIMIT_DEG (40) is a rounded, game-safe value inside commonly quoted active
- * thoracolumbar rotation (about 30 to 45 degrees each way); not measured on this body. Display kinematics: the whole
- * twist is taken at one joint of this rigid rig.
- */
+
+
+
+
+
+
+
+
+
+
 export const LOOK_TWIST_LIMIT_DEG = 40;
 /**
  * R558 (same notes): the trunk bend that goes with the head (options.lookBendDeg, + = the head goes down) is a bend
@@ -2806,13 +2806,13 @@ export function poseBodyDetailed(rig, jointTargetsDeg = {}, options = {}) {
   return result;
 }
 
-/**
- * R558 (user Messages 2 and 12): the drawn matrix (source rest mm -> drawn mm, column-major Float64Array) of every
- * segment for these joint targets, WITHOUT the per-mesh work of poseBodyDetailed: the same clamping, anchor, baked keep
- * correction, limbTurn, holdChest, armFollow and external options, so a point carried by a segment lands exactly where
- * poseBodyDetailed's `segments` would put it. For the held-limb joint solve and the stop-at-contact test (cheap enough
- * to call several times a frame). Returns { segmentId: Float64Array(16) }.
- */
+
+
+
+
+
+
+
 export function poseBodySegments(rig, jointTargetsDeg = {}, options = {}) {
   checkRig(rig);
   const t = clampBodyJointTargets(jointTargetsDeg);
@@ -2849,22 +2849,22 @@ export function bodyHeadFrame(rig, jointTargetsDeg = {}, options = {}) {
   return out;
 }
 
-/**
- * R558 (Space dance; Messages 2 and 11): how far the two hips may turn before the feet touch, in the current leg
- * posture. The legs lie straight forward side by side (parallel, not spread), so turning both sets of toes inward
- * (internal rotation) brings the feet together; with bent knees turning them outward does. The game does not spread
- * the legs to make room: it limits the hip turn instead. For each direction it finds the largest EQUAL turn of both hips
- * (both inward, or both outward) at which the bone points of the two lower legs (shank, foot and toes: the rig's
- * voxel-downsampled bone clouds) stay at least boneGapMm apart; that gap leaves room for the muscles, tendons and other
- * drawn tissue over the bones (FEET_CLEARANCE; checked against the full posed meshes, see the build notes). A smaller
- * turn of one hip, or a turn the other way, only takes its foot further from the other one.
- *   boneGapMm      bone-to-bone gap kept between the two lower legs (mm)
- *   scanSteps      coarse steps over each direction's anatomical range, then bisectSteps halvings of the first failing step
- * targets: the current joint angles (every joint as posed now; the two hip_rot values are ignored).
- * Returns { hip_rot_L: [lo, hi], hip_rot_R: [lo, hi] (degrees, lo = most internal), internalDeg, externalDeg (the
- * touch-free equal turns), gapMm (bone gap with both hips at 0 when it is below boneGapMm, else null), limitedBy: { internal, external } ('feet' | 'range') }.
- * A posture whose feet are already closer than boneGapMm keeps them at least as far apart as they are.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const FEET_CLEARANCE = Object.freeze({ boneGapMm: 20, scanSteps: 12, bisectSteps: 6, linearMm: 0.5 }); // (linearMm: how far the quick hip-turn rotation may be off the pose, 20 Nov)
 const legCloudCache = new WeakMap();
 function legClouds(rig) {
@@ -3088,18 +3088,18 @@ export function hipRotationClearRange(rig, targets = {}, options = {}) {
  * null when the muscle is unknown or has fewer than two candidate segments with geometry.
  * options.nearest: 'index' (default, round 4) or 'scan' (every cloud point; same result, for the exactness test).
  */
-/**
- * R558 (Message 32: "The far right base of the neck muscles ... above the clavicles" stuck out): a muscle that spans the
- * neck (a head segment, cervical / skull / mandible, AND a trunk segment, thorax or a shoulder girdle, among its
- * candidates: the sternocleidomastoids, the platysmas, the descending trapezius and the levator scapulae) was posed as
- * ONE rigid piece, a least-squares fit between the head and the trunk. The mouse look turns the head all the time, and
- * at a 30 degree turn the platysma stood off the right side of the neck as a flat pointed wing and the
- * sternocleidomastoid left the clavicle as a strap (measured with the head turned 70 and nodded: up to 37 mm free).
- * These muscles are now skinned per vertex like the right hand's (handSkinRecords, HAND_SKIN_JOINTS has the neck and jaw
- * joints), with CONTINUOUS weights (neckSkinWeights): the plain two-nearest-bones rule jumps where a third candidate
- * becomes the second nearest, and the neck's thorax, cervical and skull frames turn apart. Display mechanics on licensed
- * anatomy, not measured soft-tissue motion.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 const NECK_HEAD = new Set(['cervical', 'skull', 'mandible']), NECK_TRUNK = new Set(['thorax', 'r_girdle', 'l_girdle']);
 // GQ check (frame rate): the missing-muscles packet (decision 53) brought 29 more neck-spanning meshes, and skinning all 36
 // (116k vertices) on every frame of a look cost about a quarter of the frame rate while looking around (36 -> 24 fps).
@@ -3110,17 +3110,17 @@ const NECK_HEAD = new Set(['cervical', 'skull', 'mandible']), NECK_TRUNK = new S
 // muscles rigid did show (longissimus capitis through the levator scapulae by 14 mm at a 30 degree look, the
 // sternothyroid off the sternum, a scalenus through the levator scapulae by 5 mm), so those keep the per-vertex skin.
 const NECK_SKIN_RIGID = new Set(['FJ1526', 'FJ1526M', 'FJ1534', 'FJ1534M', 'FJ1539', 'FJ1539M', 'FJ1542', 'FJ1542M', 'zm-longus-colli-r', 'zm-longus-colli-l']);
-/* 17 November 2026 (user: "fix it when muscles essentially become detached, which is still a problem when they're moved
- * into certain ranges of motion"; "clicking of the muscles does not result in ... detachments of muscles"): the rule
- * that was made for the neck now holds for EVERY muscle that crosses a joint (two or more candidate segments: 226 of
- * the 232 muscles, 819 thousand of 844 thousand vertices). Such a muscle used to be drawn as one rigid piece, a
- * least-squares fit between the bones it attaches to, so with a joint far from the start posture both of its ends
- * stood off their bones: the hamstrings and the calf at a bent knee, the hip flexors at a lifted thigh, the belly
- * muscles on a bent trunk, the deltoid and the chest muscle at a raised arm. Now each of its vertices follows the two
- * bones nearest to it, with the continuous weights below, so its ends stay on their bones and its belly bends with the
- * joint. The scene re-skins a muscle only while the bones it attaches to move against each other. The right hand's
- * and forearm's muscles keep their own rule (the twist), and the five deep neck pairs stay rigid as before. The name
- * is kept: it is the neck's rule. Display mechanics on licensed anatomy, not measured soft-tissue motion. */
+
+
+
+
+
+
+
+
+
+
+
 const neckSkinnedMuscle = (info, id = null) => Boolean(info && info.kind === 'muscle' && new Set(info.candidates || []).size >= 2
   && !(info.candidates || []).some(s => HAND_SKIN_RE.test(s) || s === 'r_radius') && !(id !== null && NECK_SKIN_RIGID.has(id)));
 /**
@@ -3164,17 +3164,17 @@ function wallSkinWeights(idx, segs, p, o = WALL_SKIN) {
   }
   return { ia, ib, wa };
 }
-/**
- * 18 November 2026 (the owner: "fix it when muscles essentially become detached"; a check: the count of poses with a
- * muscle end over 8 mm off its bone had not moved). The ends that still left their bone at the hip are vertices of
- * the short deep muscles that lie on the pelvis at the socket's rim AND against the ball of the thigh bone under
- * them: the nearest-two rule gave the ball a share, and the ball turning in its socket dragged them off the pelvis by
- * 10 to 17 mm. The ball of a hip carries nothing: muscle slides over it. Within `noneWithin` joint radii of the hip
- * centre the thigh's share is zero, from `fullFrom` radii on it is the rule's own (the greater trochanter, where
- * these muscles end on the thigh bone, is over two radii out), smooth in between; what the thigh gives up goes to
- * the pelvis. (Tried first: sharper weights everywhere, the shares squared; the loose ends rose from 81 to 86 over
- * 29 hip, shoulder and neck poses, because it handed such vertices to the ball even more firmly. Removed.)
- */
+
+
+
+
+
+
+
+
+
+
+
 export const BALL_SKIN = Object.freeze({ noneWithin: 1.1, fullFrom: 1.6,
   joints: Object.freeze([Object.freeze({ seg: 'r_thigh', parent: 'pelvis', joint: 'r_hip' }), Object.freeze({ seg: 'l_thigh', parent: 'pelvis', joint: 'l_hip' })]) });
 // The ulna and radius use the same twist frame in elbow-spanning muscles. Search their two clouds as one,
@@ -3375,37 +3375,37 @@ export function anconeusPoseWeights(weights, flexDeg) {
   return { delta: weights.anconeusDelta, mix: weights.anconeusDelta ? anconeusBendBlend(flexDeg) : 0 };
 }
 
-/**
- * 21 November 2026 (ELBOW; the published list of what is not done: "the right elbow at its full bend still folds its
- * muscles"; the owner: "Any limited range of motion that's unnatural needs to be fixed"). THE RIGHT ELBOW'S SKIN AT A
- * DEEP BEND. Looked at offline in close pictures of the elbow posed with the game's own rig and skin records (bent 90,
- * 120 and 145 degrees, palm up and palm down), three faults, each with its own rule here:
- *   tailMm   the far ends of the forearm's muscles kept a share of the upper arm's frame (the two-influence weights
- *            fall off slowly with the distance to each bone: 6 cm down the forearm the long finger and wrist flexors
- *            still followed the upper arm by 15 to 30 %, the brachioradialis 4 cm up the upper arm the forearm by 15 %;
- *            the triceps 3 cm above the olecranon by 35 %). At a deep bend such a vertex is pulled 2 to 4 cm toward
- *            the other bone: the forearm's flexors folded back into the crease and through the biceps. A vertex whose
- *            two bones lie on either side of the elbow now hands its share over to the bone of its own side between
- *            tailMm[0] and tailMm[1] from the elbow along that side's bone (forearm: toward the wrist; upper arm:
- *            toward the shoulder); nearer the elbow its weights are the rule's own (an attachment on an epicondyle or
- *            the olecranon keeps its bone).
- *   spin     the plain linear blend of two frames bent 145 degrees apart pulls a vertex shared half and half most of
- *            the way to the joint's axis (it keeps cos 72.5 = 30 % of its distance): the back of the elbow came to a
- *            pinched point of crumpled triangles. Such a vertex now turns about the elbow's axis by its share of the
- *            bend instead, for `spin` of the difference (1 = a full turn blend, which swelled the back of the elbow
- *            into a ball; 0.5 keeps a round point). Only the bend about the elbow's axis is blended so; the forearm's
- *            turn and anything else stays linear.
- *   clamp    at a deep bend the forearm's flexors and the biceps / brachialis pass into each other. Past fromDeg of
- *            bend (full from toDeg) a vertex on the inner side of the elbow (innerMm: from the elbow's axis toward
- *            the inside of the bend) that has crossed the plane halving the bend, from the forearm's side or the
- *            upper arm's, is put back on its own side (smoothly: within marginMm of the plane it is moved by under a
- *            third of that). A vertex shared about half and half (its share between pure[0] and pure[1] of the way
- *            from even to whole) is moved less, none at even shares, so nothing tears. The two masses then meet along
- *            that plane, as a fully bent arm's front does.
- * Display rules for the atlas surface, not a model of soft tissue; nothing here is measured on a body. Shared by the
- * start-posture bake (bakeBodyPosture), skinBodyPositions, the skin records (handSkinRecords, which carry elbowRig) and
- * the scene's processor skin (ns-scene-three), so every one draws the same arm.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const ELBOW_SKIN = Object.freeze({ on: true, tailMm: Object.freeze([20, 50]), spin: 0.5,
   clamp: Object.freeze({ marginMm: 2.5, fromDeg: 50, toDeg: 100, innerMm: Object.freeze([-5, 15]), pure: Object.freeze([0.1, 0.6]) }) });
 const ELBOW_FORE_RE = /^r_(forearm|radius|hand|thumb_(mc|pp|dp)|(index|middle|ring|little)_(pp|mp|dp))$/;
@@ -3520,7 +3520,7 @@ export function bodySkinWeights(rig, meshId, restPositions, options = {}) {
   const avail = (info.candidates || []).filter(s => clouds[s]);
   if (avail.length < 2) return null;
   if (neckSkinnedMuscle(info, meshId)) {
-    // R558 (Message 32): the neck muscles' continuous weights (the bake uses the same: bakeSkinWeights).
+
     const c = continuousSkinWeights(rig, p, avail, info.skin || null);
     if (!c) return null;
     const n = p.length / 3, w0 = new Float32Array(n), w1 = new Float32Array(n);
@@ -3624,16 +3624,16 @@ export function rForearmTwistMap(T, f, out) {
   return out;
 }
 
-/** R558 (Messages 14 / 15): the right-hand muscles a single rigid matrix cannot carry once the digits move on their own:
- * every muscle whose candidate segments include the right hand or a right digit (the long finger and thumb muscles, the
- * wrist muscles and the hand's own muscles and muscle sets). */
+
+
+
 const HAND_SKIN_RE = /^r_(hand|thumb_(mc|pp|dp)|(index|middle|ring|little)_(pp|mp|dp))$/;
 /** The joints whose change from the start posture makes the right hand's muscles need per-vertex skinning. */
 export const HAND_SKIN_JOINTS = Object.freeze(['r_wrist_flex', 'r_wrist_ext', 'r_wrist_dev', 'r_grasp', 'r_open', 'r_thumb_flex', 'r_thumb_opp',
   'r_index_flex', 'r_middle_flex', 'r_ring_flex', 'r_little_flex', 'r_finger_spread',
   // R558 (R_FOREARM_TWIST): the right forearm's turn and the elbow bend its muscles per vertex too.
   'r_pronation', 'r_elbow_flex',
-  // R558 (Message 32): the neck muscles (neckSkinnedMuscle) follow the head's turn, nod and side bend and the jaw.
+
   'neck_rot', 'neck_flex', 'neck_side', 'jaw_open', 'jaw_side']);
 /**
  * Skin records for the scene's setBodySkin: Map(element id -> { src (source positions, Float32Array), i0, i1, w0, w1 })
@@ -3647,7 +3647,7 @@ export function handSkinRecords(rig, meshesById, options = {}) {
   for (const m of rig.muscles) {
     const info = rig.meshSegment[m.id];
     // R558: and every right forearm muscle that reaches the radius, for the continuous twist (R_FOREARM_TWIST); and
-    // (Message 32) every muscle that spans the neck (neckSkinnedMuscle).
+
     if (!info || !((info.candidates || []).some(s => HAND_SKIN_RE.test(s) || s === 'r_radius') || neckSkinnedMuscle(info, m.id))) continue;
     const mesh = get(m.id), p = positionsOf(mesh);
     if (!p) continue;
@@ -3832,44 +3832,44 @@ export function rotationBodyDrives(byName, options = {}) {
 // (no trunk, neck or jaw angle), so the head, the first-person eye, the face layer and the left-arm shoulder stay
 // exactly where they were. No chair or floor is drawn; the posture is a display choice, not a measured pose.
 
-/**
- * Rest postures in degrees from the BodyParts3D source pose (same ids and signs as BODY_JOINT_LIMITS / ns-bodymap
- * JOINT_SEMANTICS; missing ids are 0). Display choices inside ordinary adult ranges of motion, not measured on anyone.
- *  - 'open' (DEFAULT_BODY_POSTURE, R558 as corrected by the user: "out straight forward front facing", "an invisible
- *    ground ... flat", and "all the limbs straight out like a stick (perpendicular from the torso), instead of the
- *    suggestive spread eagle pose"): every limb straight FORWARD, at right angles to the trunk. The body sits upright
- *    on an invisible flat ground with both legs straight out in front, side by side ("long sitting": hips flexed 90
- *    deg, knees, ankles and toes straight). Each leg is swung only 6 deg out to its own side (hip abduction): in the
- *    source pose the thighs slope inward to the knees, and 6 deg makes them run parallel, so the knees stay about a
- *    hip width apart instead of nearly touching ("The knees/thighs of the legs should not be so close together")
- *    without any spread. The right arm points straight forward at shoulder height
- *    (shoulder flexed 90 deg, elbow, wrist and fingers straight), the forearm turned fully palm down (160 of 160 deg,
- *    80 deg past thumb-up, the same full pronation as the left game arm's start, for left-right symmetry). The left arm is
- *    the game arm: it reaches forward to its full length toward the look point (ns-arm), straight forward at look 0/0.
- *    Hip flexion 90 with a straight knee is at the end of the usual straight-leg range (hamstrings), inside the joint
- *    limits. The skull stays at its source place (bakeBodyPosture keeps it); no floor is drawn. A display choice
- *    inside ordinary adult ranges of motion, not a measured pose.
- *  - 'seated' (the default until R558): sitting upright on an ordinary seat, thighs level to slightly rising toward the
- *    knees (hips flexed 95 deg), lower legs reaching a little forward (knees flexed 45 deg) with relaxed ankles (15 deg
- *    toes-down). Chosen from rendered candidates and a body-only ID-buffer scan (round3/R3-body-NOTES.md): with the
- *    knees bent 55-70 deg the knees hide most of the feet from the eye; hips at 95 instead of 85 deg show the kneecaps
- *    on 0.105 % instead of 0.066 % of the far-down view.
- *    Right arm (round 4, R4-body): the forearm rests forward at the side of the body, as if on an armrest (none is
- *    drawn): upper arm 15 deg forward and 15 deg out, elbow bent 85 deg (forearm about 10 deg above level), forearm
- *    turned past thumb-up so the palm faces mostly down and in (115 of 160 deg), wrist bent 10 deg, fingers loosely
- *    curled 20 deg. Why: the round-3 arm (shoulder 5 / 12, elbow 40, turn 85) let the hand hang beside the right knee,
- *    about 59 deg below eye level, so at a far-right look the hand only came into view at a 25 deg downward look
- *    (half the hand; 27.5 deg for 90 %). Resting forward at elbow height it is about 44 deg below eye level and comes
- *    into view at 10 deg (half) / 12.5 deg (90 %), measured in the game with its own camera, trunk turn and HUD
- *    (round4/R4-body-NOTES.md). A forearm resting ON the thigh was measured too: this rig has no shoulder rotation or
- *    adduction below 0, so the forearm stays in the shoulder's plane, beside the thigh about 90 mm above it, and the hand
- *    stays about 52 deg below eye level (in view only at an 18 deg downward look); it would look like floating.
- *  - 'anatomical': the source pose itself (standing, arms at the sides, palms forward): every angle 0.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BODY_POSTURES = deepFreezeRig({
   anatomical: {},
-  // 17 November 2026 (user: "someone who is leaning laid back in a really leaning laid back chair ... can see
-  // everything at the front of their body from the chin down all at once, shoulders, chest and everything"; "Torso
+
+
   // should be declining back in an invisible imaginary decline sofa"; "the shoulders rolled forward and the back
   // convexly curved"; "see all of the front of the torso at once without the chest pumping out but depressed
   // down/inwards"; "full neutral hip extension. The bend is from the back and not the hips"): the body lies back as on
@@ -3888,8 +3888,8 @@ export const BODY_POSTURES = deepFreezeRig({
   // The head keeps its place (the bake keeps the skull), so the body lies out ahead of the eyes, chin to toes. The
   // right arm is raised 54 from the trunk so it still points level forward. No sofa is drawn. A display choice inside
   // the joints' ranges (trunk 80 forward, neck 50), not a measured pose.
-  // 18 November 2026, later (user, after seeing the game: "I want flat depressed chest not booby pumped out chest. And
-  // you are gazing diagonally downwards. You should be able to see your own shoulders and stomach/abs"): trunk 70 of
+
+
   // its 80 and neck 20 (still 90 together: the pelvis and legs lie level), and the eyes are lowered in the head
   // (POSTURE_EYES below). The game starts with the look 34 degrees below level: the head is bowed 12 of them (the neck
   // at 32 of its 50) and the eyes do the other 22. With the chin no longer pressed down (the neck was at its 50) the
@@ -3918,15 +3918,15 @@ export const BODY_POSTURES = deepFreezeRig({
   // along the body toward the knees: the right upper arm 37 degrees forward of the leaning trunk, the elbow 8 (soft,
   // not locked), the forearm palm UP (r_pronation 0, the limb turn's open end); the knees keep their soft 10
   // (EXTENSION_SOFT_BEND). A display choice inside the joints' ranges, not a measured pose.
-  // 18 November 2026 (the owner: "we start the game in an underside view of the limbs"; "minimal elbow and knee
-  // flexion initially, although they must still look naturalistic, but yet be fully extended out"): the right palm up
+
+
   // (r_pronation 0) and both legs at the limb turn's underside end (leg_turn 25: the feet 45 degrees outward, a V;
   // ns-dance LEG_TURN_ENDS, DANCE_UNDERSIDE), the
-  // knees soft (6 degrees), the elbow 8. The legs 7 degrees apart each (12 in the eleventh upload; the owner: "they're
-  // probably a little too wide at the moment, the ankles"): the feet still clear each other on the overside.
+
+
   // 18 November 2026, late (the whole arm turns over in the limb switch, ns-dance ARM_TURN): the right upper arm starts
   // at the underside end of its own turn (r_shoulder_rot 35 outward), with the palm up.
-  // 20 November 2026 (the owner: "Let's make the limbs longer"; ns-body-shape BODY_SHAPE): the arms are drawn about 1.19
+
   // times as long, and at 37 degrees their hands rose into the motor strip in the start picture (your fingertips over the
   // face areas, the mirror body's hands over the leg and trunk areas, whose labels then had no place). The upper arm
   // now starts 33 degrees forward of the trunk and 5 out (37 and 8 before): the hands lie a little lower and nearer the
@@ -3941,15 +3941,15 @@ export const BODY_POSTURES = deepFreezeRig({
     r_shoulder_flex: 15, r_shoulder_abd: 15, r_elbow_flex: 85, r_pronation: 115, r_wrist_flex: 10, r_grasp: 20
   }
 });
-/**
- * R558 (user Message 51: "let's have the extended arm and legs, you know, slightly bent. Not perfectly straight"): the
- * DRAWN right elbow and both knees keep a small bend at full extension, the way a relaxed limb is rarely locked
- * straight. drawn bend = sqrt(bend^2 + min^2): `min` degrees at a fully extended joint, within 1 degree of the joint's
- * own angle from about 4 x min on, smooth in between (no step when a joint starts to bend) and never past the joint's
- * limit. A display choice, not a measured resting angle. Only the drawn pose changes: the activity's joint angles, the
- * joint limits and the body map keep 0 = straight. The left game arm needs none: its reach stops at ns-arm
- * WRIST_REACH_FRACTION of the arm's length, about 16 degrees of elbow bend.
- */
+
+
+
+
+
+
+
+
+
 export const EXTENSION_SOFT_BEND = Object.freeze({ elbowDeg: 12, kneeDeg: 10 });
 /** The joint angles to DRAW (see EXTENSION_SOFT_BEND): a new object; ids without a finite angle are left alone. */
 export function softExtensionAngles(angles, o = EXTENSION_SOFT_BEND) {
@@ -3962,20 +3962,20 @@ export function softExtensionAngles(angles, o = EXTENSION_SOFT_BEND) {
   return out;
 }
 
-/**
- * R558 (user Messages 47 and 48: every leg movement must be achievable and plain to see; "it's really hard to get the
- * legs to ... extend the hip"): the knee to DRAW for a thigh lifted past where a straight knee lets it go.
- * HIP_KNEE_COUPLING stops hip flexion at straightKneeMaxDeg while the knee is straight (the hamstrings). Instead of
- * holding the thigh back there, the drawn knee gives way just far enough for the hip to reach the angle it was asked
- * for: knee flexion >= (hip - straightKneeMax) / (bentKneeMax - straightKneeMax) x fullAtKneeFlexDeg. That is how a
- * sitting person lifts a thigh: the knee bends as it rises. A display coupling for a two-joint muscle group, not a
- * measured hamstring length. Only the drawn knee changes: the activity's own knee angle, the limits and the body map
- * are untouched, and a knee already bent further is left alone. Pure; returns a new object.
- * It replaces the earlier leg ground model (groundLegAngles: the heel slid along an invisible ground, a knee bend was
- * drawn only as far as that allowed, and a thigh could never go below level, so hip extension did nothing). The
- * invisible ground is where the two bodies sit at the start; it no longer stops a limb.
- * @param angles { BODY_JOINT_ID: deg } absolute joint angles
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function passiveKneeAngles(angles, hk = HIP_KNEE_COUPLING) {
   const out = { ...angles };
   const span = hk.bentKneeMaxDeg - hk.straightKneeMaxDeg;
@@ -3989,24 +3989,24 @@ export function passiveKneeAngles(angles, hk = HIP_KNEE_COUPLING) {
   return out;
 }
 
-/**
- * Display caps for posture-relative targets (bodyPostureTargets), tighter than BODY_JOINT_LIMITS where the rigid 3D
- * meshes would pass into each other (round 4, R4-body). 'seated': lifting a thigh stops at 110 deg hip flexion (15 deg
- * above the seated 95; the body map asks +35, which BODY_JOINT_LIMITS would clamp at 120). Beyond that the thigh
- * muscles pass into the belly wall. Torso vertices inside a leg mesh (every 3rd vertex; a vertical ray up and down must
- * both cross the mesh an odd number of times), both thighs lifted as posed in the game: 114 at rest (the psoas tendons
- * at their femur attachments), 379 at 110 deg, 3504 at 120 deg, most of them the external oblique inside the adductor
- * magnus (one leg baked at each angle: 58 at 95 deg, 91 at 100, 233 at 110, 840 at 115, 1892 at 120). Real soft tissue
- * would squash; these meshes cannot. The legs never pass into each other in any leg action (unit test R4-body-pose).
- * The seated right elbow bends at most to 120 deg (the body map's +80 would reach the 145 deg limit from the 85 deg
- * armrest rest): "bend right elbow" then ends where it ended in round 3 (40 + 80), with the hand about 265 mm from the
- * eye, instead of about 164 mm at 145 deg, where the hand fills the lower corner of the view.
- * 'open' keeps the same 110 deg hip-flexion cap (the thigh and belly meshes are the same ones).
- * R558 audit (Message 2): these are the only caps below BODY_JOINT_LIMITS, and each keeps its documented mesh reason
- * (the 110 deg thigh lift; the seated 120 deg elbow). Hip extension follows the rig limit (-30, AAOS). With a straight
- * knee HIP_KNEE_COUPLING (applied in clampBodyJointTargets) would hold the hip at 100, below the 110 cap; the game
- * draws the knee bending with the lift instead (passiveKneeAngles), so the thigh reaches the cap.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BODY_POSTURE_LIMITS = deepFreezeRig({
   anatomical: {},
   // (18 November 2026: trunk_flex. The start posture rolls the pelvis under by 55 degrees, all of it in the low back;
@@ -4378,20 +4378,20 @@ function boundsOf(p) {
  */
 const bakeWeightCache = new WeakMap();
 
-/**
- * R558 (Message 32: "No muscles should arbitrarily be pointy and stick out"): the posture bake skins a muscle that spans
- * a joint the start posture bends (the hips and the right shoulder at 90 degrees, the girdle that follows the arm) with
- * two bones per vertex and inverse-square distance weights. Those weights change steeply where a vertex's distances to
- * the two bones cross (and their gradient jumps along the bones' medial lines), and at a 90 degree bend a weight step of
- * 0.1 over 2 mm moves neighbouring vertices up to about 20 mm apart: measured on the start posture, ridges, folds and
- * pointed plates up to 21 mm high on the gluteus maximus, rectus femoris, sartorius, iliacus, the right pectoralis,
- * deltoid and serratus anterior (the GQ protrusion check). So the bake's displacement from the muscle's own rigid rest
- * fit, d = baked - rest(src), is smoothed over the welded surface (`passes` neighbour means of d itself, not of the
- * positions, so the mesh does not shrink and the bend is kept): the bend stays, its ridges go. The right hand and forearm
- * muscles keep the plain skin, because the scene skins them per vertex from the same weights at every pose
- * (handSkinRecords) and the skinned start pose must equal the baked one. The lifted copy gets the same correction
- * (bakeLiftedPositions). A display choice on licensed anatomy, not measured soft-tissue mechanics.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BAKE_SMOOTH = Object.freeze({ passes: 24 });
 /** The welded neighbour-mean smoothing of a displacement field d (Float32Array, layout of p) over a mesh, in place. */
 function smoothDisplacement(p, ix, d, passes) {
@@ -4430,7 +4430,7 @@ function bakeSkinWeights(rig, id, p, avail, near, useCache, indices = null) {
   const hit = byId ? byId.get(id) : null;
   if (hit && hit.p === p && hit.avail === avail.join(',') && (id !== 'FJ1485' || hit.indices === indices)) return hit;
   if (neckSkinnedMuscle(rig.meshSegment[id], id)) {
-    // R558 (Message 32): the neck muscles' continuous weights, exactly as bodySkinWeights gives them to the scene's skin.
+
     const c = continuousSkinWeights(rig, p, avail, rig.meshSegment[id].skin || null);
     if (c) {
       const out = { p, avail: avail.join(','), ...c, tf: null, indices, ...anconeusSkinDeltas(rig, id, p, indices, avail, c) };
@@ -4553,7 +4553,7 @@ export function bakeBodyPosture(rig, meshesById, { posture = DEFAULT_BODY_POSTUR
             }
           }
           if (eShare) elbowCreaseClamp(positions, null, v => eShare[v], elbowPlaneOf(er, eU, eF), angles.r_elbow_flex);
-          // R558 (Message 32): the bake's displacement from the rigid rest fit, smoothed (BAKE_SMOOTH), except for the
+
           // muscles the scene skins per vertex. The correction is kept for the lifted copy (bakeLiftedPositions).
           if (BAKE_SMOOTH.passes > 0 && !sceneSkinnedMuscle(info, id) && mesh.indices) {
             const d = new Float32Array(p.length);
@@ -4629,12 +4629,12 @@ export function bodyRootAnchor(rig, baked = null) {
 }
 
 
-/* R558 (performance, user Message 42): the body is re-posed on most frames (the head and the left arm follow the look),
- * but most of its segments do not move from one pose to the next. bakedDelta is a pure function of the matrices of the
- * segments a mesh uses, so its last result is kept per mesh and returned again while every one of those matrices is
- * exactly (element for element) what it was in the previous pose; a bone's matrix is worked out once per segment instead
- * of once per bone. Same numbers as before: nothing is approximated, and a changed element recomputes. Kept per baked
- * posture, for one rig and one muscle mode at a time. */
+
+
+
+
+
+
 const bakedDeltaMemos = new WeakMap();
 function bakedDeltaMemo(rig, B, mode, mats) {
   let c = bakedDeltaMemos.get(B);
@@ -4693,8 +4693,8 @@ function bakedDelta(rig, baked, id, info, world, mats, mode) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Round 5 (R5-body, D15): Body Worlds layers
 //
-// The user (2026-11-08T21:54Z): "make the superficial muscles slightly detached. Gunther von Hagens style body worlds, so
-// that we can see into the deep muscles."
+
+
 //
 // R183: anatomical qualification comes from exact-ID bounded regional source records
 // (ns-regional-layers.mjs; R175/R130/R135 pins), with scope/head/part caveats intact.
@@ -4810,9 +4810,9 @@ export function bodyLayerRecord(id) {
 // ---------------------------------------------------------------------------------------------------------------------
 // R558: the Body Worlds stack with anchored ends
 //
-// The user (2026-11-11): "a Gunther Von Hagens Body Worlds radially (direction, not bone) elevated muscles stack so
-// that deep muscles are clearly visible through and under slightly floating superficial ones. That does not mean
-// transparency effects to muscles and bones." And: "make sure tendon insertions and origins are still accurate and
+
+
+
 // there, even if that means they are much much longer than they otherwise would be."
 //
 // The round-5 display moved every qualified outer muscle with ONE rigid matrix (3 to 15 mm and a small peel). That
@@ -4850,7 +4850,7 @@ export function bodyLayerRecord(id) {
 // (neither ligament is a mesh in the packet). An end with no bone under it (a tendon ending in an aponeurosis, or on
 // a bone this build does not have) falls back to pinning the last 6% of the muscle's length where it is.
 //
-// Round 3 adds the display FILL (the user: "The muscles should be full, filled-out and plumpy."): at full amount
+
 // EVERY muscle, lifted or not, is also drawn a little fuller, its surface moved outward along its smoothed normal by
 // at most a few millimetres per region and at most a share of the local radius (stackFillOffsets), never on the
 // anchored ends. The drawn gap between two storeys is the lift difference less the two fills, so it stays under 20 mm
@@ -4869,7 +4869,7 @@ export const BODY_STACK_RULE = Object.freeze({
   // Every gap is at or below 20 mm ("slightly floating"). The middle level floats at half of it. Round 3: the neck is a
   // region of its own (a slim neck under a 30 mm trunk lift looked like a collar standing off it); the forearm gap is
   // smaller, because its outer muscles are slim and a large radial lift parts them into strands with bone between.
-  // Round 4 (Message 18: "anatomical realism and accuracy ... doesn't necessarily have to have a bodybuilder look"):
+
   // the gaps are smaller (were trunk 30, neck 14, upper arm 20, forearm 11, hand 7, thigh 30, shank 22, foot 8). A
   // 30 mm trunk lift drew the pectorals as mounds that hid the thighs from the eye and the deltoid as a balloon; at
   // these values the outline stays close to an adult body and the storeys read through partings, not through bulk.
@@ -4888,7 +4888,7 @@ export const BODY_STACK_RULE = Object.freeze({
   // Round 4: on the left game arm, the LIFT fades out where the forearm twist skinning turns neighbouring vertices by
   // different angles and where the elbow / wrist blends shear them (see armTwistFade); the fill stays (armStackLift).
   armTwistFade: Object.freeze({ slope: 8, joint: 1 }),
-  // R558 (user Message 30: "The bone tips probably shouldn't be so spikey"): on a finger or a toe a tendon lies on its
+
   // bones. Past the knuckles the hand and foot gaps (5 and 6 mm) floated the long finger and toe tendons that far off
   // phalanges only 8 to 10 mm thick, and each tendon then dived back down to its anchored insertion on the distal
   // phalanx: drawn tendon-white, that dive was a hooked sliver standing off every fingertip and toe tip (the claws and
@@ -4908,12 +4908,12 @@ export const BODY_STACK_RULE = Object.freeze({
   // ramp a muscle can get (searchMm at least, maxMm for a muscle with its own distShare; see anchoredStackLift).
   ramp: Object.freeze({ lengthShare: 0.1, minGaps: 1, maxMm: 70, bellyMm: 25, distShare: 0.5, searchMm: 36 }),
   direction: Object.freeze({ constantBelowDeg: 60, radialAboveDeg: 120, minRadialMm: 2 }),
-  // Round 3, the display FILL (user: "The muscles should be full, filled-out and plumpy."): every muscle, lifted or
+
   // not, is drawn slightly fuller by moving its surface outward along the smoothed surface normal (stackFillOffsets):
   // at most mm[region], and at most radiusShare x the local radius of the surface, so a thin tendon swells by a
   // fraction of its own thickness while a belly gets the full amount. 0 on the attachment ends, full after endRampMm.
   // head = muscles posed with the skull or the jaw. A display choice, never measured anatomy.
-  // Round 4 (Message 18 refines Message 9: full and natural, not inflated): the caps are about a third of round 3's
+
   // (trunk 3, neck 2.5, head 1.2, upper arm 3.5, forearm 3, hand 1.5, thigh 4, shank 3.5, foot 1.5). Because the
   // amount is min(cap, radiusShare x local radius), a strand or tendon thinner than cap / radiusShare (about 2 to 3 mm)
   // still gets exactly the round-3 amount, so the forearm and shin do not turn stringy again; only the broad bellies,
@@ -4941,7 +4941,7 @@ export const BODY_STACK_RULE = Object.freeze({
   axisOf: Object.freeze([
     ['FJ1418', 'Right gluteus maximus', 'r_leg'], ['FJ1418M', 'Left gluteus maximus', 'l_leg']
   ].map(([id, name, axis]) => Object.freeze({ id, name, axis, basis: 'hip muscle behind the hip joint: lifted radially from the thigh axis' }))),
-  // Round 4 (Message 18): exact-ID rows that tune one muscle's lift, display choices with the reason in basis.
+
   //   gapScale   multiplies its gap
   //   distShare  replaces ramp.distShare for it (1 = the lift grows across the whole muscle: a sheet reflected off
   //              its bed from its origin, highest at its free border)
@@ -4957,14 +4957,14 @@ export const BODY_STACK_RULE = Object.freeze({
     ...['FJ1447:Clavicular part of right pectoralis major', 'FJ1464:Sternocostal part of right pectoralis major', 'FJ1446:Abdominal part of right pectoralis major',
       'FJ1447M:Clavicular part of left pectoralis major', 'FJ1464M:Sternocostal part of left pectoralis major', 'FJ1446M:Abdominal part of left pectoralis major'
     ].map(s => s.split(':')).map(([id, name]) => Object.freeze({ id, name, gapScale: 0.25, distShare: 1,
-      // 18 November 2026 (the owner: "flat depressed chest not booby pumped out chest"): gapScale 0.8 -> 0.25. The sheet
+
       // stood up to 12.8 mm off the muscles under it at its free border, which is half of what made the chest two
       // mounds (the other half was the muscle's own depth: flattenChest); now 4 mm, a thin parting.
       basis: 'reflected from its origin on the sternum and clavicle like a dissected sheet, but only a thin parting high (the chest is drawn flat): low near the midline, highest at the free lower outer border over serratus anterior' })),
     ...[['FJ1452', 'Right external oblique'], ['FJ1452M', 'Left external oblique']].map(([id, name]) => Object.freeze({ id, name,
       smooth: Object.freeze({ innerMm: 50, outerMm: 85, cellMm: 4, reachMm: 24, blurMm: 10 }),
       basis: 'the atlas sculpts the segments of rectus abdominis into the front of this sheet (the anterior rectus sheath); that relief is drawn shaved down to a smooth surface within about 50 to 85 mm of the midline, so the sheath does not read as a rectus abdominis ("six-pack"); when the real rectus abdominis is loaded (missing-muscles-r1) the part of the sheet in front of it is not drawn at all (openRectusSheath: the sheath opened, as in a dissection)' })),
-    // 18 November 2026 (the owner: "some muscles have become detached and are sticking out, such as around the hips"):
+
     // with the stack drawn again (shaveReliefPosed) the buttock's full 20 mm thigh gap, lifted radially from the thigh's
     // axis, drew the gluteus maximus as a shell hanging off the hip, its lower border a flap under the buttock and its
     // upper border a free edge with a dark gap under it (seen from below and from the side).
@@ -4973,8 +4973,8 @@ export const BODY_STACK_RULE = Object.freeze({
     ...[['FJ1595', 'Right sternocleidomastoid'], ['FJ1573', 'Left sternocleidomastoid']].map(([id, name]) => Object.freeze({ id, name, region: 'neck',
       basis: 'neck muscle from the mastoid to the sternum and clavicle: the neck gap along its whole length, so its lower end does not stand off as a hood' }))
   ]),
-  // R558 (Message 32: "No muscles should arbitrarily be pointy and stick out. The far right base of the neck muscles do,
-  // above the clavicles."): exact-ID rows of a muscle that the stack does not lift but that the atlas draws OVER muscles it
+
+
   // does lift. Without this the lifted muscle came out THROUGH the thin sheet lying on it (measured on the start posture:
   // the sternocleidomastoid by up to 7.3 mm over 411 vertices of the platysma, the descending trapezius by up to 14.3 mm
   // just above the clavicle), and what was left of the sheet stood off as flat, pointed scraps at the base of the neck.
@@ -4989,7 +4989,7 @@ export const BODY_STACK_RULE = Object.freeze({
   ].map(([id, name, on]) => Object.freeze({ id, name, on: Object.freeze(on),
     basis: 'the platysma is the outermost sheet of the neck: it lies on the sternocleidomastoid, on the infrahyoid strap muscles and, above the clavicle, on the anterior border of the trapezius, all of which the stack lifts' }))),
   carryRule: Object.freeze({ reachMm: 5, coverMm: -1, marginMm: 0.6, spreadMm: 3, rampPasses: 6 }),
-  // R558 (Message 32): the whole display offset of every drawn muscle (lift + fill + carry, from the baked geometry) is
+
   // smoothed over its welded surface by `passes` neighbour means at the end. The parts of it change from one vertex to
   // the next by rule (the per-vertex radial direction, the fill's curvature cap, a cover cap that tucks a vertex in while
   // its neighbour just outside coverMm keeps its fill), and single vertices stood out of their neighbourhood as needles
@@ -5234,23 +5234,23 @@ export function openRectusSheath(meshesById, rule = RECTUS_SHEATH_OPENING) {
   return { meshesById: out, report };
 }
 
-/**
- * 20 November 2026 (the owner, Message 200: "Let's ensure that the human neck looks natural. Right now it looks like
- * there's a scarf around the neck."). The scarf was the PLATYSMA, the thin sheet that runs in the skin of the neck from
- * the lower jaw over the collar bones onto the upper chest. In the source model it is one smooth sheet; in the game's
- * reclined start posture the neck is bent forward 40 of its 50 degrees (BODY_POSTURES.open), the chin comes down
- * toward the chest and the front of the neck is a third of its height: the sheet, carried by the jaw at its top and by
- * the chest at its foot, folds into a crumpled band along the jaw and a thicker one round the root of the neck, over
- * the sternocleidomastoids and the strap muscles, in a lighter tone than the muscles round it. Seen on both bodies and
- * from outside, at every look; with the neck straight (a check only) it is a smooth sheet again. A sheet squashed to a
- * third of its height has to fold whatever its skin weights, and a cut-out middle would be a torn sheet (Message 183).
- * Like an anatomical ecorche, which takes the platysma off with the skin, the bodies are now drawn WITHOUT it
- * (drawn: false): the neck shows the two sternocleidomastoids running down to the breastbone and the strap muscles
- * between them. The platysma stays in the rig, the posture bake, the skin records and the movement map (it is still
- * named with the mouth's corner and lower lip, whose other muscles light up); only no triangle of it is handed to the
- * scene, which skips a mesh without triangles (no record, no mirror twin, no pick, no beam end). A display choice, told
- * honestly; no licensed mesh file is changed.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const NECK_SHEET = Object.freeze({ drawn: false,
   rows: Object.freeze([Object.freeze({ id: 'zf-platysma-r', name: 'right platysma' }), Object.freeze({ id: 'zf-platysma-l', name: 'left platysma' })]),
   basis: 'display choice: the platysma (a sheet in the skin of the neck) is not drawn; the bowed start posture folds it into a band round the neck' });
@@ -5271,36 +5271,36 @@ export function leaveOutNeckSheet(meshesById, rule = NECK_SHEET) {
   return { meshesById: out || meshesById, leftOut };
 }
 
-/**
- * 18 November 2026 (the owner, three times: "without the chest pumping out but depressed down/inwards"; "I want flat
- * depressed chest not booby pumped out chest"): the chest muscles are drawn FLAT. The source model's pectoralis major
- * is a deep, athletic muscle: over the middle of each side of the chest it stands 20 to 26 mm (at most about 40 mm)
- * off its own rib-side surface, and seen from the eyes the two sides read as two mounds with the breastbone between.
- * Here every part of pectoralis major, both sides, is thinned toward the ribs:
- *  - a vertex keeps its place ACROSS the chest wall (its angle round the trunk's long axis and its height), and its
- *    height above the muscle's own deep surface is multiplied by thicknessShare. The chest wall is taken as an
- *    upright elliptical tube (axis: halfWidthMm x halfDepthMm about the line x = 0, y = yMm), which only fixes which
- *    way "toward the ribs" points at each place; the deep surface is the muscle's own: the lowest of its vertices in
- *    each cell of a grid over (angle, height), read between cell centres, so the rib side of the muscle stays where
- *    it is (it moves by at most a fraction of a millimetre) and the muscle still lies on the ribs and on pectoralis
- *    minor exactly as before;
- *  - toward the arm the change fades out (between fade.fromMm and fade.toMm from the midline), so the tendon that
- *    crosses the armpit and its end on the upper arm bone are untouched; within hold.fromMm of the collar bone or
- *    the breastbone nothing moves and the change grows to its full amount over hold.toMm from them (a first try
- *    without this drew the upper edge of the muscle in behind the front of the collar bone, which then lay bare).
- * It is done on the REST mesh before the rig is built, so your body, the mirror body, picking, the skin weights and
- * the layer lift all get the same shape. A display choice that departs from the source model on purpose, to be told
- * to the player honestly. Measured on this body (10 mm cells over the chest wall, outermost minus innermost vertex):
- * the sternocostal part is on average 13 mm deep where the source model has 21 (about two thirds; at most 27 where
- * the source has 42), the clavicular part 12 where the source has 15, the abdominal part 3 where it has 6.5; the
- * front surface itself comes down by up to 17 mm. The licensed files are unchanged. Returns { meshesById (a new Map; the thinned meshes get new position arrays), report }.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const CHEST_FLATTEN = Object.freeze({
   rows: Object.freeze([
     ['FJ1447', 'Clavicular part of right pectoralis major'], ['FJ1464', 'Sternocostal part of right pectoralis major'], ['FJ1446', 'Abdominal part of right pectoralis major'],
     ['FJ1447M', 'Clavicular part of left pectoralis major'], ['FJ1464M', 'Sternocostal part of left pectoralis major'], ['FJ1446M', 'Abdominal part of left pectoralis major']
   ].map(([id, name]) => Object.freeze({ id, name }))),
-  // (18 November 2026, the owner: "even if that means you're a little flat-chested"; a check: from the eyes the chest
+
   // was still two slabs either side of the breastbone in a groove: 0.4 -> 0.25. Measured the same way as above: the
   // sternocostal part is on average 11.5 mm deep where the source has 20.7 (0.56; at most 23 where the source has 42),
   // the clavicular part 11.1 where it has 15.0, the abdominal part 2.5 where it has 6.5. The numbers in the note above
@@ -5310,7 +5310,7 @@ export const CHEST_FLATTEN = Object.freeze({
   cellRad: 0.05, cellMm: 6, fillPasses: 3, smoothCells: 2, smoothPasses: 3,
   fade: Object.freeze({ fromMm: 120, toMm: 158 }),
   hold: Object.freeze({ fromMm: 2, toMm: 14, bones: Object.freeze([['FJ3362', true], ['FJ3290', false], ['FJ3178', false]].map(r => Object.freeze(r))) }),
-  basis: 'display choice (the owner asked for a flat, sunken chest): pectoralis major drawn at about half of the source model\'s depth, thinned toward its own rib-side surface; not measured anatomy'
+  basis: "display choice: pectoralis major drawn at about half of the source model's depth, thinned toward its own rib-side surface; not measured anatomy"
 });
 export function flattenChest(meshesById, rule = CHEST_FLATTEN) {
   if (!(meshesById instanceof Map)) return { meshesById, report: null };
@@ -5494,44 +5494,44 @@ export function closeBellyMidline(meshesById, rule = BELLY_MIDLINE) {
 // ---------------------------------------------------------------------------------------------------------------------
 // 18 November 2026 (package BULK): a trained body, the same on your body, the mirror body and the left game arm.
 //
-/**
- * The owner, 18 November: "perhaps we should go bulkier with the muscles, especially for the limbs ... more of a
- * bodybuilder aesthetic"; "the arms and legs shouldn't look small either"; "We actually want wider wrists, wider
- * ankles, wider feet, wider hands, wider forearms, wider forelegs"; "Maybe you also need a thicker neck too";
- * "Undeveloped muscles need work, such as the abdomen". The source model (BodyParts3D) is an averagely built body.
- * BODY_BULK is a PROPORTION CHANGE of that model, done once on the rest meshes before the rig (so your body, the mirror
- * body, picking, the skin weights, the bake and the layer lift all get the same shape), as a few smooth spatial rules
- * rather than muscle-by-muscle patches:
- *  1. LIMB FIELDS. Each limb is a chain of straight axes between the reference joint centres (REFERENCE_JOINTS; the left
- *     arm uses the right arm's mirrored): upper arm (shoulder -> elbow), forearm (elbow -> wrist), hand (wrist -> the
- *     middle finger's knuckle, carried on through the fingers); thigh (hip -> knee), shin (knee -> ankle), foot (the
- *     ankle's own frame). Neighbouring axes are blended over blendMm either side of a joint, so the field is continuous.
- *     a. BULK (muscles only): a muscle vertex at distance rho from its axis moves straight away from the axis by
- *        k x (rho - r0), where r0 is the height of the segment's BONE surface under it (a polar height map of the
- *        bones, binMm along the axis x binDeg round it). A vertex on the bone does not move and every layer above it
- *        moves in proportion to its height, so deep and superficial muscles grow together, keep their order and
- *        nothing leaves its bone. k = bulk x belly(t) x ang(theta): belly is 0 at the joints and 1 at `belly[1]` of the
- *        segment's length (attachments and tendons keep their size); ang adds lobes for the muscles that make the
- *        look (biceps and triceps, the quadriceps' sweep, the calf) and takes some off the side that faces the trunk
- *        or the other thigh (`medial`). theta: 0 front, 90 out to the side, 180 back, 270 toward the midline.
- *     b. WIDER FAR ENDS (bones, tendons and muscles alike): the forearm and the shin are scaled across their own axis by
- *        a factor that rises from 1 just below the elbow / knee (`widenFrom` of their length: the tendons' ends on the
- *        tuberosities keep their place) to `widen` by `widenTo` and goes on to `wrist`
- *        at the wrist / ankle. The hand is scaled in its own width (`width`) and thickness (`thick`, faded out over
- *        the fingers, which get their bulk from the digit pads of DIGIT_PADS); the foot in its width (about the line
- *        from the ankle to the toes) and a little in its thickness (about its own mid-height). The two sides of a
- *        joint get the same factor there, so wrist, ankle and the joints of the hand and foot stay closed; the rig's
- *        joint centres are found afterwards from the widened bones.
- *  2. NECK: the muscles that span the neck move away from the cervical spine (axis from the cervicothoracic to the
- *     atlanto-occipital joint centre) by the same rule (r0 = the cervical vertebrae's polar height map), most at the
- *     back and sides, little at the throat; and MUSCLE_THICKEN below thickens the descending trapezius.
- *  3. MUSCLE_THICKEN: a few muscles are thickened toward their own outside (the inverse of flattenChest): the deltoid's
- *     three parts (the shoulder cap), the descending trapezius (the slope from the ear to the shoulder), and rectus
- *     abdominis, which also gets its tendinous intersections and segments (ABDOMEN_RELIEF).
- *  The chest is left as flattenChest made it. Display choice that departs from the source model on purpose, to be told
- *  to the player honestly (factors in the report and in DESIGN notes); not a measured physique. Returns
- *  { meshesById (a new Map; changed meshes get new position arrays), report }.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BODY_BULK = Object.freeze({
   blendMm: 20, binMm: 8, binDeg: 12, fillPasses: 6, smoothPasses: 2,
   arm: Object.freeze({
@@ -5547,7 +5547,7 @@ export const BODY_BULK = Object.freeze({
     foot: Object.freeze({ width: 1.16, thick: 1.06, ankleBlendMm: Object.freeze([-25, 15]) })
   }),
   neck: Object.freeze({ bulk: 0.3, reachMm: Object.freeze([62, 92]), along: Object.freeze([-0.4, -0.05, 0.85, 1.15]), lobes: Object.freeze([Object.freeze([90, 0.25, 60]), Object.freeze([180, 0.2, 70])]), front: 0.65 }),
-  basis: 'display choice (the owner asked for a bodybuilder build, wider forearms, wrists, hands, shins, ankles and feet, a thicker neck): a proportion change of the source model by smooth rules, not a measured physique'
+  basis: "display choice: a proportion change of the source model by smooth rules, not a measured physique"
 });
 const BULK_ARM_SEGS = /^(r|l)_(upperarm|armwrap|forearm|radius|hand|thumb_(mc|pp|dp)|(index|middle|ring|little)_(pp|mp|dp))$/;
 const BULK_LEG_SEGS = /^(r|l)_(thigh|patella|quad\d|shank|foot|toes|hallux)$/;
@@ -5863,19 +5863,19 @@ export function thickenMuscle(p, idx, row, side, rule = MUSCLE_THICKEN) {
   return { q, maxMm };
 }
 
-/**
- * ABDOMEN_RELIEF (BODY_BULK 3, the owner: "Undeveloped muscles need work, such as the abdomen"): rectus abdominis
- * thicker, in its segments. The packet's rectus abdominis already carries its tendinous intersections (shallower bands
- * across it) and a midline groove; they read weakly because the muscle is thin. Here its thickness above its own deep
- * surface (an elliptical tube round the trunk, CHEST_FLATTEN.axis, cells cellRad x cellMm) is multiplied by
- * 1 + k x across, so the source's own segments (thick) grow more than its intersections (thin) and the relief is
- * amplified where the anatomy puts it. across is 0 at the muscle's inner border (the midline groove, deepened further
- * to midlineShare over midlineMm) and under the external oblique's flap along its outer border (outerKeepMm: the flap
- * that RECTUS_SHEATH_OPENING keeps over the muscle's outer edge would otherwise be pierced). The deep side does not move.
- * (Tried first and dropped: three imposed grooves at the textbook heights, the xiphoid level, the navel and halfway,
- * segmentShare 1 / grooveShare 0.45: they did not lie on the packet's own intersections and drew a second, crossing
- * set of bands. abdomenIntersections still gives those heights for the report.) Display choice; not measured anatomy.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const ABDOMEN_RELIEF = Object.freeze({
   ids: Object.freeze(['zm-rectus-abdominis-r', 'zm-rectus-abdominis-l']), k: 0.65, innerRiseMm: 14, outerKeepMm: 15, outerRiseMm: 14, segmentShare: 0, grooveShare: 1, grooveMm: 6, midlineMm: 9, midlineShare: 0.6,
   xiphoid: 'FJ3153', xiphoidBelowMm: 12, navelJoint: 'l3_l4', navelAboveMm: 10, cellRad: 0.04, cellMm: 5, fillPasses: 3, smoothPasses: 2,
@@ -5949,23 +5949,23 @@ export function abdomenRelief(p, side, cuts, rule = ABDOMEN_RELIEF) {
   return { q, maxMm };
 }
 
-/**
- * DIGIT_PADS (18 November 2026, the owner: "fingers and toes should never be spiky like knives, but potentially even
- * chunky"; 11 November: "No muscles should arbitrarily be pointy and stick out"). On this skinless body a finger or toe
- * is bare bone with thin tendon strips; from the eyes the hands and feet read as claws. Each phalanx gets a rounded
- * SLEEVE of soft tissue (in a body: the fibrous flexor sheath and its pulleys, the fat pads of the palm side, the pulp of
- * the tip; drawn in the white tendon tone): a closed tube round the bone's own long axis (its principal axis), its
- * cross-section an ellipse round the bone's widest section in each slice (`slices` along it) plus `palm` on the palm /
- * sole side, `back` on the back and `side` to the sides, ending in rounded caps: the near cap at nearShare of the
- * bone's length (so the knuckle between two sleeves still reads), the far cap past the bone's end (farMm; on a last
- * phalanx tipMm, the blunt pulp of the tip). It is rigged to the phalanx's own segment (rig_hint), so it follows the
- * bone through every finger and toe movement. Generated geometry for display (documented here; no licensed file is
- * changed), on your body, the mirror body and the left game arm. Returns [{ id, name, segment, positions, indices }].
- * bones: [{ id, name, segment, positions }]; distal: unit direction toward the tips; palmar: unit palm / sole direction.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const DIGIT_PADS = Object.freeze({
-  // 19 November 2026 (the owner: "for the fingertips, make sure the fingertips are still bony, so they actually should
-  // be skinnier when they're away from the finger joints and chunkier towards the joints, and including the tip"):
+
+
   // on: false = no sleeves are made; the finger and toe BONES show, with their own shape (a thin shaft between a thick
   // base and head, and the tuft at the tip). The sleeves of 18 November made every digit one even sausage.
   on: false,
@@ -6067,7 +6067,7 @@ export function bulkBody(entries, meshesById, rule = BODY_BULK, shape = BODY_SHA
   if (!(meshesById instanceof Map)) return { meshesById, report: null };
   const t0 = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
   const list = entryList(entries), groups = new Map();
-  const flatChest = new Set(CHEST_FLATTEN.rows.map(r => r.id)); // the chest stays as flattenChest made it (the owner: flat)
+  const flatChest = new Set(CHEST_FLATTEN.rows.map(r => r.id));
   for (const e of list) {
     if (flatChest.has(e.id)) continue;
     const g = bulkMembership(e);
@@ -6330,23 +6330,23 @@ export function shapeBody(entries, meshesById, rule = BODY_SHAPE) {
   return { meshesById: out, entries: Array.isArray(entries) ? rawOut : entries && Array.isArray(entries.assets) ? { ...entries, assets: rawOut } : entries, report };
 }
 /** 'right index finger pad' from 'distal phalanx of right index finger' (the digit pads' plain names). */
-/**
- * MUSCLE_SWELL (18 November 2026, the owner: "and ensure naturalistic stacking deformation during muscle contraction";
- * 11 November: the Body Worlds stack "so that deep muscles are clearly visible through and under slightly floating
- * superficial ones"). A muscle that contracts shortens and its belly swells; what lies over it is lifted. The data for
- * that, baked once per muscle (pure; the scene adds the displacement after its per-vertex skinning, along each vertex's
- * posed normal, and the game drives the amounts):
- *  - own[v] (mm at full swell): k x belly x thickness on the muscle's OUTER surface (its normal points away from the
- *    nearest bone): belly = sin(pi t)^bellyPow along the muscle's own long axis (0 at both ends: tendons keep their size),
- *    thickness = the distance to the nearest vertex of the muscle's inner surface (at most maxThickMm). The inner surface
- *    does not move: the muscle swells outward, off what it lies on.
- *  - under[v], underIdx[v]: the lift a vertex takes when the muscle UNDER it swells: a vertex of the inner surface takes
- *    the largest own[] of another muscle's outer surface within underMm (signed so that it moves away from that
- *    muscle), and each outer vertex the same as its paired inner vertex, so the whole overlying muscle rises with the
- *    one beneath (the stack moves as a stack) instead of being pierced. unders lists the muscles underIdx refers to.
- *  - anchors: the two segments that carry most of the muscle and a point on each (source mm), for its shortening.
- * Only limb muscles and the belly wall (muscleSwellMembers). Display mechanics, simulated; not measured muscle shape.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const MUSCLE_SWELL = Object.freeze({ k: 0.42, bellyPow: 1.5, maxThickMm: 30, outerFrom: 0.15, outerTo: 0.5, cellMm: 8, underMm: 7, smoothPasses: 2,
   activityFrom: 0.12, activitySpan: 0.6, perActivity: 0.7, perShortening: 2.5, min: -0.5, max: 1, easeS: 0.25, easeSReduced: 0.9, step: 1 / 32 });
 /** The amount (-0.5 .. 1) a muscle swells: activity above its resting level, plus its shortening (a lengthened muscle
@@ -6608,10 +6608,10 @@ export function bulkArmAssets(armMap, roleOf, rule = BODY_BULK, shape = BODY_SHA
   return { arm: out, pads, report: { meshes: out.size, maxMovedMm: Math.round(maxMm * 10) / 10, pads: pads.length, factors: bulkFactors(rule), shape: shapeReport } };
 }
 
-/** R558 (builder AN): the plain sided name of a missing-muscles packet id ('right gracilis', 'left latissimus dorsi'),
- * only when the producer catalogue does not know the id (as bodyStackClass), else null. The renderer gives it to
- * ns-colors muscleToneKey as the source name, so both sides of a packet muscle share one tone (Message 15), including
- * the right levator scapulae, whose left twin (FJ1532M) is a catalogue muscle of the left shoulder girdle. */
+
+
+
+
 export function bodyPacketMuscleName(id) {
   if (typeof id !== 'string' || regionalLayerQualification(id).id !== null) return null;
   const r = STACK_PACKET_BY_ID.get(id);
@@ -6890,8 +6890,8 @@ function stackMeshAnchors(p, bone, midline, capMm, hold = null) {
   return { n, lengthMm: L, anchor, d, anchored: count, clean, reach: [lo / BINS, 1 - hi / BINS], heldShare: hold ? hold.lengthShare : 0, capMm };
 }
 
-/** R558 (Message 30): rig segments that carry finger, thumb and toe PHALANGES (body rig and left-arm rig names; the
- * metacarpals and metatarsals ride the hand / thumb_mc / foot segments and are not digits). */
+
+
 export const STACK_DIGIT_SEGMENT = /^(?:[lr]_)?(?:thumb_pp|thumb_dp|index_|middle_|ring_|little_|toes$|hallux$)/;
 /** The lift factor on the digits (BODY_STACK_RULE.digits) as a function (x, y, z) -> 0..1, or null without digit
  * bones: sstep((d - nearMm) / rampMm), d = the distance to the nearest sample of the given phalanx meshes (their
@@ -6980,7 +6980,7 @@ function stackChainGap(chain, t) {
  */
 function anchoredStackLift(muscles, bones, chainFor, digitBones = null) {
   const R = BODY_STACK_RULE, capMm = Math.max(R.ramp.maxMm, R.ramp.minGaps * Math.max(...Object.values(R.gapMm)));
-  const digitAt = stackDigitFade(digitBones); // R558 (Message 30): BODY_STACK_RULE.digits
+  const digitAt = stackDigitFade(digitBones);
   const bone = bones && typeof bones.near === 'function' ? bones : stackBoneIndex(bones, R.anchor.boneMm, R.anchor.boneSampleMm);
   const groups = new Map(), byId = Object.create(null), units = Object.create(null), unavailable = [], lifted = new Map(), anchorDist = new Map();
   for (const m of muscles) {
@@ -7077,7 +7077,7 @@ function anchoredStackLift(muscles, bones, chainFor, digitBones = null) {
           }
         }
         if (inward) { const q = legKeep(dx, dy, dz); dx = q[0]; dy = q[1]; dz = q[2]; }
-        const lift = gap[v] * w * (digitAt ? digitAt(x, y, z) : 1); // R558 (Message 30): none on a finger or toe
+        const lift = gap[v] * w * (digitAt ? digitAt(x, y, z) : 1);
         out[i] = x + lift * dx; out[i + 1] = y + lift * dy; out[i + 2] = z + lift * dz;
         const moved = inward ? lift * Math.hypot(dx, dy, dz) : lift;   // a leg's inward part may have shortened it
         if (moved > maxLift) maxLift = moved;
@@ -7097,23 +7097,23 @@ function anchoredStackLift(muscles, bones, chainFor, digitBones = null) {
   return { lifted, byId, units, unavailable, ends, boneSamples: bone.points, anchorDist };
 }
 
-/**
- * The display FILL of one muscle mesh (BODY_STACK_RULE.fill; the user: "The muscles should be full, filled-out and
- * plumpy."): an outward offset per vertex along the smoothed surface normal,
- *   offset(v) = weight(v) x min(mm(v), radiusShare x r(v)) x normal(v),
- * where r(v) = 1 / (2 |H(v)|) is the local radius of the surface from its mean curvature H (a tube of radius r has
- * H = 1/(2r), a flat sheet H = 0). So a thin tendon or the rounded rim of a sheet swells by a fraction of its own
- * thickness while a belly or a broad sheet gets the full mm(v), and a concave place is limited the same way, so the
- * surface does not fold over itself. Repeated seam vertices are welded by position (one offset each, so the surface
- * cannot tear), normals and radius are smoothed over the surface, and a mesh wound inside out is detected by its
- * signed volume. A vertex with weight 0 (an attachment end) does not move at all.
- * @param p positions in the frame the mesh is drawn in; ix its triangle indices
- * @param mm Float32Array per vertex: the region's largest fill in mm
- * @param weight Float32Array per vertex, 0..1
- * @param inward null | [x, y, z] unit: on a leg, the direction toward the other leg in the drawn frame; a surface
- *   facing it is filled less (none once it leans legInward.marginShare toward it), so the legs do not crowd
- * @returns { off: Float32Array (same layout as p), maxMm }
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function stackFillOffsets(p, ix, mm, weight, inward = null, cap = null) {
   const F = BODY_STACK_RULE.fill, n = p.length / 3, wid = new Int32Array(n), first = new Int32Array(n);
   // Weld by quantised position: an open-addressing hash over integer cells (exact cell match, so no false merges).
@@ -7315,18 +7315,18 @@ function stackCoverCaps(list) {
   return caps;
 }
 
-/**
- * R558 (Message 32): the CARRY of one muscle A on the muscles under it (BODY_STACK_RULE.carry / carryRule). Pairs are
- * found in the SOURCE frame (the atlas): a vertex of A whose nearest base vertex lies within reachMm and on whose outer
- * side it lies (signed distance along the base's outward normal above coverMm) is a covering vertex. In the DRAWN frame
- * (lift and fill done) it must lie at least marginMm outside that base vertex's drawn tangent plane; the shortfall is its
- * push, along the base's drawn normal. Every vertex of A then takes the largest push within spreadMm on A (both faces of
- * a thin sheet move together), and the push fades out over rampPasses rings of A's welded surface (never below what a
- * vertex needs), with the direction smoothed alike, so the carried part has no crease at its edge.
- * @param srcA, drawnA, ixA the carried muscle (source positions, drawn positions, triangle indices)
- * @param bases [{ src, drawn, ix }] the muscles it rides on
- * @returns { off: Float32Array (drawn offsets, layout of drawnA), maxMm, vertices (moved) }
- */
+
+
+
+
+
+
+
+
+
+
+
+
 function stackCarryOffsets(srcA, drawnA, ixA, bases) {
   const C = BODY_STACK_RULE.carryRule, n = srcA.length / 3, off = new Float32Array(srcA.length);
   // Outward unit normals of a mesh at each vertex (area weighted, welded by exact position, sign from the signed volume
@@ -7502,20 +7502,20 @@ function stackShaveRelief(p, weight, { cellMm = 4, reachMm = 24, blurMm = 10 } =
   return maxMm;
 }
 
-/**
- * 18 November 2026 (the owner: "some muscles have become detached and are sticking out, such as around the hips. This
- * needs to be fixed for all muscles"). stackShaveRelief reads "how far forward" as -y, which holds in the SOURCE frame
- * (the atlas body stands upright) and held in the drawn frame while the start posture sat upright. Since the reclined
- * start posture (trunk 68, later 80 degrees, the pelvis rolled under 55) it read the lying belly as a relief of tens of
- * millimetres and pushed the lower front of the external oblique, over the hip, up to 97 mm along -y. The scene refuses
- * any lift past the stack rule's cap (scene_input), so from then on the WHOLE Body Worlds stack was off in the game
- * (no muscle lifted; the tendon-white ends only on the muscles registered before the oblique).
- * Now the relief is shaved where the rule was written for it: on the lifted SOURCE sheet q (the upright atlas frame; the
- * fill of about a millimetre is left out of the heights), and each vertex's shave s (backward, +y there) is carried
- * into the drawn frame along that vertex's own posed backward direction (the bake's blended frame of its two bones, or
- * its rigid rest frame). Same rule, same numbers; only the frame it is measured in. Display choice on licensed anatomy.
- * Changes `out` (drawn positions) in place and returns the largest shave in mm.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function shaveReliefPosed(rig, baked, id, p, q, out, weight, S, skinned) {
   const src = Float32Array.from(q && q.length === p.length ? q : p), n = src.length / 3, y0 = new Float32Array(n);
   for (let v = 0; v < n; v++) y0[v] = src[3 * v + 1];
@@ -7727,7 +7727,7 @@ export function bodyWorldsLayers(rig, baked = null, { meshesById = null, extraBo
       filled.push(f.id);
       byId[f.id].fillMm = Math.round(maxMm * 10) / 10;
     }
-    // R558 (Message 32): the carry (BODY_STACK_RULE.carry): a sheet the atlas draws over lifted muscles rides on them,
+
     // after every lift and fill is known, so a lifted muscle never comes out through it.
     for (const f of fillList) {
       const row = stackRuleRow(BODY_STACK_RULE.carry, f.id), drawnA = positions.get(f.id), srcA = positionsOf(getMesh(f.id));
@@ -7744,7 +7744,7 @@ export function bodyWorldsLayers(rig, baked = null, { meshesById = null, extraBo
       byId[f.id].carryMm = Math.round(maxMm * 10) / 10;
       byId[f.id].carriedVertices = vertices;
     }
-    // R558 (Message 32): the display offset smoothed over each muscle's surface (BODY_STACK_RULE.displaySmooth).
+
     if (BODY_STACK_RULE.displaySmooth.passes > 0) for (const f of fillList) {
       const drawn = positions.get(f.id), bakedMesh = baked ? baked.meshesById.get(f.id) : getMesh(f.id), src = positionsOf(getMesh(f.id));
       const base = bakedMesh && bakedMesh.positions, ix = (bakedMesh && bakedMesh.indices) || (getMesh(f.id) && getMesh(f.id).indices);
@@ -7850,7 +7850,7 @@ export function armStackLift(muscles, bones, pivots) {
   const P = k => (pivots && Array.isArray(pivots[k]) ? pivots[k] : null);
   const chain = stackChain('l_arm', [P('shoulder'), P('elbow'), P('wrist'), P('middle_mcp')], ['upperarm', 'forearm', 'hand'], { limb: true });
   const A = BODY_STACK_RULE.anchor, bone = stackBoneIndex([...(bones || [])].filter(b => positionsOf(b)), A.boneMm, A.boneSampleMm);
-  // R558 (Message 30): no lift on the fingers and the thumb (BODY_STACK_RULE.digits), from the arm rig's digit bones.
+
   const digitBones = [...(bones || [])].filter(b => positionsOf(b) && typeof b.segment === 'string' && STACK_DIGIT_SEGMENT.test(b.segment));
   const lift = anchoredStackLift(muscles || [], bone, () => chain, digitBones.length ? digitBones : null);
   // Round 3: every arm muscle also gets the display fill (stackFillOffsets), on top of its lift when it has one.
@@ -8229,7 +8229,7 @@ export function excludeGenitalAnatomy(entries) {
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// R558 (user Message 20, builder FA): scalp muscles drawn ON the completed skull
+
 
 /**
  * Display choices for conformMusclesToBones. The Z-Anatomy face packet was fitted to the BodyParts3D frontal, temporal and

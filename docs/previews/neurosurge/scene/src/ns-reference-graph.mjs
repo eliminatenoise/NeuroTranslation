@@ -120,43 +120,43 @@ export function offsetBrainState(state, view, actualTransform, movementWorld) {
   return { ...state, translation: vec(state.translation, 'brain translation').map((v, i) => v + delta[i]),
     pivotWorld: vec(state.pivotWorld, 'brain pivot').map((v, i) => v + delta[i]), anchor };
 }
-/** R558 (display choice, hunt 2 look #9: a mirror body carried close and to the side was badly stretched by the wide
- * view, Message 13 "not absurd ... optical perspective effects"): W/A/S/D keep a carried mirror body's centre within
- * maxSideDeg of the straight-ahead direction (sideways in the level ground frame). A mirror body already farther out
- * (released there, then the view turned) may come back in but not go farther out. Chosen over keeping its nearest point
- * about 1 m from the eye, which would have stopped it short of your body (the start reflection already sits at that
- * distance) against Message 12 ("moved to and around each other"); straight ahead it can still be brought up to your
- * body, where the stop-at-contact rule holds it. */
+
+
+
+
+
+
+
 export const MIRROR_CARRY = Object.freeze({ maxSideDeg: 35 });
-/**
- * 19 November 2026 (the owner: "XZ plane with grasp WASD should be consistent between the mirror body and the brain
- * should move much faster."). How W / A / S / D move a held thing, the brain and the mirror body alike:
- *  ratePerS  the speed is this share of the thing's own level distance from you per second, so both cross the
- *            picture at the same pace whatever their distance: A / D swing it about 40 degrees of bearing a second,
- *            W / S change its distance by that share a second (a held brain comes from its start place to your feet
- *            in about a second and a half; the mirror body crosses its range in about one);
- *  easeS     the speed eases in and out over about this long (no jerk at the press, no dead stop at the release);
- *  minDistM  the distance the speed is counted from when the thing is nearer than this.
- * Before, the brain moved 1 m a second at 7.5 m (it crawled) and the mirror body 1 m a second at 2 m. Display choices. */
+
+
+
+
+
+
+
+
+
+
 export const CARRY_KEYS = Object.freeze({ ratePerS: 0.7, easeS: 0.1, minDistM: 0.8 });
-/**
- * 19 November 2026 (the owner: "let's also change it such that we can move both the mirror body and the brain into
- * ourselves. And basically through ourselves and through anything."). true: a carried brain or mirror body is stopped
- * by nothing. The brain's key range is twice its start distance (to you, through you and as far again behind); the
- * mirror body's near limit is gone (its W / S range runs from farM in front to farM behind) and a press takes hold of
- * it at any distance, also when it stands in you. The app's stop-at-contact guards are switched off with the same
- * constant (ns-app guardMirror / guardBrain). false: the rules of before (Message 12: things stop where they touch).
- */
+
+
+
+
+
+
+
+
 export const CARRY_THROUGH = true;
-/**
- * 22 November 2026 (browser hunt of update 64, H9: a brain carried behind you with S and let go was in neither view, and
- * nothing said how to get it back; the lost-brain line knew only the look's carry and sat on a card the default reading
- * level hides). CARRY_THROUGH stays (the owner asked for carrying through yourself), so the game says it instead: the
- * brain counts as BEHIND you when its centre lies behind the eye's start place along the start's straight-ahead
- * direction (level, x and z only) by more than behindM, and the look is not turned toward it (the cosine between the
- * look's level direction and the brain's is below facingCos: turned round, the brain is in view again and the line
- * goes). Display choices.
- */
+
+
+
+
+
+
+
+
+
 export const BRAIN_BEHIND = Object.freeze({ behindM: 0, facingCos: 0 });
 /** PURE: is the brain behind you (BRAIN_BEHIND)? centre: the brain's centre, eye: the eye's start place (world m);
  * startYaw / lookYaw: the start look's and the look's turn (rad; yaw 0 looks along -z). False for missing input. */
@@ -211,9 +211,9 @@ export function offsetMirrorCarry(state, movementWorld) {
   }
   return { ...state, mirror: { ...m, anchor, centreWorldM: m.centreWorldM.map((x, i) => x + delta[i]) } };
 }
-/** R558 (Message 12): move the mirror body's carried place by `movementWorld` whether it is held or not (the app folds a
- * held-back share of a move into it, so the carry never runs on inside your body). While it is held, the look anchor is
- * moved with it (as offsetMirrorCarry), so the look and keys carry on from the new place. */
+
+
+
 export function shiftMirrorCarry(state, movementWorld) {
   const delta = vec(movementWorld, 'mirror placement shift');
   if (delta.every(x => x === 0) || !state || !state.mirror) return state;
@@ -250,11 +250,11 @@ export function stepObjectCarry(previous, { pick = null, events = [], gazeAt = 0
   if (![clearance, minimum, reach].every(Number.isFinite) || !(clearance > 0 && reach > 0 && minimum >= reach)) fail('existing full brain clearance metadata unavailable');
   // The old global minimum is diagnostic context only: equality with reach+clearance must NOT disable W-away or safe lateral movement.
   // A brain sphere around its centre can enclose the eye in the intentional motor-focused view; it is NOT used to invent a near radius.
-  // R558 (user Message 12: the items "can be moved to and around each other but not through"): the W/A/S/D offset may
+
   // reach as far as the brain's centre is from the camera now (so S can bring it all the way up to your body and W push
   // it out as far again); the app's stop-at-contact rule (ns-collide, after the step) keeps it from touching your body
   // or the mirror body and out of your left hand's reach. The earlier budget (the 1 m clearance) kept the brain out of
-  // reach by design, which Message 12 overturns.
+
   // 19 November 2026: the budget is the distance of the brain's OWN place (without the key offset), not of where the
   // keys have brought it. Counted from where it is now, the budget shrank as S pulled the brain in, and the brain
   // stopped half way to you (offset = start distance - distance <= distance).
@@ -265,7 +265,7 @@ export function stepObjectCarry(previous, { pick = null, events = [], gazeAt = 0
   let heldPoseS = 0, clamped = false, selected = null, brainClearance = null, refused = null;
   let carryLook = prior.lastLook ? { ...prior.lastLook } : { ...look };
   let carryOrigin = prior.lastOrigin ? vec(prior.lastOrigin, 'previous active camera origin') : o.slice();
-  // R17 (owner, 17 November: "When it comes to the mirror body, up and down, you need to be able to move up and down";
+
   // this overturns the R558 rule that a carried mirror body never leaves the ground): a held mirror body follows the
   // whole look about the eye (its turn AND its up / down), exactly as the held brain does. W/A/S/D still move it level
   // (X and Z), whatever its height. (19 November 2026: the pointer's own shift of a held item is withdrawn; the pointer
@@ -294,7 +294,7 @@ export function stepObjectCarry(previous, { pick = null, events = [], gazeAt = 0
     const mx = mean(0), mz = mean(1);
     if (mx === 0 && mz === 0) return;
     const step = CARRY_KEYS.ratePerS * dist * dt;
-    // R558 (Message 2: W/S forward / back, A/D left / right, "not up and down as grasped cursor does that"): both held
+
     // items move in the LEVEL ground frame (the look's turn only); looking up / down carries them up / down. (The brain
     // used the camera frame, pitch included, so S on a brain seen from below moved it down onto your body.)
     moveHeld(transformDirection(groundRotation, [mx * step, 0, -mz * step]), true);
@@ -354,7 +354,7 @@ export function stepObjectCarry(previous, { pick = null, events = [], gazeAt = 0
     }
   };
   const timeline = [{ type: 'pick', at: Math.min(gazeAt, wallDt), order: 0, value: pick }];
-  // R558 (user Message 40): a Space hold or tap grasps ({ type: 'grasp', down, target? }; ns-controls SPACE_GESTURE; the
+
   // F key is gone). A grasp of one of your own limbs (target 'limb') is the app's, not a carry of the brain or the mirror body.
   events.forEach((ev, i) => {
     if (!ev || ev.type !== 'grasp') return;

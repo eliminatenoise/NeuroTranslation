@@ -1,11 +1,11 @@
 /* NeuroSurge: the loading picture (parts coming together) and the five-second picture of the main controls.
    17 November 2026: no start page and no loading page. */
 
-/* The loading picture covers the game canvas until the game has drawn its first frame, then fades out over it.
-   21 November 2026 (the owner, Message 208: "Background should still be more of an abyss."): before its own first
-   frame it shows the abyss as the page behind it does (.ns-app below: the black of ns-room ROOM.abyss.black, RGB 2, 2,
-   2, a few steps lighter in the middle; it was the old blue-black #05070b, flat), so the first paint, the canvas and
-   the loading picture's first frame follow each other without a step. */
+/*
+
+
+
+*/
 .ns-assembly {
   position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; display: block;
   z-index: 8; background: #020202 radial-gradient(36% 54% at 51% 46%, #0b0c0d 0%, #060607 50%, #020202 100%); pointer-events: none; opacity: 1;
@@ -19,15 +19,15 @@
 .ns-assembly-static p { margin: 0; }
 .ns-assembly-static progress { width: min(12rem, 85vw); accent-color: #7fe3ff; }
 
-/* 19 November 2026, late: no separate loading picture any more (eye-view-r558 LOADING_PICTURE). While the game loads,
-   the page shows the game's own dark backdrop (the tones of the room the game draws: nearly black, a little lighter
-   low in the middle) with the loading bar; the game's canvas is held back and then fades in over that same backdrop,
-   so loading and playing are one picture. (Under reduced motion neurosurge.css stops the fade: the game is there at
-   once.)
-   21 November 2026 (Message 208, the abyss): the page's very first paint, before the loading picture is there, was this
-   backdrop in the old room's greys (RGB 27, 33, 36 in the middle, 15, 19, 22 at the edges: a grey flash before a black
-   picture). It is now the abyss too: its black, a few steps lighter in the middle, where the loading picture then
-   shows the lit dark round its brain and bodies (about 11 there, 2 at the edges). */
+/*
+
+
+
+
+
+
+
+*/
 .ns-app { background: radial-gradient(36% 54% at 51% 46%, #0b0c0d 0%, #060607 50%, #020202 100%); }
 .ns-app[data-ns-phase="loading"] .ns-canvas { opacity: 0; }
 .ns-app[data-ns-phase="playing"] .ns-canvas { transition: opacity 0.45s ease-out; }
@@ -89,11 +89,11 @@ body:has(.ns-load) .ns-assembly-static p, body:has(.ns-load) .ns-assembly-static
 .ns-app[data-ns-phase="loading"] ~ .preview-note, body:has(.ns-app[data-ns-phase="loading"]) .preview-note { opacity: 0; }
 .preview-note { transition: opacity 0.6s ease; }
 
-/* The main controls: W A S D, E, R, Space, and the trackpad with its click, in two panels either side of the middle
-   of the picture. 19 November 2026 (the owner: "the controls switch off halfway through. And the controls should stay
-   visible the entire time while loading"): it stays for as long as the game loads. When the game is ready the
-   launcher adds ns-keys-leave, and the card fades --ns-keys-ms later (the launcher sets that so the card has been up
-   for at least five seconds in all). */
+/*
+
+
+
+*/
 .ns-keys {
   --ns-keys-ms: 1500ms;
   position: fixed; inset: 0; z-index: 9; pointer-events: none; box-sizing: border-box;

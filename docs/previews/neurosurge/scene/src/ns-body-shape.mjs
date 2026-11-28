@@ -1,67 +1,67 @@
-/** NeuroSurge: the body's shape as the game draws it, beyond the source model: longer limbs, a flatter chest and a
- * lower torso that comes forward (20 November 2026).
- *
- * The owner, 19 November: "Let's make the limbs longer." And: "for you keep making a mistake with the chest and front of
- * the torso being the abs and stomach and so forth. The chest should not be significantly in front. In fact, we want
- * essentially the bottom of the torso to come out more and be more obvious and more visible. Not for the chest to take
- * the whole torso as it is now. So a smaller and much flatter chest essentially, and a more observable bottom torso."
- *
- * WHAT IT IS. Two smooth spatial rules (fields) on the REST meshes, in BodyParts3D 4.0 whole-body millimetres (+x subject
- * LEFT, +y POSTERIOR, +z SUPERIOR), done once before anything is built from them (ns-body bulkBody and bulkArmAssets run
- * them last, after the trained build). The rig's joints are then estimated from the reshaped bones, so the joints, the
- * skin weights, the limb solve and the limb keys, the hip range, the contact balls, picking, the mirror body (a
- * reflection of your posed body), the left game arm (its own rig, from its own reshaped packet) and the organs
- * (ns-organs, which are built in this frame and pass through the trunk rule) all follow. The licensed files are
- * unchanged. A display choice, an illustration: not a claim about real bodies.
- *
- * 1. LONGER LIMBS (limbLengthField). Each limb is a chain of straight axes between reference joint centres (the same
- *    chains as the trained build, ns-body bulkLimbChain): upper arm / thigh (P0 -> P1), forearm / shin (P1 -> P2), hand
- *    (wrist -> the middle finger's knuckle, P2 -> P3) or foot (the level line from the ankle to the ball of the foot).
- *    A segment that is made `upper` times longer gains (upper - 1) x its length, and the gain is spread over its SHAFT
- *    only (`zone`, fractions of its length, eased in and out over `ease` of the zone): the joint at each end, with
- *    everything round it, is carried along whole, so no joint changes shape (its bones are fitted again afterwards
- *    exactly as before) and no tendon end leaves its bone. Everything beyond a segment moves with it. The hand and the
- *    foot are made longer the same way along their own line from `endFromMm` past the wrist / ankle (fingers and toes
- *    in proportion; a foot's gain only below the ankle, `footBelowMm`). Nothing moves across the limb: the trained
- *    build keeps its girth.
- *    A muscle that runs from the trunk onto a limb (latissimus dorsi, pectoralis major, the rotator cuff, the glutes,
- *    the hamstrings ...) is moved only as far as it lies on the limb's bones: ns-body weighs each of its vertices by
- *    how much nearer it lies to the limb's bones than to the trunk's (`band`), so the part on the trunk stays where it
- *    is. The loading picture, which has no bones to ask, uses the distance from the limb's axes (`reachMm`) instead.
- * 2. THE TRUNK (trunkShapeField). Everything in front of a line just in front of the spine (`backYMm`) is moved toward
- *    it (the chest) or away from it (the belly), in proportion to how far in front of that line it lies: the breastbone,
- *    the front of the ribs and their cartilages, pectoralis major and the organs come back toward the spine by `chest`
- *    of that distance, and the belly wall with what lies under it comes forward by `belly`, each faded in and out over
- *    heights (zMm: none above the first, full between the second and the third, none below the fourth) and toward the
- *    sides (xMm, from the midline). Pure function of the place, the same for bones and muscles, so nothing separates
- *    from what it lies on; and the move never changes the order of things front to back (a vertex in front of another
- *    stays in front of it), so the organs stay inside the ribs. The shoulders, the arms and the spine do not move.
- *    `onsetMm`: the move grows smoothly from nothing at the line over this depth (no crease in a rib that crosses it).
- */
 
-/** The shape rules (see the header). Lengths are factors of the source model's own; mm in the source frame.
- *  limbs.arm / limbs.leg: `upper`, `fore` (the shaft gains of the two long segments) and `end` (the hand / foot), their
- *  zones, where the hand / foot's gain starts (endFromMm past the wrist / ankle along its own line) and, for the foot,
- *  footBelowMm (full below the ankle by the first, none above it by the second: the shin's tendons in front of the
- *  ankle stay with the shin). band: ns-body's nearer-bone weight goes from 0 to 1 over this difference in distance
- *  (mm) between the trunk's and the limb's bones (the arm's is wide, 60: with 24, latissimus dorsi's thin tendon round
- *  the armpit folded through itself, 19 triangles turned over; 21 November 2026, review B1). reachMm: the loading picture's weight by distance from the axes.
- *  ease: the share of a zone over which its stretch eases in and out (the rest of the zone stretches evenly).
- *  Why these amounts: measured on the body as the page prepares it (BODYSHAPE notes, 20 November 2026), the source
- *  model's thigh, shin and forearm have ordinary adult proportions and its upper arm is 0.85 of the usual 0.186 of the
- *  standing height; the limbs look short mainly because the start picture sees them from your own eyes, end on (the
- *  shin at 21 px per 100 mm of its length at 1600 x 900, the thigh 46, the arm 55). They are made longer than ordinary
- *  on purpose (the owner asked for longer limbs): upper arm 1.22 (to about 0.19 of the height), forearm and shin 1.15,
- *  thigh 1.1, hands and feet 1.08 (in proportion, a little less than the long bones).
- *  trunk: backYMm (the line just in front of the vertebral bodies, which lie at y -64 to -88), onsetMm, and for the chest
- *  and the belly the share of the depth in front of that line taken away / added, its heights and its sides (see the
- *  header). Why these amounts: the start picture looks down the trunk along its own axis (about 5 degrees off it), so
- *  what sticks out at the top of the trunk hides the belly: in an offline count of the start picture the belly wall was
- *  0.8 % of the body's pixels. Tried on side views and that count (all with the longer limbs): chest 0.3 / belly 0.22
- *  (4.0 %; a crease under the ribs), 0.3 / 0.18 and 0.35 / 0.15 (2.7 and 2.9 %), 0.35 / 0.25 (3.6 %; a pot belly),
- *  0.4 / 0.2 with longer fades (3.7 %, a flat chest and a smooth belly: kept). The breastbone comes back by up to 47 mm.
- *  The side fades are wide (70 to 190 mm, 80 to 170): narrower ones (105 to 150) sheared the thin side of pectoralis
- *  major so much that its two faces crossed near the armpit. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BODY_SHAPE = Object.freeze({
   limbs: Object.freeze({
     on: true,
@@ -75,7 +75,7 @@ export const BODY_SHAPE = Object.freeze({
     chest: Object.freeze({ share: 0.4, zMm: Object.freeze([1372, 1322, 1220, 1070]), xMm: Object.freeze([70, 190]) }),
     belly: Object.freeze({ share: 0.2, zMm: Object.freeze([1150, 1010, 930, 845]), xMm: Object.freeze([80, 170]) })
   }),
-  basis: 'display choice (the owner asked for longer limbs, a smaller and much flatter chest and a lower torso that comes forward): smooth rules on the source model, not a measured body'
+  basis: "display choice: smooth rules on the source model, not a measured body"
 });
 
 const sstep = t => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));

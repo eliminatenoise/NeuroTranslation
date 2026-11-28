@@ -1,25 +1,25 @@
-/** The two halves of the brain drawn apart (19 November 2026).
- *
- * The owner: "let's center the motor strip on either side of the head of the mirror body. So maybe we'll keep a bigger
- * gap between the hemispheres. So it looks like almost hair coming out of either side of the mirror body's head."
- *
- * WHAT THIS IS. A display choice with no anatomical meaning. Every mesh of a cerebral half is moved `eachMm` straight
- * away from the midline (the left half toward +x, the right half toward -x; BodyParts3D atlas millimetres), so the gap
- * between the two leg areas at the top of the n-shaped motor strip is wide enough for the mirror body's head to stand
- * in it. In the atlas the two halves lie about 2 mm apart. Nothing inside a half changes in front of the motor strip's
- * back edge: the same meshes, the same areas, the same distances within the half; behind it the step eases off so the
- * gap closes at the back (HEMI_GAP.back, 20 November 2026). The parts in the middle that belong to neither half (the brainstem, the
- * cerebellum, the hypothalamus, the ventricles of the midline: `middle`, words of their atlas names) stay where they
- * are and show at the bottom of the gap.
- *
- * The move is made ONCE, on the loaded positions, before anything is built from them (ns-app start; the loading
- * picture's worker does the same to the meshes it draws), so the areas, the picker, the labels, the light beams, the
- * turn arrows, the outline and the hidden-things picture all come from the parted brain and agree with what is drawn.
- * The eyeballs and the ends of their nerves follow their halves (ns-brain-eyes), and so do the brain's vessels when
- * they are drawn (partedOnBrain, partedBridging; ns-scene-three setBrainVessels). eachMm 0 = the atlas brain as it is.
- *
- * Pure: no imports, no Three.js, no DOM (the loading picture's worker imports this file).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const HEMI_GAP = Object.freeze({
   eachMm: 6,
   middle: Object.freeze(['third ventricle', 'fourth ventricle', 'aqueduct', 'habenula', 'hypothalamus', 'colliculus', 'medulla', 'midbrain', 'pons', 'tuber cinereum', 'cerebellum', 'pineal']),

@@ -1,103 +1,103 @@
-/** NeuroSurge scene: the comic ink look of the brain (R558 BB, BB2; user Messages 24, 25, 26, 27, 28, 29, 35 and the
- * style guide).
- *
- * Message 24: "Let's introduce texture to all our tissues (especially gyri and sulci for the motor neural tissue)."
- * Message 29: "Perhaps the borderlands aesthetic should be applied throughout."
- * Message 35: "The borderlands effect should also apply to the motor strip, as should it apply to everything else as
- * well. The entire aesthetic."
- *
- * What is here (pure: strings, numbers and typed arrays; nothing imports 'three'):
- *  - THE ATLAS GEOMETRY. The motor areas are drawn on the atlas's own precentral gyrus (BodyParts3D FJ1801 / FJ1800,
- *    OBJ99, about 2.7 mm edges); the glass brain is the 59 atlas brain meshes (178,743 vertices, about 1.7 mm edges).
- *    Every brain mesh is a closed CORTICAL RIBBON: the outer (pial) surface, i.e. the crown and both banks that dive
- *    into the sulci, and the inner (white matter) surface about 3 mm under it (checked on slices across the strip,
- *    BB2 report). The banks of the precentral gyrus go 15 to 25 mm deep; the anterior bank slopes under the frontal
- *    gyri, so from above (the start view) much of the strip's footprint is that buried bank, seen through the glass.
- *  - TWO FOLD SIGNALS, both read only from atlas vertices (nothing is invented, no fold is added):
- *    1. foldDepth (glass): how far a vertex lies BELOW a ball of radius ballMm rolled over the whole atlas brain from
- *       outside, approximated locally: the largest h - lateral^2 / (2 ballMm) over every atlas brain vertex within
- *       radiusMm (h = its height above the vertex along the vertex's normal, lateral = its distance from that normal
- *       line). A gyral crown has nothing above it (0 mm); a bank or a sulcal floor has the opposite gyrus's crown above
- *       it. On the glass this marks every sulcus of the atlas (BB2 analysis picture glass-cmp). It is NOT used on the
- *       strip any more: in this atlas the precentral crown lies lower than its neighbours near the midline (at 20 mm
- *       from the midline its top is 8.7 mm under a 10 mm ball), so the whole medial crown read as "deep" and the visible
- *       face stepped from crown to deep in the last pixels (BB check).
- *    2. reliefDepth (strip): the strip's OWN relief. The direction "out of the brain" at each strip vertex is the
- *       envelope normal (envelopeNormals: a soft minimum over the brain's convex-hull support planes, so it turns
- *       smoothly), and the relief depth is how far the vertex lies below a large ball (ballMm 25) rolled over the strip
- *       mesh alone, along that direction. The crown top reads 0, the shoulders a millimetre or two, the lip of each
- *       sulcus about 1.5 mm, the banks 3 to 20 mm and the fundus deepest, wherever the neighbours are; real dimples of
- *       the atlas crown read as small depths. The level line reliefDepth = lipMm is the inked sulcus line on both sides
- *       of the gyrus (and around any real dimple deeper than that).
- *    foldDepth uses a dense cell grid with cell culling (a cell whose highest possible cap cannot beat the best so far is
- *    skipped) and an optional early exit at maxMm; the result is identical to the plain scan (BB2 check: max difference
- *    0 mm on FJ1801).
- *  - The motor-area SHADER PATCH (patchAreaInkShaders), on top of the per-fragment areas (ns-scene-three REGION_BORDER):
- *      relief-banded light: each direct light's N.L (softened by lightGamma) is multiplied by the relief factor
- *        1 - reliefDark x (1 - exp(-relief / reliefMm)) and quantised into BRAIN_INK.cel's four tones with narrow soft
- *        steps, so the bands run ALONG the gyrus: lit crown top, light crown, mid upper bank from the lip on, dark deep
- *        bank (the light-to-mid step falls on the sulcus line); the indirect fill and the area's faint resting
- *        self-light fall off down the banks too (aoMin); the specular is kept off the banks (x relief factor^specRelief);
- *      ink: the sulcus line on both sides (relief = lipMm, constant width in CSS pixels, a little heavier on the shadow
- *        side like a brush line), a finer fundus line deeper on the bank (relief = fundusMm), the gyrus contour where the
- *        strip turns away from the eye (N.V = 0);
- *      hatching: fine ink strokes ACROSS the gyrus (level lines of the along-gyrus coordinate s: fixed to the tissue, they
- *        run down the banks like hachures) inside the shadow bands and on the deep banks, a second offset set where
- *        darker, and deep in the sulci a cross-hatch along the relief's level lines (every crossMm of relief depth);
- *        all faded out when the strokes would be closer than hatchMinSpacingCss on screen and under a glow;
- *      solid: the resting area is drawn more solid (alpha 1 - (1 - a) x (1 - solid)), so its bands are not washed out
- *        by the black behind it. The area colours (albedo, glow), the per-fragment bands, the borders, the picking and
- *        the place of the strip are not touched; the power-up charge (emission) is never inked over.
- *  - The GLASS (glassInkGlsl): soft two-step cel shading of the gyral crowns from the glass key light (the same headlight
- *    direction as the scene's key light), the atlas sulci inked (the level line of the glass fold depth at the lip of
- *    every sulcus, once glassFold is ready), the glass's own contours (N.V = 0) inked with a thin light rim inside them,
- *    and one crisp highlight shape per crown. Everything clears next to the strip (GLASS_CLEAR) as before.
- *
- * Display only: every number below is a display choice; none is a measurement of tissue or of neural activity.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import { BRAIN_LIVE, liveBloomGlsl } from './ns-brain-live.mjs';
 import { AREA_HALO, haloTissueGlsl } from './ns-area-halo.mjs';
 import { RAW_LOOK, rawLightDir, rawShadeGlsl } from './ns-raw-look.mjs';
 
-/** Display choices (see the BB and BB2 reports for what was tried).
- *  ink: near-black #0b0809 as drawn (sRGB), the style guide's ink, shared with ns-outline OUTLINE.colour.
- *  fold: foldDepth radiusMm / ballMm (whole-brain fold depth); foldShade loMm (crown up to here) .. hiMm (floor from here).
- *  relief: the strip's own relief (reliefDepth): envelope soft-minimum width envTauMm, ball ballMm, neighbour radius
- *    radiusMm (all source mm).
- *  glassFold: the glass's fold depth (radiusMm, ballMm, maxMm: the depth is not needed beyond the darkest tone), its
- *    shade loMm .. hiMm (0 crown .. 1 groove, written into the glass's groove attribute nsSulc), the cell size of the
- *    grid and the per-slice time budget of the background job (ms).
- *  cel: N.L steps (t1 < t2 < t3), the four tone levels (deep shadow, mid, light, highlight) and the soft half-width of a
- *    step in N.L units (widened to at least one pixel by the step's screen gradient).
- *  area: contourCss / contourAlpha: half-width (CSS px) and opacity of the gyrus contour; lipMm / lipCss / lipAlpha: the
- *    relief level of the sulcus line, its half-width and opacity; fundusMm / fundusCss / fundusAlpha: the same for the
- *    finer line deeper on the bank; reliefMm / reliefDark / lightGamma: the relief factor (1 - reliefDark x
- *    (1 - exp(-relief / reliefMm))) and the softening of N.L before the bands (N.L^lightGamma); aoMin: the share of the
- *    flat fill (ambient and sky light) and of the resting self-light kept at full relief; specRelief: the specular is
- *    multiplied by the relief factor to this power; crossMm / crossFrom / crossFull: the cross-hatch spacing in relief
- *    depth and the relief share over which it fades in; indirect: the share of the flat fill the areas keep at all,
- *    so the banded key light shapes the gyrus (deep shadow to lit crown, Message 25); floorDark / floorFrom / floorTo:
- *    the lit light (not the activation glow) is darkened by up to floorDark over that range of the relief share; solid:
- *    how much more solid the area is drawn than its material alpha; hatchPerS: strokes per unit of the along-gyrus
- *    coordinate s (about 1 mm apart at the strip's middle); hatchCss: stroke half-width; hatchAlpha: stroke opacity;
- *    hatchFrom / hatchFull: shade (0 dark .. 1 lit, the luminance-weighted banded light) at which the strokes start /
- *    are full; denseFrom / denseFull: the same for the second, offset set; reliefHatch: the strokes' strength on the
- *    deep banks (relief share 0.45 .. 0.9); hatchMinSpacingCss: strokes closer than this on screen fade out; glowFade:
- *    emission luminance over which the strokes and the sulcus lines fade (the power-up stays clean).
- *    gloss (user Message 54, "a bit of shine, a bit of glossiness"): a highlight of the key light along the gyrus
- *    crowns, drawn in the patch because the material's own highlight is only a few degrees wide and rarely lands on
- *    the strip. g = (N.H)^power for the key light's half vector; sheen x g is added as a soft falloff and core more
- *    inside the crisp step coreLo .. coreHi of g (its edge at least a pixel wide). Both are kept off the banks like
- *    the specular (x relief factor^specRelief) and stay under white with the rest of the reflected light.
- *  glass: contourCss / contourAlpha: the glass contour ink; rimCss / rimLight / rimAlpha: the light band just inside it;
- *    highlight: power of the key-light highlight, its crisp step (lo .. hi), added light and alpha (a highlight whose
- *    step is crossed within about a pixel, a speck on the coarse mesh, is left out); cel: the crowns' fill (alpha and
- *    light at the lit band, the two N.L steps, their soft half-width, the share kept by the shadow band); foldLevel /
- *    foldCss / foldAlpha: the groove level of the inked sulcus line on the glass, its half-width and opacity.
- *  R558 (user Messages 49 and 54: the comic ink was overdone, the picture matte): lighter ink (area contourAlpha
- *  0.92 -> 0.8, lipAlpha 0.95 -> 0.8, hatchAlpha 0.55 -> 0.35; glass foldAlpha 0.75 -> 0.6) and a larger, brighter
- *  highlight on the glass (power 400 -> 200, alpha 0.18 -> 0.3), so the brain reads as polished glass. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BRAIN_INK = Object.freeze({
   ink: Object.freeze([0x0b / 255, 0x08 / 255, 0x09 / 255]),
   fold: Object.freeze({ radiusMm: 14, ballMm: 10, loMm: 1.0, hiMm: 10, cellMm: 4 }),
@@ -106,8 +106,8 @@ export const BRAIN_INK = Object.freeze({
   cover: Object.freeze({ depthMm: 30, latMm: 3, latFullMm: 1.5, cellMm: 3 }),
   cel: Object.freeze({ steps: Object.freeze([0.14, 0.38, 0.72]), levels: Object.freeze([0.3, 0.55, 0.8, 1.0]), soft: 0.035 }),
   area: Object.freeze({
-    // 19 November 2026 (the owner: "the motor strip is just very, very hard to look at right now because it's so liney
-    // ... There has to be a better solution, an overhaul"): the strip's inked relief lines are gone (the gyrus contour
+
+
     // 0.8 -> 0.15, the sulcus line 0.8 -> 0 and the finer bank line 0.55 -> 0) and its relief shading is gentler
     // (reliefDark 0.6 -> 0.3, floorDark 0.15 -> 0), with no gloss: each area is one clean block of its own colour.
     contourCss: 1.05, contourAlpha: 0.15,
@@ -340,31 +340,31 @@ float nsCelBand( float x ) {
 }
 `;
 
-/** The motor areas as KEYS of a control panel (owner, 17 November: "the brain turns into a bunch of buttons ... a
- * control panel"; "neural activation should be much more obvious on the motor strip"; 12 November: "only small regions
- * should be activating"). Drawn in the area patch below from what the per-fragment area patch already knows (the
- * distance in CSS pixels to the area's two borders along the strip) and one small per-area uniform, nsKey = (hovered
- * 0 / 1, the clock time of the last press, -, the glow strength 0..1). No new draw, no texture.
- *  - bevel: inside each border a band bevelCss wide (at most bevelShare of the key's width) is lightened where that edge faces the key light on the screen and
- *    darkened where it faces away (bevelLight / bevelDark, plus a small white edge bevelSpec), so every area reads as a
- *    separate raised key next to the dark gap the border patch draws (ns-scene-three REGION_BORDER seam); toward both
- *    borders the key's lit colour also falls off a little (pillowDark over pillowCss), like a rounded key top.
- *  - hover: the scene lights the hovered key (its own colour as emission) and frames it; here its bevel is stronger
- *    (hoverBevel).
- *  - press: for pressS after a press (a click, a number key, a held look: one more activation count) the key goes
- *    DOWN: the bevel turns over, the key darkens by pressDark and a solid dark frame pressCss wide (at most pressShare
- *    of the key's width) closes in from its borders (full until pressHoldS, then it springs back), so the flash of
- *    the activation is seen inside a key that is going down and coming up again. Not under prefers-reduced-motion.
- *  - on: while the area glows, ONLY that key shows a white-hot frame just inside its borders (frameCss wide, frameGain
- *    x the glow, whitened by frameWhite), a slow pulse of the whole key (pulse at pulseHz) and a ring that runs from
- *    the key's middle out to its edges again and again (ringHz, width ringW in key radii, ringGain x the glow, fading
- *    as it grows; the key's radius is 1 at its borders along the strip and at ringReliefMm of relief depth across the
- *    gyrus). Under prefers-reduced-motion the frame and the glow are steady and there is no pulse or ring. The glow
- *    itself is above display white (ns-colors AREA_LOOK.areaGain), so the scene's bloom gives the lit key a halo.
- *  - focus: while any area is switched on, every key that is neither lit nor hovered is dimmed by focusDim (the shared
- *    uniform nsKeyDim.x, eased by the scene over focusInS / focusOutS), so the lit key is the one bright thing on the
- *    strip. A glow that only shows a held posture (the scene's postureGlow) does not count as switched on.
- * Display choices; timings are UI choices, not physiology. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BRAIN_KEYS = Object.freeze({
   // 19 November 2026 ("so liney"): a much softer bevel and pillow (0.7 / 0.55 / 0.28 and 0.38 before): a key is a flat
   // block of colour with barely a rounded edge.
@@ -372,7 +372,7 @@ export const BRAIN_KEYS = Object.freeze({
   pressS: 0.2, pressHoldS: 0.07, pressDark: 0.45, pressCss: 4, pressShare: 0.3,
   // 18 November (MAP): the lit key's frame in its own colour (frameWhite 0.3 -> 0.1): the white-hot frame turned the
   // whole lit key white under the bloom; the neon glow is saturated now.
-  // 21 November 2026 (ns-area-halo AREA_LIT; the owner: "Right now, there's essentially no glow"): frameGain 2.0 -> 0.
+
   // The lit block's light along its borders is now the area's own colour at the screen's full brightness (AREA_LIT's
   // rim); the frame's extra 2 x of it went past white per channel, where the screen cuts each channel off, so an azure
   // key's frame showed cyan-white and an orange key's yellow, and with the bloom pass it was a second white halo.
@@ -395,8 +395,8 @@ export const BRAIN_KEYS = Object.freeze({
  * Returns { vertexShader, fragmentShader, cel, keys, clock } or null when a hook is missing (keys / clock: whether the
  * key look and its timed parts were added, BRAIN_KEYS; they need the per-area uniform nsKey).
  */
-// 20 November 2026 (the owner, Message 196: "New look for everything not just body"; the strip's areas "keep their colours
-// (they are the game's information) but are drawn in the same matte light"): with `raw` (ns-raw-look RAW_LOOK, the
+
+
 // default while its switch is on) the areas' lit colour is their own colour x the raw look's light (no cel bands of the
 // key light, no gloss); areaInkUniformValues(..., raw) turns the ink lines, the hatching and the dark sulcal floors off.
 // The glow, the hover light, the keys' press, frame, pulse and ring are signals and stay.
@@ -468,7 +468,7 @@ export function patchAreaInkShaders(vertexShader, fragmentShader, lightsChunk = 
 		// the reflected light kept at most white (R558 BB check): at the strip's grazing silhouette the specular term
 		// spikes on single pixels, which the HDR target (bloom) turned into white sparkles along the strip's edge; only
 		// the glow (emission) may go above white and bloom (style guide: selective bloom)
-		// gloss (Message 54): a soft sheen and a crisp core of the key light along the gyrus crowns
+		//
 		float nsGp = pow( max( dot( normalize( normal ), normalize( nsAKey.xyz + normalize( vViewPosition ) ) ), 0.0 ), nsAGloss.x );
 		float nsGe = max( 0.5 * ( nsAGloss.w - nsAGloss.z ), fwidth( nsGp ) );
 		float nsGm = 0.5 * ( nsAGloss.z + nsAGloss.w );
@@ -620,44 +620,44 @@ export function glassInkUniformValues(o = BRAIN_INK) {
 
 /* ------------------------------------------------------------------ the fleshy cortex (17 November) */
 
-/** The brain surface as LIVING CORTEX (owner, 17 November: "The brain area looks awful ... Maybe it should be far more
- * fleshy"; earlier: "visceral and fleshy but never disgusting", "clinical", "a bit of shine, a bit of glossiness",
- * "contrast and high dynamic range are still visually key").
- * Until now the brain was a glass shell: a face-on alpha of 0.01 with a pale rim, so at the start it read as a dark
- * glass ornament. The shell pass (still ONE draw of the nearest surface, after its depth pre-pass; no new pass, no
- * texture) now shades that surface as tissue:
- *  - colour: a warm pink-grey on the gyral crowns that deepens to a dark rose down the sulci (the same per-vertex fold
- *    depth the glass used: 0 crown .. 1 groove), with a faint mottling fixed to the tissue (two octaves of value noise
- *    of the atlas position, mottleMm / mottleFineMm across), so the surface is not one flat paint; the same mottling
- *    is a height of bumpMm for a derivative bump of the normal (the atlas mesh has about 1.7 mm facets; the bump breaks
- *    their flat highlights up), faded out when its grain would be finer than about bumpFadePx pixels;
- *  - light: the scene's key light (the camera headlight, upper right), wrapped by `wrap` because tissue scatters, over
- *    a small flat fill; a fold keeps aoMin of both at its floor, so every sulcus is a dark line and every gyrus a
- *    rounded, lit fold (light-to-dark range); what the key light does not reach is filled a little with a warm red
- *    (scatter), so the shaded side stays tissue-coloured, never grey;
- *  - wet: a soft sheen (sheen x (N.H)^sheenPower) and a small crisp glint (glint inside the step glintLo .. glintHi of
- *    (N.H)^glintPower) of the key light on the crowns, both off in the sulci, like a moist surface under an examination
- *    lamp; the reflected light is kept at or under white, so it never blooms or sparkles (only the activation glows may);
- *  - rim: a faint pale rim toward the silhouette (the shell's rim uniforms: stronger while the brain is held);
- *  - solid: alpha `alpha` face-on and rimAlpha at the silhouette (a little see-through at the very edge, so a hand or the
- *    mirror body crossing the outline is not cut hard). Next to and over the motor strip the surface still clears
- *    (the scene's GLASS_CLEAR attribute), so the motor areas are seen whole, as before.
- * Colours are sRGB 0..1 as drawn face-on in full light. Display choices only: no tissue optics are implied.
- * 18 November (owner: "make sure the brain and the body are noticeably different, or at least noticeably different
- * shades"): living cortex is a pale, cool pearl-grey rose, not the salmon of the muscles. crown [0.87, 0.7, 0.69] ->
- * [0.9, 0.85, 0.86], groove [0.4, 0.16, 0.2] -> [0.56, 0.4, 0.46] (a mauve rose, no longer a red-brown), mottleWarm
- * [1, 0.9, 0.88] -> [1, 0.95, 0.96], scatterTint [1, 0.34, 0.3] -> [0.95, 0.62, 0.7] (the shaded side stays rose,
- * not red), rim [1, 0.82, 0.8] -> [0.92, 0.9, 0.96] (a pearly film). Measured at the start view (fixed patches,
- * CIE L* of the mean colour): brain 46.7 / muscle 43.5 before, see the vessels notes for after. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BRAIN_FLESH = Object.freeze({
-  // 19 November 2026 (the owner: "surely the brain should be a little more pinkish, fleshy"): crown 0.9, 0.85, 0.86 ->
+
   // a soft flesh pink, the grooves a deeper rose (0.56, 0.4, 0.46 before).
   crown: Object.freeze([0.93, 0.74, 0.73]), groove: Object.freeze([0.6, 0.33, 0.36]), grooveCurve: 0.8,
   mottle: 0.18, mottleMm: 11, mottleFineMm: 3.2, mottleWarm: Object.freeze([1.0, 0.95, 0.96]), bumpMm: 0.5, bumpFadePx: 5,
   key: 1.0, wrap: 0.35, fill: 0.2, aoMin: 0.22,
   scatter: 0.22, scatterTint: Object.freeze([0.95, 0.62, 0.7]),
-  // 19 November 2026 (the owner, later the same day: "let's make the rest of the brain look a little yummy, like food.
-  // So it's actually okay for the brain to be a little glossy and slimy"): the wet sheen and the glint are back and a
+
+
   // little stronger and broader than on 18 November (sheen 0.2 at power 28, glint 0.42, wetGroove 0.9 then; all were 0
   // for the matte look of this morning). The body and the strip's keys stay matte.
   sheen: 0.34, sheenPower: 16, glint: 0.6, glintPower: 140, glintLo: 0.5, glintHi: 0.72, wetGroove: 0.75,
@@ -668,35 +668,35 @@ export const BRAIN_FLESH = Object.freeze({
   // lines below drew vessels that followed no anatomy and would now stand beside the real ones.
   vessel: null
 });
-/** 20 November 2026 (the owner, Message 196: "New look for everything not just body"): the cortex in the RAW look
- * (ns-raw-look): the same fleshy pink of its own (Message 153; the crown and groove colours above are kept, so the folds
- * still read by their colour), lit by the raw look's one light (ambient + direct x |N.L|, nothing else), with no wet
- * sheen or glint (Message 163's gloss and slime give way to this later note), no fold darkening laid over the light
- * (raw.ao 0), no tissue scatter, no mottling and no bump (a clean surface like the reference pictures). The pale rim is
- * drawn only as the held-brain cue (the rim's opacity above its resting MATERIAL.glassRimOpacity, `raw.rimFrom`, times
- * raw.rimGain): a control's feedback, not a look. The beat's flush, the blooms round a lit key and the faint tint of the
- * picked area's colour stay (signals). */
+
+
+
+
+
+
+
+
 export const BRAIN_FLESH_RAW = Object.freeze({
   ...BRAIN_FLESH,
   // the crown and the grooves a little lighter and pinker than BRAIN_FLESH's (0.93, 0.74, 0.73 and 0.6, 0.33, 0.36): the
   // raw light gives a surface facing the viewer 0.76 of its colour (the old key and fill about 1.0), and the brain read
-  // as a dull mauve; this keeps it the fleshy pink of Message 153, still paler and pinker than the muscles' reds
+
   crown: Object.freeze([0.98, 0.79, 0.78]), groove: Object.freeze([0.7, 0.42, 0.45]),
   mottle: 0, bumpMm: 0, scatter: 0, sheen: 0, glint: 0, rimGain: 0,
   raw: Object.freeze({ ao: 0, rimFrom: 0.34, rimGain: 2.4 })
 });
 /** The cortex look in force: BRAIN_FLESH_RAW under the raw look's switch (RAW_LOOK.on), else BRAIN_FLESH. */
 export const BRAIN_FLESH_LOOK = RAW_LOOK.on ? BRAIN_FLESH_RAW : BRAIN_FLESH;
-/** 21 November 2026 (the owner, Message 177: "have the whole brain light up slightly, faintly, with whatever color
- * area is being picked"; a browser hunt, H25: on the matte brain the whole cortex turned lilac or grey-blue). The pick
- * tint was a light ADDED to the cortex: 6 % of the area's saturated glow colour. The cortex is a pale pink (OKLCH chroma
- * about 0.05) with little blue, and the matte light leaves much of it in shade, so the same added light turned its hue
- * by 15 degrees where it faced the light and by 25 to 30 in shade: a recolouring, not a faint light. Now it is a GAIN on
- * the cortex's own colour, the same share in light and shade (so the same faint change everywhere), worked out in OKLab
- * from the crown colour: lightness up by `lift` (it lights up), and the colour moved `chroma` toward the area's own hue
- * (a faint cast of that colour), its chroma never under `keepChroma` of the cortex's own (a cool colour on the pink does
- * not grey it). The change of the crown colour is about 0.02 in OKLab (lift and cast together): seen side by side,
- * never a different colour. Display choices. */
+
+
+
+
+
+
+
+
+
+
 export const BRAIN_PICK_LOOK = Object.freeze({ lift: 0.014, chroma: 0.012, keepChroma: 0.85 });
 const okOfLinear = (c, o) => {
   const l = Math.cbrt(Math.max(0, 0.4122214708 * c[0] + 0.5363325363 * c[1] + 0.0514459929 * c[2]));
@@ -743,30 +743,30 @@ export const PROCEDURAL_VESSELS = Object.freeze({
   pulse: 0.3, minPx: 0.3, fullPx: 0.7, endSlope: 0.12, runSlope: 0.38
 });
 
-/** The fine surface vessels (18 November; owner: "far more fleshy", "hyper-detailed hyper-real glossy fleshy but not
- * gory"): thin bright arteries that wander over the gyral crowns in two sizes, and darker veins that run ALONG the
- * grooves, all fixed to the tissue. No texture and no new draw: each family is the level line of something the shader
- * already has or can get from the tissue-fixed value noise:
- *  - arteries: the 0.5 level of one value-noise field of the (gently warped) atlas position, arteryAcrossMm across,
- *    drawn arteryMm wide: the trunks. They fade into the grooves, where they dive under, and their width follows the
- *    mottling, so a trunk thickens and thins along its way. Where the field is nearly flat (its slope under endSlope
- *    .. runSlope) a level line would close into a small ring: there the vessel fades out instead, so the eye sees
- *    runs that end, not rings;
- *  - their branches (18 November, after the check: single hairlines that "wander and stop" and never branch read as
- *    squiggles close up): the finer family (fineAcrossMm, fineMm) is drawn ONLY as twigs that leave a trunk: from the
- *    trunk out to twigMm from it, on one side of the trunk at a time (the side changes slowly along the trunk), and
- *    each twig thins from fineMm at the trunk to twigTip of that at its end. So the picture is trunks that give off
- *    side branches that taper out, not loose lines;
- *  - veins: a level of the fold depth itself (veinLevel, wandering by veinWander with the mottling), so a vein follows
- *    its sulcus round every bend, just inside the lip of the groove; only veinShare of the sulci carry one (a slow
- *    noise field veinAcrossMm across). They are a dull blue-violet against the red-brown of the grooves (18 November:
- *    in the first colour, a dark red-violet at mid bank, they could not be told from the groove's own shade), soft
- *    and half transparent so they read as a vessel under the wet film and not as a drawn outline of the gyrus;
- *  - the arteries swell and brighten a little with the beat (pulse x the beat uniform nsLive.y; the veins do not).
- * Widths are true millimetres on the tissue; a vessel that would be under minPx pixels wide is not drawn (fullPx: from
- * here on at full strength), so from far away the surface shows no sub-pixel scribble. The vessels are painted into
- * the tissue colour BEFORE the light, so they are shaded, wet and shadowed exactly like the tissue they lie on.
- * Display choices; no vascular anatomy of this atlas brain is implied. nsAlb, nsG, nsMot and vNsObj in scope. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function cortexVesselGlsl(v = PROCEDURAL_VESSELS) {
   const f = glslFloat, v3 = c => `vec3( ${c.map(f).join(', ')} )`, lin = c => v3(c.map(srgbToLinear));
   const line = (field, w) => `( 1.0 - smoothstep( ${w} - 0.5, ${w} + 0.6, abs( ${field} ) / max( fwidth( ${field} ), 1e-5 ) ) ) * smoothstep( ${f(0.5 * v.minPx)}, ${f(0.5 * v.fullPx)}, ${w} )`;
@@ -810,7 +810,7 @@ export const CORTEX_FLESH_HEAD = 'float nsFlH( vec3 p ) { p = fract( p * 0.1031 
 export function cortexFleshGlsl(light, o = BRAIN_FLESH_LOOK, live = BRAIN_LIVE, hooks = {}, halo = AREA_HALO) {
   const f = glslFloat, v3 = c => `vec3( ${c.map(f).join(', ')} )`, lin = c => v3(c.map(srgbToLinear));
   const B = live.bloom, P = live.beat;
-  // 21 November 2026 (ns-area-halo AREA_HALO; the owner: "Right now, there's essentially no glow"): the light of a lit
+
   // or looked-at block on the tissue round it is the halo's now (the block's own shape and colour, gone when the
   // contraction ends). The bloom keeps its swell, its dimple, its rosy flush and its ring; its own spill of the key's
   // hue (a disc that faded over 0.8 s) and its light above white (seen only where the bloom pass runs) give way to it.
@@ -865,7 +865,7 @@ export function cortexFleshGlsl(light, o = BRAIN_FLESH_LOOK, live = BRAIN_LIVE, 
 	${wetGlsl}
 	float nsRimF = pow( max( 1.0 - nsFacing, 0.0 ), nsRimPower ) * ( 1.0 - nsRimGroove * nsG );
 	${rimGlsl}
-	// 19 November 2026 (the owner: "can we also please have the whole brain light up slightly, faintly, with whatever
+	//
 	// color area is being picked"): the whole cortex lights up faintly in the picked area's colour (nsPickTint: a gain
 	// per channel less 1, brainPickGainInto, set by the scene; 0 when nothing is picked; 21 November 2026: a gain, the
 	// same faint change in light and in shade, where an added light recoloured the matte cortex lilac or grey-blue).

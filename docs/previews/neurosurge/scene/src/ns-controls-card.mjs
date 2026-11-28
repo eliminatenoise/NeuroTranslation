@@ -1,18 +1,18 @@
-/** NeuroSurge: the main controls, shown for the first five seconds of the page (user notes: "for the first 5 seconds,
- * I want you to have an overlay of the main controls. WASD, ER, space, and trackpad with click"; 18 November: "WASD is
- * in a sort of pyramid structure, whilst ER are by themselves chunked together, but away from the pyramid slightly";
- * 19 November: "Things should be chunked together and those chunks should be spaced away from each other").
- *
- * The card is FOUR chunks, each in its own frame with its own word, and clearly more room between the chunks than
- * inside them (scene/example/quiet.css, .ns-ctl-*):
- *   1. W over A S D, a pyramid: move
- *   2. E and R, a pair set apart from the pyramid: view, info
- *   3. Space on its own: grip (20 November 2026, evening, Message 204: Space grips with both hands and both feet and
- *      takes hold; a click never grips, it presses)
- *   4. the trackpad with its three actions: move = look, click = press, drag = turn
- * The words name game controls only. DOM by createElement and textContent (the page's content security policy needs
- * nothing new). The card fades by itself after its time (a CSS animation on .ns-keys, assembly.css: it goes on time
- * even while the page is busy loading, and at once under reduced motion). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** How long the card stays (ms). */
 export const CONTROLS_CARD_MS = 5000;

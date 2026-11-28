@@ -1,42 +1,42 @@
-/** NeuroSurge: the DATA of the drawn nerves (21 November 2026, package WIRING, DESIGN-DECISIONS section 193).
- *
- * Owner, 20 November: "we want a view of brain activity ... so we can actually see electrical storms and electrical
- * activity and neural activity and networks and pathways, etc., etc., throughout the entire body, from brain to body
- * and body to brain. And then we can tie that to muscle contraction." 21 November: "let's try an electrical mapping
- * view, like you see in functional neuroscience, connectomic live maps, dynamic maps."
- *
- * The atlas the game draws has muscles, bones and a brain, but no spinal cord and no nerves. The electrical map
- * (ns-emap) therefore DRAWS typical nerve routes. This module is what those routes are drawn from:
- *  - MUSCLE_ROWS / MUSCLE_NERVE / nerveForMuscle: which nerve serves each muscle the game knows, from which spinal or
- *    cranial levels, and the main one (one readable row per muscle);
- *  - NERVE_TRUNKS: each named nerve and branch, with a plain name, its levels, its parent and its COURSE over the
- *    body: ordered points { seg, p } from the cord (or the brainstem) outward, p in millimetres in the rest frame of
- *    packs/BODY-RIG.json (WIRING_FRAME), seg the rig segment the point rides when the body moves. The table holds the
- *    right side under ids `r_...`; the left side is its mirror under ids `l_...` (mirrorTrunk, trunkById, mirrorPoint);
- *  - the cord: CORD_LEVELS, cordLevelAt, rootExitAt, cordCourse, caudaCourse, rootCourse (the cord is shorter than
- *    the column: its lower segments lie well above the vertebrae their roots leave under);
- *  - the ROOTS: a nerve that starts at the cord (no parent) has, for each of its levels, the point of its own course at
- *    which that root joins it: trunk.rootJoin = { level: index } (generated: the point at, or just below, where the
- *    root comes out of the column; a plexus's lower roots join it lower down, they do not all climb to its first
- *    point). A view draws each root from the cord down the canal to its opening (rootCourse) and on to that point
- *    (rootWay gives the whole line; trunkRootLines the last stretch). trunk.rootsLeave says where they come out:
- *    'opening' (between two vertebrae, rootExitAt), or 'cord' for the accessory nerve, whose roots leave the cord's
- *    side inside the canal and join a strand that climbs into the skull;
- *  - BRAIN_LINKS: typical links between the regions the brain atlas has as meshes, with where the fibres change sides
- *    as data (crossing, crossesAt);
- *  - WIRING_SOURCES: every table and every trunk names the sources its facts were taken from.
- *
- * Honesty (WIRING_NOTE, plain sentences a view can show): typical adult anatomy as it is taught, simplified, laid by
- * rule over this one atlas body by tools/build-wiring-courses.mjs; not traced from a scan and not measured in anyone;
- * real bodies vary; the "main" level of a muscle is this game's pick where books give several; the brain's links are
- * tied to the nearest part the brain model has. Where teaching sources differ the commonly taught value is taken and
- * the row's note says so, with the other value.
- *
- * Unknown keys (a level, an id, a name the data does not have, 'constructor' or '__proto__' among them) give null or
- * an empty list, never an error. Everything exported is frozen.
- *
- * Pure, dependency-free ES module (browser and Node): no three.js, no DOM, no game state.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const freeze = Object.freeze;
 /** o[k] only when k is one of o's own keys (so 'constructor' or '__proto__' find nothing). */

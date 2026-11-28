@@ -1,54 +1,54 @@
-/** NeuroSurge scene: the LEFT arm, attached at the anatomical left shoulder, placed so the whole hand stays on screen.
- *
- * Pure ES module (browser and Node; imports only ./ns-math, ./ns-rig and ./ns-colors).
- *
- * Frames
- *  - Rig rest pose: BodyParts3D source millimetres, +x subject LEFT, +y POSTERIOR, +z SUPERIOR (ns-rig).
- *  - World: Three metres with the EYE at the origin, +y up; the standing body faces -z at body yaw 0
- *    (ns-math bodyToWorldMatrix). The player's body is fixed in place.
- *  - Camera: Three convention (+x right, +y up, looking along -z); world = lookRotation(yaw, pitch) * camera.
- * The arm is solved in CAMERA space, but the shoulder is no longer a camera-attached constant (U3a, round 2):
- * armAttachment() puts the rig's glenohumeral pivot where the anatomical left shoulder is (body frame, eye at the
- * camera) in camera coordinates for the current look. Looking around therefore moves the shoulder in camera space and
- * the shoulder joint carries the arm so that the hand keeps its screen position (user R8: shoulder flexion/extension
- * follows the camera view; R9: the hand is locked to the view vertically).
- *
- * Placement rules (user R3, R9, R10 and the R9 history notes "the hand cannot go beyond the borders of your field of view")
- *  - The hand centre (vertex centroid of metacarpals 2-5) lies exactly on the camera ray through NDC (xNdc, yNdc) with
- *    yNdc = HAND_Y_NDC (R558: -0.28, the straight level arm at the start look; it was +0.5). It never moves vertically on screen.
- *  - A/D change xNdc; W/S change the depth along that ray inside a per-anchor DEPTH WINDOW [near, far]: far = the arm's
- *    reach (elbow nearly straight), near = the depth at which the projected hand height is at most maxHandHeightNdc.
- *  - The A/D range depends on the viewport and the look (the shoulder moves in camera space), never on the pose. Tier
- *    'full': every pose of the per-joint envelope grid (wrist within ANCHOR_WRIST_RANGE_DEG, every digit joint over its
- *    whole range, the forearm pronation range) fits inside the margins at the anchor's reach; where no anchor admits
- *    that (the arm near full reach: high pitch, looking right), tier 'game' requires it of the game's held poses
- *    (GAME_POSES) in every rotation state. Ranges are cached per quantised look in a bounded LRU, warm-started.
- *  - The whole hand (every hand and digit box corner plus the forearm-support box) is re-checked each frame; a pose that
- *    does not fit is pushed deeper along the same ray, then the displayed wrist is eased toward a fitting angle (wrist
- *    clamp), never sideways. Fallbacks that move x are flagged and were never needed in the U3a test matrix.
- *  - Looking far to the side beyond ARM_YAW_FREE_DEG turns the trunk (bodyYawForLook) instead of tearing the arm off.
- *
- * IK: for a given pose the elbow-to-hand-centre chain (ulna, pronation turn, wrist and hand) is rigid, so the 2-bone
- * problem shoulder -> elbow -> hand centre is solved in closed form: the elbow angle from the shoulder-to-hand distance,
- * then one shoulder rotation that sends the rest shoulder-to-hand direction onto the target direction and the rest elbow
- * axis onto the normal of the (shoulder, hand target, pole) plane. The pole (elbow down and out, BODY_POLE_DIR, blended
- * toward BODY_POLE_DIR_OVERHEAD for overhead looks) is fixed in the BODY frame, and the glenohumeral centre rises with
- * the anticipated elevation (GIRDLE_ELEVATION). Elbow flexion is limited to 0..145 deg and the wrist reach to
- * WRIST_REACH_FRACTION of the arm; the shoulder is reported against SHOULDER_LIMITS (display approximations).
- *
- * R5-pronation (user note 2026-11-08T23:43Z, R27: "as we externally or internally rotate our left arm, the rest of the
- * body will follow correspondingly ... normal joint mechanics"): the double-tap palm turn is SHARED between the forearm
- * and the shoulder (ROTATION_COUPLING). joints.forearm_pronation stays the commanded TOTAL palm turn (+80 palm down ..
- * -80 palm up). Going from palm down toward palm up, the upper arm turns outward at the shoulder (external rotation:
- * the elbow swings in toward the body about the shoulder -> hand-centre line, so the hand centre does not move), the
- * radius turns about the ulna by the rest of the turn, the shoulder blade slides back a little (retraction) and the upper
- * trunk turns a little toward the arm's side; going back toward palm down the upper arm turns inward again (internal
- * rotation). The shoulder's share is larger when the elbow is straighter. Palm down is the reference pose (no coupling),
- * so the start pose is exactly the round-4 pose. See ROTATION_COUPLING, rotationCoupling() and fitHand().coupling.
- *
- * Everything here is a simulated, unitless display rig. A/D, W/S, Space and gaze are virtual game inputs, not measured
- * motion, EMG, force, stimulation or decoding.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import {
   add, sub, scale, dot, cross, length, normalize, reject, clamp, frame, multiply, translation, uniformScale,
   rotationAxisAngle, rotationAboutPivot, basis, rotationTranspose, transformPoint, transformDirection,
@@ -65,11 +65,11 @@ import { shoulderTurnRange } from './ns-dance.mjs';
 
 const fail = (code, message) => { throw new Error(`ns:${code}: ${message}`); };
 
-/** Vertical NDC of the hand centre. It was three quarters up the screen (user note 2026-11-08T03:12Z, R10: +0.5). R558
- * (user, 11 November: "all the limbs straight out like a stick (perpendicular from the torso)", "out straight forward
- * front facing"): the hand sits where the straight, level, forward arm puts it at the start look, so the left arm
- * mirrors the right one. Measured on this rig at the eye camera (90 deg vertical field of view, 16:9): about 0.28
- * below the centre and 0.17 left of it. The hand stays locked to the view vertically, as before. */
+
+
+
+
+
 export const HAND_Y_NDC = -0.28;
 
 /**
@@ -158,13 +158,13 @@ export const ARM_DEFAULTS = Object.freeze({
   humeralSwivelDeg: 0
 });
 
-/**
- * R558 (Space dance, the user's Message 2): the upper arm's whole outward (+) / inward (-) turn the game arm may show,
- * degrees: internal about 70, external about 90 (commonly quoted active ranges, e.g. AAOS tables; cited from memory,
- * not measured on this arm). With the elbow straight the turn about the shoulder -> hand line is the upper arm's own
- * axial rotation; with the elbow bent the axial part is smaller (couplingReport humeralTwistDeg), so this bound is
- * conservative.
- */
+
+
+
+
+
+
+
 export const HUMERAL_ROTATION_RANGE_DEG = Object.freeze([-70, 90]);
 /**
  * 18 November 2026, late (the limb switch turns the whole arm over, ns-dance ARM_TURN; "make sure limbs can't be put
@@ -274,35 +274,35 @@ export const GIRDLE_ELEVATION = Object.freeze({
   elevationStartDeg: 70, elevationFullDeg: 170, shiftAtFullM: Object.freeze([0.012, 0.04, -0.012]), nominalDepthM: 0.3, nominalXNdc: -0.3
 });
 
-/**
- * R4-arm: shoulder-girdle REACH shift (scapular protraction, display approximation). A seated person reaching with the
- * left hand across the body toward the right does not only adduct the arm at the shoulder joint: the shoulder blade
- * glides forward around the rib cage (protraction) and the shoulder comes a little toward the midline, so the hand
- * can cross the midline well past the right shoulder line. Round 3 kept the glenohumeral centre fixed for every A/D
- * anchor, so the reach ran out a little right of the screen centre (A/D range x -0.609 .. +0.219 at the start look,
- * round3/FIX-REPORT.md F6).
- *
- * How it works. The A/D anchor x drives it: w = smoothstep((x - startXNdc) / (fullXNdc - startXNdc)) moves the
- * glenohumeral centre (and the elbow pole with it) by w * shiftAtFullM (BODY frame metres: +x toward the body's right =
- * toward the midline for the left shoulder, +y up, -z forward). It is zero at and left of the start anchor (x -0.3), so
- * the start pose and every look with the hand there are exactly as in round 3, and it depends only on the anchor x:
- * never on the look (the look still moves the shoulder through the attachment, user R8: the shoulder follows the
- * camera), the W/S depth or the hand pose. So W/S stay pure depth moves, a look never moves the hand (S04), and D gives
- * the coordinated shoulder + elbow + wrist movement of R8 (the shoulder blade slides forward as the hand goes right).
- * The hand centre stays on its ray at y = +0.5; only the arm solution behind it changes. A body-angle drive (how far the
- * hand line crosses the body) was tried first: it also shifted the shoulder when only the look changed, which breaks
- * the round-3 contract that a look moves the shoulder only through the attachment (U3a placement test).
- *
- * Values (display choices, cited from memory, Root reference qualification pending): scapular protraction moves the
- * shoulder forward by a few centimetres (the shoulder blade glides roughly 10-15 cm around the chest wall between full
- * retraction and full protraction) and the clavicle rises a little with a forward-and-up reach; 3.5 cm forward, 2 cm
- * toward the midline and 0.5 cm up at full weight (4.1 cm in all) stay inside that. A 6.4 cm shift reached only a
- * little further (D edge at look 0/0, 1280x720: 0.468 vs 0.404 NDC on the whole view, 0.262 vs 0.253 with the
- * information column kept clear) and opened the arm's deltoid edge more visibly when looking down at the shoulder,
- * because the body's own shoulder blade and collarbone do not follow the shift (harness/run-R4-arm-probe-1/
- * girdle-size-1.txt, harness/run-R4-arm-shoulder-ov3g-1/crop-x0.21-base-4cm-6cm.png). The body renderer may move the
- * left clavicle and shoulder blade by fitHand(...).girdle.shiftBodyM (not wired in round 4).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const REACH_GIRDLE = Object.freeze({
   startXNdc: -0.3, fullXNdc: 0.45, shiftAtFullM: Object.freeze([0.02, 0.005, -0.035])
 });
@@ -1300,7 +1300,7 @@ export const SIZE_REFERENCE_POSES = Object.freeze((() => {
 export const GAME_POSES = Object.freeze([
   Object.freeze({}),
   REST_HAND_POSE_DEG, // R3-arm: the relaxed rest hand (ns-actions REST_POSE) is the pose shown most of the time
-  // R558 (Message 2 / 14): the held poses at their new ends (ns-actions ACTION_TARGETS): open hand at the MCP limit,
+
   // the full spread, each single finger fully bent, the thumb across the palm. All lie on the per-joint grid.
   Object.freeze({ ...Object.fromEntries(DIGIT_NAMES.flatMap(d => [[`${d}_mcp_flex`, -10], [`${d}_pip_flex`, 0], [`${d}_dip_flex`, 0]])), thumb_mcp_flex: -10, thumb_ip_flex: -5 }),
   Object.freeze({ index_mcp_abd: 20, ring_mcp_abd: 15, little_mcp_abd: 20 }),
@@ -2098,49 +2098,49 @@ export function fitHand(rig, boxes, request, viewport, options = {}) {
 
 /* ------------------------------------------------------------------ the free hand (19 November 2026) */
 
-/**
- * 19 November 2026 (the owner: "We want the hands and the feet to move far more forward and far more back, covering a
- * great distance"; "arm movement range of motion can be limited when looking up whilst in internal rotation ... Any
- * limited range of motion that's unnatural needs to be fixed ... We want full range of motion on all axes"). THE FREE
- * HAND: the left hand is asked for at a PLACE BESIDE THE SHOULDER (metres from the shoulder joint's rest place, in the
- * chest's own axes: +x the body's right, +y up the chest, +z out of the back), not at a place in the picture. Nothing
- * here reads the look, the window or what fits in the view, so the hand goes wherever the arm's joints let it and
- * stays there when the view turns (fitHand's window rule keeps the hand at one height of the picture and inside it,
- * which left the hand 0.1 m of travel at some looks). The joints' own ranges are the only limits:
- *   the elbow         0 to ELBOW_MAX_DEG, as everywhere in this file;
- *   the shoulder      as the direction from the shoulder to the hand: `elevation` (0 = hanging straight down, 90 =
- *                     level, 180 = straight up) and `plane` (0 = out to the side, 90 = straight forward, more = across
- *                     the body, negative = behind the line of the shoulders). Raising forward and sideways: the whole
- *                     180 (AAOS: flexion 180, abduction 180). Across the body: to acrossDeg (45 degrees past straight
- *                     forward: AAOS horizontal flexion 135 from the side line). Behind: the `behind` table, the furthest
- *                     plane behind the side line at each elevation (AAOS: extension 60 with the arm down; horizontal
- *                     extension about 40 at shoulder height; nothing behind with the arm straight up). Below
- *                     freeBelowDeg the arm hangs beside the trunk and every plane is allowed. These bound a STRAIGHT
- *                     arm; with the elbow bent the hand comes round in front of and beside the body by the elbow, so
- *                     the bound fades out between bentFrom and bentTo of the arm's full length.
- * Typical textbook ranges of a healthy adult, used as display rules; nothing is measured on this arm or the player.
- *   startBodyM   where the hand starts: stretched out beside the left knee, the mirror image of where the right hand
- *                lies in the start posture (read off the drawn body: the direction of the right hand's middle from its
- *                shoulder, mirrored and turned into the left chest axes), at the distance that leaves this arm's elbow
- *                as softly bent as the right one is drawn (about 14 degrees; the two rigs measure the hand's middle at
- *                different points of the hand, so the same distance would bend this elbow 32 degrees, and the limb
- *                turn then swung that bent elbow far out to the side).
- *   speedMps     how fast W / A / S / D move it; leadM: how far the asked place may run ahead of where the hand is.
- *   poleHang     the elbow's side when the arm hangs or reaches back (the point of the elbow to the back); swivelDegPerS:
- *                how fast the elbow's side may swing round the shoulder -> hand line (a change of side is a turn, never
- *                a snap).
- *   acrossFullM  the shoulder blade is drawn forward (REACH_GIRDLE's shift) as the hand goes this far to the body's
- *                right of the shoulder.
- *   wrist        the wrist's small share of a reach (as WASD_WRIST_SYNERGY: bent back a little at full reach, bent
- *                forward a little with the hand pulled in), from the shoulder-to-hand distance.
- */
-/* 20 November 2026 (the owner: "Let's make the limbs longer"): the arm is drawn longer (ns-body-shape BODY_SHAPE: upper
- * arm, forearm and hand each by their own factor; this rig is built from the reshaped packet), so the start place is
- * moved out along its own line by the arm's gain from the shoulder to the hand's middle (the source arm's 270, 253 and
- * about 60 mm), and the elbow starts as softly bent as before (at the old place the longer arm bent 53 degrees). It is
- * also turned 4 degrees down about the chest's side to side axis and 3 in toward the body ([-0.245, -0.341, -0.373]
- * before), as the right arm of the start posture is (ns-body BODY_POSTURES.open r_shoulder_flex 37 -> 33, r_shoulder_abd
- * 8 -> 5): the longer arms' hands had risen into the motor strip. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const ARM_SHAPE_GAIN = (() => { const L = BODY_SHAPE.limbs; if (!L || !L.on) return 1; const a = L.arm; return (a.upper * 270 + a.fore * 253 + a.end * 60) / 583; })();
 export const FREE_HAND = Object.freeze({
   startBodyM: Object.freeze([-0.225, -0.379, -0.348].map(v => v * ARM_SHAPE_GAIN)),
@@ -2554,16 +2554,16 @@ export function muscleActivation(drive, baseline = MUSCLE_BASELINE_DRIVE) {
   return clamp((drive - b) / (1 - b), 0, 1);
 }
 
-/**
- * Per-mesh colours of the arm muscles from their simulated drives, through the SAME ns-colors ramp and shading rule as
- * the brain activity, so that a brain region and the muscles it drives read the same (user R2): `rgb` is the ramp
- * colour activityColor(activation); `albedo` / `emission` are ns-colors activityShade(MUSCLE_BASE_LINEAR, activation),
- * i.e. the lit muscle tissue with the ramp added as an emissive glow (the ns-colors recommended use; at rest the tissue
- * keeps its base colour instead of the ramp's near-black zero).
- * @param muscles [{ id, muscleKey | null }]
- * @param drives { muscleKey: drive } (ns-actions muscleDrives)
- * @returns Map(id -> { activation, rgb, albedo, emission }) (linear RGB 0..1)
- */
+
+
+
+
+
+
+
+
+
+
 export function armMuscleColors(muscles, drives, { baseline = MUSCLE_BASELINE_DRIVE, color = activityColor, shade = activityShade, base = MUSCLE_BASE_LINEAR } = {}) {
   if (!Array.isArray(muscles)) fail('arm_input', 'muscles must be an array of { id, muscleKey }');
   if (typeof color !== 'function' || typeof shade !== 'function') fail('arm_input', 'color and shade must be functions');

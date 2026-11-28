@@ -45,6 +45,7 @@ const dedicatedChoices=new Set([...Object.keys(sideArmParts),...Object.keys(hipJ
 export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,onClose=()=>{},onSaveTake=null,onOpenCommand=null,backend='local-model'}) {
   const node=document.createElement('section');
   node.className='joint-view'+(embedded?' joint-overlay':'');
+  if (embedded) node.tabIndex = -1;
   node.setAttribute('aria-label','Movement mirror'); node.innerHTML=markup;
   host.append(node);
   const el=s=>node.querySelector(s), text=(s,v)=>{el(s).textContent=v;};

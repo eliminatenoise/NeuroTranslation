@@ -6,7 +6,7 @@ vein, the popliteal artery and vein, the anterior and posterior tibial arteries,
 superficial epigastric vein, the axillary artery and vein, the brachial, radial and ulnar arteries, the cephalic,
 basilic, median cubital and median antebrachial veins and the dorsal venous network of the hand, both sides.
 
-Why: the owner asked on 18 November 2026 to get the vascularity right "for all other items as well". The bodies had no
+The vessel centreline is an anatomical illustration used in the whole-body view.
 vessels at all.
 
 Why centre lines and not the meshes: the atlas's meshes of these vessels are 24.6 MB (the great saphenous vein alone

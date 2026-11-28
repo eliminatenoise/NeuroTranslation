@@ -1,13 +1,13 @@
-/**
- * Input epochs: cancel queued GAME input at a known boundary (pause / resume, focus or page visibility lost, page
- * hidden, Reset body / Reset brain view, the display rescue, an overfull deferred-input list) so nothing pressed before
- * the boundary acts after it. Pure helpers, no DOM; ns-app owns the boundaries (cancelPendingGameplay). Ported from the
- * public main's input-queue update and adapted to the R558 controls (Message 40): Space is the only hand key. A hold or
- * a tap takes hold of something, a double tap turns the limbs, a double tap held keeps turning them slowly
- * (ns-controls SPACE_GESTURE). A boundary ends a grasp (held, or kept by a tap) and a running limb turn alike.
- * A cancellation does not reconstruct physical event times: its generated releases carry the time the boundary was
- * observed.
- */
+
+
+
+
+
+
+
+
+
+
 
 /** The releases every cancelled epoch ends with, stamped at the observation time: a grasp release (lets go of
  * whatever Space held or kept: the brain grab in ns-actions, the carry of the brain or the mirror body in

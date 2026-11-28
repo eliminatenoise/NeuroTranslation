@@ -27,7 +27,7 @@
 // which region-mode picking and the marker dots use), stabilizers, catalogRoles (existing MOVEMENT-MAP catalog keys,
 // left arm only), lateralBias, note.
 //
-// Plain-language fields (round 3, R3-text; user R17 "simple so that anyone can understand", lead decision D3). Additive:
+
 // the technical label/effector/explanation/caveat/citations stay unchanged and are the "More detail" layer.
 //   region: plainLabel ("Left knee", "Belly and back", "In-between area (upper)"), plainLead (ONE sentence: what the area
 //   does, which half of the brain it is in), plainMoves (what it moves in THIS game, or "Nothing"), plainCaveat (one short
@@ -54,7 +54,7 @@ export const BODY_JOINT_IDS = Object.freeze([
   'toe_flex_L', 'toe_flex_R',
   'trunk_flex', 'neck_flex', 'neck_rot', 'jaw_open', 'brow_raise', 'eye_close', 'lip_purse', 'smile',
   'r_shoulder_flex', 'r_shoulder_abd', 'r_elbow_flex', 'r_wrist_flex', 'r_wrist_ext', 'r_grasp', 'r_open', 'r_pronation',
-  // R558 (Messages 14 / 15 / 2): more activation points, left-right symmetry and full ranges (ns-body BODY_JOINT_IDS).
+
   'ankle_inv_L', 'ankle_inv_R', 'hallux_flex_L', 'hallux_flex_R', 'trunk_side', 'trunk_rot', 'neck_side', 'jaw_side',
   'hyoid_elev', 'nose_wrinkle', 'upper_lip', 'lower_lip',
   'r_wrist_dev', 'r_thumb_flex', 'r_thumb_opp', 'r_index_flex', 'r_middle_flex', 'r_ring_flex', 'r_little_flex', 'r_finger_spread',
@@ -64,8 +64,8 @@ export const BODY_JOINT_IDS = Object.freeze([
   'leg_turn_L', 'leg_turn_R'
 ]);
 
-/** Existing left-arm action ids (ns-actions ACTION_IDS, in map order) plus forearm rotation, plus (R558, Messages 14 /
- * 15) the game-defined left-hand actions that mirror the right hand's detail (ns-actions EXTRA_ARM_ACTION_IDS). */
+
+
 export const LEFT_ARM_ACTION_IDS = Object.freeze([
   'grasp_close', 'relax_release', 'open_hand', 'spread_fingers',
   'wrist_flexion', 'wrist_extension', 'elbow_flexion', 'elbow_extension',
@@ -80,18 +80,18 @@ export const LEFT_ARM_ACTION_IDS = Object.freeze([
 
 const sem = (positive, negative, lo, hi, side, unit = 'deg') => ({ unit, positive, negative, suggestedRange: [lo, hi], side });
 
-/**
- * The joint-value convention this map assumes (for ns-body / ns-actions to reconcile with BODY_JOINT_LIMITS).
- * Every value is a signed angle in degrees from the BodyParts3D SOURCE POSE, which is the standard anatomical position
- * (standing upright, arms at the sides, palms facing forward). Positive = the direction the id names. A target of 0
- * returns the joint to the source pose. R558: an action's joint value is the ABSOLUTE end angle its contraction drives the
- * joint to (20 November 2026, Message 206: then it returns to where it was; it was held there), chosen as the largest angle the
- * rig's own limit allows inside normal adult range of motion. The four facial ids are not joint rotations: their values are nominal display
- * degrees, 0 (rest) .. 20 (full display amplitude), and ns-body should normalise them by that range.
- * suggestedRange is a game-safe range inside normal adult range of motion; the rig's own limits take precedence.
- */
+
+
+
+
+
+
+
+
+
+
 export const JOINT_SEMANTICS = deepFreeze({
-  // R558 audit (Message 2: "maximum anatomically feasible range of motion but never beyond"): every suggestedRange is
+
   // now the full ns-body BODY_JOINT_LIMITS range (adult active norms, AAOS 1965 / AMA Guides; the basis per joint is
   // in ns-body BODY_JOINT_LIMITS), so an action's end angle may be the joint's anatomical end.
   hip_flex_L: sem('hip flexion (thigh forward and up; about 100 at most with the knee straight, ns-body HIP_KNEE_COUPLING)', 'hip extension (thigh down and back)', -30, 120, 'left'),
@@ -150,7 +150,7 @@ export const JOINT_SEMANTICS = deepFreeze({
 });
 
 // ---------------------------------------------------------------------------------------------
-// Round 5 (R5-text, 2026-11-09): the face and chewing muscle packet (lead decision D20; user R24, and the user's
+
 // 2026-11-09 choice "Download open models": only the face and chewing muscles, from an openly licensed atlas).
 //
 // BodyParts3D 4.0 has no facial-expression or chewing muscles, so until round 5 the face areas only kept a number.
@@ -359,8 +359,8 @@ const CAVEATS = [
 // the extents that contain u" (ns-brain regionOwnerAt). Every left-arm action position (LEFT_ARM_ACTION_U) lies inside
 // the core of its own action's region.
 //
-// R558 (motor-strip accuracy audit, round 2; user: "make sure your primary motor cortex strip ... is as accurately
-// placed as possible"): the strip coordinate is the ALONG-GYRUS coordinate v of ns-brain alongGyrusCoordinate (0 at the
+
+
 // medial-wall edge, 1 at the ventral tip next to the Sylvian fissure, level lines across the gyrus), so the areas run in
 // order all the way down the side of the brain. Before, u was the fraction of the mesh's |x| span: fine on top, but the
 // gyrus is widest (|x| max) at z about 1578 mm, so its lowest 15 mm folded back (jaw, lips and lower face reappeared
@@ -394,7 +394,7 @@ const CAVEATS = [
 // from the side are in Penfield order from neck down to the swallowing area at the ventral end, with no fold-back; the
 // hand areas cover the knob on the central-sulcus edge. Still a schematic on one atlas brain (see CAVEATS).
 const S = (key, centre, overlap = 0.03) => ({ key, centre, overlap });
-// R558 (Message 14, "as many activation points across the motor strip ... as possible", and Message 15, symmetry): the
+
 // hand zone has one area per digit in Penfield's medial-to-lateral order (hand, little, ring, middle, index, thumb;
 // Penfield & Boldrey 1937), the face zone has a nose area, and a throat (swallowing) area follows the tongue (Penfield's
 // sequence ends with swallowing); both hemispheres carry exactly the same set. Placed in the along-gyrus coordinate
@@ -474,7 +474,7 @@ const CONTENT = {
     label: `${c.Sc} toes`, shortLabel: `${c.Sc[0]} toes`, effector: `toes (${c.S} foot): the big toe and the four small toes`, bodySide: c.S, medialSurface: true,
     displayGroup: `${c.S}_leg`, pathway: 'corticospinal', laterality: 'contralateral',
     actions: [
-      // R558 (Message 14): the big toe is its own segment with its own long muscles, so it curls and lifts on its own
+
       // (first MTP flexion 45, extension 70: AAOS); the four small toes curl and lift together (MTP 40 / 40: AAOS).
       { id: `${c.code}_big_toe_curl`, label: `Curl ${c.S} big toe`, joints: { [`hallux_flex_${c.J}`]: 45 },
         agonists: sided(c.S, 'flexor hallucis longus', 'flexor hallucis brevis', 'abductor hallucis'),
@@ -502,7 +502,7 @@ const CONTENT = {
       { id: `${c.code}_ankle_plantarflex`, label: `Point ${c.S} foot down (plantarflex)`, joints: { [`ankle_dorsi_${c.J}`]: -50 },
         agonists: sided(c.S, 'gastrocnemius', 'soleus', 'plantaris', 'fibularis longus', 'fibularis brevis', 'tibialis posterior'),
         antagonists: sided(c.S, 'tibialis anterior', 'fibularis tertius') },
-      // R558 (Message 14): foot inversion 35 / eversion 15 (AAOS).
+
       { id: `${c.code}_ankle_invert`, label: `Turn ${c.S} sole inward (invert)`, joints: { [`ankle_inv_${c.J}`]: 35 },
         agonists: sided(c.S, 'tibialis posterior', 'tibialis anterior'),
         antagonists: sided(c.S, 'fibularis longus', 'fibularis brevis'),
@@ -540,8 +540,8 @@ const CONTENT = {
       // knee bent) and is held at 110 where the rigid thigh and belly meshes meet (BODY_POSTURE_LIMITS); a straight knee
       // would stop the hip at 100 (ns-body HIP_KNEE_COUPLING, the hamstrings), so the knee is drawn giving way as the
       // thigh rises (ns-body passiveKneeAngles). Extension swings the thigh down past the line of the trunk to 20
-      // degrees behind it (user Messages 47 and 48: hip extension must be achievable; the earlier action "lowered the
-      // thigh to the ground", 90, which is where the leg already rests, so it never moved). The invisible ground is
+
+
       // where the bodies sit; it does not stop a limb. Abduction ends at 45 (AAOS); adduction stops at 0, the legs side
       // by side.
       { id: `${c.code}_hip_flex`, label: `Lift ${c.S} thigh (hip flexion)`, joints: { [`hip_flex_${c.J}`]: 120 },
@@ -564,7 +564,7 @@ const CONTENT = {
         agonists: sided(c.S, 'adductor magnus', 'adductor longus', 'adductor brevis', 'gracilis', 'pectineus'),
         antagonists: sided(c.S, 'gluteus medius', 'gluteus minimus'),
         note: 'Stops with the legs side by side (the source pose, knees nearly touching): the full 30 degrees of adduction would take the leg into the other leg.' },
-      // 20 November 2026 (BODYMAP; the owner, Message 204: "as many activation spots and encoded movements as possible"):
+
       // the thigh's turn about its own length (hip_rot, until now turned only by a drag on the leg and the Space double
       // tap) gets its own two spots: outward to 45 and inward to 40 (AAOS, measured with the hip bent as in long
       // sitting: ns-body BODY_JOINT_LIMITS). The deep outward turners (piriformis, the obturators, the gemelli,
@@ -592,7 +592,7 @@ const CONTENT = {
     label: 'Trunk', shortLabel: 'Trunk', effector: 'trunk (abdominal and back muscles, both sides)', bodySide: 'midline', medialSurface: false,
     displayGroup: 'trunk', pathway: 'corticospinal', laterality: 'bilateral',
     actions: [
-      // R558 (Message 2): thoracolumbar flexion 80, extension 25, side bend 35, rotation 45 (AAOS).
+
       // R558 (builder AN): the prime movers of trunk extension, the erector spinae columns (iliocostalis, longissimus,
       // spinalis; BodyParts3D 4.0 members) and quadratus lumborum (Z-Anatomy), are drawn now (packets/missing-muscles-r1),
       // so "Lean trunk back" names them again and the issue-hunt-2 stopgap (latissimus dorsi and gluteus maximus standing
@@ -621,8 +621,8 @@ const CONTENT = {
   shoulder: c => (c.H === 'right' ? {
     label: 'Left shoulder', shortLabel: 'L shoulder', effector: 'shoulder (left arm)', bodySide: 'left', medialSurface: false, isLeftArm: true,
     displayGroup: 'left_arm', pathway: 'corticospinal', laterality: 'contralateral_predominant',
-    // 20 November 2026 (BODYMAP; the owner, Message 204: "make sure there's clear movement for each brain activation
-    // area"): this area used to move nothing (the look and W/A/S/D carry the left arm). Its four movements now swing the
+
+
     // whole left arm at the shoulder, on top of where the look and the keys hold the hand (ns-actions
     // SHOULDER_ACTION_DEG), with the same muscles the reach keys light (ns-actions REACH_MUSCLES), as the right shoulder's
     // four do on the right arm.
@@ -642,7 +642,7 @@ const CONTENT = {
     label: 'Right shoulder', shortLabel: 'R shoulder', effector: 'shoulder (right arm)', bodySide: 'right', medialSurface: false,
     displayGroup: 'right_arm', pathway: 'corticospinal', laterality: 'contralateral_predominant',
     actions: [
-      // R558 (latch; start posture: the right arm straight forward, flexion 90). R558 (Message 2): flexion raises it on to
+
       // 180 (AAOS, arm straight up beside the head); extension swings it down and back to -60 (AAOS). With the arm
       // forward, abduction swings it out to the side in the horizontal plane (ns-body turns abd before flex): 135 = 45
       // degrees behind the side line, the AAOS end of horizontal extension; adduction swings it back to straight
@@ -667,12 +667,12 @@ const CONTENT = {
         agonists: ['right pectoralis major', 'right latissimus dorsi', 'right teres major', 'right subscapularis'],
         antagonists: ['acromial part of right deltoid', 'right supraspinatus'],
         stabilizers: ['right serratus anterior', 'right pectoralis minor'] },
-      // 20 November 2026 (BODYMAP; the owner, Message 204: "as many activation spots and encoded movements as possible"):
+
       // the upper arm's turn about its own length (r_shoulder_rot, until now turned only by a drag on the upper arm and
       // the Space double tap; the start posture holds it 35 outward) gets its own two spots: outward to 90 (AAOS external
       // rotation: ns-body BODY_JOINT_LIMITS) and inward to 40 (of the 70 the joint has: with the arm stretched along the
-      // body, tools/rom-sweep.mjs found the forearm 32 mm inside the thigh at 70, none at 40; and the owner, Message 160:
-      // "You probably overdid it with the internal or medial rotation with the arms").
+
+
       { id: 'lh_r_shoulder_out', label: 'Turn right arm outward (external rotation)', joints: { r_shoulder_rot: 90 },
         agonists: ['right infraspinatus', 'right teres minor', 'spinal part of right deltoid'],
         antagonists: ['right subscapularis', 'right pectoralis major', 'right teres major'] },
@@ -737,7 +737,7 @@ const CONTENT = {
     actions: [
       leftArm('wrist_flexion', 'Flex left wrist', ['FCR', 'FCU'], ['ECRL', 'ECRB', 'ECU'], ['FDS', 'FDP']),
       leftArm('wrist_extension', 'Extend left wrist', ['ECRL', 'ECRB', 'ECU'], ['FCR', 'FCU'], ['ED']),
-      // R558 (Messages 14 / 15): the right wrist bends sideways (radial 20 / ulnar 30, AAOS), so the left wrist area has
+
       // the same two spots. (21 November 2026, H8: the game arm's wrist bends sideways too now, ns-rig wrist_dev.)
       leftArm('wrist_radial_deviation', 'Bend left wrist toward the thumb (radial deviation)', ['FCR', 'ECRL', 'ECRB'], ['FCU', 'ECU'], [],
         null, null, LEFT_WRIST_SIDE_NOTE),
@@ -756,7 +756,7 @@ const CONTENT = {
       { id: 'lh_r_wrist_ext', label: 'Extend right wrist', joints: { r_wrist_ext: 70, r_wrist_flex: 0 },
         agonists: ['right extensor carpi radialis longus', 'right extensor carpi radialis brevis', 'right extensor carpi ulnaris'],
         antagonists: ['right flexor carpi radialis', 'right flexor carpi ulnaris'] },
-      // R558 (Message 14): radial deviation 20, ulnar deviation 30 (AAOS), about the palm's normal through the capitate.
+
       { id: 'lh_r_wrist_radial', label: 'Bend right wrist toward the thumb (radial deviation)', joints: { r_wrist_dev: 20 },
         agonists: ['right flexor carpi radialis', 'right extensor carpi radialis longus', 'right extensor carpi radialis brevis'],
         antagonists: ['right flexor carpi ulnaris', 'right extensor carpi ulnaris'] },
@@ -777,15 +777,15 @@ const CONTENT = {
           '0.008 (unitless). The factor is a display convention, not a measured grip law, EMG or force. Real power grip can ' +
           'co-activate the extensors: Motawar 2012 recorded extensor digitorum activity during maximal isometric power grip (right ' +
           'hand, right-handed adults; map-delta D07). This virtual left-hand display is an illustrative extrapolation.'),
-      // 18 November 2026 (SMALL, audit S18; the owner, Note 15: "Ensure anatomical symmetry across systems except where
-      // inappropriate"): "Relax / release left grasp" is no longer one of the hand area's movements, so both hands list
+
+
       // the same four (close, open, spread, together). Release lowers flexor and extensor drive; it is not active
       // extension and not cortical silence (Motawar 2012), and "Open" already brings a closed hand back first (the
       // latch rule). The game arm's relax_release itself stays (the grip's own release uses it).
       leftArm('open_hand', 'Open left hand', ['ED', 'EI', 'EDM', 'EPB', 'EPL'], ['FDS', 'FDP', 'FPB', 'FPL'], ['LUM', 'DI', 'PI'],
         null, null, 'Letting go of Space does not open the hand: it goes back to rest (natural release can be passive).'),
       leftArm('spread_fingers', 'Spread left fingers', ['DI', 'ADM'], ['PI'], ['ED', 'LUM']),
-      // R558 (Messages 14 / 15 / 6): the anatomical opposite of spreading (palmar interossei), as on the right hand.
+
       leftArm('fingers_together', 'Bring left fingers together', ['PI'], ['DI', 'ADM'], [])
     ],
     explanation: 'Hand area (the hand knob) for the LEFT hand in the right hemisphere: whole-hand grasp, opening, spreading and bringing the fingers together. Crossed corticospinal fibres, including direct cortico-motoneuronal connections that support fine finger control (Lemon 2008), reach the hand motor neurons. In the game, looking here, or holding Space for the fist, drives the existing left-hand actions, and the finger flexors or extensors take the same colour ramp as the brain. Huber 2020 measured left-hand grasp and retraction in the right motor cortex as overlapping, repeated action patches that differ between people, and natural grip release can be passive (Motawar 2012), so letting go of Space only lets the hand go back to rest.',
@@ -837,7 +837,7 @@ const CONTENT = {
     actions: [
       leftArm('thumb_mcp_flexion', 'Flex left thumb (MCP)', ['FPB'], ['EPB'], ['FPL']),
       leftArm('thumb_mcp_extension', 'Extend left thumb (MCP)', ['EPB'], ['FPB'], ['EPL']),
-      // R558 (Messages 14 / 15): the thumb's own base joint (CMC) turns it across the palm (opposition, 40 deg, the game
+
       // arm's limit) or back out; the right thumb has the same two spots.
       leftArm('thumb_opposition', 'Turn left thumb across the palm (opposition)', ['OP', 'FPB'], ['EPL'], [],
         [CATALOG_NAMES.OP, 'left abductor pollicis brevis', CATALOG_NAMES.FPB], ['left abductor pollicis longus', CATALOG_NAMES.EPL]),
@@ -851,7 +851,7 @@ const CONTENT = {
     label: 'Right hand', shortLabel: 'R hand', effector: 'whole hand (right): close, open, spread, together', bodySide: 'right', medialSurface: false,
     displayGroup: 'right_arm', pathway: 'corticospinal', laterality: 'contralateral_predominant',
     actions: [
-      // R558 (Messages 14 / 15): the right hand moves each digit on its own (ns-body r_<digit>_flex); the whole-hand
+
       // actions set all five. Closing: fingers MCP 90 / PIP 104 / DIP 85, thumb CMC 30 / MCP 50 / IP 80. Opening: MCP
       // 30 into hyperextension, thumb IP 20, thumb out 15 (BODY_JOINT_SHARES; AAOS ranges).
       { id: 'lh_r_grasp', label: 'Close right hand', joints: { r_thumb_flex: 90, r_thumb_opp: 30, r_index_flex: 90, r_middle_flex: 90, r_ring_flex: 90, r_little_flex: 90 },
@@ -921,7 +921,7 @@ const CONTENT = {
     label: 'Right thumb', shortLabel: 'R thumb', effector: 'thumb (right hand)', bodySide: 'right', medialSurface: false,
     displayGroup: 'right_arm', pathway: 'corticospinal', laterality: 'contralateral_predominant',
     actions: [
-      // R558 (Messages 14 / 15): the right thumb now has its own joints, like the left game thumb: MCP and IP bend (MCP
+
       // 50, IP 80) and straighten (IP 20 into hyperextension), and the base joint (CMC) turns it across the palm
       // (opposition, 40, the same end as the left game thumb) or out from the palm (15).
       { id: 'lh_r_thumb_flex', label: 'Flex right thumb', joints: { r_thumb_flex: 90 },
@@ -944,7 +944,7 @@ const CONTENT = {
     label: 'Neck', shortLabel: 'Neck', effector: 'neck (head flexion, turning and side tilt)', bodySide: 'midline', medialSurface: false,
     displayGroup: 'neck', pathway: 'corticospinal+corticobulbar', laterality: 'bilateral_debated',
     actions: [
-      // R558 (Message 2): neck flexion 50, extension 60, rotation 80 (AMA), side bend 45 (AAOS / AMA).
+
       { id: `${c.code}_neck_flex`, label: 'Bend head forward', joints: { neck_flex: 50 },
         agonists: [...both('sternocleidomastoid'), ...both('longus colli')],
         antagonists: [...both('splenius capitis'), ...both('semispinalis capitis'), ...both('semispinalis cervicis'), ...both('trapezius'), ...both('longissimus capitis'), ...both('longissimus cervicis'), ...both('iliocostalis cervicis')] },
@@ -978,7 +978,7 @@ const CONTENT = {
     label: 'Brow', shortLabel: 'Brow', effector: 'eyebrows (upper face, both sides): raise and frown', bodySide: 'midline', medialSurface: false,
     displayGroup: 'face', pathway: 'corticobulbar', laterality: 'bilateral',
     actions: [
-      // R558 (Messages 14 / 6): the frown is the brow raise's opposite (agonist and antagonist swap); temporoparietalis,
+
       // part of the scalp muscle with the frontalis, helps the raise.
       { id: `${c.code}_brow_raise`, label: 'Raise both eyebrows', joints: { brow_raise: 15 },
         agonists: ['frontal belly of left occipitofrontalis', 'frontal belly of right occipitofrontalis', ...both('temporoparietalis')],
@@ -999,7 +999,7 @@ const CONTENT = {
       { id: `${c.code}_eye_close`, label: 'Close both eyes', joints: { eye_close: 20 },
         agonists: both('orbicularis oculi'), antagonists: both('levator palpebrae superioris'),
         note: 'Levator palpebrae superioris is supplied by the oculomotor nerve, a separate pathway.' },
-      // R558 (Messages 14 / 6): opening the eyes wide is the closure's opposite.
+
       { id: `${c.code}_eye_open`, label: 'Open both eyes wide', joints: { eye_close: -15 },
         agonists: both('levator palpebrae superioris'), antagonists: both('orbicularis oculi'),
         note: 'Levator palpebrae superioris lights (it lies inside the eye socket, behind the eyelid muscles); it is supplied by the oculomotor nerve, a separate pathway, and the eyelids themselves are not modelled.' }
@@ -1013,7 +1013,7 @@ const CONTENT = {
     label: 'Nose', shortLabel: 'Nose', effector: 'nose: wrinkling and nostril flaring (both sides)', bodySide: 'midline', medialSurface: false,
     displayGroup: 'face', pathway: 'corticobulbar', laterality: 'bilateral',
     actions: [
-      // R558 (Message 14, "nose"): two opposite nose movements (Message 6), coloured from the face-muscle packet.
+
       { id: `${c.code}_nose_wrinkle`, label: 'Wrinkle the nose', joints: { nose_wrinkle: 15 },
         agonists: [...both('levator labii superioris alaeque nasi'), 'transverse part of left nasalis', 'transverse part of right nasalis'],
         antagonists: both('depressor septi nasi') },
@@ -1036,7 +1036,7 @@ const CONTENT = {
         note: c.face
           ? `${FACE_PACKET_NAME_CAP} adds these muscles: the smile is a simulated display level shown as colour on the ${c.S} cheek muscles, and the ${c.S} mouth corner moves up, out and back (the other a little; a game rule, exaggerated so it shows; the ${c.S} side receives most of this hemisphere's drive).`
           : `BodyParts3D 4.0 has no mesh for these muscles: the smile is a simulated display level only, and nothing moves or is coloured (the ${c.S} side would receive most of this hemisphere's drive).` },
-      // R558 (Messages 14 / 6): the smile's opposite: depressor anguli oris (with platysma) pulls the corner down.
+
       { id: `${c.code}_mouth_down`, label: 'Pull mouth corner down', joints: { smile: -15 },
         agonists: sided(c.S, 'depressor anguli oris', 'platysma'),
         antagonists: sided(c.S, 'zygomaticus major', 'levator anguli oris'), lateralBias: c.S }
@@ -1050,7 +1050,7 @@ const CONTENT = {
     label: 'Lips', shortLabel: 'Lips', effector: 'lips: purse, stretch, upper lip lift, lower lip pout and pull-down', bodySide: 'midline', medialSurface: false,
     displayGroup: 'face', pathway: 'corticobulbar', laterality: 'contralateral_predominant',
     actions: [
-      // R558 (Messages 14 / 6): five lip movements in opposing pairs. Pursing also brings a lifted upper lip down
+
       // (orbicularis oris closes the lips), so it is the upper-lip lift's opposite.
       { id: `${c.code}_lip_purse`, label: 'Purse the lips', joints: { lip_purse: 15, upper_lip: 0 },
         agonists: ['orbicularis oris'], antagonists: [...both('zygomaticus major'), ...both('risorius')], lateralBias: c.S },
@@ -1082,7 +1082,7 @@ const CONTENT = {
         note: c.face
           ? `Masseter, temporalis and the medial pterygoid come from ${FACE_PACKET_NAME} and are coloured with the simulated display level; the jaw is closed at rest, so clenching shows no movement then, and after the jaw has opened it closes the jaw again; bite force is not modelled.`
           : 'Masseter, temporalis and the medial pterygoid have no BodyParts3D 4.0 mesh, so clenching shows no colour; the jaw is closed at rest, so clenching shows no movement then, and after the jaw has opened it closes the jaw again; bite force is not modelled.' },
-      // R558 (Message 14): side shift 10 mm (a usual adult lateral excursion). The pterygoids of one side push the chin
+
       // to the OTHER side; the crossed hemisphere drives the opposite pterygoids more, so each hemisphere shifts the chin
       // toward its own side (a game choice from that crossed bias).
       c.H === 'right'
@@ -1110,8 +1110,8 @@ const CONTENT = {
     label: 'Throat (swallowing)', shortLabel: 'Swallow', effector: 'swallowing: the hyoid bone lifts (both sides)', bodySide: 'midline', medialSurface: false,
     displayGroup: 'face', pathway: 'corticobulbar', laterality: 'bilateral',
     actions: [
-      // R558 (Message 14, "swallowing / larynx"): the swallow lifts the hyoid (ns-body HYOID_LIFT, up to 15 mm); its
-      // opposite lowers it again (Message 6).
+
+
       { id: `${c.code}_swallow`, label: 'Swallow (lift the hyoid)', joints: { hyoid_elev: 20 },
         agonists: [...both('digastric'), 'anterior belly of left digastric', 'anterior belly of right digastric', 'posterior belly of left digastric',
           'posterior belly of right digastric', ...both('geniohyoid'), ...both('mylohyoid'), ...both('stylohyoid'), ...both('thyrohyoid')],
@@ -1169,7 +1169,7 @@ export const CATALOG_NAMES = Object.freeze({
  * without its qualifier. Keyed by CONTENT key; c = ctxFor(hemisphere). */
 const NO_FACE_MUSCLES = 'No facial-expression muscles exist in the dataset: nothing here moves or changes colour.';
 // R5-text: with the face-muscle packet loaded.
-// 20 November 2026 (FACE; the owner, Message 204): the face muscles move the face now (ns-face-move).
+
 const FACE_COLOUR_ONLY = 'The face moves by a game rule, exaggerated so you can see it: a picture of the movement, not a measured one.';
 const SCAN_CAVEAT = 'Moves nothing in the game: any real role (planning, posture) is not simulated.';
 const REGION_CAVEATS = {
@@ -1211,7 +1211,7 @@ const REGION_CAVEATS = {
 };
 
 // ---------------------------------------------------------------------------------------------
-// Plain-language fields (round 3, R3-text: user R17, lead decision D3)
+
 //
 // Written for a curious 12-year-old: short sentences, everyday words, technical names only in brackets. Each plain field
 // restates what the region's technical explanation, actions and notes already say; none adds a claim. c = ctxFor(h):
@@ -1999,7 +1999,7 @@ const NECK_CHOICE_PLAIN = 'This is a game choice: each half of the brain turns t
 // said "long sitting", "you sit with your legs straight out" or "the arm starts straight out in front" are reworded,
 // and the palm notes no longer say which way the palm starts (the limb switch and the start turn numbers decide it).
 const PLAIN_NOTE = {
-  // R558 (Messages 47 and 48): no ground under the legs; the knee bends all the way with the thigh level.
+
   knee_flex: () => 'Your thigh stays where it is and your lower leg swings down and back under it, all the way. ' +
     'The game has no ground under your legs.',
   knee_extend: () => 'Your knee starts straight, so at first this shows the front thigh muscles (quadriceps) without moving ' +

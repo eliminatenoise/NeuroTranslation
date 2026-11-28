@@ -1,21 +1,21 @@
-/** NeuroSurge scene: holding and turning your own limbs (R558, user Message 2: "allow you to manipulate all three items
- * (your individual's body, glass brain, mirror body) with all the control keys ... while grasping limb (your own) ... it
- * will move those accordingly ... Clicking and dragging anything shifts orbit or external/internal rotation (imagine
- * pulling/pushing in a direction or turning a dial around the center point)").
- *
- * Pure maths, no DOM. A held limb (HOLD or TAP Space on it; R558, Message 40) moves its END (the right hand, or a foot at the ankle) toward a target
- * point that W/A/S/D and the look move; solveLimb finds the joint angles that bring the end there, every joint inside
- * its anatomical range (the body rig's limits; nothing goes past them): a small solve over the limb's three joints
- * (two at the root, one bend). A drag on a limb turns it about its own long axis like a dial (rollDeg), through the
- * body's own rotation joints (the Space dance's joints, held like a latch): on the right upper arm its internal /
- * external rotation (r_shoulder_rot), on the right forearm or hand the forearm turn (pronation / supination,
- * r_pronation), on a leg its hip rotation (internal / external, hip_rot_R / hip_rot_L). The left arm is the game arm:
- * holding it is the ordinary W/A/S/D reach, and turning it activates the palm-down / palm-up areas (the app does that
- * through the activity).
- *
- * The joint names and limits are ns-body's (BODY_JOINT_LIMITS, degrees, game-safe values inside commonly quoted adult
- * ranges of motion; not measured on this body or on the player). Nothing here is measured movement or force.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** The limbs that can be held (ids used by the app and the texts). */
 export const LIMB_IDS = Object.freeze(['rightArm', 'leftArm', 'rightLeg', 'leftLeg']);
@@ -29,34 +29,34 @@ export const LIMB_IDS = Object.freeze(['rightArm', 'leftArm', 'rightLeg', 'leftL
  * the motor area lit when no body-map action moves that joint. upperDial: a press on the right UPPER arm turns the
  * upper arm (r_shoulder_rot) instead of the forearm.
  */
-/* 21 November 2026 (ELBOW; the published list of what is not done: "with the right arm across the chest, S leaves the
- * hand where it is"; the owner: "We want full range of motion on all axes"). spin: the joint the KEYS' solve may also
- * turn, the upper arm's own turn about its length (solveLimb's `spin` option). With the right arm brought across the
- * chest the shoulder's raise and sideways swing are at the combined-range rule's end, and bending the elbow alone swings
- * the hand out sideways (the forearm folds in the plane the upper arm's turn gives it), so S could not draw the hand in
- * along its line: the joints that would have to do it (turning the upper arm inward, as a person does to bring the hand
- * to the other shoulder) were not the solve's. Now they are, at `weight` (the step prefers the other two shoulder joints
- * by 1 / weight^2 and turns the upper arm when they cannot do it: only with the arm brought across the front of the body
- * (across: the hand's place more than medialMm toward the body's other side of the ELBOW, along the breastbone's own
- * left-right axis: the forearm has to reach in across the body) and round a bent elbow (bendFrom .. bendTo), never otherwise, since W and S are not to
- * turn the limb (the owner, Message 186)). The limb turn (the double tap of Space) still sets this
- * joint to its own two ends; the keys turn it on from there as the hand's place needs, and the next limb turn starts
- * from wherever the keys left it. The look's carry and every other solve leave it alone. */
-/* 21 November 2026, evening (FIX63; a review of Body update 63, finding C1: "the 'across the body' test also fires for an
- * ordinary hanging or backward right arm, so S turns the upper arm about 45 to 50 degrees inward there"; the owner,
- * Message 186: W and S "are not rotating internally or externally while moving"). The across test asked only that the
- * hand's place lie medialMm toward the body's other side of the ELBOW. A hanging elbow sits 5 to 11 cm to the OUTSIDE of
- * the shoulder that S draws the hand toward, so the test held there too, and (the low arm having no sideways swing left
- * under the combined-range rule) S turned the upper arm from 35 to between -16 and 2 degrees; with the arm out to the
- * side S turned it up to 10 degrees either way and A, round a bent elbow, up to 20 outward. across.elbowMm: the turn's leave is now given
- * only with the upper arm itself brought across, the elbow at least this far toward the body's other side of the
- * SHOULDER along the same axis (80 mm, a quarter of the upper arm's length: the upper arm about 14 degrees inward).
- * Offline on the game's body (90 frames of each key from 150 poses the body takes): every wrongly turned pose had its
- * elbow 57 to 327 mm to the outside of the shoulder when the leave was given; the arms across the chest (raise 40 to
- * 90, across 20 to 45) had it 110 to 251 mm to the inside, and turn as before. Two low arms just inside (raise 20 and 30,
- * across 15: the elbow 25 to 32 mm inside when the leave was given, the hand in front of its own side of the chest) were
- * turned 67 degrees before and are not now. The test is made when the leave is given, not while it lasts: as S draws
- * the hand in, the elbow itself goes back out past the shoulder (206 to -53 mm). elbowMm null: the test as it was. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 21 November 2026, late (a check of the above found two residues, both shown offline on the game's body).
  *   handMm    the leave ENDS, and none is given, once the hand's place is no longer on the body's other side of the
  *             shoulder (0: level with it or outside). The leave lasted until the look next carried the limb, so the
@@ -141,10 +141,10 @@ export const LIMB_HOLD_REACH = Object.freeze({ ...LIMB_HOLD_TRACK, solveIters: 1
  * as stretched sheets and the hand passes the view point. A movement switched on from the brain still has the whole
  * range. Display choice, found on pictures.
  */
-/* 19 November 2026, later (the owner: "there's problems with some limbs, such as the right arm having a full range of
- * motion, especially when you go left all the way and it's unable to cross the body"; "We want full range of motion on
- * all axes"): no caps any more. The keys and the look move every limb through the body's own ranges (ns-body
- * BODY_JOINT_LIMITS and the combined-range rule); the caps were sideways lift 0 to 80 and forward raise -25 to 105. */
+
+
+
+
 export const LIMB_HOLD_LIMITS = Object.freeze({});
 /** limits with LIMB_HOLD_LIMITS applied for the pose `now` ({ jointId: degrees }): each capped joint keeps the side of
  * its cap it is already beyond (a joint a brain movement took past the cap is not snapped back; it can only come in).
@@ -194,22 +194,22 @@ function dlsStep(J, e, lambda) {
   return J.map(c => c[0] * y[0] + c[1] * y[1] + c[2] * y[2]);
 }
 
-/**
- * 19 November 2026 (the owner: "If we click on a limb, we now control that limb until we change the camera view").
- * LIMB_CLICK is how that sentence is read. A plain click on one of your own limbs makes it the CONTROLLED limb:
- * W / A / S / D then move its end (level: A / D sideways, W farther, S nearer) instead of the left arm, and a
- * press-and-drag on it turns and bends it as always. The look stays free and does NOT carry the limb (followsLook
- * false): a check found that a limb which follows every look ends up under the crosshair, in front of the motor
- * strip and the mirror body, with no way to look at the brain without moving it.
- * "Until we change the camera view" is read both ways the owner uses those words: control ends when the view is
- * changed with E, AND when the look has turned lookAwayDeg away from where the limb was clicked or last moved (the
- * limb has left the middle of the picture: you are looking at something else). It also ends with a click on the same
- * limb again, a click on nothing (open space or bare brain), a click on another limb (that one is taken) and Reset
- * body.
- *   followsLook  true: the earlier reading (the limb's end follows the look as while Space holds it; only E, a click
- *                and Reset end it). Kept behind this switch for the lead's decision; lookAwayDeg is not used then.
- *   lookAwayDeg  null: looking away never ends it (only E and clicks do).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LIMB_CLICK = Object.freeze({ followsLook: false, lookAwayDeg: 24 });
 
 /**
@@ -310,7 +310,7 @@ export function solveLimb({ rig, segmentsFor, targets, limb, targetMm, limits, o
     const reuse = memo && memo.limb === limb && memo.J && !memo.stale && Number.isFinite(opts.reuseDeg) && memo.J.length === rootJoints.length
       && c.joints.every(id => Number.isFinite(memo.at[id]) && Math.abs(q[id] - memo.at[id]) <= opts.reuseDeg);
     const J = reuse ? memo.J : rootJoints.map(id => {
-      // 20 November 2026 (LIMBFREE; the owner: "The limb should never get stuck"): a probe that the combined-range rule
+
       // cuts back (project) went into a range the pose does not take: its column came out zero, or worse, it showed a
       // drawn coupling's move the step could never make (a thigh past 100 degrees bends its drawn knee instead), and the
       // step then never used that joint, or pushed it the wrong way: A could not bring a leg back in from the end of its
@@ -337,8 +337,8 @@ export function solveLimb({ rig, segmentsFor, targets, limb, targetMm, limits, o
     // (the turn moves the hand only round a bent elbow: its weight grows from nothing at bendFrom to all at bendTo
     // degrees of bend, so with the arm straight the keys never turn the upper arm for the hand's few millimetres)
     const spinW = sp ? sp.weight * (u => (u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u)))((c.bendSign * q[c.bend] - sp.bendFrom) / (sp.bendTo - sp.bendFrom)) : 0;
-    // (and only where the shoulder's other two joints cannot do the step: the owner, Message 186, "they're not rotating
-    // internally or externally while moving ... We only introduce some rotation if we're combining key functions". The
+
+
     // first step leaves the turn out; only a step that pushes the raise or the sideways swing past their range is made
     // again with the turn in their place.)
     const wOf = (id, on) => (sp && id === sp.joint ? (on ? spinW : 0) : 1);
@@ -413,16 +413,16 @@ export function rollDeg({ axisWorld, viewDirWorld, rightWorld, upWorld, dx, dy, 
   return (w[0] * t[0] + w[1] * t[1] + w[2] * t[2]) * degPerPx;
 }
 
-/**
- * Which motor-map area moves a joint which way: { [jointId]: { '1': { regionId, actionId }, '-1': {...} } } from the
- * body map's region actions (an action's end angle above the joint's start angle moves it the +1 way). Actions that
- * move a single joint are preferred.
- * 20 November 2026 (BODYMAP; the owner, Message 205: "That goes both ways for when you're moving the body and the brain
- * area is activating"): an action whose end IS the joint's start angle moves it nowhere from the start, but when that
- * end is also the joint's end stop (limits[id], degrees: "Turn right palm up" with the palm up, "Bring right fingers
- * together") it is the movement toward that stop, so it is the area and action of that direction (a drag that turns the
- * right palm up lit only the forearm area, not "Turn right palm up").
- */
+
+
+
+
+
+
+
+
+
+
 export function jointAreaIndex(bodyMap, restDeg = {}, limits = null) {
   const out = {};
   const regions = bodyMap && Array.isArray(bodyMap.regions) ? bodyMap.regions : [];

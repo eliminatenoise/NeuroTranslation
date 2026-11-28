@@ -1,131 +1,131 @@
-/** NeuroSurge: whatever is hidden behind something shows through it as light-blue glass, and a limb hidden behind
- * another limb can be aimed at (18 November 2026; widened to everything on 19 November 2026).
- *
- * The owner, 17 November: "fix it when limbs become invisible because they're blocked behind other limbs"; "often limbs
- * become out of view and you can't control them anymore". 18 November: "make sure limbs can't be ... locked away or
- * occluded in inaccessible places". 11 November: "If limbs are overlapping, make sure their clearly defined with
- * outlines so they don't merge into each other" and "No invisible or transparent body parts".
- * 19 November: "The under torso or under any body of flesh outline is great. That sort of bluish transparent outline is
- * great. We actually want that for everything now. Whenever anything is occluded behind something, we want to see it
- * through as well with a highlighted outline, light bluish glass thing."
- *
- * WHAT IT DOES. Where a THING is covered by another thing, the covered part is drawn over the thing in front as a
- * GHOST: a clear light-blue line round the hidden part, a thin dark keyline just inside it, and (for some things) a
- * faint cool fill. Nothing in front becomes see-through: the ghost is only added on top. ONE LOOK for every ghost
- * (SEE.glass): until 19 November each limb's ghost had its colour family on the motor strip; the look the owner liked
- * was the left arm's blue one, and every ghost has it now. The strip, the beams and the muscles keep their colours.
- *
- * THE THINGS (a ghost code; SEE_THINGS): on each body its four limbs (1..4 yours: left arm, right arm, left leg, right
- * leg; 5..8 the mirror body's) and its trunk with the neck and head as one piece (9 yours, 10 the mirror body's); the
- * brain's surface (11); the eyeballs with their nerves (12); the motor strip, one code per GROUP of areas (13 and up:
- * the groups the strip's own labels name).
- *
- * WHICH PART IS A GHOST (the rule on the graphics card; seeShows is the same rule in plain code):
- *  - a thing never shows through itself (the fingers in front of their own palm, a forearm folded on its upper arm,
- *    the chest in front of the belly, one fold of the brain behind another, a motor area behind the brain's surface);
- *  - a part joined at a joint to the part in front is not hidden (a thigh going into the hip, an upper arm going into
- *    the shoulder; and the other way round, the trunk behind the root of its own limb);
- *  - the hidden part must lie at least SEE.gapM (plus SEE.gapRel of the distance) behind the part in front;
- *  - WITHIN A BODY the limbs show through each other and through the trunk (as before), and the trunk shows through a
- *    forearm, hand, shank or foot in front of it (SEE.rules.trunk);
- *  - ACROSS THE BODIES your limb or trunk shows through the mirror body and the mirror body through you
- *    (SEE.rules.across);
- *  - THE BRAIN (SEE.rules.brain): a body part behind the brain shows through it; the brain's surface or a group of motor
- *    areas behind a body part shows through that part (the eyeballs and nerves never do since 20 November 2026,
- *    SEE.eyesGlass, nor behind the brain's own surface; they still cover what is behind them). Per sample only ONE hidden thing is drawn: the nearest one behind what is seen there. Things that are
- *    not ghosts on the way (the same thing again, a joined root) are passed through: a hand pushed under the body shows
- *    through the thigh AND the pelvis in front of it.
- *  - a hidden sliver narrower than SEE.minWidthCm gets nothing (a tendon behind a thigh; and whatever lies behind a
- *    finger: the piece of it a finger covers is a sliver too). The width is that of the hidden PIECE: a hidden trunk
- *    and its hidden limbs count together, and so do the brain's things.
- *
- * WHERE THE LINE IS. Round the hidden part's OWN outline: where the next sample neither is that hidden thing nor shows
- * that thing itself in front. So a big thing behind a small one (the trunk behind a hand, the brain behind a leg) gets
- * a line only where its own edge passes behind the small one, never round the small one. Where two hidden things meet,
- * one line is drawn, on the side of the smaller kind (a limb, an area or an eyeball before a trunk, a trunk before the
- * brain's surface). Where the trunk goes on behind the root of its own limb (not a ghost there, see above) no line is
- * drawn across the joint.
- *
- * THE FILL (seeFillTargets). A limb keeps its light fill, and a strong one while it is LOCKED AWAY (hidden and hardly
- * seen anywhere in the picture: a leg behind the other thigh, an arm under the body). A trunk gets a fill only as far
- * as it is hidden (none while most of it shows), and the strong one when it too is hidden and hardly seen: a whole
- * body behind the brain is then one glass figure. The brain's surface gets none (it is behind almost everything; a
- * fill would tint every body in front of it). A group of motor areas and an eyeball get a faint one.
- * 20 November 2026, evening (the owner: "ensure, especially with the right arm, that muscles do not become transparent
- * under certain angles ... That shouldn't be happening"): a fill is drawn only where the BRAIN (its surface, an area, an
- * eyeball) is the thing in front (seeFillOver). Where a body part is in front (yours, the mirror body's, the game arm),
- * the ghost is its lines alone, so a muscle in front never reads as see-through: the strip's areas behind a raised arm
- * washed it light blue, and a thigh locked away behind the folded right arm laid its strong fill over the forearm. The
- * fill strengths below are unchanged; a whole body behind the brain is still one glass figure.
- *
- * WHICH PART THE CROSSHAIR TAKES (ns-app controlTargets): the ghost of a LOCKED-AWAY LIMB (strongly filled where the
- * brain is in front of it, its line alone where a body part is: 20 November 2026), where a
- * part of its own body covers it (seeHiddenEntry, seeTakesGhost) AND that ghost is the one drawn there (seeDrawnEntry,
- * 20 November 2026: one hidden thing is drawn per pixel, so where a trunk, the other body or the brain is drawn between
- * the part in front and the hidden limb, or the brain is in front, the crosshair keeps what is seen); everywhere else
- * the thing in front, and Shift reaches behind it (a hidden limb of the same body first, else the other item on the
- * ray). No trunk, brain, area or eyeball ghost takes the crosshair, and a motor area the look names is always the
- * default. A body behind the brain counts as hardly seen in the census (its ghost is the strong glass figure), so its
- * limbs are locked away: where one of them lies behind a part of its own body outside the brain, its strongly filled
- * ghost is drawn there and takes the crosshair, as any locked-away limb's does.
- *
- * COST. On the frames where the outline pass redraws its ID picture (the camera or a body moved): one more draw of the
- * outline's batch (geometry only) into a target of the ID picture's size; one small screen pass over it (the thing in
- * front, and the brain where a body hides it); the three small brain parts again. When the camera or the brain moved,
- * the brain's own picture first, at half the size (its surface in one draw, its areas in one draw, the eyeballs and
- * nerves): code and depth in one texel. Then the census (a 48 x 27 grid, also read back, never waited for), and the pass
- * for the lines and the composite, both drawn as the census's grid of cells and only in the cells that hold a ghost
- * that can show (TILE_VS). Measured (the graphics card's timer round the pass, 19 November): 1.4 ms a redrawn frame at
- * 1600 x 900 and 1.6 ms at 3200 x 2000, against 0.95 and 1.1 ms with the three new rules off.
- *
- * QA only (globalThis flags, read when set; none is set by the game): __nsSeeOff (the pass is skipped), __nsSeeRules
- * ({ trunk, across, brain } in place of SEE.rules), __nsSeeCodes (true: a colour per thing; 2 / 3: the brain's picture /
- * the ghost picture as they are), __nsSeeCount (state().counts: pixels and boxes per thing), __nsSeeLockAll (every
- * hidden limb counts as locked away), __nsSeeDebug (drawn strongly), __nsSeeGpu with __nsSeeGpuPart and
- * __nsSeeGpuReset (state().gpu: the graphics card's time for the pass, or for one part of it).
- *
- * Display only: a drawing aid and a picking aid. It changes no pose, activity value or collision.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { OUTLINE, OUTLINE_GROUPS, OUTLINE_ADJACENT, OUTLINE_MIRROR_OFFSET, OUTLINE_FACE_EDGE_GROUP, OUTLINE_ID_VS, OUTLINE_SKIN_ID_VS, OUTLINE_SKIN_BATCH_VS } from './ns-outline.mjs';
 
-/** Display and picking choices (18 November 2026; the widening of 19 November 2026).
- *  gapM / gapRel: how far behind the front part (metres, plus a share of its distance) a part must lie to be hidden.
- *  lineCss: the ghost line's width (CSS px, on a near thing; tapered like the outline's lines by the on-screen size of a
- *  centimetre at the HIDDEN thing's distance, so the far mirror body's ghost gets a thinner line, but never under
- *  taperMin of the width: the outline's own lines go down to 0.42, and a ghost line that thin on the far brain or the
- *  mirror body was a hair that could hardly be seen, `after-1/z-start-mid.png`). lineAlpha: its opacity.
- *  glass: the one look of every ghost (linear RGB; 19 November 2026): `line` the light-blue line, `fill` the cool
- *  translucent fill. No channel is above 0.8, which is under the bloom's threshold (ns-scene-three HDR_BLOOM: 1.1 with a
- *  knee of 0.3), so a ghost does not glow. keyCss / keyAlpha: a thin dark band just inside the line (the outline's ink
- *  colour), so the light line holds on the pale pink brain and on pale tendon and bone as well as on dark muscle.
- *  rules: the three widenings of 19 November (see the header), each can be switched off by itself.
- *  LOCKED AWAY (per limb, from the census: a grid of censusCells cells across the picture, each noting which things are
- *  seen and which hidden in it, from censusGrid x censusGrid samples of the cell): a limb hidden in at least lockCells
- *  cells whose seen share (seen / (seen + hidden) cells) is under lockOn; it stays locked until the share rises over lockOff (no flicker near the threshold). Its ghost is
- *  filled at fillAlpha (where the brain is in front; a body part in front shows its line alone, seeFillOver) and the
- *  crosshair takes it; every other limb ghost gets the light fillLow and leaves the part in
- *  front to the crosshair (Shift reaches it). The fill strength eases over fillEaseS (at once under reduced motion).
- *  (First tried, per pixel: fill where the hidden part looked "closed" within 9 to 13 cm round the pixel. The fill came
- *  out patchy: a jagged diamond-shaped hole in the middle of a leg hidden behind the other thigh, `under-fix.png`, and a
- *  forearm across the edge of a thigh filled the thigh's strip, `ar-2.png`. A limb's visibility is a property of the
- *  whole limb, so it is now decided per limb.)
- *  fillTrunk / partFrom / partFull: a trunk's fill grows from nothing to fillTrunk as its hidden share (hidden /
- *  (seen + hidden) cells) goes from partFrom to partFull: a trunk that mostly shows gets lines only; hidden and hardly
- *  seen (the same rule as a limb's, lockOn / lockOff) it gets fillAlpha like a limb, so a whole body behind the brain
- *  reads as one glass figure (first the limbs were strongly filled and the trunk hollow, `after-3/a-4-brain-outside.png`).
- *  fillArea / fillEyes: the faint fill of a hidden group of motor areas and of the eyeballs. The brain's surface never
- *  gets a fill.
- *  brainStep: the brain's own picture has one sample per brainStep x brainStep samples of the ID picture (it is only
- *  asked "is the brain nearer here, and which of its things": half the size costs a quarter of the filling).
- *  minWidthCm: a hidden part narrower than this (its narrowest width through the pixel, in the world, at the hidden
- *  thing's own distance) gets no ghost: a finger tip or a tendon tucked behind a thigh is noise, the limb shows beside it.
- *  focusCss: the line round the limb that Shift would take (while Shift is held).
- *  eyesGlass (20 November 2026, evening; the owner: "And I'm not sure how important it is to have transparency outline
- *  effects for the eyes and their nerve cords"): false: the eyeballs, the optic nerves with their sheaths and the
- *  chiasm are never a ghost (no line, no fill: behind a body part, behind the brain's surface, anywhere). They still
- *  cover what lies behind them, and a body part behind an eyeball still shows through it. Before, the X of the nerves
- *  and the two circles of the eyeballs, which lie behind your own body at the start, were outlined in every opening
- *  picture (section 147's own "not right" list). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const SEE = Object.freeze({
   gapM: 0.012, gapRel: 0.01,
   lineCss: 2.0, lineAlpha: 1, keyCss: 1.0, keyAlpha: 0.55, taperMin: 0.75,
@@ -210,10 +210,10 @@ export function seeShows(front, behind, rules = SEE.rules) {
   const off = bodyOfGroup(gOf(front)) === 2 ? OUTLINE_MIRROR_OFFSET : 0, a = gOf(front) - off, b = gOf(behind) - off;
   return !ADJ.has(`${Math.min(a, b)}:${Math.max(a, b)}`);                    // not joined at a joint
 }
-/** THE FILL'S PLACE (pure; INK_FS applies the same per sample, nsFillOver): whether a ghost's fill may be drawn where
- * `front` is the thing in front (a ghost code as nsFrontAt gives it: 1..10 a body part, + 128 a limb's root; 11 and up
- * one of the brain's things; 0 nothing). Only the brain's things: over a body part a ghost is its lines alone (20
- * November 2026, owner Message 198: a muscle in front must never read as see-through). */
+
+
+
+
 export function seeFillOver(front) {
   const f = Number.isInteger(front) ? (front >= 128 ? front - 128 : front) : 0;
   return f >= T.brain && f <= T.maxCode;
@@ -248,19 +248,19 @@ export function seeHiddenEntry(layers, o = SEE) {
   }
   return null;
 }
-/** THE GHOST DRAWN ON A RAY (pure; 20 November 2026, from a code review): the entry of `layers` (controlLayersAt,
- * nearest first) whose ghost the graphics card draws at that pixel, or null. As there (nsFrontAt, GHOST_FS, BEHIND_FS,
- * PART_FS): what is in FRONT is the nearer of the first body entry and the first entry of the brain's own picture (its
- * surface, a motor area, an eyeball or a nerve: kind 'glass' or 'area'; not 'outline', which is no surface; none while
- * the brain's rule is off), and the ghost is the NEAREST entry behind the front, past the gap, that the drawing rule
- * shows against it (seeShows). One hidden thing per pixel: a trunk, the other body or the brain lying between the part
- * in front and a hidden limb is what is drawn there (legs crossed: the pelvis behind the shank, not the other thigh
- * behind the pelvis), and with the brain in front the ghost is the body part nearest behind it.
- * The brain's picture holds ONE of its surface and small parts per pixel, the nearest (drawBrain; its areas are drawn
- * over it): the brain's surface behind an eyeball, a nerve or a nearer fold of itself is not in it, so it is passed
- * (20 November 2026, from a review of Body updates 60 and 61: with an eyeball between your hand and the brain's surface,
- * the graphics card drew the locked-away thigh behind them, as the eyeballs are never a ghost, while this rule named the
- * surface, so the crosshair refused the thigh whose glass was drawn there). */
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function seeDrawnEntry(layers, o = SEE, rules = o.rules) {
   if (!Array.isArray(layers)) return null;
   const R = rules || SEE.rules;
@@ -365,14 +365,14 @@ float nsUnpack( vec3 e ) { return dot( e, vec3( 1.0, 1.0 / 255.0, 1.0 / 65025.0 
 // a distance (0.05 m .. 12.8 m) in one byte (steps of 2.2 %), and back
 float nsDistByte( float z ) { return clamp( log2( max( z, 1e-4 ) / 0.05 ) / 8.0, 0.0, 1.0 ); }
 float nsByteDist( float b ) { return 0.05 * exp2( b * 8.0 ); }`;
-/* THE BRAIN'S PICTURE (a smaller target with its own depth): alpha = the thing's code (the surface, an area, the
- * eyeballs and nerves), rgb = its depth packed, so one fetch gives both. The vertex shader keeps Three's begin_vertex
- * chunk, so the scene can give it the living brain's vertex rule (as it does for the outline's strip).
- * WHICH AREA a fragment of the motor strip is: the scene's areas are not whole triangles (the strip's triangles are long
- * shards; ns-scene-three REGION_BORDER decides per fragment, from the strip coordinate s and a table of owners), so the
- * same table is read here (tOwn, uOwnW texels wide; attribute nsOwn = s and the table's row, row < 0: no table): the
- * code is uOwnCode[the owner's number] (the scene's choice: one code per GROUP of areas, see SEE_THINGS). Where the
- * table names no owner (a gap in the map) or there is no table, the triangle's own code (attribute nsCode) stands. */
+
+
+
+
+
+
+
+
 const BRAIN_VS = `
 #include <common>
 #include <logdepthbuf_pars_vertex>
@@ -555,7 +555,7 @@ uniform float uFill[ ${T.count} ]; // each thing's fill strength now (0: lines o
 ${FRONT_GLSL}
 int ghostAt( ivec2 q ) { return int( texelFetch( tGhost, q, 0 ).r * 255.0 + 0.5 ); }
 bool inside( ivec2 q ) { return q.x >= 0 && q.y >= 0 && q.x < uSize.x && q.y < uSize.y; }
-// a ghost's fill only where the brain's thing is in front, never over a body part (seeFillOver; Message 198)
+//
 bool fillOver( ivec2 q ) { int f = nsFrontAt( q ); if ( f >= 128 ) f -= 128; return f >= ${T.brain}; }
 bool brainIs( ivec2 q ) { return int( nsBrainAt( q ).a * 255.0 + 0.5 ) == ${T.brain}; }
 // which of two hidden things that meet carries the line: a limb, an area or an eyeball before a trunk, a trunk before

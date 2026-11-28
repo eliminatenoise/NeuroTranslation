@@ -1,66 +1,66 @@
-/**
- * ns-camera.mjs: the NeuroSurge camera rig (round 5, R5-camera; lead decision D18; the user's R22: "a third person view
- * so we can view the posterior of the body using the E control key. When you press E, it switches from first person to
- * third person, and if you press E again, it switches vice versa").
- *
- * PURE MATH: no DOM, no THREE, no imports. Everything here runs in plain Node (tests/unit/R5-camera-*.test.mjs).
- *
- * Frames and conventions (the same as ns-scene-three, ns-controls, ns-arm and ns-brain):
- *  - World: metres, +x right, +y up; at body yaw 0 the player faces -z. The FIRST-PERSON eye is at the world origin
- *    (ns-scene-three CAMERA contract); the body is placed around it (ns-math bodyToWorldMatrix: BodyParts3D mm -> world m,
- *    BodyParts3D axes +x subject LEFT, +y POSTERIOR, +z SUPERIOR).
- *  - Look angles (ns-controls): yaw in radians about +y, positive = turn LEFT, never wrapped by the controls; pitch in
- *    radians, positive = look UP. View direction gazeDirection(yaw, pitch) = (-sin yaw cos pitch, sin pitch,
- *    -cos yaw cos pitch), exactly ns-brain gazeDirection. In Three: camera.rotation.set(pitch, yaw, 0, 'YXZ'), i.e. the
- *    camera rotation is Ry(yaw) Rx(pitch).
- *
- * The two views:
- *  - 'first': the head camera of rounds 1-4, unchanged: at the eye (world origin), looking along the controls' look.
- *  - 'third': a camera on a boom behind and a little above the body. The camera always looks THROUGH an orbit centre
- *    a little above the top of the head (THIRD_PERSON.centreFromEyeMm), so the crosshair passes over the head and on to
- *    the brain, and the body (seen from behind: head, shoulders, back) fills the lower middle of the screen. The mouse
- *    turns the boom about that centre (any yaw; pitch limited to THIRD_PERSON.minPitchDeg..maxPitchDeg), so the player
- *    can walk the camera all the way round to see the back and both sides. The camera never enters the body: the boom is
- *    lengthened until the camera is outside every keep-out sphere (the posed body's mesh bounding spheres, or the
- *    DEFAULT_BODY_PROXY), so the near plane (CAMERA.near 0.02 m) never cuts into a mesh.
- *
- * The toggle (E, VIEW_KEY_CODE): the camera eases over THIRD_PERSON.easeS (0.4 s, smoothstep) between the two views; with
- * prefers-reduced-motion it switches at once. The first-person look is never changed by the third-person view, so E then
- * E (no mouse movement) returns EXACTLY. Who keeps the looks: when ns-controls owns the view (R5-input: state.view
- * { mode, yaw, pitch, seq }; the mouse turns the third-person look in third person and the first-person look is frozen),
- * this module only eases between the two (syncView, drive A); with a controls state that has one look only, toggleView
- * stores the first-person look and hands it back (drive B). See createCameraState.
- *
- * Legacy bodyLook contract in third person (decision, see round5/R5-camera-NOTES.md):
- * R425 retains the physical body frame but re-solves the attached arm in actual C to honor the displayed anchor.
- * Reach feasibility/normal joints/full-body and view qualification remain open; this is not a fixed-pose waiver.
- *  - They keep the FIRST-PERSON frame they had when E was pressed ("body look", pose.bodyLook): the trunk yaw, the neck
- *    flex, the shoulder and the hand's screen-locked aim do not change when the camera leaves the head.
- *  - W / A / S / D keep moving the hand in that first-person frame (A / D across, W / S away / toward), and Space (hold
- *    or tap: grasp; double tap: the limbs turn once; double tap and hold: they keep turning slowly; R558, Message 40)
- *    works exactly as in first person.
- *  - The genuine NDC y +0.5 hand lock applies to the actual displayed view too. The optional R425 App/display path
- *    refits anatomy in this actual camera; the legacy bodyLook alone does not establish that screen rule.
- *  - Why not let the arm follow the third-person camera: the boom turns all the way round the body; a hand locked to
- *    that screen would have to reach behind the back (outside the shoulder's range) and the body would spin with the
- *    mouse. Keeping the first-person frame means E never moves the body or the arm, and E again returns exactly.
- *
- * Gaze in third person: the crosshair ray starts at the CAMERA (pose.gazeRay), not at the eye. brainSourceRay() turns it
- * into the brain's source-mm frame for ns-brain classifyRegionGaze (with the origin ray it equals ns-brain
- * gazeRayForView to rounding). While the camera moves between views the gaze is SILENT (pose.silentGaze): the area under
- * the crosshair is recorded, never switched on, exactly like an orbit step (round-1 A4: no activation without the
- * player's look or click).
- *
- * Display rules the pose carries for the scene (multipliers 0..1):
- *  - headInPlace: the head and face meshes (ns-scene-three's face group) are drawn IN PLACE, opaque, once the camera is
- *    clear of the head (fades in while the camera is THIRD_PERSON.headClear.startM..fullM outside the head's keep-out
- *    sphere, DEFAULT_BODY_PROXY 'head'), so the ease never flashes a close-up of the inside of the skull;
- *  - faceGhost: the first-person face ghost / inset (looking up) is a first-person-only view: 1 - blend;
- *  - overBrainSeeThrough: the first-person "body see-through where it covers the brain" (BODY_OVER_BRAIN) is off in
- *    third person, which exists to show the back of the body: 1 - blend;
- *  - farExtraM: the camera's distance from the eye, to add to the far plane (ns-scene-three farPlaneFor is measured from
- *    the eye).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const DEG = Math.PI / 180;
 
@@ -79,108 +79,108 @@ export const VIEW_TEXT = Object.freeze({
 /** The first-person camera: at the eye, the world origin (ns-scene-three CAMERA: PerspectiveCamera(the selected display FOV, aspect, 0.02, far)). */
 export const FIRST_PERSON = Object.freeze({ position: Object.freeze([0, 0, 0]), nearM: 0.02 });
 
-/**
- * 18 November 2026 (the owner: "they can see everything at the front of their body from the chin down all at once,
- * shoulders, chest and everything"; "You should be able to see your own shoulders and stomach/abs"): the game's view
- * point is no longer bound to the anatomical eye. The first-person camera is pulled BACK along its own viewing
- * direction (a dolly), as if you looked from the back of your head through your eyes:
- *  - the line through the crosshair is the same line as before, so aiming is unchanged;
- *  - near things (the chest under the chin) are drawn smaller and flatter, far things (the brain, the feet) barely
- *    change, and the shoulders, which lie about level with the eyes' plane, come into the lower corners;
- *  - only the CAMERA moves: the anatomical eye that the arm fit, the head pose and the reference frame use stays
- *    where it is (ns-app referenceFrameForLook; the pose carries it as armParentPosition for the scene).
- * 18 November 2026, later (the start posture changed: the pelvis rolled under, the upper back straight and leaning
- * back, the neck bent forward 40 degrees; ns-body BODY_POSTURES.open): with the head bowed that far the top of the
- * breastbone lies only 12 cm under the eyes, and a camera pulled BACK the 7 to 10 cm that suited the rounded back
- * looked straight down into the open root of the neck (the first ribs as loops; the neck near the eye is never
- * drawn). So the camera now rides ABOVE the eyes on the head: upM along the HEAD's own up direction (the head is
- * bowed less than the look: the eyes are lowered headAboveLookDeg in it, ns-body POSTURE_EYES, fading out by
- * headLevelEndDeg of upward tilt exactly as ns-app headPitchForLook has it). From there the collar bones lie along
- * the lower edge of the picture with the opening just below it, the caps of both shoulders are in the lower corners,
- * and the eyes see OVER the lower edge of the chest to the belly (from the eye itself the belly is edge-on behind the
- * chest: 5 % of the picture's half height; from 12 cm higher 14 %). Because the offset turns with the head, the
- * picture of your own chest and collar stays the same however far down you look. The crosshair's line is no longer
- * the eye's own line but one parallel to it; aiming uses the camera, as the picture does. backM (along the line of
- * sight) is kept as a second knob and is 0.
- * (What follows, down to the note of 19 November, is how it was until then: the eases toward the eye and the byPitch
- * table are gone; EYE_DOLLY below has the rule that replaced them.)
- * While the look rises from upFromDeg to upFullDeg both ease to 0 (the camera would otherwise sink into your own neck
- * and back when you look up), and while it turns from sideFromDeg to sideFullDeg to either side they ease to sideShare
- * of that (the opening at the root of the neck comes into the picture from behind there). Every part is continuous,
- * so no look makes the picture jump. Display choices found on screenshots and on the posed body's landmarks; not a
- * measurement of anything.
- * 18 November 2026, after a check (the chest filled the lower third of the picture as two slabs, the stomach was a
- * 50 px band behind its far edge, and the crosshair could no longer be put on your own belly): the camera now stands
- * 26 cm above the eyes along the head's up AND 14 cm back along the line of sight at the start look: from higher up
- * the chest is a smaller, flatter plate, the stomach and pelvis show over its far edge, and both shoulders and the
- * collar bones are inside a NARROWER view (100 degrees, was 116), so everything is drawn larger for its place. What
- * made that possible is the neck shade (ns-scene-three NECK_SHADE): the place where your own neck leaves the chest
- * is drawn as a dark shape, so a camera behind the collar bones no longer looks into the open rib cage. Below the
- * start look the offsets follow byPitch (rows [look pitch, upM, backM], read in a straight line between the rows): looking
- * further down the camera comes back to the line of sight and nearer the eye, so the crosshair reaches your own
- * belly at the look's lower end. Above the start look both ease to 0 between upFromDeg and upFullDeg (at a level look
- * the camera is the eye again).
- * 18 November 2026, after a second check (far down, the camera 12 cm back on the line of sight stood behind the
- * collar bones and looked into the neck shade from above: a black disc 480 px wide at 75 down, and, with the look
- * also turned 60 degrees or more to a side, the trunk seen opened from above: a flap of back muscle and a loose
- * stump beside the shade): the table's lower end is now 8 cm up and 0 back (at 75 down the camera stands over the
- * eye, in front of the collar bones: the shade is out of the picture and the chest lies below it), and the ease for
- * looks to a side runs from 50 to 100 degrees (was 95 to 155): looking 100 degrees or more to a side the camera is
- * the eye, as before the camera was moved at all. Seen on pictures at 0 / 30 / 60 / 75 / 95 degrees to a side and
- * 45 to 72 down: no opening, flap or stump.
- */
-/* 18 November 2026, late (the owner: "a very wide field of view, but a very narrow depth of field. So things that are
- * far away look extremely close to us ... a very wide view, but a very flat view as well"; "a much larger set of four
- * limbs, and perhaps that involves dialing down the field of view to some extent"; "all of the torso has to be
- * visible at once"): the eye view is now a LONGER LENS FROM FURTHER BACK. The camera stands backM behind the eye on
- * the line of sight (and upM above it along the head's up) and the lens is narrower (the launcher's field of view,
- * 100 -> 54 degrees), so what is near (chest, shoulders) is drawn smaller for its place and what is far (shins, feet,
- * the mirror body, the brain) larger: depth is flattened. Why not further back with a still longer lens: in the
- * slumped posture the front of the trunk faces 49 degrees above level, so a look 41 degrees down runs PARALLEL to it;
- * from far back every ray runs along it and the chest hides the belly and pelvis (see the notes of this package). The
- * start look is therefore steeper (52 degrees down: the line of sight crosses the trunk's front at about 17 degrees),
- * which lets the camera stand back and the lens narrow while the whole torso stays in the picture.
- *  - zRefM: how the lens follows the camera when the camera comes back to the eye (looking up, far to a side, far
- *    down): the view's angle widens so that things zRefM in front of the eye keep their size (a dolly zoom: nothing
- *    near jumps), null = the angle stays the launcher's. The view's angle is the launcher's at the start look.
- *  - nearBehindEyeM: the near plane stands this far behind the eye's own plane (never nearer the camera than
- *    FIRST_PERSON.nearM), so nothing between the camera and the back of your own head is drawn.
- * Display choices, judged on pictures. */
-/* 19 November 2026 (the owner: "there's a problem whenever you look to the far side of any screen, everything gets
- * super magnified and is unusable"; "The camera view should be free to move wherever it wants"). Until now the camera
- * came back to the eye when the look turned past 50 degrees to a side or rose toward level, and nearer the eye for
- * steep downward looks (the byPitch table, upFromDeg / upFullDeg, sideFromDeg / sideFullDeg). At the eye the same long
- * lens draws your own arm and shoulder, which lie a hand's breadth away, across the whole picture. Now the stand-off
- * is ONE distance at every look: backM behind the eye and upM above it. What keeps the camera out of your own neck
- * and back is where the stand-off points, not its length:
- *  - standPitchMaxDeg: for looks above this the camera stays where that look puts it (behind and above the head) and
- *    only turns there, so a level or upward look never lowers it into the trunk;
- *  - standYawMaxDeg: the stand-off follows the HEAD's turn (the neck's and the chest's together); past it only the
- *    eyes turn on, and the camera turns where it stands instead of swinging round in front of your face.
- * Inside both the camera stands straight behind the eye on the line of sight, as at the start. Everything is
- * continuous, so no look makes the picture jump, and nothing changes its size on screen because of the turn alone.
- * nearBehindEyeM 0.1 -> 0: the near plane stands AT the eye's own plane. With it 10 cm behind, the top of your own neck
- * (drawn in place since 18 November) was cut through by that plane: a dark hollow at the bottom of the start picture,
- * and ragged stumps of neck muscle standing up into the picture when the head was turned past about 80 degrees. At
- * the eye's plane the part of the neck above it is not drawn at all, and what remains is its root between the collar
- * bones. (Further forward, 8 cm in front of the eye, the plane cut the chest and the shoulder open instead: seen.)
- * Display choices, judged on pictures. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 19 November 2026, after a check ("the whole torso visible at the start" was not met: the shoulders were cut by the
  * lower edge; and at far side looks the near plane, which stood at the eye's own plane, cut your neck and shoulder
  * open): backM 0.3 -> 0.5 and upM 0.1 -> 0.14: from further back your whole front, both shoulders included, is inside
  * the lower part of the start picture under the strip (the launcher has the layout). nearBehindEyeM 0 -> null: the
  * near plane is the scene's own again and cuts nothing; your head and neck are left out above the collar by the
  * scene (ns-scene-three EYE_COLLAR: a box that is not drawn and a plain cap), the same from every look. */
-/* 19 November 2026, later (the owner: "a proper first person view"; a check: with the chosen limb's hand or foot held
- * three quarters up the picture the look is 50 to 60 degrees down, and from half a metre behind and above the head
- * that was a view of your own shoulders and collar from above, not out of your eyes). The stand-off now closes as the
- * look goes down: whole to downFromDeg below level, downShare of it from downToDeg, eased between. Looking down at
- * your own body you look out of your own eyes; at the start look and above nothing changes. */
+
+
+
+
+
 export const EYE_DOLLY = Object.freeze({
   backM: 0.5, upM: 0.14, headAboveLookDeg: 30, headLevelEndDeg: 40,
   standPitchMaxDeg: -25, standYawMaxDeg: 110,
-  // (the owner, on seeing it: "I like the zoom, pan ... dolly effect, but you've definitely gone overkill with it. It's
-  // too extreme": the stand-off now closes to 0.55 of itself, not 0.12, and over a longer stretch of look, 27 to 75
+
+
   // degrees down: about a quarter of the travel, and under half a centimetre for each degree of look)
   // (and then: "there should essentially be no zoom effect when moving ... the camera view up and down ... There can be
   // some ... zoom effects when we're doing WASD": downShare 1 = the look's pitch moves the camera no nearer at all; the
@@ -228,16 +228,16 @@ function eyeFlatLens(offset, g, o) {
 /** How far back (m) the camera stands (eyeDolly's backM). */
 export function eyeDollyBackM(look, o = EYE_DOLLY) { return eyeDolly(look, o).backM; }
 
-/* 20 November 2026, afternoon (a hunt: with the right arm chosen, a look up carries the hand up beside and behind the
- * head, and a turn of the look to the other side then swings the camera, which stands EYE_DOLLY's half metre behind
- * and above the eye, round into that arm: the picture filled with the arm's inside, its muscles cut open by the near
- * plane). EYE_CLEAR: the eye view's camera keeps clear of your own limbs, given to it as rods (a segment with a
- * radius: shoulder to elbow, elbow to hand; hip to knee, knee to ankle). Where the camera's place comes within clearM of
- * a rod, it is moved ACROSS the line of sight, never along it: nothing in the picture grows or shrinks, and a look up or
- * down does not change the camera's distance (the owner: no zoom when the look moves up and down). It goes straight
- * away from the rod's nearest point (taken across the line of sight), so an arm that comes nearer pushes the camera
- * along before it, starting from nothing at clearM, and a camera place that goes past or through an arm is taken
- * round it: nothing jumps. ns-app eases the move as well. mostM caps it. Display choices. */
+
+
+
+
+
+
+
+
+
+
 export const EYE_CLEAR = Object.freeze({ on: true, clearM: 0.07, mostM: 0.3, passes: 2 });
 /** EYE_CLEAR: the camera place P (world m) kept clear of `rods` ([{ a, b, r }]: segment ends and radius, world m), for
  * the eye E and the unit line of sight g. Returns P itself when nothing is near. Pure. */
@@ -285,50 +285,50 @@ export function eyeClearOfRods(P, E, g, rods, o = EYE_CLEAR) {
   return ol > o.mostM ? [P[0] + off[0] * o.mostM / ol, P[1] + off[1] * o.mostM / ol, P[2] + off[2] * o.mostM / ol] : p;
 }
 
-/**
- * Third-person rig (display choices, chosen from viewed screenshots: round5/R5-camera-NOTES.md):
- *  - centreFromEyeMm: the orbit centre, from the eye, in BodyParts3D axes (+y posterior, +z superior): 6 cm back (over
- *    the middle of the head) and 19 cm up (about 7 cm over the top of the skull, which is about 12 cm above the eye);
- *  - distanceM: the boom length from that centre;
- *  - E starts third person straight BEHIND the body (yaw = the body's forward). Its pitch aims the crosshair
- *    aimPitchBiasDeg below the line from the orbit centre to the brain's centre (aimAt), so the crosshair is on the
- *    brain on every screen shape (the brain is framed higher on portrait screens) while the body sits low and most of
- *    the brain stays visible over the head; without aimAt it is defaultPitchDeg;
- *  - minPitchDeg / maxPitchDeg: the mouse's pitch range in third person (from high above the head to a little below the
- *    shoulders), equal to ns-controls THIRD_PERSON pitchMinDeg / pitchMaxDeg (R5-input; unit-tested); yaw is free (all
- *    the way round). The keep-out sweep also covered -70 deg (round5/R5-camera-NOTES.md);
- *  - aimAtBrain: false makes the start pitch defaultPitchDeg whatever the brain's place;
- *  - easeS: the toggle's ease time (smoothstep), 0 under reduced motion;
- *  - headClear: the head fades in while the camera is startM..fullM OUTSIDE the head's keep-out sphere (the camera leaves
- *    the eye through the head; at 0.12 m outside the head is about 0.4 of the screen height, at 0.32 m about 0.25);
- *  - clearanceM: the extra gap kept between the camera and any keep-out sphere (3 x the 0.02 m near plane: the near
- *    plane's corners lie up to about 1.9 x near from the camera at a 120 deg vertical FOV, about 1.6 x at 90);
- *  - maxDistanceM: the longest boom the keep-out rule may use;
- *  - followHead (R558, the user's Message 2: "I'm not sure how, head/neck, shoulder movement, hand placement (locked
- *    in reference to camera view) tied to cursor/camera movement are affected by third-person view? Perhaps the
- *    same?"; Message 16: "Ensure things are consistently sized across 1st/3rd person"): true = the mouse keeps turning
- *    the HEAD in third person exactly as in first person (the head, neck, chest, shoulder and hand all follow the one
- *    look) and the camera only moves: it rides behind and above the posed head, looking the way the head looks. The
- *    orbit centre is then centreFromEyeMm's height (19 cm) above the posed eye and its back distance (6 cm) behind it
- *    along the look; the boom's own pitch is held inside followMinPitchDeg..maxPitchDeg (so it never swings under the
- *    body) while the camera still faces the head's direction. E never changes the look, the body or anything's size
- *    or place; E then E returns exactly. false = the earlier orbit camera (its own look, the body frozen);
- *  - followMinPitchDeg (R558, followHead): the boom follows the head's look all the way down (-80, ns-app HEAD_LOOK
- *    maxDownDeg), so the camera stays on the head's line of sight and the crosshair stays on the body. With the boom
- *    held at minPitchDeg (-60) while the camera faced 80 down, the view's centre fell behind the body and the lower
- *    half of the picture was empty (seen in a screenshot). At -80 the camera is almost straight above the head; the
- *    keep-out spheres still lengthen the boom out of anything in the way (a raised arm).
- *  - followOffsetM (R558, issue hunt 2: with the camera straight behind the head, the mirror body, a literal reflection
- *    on the same line, hid completely behind your own back and only its arrow tips showed, drawn on your body): the
- *    followHead orbit centre is [right, up, back] metres from the posed eye in the look's own frame (right and back
- *    along the floor, up along world up): 0.42 m to the right and 0.42 m up (an over-the-shoulder view), 6 cm back as
- *    before. Seen from there at the start look the mirror body stands beside and above your head: measured with the
- *    arrow rule's sight lines (ns-scene-three FRAME_VIS), about 0.7 of its frame is seen at 1600x900 (its lower legs
- *    and one side stay behind your right shoulder) and all of it at 720x1200; your head and back sit in the lower left
- *    of the picture. With the earlier straight-behind camera none of it showed. Only the camera moves: no
- *    size or place of anything changes (Message 16), E then E still returns exactly, and the crosshair ray starts at
- *    the camera as before. Display choice.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 18 November 2026 (the body now LIES BACK, stretched out ahead of the eyes, where on 11 November it sat upright): the
  * view from behind was framed for an upright body, 1.4 m straight behind and above the head, looking the way the head
  * looks. From there the lying body was a small top-down shape under the back of the brain (seen in a screenshot: about
@@ -396,9 +396,9 @@ export const THIRD_PERSON = Object.freeze({
   // (18 November 2026, late, package FLAT: 66 -> 50 with distanceM 1.7 -> 1.9 and followFovYDeg 60 -> 66. With the
   // brain now beyond and below the feet, at 66 only the right half of the strip was in the picture; at 50 the whole
   // strip, both halves, is in it beside the body, which is still seen from the side in its true proportions.)
-  // (19 November 2026, the owner: "For third-person view, the head should not be shifted to the right, such that when
-  // you make it neutral, the head is always tilted to the right. It's extremely disturbing. It should just start off in
-  // the middle." The head was never turned: the CAMERA stood 50 degrees round to the right, so the body lay slanted
+
+
+
   // across the picture with its head to one side. 50 -> 0: the camera stands straight behind the head, on the body's
   // midline, and higher (followPitchBiasDeg 16 -> -20: it looks down along the lying body instead of across it, so
   // the legs are not hidden behind the trunk) and nearer (distanceM 1.9 -> 1.4). At a neutral look the head is at the
@@ -967,15 +967,15 @@ function handRayBoom(reference, ray, bodyToWorld, eyeBp, avoid, r) {
   return { centre, backDirection, exitDepthM, radiusM, maximumRadiusM, checked };
 }
 
-/**
- * 20 November 2026 (ns-app NECK_VIEW; the owner: "certainly in first person view and all other views, neck movement is
- * exaggerated, so you can see it's moving"): a settled eye-view pose (cameraPose, first person, progress 0) turned to
- * `look` { yaw, pitch } (radians) and rolled by rollRad about its own line of sight, as the head would carry it. The
- * camera stays about the same eye (pose.armParentPosition, the eye; or the camera itself when it stands at the eye) and
- * stands where EYE_DOLLY puts it for that look, exactly as cameraPose does for an ordinary look, so the turn changes
- * nothing's size; the crosshair ray, the camera's own look and the lens follow. bodyLook (the look the body, the
- * shoulder and the left hand use) is kept: the body does not turn with it. Any other pose comes back unchanged. Pure.
- */
+
+
+
+
+
+
+
+
+
 export function turnEyeView(pose, look, rollRad = 0) {
   if (!pose || pose.firstPerson !== true || pose.progress !== 0 || !isLook(look)) return pose;
   const eye = isVec3(pose.armParentPosition) ? pose.armParentPosition : isVec3(pose.position) ? pose.position : null;

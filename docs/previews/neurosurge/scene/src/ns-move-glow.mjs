@@ -1,16 +1,16 @@
-/** NeuroSurge scene: the glow of the player's own movements (owner, 17 November: "you've got to get the small details
- * right, such as when you're moving the cursor around. That's naturally going to activate muscles of the shoulder,
- * etc., muscles of the neck, etc.").
- *
- * Pure, no DOM. Every joint the player moves (the neck and trunk that turn the head with the pointer, the left shoulder
- * that keeps the arm in the view, a limb held with Space or turned by a press-and-drag) feeds a CHANNEL with its speed.
- * A channel's display level rises quickly while the joint moves and falls away when it is still, so the glow is plain
- * to see during the movement and fades afterwards. What a channel lights (which motor area, which muscles) is the
- * caller's row: the body map's own action -> muscle lists, never a mapping made up here.
- *
- * Display values only (0..1, no units): a picture of which muscles make a movement. Nothing here is measured, decoded
- * or a model of real muscle activity; the speed-to-level curve and the rates are choices made for the eye.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Display choices.
  *  max          the level a fast movement reaches (0..1).

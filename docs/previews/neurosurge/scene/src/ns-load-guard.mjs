@@ -1,21 +1,21 @@
-/** NeuroSurge load guard (19 November 2026; the owner: "The game is currently broken as it just stays on the loading
- * page forever").
- *
- * The page's FIRST script, and it imports nothing: whatever else fails to arrive, this one file is enough to say so.
- * It watches the whole load and puts a plain panel on the page, with a "Try again" button, when
- *   - a script of the game cannot be had (the error event of a <script data-ns-needed> element: one missing file among
- *     the launcher's fifty leaves the launcher never run, so nothing inside the launcher can report it);
- *   - a script throws before the launcher has taken over (for example an address the launcher refuses);
- *   - nothing has advanced for LOAD_STALL_MS: no file has arrived, no byte of a pack, no step of the build
- *     (a request that never answers, a worker that never speaks, a promise nobody settles). The panel goes away by
- *     itself if loading then moves again. Long before that, after LOAD_QUIET_MS, the bar's word becomes "Waiting";
- *   - the launcher reports that loading failed (fail()).
- * The launcher and the page's second small script (early-load.mjs) hand it the loading bar and the bar's own record
- * of the last real news (attach()); until then every file the browser finishes counts as news (resource timing).
- *
- * installLoadGuard() is safe to call again: it returns the guard already on the page (window.__nsGuard).
- * createLoadWatch and showLoadFailure are plain parts, testable in Node.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const LOAD_STALL_MS = 20000;
 /** After this long without news the bar's word says so ("Waiting"), long before the panel: a bar that stands still

@@ -1,33 +1,33 @@
-/** NeuroSurge scene: the LIVING brain (owner, 17 November 2026: "Perhaps let's also get a beating reacting brain as you
- * would see in neurosurgery."; "neural activation should be much more obvious on the motor strip").
- *
- * What the player sees:
- *  - IT BEATS. The brain swells a little with each heartbeat (a quick rise, a slower fall with a small second bump) on
- *    a slow rise and fall like breathing: the same wave, rate and clock as the brain of the loading picture
- *    (ns-assembly-core brainBeat, brainBeatClock), so the brain that came together there goes on beating here. The wet
- *    highlights slide over the folds with it and the tissue flushes very slightly at each beat.
- *  - IT REACTS TO THE LOOK AND TO ACTIVITY. The tissue round the key under the crosshair gives a little (a shallow
- *    dimple) and flushes faintly. When a movement is switched on (a number key, a click, a look that has rested), the
- *    tissue round its key swells, flushes rosy with a hint of the key's colour (a "bloom": the tissue keeps its folds
- *    and its own light) and ONE ring of the key's colour runs outward from the key over the tissue; the bloom fades
- *    when the area goes off. The beat picks up a little with every area that is on, then settles back. The grip of a
- *    Space grasp is not a movement switched on from the brain: its hand area shows only a faint flush while it holds.
- *  - IT REACTS TO BEING HANDLED. While the brain is carried or turned (pointer, W/A/S/D, press-and-drag, the arrows)
- *    the soft tissue trails behind; when it starts or stops the tissue swings and settles in about half a second,
- *    like firm jelly: the middle follows the hand, the outside lags. Nothing moves at rest.
- *
- * How it is drawn. The brain GROUP is never moved or scaled for this (its picking, labels, arrows and contact spheres
- * all assume the rest shape). Instead every brain material displaces its vertices with ONE function of the vertex's
- * rest position (source mm) and a few shared uniforms (LIVE_VERTEX_HEAD: nsLiveMove), so the surface, the motor
- * areas, their depth pre-passes and the strip's silhouette all move together and nothing separates. Per frame the
- * scene writes those uniforms and nothing else (no allocation, no new pass).
- *
- * Under prefers-reduced-motion nothing moves (no beat, no wobble, no swell): an area that is on shows its flush and
- * light as a steady colour, switched on and off at once.
- *
- * Pure: numbers, typed arrays and shader strings; nothing imports 'three'. Everything here is a display rhythm for a
- * simulated teaching picture: no pulse, pressure, blood flow or tissue mechanics is measured or implied.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { BRAIN_BEAT } from './ns-assembly-core.mjs';
 
 /** Display choices.
@@ -73,16 +73,16 @@ import { BRAIN_BEAT } from './ns-assembly-core.mjs';
  *    maxRad / speedRad: the same for turning; radiusMm: the tissue at this distance from the centre (and farther) lags fully, the centre
  *    not at all; restMm / restRad: below this it is at rest (nothing is written or drawn differently). */
 export const BRAIN_LIVE = Object.freeze({
-  // 19 November 2026 (the owner: "the beating of the brain is way too obvious. It should be far more subtle"): about a
+
   // third of the earlier swell, slide and flush (0.017, 0.008, 0.24, 0.12, 0.07).
-  // 19 November 2026, later (the owner: "let's make blood flow and brain beating far less noticeable. But there, if you
-  // really, really pay attention"): about a third again (0.005, 0.003, 0.08, 0.04, 0.022 that morning).
+
+
   beat: Object.freeze({ swell: 0.0018, breathSwell: 0.0012, aimMm: 130, slide: 0.03, breathSlide: 0.015, flush: 0.007 }),
   rate: Object.freeze({ perArea: 0.14, max: 1.45, upS: 0.9, downS: 3.0 }),
   bloom: Object.freeze({ slots: 6, swellMm: 1.6, dipMm: 0.8, lookLevel: 0.35, holdLevel: 0.2, radiusMm: 17, radius0: 0.4, growS: 0.6, inS: 0.16, outS: 0.8,
     flush: 0.6, flushTint: Object.freeze([1.22, 0.7, 0.74]), spill: 0.4, spillGain: 1.3, glow: 0.12, grazeLo: 0.12, grazeHi: 0.45, grazeKeep: 0.35,
     ring: 0.5, ringAt: 1.2, ringW: 0.28, tilt: 2.5,
-    // 21 November 2026 (ns-area-halo; the owner: "there's essentially no glow, and it's too much before as well"): the
+
     // ring of a movement being switched on now has the area's own colour (it took the area's emission, near white
     // while lit), and in that colour the old ring was a wide wave over 41 mm of cortex that ran on for 0.4 s after the
     // contraction had ended. It ends with the contraction (pulseS 0.8 -> 0.45; at 0.4 s it is at 4 % of its strength:

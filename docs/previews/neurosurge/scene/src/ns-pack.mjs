@@ -1,27 +1,27 @@
-/** NeuroSurge mesh packs (19 November 2026; the owner: "Game should not take long to load at all. Minutes are a
- * liability. Perhaps game is way too big at the moment").
- *
- * The game's anatomy is 691 OBJ text files (about 166 MB; the published host serves them uncompressed, one request
- * each). The game reads only the vertex positions and the triangles of each file. A mesh pack holds exactly that for
- * every file of one source packet, in a compact binary form: each coordinate as a whole number of 1/scale mm (the
- * files are written with a few decimals), the difference to the vertex before it, as a variable-length integer; each
- * triangle corner as a difference too; the whole then gzip-compressed (the page inflates it itself with
- * DecompressionStream, so nothing depends on what the host compresses).
- *
- * LOSSLESS: decodePack() returns, for every file, the very mesh ns-assets parseObjFast() returns for the source file
- * (positions bit for bit, indices, the counts, the bounds and the comment lines, which carry each file's own licence
- * notice). tools/build-mesh-packs.mjs makes the packs from the source packets and refuses any value that would not
- * come back exactly; tests/pack.test.mjs decodes every committed pack and compares every mesh with the parsed source
- * file. The source packets, their manifests, hashes and licence records stay in the repository unchanged.
- *
- * HASHES: each pack entry records the byte count and the SHA-256 of the source file it was made from. The game's
- * loaders (ns-assets readVerified) still compare both with their pinned manifests, file by file, before a mesh is
- * used; a pack is only decoded after its own bytes matched the SHA-256 in packs/PACK-INDEX.json, and that index is
- * only used after its bytes matched PACK_INDEX_SHA256 below. So the chain is: pinned index -> pack bytes -> recorded
- * source hash of each mesh -> the manifest's pinned hash of that source file.
- *
- * Pure (no DOM, no Node): encodePack / decodePack work on plain bytes; the caller compresses and inflates.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const PACK_FORMAT = 'ns-mesh-pack-1';
 /** The SHA-256 of packs/PACK-INDEX.json as committed (tools/build-mesh-packs.mjs writes this line; tests/pack.test.mjs

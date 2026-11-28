@@ -1,46 +1,46 @@
-/** Face movements you can see (20 November 2026).
- *
- * The owner (Message 204): "make sure there's clear movement for each brain activation area. And you can clearly
- * identify what type of movement it is for each area." Before this module the face areas' movements (brow, eyelids,
- * nose, mouth corner, lips) only changed the colour of the face muscles: no part of the face moved.
- *
- * WHAT THIS IS. The face is drawn from the face packet's muscle meshes (no skin). Each face movement now moves the
- * vertices of those muscles the way that movement pulls them, exaggerated so it reads on the mirror body held near
- * (Message 154: "as exaggerated and obvious as possible within reason"):
- *   browUp        the forehead muscle (frontalis) shortens toward its fixed top edge: the brows and the upper ring of
- *                 the eye muscle go up, the forehead bunches into ridges;
- *   frown         the frown muscles (corrugator, procerus) pull the inner brows down and toward each other, and bunch;
- *   eyesShut      the eyelid part of the ring muscle round the eye slides down over the eyeball (the lower lid a little
- *                 up) until the eye is shut; the outer ring squeezes in;
- *   eyesWide      the upper lid slides up off the eyeball, the lower lid down;
- *   noseWrinkle   the nose muscles bunch up the side of the nose, the nostril wing and the upper lip next to it rise;
- *   nostrilFlare  the nostril wings pull outward, the septum's muscle pulls the nose tip down;
- *   smileR/L      a mouth corner goes up, out and back toward the cheekbone (zygomaticus major), the cheek rises;
- *   cornerDownR/L a mouth corner is pulled down toward the jaw (depressor anguli oris);
- *   purse         the ring muscle of the mouth draws the lips together and pushes them forward;
- *   stretch       the corners are pulled straight out and back, the lips thin (risorius, buccinator);
- *   upperLipUp    the upper lip is lifted (levator labii superioris);
- *   pout          the chin muscle (mentalis) pushes the chin and the lower lip up and out;
- *   lowerLipDown  the lower lip is pulled down (depressor labii inferioris).
- * A contracting muscle also thickens: its belly stands out along its own normals (the sheets are thin closed meshes,
- * so the front moves out and the back in). The parts a muscle pulls (lips, brows, eyelids) move with it, fading with
- * distance, so neighbouring meshes stay together.
- *
- * HOW. Everything is worked out once, when the body is installed (buildFaceMoves): a head frame from the meshes
- * themselves (across the eyes, chin to forehead), landmarks (mouth corners, the lips' line, the eye openings, the
- * brows, each muscle's ends), and for every shape a sparse list of the vertices it moves with their displacement at
- * full strength and the change of their normal. Drawing a face then only adds the active shapes' lists to the resting
- * positions (applyFaceMoves): linear in each shape's strength, so the face follows each activation's contraction and
- * return exactly as the face's display joints do (ns-body FACE_DISPLAY_IDS, driven by the activity like every other
- * joint). With every strength at 0 the face is exactly its resting geometry.
- *
- * The one-sided mouth movements: the lower-face area of each half of the brain lifts (or pulls down) mainly the mouth
- * corner on the other side (ns-bodymap, "Smile (mostly the right side)"); the joint itself is one number, so the caller
- * says which corner leads (faceShapeWeights sides).
- *
- * A display choice on licensed anatomy, not measured soft-tissue mechanics: the amounts are exaggerated on purpose.
- * Pure: no Three.js, no DOM.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Everything about the face movements.
  *  on: false moves nothing (the face only changes colour, as before).

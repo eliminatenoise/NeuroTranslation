@@ -1,41 +1,41 @@
-/** NeuroSurge: the ELECTRICAL MAP, the pure model (21 November 2026, section 192).
- *
- * The owner, 21 November: "Let's continue working on the neurosurge game. And let's try an electrical mapping view, like
- * you see in functional neuroscience, connectomic live maps, dynamic maps." And on 20 November: "a connectomic activity
- * map, or ... a functional neuroscience map where we can actually see activity, color-coded ... electrical storms and
- * electrical activity and neural activity and networks and pathways ... throughout the entire body, from brain to body
- * and body to brain. And then we can tie that to muscle contraction."
- *
- * WHAT THE PLAYER GETS (the M key; ns-controls EMAP_CODE). The picture goes dim and the nervous system appears over it
- * as fine lines of light: fibres from every block of the motor strip down through the brain to the brainstem, a cord
- * down the mirror body's spine (and your own), nerves into the limbs, the trunk and the face. An area switched on sends
- * a bright front in its own colour down its own route, crossing sides where the real fibres cross, out along the nerve
- * to the muscles of that movement; paler beads run back up beside it to the sensory strip (the body's report); fainter
- * pulses spread to the brain regions the block is linked with. At rest a few slow sparks drift along the wiring.
- *
- * WHAT IT IS. A drawn picture of the game's made-up, unitless signal on TYPICAL, SIMPLIFIED routes laid by hand over an
- * atlas that has no spinal cord and no nerves. Nothing is traced from a scan, nothing is measured, and the travel is
- * slowed so it can be seen (EMAP.realMmS against the display speed; the legend says by how much). The courses of the
- * nerves, the level of each nerve and the nerve of each muscle come from a data object in the shapes of section 193
- * (`wiring`: NERVE_TRUNKS, nerveForMuscle, mirrorTrunk, CORD_LEVELS, cordLevelAt, BRAIN_LINKS); until that module is
- * in the game a stand-in is used (ns-emap-standin.mjs).
- *
- * HOW IT IS BUILT (this file; the drawing is ns-emap-three.mjs).
- *  - A WIRE is one smooth line of nodes. Every node carries a rest place in atlas millimetres and the thing it rides:
- *    the big brain, a segment of the body rig, or a segment of the left game arm (a blend of two where a line crosses a
- *    joint, and a blend of two PLACES for the drawn bridge from the big brain to the mirror body's spine).
- *  - The body's wires are a tree per side: the cord's strand, the roots at their levels, the nerve trunks and their
- *    children, one branch per muscle. The brain's wires are one fibre per motor area (with a twig per movement's part
- *    of the block), a tail to each way out it needs (crossing in the low medulla or not, or to a head nerve's place in
- *    the brainstem), one fibre back up per area and way out to the sensory strip, and the area's links.
- *  - Every node has ONE time coordinate `a`: the display time, in seconds, at which a front that entered the cord at 0
- *    reaches it (negative inside the brain). A volley is then four numbers (start time, start coordinate, level,
- *    colour) and each lit wire two (how far the route uses it, and when the report enters it): the drawer evaluates
- *    fronts, beads and marks per pixel from those, so nothing is rewritten per vertex while the map runs.
- *  - emapStep is the per-frame state machine (slots = lit areas and sparks, wire states), with no allocation.
- *
- * Pure: no three.js, no DOM. Tested in Node (tests/emap.test.mjs).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { areaGlowColor } from './ns-colors.mjs';
 import { hemisphereSideOf, backShareAt, HEMI_GAP } from './ns-brain-part.mjs';
 import { SEGMENTS as ARM_SEGMENTS } from './ns-rig.mjs';
@@ -105,16 +105,16 @@ export const EMAP = freeze({
   // (22 November 2026, part 3: the links of the areas rest at 0.3 instead of 0 (they carry traffic now), the network's
   // fibres: bundle and local; later the same day, after a checker: links 0.15, bundle and local 0.2)
   idle: freeze({ fibre: 0.62, twig: 0.6, tail: 0.5, sens: 0.3, link: 0.15, net: 0.4, bundle: 0.2, local: 0.2, bridge: 0.25, cord: 1.25, root: 0.8, trunk: 1, branch: 0.7 }),
-  /** 22 November 2026 (part 3; the owner: "electrical wire, electrical storm activity going everywhere"): the network's
-   * fibres in the brain. Every link of the wiring data is drawn as a bundle of `fibres` fine fibres, each from its own
-   * point of the two regions' surfaces (fanned at the ends) through the link's middle, a little apart there (bundleMm);
-   * a link with no station of its own and no crossing bends through a middle point sunk toward its half's middle by
-   * bundleSink of its length (22 November 2026: 6 straight fibres a link ran as chords through the brain's middle,
-   * right behind the mirror body, and buried its torso: a checker's finding; now 3, bent, resting at 0.2);
-   * neighbouring surface regions of one half are joined by `local.fibres` short fibres each (at most local.perRegion
-   * neighbours a region and local.max pairs in all; only between surface points nearer than local.maxMm), sunk toward
-   * the half's middle by local.sink of their length (the short fibres under the cortex). Generated by these rules and
-   * stated as drawn: not traced from a scan. */
+
+
+
+
+
+
+
+
+
+
   scan: freeze({ fibres: 3, bundleMm: 3.2, bundleSink: 0.3, local: freeze({ fibres: 2, perRegion: 4, max: 160, maxMm: 45, sink: 0.22 }),
     surface: /gyrus|lobe|lobul|insula|cuneus|pole|hippocamp|cerebellum/i, notRegion: /ventricle|aqueduct|white matter|habenula|tuber|pineal|colliculus/i }),
   cord: freeze({ backMm: 9, halfMm: 2.6, rootOutMm: 6 }),

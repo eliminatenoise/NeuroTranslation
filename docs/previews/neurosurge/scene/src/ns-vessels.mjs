@@ -1,46 +1,46 @@
-/** NeuroSurge: the vessels of the brain (18 November 2026, package VESSELS). Pure ES module (browser and Node): no DOM,
- * no Three.js; the scene turns what it returns into meshes (ns-scene-three setBrainVessels).
- *
- * Owner, 18 November: "And let's get the vascularity right, especially with the cerebral veins and etc. and for all
- * other items as well." Earlier: "Everything must be anatomically correct and accurate, brain included"; "a beating
- * reacting brain as you would see in neurosurgery"; "clinical", not gory or bloody.
- *
- * What is drawn on the brain, as a neurosurgeon sees its outer surface:
- *  - ARTERIES: real meshes. BodyParts3D 4.0 (CC BY 4.0, DBCLS) models the cortical branches of the middle, anterior and
- *    posterior cerebral arteries in the same source frame as the brain the game draws; packet
- *    packets/bodyparts3d-cerebral-arteries-r1 holds 80 byte-exact archive members (both sides; the left side's files
- *    are the atlas's own mirror copies, FJ....M). Registered as they are: the median distance of a cortical branch's
- *    vertices from the nearest vertex of the game's brain is 0.8 to 4.4 mm (they lie in and over the sulci). They pulse
- *    with the beat (ARTERY_LOOK.pulseMm), the veins barely.
- *  - VEINS AND SINUSES: BodyParts3D 4.0 has no cerebral veins and no dural sinuses, so they are laid by hand
- *    (VEIN_COURSES) as courses over this brain's own landmarks (its named gyri: the central sulcus between the
- *    precentral and postcentral gyri, the lateral (Sylvian) fissure above the temporal gyri, the poles, the midline),
- *    following the typical anatomy of the superficial venous system (Rhoton, "The cerebral veins", Neurosurgery 51 (4
- *    Suppl), 2002, S159-S205; Gray's Anatomy, 42nd ed., ch. "Vascular supply of the brain"):
- *      superior cerebral veins: eight a side, rising over the convexity to the superior sagittal sinus; the frontal
- *        ones enter about at right angles, the parietal and occipital ones run forward as they rise (against the
- *        sinus's flow); each widens toward the sinus and takes small tributaries off the gyri on its way;
- *      the precentral and central (Rolandic) veins along their sulci; the superior anastomotic vein (Trolard) from the
- *        lateral fissure up to the sagittal sinus, dominant on the right here; the inferior anastomotic vein (Labbe) from
- *        the middle of the lateral fissure back and down over the temporal lobe to the transverse sinus, dominant on
- *        the left here (a common pattern; either can dominate in a real person);
- *      the superficial middle cerebral vein along the lateral fissure, forward and down round the temporal pole toward
- *        the sphenoparietal sinus; inferior cerebral veins on the temporal lobe toward the transverse sinus;
- *      the superior sagittal sinus as a broad band over the midline (it lies in the dura's falx, over the
- *        interhemispheric fissure; the dura itself is not drawn), widening toward the back, the confluence and both
- *        transverse sinuses along the occipital base.
- *    Veins lie ON the surface: flat and wide (an ellipse wider along the surface than it is tall), over the gyral
- *    crowns and bridging the sulci (they are draped on the brain's outer envelope, BRAIN_ENVELOPE, not on the folded
- *    surface). Arteries are round and mostly IN the sulci, emerging, branching and tapering: as the atlas has them.
- *  - Over the motor strip the vessels give way to the keys: a vein that crosses a key is drawn half as wide and flush
- *    with the surface, an artery there sinks under the key's surface (STRIP_GIVE), so no small area is hidden. The
- *    aim is computed on the brain's rest shape and does not see the vessels.
- *
- * Scope: a teaching picture. The courses are typical anatomy laid on one atlas brain, not this or any person's
- * angiogram; widths are display choices within real ranges; nothing is measured. The procedural vessel lines the
- * cortex shader drew before (ns-brain-ink cortexVesselGlsl) are switched off (BRAIN_FLESH.vessel null) so nothing fake
- * stays beside these.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ---------------------------------------------------------------------------------------------------------------------
 // The artery packet
@@ -50,7 +50,7 @@ export const CEREBRAL_ARTERIES_PACKET = 'bodyparts3d-cerebral-arteries-r1';
 export const CEREBRAL_ARTERIES_DEFAULTS = Object.freeze({
   manifestUrl: '../../packets/bodyparts3d-cerebral-arteries-r1/CEREBRAL-ARTERIES-MESH-MANIFEST.json',
   packetBase: '../../packets/bodyparts3d-cerebral-arteries-r1/',
-  manifestSha256: 'bf314c2e4da04ccd116993820bb845aa97428b0588fdbbc69e2c2291951c0595'
+  manifestSha256: 'd10c7db17566f70e4d996f6a049c054383d74e18731ab3a44e557f75313c1490'
 });
 /** Territories (manifest `territory`) and what they are. */
 export const ARTERY_TERRITORIES = Object.freeze({
@@ -485,7 +485,7 @@ export function vesselFragmentGlsl({ pulseGlow = 0 } = {}) {
 export const BODY_VESSELS_PACKET = 'bodyparts3d-body-vessels-r1';
 export const BODY_VESSELS_DEFAULTS = Object.freeze({
   url: '../../packets/bodyparts3d-body-vessels-r1/BODY-VESSEL-CENTRELINES.json',
-  sha256: 'c86600f42d7541de96ab3e782b43bbecd9b19339c28f8a8c6132326ee0626c3f'
+  sha256: '52ddde91d7ae96d0596f761f114619cd1fe898648aca16c9664ad2ea48dc4aa7'
 });
 /** Vessels left out of the full body: your LEFT arm is the game arm, drawn and skinned by its own rig (ns-arm), not by
  * the full body these vessels are riveted to; its vessels would hang where that arm is not. Not wired yet. */

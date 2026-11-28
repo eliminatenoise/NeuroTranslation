@@ -1,45 +1,45 @@
-/** NeuroSurge scene: the PAINTED, WET look of the two bodies (18 November 2026).
- *
- * The owner's words (17 November): "a hyper-detailed hyper-real glossy fleshy but not gory or bloody yet still
- * somewhat viscerally disturbing telltale games art style rather than borderlands. The difference I guess can be
- * somewhat subtle." And (18 November): "Some rough patchy small-poxy muscles need work such as pelvis / hip flexors."
- * "I want flat depressed chest not booby pumped out chest."
- *
- * Until now the bodies were drawn Borderlands-style (ns-scene-three patchComicShaders, ns-colors BODY_CEL): four hard
- * tone bands, a flat highlight sticker with a hard edge, ink lines round every muscle, ink hatching in the shadow
- * bands and an ink stipple on bone. On a real, slightly bumpy anatomy mesh that gave the faults the owner names: the
- * band edges break into ragged patches wherever the surface is uneven (the hip flexors and the inside of the pelvis
- * most of all), the hatch strokes and the bone stipple read as pock marks, and each chest muscle carried one big
- * round highlight sticker, so it read as a rounded mound.
- *
- * What replaces it (the same single material pass, the same hooks, no new draw, no texture; pure strings here):
- *  - PAINT, not bands. The light factor L (lit luminance over albedo luminance, exactly as before) goes through ONE
- *    smooth curve from a deep shade to a light one (ramp, levels): deep shades and light lights stay (11 November:
- *    "deep deep shades to light light shades"), but there is no edge to break up. The shadow side turns WARM and
- *    more saturated (shadowTint: light that has passed through tissue is red), instead of the old cool neutral dark.
- *  - FIBRES. Each muscle carries a FIBRE FRAME per vertex (fibreFrame below, in place of the old ink's hatch frame
- *    in the same attribute nsHatch): which fibre passes through the vertex (its place across the muscle, measured
- *    in the muscle's own girth at that place) and how far along the muscle it lies. Three levels of bundles are
- *    drawn in that frame (groups of bundles, bundles, and fine strands close up): rounded bundles lying side by
- *    side, each with its own shade, a darker parting between two of them. They run the muscle's length and converge
- *    where it narrows (a fan such as the chest muscle fans from its broad origin to its tendon). The bundles are a
- *    change of colour AND a height (a bump of the normal BEFORE the lights are summed), so every bundle carries its
- *    own streak of the wet highlight instead of one round patch on the whole muscle. Each level fades out before its
- *    bundles would be under two pixels wide (the mirror body at its start distance shows none: no noise, no
- *    shimmer), and all of it fades out on a surface seen edge-on.
- *  - WET. The highlight is the real (GGX) highlight of the lights, compressed so that it can never blow out into a
- *    white patch (wet.max), plus small glints where it peaks. No hard-edged sticker any more.
- *  - TENDON AND BONE. Pearly tendon ends keep fine strands and a tighter gloss; bone is a smooth ivory with a warm
- *    shadow side, a faint large-scale mottling (no dots, no stipple) and a soft gloss.
- *  - RIM. A thin cool light on the silhouette on the side of the scene's rim light, in the tissue's own colour,
- *    instead of the crisp rim band. (A wet film at grazing angles all round was tried and taken out: it laid a
- *    grey-lilac veil over every muscle seen edge-on.)
- * The activation glow is emission. On a glowing muscle everything takes the glow's own hue (the lit surface, its
- * white tendon parts, the wet highlight), the glow follows the shading a little and shows the fibres (glowForm), and
- * no channel is allowed to clip: a lit muscle is its motor area's colour all over, in shade and in light, with form.
- *
- * Display choices only: nothing here says anything about real tissue optics.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const f = x => (Number.isInteger(x) ? `${x}.0` : `${x}`);
 const v3 = c => `vec3( ${c.map(f).join(', ')} )`;
@@ -116,8 +116,8 @@ export const BODY_FLESH = freeze({
     capFrom: 0.3, capTo: 0.6, crossFrom: 0.8, crossTo: 0.94,
     tendonAmp: 0.45, glowKeep: 1, fadeFrom: 0.22, fadeTo: 0.5, aaPx: 0.9, edgeMin: 0.1, viewFrom: 0.2, viewTo: 0.55
   }),
-  // 19 November 2026 (the owner: "Body is probably too glossy and it makes everything really hard to differentiate from
-  // each other"): a satin surface. The highlight is under half of what it was (gain 4, max 0.62, maxWhite 0.5, glint
+
+
   // 0.34), so a muscle's own tone and its edge carry the picture, not the reflections lying across them.
   wet: freeze({ gain: 1.6, max: 0.26, maxWhite: 0.28, glint: 0.1, glintLo: 0.1, glintHi: 0.3, partKeep: 0.35, glowKeep: 0.3 }),
   rim: freeze({ gain: 0.42, power: 3.4, colour: freeze([0.8, 0.9, 1.0]), white: 0.15, film: 0 }),
@@ -519,42 +519,42 @@ export function fleshLightGlsl(kind = 'muscle', tendon = false, o = BODY_FLESH) 
 	}`;
 }
 
-/** DEPTH PREFERENCE round rectus abdominis (18 November; the owner: "Some rough patchy small-poxy muscles need work
- * such as pelvis / hip flexors"; the checker: ragged saw-tooth borders round the lower rectus abdominis, islands of
- * another muscle at its lower corners, rows of specks along its edges).
- * The cause is not shading. The sheets that wrap rectus abdominis (the external oblique's sheath, the laminae of the
- * internal oblique and transversus abdominis) are drawn OPENED over it: their triangles in front of the muscle are
- * left out, triangle by triangle, so the opening has a toothed edge, and bits of a sheet that lie up to 13 mm in
- * front of the muscle still show as teeth, specks and islands over it.
- * The fix moves NO vertex and changes no place on the screen. The part of each sheet that lies over the muscle and
- * just beside it is drawn, in the depth buffer only, `pushM` further from the eye along the line of sight, in the main
- * picture and in the outline's ID pass alike (both read the per-vertex attribute nsLift, metres, negative = away). So
- * wherever the muscle lies behind such a bit of sheet it now wins: its own smooth outline replaces the toothed edge,
- * and the specks and islands go under it.
- *  - WHERE, and why it is worked out the way it is: the push is one function of the place on the FRONT of the body
- *    (across, source x, and up, source z; the front-to-back coordinate is not used), the same for every sheet, so
- *    the sheets keep their order among themselves; and it is built from straight ramps, which are exact at every
- *    pixel of a triangle for every mesh, however differently the sheets are cut into triangles. Across: full over
- *    the muscle (the pair's half-width at that height, from the muscle's own vertices) and `fullBesideMm` beside it,
- *    gone `noneBesideMm` beside it. A DEEPER sheet keeps its full push to beyond where the sheet in front of it has
- *    lost much of its own (external oblique 2 -> 14 mm, internal oblique 8 -> 22 mm, transversus 16 -> 30 mm): at
- *    every place a deeper sheet is pushed at least as far as the one in front, so the bend of a ramp inside one
- *    triangle can never bring a deeper sheet through (with one ramp for all three, a seam of blotches ran beside the
- *    muscle where the ramp ended). The wider zones of the deeper sheets lie under the whole outer sheet.
- *    Up: also none below `noneToShare` and full only from `fullFromShare`: at the pubic end the deeper sheets are
- *    the outer surface beside the muscle and the hip muscles lie close behind them (pushed there, a hip muscle came
- *    through them with a toothed edge). Up: full from the lower (pubic) end to `fullToShare` of the muscle's height, gone
- *    at `noneFromShare`: its upper end runs up under the chest muscle, where the sheet is whole.
- *    (First try: the 3D distance of each sheet vertex to the muscle, through a smooth step. Each sheet then had its
- *    own push at one place and the deeper sheets came through the outer one in blotches beside the muscle.)
- *  - Why the sheets go back and the muscle does not come forward: anything in FRONT of the belly (a hand moved over
- *    it) must stay in front. Pulling the muscle forward by enough to win at a grazing angle (from the eyes the belly
- *    is seen at about 70 degrees, where a 13 mm gap is 40 mm along the line of sight) would have put it in front of
- *    a hand lying on the belly.
- *  - Tried and rejected: adding P22 x metres to clip z (wrong by a factor of distance / (2 x near): 15 mm acted
- *    like a third of a metre and pieces of the muscle's upper end showed through the chest), and a true 15 mm toward
- *    the eye (too little at the grazing angle the belly is seen at).
- * muscles: the element ids of the muscle (both sides count as one); sheets: element id -> its ramp beside the muscle. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BODY_DEPTH_PREFERENCE = freeze({
   pushM: 0.028, acrossAxis: 0, upAxis: 2, noneToShare: 0.06, fullFromShare: 0.16, fullToShare: 0.62, noneFromShare: 0.8, bins: 16,
   muscles: freeze(['zm-rectus-abdominis-r', 'zm-rectus-abdominis-l']),

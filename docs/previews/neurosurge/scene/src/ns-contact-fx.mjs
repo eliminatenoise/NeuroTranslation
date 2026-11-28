@@ -1,15 +1,15 @@
-/** NeuroSurge: the mark where a contact happens (18 November 2026, package CONTACT; owner, 17 November: "And I asked for
- * collision effects. And limb pushing limb effects").
- *
- * A small pool of ripples that face the camera. Each starts at the contact's place, moved a few centimetres toward the
- * eye so the two touching surfaces do not hide it, and runs outward and fades within CONTACT_FX.s (about a third of a
- * second): a dark band, the shadow of the tissue dented by the touch, with a thin wet highlight inside it and a short
- * pale flush at the centre, the way a press shows on glossy flesh. A pale additive light alone was tried first and
- * hardly showed on the pale muscle. No words. The app places one on your body and one at the same place of the mirror
- * body (scaled with it). The ripple is drawn with the depth test (hidden behind what stands in front of it) and once more,
- * faint, without it (a touch behind a limb still shows a little). Under prefers-reduced-motion it does not run outward:
- * it fades where it is. The ripples write no depth and are not drawn when idle. A display mark only: nothing measured.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** slots: ripples in the pool; s: seconds a ripple lives; r0 / r1: its radius at the start and at the end (world metres
  * at scale 1; the bodies are drawn life size); liftM: how far it stands toward the eye from the contact; dent / wet /

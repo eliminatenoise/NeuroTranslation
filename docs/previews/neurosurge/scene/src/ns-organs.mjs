@@ -1,44 +1,44 @@
-/** Organs in the opened chest (20 November 2026).
- *
- * The owner, 19 November: "Yes, it's nice to have a view within the body and the rib cage. Perhaps put some organs in
- * there for fun, but make sure the occluding muscles, neck muscles are gone, and the transition between is smooth."
- *
- * WHAT THIS IS. Simple, smooth shapes that READ as a heart, two lungs, the great vessels and the windpipe when you look
- * down into your own opened chest (the eye view ends your body at the collar: ns-scene-three EYE_COLLAR) or between the
- * ribs. They are ILLUSTRATIONS PLACED BY PROPORTION inside the rib cage of the game's body, built here in code: NOT traced
- * anatomy (the packets hold no organ meshes), NOT part of the game's signal (no motor area, no activity, no link, no
- * collision, nothing can aim at them or hold them), and nothing about them is measured.
- *
- * WHERE THEY ARE. In BodyParts3D 4.0 whole-body millimetres (+x subject LEFT, +y POSTERIOR, +z SUPERIOR), the frame of
- * every body mesh's source. The numbers below were chosen from the inside of the rib cage of the body as the page
- * prepares it (tools/page-body.mjs: ribs, costal cartilages, breastbone and thoracic vertebrae), measured per 10 mm of
- * height: the inner lateral wall (about 108 mm from the midline at the level of the 6th to 9th ribs, 100 at the 4th,
- * 66 at the 2nd, 41 inside the first ribs), the inner face of the breastbone (y -203 at its lower end, -194 at the 5th
- * rib, -176 at the 3rd, -133 behind the manubrium), the inner back wall beside the spine (y -15 to -25 from the 4th
- * rib down, -40 at the 2nd, -60 inside the first ribs) and the front of the vertebral bodies (y -64 to -88). Each
- * organ keeps a few millimetres inside those walls. In the start posture the whole rib cage moves with its sixth
- * thoracic vertebra to within 1 to 3 mm (measured on the baked posture), so the organs ride on that segment (host:
- * 't6') and move with the trunk as one piece.
- *
- * WHAT IS SIMPLIFIED, ON PURPOSE.
- *  - The lungs are each one smooth lobe-shaped body (a loft of rounded sections, a dome on top under the first rib, a
- *    shallow dome pushed up from below by the diaphragm) with painted fissure lines; the left one is notched for the
- *    heart. Where a lung would run into the heart, a great vessel, the windpipe or the spine, its surface is pushed back
- *    onto that thing (the impressions real lungs carry), so nothing passes through anything.
- *  - The heart is a rounded cone (base up, back and to the right; apex down, forward and to the left) with the grooves
- *    between its chambers painted pale (the fat along the coronary vessels) and the atria a little darker. It swells
- *    very slightly with the living brain's beat (ns-brain-live: the same wave and clock) and not at all under reduced
- *    motion; the scene does that with one uniform (no per-frame work here).
- *  - Vessels: the aorta (red) rising from the heart, arching back to the left and running down beside the spine; the
- *    pulmonary trunk (blue, the usual colour for blood low in oxygen) and its two branches into the lungs; the superior
- *    vena cava (blue). The windpipe is pale and ringed and parts into the two main bronchi. Every free end is rounded
- *    (nothing ends in a cut); the branches into the neck and arms are left out.
- *  - No organs of the upper belly: from the eye view and from outside the belly wall covers them entirely, so they would
- *    cost triangles and never be seen.
- *
- * Cost: about 7 200 triangles in two meshes (the heart alone, for its beat; everything else in one), built once, shared by
- * your body and the mirror body. Pure: no Three.js, no DOM. The scene (ns-scene-three) makes the meshes and materials.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import { BODY_SHAPE, trunkShapeField } from './ns-body-shape.mjs';
 
@@ -401,16 +401,16 @@ function addLung(M, o, side, keep) {
   joinRings(M, first, rings.length, N, { startPole: pole0, endPole: pole1, flip: side < 0 });
 }
 
-/**
- * Every organ: { heart: { positions, normals, colors, indices, triangles, centre }, tissue: { ..., ranges } (the lungs,
- * the vessels and the windpipe in one mesh; ranges: each part's [first, end) triangles), triangles, parts: { lungs,
- * vessels, heart } (triangles), host }.
- * Positions in source mm (see the head of this file). An illustration: nothing here is measured.
- * 20 November 2026 (the owner: "a smaller and much flatter chest"): the organs pass through the same trunk rule as the
- * body's meshes (ns-body-shape trunkShapeField, `shape`; null leaves it out), so the flatter rib cage still holds them:
- * the rule moves every point at the same height and side by the same share of its depth in front of the spine, and
- * never changes which of two points is further forward. The numbers in ORGANS are those of the source body.
- */
+
+
+
+
+
+
+
+
+
+
 export function buildOrgans(o = ORGANS, shape = BODY_SHAPE.trunk) {
   const heart = buildHeart(o);
   const M = meshOf(), V = o.vessels, C = o.colors;

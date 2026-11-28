@@ -179,6 +179,8 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
     if (!panel) {
       panel = document.createElement('section');
       panel.id = 'ns-motion-camera';
+      // Clicking a status message keeps keyboard focus in the recorder until the player returns to the scene.
+      panel.tabIndex = -1;
       panel.setAttribute('aria-label', 'Motion recorder');
       Object.assign(panel.style, {
         position: 'fixed', right: '12px', top: '12px', zIndex: '20000', width: 'min(230px, 84vw)',

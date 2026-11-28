@@ -1,53 +1,53 @@
-/**
- * NeuroSurge mirror body (R5-mirror, lead decision D19; user requirement R23, 2026-11-08T21:54Z).
- *
- * Historical (R23, the placement half of it overturned by R558 below): "a mirror body that initially, when you start the game, is behind the brain. And given the brain's translucent ...
- * you can see it behind the brain. And it will also have its own arrows, but of course those arrows will be closer to
- * the body and within and behind the brain. So to move the body around, you have to move the brain that's in front of
- * it away, and then you have to manipulate the body from then. And whatever activity is happening on your own body
- * will also be happening on the mirror body. But the mirror body will be facing you, essentially, and looking at you
- * ... you'll be able to turn that body around to look at the posterior. You'll be able to shift the orbit of that body
- * in any which direction."
- *
- * R558 (user, newest: "The mirror body should literally be a 1:1 perpendicular perfect reflection and it needs to be
- * coming from the exact same reflection angle at the beginning until manipulated"; "If we imagine an invisible ground,
- * the mirror body should be touching the same ground. The ground is flat and has no incline or decline whatsoever."):
- * the earlier placement (a scaled, turned copy fitted into a free box inside the brain) is overturned. At the start and
- * after a reset the mirror body is EXACTLY your body reflected in one vertical plane: scale 1, no tilt, no turn, no
- * offset; the image is as far behind the plane as you are in front of it, at the same height, on the same ground.
- *
- * PURE module (no DOM, no Three, importable in Node). It owns:
- *   1. placement: the literal plane reflection (mirrorReflectionPlacement): a vertical plane square to the body's
- *      forward axis, a distance d in front of the eye, d = the posed body's forward extent from the eye plus a few
- *      centimetres (MIRROR_REFLECTION). The plane is fixed in the world once set (like a mirror on a stand); the scene
- *      sets it from the posed body at the start and at a reset. It does not depend on the brain at all;
- *   2. the mirror transform (mirrorTransform; det -1): the reflection, composed with the player's orbit about the
- *      image's own centre (a turn about the vertical axis and a tilt about the screen's horizontal axis), the push
- *      along the ground and the grasp carry. A turn and a carry keep it on the same flat ground as your body; only a
- *      tilt takes it off the upright, and tilting back or a reset stands it up again. Turned or tilted, it stands
- *      back along the ground as far as it takes to keep the mirror image of your left hand's reach on its own side
- *      of the mirror (MIRROR_ORBIT.reachClear), so it can be turned all the way round;
- *   3. its own orbit state: yaw (wraps, any amount, so the back can be seen), pitch (the tilt, inside
- *      +-MIRROR_ORBIT.pitchLimitDeg) and push (m, along the ground, away from the plane). Click = one step, hold =
- *      gentle continuous change, never autonomous (mirrorOrbitStep, mirrorHoldSteps, applyMirrorOrbit, resetMirror);
- *   4. the frame of its four arrows (mirrorArrowFrame) for the arrow module;
- *   5. the state-sync contract from the primary body (MIRROR_SYNC) and the mapping of glow end points (mirrorPoint);
- *   6. plain texts for the panel and the Esc page (MIRROR_TEXT, mirrorPartName, mirrorInfoCard).
- *
- * Conventions (shared with ns-math / ns-brain / ns-scene-three): world metres, the first-person eye at the world
- * origin, +x screen right, +y up, the player faces -z at body yaw 0. 4x4 matrices are column-major Float64Array(16)
- * (THREE.Matrix4.elements layout). Angles in this module's public state are DEGREES (like the brain orbit).
- *
- * CHIRALITY (documented for the labels): the mirror is the reflection of your body through a vertical plane that faces
- * you (det = -1), like a real mirror. The image of your LEFT arm is on the LEFT of the screen and moves the same way on
- * the screen as your arm; the image itself is left-right reversed (on a real person facing you it would be their right
- * arm). Every label therefore names YOUR part followed by "(mirror image)" ("your left arm (mirror image)"); it never
- * calls it "its right arm". After you turn the mirror body round (yaw 180) you see the image from behind, so the image
- * of your left arm is then on the right of the screen.
- *
- * Everything shown stays simulated: the mirror body copies the simulated pose and the simulated, unitless activity of
- * your own body; it is a picture, not a second person, a sensor or a recording.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import {
   DEG, add, sub, scale, dot, cross, length, normalize, clamp, identity, multiply, translation, uniformScale, transformPoint,
@@ -63,14 +63,14 @@ export const MIRROR_VERSION = 'ns-mirror-r558 (literal plane reflection on a lev
  */
 export const MIRROR_VIEW = Object.freeze({ arrowGapFrac: 0.06, arrowSizeFrac: 0.16 });
 
-/**
- * R558 (user Message 52: "if when you press E to go into third person, that your body gets further away, then the
- * mirror body should also get further away equally. Otherwise, then it's just getting far too close"): in the outside
- * view the camera backs away from your body by the boom length (ns-camera THIRD_PERSON.distanceM); the mirror body then
- * backs away from your body by the same distance, eased with the same blend (state.viewAwayM, set by the scene from
- * the camera pose). It is a view slide only: it is not part of the orbit, is not saved, does not count towards the
- * push limit and is 0 in the first-person view, where the literal reflection holds exactly.
- */
+
+
+
+
+
+
+
+
 /* 19 November 2026 (a check: in the outside view the mirror body was 90 px tall at 1600x900, the lead's 230): in the eye
  * view it stands small in the hollow of the motor strip (MIRROR_NEAR), which is right for a picture taken from your
  * eyes; from outside, where the camera stands behind and above you, that place is far away and over the strip's leg
@@ -78,10 +78,10 @@ export const MIRROR_VIEW = Object.freeze({ arrowGapFrac: 0.06, arrowSizeFrac: 0.
  * reflection's own size) and dropM lower, between the strip and your feet, eased with the camera's own blend
  * (state.viewOutside 0 to 1). A view change only, like the slide: not saved, not part of the orbit. A mirror body that
  * has been carried keeps the place it was put (no drop), and only its size changes with the view. */
-/* 19 November 2026, later (the owner: "let's have the mirror body so close that the toes are almost touching and they're
- * level, of course."): in the eye view the mirror body is the literal reflection again, at your own size (MIRROR_NEAR),
- * so from outside it is no longer drawn larger or lower: magnifyBy 1.8 -> 1 and dropM 0.6 -> 0 (1.8 times your size
- * would stand across your own legs). The slide away with the camera (awayM, the owner's note of 12 November) stays. */
+
+
+
+
 export const MIRROR_OUTSIDE = Object.freeze({ awayM: THIRD_PERSON.distanceM, maxM: 4, magnifyBy: 1, dropM: 0 });
 
 /**
@@ -94,41 +94,41 @@ export const MIRROR_OUTSIDE = Object.freeze({ awayM: THIRD_PERSON.distanceM, max
  */
 export const MIRROR_REFLECTION = Object.freeze({ clearanceM: 0.05, matrixTolerance: 1e-9 });
 
-/**
- * 18 November 2026, late (package FLAT; the owner: "We want the body to be much closer. I mean the mirror body to be
- * much closer to our own"; "maybe because the mirror body is so far away, we have to introduce a magnification
- * factor"). The eye view is now a long lens looking 52 degrees down, so the literal reflection beyond your feet is
- * drawn large (about 600 px tall at 1600x900) but almost all of it ABOVE the picture: its head is at your eye level
- * while you look down your own body. The mirror body is therefore placed as a NEAR VIEW of the reflection
- * (mirrorReflectionPlacement view): the same mirror image (the same pose, left and right as in a mirror, det < 0),
- * drawn magnifyBy times the reflection's size about its own centre and standing dropM lower (and nearerM toward you
- * along the ground), so at the start it stands upright in the open middle of the picture just beyond your feet, over
- * the hollow of the motor strip, the whole figure in view. Everything that uses the mirror body's place and size
- * (picking, its arrows and their frame, contact, carrying and turning it, the view from outside) uses this placement:
- * it is the mirror body's place. Display choices, judged on pictures; not a measurement.
- */
-/* 19 November 2026 (the owner: "Both the brain and mirror body are far too low."; package VIEW): with the look starting
- * 24 degrees down and the brain above your feet, the mirror body stands directly under the motor strip, between your
- * hands: magnifyBy 0.68 -> 0.95 (almost the reflection's own size: about 290 px tall at 1600x900, where 0.68 would be
- * 200) and dropM 1.0 -> 0.9. It is not higher than that because the strip's leg areas are directly above its head and
- * your knees directly below its feet; in the picture it is now in the middle, where the look starts. */
-/* 19 November 2026, after a check (the owner said BOTH were far too low and only the brain had gone up; the mirror body
- * stood between your own thighs with the crosshair on its neck, and it was out of the picture when the crosshair was
- * on the strip's outermost areas): the mirror body now stands IN THE HOLLOW of the motor strip's U, in front of the
- * brain's midline: dropM 0.9 -> -0.3 (0.3 m ABOVE the reflection's own height), magnifyBy 0.95 -> 0.48 (about 235 px
- * tall at 1600x900: the hollow is no taller) and tiltDeg 22: so far up you would look at a lying body from its feet,
- * so it stands tilted, its top toward you, as the top arrow tilts it, and is seen from the front as it was when it
- * stood low. The tilt arrows start from there (ns-mirror mirrorTransform). It is in the picture with every strip
- * area, clear of your own limbs, and nothing covers it. */
-/* 19 November 2026, later (the owner: "let's have the mirror body so close that the toes are almost touching and they're
- * level, of course."; and earlier that day: "make the two bodies more level, your body and the mirror body"). The mirror
- * body is the LITERAL REFLECTION again: your own size (magnifyBy 0.46 -> 1), on your own level (dropM -0.33 -> 0), not
- * tilted (tiltDeg 22 -> 0). The mirror plane stands MIRROR_REFLECTION.clearanceM (5 cm) beyond your toes, so its toes
- * are 10 cm from yours. It sits facing you as your own image, about 345 px tall at 1600x900 from its head to its toes.
- * Since the same day the brain is turned half a turn (ns-brain BRAIN_VIEW.spinDeg): its motor strip is an n, an arch,
- * and the mirror body sits INSIDE that arch in the picture, its head just under the leg areas at the top of the n and
- * its toes on yours, in front of the brain's bare front half; it covers no arm or face area. (The hollow placement of
- * the morning, small and raised, is withdrawn by the owner's note.) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const MIRROR_NEAR = Object.freeze({ magnifyBy: 1, dropM: 0, nearerM: 0, tiltDeg: 0 });
 
 /** The rest-pose fallback body box (world m, seated BodyParts3D body at the default eye) used only when the integrator
@@ -137,38 +137,38 @@ export const MIRROR_FALLBACK_BODY = Object.freeze({
   centre: Object.freeze([0, -0.62, -0.18]), half: Object.freeze([0.32, 0.72, 0.45])
 });
 
-/**
- * Orbit of the mirror body (about its OWN centre; the brain's step and hold speed).
- *  stepDeg: one click on a mirror arrow (= ns-brain BRAIN_VIEW.orbitStepDeg, 15).
- *  hold: holding an arrow keeps turning gently (= ns-scene-three ORBIT_HOLD: after 300 ms, 1.2 deg every 100 ms =
- *    12 deg/s, at most 5 steps banked per frame).
- *  pitchLimitDeg: 90. R558 (user Message 45: "The body arrows for the body should also be for orbit not back and
- *    forth"; Message 46: pressing on an item and moving the pointer orbits it): the top and bottom arrows and an up /
- *    down drag tilt the body about the screen's horizontal axis through its centre, as far as a view from straight
- *    above (+90) or straight below (-90). Going further would only show it upside down; the back is reached by the
- *    side arrows, since yaw has no limit (it wraps to (-180, 180]). At the start and after a reset the tilt is 0 (user
- *    Message 10: "the mirror body should be touching the same ground. The ground is flat and has no incline or decline
- *    whatsoever"); a turn about the vertical axis and a carry keep every point at its height, so only a tilt lifts
- *    the feet off that ground, until it is tilted back or reset.
- *  tiltClear: a tilted body's box reaches farther toward you than the upright one (the head, or the forward legs,
- *    swing toward you, and the plane is only a few centimetres beyond your toes and fingertips). The body therefore
- *    stands back along the ground by exactly that extra reach (mirrorTiltAwayM), so a tilt never brings its box nearer
- *    than a turn alone does. It is 0 at pitch 0, so the literal reflection and a carry are unchanged.
- *  reachClear: the game arm goes wherever you look, so the mirror body carries the mirror image of everything your
- *    left hand can reach: a sphere about the left shoulder (the placement's `reach`). Reflected and untouched, that
- *    image is behind the mirror plane, as your own reach is in front of it. Turned or tilted about the body's centre
- *    it would swing through the plane and into the space your own legs and hands use (measured before this rule: the
- *    stop-at-contact guard held a turn at 171.5 degrees one way and 123.2 degrees the other, so the body could not
- *    be turned all the way round, and near those angles the unseen sphere could hold back a move of your own
- *    limbs). The body therefore stands back along the ground by exactly the distance that sphere would pass the
- *    plane (mirrorReachAwayM): 0 while the sphere is behind the plane anyway (so 0 at the start, after a reset and
- *    for the first part of a turn either way), growing smoothly to its most where the image shoulder is nearest
- *    you. A turn still keeps every point at its height. The body stands back by the larger of this and the tilt's
- *    own clearance, never the sum. Without a `reach` on the placement the rule does nothing.
- *  push: metres along the ground, away from you. No arrow or drag drives it any more (the top and bottom arrows slid
- *    the body away and back between 11 and 12 November); it is kept for the scene's own path (setMirrorView({ pushM
- *    })) and for old states. 0 = where it stands; at most maxM farther. perDegM is the old arrow step's scale.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const MIRROR_ORBIT = Object.freeze({
   stepDeg: 15, pitchLimitDeg: 90, tiltClear: true, reachClear: true,
   hold: Object.freeze({ delayMs: 300, everyMs: 100, stepDeg: 1.2, maxStepsPerFrame: 5 }),

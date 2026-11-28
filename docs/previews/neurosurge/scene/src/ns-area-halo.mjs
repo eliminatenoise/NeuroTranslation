@@ -1,33 +1,33 @@
-/** NeuroSurge scene: the GLOW of the motor strip that needs no extra pass (21 November 2026).
- *
- * The owner, 21 November 2026: "The glow needs to be fixed, and the glow for the black parts of the motor strip also
- * need to be fixed. Right now, there's essentially no glow, and it's too much before as well." Message 208: "The black
- * motor parts should have some edge glow." Still standing: Message 2 ("an optogenetic glow activation but with
- * different colors/shades for each are"), Message 159 ("let's make brain activation almost bright white"), Message 203
- * ("as bright as possible"), and the three times it was too much (Messages 133, 170, 198).
- *
- * What was wrong. The only thing that spread light beyond a lit block was the full-screen bloom pass, and that pass is
- * the first thing the automatic picture quality drops (ns-scene-three HDR_BLOOM.offFromLevel 1): on a large or slow
- * display every glow ended at white, a flat white patch for 0.4 s, with its colour gone (AREA_LOOK.areaWhite 1). An
- * area under the look had only a weak light multiplied by its own colour: on an area tried before about what an untried
- * area shows at rest, on a black block nothing.
- *
- * What the player sees now, the same at every picture quality level:
- *  - THE HALO (AREA_HALO): a pool of light in the block's own glow colour on the surface round it (the neighbouring
- *    blocks and the brain tissue beside the strip), strongest at the block's edge and gone about one block width
- *    further out. It is worked out in the materials that are drawn anyway (the cortex and the areas), from the
- *    distance to the block's own shape (a line through the middle of the band it is, over the crown and down both
- *    banks, and the block's half width), so it lies on the surfaces, behind the bodies in front of them, costs a few
- *    lines of shader only while something glows, and does not depend on the bloom. The look gives the block under it
- *    `look` of the strength a contraction gives.
- *  - THE LIT BLOCK (AREA_LIT): white-hot in its middle (Messages 159, 203) with its own vivid colour along its borders
- *    and down its banks, so one glance tells which colour is on.
- *  - THE BLACK BLOCKS (ABYSS_EDGE): a quiet glow along the inside of their borders at rest, which brightens under the
- *    look; they move nothing, so they never flare white (areaFlares).
- *
- * Pure: numbers, typed arrays and shader strings; nothing imports 'three' or touches the page. Everything here is a
- * display rule for a simulated teaching picture: no light, current or activity is measured or implied.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const glslFloat = x => (Number.isInteger(x) ? `${x}.0` : `${x}`);
 const srgbToLinear = v => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
@@ -74,7 +74,7 @@ const LOOK_SET = 0.8, TISSUE_ADD = 0.3;
 export const AREA_HALO = Object.freeze({
   on: true, slots: 6,
   // (22 November 2026, the check: with the look alone the pool showed only near the block's edge, +2 to +8 of 255 in a
-  // band round it; the owner's complaint was "essentially no glow". look 0.4 -> 0.55, now that the neighbouring blocks
+
   // take none of it. A second check: still +1 to +5 of 255 in the band 28 to 70 px round the crosshair, only the block
   // itself brighter; the lead: a glow seen at a glance, at normal size. look 0.55 -> LOOK_SET below.)
   lit: 1, look: LOOK_SET, held: 0.4, easeS: 0.15,
@@ -101,25 +101,25 @@ export const AREA_LIT = Object.freeze({ on: true, rimCss: 5, rimShare: 0.34, rim
  * long as the look is on it and comes back when the look leaves), plus the halo at AREA_HALO.look. */
 export const LOOK_GLOW = Object.freeze({ unvisit: true });
 
-/** The black blocks' edge glow (the owner, Message 208: "The black motor parts should have some edge glow."). The
- * strip's in-between areas are drawn in the abyss's black (Message 206), with a black gap round them: they read as
- * holes. Each now carries a soft glow along the INSIDE of its borders: brightest at the inner edge of its black border
- * and gone `css` CSS pixels in (a falloff (1 - t)^falloffPower), constant in screen pixels, in one cool pale colour on both
- * halves of the brain, at `rest` of that colour: plainly there, yet quieter than any coloured block. Under the look it
- * brightens (lookCss wide, `look` of the colour) and the block throws the look's halo in the same cool pale colour.
- * Its borders are the two ends of its run along the strip (the gap between blocks: exact, from the strip coordinate)
- * and, with `face` above 0, across the strip the gyrus's own outline as seen (where the surface turns away from the
- * eye: faceLo .. faceHi of its facing, at most the same width, x face). share: the glow takes at most this share of the block's width from each
- * side, so a narrow block keeps a black middle. colour: sRGB 0..255. halo: the share of the look's halo strength a
- * black block throws (its colour is pale, so the same strength lightened its neighbours far more than a coloured
- * block's halo does: measured +30 to +55 of 255 in the ring round it at the full strength).
- * It is NOT activity: it never changes when another area is switched on, lit or pressed (it is added after the keys'
- * press and focus rules), it does not flare, and it changes nothing in what is picked. on: false takes it away.
- * (The draft of 21 November read the outline pass's ink picture with 40 samples a fragment and a distance field per
- * block; it was never run and is not used: the area shader already has both distances.) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 22 November 2026 (an independent check: at rest the edge read as a thin steel-grey line with a streak along the lower
-// bank, and under the look the white hover frame made it a hard white outline; the owner, Message 146: "much darker
-// blacks instead of ugly grays"): it reads as LIGHT now. colour 150, 170, 205 (a grey-blue) -> 120, 160, 235 (a cool
+
+
 // light blue); rest 0.5 -> 0.6; css 4 -> 6 and lookCss 7 -> 10 (a softer, longer falloff inward); face 1 -> 0: the
 // glow along the gyrus's outline as seen (where the surface turns from the eye) is off, it made the streak on the
 // coarse bank (faceLo / faceHi are kept for it); frame: under the look the block's frame is drawn in this colour,
@@ -150,14 +150,14 @@ export function shownActivity(activity, region, scan = false, o = NO_FLARE) {
   return areaFlares(region, scan, o) && Number.isFinite(activity) ? activity : 0;
 }
 
-/** When a key is PRESSED (ns-brain-ink BRAIN_KEYS press: it darkens and a dark frame closes in for 0.2 s). The scene
- * presses a key at each new activation count. A look counts its activation 0.5 s after it started (ns-actions
- * GAZE_DWELL.markS), when the 0.4 s of its light has just ended: the press then came between the lit block and the
- * look's glow, a dark dip of about 0.1 s at the end of every activation (measured by an independent check, 22 November
- * 2026: the block's middle 221 lit, 99 pressed, 170 under the look), one blink per activation; the owner: "The game
- * currently physically hurts to look at with your eyes" (Message 133). A count that comes less than quietS after the
- * area's light ended presses nothing, so the light falls from lit to the look's glow without a dip; a click (counted at
- * once) still presses its key. Pure: countRose, the area is lit now, seconds since its light last ended. */
+
+
+
+
+
+
+
+
 // (22 November 2026, a second check: the time alone could not tell the look's count from a click's. A click late in its
 // frame, 0.1 to 0.3 s after the light ended, lost its press in 4 of 20 frame phases at 60 frames a second and 11 of 20
 // at 144 (the area's light rises a frame after its count); and an area that never lights (a black block, the tongue)
@@ -205,11 +205,11 @@ export function haloParts({ glow = 0, looked = false, held = false, posture = fa
   return out;
 }
 
-/** Whose colour the whole brain's faint tint takes (the owner, Message 177: "have the whole brain light up slightly,
- * faintly, with whatever color area is being picked"), pure: { id, share } written into `out`. litId / litLevel: the
- * area of the strongest link that draws a line (an area in its contraction) and its level; lookId: the area the look
- * rests on; lookShare: the tint's share for a look (ns-scene-three BRAIN_PICK_TINT.look; 0 = a look gives none). A
- * contraction comes first (share = its level / 0.6, at most 1); else the look, for as long as it rests there. */
+
+
+
+
+
 export function pickTintWant(litId, litLevel, lookId, lookShare = 1, out = { id: null, share: 0 }) {
   if (litId) { out.id = litId; out.share = Math.min(1, Math.max(0, (Number.isFinite(litLevel) ? litLevel : 0) / 0.6)); }
   else if (lookId && lookShare > 0) { out.id = lookId; out.share = Math.min(1, lookShare); }

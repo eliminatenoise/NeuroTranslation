@@ -1,59 +1,59 @@
-/** NeuroSurge: the ELECTRICAL MAP's live scan and storms, the pure part (22 November 2026, section 192, part 3; the map
- * itself is ns-emap.mjs, its drawing ns-emap-three.mjs).
- *
- * The owner, 22 November about 01:25: "I mean like a live brain scan map where you have electrical wire, electrical
- * storm activity going everywhere." And on 20 November: "a connectomic activity map ... where we can actually see
- * activity, color-coded ... electrical storms and electrical activity and neural activity and networks and pathways ...
- * from brain to body and body to brain. And then we can tie that to muscle contraction."
- *
- * WHAT IT WORKS OUT, once a frame, as a few small arrays the drawing hands to its shaders (nothing per spot, per pulse
- * or per vertex on the processor):
- *  - the scan's resting sources (`base`): a few dozen soft hot spots on the brain's surface that swell, drift and fade,
- *    each slowly (no source changes faster than once in five seconds);
- *  - the storms (`storm0..2`): every one to three seconds a burst starts on a region (sometimes where the look rests),
- *    swells as a hot core with a wave rolling out over the surface, fires the fibres of the region's links so a front
- *    runs along each to the regions they join, which then flare in turn (one or two hops), and now and then sends a
- *    volley down the cord; each calms over one to two seconds; several overlap;
- *  - the activations (`act`): a switched-on area is the hottest spot of the scan while it is lit, its linked regions
- *    warm, and the feeling strip behind it warms when the report comes back.
- * Every function of light here is smooth: a point brightens and darkens at most about three times a second (the
- * owner: "The game currently physically hurts to look at with your eyes"); tests check it on the curves.
- *
- * WHAT IT IS. Made-up activity for the game, drawn like a live brain scan: not a recording, not a measurement.
- * No three.js, no DOM.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const freeze = Object.freeze;
 
-/** The scan and the storms (display choices, 22 November 2026; the owner's words above; tuned on pictures at 1600 x
- * 900). Millimetres are the brain atlas's; seconds are the map's clock.
- *  - slots: storms alive at once (primary and their hops), the size of the shaders' arrays;
- *  - everyS: a new storm starts after a pause drawn between these; lookShare: the share of storms that start on the
- *    region the look rests on;
- *  - riseS / fadeS: a storm swells over riseS, then calms over a time drawn between fadeS (its light is the product of
- *    the two smooth steps, so it rises once and falls once);
- *  - coreMm: the hot core's radius; waveMmS / waveWMm / waveGain / waveMaxMm: the wave rolling out over the surface
- *    (its speed, half width, light and how far it goes: a point under it brightens and darkens once in about
- *    2 * waveWMm / waveMmS = 0.58 s); a storm's place is the point of its region nearest the eye of pointsOf drawn
- *    at random (`eye`, stepStorms; a point nearer the midline than medialMm counts as that much farther: seen
- *    face-on through the gap between the halves a storm there was a bright block behind the mirror body), and a new
- *    storm's region the nearest of pickOf drawn (13 mm, 0.34 and 26 mm at first: the storms were small and many of
- *    them on the brain's far side, unseen; then 20 mm, 0.6 and 90 mm with strengths 0.7 to 1: close up, with an area
- *    lit, the heat summed to near white over most of the brain, a white-out); area: a lit area's own storm;
- *  - hops / hopGain / hopFan: a storm fires up to hopFan of its region's links; the regions they join flare when the
- *    front arrives (hop 1) and fire on once more (hop 2), each weaker;
- *  - fibreMmS: the fronts' speed along the fibres; fibreHeadMm: their head's half length (a point under a passing
- *    head brightens over about 2 * fibreHeadMm / fibreMmS = 0.15 s and settles to the storm's steady light: it travels,
- *    it does not blink);
- *  - cordShare / cordDelayS / cordRate: now and then a storm sends a volley down the cord, cordDelayS after it starts,
- *    running cordRate seconds of the route's own time coordinate a second (the route's front runs 1: this one is slower);
- *  - strength: a primary storm's strength is drawn between these;
- *  - base: the resting sources (n of them, each drifting driftMm about its place over driftS, swelling with a period
- *    drawn from periodS, up to gain, radius radiusMm); floor: the scan's light where nothing happens;
- *  - act: the activation's sources (at most n; the area itself at `level` of its level, a linked region at `link`, the
- *    feeling strip at `sens` once the report is back; radiusMm);
- *  - traffic: the pulses that run on every wire at all times: hz pulses a second pass any point (never more than
- *    1.1: three times a second is the limit), spacingMm apart (long bundles wider apart, so they run faster), gain. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const EMAP_STORM = freeze({
   slots: 16,
   everyS: freeze([1, 3]), lookShare: 0.35,
@@ -71,7 +71,7 @@ export const EMAP_STORM = freeze({
   floor: 0.1,
   // (22 November 2026: the heat above the floor fades to nothing toward the midline, from midFadeMm[1] to midFadeMm[0]
   // millimetres off it: the halves' inner faces, seen face-on through the gap, glowed as a flat yellow bar behind the
-  // mirror body; a checker and a reviewer found it, and that it spread there from storms placed elsewhere)
+
   midFadeMm: freeze([6, 22]),
   act: freeze({ n: 8, level: 0.75, link: 0.3, sens: 0.45, radiusMm: 14 }),
   traffic: freeze({ hz: freeze([0.6, 1.1]), spacingMm: freeze({ brain: 22, body: 60, bundle: 34 }), gain: 0.5 })

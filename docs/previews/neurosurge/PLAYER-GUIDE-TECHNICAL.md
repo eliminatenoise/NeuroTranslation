@@ -2,6 +2,18 @@
 
 [Open Full online](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Simple guide](PLAYER-GUIDE.md)
 
+## Keyboard focus and aiming
+
+Full and Lite use the same game controls. Lite uses Brotli compression for the same anatomical meshes as Full. The downloadable Lite package contains the local Node.js launcher and the compressed Lite packs. Extract it before opening the launcher inside **lite**. Node.js 18 or later must be available on the computer.
+
+When the game canvas has keyboard focus, **Left Arrow** and **Right Arrow** step through the motor areas. **Up Arrow** and **Down Arrow** change the vertical look angle. In the eye view, this input also moves the selected arm at the shoulder or the selected leg at the hip. Press **4** and then **Up Arrow** to test that response on the right arm.
+
+The scrollable information card accepts focus with **Tab**. While the card has focus, the vertical arrows scroll its text. Selecting the canvas returns the keyboard to the scene. To carry the mirror body with the keyboard, use the arrows to place the aiming mark on its head or trunk and hold **Space**. Release it to finish the hold.
+
+Press **E** for the outside view. When the layout has room, the limb selector and hint move to the side of the simulated head and trunk. On narrower screens their position depends on the space left by the information cards. The camera position stays under player control.
+
+[Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-body-81-2026-11-28/NeuroSurge-Lite.zip)
+
 ## Input and movement
 
 - Start and **Resume** use a free pointer. Drag on empty space to turn the view. **Capture mouse** in the Escape menu enables browser pointer lock, so each mouse movement turns the view. Escape releases it. If the browser declines capture, drag on empty space to keep playing.
@@ -12,11 +24,11 @@
 - E switches modes. The eye view rotates about a fixed position. The outside view orbits a fixed point at a constant distance. Each mode has a fixed field of view for the current window size. The camera does not follow the simulated body.
 - R changes the information shown. M toggles the detailed electrical map. The normal view has a separate, lower-opacity electrical effect on the cortex and motor strip, with an off switch in Escape settings.
 - Press Escape and open **View tutorial** to review its steps or resume or restart the sequence. Markers identify game regions or joints in view.
-- In step 4, a vertical look in the eye view starts the measurement. The tutorial advances if the simulated wrist or ankle moves at least 2.5 cm relative to its shoulder or hip within 0.35 seconds of game time. The reference is its position just before the look. Drag on empty space or move the captured pointer. Press **E** to return from the outside view.
+- In step 4, a vertical look in the eye view starts the measurement. The tutorial advances if the simulated wrist or ankle moves at least 2.5 cm relative to its shoulder or hip within 0.35 seconds of game time. The reference is its position just before the look. Press Up Arrow or Down Arrow, drag on empty space or move the captured pointer. Press **E** to return from the outside view.
 
 When the scene is out of view, the recovery hint offers drag, arrow-key aiming and Escape → Reset brain view. With the brain out of view, the reset restores the initial look. Tutorial and information panels take pointer input, and the Brain ring marks a valid Space pickup.
 
-Extra sharing parameters leave the selected edition intact. The address error panel opens the default game address through **Start the game**. Camera drag suppresses motor-area activation by the aiming mark. With the information visible, the ring in the limb drag step appears when a press at its centre can select the chosen limb. The view recovery message is available at every information level.
+Extra sharing parameters leave the selected edition intact. An unrecognized edition opens the address error panel. It offers the default game address through **Start the game**. Camera drag suppresses motor-area activation by the aiming mark. With the information visible, the ring in the limb drag step appears when a press at its centre can select the chosen limb. The view recovery message is available at every information level.
 
 ## Command box and camera
 

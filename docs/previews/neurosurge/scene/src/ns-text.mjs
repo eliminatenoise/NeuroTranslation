@@ -1,7 +1,7 @@
 // NeuroSurge plain UI text (round 3, R3-text, 2026-11-08). The single source of user-visible wording.
 //
-// Why: the user asked (R17, exact): "the language should be such that it's pretty explanatory. It's pretty simple so
-// that anyone can understand. We're not trying to go extremely jargonistic or terminological or technical here."
+
+
 // Lead decision D3: default visible text targets a curious 12-year-old: short sentences, everyday words, technical terms
 // only in brackets after a plain phrase or inside a collapsed "More detail".
 //
@@ -106,7 +106,7 @@ export const HONESTY = deepFreeze({
       '(BA4) lies in the anterior bank of the central sulcus, which is not shown separately.'
   },
   // R558 (genuine note R26: "no floating face at the top"): the separate own-face display is gone; the face is on the
-  // mirror body, and on your own head when you look from behind. R558 (the user's notes of 2026-11-10; ns-scene-three
+
   // FIRST_PERSON_BODY): the ordinary view draws only what is in front of your face. R558 (notes of 2026-11-11): the
   // picture is taken from between the eyes, the whole body is solid, and the body sits with every limb straight forward.
   face: {
@@ -119,7 +119,7 @@ export const HONESTY = deepFreeze({
       'out in front of you, side by side, and your chest is below you. The mirror body shows the same face, chewing, neck and trunk muscles, and ' +
       'the view from behind (E) shows your whole body with the head in place.'
   },
-  // R558 (user Message 20, builder FA): the completed skull and eyes, and the scalp muscles drawn lying on that skull.
+
   skull: {
     id: 'skull-eyes',
     plain: 'The back of the skull and the eyes come from the same anatomy set as the other bones. The scalp muscles ' +
@@ -138,7 +138,7 @@ export const HONESTY = deepFreeze({
     more: 'The link from a muscle to a motor area is read from the same rough map the game uses in the other direction. ' +
       'Real motor cortex has overlapping zones that vary between people; one muscle does not have one point.'
   },
-  // R5-text (D17, user R21): the glow is a picture of the game's area-to-muscle link, never a nerve path.
+
   glow: {
     id: 'glow-not-nerve',
     plain: 'The shared colour and the cone of light between a brain area and its muscles are only a picture. They show ' +
@@ -149,12 +149,12 @@ export const HONESTY = deepFreeze({
       'signal (the glow only looks like light-activated tissue): real corticospinal signals reach spinal motor neurons ' +
       'and then peripheral nerves; corticobulbar signals reach cranial-nerve nuclei in the brainstem.'
   },
-  // R5-text (D15, user R19): the lifted outer muscles are a display choice; in the body they lie on the deeper layer.
+
   // R558: the lift is a stack (outer level, a middle level by half) and the two ends of a lifted muscle stay on the
   // bone, so the part between the end and the belly is drawn longer than it is. Where a mesh meets bone is worked out
   // from the shapes of the licensed meshes; it is not a record of measured attachments. Round 3: every muscle is also
-  // drawn a little fuller (the user: "full, filled-out and plumpy"), a display choice, not measured anatomy.
-  // Round 4 (Message 18): smaller lift and fill (realistic, not bodybuilder bulk); the front of the belly is drawn
+
+
   // smooth where the atlas shapes the rectus abdominis into the sheet over it. R558 (builder AN): the muscles the first
   // anatomy set lacked (latissimus dorsi, erector spinae, rectus abdominis, gracilis, ...) now come from a second licensed
   // set (packets/missing-muscles-r1); the text names where they come from and the few muscles still not drawn.
@@ -189,7 +189,7 @@ export const HONESTY = deepFreeze({
       'spine muscles, the suboccipital muscles, subclavius, most small muscles of the sole, the pelvic floor, the ' +
       'diaphragm and the muscles between the ribs.'
   },
-  // R5-text (D19, user R23): the mirror body copies the simulated body; it is a picture, not a person or a sensor.
+
   mirror: {
     id: 'mirror-picture',
     plain: 'The mirror body is only a picture. It copies your body’s moves and made-up colours at the same time. It is ' +
@@ -223,8 +223,8 @@ export const BRAND = deepFreeze({
  * compassArrows (the 3D arrows, D16), faceMuscles (D20), mirrorResetButton (a separate "Reset mirror body" button
  * instead of Reset brain view also turning the mirror body back). */
 const part = (text, need = null) => ({ text, need });
-// 22 November 2026 (WORDS2, hunt H15; the owner: "Way too much text now"; "Things should be chunked together and those
-// chunks should be spaced away from each other"): the full instructions ("Show the full instructions" on the Esc page)
+
+
 // were about 3,400 words: these steps 1,500, the controls 890, the limits 620, and the steps said most controls a second
 // time in other words. Now each step says what a thing IS in two to four short sentences, and each control is said ONCE,
 // in the Controls list below. The step "Move other body parts." also said that Space on your own limb lets you carry it,
@@ -243,7 +243,7 @@ const STEP_TABLE = [
     'your left arm, left leg, right leg or right arm. In the eye view the chosen limb goes with your view, and W, A, S and D ' +
     'move its hand or foot. Your view turns only when the hand or foot would leave the picture.')],
   intro: [part('Keys 1 to 4 choose a limb; in the eye view it goes with your view, and W, A, S and D move its hand or foot. Tap Space twice: all four limbs turn once. Tap twice and hold: they keep turning, slowly.')] },
-  // R558 (Messages 2 and 56; 19 November 2026, the brain turned half a turn): what the band is, which way the brain faces
+
   // and that each half mainly moves the other side (HONESTY.crown and HONESTY.leftArmRightHalf say both in full).
   { head: 'The brain.', parts: [
     part('A giant brain floats in front of you. Its coloured band is the motor strip: a simplified map of the areas that ' +
@@ -255,7 +255,7 @@ const STEP_TABLE = [
     'are at the bottom), so its right half is on your left. Each half of the brain mainly moves the opposite side of your ' +
     'body: the areas on your left move your left side. Each motor area has its own colour: switched on, it and its muscles glow in that colour.'),
     part('A cone of light in that colour joins them (a picture, not a nerve).', 'glow')] },
-  // R558 (Message 56): the order of the body along the strip (ns-bodymap order), then the colour families.
+
   { head: 'A map of the body.', parts: [
     part('Along the strip, from the top middle of the brain down each side: leg (toes to hip), trunk, arm (shoulder to ' +
       'thumb), neck, face, tongue and throat. Blues: left arm. Oranges: right arm. Purples: left leg. Yellows: right leg. ' +
@@ -264,15 +264,15 @@ const STEP_TABLE = [
   intro: [part('Along the strip, from the top middle of the brain down each side: leg (toes to hip), trunk, arm (shoulder ' +
     'to thumb), neck, face, tongue and throat. Blues: left arm. Oranges: right arm. Purples: left leg. Yellows: right leg. ' +
     'Greens: belly and back. Pinks: face and neck.')] },
-  // 20 November 2026 (the owner, Message 206: "no permanent movements ... it will contract, then return to its previous
-  // place"); the look switches an area on, a click repeats it.
+
+
   // 24 November 2026 (ns-app FREE_AIM, section 206): the pointer is free at the start and is the aim: "point at", not
   // "rest your look on" (with the mouse captured the mark at the middle of the picture does the pointing).
   { head: 'Switch areas on.', parts: [part('Point at a motor area to move its body part. Click to repeat the movement. ' +
     'The part contracts, then goes back to where it was, unlit: a rule of this game, not something measured. Click a ' +
     'muscle on either body to switch on its motor area. With the mouse captured, the mark at the middle of the picture does the pointing.')],
-  intro: [part('Point at a motor area and its movement happens at once: the part contracts, then returns to where it was. Click to do it again. The arrow keys step to the next area.')] },
-  // 20 November 2026 (Message 204): Space grips with all four limbs; 19 November (LIMB_KEYS.view.hold): Space on your own
+  intro: [part('Point at a motor area and its movement happens at once: the part contracts, then returns to where it was. Click to do it again. The left and right arrow keys step to the next area.')] },
+
   // limb chooses it; ns-app LIMB_PUSH and LIMB_BLOCK (sections 174, 185, 194, 195): the moved limb pushes the others and
   // stops against one that cannot give way (hunt H3); ns-reference-graph CARRY_THROUGH: a carried thing goes through anything.
   { head: 'Hold and carry.', parts: [part('Space takes hold of the brain or the mirror body; turn your view to carry it. ' +
@@ -280,7 +280,7 @@ const STEP_TABLE = [
     'Press on a limb and drag to turn or bend it. The limb you move pushes your other limbs aside and stops against ' +
     'one that cannot give way; it can sink in a few centimetres first.')],
   intro: [part('Other body parts respond through the brain. Hold or tap Space to take hold. Move the pointer or press W/A/S/D to carry what you hold. Hold Shift as you press to reach the other thing in line.')] },
-  // R5-text (D16, user R20 "I don't want them to be curved"): no "curved" arrows.
+
   { head: 'Turn the brain.', parts: [
     part('Press on the brain and drag to turn it, or click or hold one of the four grey arrow tips round the motor ' +
       'strip. The brain turns in place. Turn it to one side to see the lowest face areas (the tongue).', 'compassArrows'),
@@ -289,16 +289,16 @@ const STEP_TABLE = [
     part('Click or hold an arrow by the brain to turn the brain in place.', '!compassArrows')] },
   { head: 'See your body.', parts: [
     part('Look down to see your trunk, your legs and your feet. Your face and back are on the mirror body: it copies yours.'),
-    // R5-text (D15, user R19).
+
     part('The outer muscles are lifted out a little, like in a Body Worlds exhibit, so you can see the deeper ones.', 'bodyWorlds'),
     part('The “What is happening” card explains each area you look at or click.')],
   intro: [part('Your right arm reaches forward at the lower right. Look down for your legs and feet. Your face and back are on the mirror body.'),
     part('The outer muscles are lifted a little to show the deeper ones.', 'bodyWorlds')] },
-  // R5-text (D18, user R22).
+
   { head: 'See your back.', need: 'thirdPerson', parts: [part('Press E to see your body from behind (third person). ' +
     'Press E again to go back to your own eyes.')],
   intro: [part('Press E to see your back (third person). Press E again to go back.')] },
-  // R558 (user: "a 1:1 perpendicular perfect reflection"; Message 45: all four arrows orbit).
+
   { head: 'The mirror body.', need: 'mirror', parts: [part('In front of you sits a mirror image of your body, as in a ' +
     'real mirror. It copies everything your body does. Click its muscles, hold Space on it to carry it, or drag it or ' +
     'use its green arrow tips to turn or tilt it.')],
@@ -308,7 +308,7 @@ const STEP_TABLE = [
 // trackpad", "Double-tap and hold" into "Double-tap Space". The words below are checked against ns-app and ns-controls
 // as they are on this date: LIMB_KEYS (1 to 4, the double click, the view carrying the limb in the eye view), the
 // limb's keys along its line (section 145, hunt H22), the press and drag on a limb and the right wrist (section 183),
-// SPACE_GRIP (Message 204), LIMB_KEYS.view.hold, CARRY_THROUGH, REACH_CODES (Shift), the arrows, E (viewAfterRelease),
+
 // R (toggleInfoDetail: read, more, off), M (EMAP, section 192) and Esc (pausedNote: Esc again keeps the pointer free).
 const CONTROL_TABLE = [
   ['Mouse / trackpad', 'drag on empty space to look around. Your head and neck turn, and past their reach your eyes turn further. As you look up or down in the eye view, the chosen limb goes with your view'],
@@ -319,6 +319,8 @@ const CONTROL_TABLE = [
   ['Point / Click', 'point at a motor area: its part contracts, then returns. Click to do it again. A click never closes a hand. With the mouse captured, the mark at the middle of the picture does the pointing.'],
   ['Click a muscle', 'on your body or the mirror body: switches on the brain area that moves it'],
   ['← / →', 'step your look to the next motor area on that side (hold the key to keep stepping)'],
+  // 25 November 2026 (ns-controls LOOK_KEY; hunt of update 78, finding 3: no key turned the look)
+  ['↑ / ↓', 'look a little up or down (hold to keep going); in the eye view the chosen limb follows'],
   ['Press and drag', 'on the brain or the mirror body: turn it. On a limb: sideways turns it, up bends and down straightens it (on your right hand it bends the wrist). That limb becomes the chosen one.'],
   ['Hold Space', 'on the brain or the mirror body: take hold. Turn your view to carry it; W and S move it farther or nearer, A and D sideways. Let go to leave it there. On one of your limbs Space only chooses it. While Space is down, both hands close and the toes curl.'],
   ['Tap Space', 'take hold and keep holding; tap again to let go'],
@@ -332,8 +334,8 @@ const CONTROL_TABLE = [
   ['M', 'the electrical map: the brain as a live scan with storms of activity, and the nerves as lines of light. It is made up by the game and drawn like a brain scan: not a recording. M again: back.'],
   ['Esc', 'pause: this page, Reset body, Reset brain view and settings. Esc again plays on with a free mouse pointer.']
 ];
-/** R5-text: the short control words for the 2 s start page (introControls), by control key. R558 (Messages 55 and 56):
- * the Esc page opens with these short words too; its "Show the full instructions" button swaps in CONTROL_TABLE's. */
+
+
 const INTRO_CONTROL_WORDS = {
   'Mouse / trackpad': 'drag on empty space to look around',
   '1 to 4': 'choose the limb W A S D move',
@@ -344,6 +346,7 @@ const INTRO_CONTROL_WORDS = {
   'Point / Click': 'point at an area: the part moves. Click: again.',
   'Click a muscle': 'switch on its brain area',
   '← / →': 'arrow keys: step your look to the next motor area',
+  '↑ / ↓': 'arrow keys: look up or down; the chosen limb follows',
   'Press and drag': 'turn the brain or mirror body; turn or bend a limb',
   'Hold Space': 'hands and feet grip; hold the brain or mirror body, look to carry it',
   'Tap Space': 'take hold and keep holding; tap again to let go',
@@ -422,7 +425,7 @@ export const SHELL = deepFreeze({
   /** R3-polish: one plain line under the Esc page buttons saying what the two reset buttons do. */
   // R5-text (D19): Reset brain view also turns the mirror body back to face you (ns-mirror resetMirror). With the
   // separate button (feature mirrorResetButton) shellText uses RESET_HELP.separate instead.
-  // R558 (Message 55): two short sentences; how to read More detail is the R row of the controls.
+
   resetHelp: 'Reset body puts your whole body back the way it started and clears the marks on used areas. ' +
     'Reset brain view puts the brain back where it started, and the mirror body back where a mirror shows you.',
   brainReset: 'Brain view reset: the brain is back in its first place and angle. The mirror body is back where a mirror shows you.',
@@ -438,7 +441,7 @@ export const SHELL = deepFreeze({
   instructionHeads: stepHeads(ALL_FEATURES),
   // R5-text: the SHORT step texts for the 2 s start page (loading and intro modes), same order and heads as
   // instructions; the round-5 steps and controls made the full page taller than the screen at 1280x720 (round5/
-  // R5-text-NOTES.md 4.1). R558 (Messages 55 and 56): the Esc page opens with these short texts as well, and
+
   // `instructions` (the full words) is one click away (detailsMore / detailsLess).
   introInstructions: introStepTexts(ALL_FEATURES),
   detailsMore: 'Show the full instructions',
@@ -449,8 +452,8 @@ export const SHELL = deepFreeze({
   // R5-text: the same controls with short words for the 2 s start page (and, R558, for the Esc page as it opens).
   introControls: introControlRows(ALL_FEATURES),
   settingsTitle: 'Settings',
-  // 19 November 2026 (EASE; the owner: "Things should be chunked together and those chunks should be spaced away from
-  // each other"; "It's not clear what the numbers do and it just adds to confusion on the menu"). The Esc page is a
+
+
   // FEW titled groups with wide gutters, not one long list: each group is one picture of its keys (ns-app
   // buildShellMenu: pad = the trackpad, wasd = the pyramid, space, keys = the key caps named) and at most five short
   // rows, [what you do, what it does]. Settings is the last group.
@@ -461,7 +464,8 @@ export const SHELL = deepFreeze({
   // group's note (its repeat of the W S and A D rows is gone), Esc twice in Views and reading; the held-drag row is gone.
   menu: [
     { id: 'look', title: 'Look and press', picture: 'pad', rows: [['Point', 'a motor area: its part moves'], ['Click', 'move it again'], ['Drag empty space', 'look around'], // (24 November 2026, FREE_AIM: the pointer is the aim)
-      ['← →', 'aim at the next motor area'], ['Drag, arrow tips', 'turn the brain or mirror body']] }, // (second pass: one row)
+      // (25 November 2026, ns-controls LOOK_KEY: the four arrow keys share one row; a group keeps five rows at most)
+      ['← → / ↑ ↓', 'next area / look up or down'], ['Drag, arrow tips', 'turn the brain or mirror body']] }, // (second pass: one row)
     { id: 'move', title: 'Move', picture: 'wasd', rows: [
       ['1 / 2', 'choose left arm / left leg'],
       ['3 / 4', 'choose right leg / right arm'],
@@ -473,7 +477,7 @@ export const SHELL = deepFreeze({
       // limb (ns-app holdCarries).
       note: 'Double click steps to the next limb. In the eye view the chosen limb goes with your view: look up to raise ' +
         'it, down to lower it. Press on a limb and drag to turn or bend it.' },
-    // (20 November 2026, evening, Message 204: Space grips with all four limbs at once; a click grips nothing)
+
     { id: 'hold', title: 'Hold and carry', picture: 'space', rows: [['Space', 'hands and feet grip; tap toggles'],
       ['W A S D', 'carry the held item'],
       ['Tap twice', 'Space turns your limbs'], ['Shift', 'reach behind as you press']] },
@@ -484,22 +488,22 @@ export const SHELL = deepFreeze({
   ],
   sensitivity: 'Look speed',
   invertY: 'Flip up and down (invert Y)',
-  // R558 (user Message 37): off by default; the "Looking at" card (bottom left) always names what is under the crosshair.
+
   crosshairCaption: 'Also show the name next to the crosshair (the “Looking at” card always shows it)',
   // R558 (genuine note R28): the keyboard picture on the start page and the Esc page. Short words sit on the keys; the
   // two lines under the picture say the same in full. Every key named here is a key the game really handles.
   keyboard: {
     title: 'Where the keys are',
-    label: 'A picture of the keys the game uses. W, A, S and D sit together on the left of the keyboard: W is above S, with A and D beside S. E is just right of W, and R is just right of E. Shift is the wide key at the left end of the row below A, and M is the seventh letter key right of it in that row. The space bar is the long key at the bottom: it takes hold of the brain or the mirror body, chooses a limb and turns your limbs. Esc is at the top left. The number keys are the row above W: 1 to 4 choose the limb that W, A, S and D move. The left and right arrow keys are at the bottom right: each steps your look to the next motor area on that side.',
-    keys: { Escape: 'pause', KeyW: 'forward', KeyA: 'left', KeyS: 'back', KeyD: 'right', KeyE: 'view', KeyR: 'read', KeyM: 'map', ShiftLeft: 'other in line', ArrowLeft: 'area', ArrowRight: 'area' },
+    label: 'A picture of the keys the game uses. W, A, S and D sit together on the left of the keyboard: W is above S, with A and D beside S. E is just right of W, and R is just right of E. Shift is the wide key at the left end of the row below A, and M is the seventh letter key right of it in that row. The space bar is the long key at the bottom: it takes hold of the brain or the mirror body, chooses a limb and turns your limbs. Esc is at the top left. The number keys are the row above W: 1 to 4 choose the limb that W, A, S and D move. The left and right arrow keys are at the bottom right: each steps your look to the next motor area on that side. The up and down arrow keys turn your look up or down a little.',
+    keys: { Escape: 'pause', KeyW: 'forward', KeyA: 'left', KeyS: 'back', KeyD: 'right', KeyE: 'view', KeyR: 'read', KeyM: 'map', ShiftLeft: 'other in line', ArrowLeft: 'area', ArrowUp: 'look', ArrowDown: 'look', ArrowRight: 'area' },
     names: { Escape: 'Esc', KeyW: 'W', KeyA: 'A', KeyS: 'S', KeyD: 'D', KeyE: 'E', KeyR: 'R', KeyM: 'M', Space: 'Space', ShiftLeft: 'Shift',
       Digit1: '1', Digit2: '2', Digit3: '3', Digit4: '4', Digit5: '5', Digit6: '6', Digit7: '7', Digit8: '8', Digit9: '9',
-      ArrowLeft: '←', ArrowRight: '→' },
-    // R558 (Messages 55 and 56): written once at the end of the number row (ns-app KEYBOARD_PICTURE_ROWS note).
+      ArrowLeft: '←', ArrowUp: '↑', ArrowDown: '↓', ArrowRight: '→' },
+
     numWords: 'Number keys 1 to 4 (the row below): choose the limb the keys move (left arm, left leg, right leg, right arm)',
-    // R558 (Message 40): the three Space gestures, in short words on the key.
+
     spaceWords: 'hold or tap: take hold · tap twice: turn · tap twice and hold: keep turning slowly',
-    // R558 (Message 55): two short notes. The key captions already say what E, R, Esc, the arrows and the number
+
     // row do; the full words are in the Controls list.
     lineMove: 'W, A, S, D move the hand or foot of the limb you chose (1 to 4), or the thing Space holds. The chosen limb goes with your view. Hold Shift as you click, press Space or drag to reach the other thing in line with the crosshair.',
     // (21 November 2026, late: Space on one of your limbs chooses it, ns-app LIMB_KEYS.view.hold; the line said it takes hold of a limb)
@@ -512,9 +516,9 @@ export const SHELL = deepFreeze({
   // R4-integrator (D8): the Esc-page picture-quality setting (option names in QUALITY_LABELS).
   quality: 'Picture quality',
   // R4-polish: "softer" was not what a player sees on a software renderer (a half-size, blockier picture); say it plainly.
-  // R558 (Message 20): the thin dark outlines between limbs are drawn at every quality; the soft shading in the creases
+
   // only at full quality (High, or Auto on a fast computer).
-  // R558 (Message 55): the help is two short sentences; the outline and crease detail is in the player guide.
+
   qualityHelp: 'Auto keeps the game smooth. Low draws a simpler, less sharp picture for slow computers. The colours and ' +
     'what they mean stay the same.',
   // R4-fix (code review M1): edge smoothing is chosen when the page loads; after a Low start, High is fully sharp only
@@ -576,6 +580,10 @@ export const FACE_VIEW_LABELS = deepFreeze({ off: 'Off' });
 
 /* ------------------------------------------------------------------ HUD */
 
+/** The area key that walks back after the area key `dir` (+1 →, -1 ←) found no more areas: '←', '→', or both when the
+ * direction is not known (HUD.areaEnd, TIP.areaEnd). The words put it after "Press" with a no-break space, so a line
+ * never ends between the word and its key. */
+export const otherAreaKey = dir => (dir > 0 ? '←' : dir < 0 ? '→' : '← or\u00a0→');
 /** Same keys as ns-app HUD_TEXT (plus the new gazeStripPrefix and gazePrefix). Lines that are only in the hidden
  * details mirror are plain too, so nothing jargon-heavy is one click away. */
 export const HUD = deepFreeze({
@@ -611,7 +619,7 @@ export const HUD = deepFreeze({
   gazeEmpty: 'Looking at: empty space (nothing switches on)',
   gazeBrain: 'Looking at: the brain, but not a motor area (nothing switches on)',
   gazeGlass: 'Looking at: brain glass, not a motor area (nothing switches on)',
-  // R558 (Messages 55 and 56): one opening for every motor area, and the line names the AREA first, then its movement
+
   // ("Looking at (motor area): Left knee · Bend left knee"). It was "(left arm): " for the left-arm areas and
   // "(other body part): " for the rest, followed by the movement alone, which never said which area it was.
   gazeAreaPrefix: 'Looking at (motor area): ',
@@ -620,25 +628,25 @@ export const HUD = deepFreeze({
   pulseNone: '',
   pulseResidual: 'Arm relaxing back to rest',
   grabbing: 'Turn your view to carry it. W moves it farther, S nearer, and A/D sideways. Let go of Space.',
-  /** R558 (Message 40): while Space holds the brain or the mirror body (what: 'brain' | 'mirror'); kept: the hold was
-   * taken with a tap (it stays after the tap, so a tap lets go), else it lasts while Space is down. */
+
+
   holdingItem: (what, kept = false) => `Holding ${what === 'mirror' ? 'the mirror body' : 'the brain'}. ` +
     'Turn your view to carry it. W moves it farther, S nearer, and A/D sideways. ' +
     (kept ? 'Tap Space to let go.' : 'Let go of Space to leave it there.'),
-  /** R558 (Messages 2, 12 and 40): while Space holds one of your own limbs (ns-grasp LIMB_IDS); kept as above. */
+
   holdingLimb: (limb, kept = false) => `Holding your ${({ rightArm: 'right hand', leftArm: 'left hand (W/A/S/D and your look move it, as always)', rightLeg: 'right foot', leftLeg: 'left foot' })[limb] || 'limb'}` +
     (limb === 'leftArm' ? (kept ? '. Tap Space to let go.' : '. Let go of Space when done.')
       : `: move the pointer sideways, up or down. W moves it farther, S nearer, and A/D sideways. ${kept ? 'Tap Space to let go.' : 'Let go of Space to leave it there.'}`),
-  /** 19 November 2026 (the owner: "If we click on a limb, we now control that limb until we change the camera view"):
-   * while a limb taken by a click is controlled. */
+
+
   // (later the same day, ns-app LIMB_KEYS.view: one limb is always chosen and goes with the view; nothing lets go of it)
   controllingLimb: limb => `W/A/S/D move your ${({ rightArm: 'right hand', rightLeg: 'right foot', leftLeg: 'left foot' })[limb] || 'limb'}. Look up or down to raise or lower it.`,
-  /** R558 (Message 12): a move stopped where two of the three would touch (what: 'brain' | 'mirror' | 'body'). */
+
   contactStop: what => `${({ brain: 'The brain', mirror: 'The mirror body', body: 'Your body' })[what] || 'That'} stopped: your body, the brain and the mirror body stop where they would touch`,
   rotationPrefix: 'Left forearm: ',
   rotationHint: ' · tap Space twice: all limbs turn',
   wholeGroupTint: 'These finger muscles serve all four fingers, so all four light up, not just one',
-  // R558 (Message 40): the slow turn of a double tap held, and a double tap's one step.
+
   spaceHeld: 'Double tap held: all four limbs keep turning slowly (simulated). Let go of Space and they stay.',
   turnStep: 'Double tap: every limb turns once (simulated)',
   spaceReleased: 'Space let go: every limb stays where it is (simulated)',
@@ -652,14 +660,16 @@ export const HUD = deepFreeze({
   /** R558 (hunt 2 controls #4): shown for a few seconds when E is pressed while Space holds the brain or the mirror body
    * (the view does not change while something is held). */
   viewWhileHolding: 'Let go of what Space holds first (or tap Space if you tapped to take hold), then press E.',
-  /** R558 (Messages 55 and 56): the area keys (left / right arrow). Shown for a few seconds when a press found no
-   * further area that way, and when it was pressed while something is held (a step is a look; a held thing follows the look). */
-  areaEnd: 'No more motor areas that way from here. Press the other arrow key, or turn the brain to bring more areas into view.',
-  areaUnreachable: 'Could not aim at another area from here. Turn the brain or try the other arrow key.',
-  areaWhileHolding: 'Let go of what you hold first, then press the arrow key.',
-  /** R558 (Messages 6, 55 and 56): what a number key (n) just did when it was not the movement itself. moveStill: it
-   * moved nothing. Shown for a few seconds. (20 November 2026, Message 206: moveBack, "brought the part back", and the
-   * head-moved lines, which said how to bring a held head back, are gone with the latch.) */
+
+
+  // (A review: with ↑ and ↓ turning the look, "the other arrow key" could be read as one of them: the words name the key,
+  // ← after → and → after ←; dir: the pressed key's, +1 →, -1 ←, else both are named.)
+  areaEnd: dir => `No more motor areas that way from here. Press\u00a0${otherAreaKey(dir)} to go back, or turn the brain to bring more areas into view.`,
+  areaUnreachable: dir => `Could not aim at another area from here. Turn the brain, or press\u00a0${otherAreaKey(dir)} to go the other way.`,
+  areaWhileHolding: 'Let go of what you hold first, then press\u00a0← or\u00a0→.',
+
+
+
   moveStill: n => `Key ${n}: that movement is already there, so nothing moved. Try another number on the card.`,
   contextLost: SHELL.contextLost,
   placeholderAttribution: 'Stand-in shapes only, no real body parts. The full game uses: ',
@@ -689,6 +699,9 @@ export const HUD = deepFreeze({
   /** R4-integrator (R4-player 1.1 / 1.4): added to the crosshair caption when the aimed area moves nothing you can see. */
   nothingMoves: 'nothing moves on the body',
   relaxNothing: 'nothing to see: your hand is not gripping',
+  /** (Hunt of update 74, finding 8, a third review: ns-app gripRefuses) the crosshair caption on a left-hand finger or
+   * thumb area while Space grips: its movement does not start. */
+  gripCaption: 'your left hand grips, so nothing moves',
   /** R4-fix (review RP6): the left shoulder area has no action of its own; the look and W/A/S/D move the shoulder. */
   shoulderMoves: 'your look and W, A, S, D already move it',
   /** R5-text (D18): the status line while the view from behind is on (VIEW has the other E texts). */
@@ -698,8 +711,8 @@ export const HUD = deepFreeze({
   /** R5-text (D19): crosshair / gaze line on the mirror body (gazeLine('mirror', part)). */
   gazeMirrorPrefix: 'Looking at (mirror body): ',
   gazeMirror: 'Looking at: the mirror body (it copies your body)',
-  /** R558 (hunt 2; Message 18 "differentiate each ... muscle node"): the crosshair on a muscle of the mirror body or of
-   * your own body names that muscle and says what a click (and Space) does there (gazeMuscleLine). */
+
+
   gazeMuscleClick: 'click: its brain area switches on',
   // (22 November 2026, WORDS2, hunt H10: never shown, crossPick.holdable is always false in ns-app; kept true: Space on
   // your own limb chooses it, LIMB_KEYS.view.hold. It said "hold Space to hold this limb".)
@@ -708,20 +721,20 @@ export const HUD = deepFreeze({
   gazeOwnPrefix: 'Looking at (your body): ',
   /** R558 (hunt 2): the crosshair on an arrow tip names what a click on it does (the tip's own caption). */
   gazeArrowPrefix: 'Looking at (arrow): ',
-  /** R558 (Messages 33 and 34): the line under "Looking at": what Space and a press-and-drag take at the crosshair (the motor
-   * area the look names means the brain, even behind a body; otherwise what you see: the brain's clear glass is
-   * see-through) and, when another item lies on the same line of sight, how to reach that one (hold Shift as you press:
-   * click, Space or drag). While Shift is held (reach), what the press will reach. front / behind: 'brain' | 'area' (a motor
-   * area of the brain) | 'mirror' | 'rightArm' | 'leftArm' | 'rightLeg' | 'leftLeg' | 'trunk' (your trunk, neck or head:
-   * nothing to hold) | 'arrow' (front only: an arrow tip) | null; ahead: the other item is the brain whose clear glass is
-   * IN FRONT of what you see; inFront: the other item is the body part IN FRONT of the motor area the look names; area:
-   * the plain name of a motor area behind ('' = none). R558 (Messages 44 and 55): short words, e.g. "Space holds the
-   * mirror body · Shift: the brain behind it", "Space holds the brain · Shift: your right arm in front of it" (a press
-   * and drag takes the same thing; the controls list says so).
-   * 22 November 2026 (WORDS2, hunt H10): limbsChosen is ns-app's LIMB_KEYS.view.hold, the rule TIP.spaceAim already
-   * follows (section 194): Space on one of your own limbs CHOOSES it and nothing holds it, so with it a limb's line is
-   * "Space chooses your right leg" and Shift held says a press "goes to" a limb rather than "takes" it. The line said
-   * "Space holds your right leg" while the right card beside it said "Your right leg is chosen". Without it, as before. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   controlTargets: ({ front = null, behind = null, ahead = false, inFront = false, area = '', reach = false, limbsChosen = false } = {}) => {
     const NAME = { brain: 'the brain', area: 'the brain', mirror: 'the mirror body', rightArm: 'your right arm', leftArm: 'your left arm', rightLeg: 'your right leg', leftLeg: 'your left leg', trunk: 'your trunk' };
     const LIMB = { rightArm: true, leftArm: true, rightLeg: true, leftLeg: true };
@@ -731,7 +744,9 @@ export const HUD = deepFreeze({
     const where = front === 'arrow' ? 'behind the arrow tip' : inFront ? 'in front of it' : ahead ? '(its clear glass in front)' : 'behind it';
     const chosen = limbsChosen === true;
     // Your trunk, neck or head cannot be held or turned: Shift there only taps (a click).
-    if (reach) return behind === 'trunk' ? `Shift held: a click taps ${far} ${where} (nothing to hold there)` : far ? `Shift held: click, Space or drag ${chosen && LIMB[behind] ? 'goes to' : 'takes'} ${far} ${where}` : 'Shift held: nothing behind to reach here';
+    // (Hunt of update 74, finding 8: with nothing behind what is seen, Shift reaches nothing and every control acts as
+    // without it, ns-app nothingBehind; the line said only that nothing was behind while the tip named the area's movement.)
+    if (reach) return behind === 'trunk' ? `Shift held: a click taps ${far} ${where} (nothing to hold there)` : far ? `Shift held: click, Space or drag ${chosen && LIMB[behind] ? 'goes to' : 'takes'} ${far} ${where}` : front && front !== 'arrow' ? 'Shift held: nothing behind, so click, Space and drag work as usual' : 'Shift held: nothing behind to reach here';
     const own = front === 'trunk' ? 'Space: nothing to hold here' : front && front !== 'arrow' ? `Space ${chosen && LIMB[front] ? 'chooses' : 'holds'} ${NAME[front]}` : '';
     return [own, behind === 'trunk' ? `Shift + click: ${far} ${where}` : far ? `Shift: ${far} ${where}` : ''].filter(Boolean).join(' · ');
   }
@@ -744,13 +759,13 @@ const fix1 = v => (Number.isFinite(v) ? v.toFixed(1) : '–');
 const fix2 = v => (Number.isFinite(v) ? v.toFixed(2) : '–');
 const str = v => (typeof v === 'string' ? v : v === null || v === undefined ? '' : String(v));
 
-/** HUD gaze line. kind: 'leftArm' | 'other' | 'between' (an in-between SCAN area) | 'strip' (a left-arm action point) |
- * 'mirror' (R5: the mirror body; label = the mirrored part, e.g. mirrorPartName('leftArm')) | 'glass' | 'brain' |
- * 'empty'.
- * R558 (Messages 55 and 56): for a motor area ('leftArm' | 'strip' | 'other') `label` is the movement under the look
- * and `area` the area's plain title; the line names the area, then the movement ("Looking at (motor area): Left knee ·
- * Bend left knee"). With one of the two (or the same words twice, as for an area without a movement of its own) the
- * line carries that one. */
+
+
+
+
+
+
+
 export function gazeLine(kind, label = '', area = '') {
   const l = str(label).trim();
   if (kind === 'mirror') return l ? `${HUD.gazeMirrorPrefix}${l}` : HUD.gazeMirror;
@@ -775,17 +790,19 @@ export function triggerLine(seq, source, label) {
  * plain atlas name; kind: 'muscle' | 'bone'; part (mirror only): which of your parts it mirrors (MIRROR_PART_NAMES,
  * e.g. 'your legs'); holdable (own only): the muscle belongs to a limb Space can hold. E.g. "Looking at (your body): right
  * biceps brachii, click to switch on its area; hold Space to hold this limb". */
-export function gazeMuscleLine({ where = 'own', name = '', kind = 'muscle', part = '', holdable = false } = {}) {
+export function gazeMuscleLine({ where = 'own', name = '', kind = 'muscle', part = '', holdable = false, gripped = false } = {}) {
   const n = str(name).trim();
   const head = where === 'mirror' ? HUD.gazeMirrorPrefix : HUD.gazeOwnPrefix;
   if (!n) return where === 'mirror' ? HUD.gazeMirror : HUD.gazeEmpty;
   const what = where === 'mirror' && str(part) ? `${n} (${str(part)})` : n;
   if (kind !== 'muscle') return `${head}${what}, ${HUD.gazeBone}`;
-  return `${head}${what}, ${HUD.gazeMuscleClick}${holdable ? `; ${HUD.gazeMuscleHold}` : ''}`;
+  // (hunt of update 74, finding 8, a third review: gripped, the Space grip refuses the movement this muscle's tap starts,
+  // ns-app gripRefuses: its click switches nothing on)
+  return `${head}${what}, ${gripped === true ? HUD.gripCaption : HUD.gazeMuscleClick}${holdable ? `; ${HUD.gazeMuscleHold}` : ''}`;
 }
-/** Lead decision (refines Messages 33 and 34): the look reaches a motor area through a body part in front of it; the
- * "Looking at" line then ends with that part, e.g. "Looking at (motor area): Left elbow · Bend left elbow, behind your
- * right forearm". */
+
+
+
 export function gazeBehindLine(line, name) {
   const l = str(line), n = str(name).trim();
   return n ? `${l}, behind ${n}` : l;
@@ -800,9 +817,9 @@ export function inFrontName({ where = 'own', segment = '', limb = null } = {}) {
   if (m && PART[m[2]]) return `your ${m[1] === 'r' ? 'right' : 'left'} ${PART[m[2]]}`;
   return ({ rightArm: 'your right arm', leftArm: 'your left arm', rightLeg: 'your right leg', leftLeg: 'your left leg' })[limb] || 'your body';
 }
-/** HUD forearm line: "Left forearm: palm down (pronated) · tap Space twice: all limbs turn". hint false leaves out the
- * " · tap Space twice: all limbs turn" part (R558, hunt 2; Message 40: not while the limbs turn or something is held,
- * which have their own lines). */
+
+
+
 export function rotationLine(state, { hint = true } = {}) {
   return state ? `${HUD.rotationPrefix}${ROTATION[state] || str(state)}${hint ? HUD.rotationHint : ''}` : '';
 }
@@ -829,7 +846,7 @@ export const INFO = deepFreeze({
   idleTitle: 'Look at a motor area',
   // R558 (issue hunt 2: the short corner card clamps its text to three lines, and these ended mid-word, "Hold F on the
   // br…", with nothing to open on a card without More detail): short enough for three lines of the narrowest card.
-  // R558 (Message 40): Space now holds (the F key is gone); glassBody keeps about the same length (100 characters).
+
   idleBody: 'Aim at a coloured brain area: this panel says what it moves and which muscles pull.',
   glassTitle: 'Brain glass: no motor area here',
   // R3-polish: the first card a new player sees (the start look is on the glass) now also says what to do next.
@@ -843,7 +860,7 @@ export const INFO = deepFreeze({
   coveredMirrorTitle: 'The mirror body is in front here',
   coveredMirrorBody: 'The mirror body is in front of the brain. Click a muscle to switch on its area; Space carries the mirror body (Shift + Space the brain).',
   leftArmTag: 'Left-arm motor area (brain’s right half)',
-  // R558 (Messages 55 and 56): "(no keys)" is gone: the number keys do this area's movements too. (The panel reads
+
   // "left arm" in a tag to tell a left-arm card, so this tag must not say it.) Now only the fallback of areaTag (an
   // area whose part of the strip is not known); every mapped area names its part: "Left-leg motor area (...)".
   otherTag: 'Motor area for another body part',
@@ -871,8 +888,8 @@ export const INFO = deepFreeze({
   noMovement: 'none: this area moves nothing in the game',
   caveatPrefix: 'Keep in mind: ',
   moreDetail: 'More detail',
-  /** R558 (Message 48, the R key "read information"): the small line at the foot of the card says what R does next, and
-   * the chip shown while the information is hidden says how to bring it back (ns-app toggleInfoDetail). */
+
+
   keyHint: { read: 'R: more', more: 'R: hide', off: 'R: info' },
   sourcesPrefix: 'Sources: ',
   unverified: ' (unverified)',
@@ -886,13 +903,13 @@ export const INFO = deepFreeze({
   /** R558: this movement moves nothing now (a left-arm movement: an elbow already straight; 20 November 2026, Message
    * 206: a body movement always moves). (bringsBack, "the first time only brings it back", is gone with the latch.) */
   alreadyThere: ' (already there, so nothing moves now)',
-  /** R558 (Messages 55 and 56): the numbered list of an area's movements on the card (ns-app infoMoves). A number key
-   * does the movement beside it; `atEnd` marks a movement that would move nothing now. */
+
+
   moves: { heading: 'Movements: press a number', atEnd: 'already there', current: 'shown now' }
 });
 
-/** "Simulated signal 0.80 of 1 (no units)". R558 (Messages 44 and 55): one short line; the colour key and More detail
- * say what 0 and 1 mean. */
+
+
 export function activityLine(v) { return `Simulated signal ${fix2(v)} of 1 (no units)`; }
 /** "Switched on 2× (marked until Reset body)"; '' below 1. */
 export function activationsLine(n) { return Number.isFinite(n) && n >= 1 ? `Switched on ${n}× (marked until Reset body)` : ''; }
@@ -983,13 +1000,13 @@ export function plainTitle(region) {
   return str(region.plainLabel) || str(region.label) || str(region.id);
 }
 
-/** R558 (Messages 55 and 56: easier to follow; a learning tool for motor neuroanatomy): the card's line under the
- * title says which PART of the strip the area belongs to and which half of the brain it is drawn on, in the words of
- * the labels on the brain ("Left leg", "Belly and back", "Face and neck"): "Left-leg motor area (brain’s right half)".
- * It was "Motor area for another body part" for everything but the left arm. The half is where the area is drawn, not
- * a claim that only that half drives the part (the card's "Known" line says which parts both halves signal).
- * The left-arm wording is INFO.leftArmTag and is given for a left-arm card only (`leftArm`): the panel tells a
- * left-arm card by that tag, so no other tag may read "left arm". Pure. */
+
+
+
+
+
+
+
 export function areaTag(region, leftArm = false) {
   if (leftArm === true) return INFO.leftArmTag;
   if (!region) return INFO.otherTag;
@@ -1066,12 +1083,12 @@ export function plainInfoCard({ region = null, action = null, leftArm = false, a
   };
 }
 
-/**
- * R558 (Messages 50 and 56: a learning tool, so every movement names its strip part, the movement and the muscles):
- * the card for a reach key (W, A, S, D). The keys move the LEFT hand; each one switches on the left-shoulder part of
- * the motor strip (W and S the left-elbow part too). Muscle roles are the standard textbook ones for the movement
- * (prime movers only); the levels are simulated and unitless, not a measured pattern.
- */
+
+
+
+
+
+
 export const REACH_INFO = deepFreeze({
   tag: INFO.leftArmTag,
   rows: { key: 'Key', area: 'Strip part', movement: 'Movement', muscles: 'Muscles that pull' },
@@ -1123,16 +1140,16 @@ export function reachInfoCard(reach) {
   };
 }
 
-/**
- * R558 (Messages 48 and 56): the card for the grip of a Space grasp. While Space holds (or a tap keeps) a grasp the
- * LEFT hand of the game arm closes; when the grasp lets go the hand opens. The card names the key, the strip part (the
- * left hand's area), the movement and the muscles: the prime movers of ns-bodymap grasp_close and open_hand, with the
- * wrist extensors that steady the wrist in a grip (its listed synergists). The closed hand is a SIGN of the grasp:
- * the game carries a held item, the fingers do not touch it (said in the caveat). Levels are simulated and unitless.
- * 20 November 2026, evening (the owner, Message 204: "Let's just make spacebar grasping for all of the limbs at once"):
- * the grip closes BOTH hands and curls the toes of both feet (ns-app SPACE_GRIP), so the card names the four strip
- * parts, the toe benders with the finger benders, and both sides of the brain; a click closes nothing.
- */
+
+
+
+
+
+
+
+
+
+
 export const GRASP_INFO = deepFreeze({
   tag: 'Hand and toe motor areas (both halves of the brain)',
   rows: REACH_INFO.rows,
@@ -1256,7 +1273,7 @@ export const ORBIT = deepFreeze({
 /** Colour key and legend (ns-scene-three HUD_LEGEND_KEY / HUD_LEGEND_SHARED / HUD_REGION_NOTE, ns-app
  * REGION_MODE_NOTE, ns-brain LEGEND_LABEL). key rows: [cssClass, long words, short words]. */
 export const LEGEND = deepFreeze({
-  // R558 (user Message 2): the colour says WHICH area (one colour per area, the same on the brain, your muscles and the
+
   // mirror body); the brightness says HOW STRONG. The bar is the glow strength, not a colour scale any more.
   label: 'Area colours (simulated, no units)',
   // R3-polish: the ramp ends say what they mean (0 = resting, 1 = strongest), as the intro does.
@@ -1312,8 +1329,8 @@ export function muscleTapBoneLine(name, where) { return `That is a bone (${name}
 
 /* ------------------------------------------------------------------ round 5 (R5-text): E, arrows, mirror, glow, layers, face */
 
-/** The E key: first person <-> view from behind (D18, user R22; ns-camera). Keys controlsRow / thirdPersonBadge /
- * armNote match ns-camera VIEW_TEXT, so ns-camera can take them over one to one. */
+
+
 export const VIEW = deepFreeze({
   key: 'E',
   controlsRow: ['E', 'see your body from straight behind your head (third person). Press E again to go back to your own eyes. E lets go of anything Space holds.'],
@@ -1324,15 +1341,15 @@ export const VIEW = deepFreeze({
   lookNote: 'Move the mouse to turn your head: the camera follows behind it.'
 });
 
-/** The 3D compass arrows (D16, user R20): four arrows round the brain (top, bottom, left, right) and four smaller ones
- * round the mirror body. 19 November 2026: the brain is turned half a turn (its front at the bottom of the picture), so
- * the TOP arrow, whose id is still 'forward', now shows more of the brain's BACK and the bottom arrow ('back') more of
- * its FRONT: an arrow still brings round the side it stands on, and the words say which side that is. tip = the short hover caption; label = the accessible name
- * (aria-label / title), which also says what a click and a hold do. Mirror arrows: the top / bottom tips tilt it (a
- * view from above / below), the side tips turn it round. The round-4 ORBIT captions stay for the HUD buttons until
- * ns-scene-three retires them.
- * R558 (hunt 2): the camera stays at your eyes, so a brain arrow turns the BRAIN about its own centre (it stays where it
- * is) and shows more of the side the arrow points to; the same turn as a press-and-drag on the brain. */
+
+
+
+
+
+
+
+
+
 export const ARROWS = deepFreeze({
   brain: {
     tip: { forward: 'Turn the brain: show more of its back', back: 'Turn the brain: show more of its front', left: 'Turn the brain: show more of the side on your left', right: 'Turn the brain: show more of the side on your right' },
@@ -1348,7 +1365,7 @@ export const ARROWS = deepFreeze({
     }
   },
   mirror: {
-    // R558 (user Message 45): all four arrows orbit. The top and bottom arrows tilt the mirror body about its own
+
     // centre (the brain's top and bottom arrows do the same to the brain); they no longer slide it along the ground.
     tip: { forward: 'Tilt the mirror body: see it from above', back: 'Tilt the mirror body: see it from below', left: 'Turn the mirror body: go round to the left', right: 'Turn the mirror body: go round to the right' },
     label: {
@@ -1359,7 +1376,7 @@ export const ARROWS = deepFreeze({
     }
   },
   holdHint: 'Click for a small turn. Hold to keep turning.'
-  // R558 (Message 7): the arrow tips are drawn in front of everything and answer a click wherever they are drawn, so
+
   // the former "behindArm" and "mirrorBlocked" lines (an arrow hidden by the arm, a mirror arrow the brain covers) no
   // longer describe anything that can happen and are gone (no code read them).
 });
@@ -1370,9 +1387,9 @@ export const MIRROR_PART_NAMES = deepFreeze({
   neck: 'your neck', face: 'your face and head', other: 'your body'
 });
 
-/** The mirror body (D19, user R23; ns-mirror). The first twelve keys match ns-mirror MIRROR_TEXT one to one. Every
- * label names YOUR part plus "(mirror image)", never "its right arm" (ns-mirror CHIRALITY). R558 (hunt 2): the
- * never-shown "blocked" line is gone (the brain no longer blocks the mirror body's arrows or clicks). */
+
+
+
 export const MIRROR = deepFreeze({
   name: 'Mirror body',
   tag: 'A mirror image of your body',
@@ -1425,11 +1442,11 @@ export function mirrorInfoCard({ part = 'other', activity = null, turned = false
   };
 }
 
-/** The brain-to-muscle glow (D17, user R21). Panel lines say plainly that it is a picture of the game's link, not a
- * nerve, and name the real route for that body part (body: spinal cord; head and face: the base of the brain; neck:
- * both). */
-// 21 November 2026 (EMAP, section 192; the owner: "let's try an electrical mapping view, like you see in functional
-// neuroscience, connectomic live maps, dynamic maps"; 20 November: "we can actually see electrical storms and electrical
+
+
+
+
+
 // activity and neural activity and networks and pathways ... from brain to body and body to brain"). The words of the
 // electrical map (the M key; ns-emap). Little text, one chunk: a title and three short lines on the short card (the
 // command going down, the report coming up, one line of honesty); under More detail the route of the area under the
@@ -1438,8 +1455,8 @@ export function mirrorInfoCard({ part = 'other', activity = null, turned = false
 // (typical, simplified, drawn by hand, not traced from a scan), nothing was recorded or measured, and the travel is
 // slowed (emapSlowLine states by how much, from the map's own display speed).
 // Later the same day, after a picture of the "more" level: More detail was 26 lines of small type (about 1070
-// characters: four sentences of route, four about the picture) and lay on the game's own information panel. The owner:
-// "Way too much text now". It is now at most nine short lines in a low card above that panel (quiet.css): either the
+
+
 // route of the area under the look (one sentence of the area's own, without its bracketed terms, which the
 // information panel beside it gives in full; how the signal goes on; the report; "typical, simplified"), or, before
 // any area was looked at, what kind of picture this is (the bridge, typical paths, simulated and how much slower).
@@ -1522,8 +1539,8 @@ export function glowNote(region, { musclesShown = true } = {}) {
   return GLOW.body;
 }
 
-/** The lifted outer muscles (D15, user R19: "Gunther von Hagens style body worlds, so that we can see into the deep
- * muscles"). note / real are the task's plain lines (the Esc limits carry HONESTY.bodyWorlds). */
+
+
 export const BODY_WORLDS = deepFreeze({
   note: 'The outer muscles are lifted out a little, like in a Body Worlds exhibit. That lets you see the deeper muscles ' +
     'under them. Their ends stay on the bones. Every muscle is drawn a little fuller.',
@@ -1662,13 +1679,13 @@ export function muscleLabel(plain, technical = '') {
 
 /* ------------------------------------------------------------------ "Try this" guide (round 4, D7) */
 
-/** Wording of the optional first-time "Try this" guide (ns-guide.mjs is the state machine; this is only text).
- * One short plain line at a time. Every line names a game control and what you will see; none says the game reads,
- * records or sends brain signals (looks, clicks and keys stay game controls). Goal ids match ns-guide
- * GUIDE_ALL_GOAL_IDS. `partial` lines replace a goal's line when half of it is done.
- * R558 (Messages 55 and 56: easier to use; a learning tool for motor neuroanatomy): the first lines teach what the game
- * is for (an area of the brain, its numbered movements on the card, the same for another body part, then watching the
- * movement on the body); the hand, Space and arrow gestures come after. */
+
+
+
+
+
+
+
 export const GUIDE = deepFreeze({
   label: 'Try this',
   // Short on purpose: the line sits in the status card (about 40 characters per line there), so each goal is one or
@@ -1677,27 +1694,27 @@ export const GUIDE = deepFreeze({
     // R4-fix (reviews SL4-4 / RP6): name areas that visibly move the arm (the shoulder area and "Relax left grip" on
     // an open hand move nothing you can see, and do not complete this goal).
     leftArmArea: 'Look at a blue area, like the left wrist. Click it to move your arm.',
-    // R558 (Messages 55 and 56): the information card lists the area's movements with numbers; a number key does the
+
     // movement with that number (ns-app; the same simulated pulse as a tap on one of its muscles).
     numberKey: 'Now press 1 or 2. Each number does one movement from the tip or the card.',
     moveHand: 'Press W, A, S or D to move the hand or foot of the limb you chose.',
-    // R558 (Message 40): the goal ids stay so saved progress keeps: 'flipPalm' = a double tap (one turn of every limb),
+
     // 'fist' = a double tap held (the slow turn); ns-guide now teaches flipPalm first.
     fist: 'Tap Space twice and hold: the limbs keep turning, slowly. Let go to stop.',
     flipPalm: 'Tap Space twice, fast: all four limbs turn once.',
     // R4-fix (reviews F3 / SL4-4): 14 grey areas move nothing; this goal completes only on one that moves a joint.
     // R558: names the orange right-arm areas (your right arm is in view while you look at the brain; the legs are not).
     otherPart: 'Look at an area of another colour, like an orange right-arm area. Click it to move that part.',
-    // R558 (Messages 55 and 56): the card keeps the last area's numbered list while the look is somewhere else, so a
+
     // movement can be watched on the body. Completes on a number key that moves something with the look off the brain.
     watchBody: 'Look at a purple leg area. Then look down at the body and press 1 or 2: watch the leg move.',
     // R5-text (D17): points out the brain-to-muscle glow; it needs a NEW switch-on while this line shows (ns-guide).
     glow: 'Look at a blue area. See its muscles glow in the same blue?',
     // The brain can be carried with the pointer or with W/A/S/D while Space holds it. (20 November 2026, evening,
-    // Message 204: Space grips with both hands and both feet; the line says so, since the step is where Space is taught.)
+
     dragBrain: 'Hold Space on the brain: both hands and feet grip. Turn your view to carry it, then let go.',
     // R4-fix (review RP4): with the mouse captured the crosshair must look far from the brain to reach an arrow; a free
-    // mouse (Esc twice) lets you click the arrows while you watch the brain. R5-text (D16): no "curved" (user R20).
+
     orbit: 'Click or hold a grey arrow to turn the brain. If you captured the mouse, press Esc and choose Resume first.',
     // R5-text (D18): E to the view from behind, and E again back to your own eyes.
     thirdPerson: 'Press E to see your own back. Press E again to go back.',
@@ -1716,7 +1733,10 @@ export const GUIDE = deepFreeze({
     readInfo: "Press R to change how much information is shown."
   },
   tutorialGoals: {
-    aimJoint: 'Look a little up or down to raise or lower the limb you selected. Watch its hand or foot.',
+    // (25 November 2026, ns-controls LOOK_KEY: the up and down arrow keys turn the look too. This long line has no key
+    // caps, and the arrow signs alone were thin and small in it: the keys are named in words, in the three lines the
+    // line took with the signs at 800x600 and 1280x720)
+    aimJoint: 'Look a little up or down (a drag, or the up or down arrow key) to raise or lower the limb. Watch its hand or foot.',
     // (25 November 2026, section 209, finding 7: every limb starts reached out, at W's far end, so W moved nothing: S first)
     moveHand: "Press S to draw the chosen limb in, or W to reach it out, then A or D to swing it sideways.",
     dragBrain: "Hold Space over the brain, move your view to carry it, then release Space.",
@@ -1742,7 +1762,7 @@ export const GUIDE = deepFreeze({
     // R5-text: shown while the thirdPerson goal is current and the view from behind is on.
     thirdPersonBack: 'This is your back! Move the mouse to look around. Press E to go back.',
     // R5-text: shown while the mirror goal is current, after the brain caught a look or click at the mirror body.
-    // R558 (Messages 33 and 34): Shift reaches past the brain to the mirror body (or hold the brain with Space and move it).
+
     mirrorBlocked: 'The brain is in the way. Press and drag the mirror body to turn it (hold Shift as you press when a brain area is in front of it).',
     // R5-text: shown while the mirror goal is current, after the brain was dragged.
     mirrorNowArrows: 'Good! Now click an arrow by the mirror body to turn it around.'
@@ -1768,7 +1788,8 @@ export const GUIDE = deepFreeze({
     holdPart: 'Hold down 1 or 2. Let go to stop',
     dragLimb: "Drag a visible arm or leg to change its pose",
     chooseLimb: "Press 2, 3 or 4 to select another limb",
-    aimJoint: 'Look a little up or down to move the limb',
+    // (25 November 2026: a no-break space keeps the two keys on one line; the larger arrow caps were split over two)
+    aimJoint: 'Look a little up or down (↑\u00a0↓) to move the limb',
     readInfo: "Press R to change the information shown",
     nice: 'Nice!',
     finished: 'All done. Esc shows the controls.',
@@ -1803,11 +1824,15 @@ export const GUIDE = deepFreeze({
     limb: "Body part",
     shoulder: "Shoulder aim",
     hip: "Hip aim",
+
+    // while the tutorial's two limb-key steps show, the mark says what it is for. Afterwards it keeps its short name.
+    shoulderTeach: "Look up or down: the arm follows",
+    hipTeach: "Look up or down: the leg follows",
     guide: "View tutorial",
     resume: "Resume tutorial",
     restart: "Restart tutorial",
     limits: "The colours link motor areas to movements in this game. On the simplified map, a ring marks a motor area and a small square marks its related body part when both are visible.",
-    jointHelp: "The shoulder or hip guide marks a fixed height one quarter of the way down the view. It is a screen reference for the wrist or ankle.",
+    jointHelp: "The shoulder or hip guide marks a fixed height one quarter of the way down the view. It is a screen reference for the wrist or ankle: when you look up or down, the chosen arm or leg rises or falls at its shoulder or hip.",
     directions: "F opens the movement directions.",
     camera: "C opens the camera controls.",
   },
@@ -1818,9 +1843,9 @@ export const GUIDE = deepFreeze({
   restart: 'Start again'
 });
 
-/** 19 November 2026 (EASE; the owner: "It's not clear what the numbers do"): the one line under a motor area's choices
- * in the tip, shown to a newcomer only (ns-app stops it after a few presses). The filled row carries a drawn pointer:
- * a click does that one; each row's key cap is the number key that does it. */
+
+
+
 const HELD_TARGET_WORDS = Object.freeze({
   brain: 'the brain', mirror: 'the mirror body',
   rightArm: 'your right hand', leftArm: 'your left hand', rightLeg: 'your right foot', leftLeg: 'your left foot',
@@ -1832,10 +1857,10 @@ const HELD_TARGET_WORDS = Object.freeze({
 export const BRAIN_PARTS = deepFreeze({ eyeball: 'Eyeball', nerve: 'Optic nerve',
   whiteMatter: 'White matter', lateralVentricle: 'Lateral ventricle', thirdVentricle: 'Third ventricle', fourthVentricle: 'Fourth ventricle',
   aqueduct: 'Cerebral aqueduct', internalCapsule: 'Internal capsule', hippocampus: 'Hippocampus', pineal: 'Pineal body', habenula: 'Habenula' });
-/* 21 November 2026, evening (FIX63; a review of Body update 63, U4): with a free pointer over one of your own limbs the
- * tip said "Space holds your right hand". Since 19 November Space there chooses the limb and nothing holds it (ns-app
- * LIMB_KEYS.view.hold; the grip card has said so since hunt H16). spaceAim's third argument, limbsChosen, is that rule:
- * with it a limb's line is "Space chooses your right arm"; without it, the line as it was. */
+
+
+
+
 const CHOSEN_LIMB_WORDS = Object.freeze({ rightArm: 'your right arm', leftArm: 'your left arm', rightLeg: 'your right leg', leftLeg: 'your left leg' });
 export const TIP = deepFreeze({
   teach: 'Click, or press a number',
@@ -1849,9 +1874,26 @@ export const TIP = deepFreeze({
     const name = Object.hasOwn(HELD_TARGET_WORDS, target) ? HELD_TARGET_WORDS[target] : null;
     return name ? { title: `Holding ${name}`, hint: kept ? 'Tap Space to let go.' : 'Let go of Space.' } : null;
   },
-  /** 19 November 2026 (the owner: "If we click on a limb, we now control that limb until we change the camera view"):
-   * the tip by the crosshair while a clicked limb is controlled ({ title, hint }, drawn like the Space hold's tip).
-   * Letting go needs no words: looking away does it. */
+  /** Hunt of update 74, finding 8 (a review): while something is carried, the tip beside the resting pointer on a motor
+   * area says what a click there starts (a rest starts nothing then: moving the pointer carries the held thing). */
+  carryClick(label) {
+    const l = str(label).trim();
+    return l ? `Click: ${l.charAt(0).toLowerCase()}${l.slice(1)}` : 'Click switches it on';
+  },
+  /** (A third review: for a muscle the line had no verb, "Click: left temporoparietalis".) What a click on a muscle
+   * does: its brain area switches on (the controls' "Click a muscle"). name: the muscle, for the hold's own tip, whose
+   * title names what is held; without it, for the muscle's own tip, whose title names the muscle. */
+  carryMuscleClick(name) {
+    const n = str(name).trim();
+    return n ? `Click: switch on the brain area for ${n.charAt(0).toLowerCase()}${n.slice(1)}` : 'Click: switch on its brain area';
+  },
+  /** (A third review: ns-app gripRefuses.) While Space grips, the left hand stays closed, and its finger and thumb
+   * movements do not start: the tip and the "Looking at" line say so in place of the movement. kept: the grip was
+   * taken with a tap. */
+  gripHolds: kept => (kept ? 'Hand gripping: tap Space, then click.' : 'Hand gripping: let go of Space, then click.'),
+
+
+
   limbTaken: limb => ({ title: ({ rightArm: 'Right arm', rightLeg: 'Right leg', leftLeg: 'Left leg' })[limb] || 'Limb', hint: 'W A S D and your look move it' }),
   /** 22 November 2026 (browser hunt of update 64, H9): the tip by the crosshair while the brain is behind you (carried
    * there and let go; ns-reference-graph brainBehind) and nothing else is under the crosshair: where it is and the two
@@ -1862,7 +1904,13 @@ export const TIP = deepFreeze({
   brainAway: { title: 'The brain is out of sight', hint: 'Look round, or press Esc, then Reset brain view.' },
   /** 25 November 2026 (ns-app LOOK_LOST, section 209): the tip in the middle of an empty picture: the player's own drag
    * turned the view away from the brain and both bodies. */
+  // 25 November 2026 (section 217): an arrow key pressed at the end of the strip (the full cards have HUD.areaEnd)
+  areaEnd: dir => `No more areas this way. Press\u00a0${otherAreaKey(dir)} to go back.`,
   viewLost: { title: 'You have turned away from the brain', hint: 'Drag back, or press ← or →. Esc, then Reset brain view, also turns you back.' },
+  // (25 November 2026, ns-app lostViewTurn: a view turned away mostly up or down also names the arrow key that turns it
+  // back, ns-controls LOOK_KEY; ← and → always bring the look back to an area)
+  viewLostUp: { title: 'You have turned away from the brain', hint: 'Drag back, or press ↓, ← or →. Esc, then Reset brain view, also turns you back.' },
+  viewLostDown: { title: 'You have turned away from the brain', hint: 'Drag back, or press ↑, ← or →. Esc, then Reset brain view, also turns you back.' },
 });
 
 /** The guide line shown in the status card: "Try this (2 of 7): Press W, A, S or D to move your left hand.";
@@ -1976,7 +2024,9 @@ export function plainStrings() {
     ['mirrorPartName', mirrorPartName('torso')],
     ['faceAttributionLine(example)', faceAttributionLine({ author: 'Z-Anatomy', licence: 'CC BY-SA 4.0', changes: 'only these muscles, fitted to the skull' })],
     ['muscleLabel', muscleLabel('chewing muscle at the cheek', 'masseter')],
-    ['faceMuscleLabel(left)', faceMuscleLabel('zygomaticus-major', { side: 'left' })]
+    ['faceMuscleLabel(left)', faceMuscleLabel('zygomaticus-major', { side: 'left' })],
+    // (the area walk's words, which name the key now)
+    ['HUD.areaEnd', HUD.areaEnd(1)], ['HUD.areaUnreachable', HUD.areaUnreachable(-1)], ['TIP.areaEnd', TIP.areaEnd(1)]
   ];
   for (const [l, v] of mirrorInfoCard({ part: 'leftArm', turned: true }).rows) samples.push([`mirrorInfoCard.row(${l})`, `${l}: ${v}`]);
   for (const k of ['arm', 'leg', 'trunk', 'face']) for (const h of ['right', 'left']) samples.push([`regionGroupLabel(${k},${h})`, regionGroupLabel(k, h)]);

@@ -11,7 +11,7 @@ medial occipital arteries and the temporal branches of the lateral occipital art
 communicating, basilar and superior cerebellar arteries. Both sides; the left side's files are the atlas's own mirror
 copies (`FJ....M`).
 
-Why: the owner asked on 18 November 2026 to "get the vascularity right, especially with the cerebral veins and etc.".
+The game uses these meshes to show named cerebral arteries in the brain view.
 The brain's vessels had been noise lines in its shader that followed no anatomy.
 
 Registration: the files are used exactly as they are. Measured against the game's brain, the median distance of a

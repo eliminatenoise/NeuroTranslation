@@ -9,104 +9,148 @@
 const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const len = a => Math.hypot(a[0], a[1], a[2]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const HOLD_DRAWN = Object.freeze({ on: true });
+export function holdBendAsDrawn(start, bendId, passive, o = HOLD_DRAWN) {
+  const own = start && bendId ? start[bendId] : undefined;
+  if (!o.on || typeof passive !== 'function' || !Number.isFinite(own)) return own;
+  const drawn = passive(start)[bendId];
+  return Number.isFinite(drawn) && Math.abs(drawn) > Math.abs(own) ? drawn : own;
+}
+
 /**
- * LIMB_PACE (the hunt, H1; the owner, section 185: "the limb keys never whip"; Message 186: A and D swing a limb about
- * the shoulder or hip with its bend unchanged). The keys move a limb's END (the hand, the ankle) at the keys' pace and
- * the cut of section 185 (ns-app LIMB_KEYS.view keyMost) kept only the end to it. Nothing kept the ELBOW or the KNEE:
- * with the elbow fully bent (after S) the hand lies close to the shoulder, near the line about which the shoulder's
- * forward raise turns the arm; there the two shoulder joints the keys' solve uses turn almost the same way (measured
- * offline on the game's body: their columns went from 58 to 11 degrees apart, the smaller singular value from 1.22 to
- * 0.14 mm a degree, against a damping of 0.81), and the damped step answered a 1 to 2 cm step of the hand with 12 to 24
- * degrees of upper arm a frame. A or D then threw the upper arm round the shoulder, back behind the trunk or up over the
- * head, in a third of a second (the elbow at 2 to 4 m/s, the hand at 0.6), and a short tap kept it swinging after the
- * key was up. Now, on a frame of the keys:
- *   bendMost   the elbow or knee point goes at most this many times the keys' own way this frame, as the end does
- *              (the same keyMost, 1.25): no part of the limb is faster than the keys move its end;
- *   rhoFar, creepMost   and where the elbow or knee goes more than rhoFar times as far as it would if the limb swung
- *              as one piece about the shoulder or hip to carry the end its own way this frame (the "throw" itself: the
- *              limb turning round its own line from the shoulder to the hand, which moves the elbow and not the hand),
- *              the frame is taken only slowly: the elbow or knee at most creepMost times the keys' way. Where the joints
- *              can bring the end the keys' way ONLY so (the folded arm under A or D), the limb curls that way slowly, as
- *              LIMBFREE lets an end curl off the keys' line (keyLatFar), and is never thrown;
- *   releaseStops  when the keys are let go, the place the limb was being taken to is put where its end is: the keys'
- *              lead (up to 2 cm ahead of the end) is not chased after the key is up (a 0.1 s tap went on swinging the
- *              arm for 0.9 s).
- * Measured offline on the game's body (96 right-arm poses, each key 0.75 s, 13 018 moving frames, before the change): the
- * elbow went 6.0 / 16.8 / 43.8 / 94.4 mm a frame (median / 90th / 99th percentile / most) for the keys' 10; its move over
- * the one-piece swing's ("rho") had a 99th percentile of 4.1 under W, 5.5 under S, 3.0 under A, 11.6 under D, and 7 to
- * 25 in the hunt's throw. With these values, offline: S 2.5 s then D 0.6 s turns the upper arm 29 degrees (was 86, to
- * its back end), the elbow at most 12.5 mm a frame (was 108), the hand 31 mm (was 68); after a 0.1 s tap nothing moves;
- * over the same 384 runs of each key the elbow's 90th percentile is 12.5 mm a frame for every key and 58 runs moved the
- * end under 2 cm in 0.75 s (52 before); the project's trap grid (tests/limb-hold.test.mjs, two keys at least 3 mm in
- * 0.1 s from 132 poses) passes. creepMost 0.3 left two folded right-arm poses with W alone (A 2 to 3 mm, D 0 to 1).
- * Tried and dropped: a move whose elbow went more than 4 times as far as the hand WAITS (the folded arm then answered only
- * W: A and D waited, S was at the fold; the project's own test asks for two keys); the cut of the elbow's pace alone (the
- * throw became a 0.6 s sweep of the upper arm behind the trunk for 5 cm of hand); a cut of the out-of-plane part of the
- * elbow's move (the arm's two shoulder joints turn the forearm's plane under W and S too: half of all W and S frames would
- * have been slowed); a damping in proportion to the solve's largest column (it cannot bound a step that answers the 2 cm
- * lead without making the folded arm slow everywhere).
- */
-/* 22 November 2026, second pass (a check of LIMBS2: "the folded right arm still ends behind the trunk (after S, D) and
- * over the head (after S, A, D) ... only slower"; "the creep makes A and D on a folded leg about 5 times slower"):
- *   swing, foldShare   A or D ALONE on a FOLDED limb (the end nearer the root than foldShare of the limb's full reach)
- *              swings the limb as one piece JUDGED BY ITS UPPER SEGMENT (limbSwingMove): the elbow or knee point turns
- *              toward the body's right or left on its ball round the shoulder or hip, and the end is carried with it
- *              rigidly. A / D turned the line from the shoulder to the HAND; with the hand at the shoulder the joints could
- *              only answer that by swinging the whole upper arm round (behind the trunk, over the head). The upper arm
- *              now goes out to the side (abduction, the owner's own words for A / D, Message 186) and comes back the same
- *              way. Where that swing cannot be followed (the hanging folded arm brought across: the combined-range rule
- *              allows no crossing that low), the frame falls back to the turn of the shoulder-to-hand line, so A still
- *              brings the folded arm across the chest. A straight or part-bent limb is moved as before.
- *   leg        the legs' own values: a thigh swung out with the knee drawn up moves the knee about twice as far as the
- *              ankle, a sweep and not a throw (rho 2.0 to 2.15, where the arm's throw was 7 to 25), and the arm's values
- *              held a folded leg's A and D to about a fifth of the keys' pace (0.11 m/s for 0.6). A leg's knee may go
- *              bendMost 2.5 times the keys' way and no creep is applied to a leg. And a leg is not swung: its sideways
- *              lift ends at 45 degrees, and a swing judged by the thigh then went on by lowering the thigh, so A took a
- *              left leg drawn up out to the side and on down and back behind you (in the browser, 746 mm of ankle in
- *              2.5 s); the turn of the hip-to-ankle line stops at the lift's end, as before LIMBS2.
- */
+ * 25 November 2026 (FIX76, finding 7). BODY_SLIDE: the place a frame of the keys asks again when its answer was refused
+ * for taking the hand deeper into the trunk's keep-out or the head's column (ns-app handKeepOut). The place the keys
+ * ask for lies on their own line and may be clear of the body while the hand, a centimetre off that line, is at its
+ * surface: the answer then carried the hand 5 to 8 mm in, was refused, and the next frame asked the same. Held W on the
+ * right arm folded up beside the neck moved the hand 8 cm and then nothing, with the elbow at 128 degrees.
+ *   from   the hand now; to: where the refused answer put it; out: `to` taken out to the surface (handKeepOut(to));
+ *   way    the keys' own move this frame (all world m); cut: ns-app keyMoveCut.
+ * Returns the place to ask for, `out` moved clearM further out along the way it was taken out, when what is left of the
+ * move still goes the keys' way (cut > 0: at most keyFarDeg off it) and is more than minShare of it; else null: the
+ * move went straight into the body and the hand stops there, as before. Pure. */
+export const BODY_SLIDE = Object.freeze({ on: true, clearM: 0.003, minShare: 0.2 });
+export function keyBodySlide(from, to, out, way, cut, o = BODY_SLIDE) {
+  if (!o.on || !from || !to || !out || !way || typeof cut !== 'function') return null;
+  const n = sub(out, to), nl = len(n), wl = len(way);
+  if (!(nl > 1e-6) || !(wl > 1e-9)) return null;
+  const T = [out[0] + n[0] / nl * o.clearM, out[1] + n[1] / nl * o.clearM, out[2] + n[2] / nl * o.clearM], m = sub(T, from);
+  return len(m) > o.minShare * wl && cut(m, way) > 0 ? T : null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LIMB_PACE = Object.freeze({ on: true, bendMost: 1.25, rhoFar: 2, creepMost: 0.5, releaseStops: true,
   swing: true, foldShare: 0.6, leg: Object.freeze({ bendMost: 2.5, rhoFar: null, creepMost: null, swing: false }) });
 
-/**
- * LIMB_ACROSS (22 November 2026, round r31, LIMBS4; section 195's "Not done": "A across the chest is the first pass's
- * slow curl"; the owner, section 185: "the limb keys never whip"). After S the right arm is folded, the hand by the
- * shoulder and the forearm out to its side. A (toward the body's other side) asked the joints' solve to turn the
- * shoulder-to-hand line; the cheapest answer was to raise the upper arm forward, which moves the elbow two to three
- * times as far as the hand, so the pace rule (LIMB_PACE creepMost) held the frame to a creep: in the browser on update 68
- * the hand went 0.4 to 0.5 mm a frame for the keys' 10 (2.5 s of A took it 42 mm toward the left; the elbow went 2.6
- * times as far), and the upper arm rose forward while the forearm still pointed out to the right. The movement that
- * brings a folded hand across is the upper arm's own turn about its length (turning it inward): the forearm swings
- * across in front of the body and the elbow stays where it is. Now:
- *   on        A (for the right arm; the side toward the body's other half) alone on a FOLDED limb (LIMB_PACE foldShare)
- *             first turns the upper arm about its length (the solve's `spin` joint, r_shoulder_rot), by the angle
- *             that moves the hand the keys' own step this frame (from the hand's move for one degree, measured on the
- *             drawn pose), as long as that move goes the keys' way (within offDeg) and the turn has range left; the
- *             frame's move is then tested as every key frame is (limbKeyFollow, the pace, the trunk and head keep-out,
- *             the other limbs' stop). The elbow does not move. Where it cannot (the turn's end, the chest), the frame
- *             falls back to the swing and the turn of the line, as before.
- *   back      D afterwards first turns the upper arm back the same way, to where A's turn began, and only then swings
- *             the folded arm out to the side as before (section 195): A then D comes back, not out with a turned arm.
- * The legs have no such joint (and their A and D are not slowed). on false: as before.
- *   open      (23 November 2026, round r32, LIMBS5; a check of update 69: "the hand stops at the chin, short of the
- *             middle, and holding A longer does nothing": measured, the turn reached its end, -70 degrees, with the hand
- *             115 mm past the right shoulder (the body's middle is about 170) and 68 mm above it, and the frames after it
- *             found no move: the swing that should take over raised the upper arm, the elbow then went faster than the
- *             pace allows, or the hand into the face's keep-out) once the turn has no range left (or its move is more than
- *             offDeg off the keys' way), A goes on by OPENING the elbow, by the angle that moves the hand the keys' step,
- *             while that move goes the keys' way, at most openMostDeg from where the opening began: the forearm, turned
- *             inward, lies further across the chest and lower (measured on the game's body after S and the turn: 10
- *             degrees open, the hand 157 mm across and 52 mm above the shoulder; 30 degrees, 257 and 26; in the browser after
- *             1 s of A the hand lies over the chest at the other shoulder). openMostDeg 30 is the least that brings the
- *             hand within 30 mm of the shoulder's height (tried 35 first: 280 mm across, the hand at the other shoulder). The elbow point does not move (only the forearm turns at it). D first closes it back to where the
- *             opening began, then turns the upper arm back as before. 0 = no opening (update 69).
- *             (Tried and dropped, on the game's body offline: offDeg 60 -> 30, which the check suggested: the turn's first
- *             frames already climb 42 degrees, so A did not turn the upper arm at all; a cap on the rise during the turn
- *             (riseMostMm): it stopped the turn 82 mm outside the shoulder, and the opening there raised the hand
- *             further; the turn and the opening solved together to keep the hand level: the elbow was already at its
- *             end and the solve stalled at 4 mm a frame. The rise WHILE the forearm turns over (up to about 80 mm above
- *             the shoulder, the hand passing the chin) is the folded arm's own and is left.)
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LIMB_ACROSS = Object.freeze({ on: true, offDeg: 60, back: true, openMostDeg: 30 });
 
 /** LIMB_ACROSS: the turn (degrees, signed) of the upper arm about its length that moves the end the keys' own way `way`
@@ -237,21 +281,21 @@ export function limbSwingMove(pts, place, bodyRight, ax, stepM, o = LIMB_PACE) {
   return [pts.root[0] + v[0] * c + x[0] * sn + n[0] * k, pts.root[1] + v[1] * c + x[1] * sn + n[1] * k, pts.root[2] + v[2] * c + x[2] * sn + n[2] * k];
 }
 
-/**
- * HOLD_LIGHT (the hunt, H2; the owner: no blinking or flicker, "the game currently physically hurts to look at with your
- * eyes"; light may rise, hold and fade, slowly). Holding D with the drawn-in right arm at the back end of its range, the
- * keys' solve could not settle: each frame it moved the shoulder's sideways joint back and forth by 0.01 to 0.3 degrees
- * (after the key was up, by 0.0001 to 0.004), every such change counted as a move (over 1e-6 degrees), and each lit the
- * area and action of its own direction: "lift the arm sideways", which lights the big shoulder muscle beside the eye, and
- * "bring it in", which lights muscles out of view, in turn, about 8 times a second, with the light beam to the brain
- * pulsing with them. Now, for the limb the view holds:
- *   minDeg   a frame whose largest joint change is under this is no move: nothing is set, nothing lights, and the hold
- *            stops solving the place it cannot reach (it ran on every frame until two answers were exactly equal);
- *   flipDeg  the light names a joint and direction only once that joint has gone at least this far that way since it
- *            last turned, and keeps naming it while it goes on that way: a joint trembling at the end of its range
- *            lights nothing new (the light it had fades as a pulse does), a real turn back lights after a degree.
- * on false: every change over 1e-6 degrees is a move and the joint that moved most lights, as before.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const HOLD_LIGHT = Object.freeze({ on: true, minDeg: 0.02, flipDeg: 1 });
 
 /** HOLD_LIGHT: one frame of the held limb's light. prev: the last result or null ({ acc: { jointId: degrees gone the
@@ -280,38 +324,38 @@ export function holdLightStep(prev, d, o = HOLD_LIGHT) {
   return { acc, lit: light || lit0, move: true, light };
 }
 
-/**
- * LIMB_BLOCK (the hunt, H3; the owner, Message 174: a limb that collides pushes the other "out of the way rather than
- * going through them"; LIMB_PUSH in ns-app). A leg swung out with the keys went straight through the arm on its side:
- * the push takes at most 12 mm a frame and only the overlap's growth, a thigh near the knee swept 20 to 34 mm a frame,
- * an arm pushed only partly follows (one solve step a frame; the left hand stops at its full reach and was counted as
- * pushed whether it moved or not), and an overlap once there was never pushed again. Now the push is backed by a stop:
- *   deepM   when the overlap of the chosen limb with another limb, measured each frame, has grown more than this past
- *           what it was when they first touched (the other limb did not give way as fast as the chosen one came, or
- *           could not give way at all), the pair BLOCKS: from then on a move of the chosen limb that would take it
- *           deeper into that limb waits (as a limb waits at the body or at a fully bent joint), whatever moves it (the
- *           keys or the look, with your trunk at rest), until the two no longer touch. A move along it or away is
- *           taken as before, and so is one that stays within deepM of where they first touched;
- *   tolM    "deeper": the overlap after the move more than this past the overlap now.
- * The push itself is unchanged: a limb that can give way is still pushed; the stop only takes over where it cannot.
- * Not during a trunk movement (a first version refused the view's hold there: with the right arm chosen, "Bend trunk
- * forward" carried it onto the thigh, the hold could not keep the hand in its place, and the arm was left 260 mm off it
- * when the trunk came back): a movement from the brain carries the limbs together and back by itself (PUSH_BACK).
- * A display rule on rods (each limb two rods with a thickness), not the drawn surfaces.
- * 22 November 2026, round r30 (LIMBS3; a check of update 67, finding 3: the stop depended on the frame's length. The keys'
- * step and the knee's pace grow with the frame's time, so one long frame (a busy machine, 15 to 22 frames a second) took
- * the knee 147 mm in one frame; the first touch was found after the move, and the stop then held whatever overlap that
- * frame had left: both legs ended 81 and 94 mm into the arms).
- *   ahead   a move of the chosen limb (the keys or the look, with your trunk at rest) is first tested against each other
- *           limb it is not yet blocked by: where it would sink in deeper than the overlap now and deeper than deepM past
- *           where they first touched (slackM when they do not touch yet), only the share of the move that stays within
- *           that is taken (aheadShare; none: the move waits this frame). So however long a frame is, a limb comes in no
- *           deeper than the stop allows, and the push and the stop go on from there as on short frames. A move along or
- *           away is not changed. Tried and dropped: refusing the whole move (on long frames a leg then stopped up to a
- *           step short of the arm and never touched it); capping the frame time the keys' step uses at 1/30 s (the limbs
- *           slow down on a busy machine, and a long frame still sank the knee up to 50 mm).
- * ahead false: only the block below, after the first touch, as before.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LIMB_BLOCK = Object.freeze({ on: true, deepM: 0.008, tolM: 0.001, ahead: true, aheadSteps: 5 });
 
 /** LIMB_BLOCK ahead: the overlap (m) a move of the chosen limb may reach with another limb it is not blocked by: the
@@ -343,23 +387,23 @@ export function limbsOverlapM(A, B, nearest) {
   return best;
 }
 
-/**
- * LIMB_BLOCK leftArm (22 November 2026, round r31, LIMBS4; the owner, Message 174: a limb that collides pushes the other
- * "out of the way rather than going through them"; the checks of LIMBS2 and LIMBS3: "your left arm, when you move it, is
- * not stopped"). The left arm is the game arm: its own rig puts the hand at the place the view asks of it in the
- * simulation's step, so the stop cannot be tested on a pose the joints' solve found, as for the other limbs; it is
- * tested on the PLACE before the step. Measured in the browser on update 68 (left leg S 1.2 s, then the left arm chosen
- * and D 1 s): the left forearm went 122 mm deep into the folded left thigh, which cannot give way; with the right leg
- * folded, 105 mm into the right thigh.
- *   on      the left hand's place asked of the step, when the keys or the look move it with your trunk at rest, is cut
- *           as the other limbs' moves are (LIMB_BLOCK ahead, aheadShare: only the share of the move from where the hand
- *           is that sinks into no other limb deeper than the overlap now and deepM past where they first touched), and
- *           a move deeper into a limb that blocks it (LIMB_BLOCK deepM, the push could not move it) waits. The arm at a
- *           trial place is the two-rod arm with the elbow kept on its side (leftArmRodsAt below): the rig's own elbow
- *           swings toward its side at most FREE_HAND.swivelDegPerS, a few degrees a frame, so one frame's trial is
- *           within millimetres of the pose the step then draws.
- * on false: the left arm is not stopped, as before (it still pushes the others).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LEFT_ARM_BLOCK = Object.freeze({ on: true });
 
 /** LEFT_ARM_BLOCK: the bend point of a two-rod limb whose end is moved to `at` (world m), its root fixed, the two rods'
@@ -411,41 +455,41 @@ export function blockRefuses(penNow, penNew, o = LIMB_BLOCK, allowM = -Infinity)
   return Boolean(o && o.on !== false && Number.isFinite(penNew) && penNew > floor + o.tolM);
 }
 
-/**
- * PUSH_BACK (a check of the SEEMOVE rounds, cases K4 and K3 of its break scenario: with the right arm chosen, "Bend trunk
- * forward" carried the arm onto the right thigh, the arm pushed the leg, and the leg stayed 87 mm off its place after the
- * trunk had come back; the owner, Message 206: "no permanent movements"). A limb pushed while your trunk (or the neck's
- * bow, which moves the shoulders) is not at rest is pushed by a movement that returns by itself, so it returns with it:
- * its angles go back from where the push left them to where they were before the first push of that movement, in step
- * with the trunk's way back (pushBackStep below, the same rule as the right arm let go during a movement), and are
- * exactly those once the trunk is at rest. A push at rest (the chosen limb moved by you into another) stays, as
- * Message 174 asks ("to put them back in place, of course, you've got to grasp them and move them"). A pushed limb you
- * choose before the trunk is back is yours: it stays where it is.
- * on false: every push stays, as before.
- * Second pass (a check of LIMBS2: P1, "Bend right knee" and then the trunk left the knee bent for good; P2, a knee
- * movement switched on during the trunk's return did not happen; and SEEMOVE round 7 changed ns-app holdArmBack's form,
- * so the call threw inside the frame once both were merged). The way back is this module's own step (pushBackStep), on
- * the joints' PLACES (the activity's bodyGoal: where each joint returns after a movement, never where a movement has it
- * now); the record is kept until every joint is home. Near rest and after it, what is left goes at most restDegS. The
- * app sets these places as places only (the activity's 'limbPlace', from SEEMOVE round 8), so a movement of the joint
- * under way goes on and returns to the new place; `moving` (leave such a joint alone) is for a caller that can only
- * set a joint's place and position at once. The push itself leaves a joint in a movement alone (ns-app stepLimbPush).
- * 22 November 2026, round r30 (LIMBS3; a check of update 67, finding 1: with the right arm chosen, "Bend trunk forward"
- * pushed the right leg, and the right leg chosen during the movement, Digit3 at 0.3 or 0.6 s, stayed 86 mm off its place
- * for good, 90 mm with a side bend; the owner, Message 206: no permanent movements). The record was dropped as soon as the
- * pushed limb became the chosen one ("a pushed limb you choose is yours"). Choosing a limb is not moving it:
- *   chosenKept  the record of a limb you choose is kept, and its way back goes on with the trunk's return. What you then
- *               do to that limb yourself (the keys, the look carrying it, a drag) is yours: a joint whose place changed
- *               that way has the change carried into the place it goes back to (pushBackStep `own`), so the push is
- *               undone and your own move is kept. Tried and dropped: dropping such a joint from the record (the push's
- *               part of it then stayed: a leg moved with S after the choice ended 86 mm plus S off its control); letting
- *               a chosen leg wait, untaken by the view, until its way back is done (the keys on it would then be undone
- *               with the trunk's return, as they are on a waiting right arm).
- * chosenKept false: a pushed limb you choose before the trunk is back stays where it is, as before.
- * 22 November 2026, round r31 (LIMBS4): what the keys and the look do to a chosen pushed limb is no longer carried as
- * joint changes once the shadow has moved (KEY_SHADOW below, pushBackStep's ownTo): the place it goes back to is where
- * the same input takes the limb from its own place. A drag or a limb turn is still carried as joint changes.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const PUSH_BACK = Object.freeze({ on: true, shareMin: 0.02, restDegS: 90, chosenKept: true });
 
 /** PUSH_BACK: the record of a limb pushed during a movement after one more push. rec: the record so far or null;
@@ -502,30 +546,30 @@ export function pushBackStep(rec, { place = {}, moving = () => false, away = 0, 
   return { rec: { ...rec, to: goals, from, last, share }, joints, done: atRest && !busy && !left };
 }
 
-/**
- * KEY_SHADOW (22 November 2026, round r31, LIMBS4; the owner, Message 206: "no permanent movements": a movement from the
- * brain contracts and returns, and only the player's own placing stays; a check of update 68: keys or a look used on a
- * pushed leg chosen during a trunk movement left it 18 to 36 mm off where the same input ends with no trunk movement (W
- * 35.4 mm, though W alone moves that leg 2 mm; S 41.0; A then D 19.8; a look 18.4 to 19.4); and R7: keys on the held
- * right arm during a trunk movement were undone when it was let go before the trunk was back, 88.4 mm off).
- * A key's move made at the pushed or bent pose has no one equal at rest: the same joint changes taken back to the rest
- * pose move the hand or foot somewhere else (and where the joint has no room left at rest, W moved a leg 2 mm at rest
- * but bent it 13 degrees back at the pushed pose). What does have one equal is the INPUT. Now:
- *   on      while a limb's way back runs (a pushed limb chosen during the movement, PUSH_BACK; the right arm let go during
- *           it, ns-app HOLD_BODY holdArmBack) or the trunk carries the held right arm, a SHADOW of the limb stands at the
- *           place it goes back to, with the trunk at rest. Each frame of the keys on the limb is played on the shadow
- *           too, through the same rules as the view's hold plays it at rest (keyShadowStep: the place on the keys' line
- *           within leadM, one solve a frame, limbKeyFollow and keyMoveCut, LIMB_PACE with the swing and LIMB_ACROSS, the
- *           trunk keep-out of an arm, nothing under HOLD_LIGHT minDeg), and a look that carries the limb carries the
- *           shadow by the same look from the camera with the trunk at rest (keyShadowCarry). The place the limb goes back
- *           to becomes the shadow's: the push and the trunk's carry are undone, and the player's input ends where it
- *           ends with no movement. The limb itself still answers the keys as it does now, frame by frame.
- * on false: the joint changes made at the pushed pose are carried (PUSH_BACK chosenKept), and the right arm let go goes
- * back to its places from before the movement, as before.
- * Not modelled on the shadow (where the control would differ): another limb in the way (LIMB_PUSH, LIMB_BLOCK), the
- * contact of a leg with the trunk, two keys at once falling back to one, the keep-out of the head's column in the eye
- * view, and a look carrying a limb beyond its reach (the shadow then waits where it is).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 23 November 2026, round r32 (LIMBS5; a check of update 69, case T5: keys on a pushed leg, another limb chosen in between,
  * then S on the leg again, ended 7.1 mm off their control). Measured: the other limb is not the cause (W then S on the
  * same leg, 7.1; S alone after the trunk is back, 6.4; S after the way back has ended, 2.2; S during the trunk, 0.0). The
@@ -536,41 +580,41 @@ export function pushBackStep(rec, { place = {}, moving = () => false, away = 0, 
  *   lineAtHome  when the chosen limb's way back ends while a key is held, the hold takes over the shadow's line of the
  *               keys (keyShadowLine), so the keys go on as they would have with no trunk movement. (T5 7.1 -> 0.0 mm, S
  *               after the trunk 6.4 -> 0.0.) false: the hold keeps its own line (update 69). */
-/* 23 November 2026, round r32, LIMBS5 pass 3 (a second independent check of this package: "A key held on the chosen right
- * arm during a trunk movement now ends the arm 110-145 mm further from where the same keys end with the trunk still than
- * update 69 does": bend + A 63.6 -> 209.1 mm, turn right + A 272 -> 381, turn left + W 160 -> 287, though W alone moves
- * that arm 3 mm; the owner, Message 206: "no permanent movements", only the player's own placing stays). Traced frame by
- * frame: the shadow of the held right arm (ns-app armShadow) ends exactly where the control ends (208.5 mm from the arm
- * in both), but the view's hold keeps its own place in the room, and that place is where the keys put it with the trunk
- * bent or turned (on keyed frames the trunk's carry even moved it with the arm, the keys' cut refusing to hold the arm
- * against the carry). Update 69 never honoured that place (the arm waited beyond its reach and rode the trunk back,
- * 63.6 mm off); pass 2 (HOLD_BODY trunkNow) made the arm go to it as the trunk came back, so it ended further off:
- *   placeHome  once the keys or the look have moved the held right arm's shadow during a trunk movement, the hold's
- *              place goes home to the shadow's end with the trunk's return: its offset from that end is cut in step
- *              with the trunk's distance from rest (as HOLD_BODY holdArmBack takes the right arm let go back: the share
- *              of the way still to go never grows again, counted from the last frame the player's keys or look moved
- *              it), at most homeMps (1.2 m/s, the hold's own rejoin pace, LIMB_KEYS rejoinMps) a frame, and goes on at
- *              rest at that pace until it is within homeDoneMm. The keys and the look still move the arm frame by frame
- *              as now; the shadow keeps being played them until the place is home. (keyShadowHomeStep.)
- * placeHome false: the hold keeps the place the keys gave it (pass 2).
- * 23 November 2026, round r32, LIMBS5 pass 4 (a third independent check: "moving the look during a forward bend leaves
- * the chosen right arm 12, 17 and 26 mm off at 40, 30 and 20 fps (update 69: 2 to 3 mm)"; the look alone had started
- * placeHome, and the shadow's look carry fell short by one frame of the look below 60 frames a second):
- *   homeOnLook  false: placeHome starts only once the player's KEYS were played on the shadow (sh.keysPlayed, set by
- *               keyShadowStep on every frame of the keys, whether the shadow could follow them or not: keys it refuses
- *               moved the real place all the same). A look alone is carried by the view's hold itself, as on update 69.
- *               true: the look's carry too starts it (pass 3). (keyShadowHomeDue.)
- *   replayLast  the held right arm's shadow stands at the arm's places from BEFORE the step of the last frame the trunk was
- *               at rest (pass 2, ns-app armRestGoal), so that frame's look and keys are played on it as it is made, and its
- *               place in the picture is taken with the look those places were made with. Pass 3 took it with the look of
- *               the frame after, so a look turned on that last frame at rest never carried the shadow: at 40, 30 and 20
- *               frames a second the look's first frame (the look 17 to 500 ms) fell there, and the shadow ended 13, 17 and
- *               26 mm short of where the same look ends with the trunk still. false: as pass 3.
- *   carryKeyed  on a frame of the keys on which the look turned too, the shadow is first carried by the look and the keys
- *               then move it from there, as the view's hold does with its place (ns-app holdTarget: carried, then moved by
- *               the keys). The shadow took only the keys on such frames: A held during a forward bend while the look
- *               turned (case KAL, the look 0.3 rad over 17 to 500 ms) ended 172 to 187 mm off where the same keys and look
- *               end with the trunk still (update 69: 112 to 174). false: as pass 3. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const KEY_SHADOW = Object.freeze({ on: true, waitMm: 40, lineAtHome: true, placeHome: true, homeOnLook: false, replayLast: true, carryKeyed: true, homeMps: 1.2, homeDoneMm: 0.5, homeMaxDt: 0.1 });
 /** KEY_SHADOW placeHome (LIMBS5 pass 4): whether the held right arm's place goes home to the shadow `sh`'s end: the keys
  * were played on the shadow (sh.keysPlayed), or with homeOnLook any move of it (sh.everMoved). Pure. */
@@ -782,61 +826,61 @@ export function keyShadowCarryKeys(sh0, target, ax, az, dt, env) {
   return sh;
 }
 
-/**
- * TRUNK_RIDE (23 November 2026, round r32, LIMBS5; a check of update 69: "With 'Bend trunk forward' your left hand moves
- * 68 mm in ONE frame (0 without the bend)", and with the bend pressed again during its return the right arm 57.3 mm; the
- * owner: nothing may jump or flash). Measured at 60 frames a second on update 69: there is no one-frame switch. The trunk's
- * contraction is the jerk spring of every movement from the brain (ns-actions JOINT_LATCH: omega 21, zeta 0.26, the
- * owner's "fierce contraction with acceleration and inertia"): the drawn trunk bend goes 0 to 35 degrees in six frames,
- * is thrown back to 27.7 and slams in again. Both shoulders go 9, 24, 34, 37, 37, 14 mm a frame. A limb the view does
- * not hold rides on the chest as one piece, so its end swings round on the lever of the arm: the left hand (another limb
- * chosen) 16, 44, 60, 68, 67, 26 mm a frame, its place beside the shoulder unchanged; the right arm likewise 64 mm with the
- * left arm chosen (the game starts so) and 57 mm in the second press. In the eye view the left hand fell from 43 to 12 %
- * of the picture's height in five frames. The chosen limb, held in the room, moves 2 to 4 mm a frame.
- * Now an arm the view does not hold FOLLOWS the place the trunk carries it to, as a hanging arm with weight trails a
- * jerked trunk: each frame its end goes toward that place by at most
- *   max(speedMps x the frame's time (15 mm at 60 frames a second), rootShare x how far the trunk moved its shoulder this
- *   frame + how far its own movement (a movement from the brain, a way back, a push) moved it this frame),
- * so the hand is never faster than 15 mm a frame, or than the trunk moves the shoulder it hangs from together with its
- * own movement where that is more; the rest of the swing comes after, at 15 mm a frame (about 0.1 m behind at most,
- * caught up in about ten frames). (Tried first: the step plus the own movement on top, max(15, shoulder) + own: during
- * the right arm's way back, HOLD_BODY holdArmBack, the catching up and the way back added to 19 to 23 mm a frame.) Only while the trunk's
- * own movement (a contraction, its return) is under way, or the end is still behind (the look's own bend of the trunk is
- * left as it was). A gap over snapMm (a reset of the body) is not followed: the end goes there at once. The place the
- * arm is kept at is never changed by this: only where it is drawn on the way.
- * 23 November 2026, round r32, LIMBS5 pass 2 (the independent check of the first pass, its blocker: "at the frame rates
- * the game really runs at while the body moves (30 fps, 25 fps, or uneven 17-45 ms frames), a trunk turn now throws a
- * hand 32-36 cm in one frame, against 20-25 cm on update 69"; and "the hands are 236-276 mm behind at frame 5-6 ... and
- * caught up only after 41-49 frames"). In a trunk TURN the hand is carried about three times as far as its shoulder
- * (the hand is far from the spine the chest turns about; in a bend about 1.8 times), so a hand kept to its shoulder's
- * step falls far behind: at 30 frames a second 186 mm after two frames, and the snap (snapMm 300, meant for a reset of
- * the body) then put it at its place in ONE frame: 323 to 361 mm. Measured on update 69's rigid ride replayed through
- * the rule offline (work notes, sim1), largest one-frame step of the left hand / largest lag / last frame behind:
- *   rule                       60 fps turn       30 fps turn    uneven 17-45 ms   25 fps   20 fps   bend 60 fps
- *   rigid (update 69)          104 / 0           196            206               244      298      68
- *   first pass (snap 300)       33 / 280 / f69   331 (snap)     339 (snap)        326      339      37 / 117 / f10
- *   now                         42 / 232 / f14    87 / 220       97 / 231         101      122      37 / 105 / f9
- * Now: no snap at all. The end goes, each frame, at least max(speedMps x the frame's time, the shoulder's step and its own
- * movement as before, catchS: the share 1 - exp(-dt / catchS) of how far behind it is), so a long lag closes like a
- * weight on a spring, in about the same TIME at any frame rate; and it is never more than maxLagMm behind: above that it
- * moves just enough to stay at that lag (it speeds up, it never jumps the rest). speedMps 0.9 -> 1.5: on a trunk's
- * return the hand's place goes about 20 mm a frame, and at 15 mm a frame the hand trailed up to 70 mm all the way back.
- * doneMm 0.5 -> 2: the last 2 mm are taken at once (the right arm's solve stops a few frames sooner; nothing to see).
- * Tried and dropped: only the largest lag (maxLagMm 100 to 150 and nothing else; the 60 fps turn's step went back up to
- * 93 to 103 mm, close to the rigid 104); a follower with its own speed (a critically damped spring, smoothTime 0.06 to
- * 0.1 s; it built up speed and its steps reached the rigid ones, 102 to 107 mm at 60 frames a second). The reset of the
- * body and the display's rescue clear the follow's records outright (ns-app rideClear; the left hand's record goes with
- * the free hand's state), a teleport on purpose, not a distance test. snapMm: kept only for the old rule (catchS 0).
- *   on false: the arms ride the trunk as one piece (update 69). catchS 0 (and maxLagMm 0): the first pass's rule.
- * 23 November 2026, round r32, LIMBS5 pass 3 (the second check, case K3xT: the right arm chosen, "Turn trunk to the right"
- * pressed twice, then "Turn trunk to the left" at frame 12: "the lag sits at 243-249 mm for three frames. Above maxLagMm
- * (250 mm) the hand has to move as fast as its place does ... there is no smoothing left in this case": the left hand's
- * steps 31, 54, 95, 163, 107 mm against update 69's 97, 151, 181, 186). maxLagMm 250 -> 400: replayed offline on update
- * 69's own frames of that case (work notes, sim3-rev), the largest step 173 -> 96 mm, the lag up to 400 mm for about two
- * frames. No other case measured comes near 250 mm (turns 182 to 228 mm at every frame rate), so they are unchanged. Tried:
- * a soft zone (half the excess taken from 250 to 400 or 500 mm): 120 to 130 mm.
- * A rule of this game's display (an arm with weight), not a measured movement.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const TRUNK_RIDE = Object.freeze({ on: true, speedMps: 1.5, rootShare: 1, catchS: 0.1, maxLagMm: 400, doneMm: 2, snapMm: 300, maxDt: 0.1, reachM: 1.3 });
 
 /** TRUNK_RIDE reachM (LIMBS5 pass 2, the check's cost): the most a trunk movement of stepDeg degrees in one frame (the

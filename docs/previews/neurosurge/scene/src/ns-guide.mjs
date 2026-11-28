@@ -4,13 +4,13 @@
 // for the status card ("Try this (2 of 7): Press W, A, S or D to move your left hand."). All wording lives in
 // ns-text.mjs (GUIDE); nothing here says the game reads, records or sends brain signals.
 //
-// Goals, in teaching order (GUIDE_GOAL_IDS). R558 (Messages 55 and 56: the game is a learning tool, so what it teaches
+
 // comes first and the hand gestures after): look at a light-blue left-arm area -> (feature moveKeys) press a number key:
 // one movement of that area's list -> switch on another body part's area -> (feature moveKeys) press a number key with
 // the look off the brain, to watch the movement on the body ('watchBody') -> move the hand with W/A/S/D -> tap
-// Space twice: every limb turns once (goal id 'flipPalm', kept for saved progress; R558, Message 40) -> tap Space twice
+
 // and hold: the limbs keep turning slowly (goal id 'fist', kept) -> hold
-// Space (R558, Message 40; the F key is gone) on the brain and carry it -> click or hold an orbit arrow. Every goal completes from a real game event, in ANY
+
 // order: a goal the player already did is skipped when its turn comes. After the last goal a short "All done" line shows
 // for GUIDE_OPTIONS.finishS seconds, then the guide hides itself. The Esc page can hide, show or restart it.
 //
@@ -20,20 +20,20 @@
 //        isLeftArm false and kind !== 'integration' -> otherPart.
 //   { type: 'key', key: 'w' | 'a' | 's' | 'd' } or { type: 'move', axis: 'x' | 'z' }
 //        A/D = axis x, W/S = axis z. moveHand needs both axes (the line asks for the missing one).
-//   { type: 'fist', on: true | false, heldS? }   the slow limb turn of a double tap held starts / stops (R558, Message 40;
+
 //        the event keeps its old name). The goal needs a turn of >= fistMinS.
-//   { type: 'flip' }                             a double tap of Space (R558, Message 40: every limb turns once).
+
 //   { type: 'grab', on: true }                    the brain was grabbed (a Space hold or tap on the brain).
 //   { type: 'grab', on: false, dragRad }          the brain was let go after a drag of dragRad radians (look angle).
 //   { type: 'armMoved', ids }                     R558 (hunt 2): the game arm really moved (a contraction of a left-arm
-//        movement or the forearm turn started; 20 November 2026, Message 206: it was a latch); completes leftArmArea.
+
 //        guideEventsFromFrame then marks left-arm 'activate' events awaitMove: true.
 //   { type: 'carry', m }                          R558 (hunt 2): while Space holds the brain, W/A/S/D carried it m metres this
 //        frame (its key offset). dragBrain completes on a release after dragMinRad of look carry OR carryMinM of keys.
 //   { type: 'orbit', dir?, hold? }                an orbit arrow turned the view (click step or hold).
 //   { type: 'pause' } / { type: 'resume' }        Esc page shown / hidden (the line hides while paused).
 //   { type: 'resetBody' }                         Reset body (no effect on the guide; accepted for completeness).
-//   { type: 'moveKey', n, moved, onBrain }        R558 (Messages 55 and 56): number key n did movement n of the information
+
 //        card's list. moved false = that movement was already at its end (nothing moved): the line then asks for
 //        another number and no goal completes. onBrain = the look was on the brain when the key went down: a key that
 //        moved something completes numberKey; with onBrain false it also completes watchBody (the look was on the
@@ -66,42 +66,42 @@
 import { GUIDE, guideLine } from './ns-text.mjs';
 
 /** The round-4 goal ids in teaching order (the guide of a build without the round-5 features). */
-// R558 (Message 40): the double tap (flipPalm) is taught before the double tap held (fist), which builds on it.
-// R558 (Messages 55 and 56): what the game teaches comes first: an area of the left arm, then an area of another body
+
+
 // part; the hand, Space and arrow gestures follow. The ids are unchanged, so saved progress keeps.
 export const GUIDE_GOAL_IDS = Object.freeze(['leftArmArea', 'otherPart', 'moveHand', 'flipPalm', 'fist', 'dragBrain', 'orbit']);
 
 /** Every goal id in teaching order, the feature goals included (R5-text; R558 numberKey). */
 export const GUIDE_ALL_GOAL_IDS = Object.freeze(['leftArmArea', 'numberKey', 'otherPart', 'watchBody', 'glow', 'moveHand', 'flipPalm', 'fist', 'dragBrain', 'orbit', 'thirdPerson', 'mirror']);
 
-/**
- * 19 November 2026 (EASE; the owner: "there should be a playable tutorial to learn how to use the game, as it's not very
- * clear at all, and to master the controls quickly"). The TUTORIAL is this same guide with its own short list, played
- * in the game itself: nine steps, each asking for ONE action and moving on the moment the player does it.
- *   lookStrip    look at a motor area of the strip: the look switches it   'activate' by a look (source 'gaze' or 'dwell')
- *                on and a part moves                                       of an area that moves something (20 November
- *                                                                          2026: no longer the bare 'look' at an area,
- *                                                                          which a look while Space holds the brain gave
- *                                                                          although looks are silent then)
- *   pressArea    click it: the part contracts again                        'activate' by a click that moves something
- *                (20 November 2026, Message 206: every switch-on contracts and returns, so a click does it again; the
- *                step said "jerks again, harder" while a movement was held part way)
- *   chooseLimb   2, 3 or 4 (or a double click): another limb is chosen       { type: 'limbChoice', n } (n 2 to 4: 1, the left
- *                                                                          arm, is the one the game starts on)
- *   aimJoint    look up or down in the eye view                           { type: 'jointAim', m } (the wrist or ankle moved
- *                                                                         relative to its shoulder or hip)
- *   moveHand     W A S D: the chosen limb's hand or foot                   as before ('move' / 'key', both axes)
- *   dragLimb     press on a limb and drag it: sideways turns it, up and     { type: 'limbDrag', deg } (the limb was turned
- *                down bends and straightens it                             or bent by at least limbDragMinDeg in one drag)
- *   dragBrain    Space on the brain, carry it, let go                      as before ('grab', 'carry')
- *   orbit        press and drag the brain to turn it                       as before ('orbit')
- *   thirdPerson  E: the view from outside, E again to come back            as before ('view'; feature thirdPerson)
- *   readInfo     R: the reading levels                                     { type: 'read' }
- * A tutorial is STRICT: only the step that shows can be done (createGuide({ tutorial: true }) sets strict), so the
- * count goes 1, 2, 3 ... and every step is really played. { type: 'skip' } passes the step that shows (the Enter key in
- * ns-app). The Esc page hides it, shows it and starts it again, as it did the guide. Saved under the same key with
- * v: 2 and tutorial: true; progress saved by the older guide (v: 1) starts the tutorial from its first step.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // (19 November 2026, later the same day: the owner took the numbered lists away, "The number overview is very confusing
 // and creates feedback delay", so the step that held a number key gave way to the limb drag. 'holdPart' stays a known
 // id, so progress saved with it still loads.)
@@ -140,11 +140,11 @@ export function guideGoalIds(features = null, goals = null) {
   return Object.freeze(GUIDE_ALL_GOAL_IDS.filter(id => !GUIDE_FEATURE_GOALS[id] || f[GUIDE_FEATURE_GOALS[id]] === true));
 }
 
-/** Display and completion constants (display choices, not measurements).
- *  - fistMinS 0.3: the slow limb turn of a double tap held (R558, Message 40; goal id 'fist' kept) of at least 0.3 s.
- *  - dragMinRad 0.12 (about 7 deg): the brain was really moved, not just grabbed.
- *  - flashS 1.5: "Nice!" shows this long in front of the next goal.
- *  - finishS 8: the "All done" line shows this long, then the guide hides itself. */
+
+
+
+
+
 // R5-text: glowWindowS 1.5: a glow drawn within 1.5 s of the switch-on (the 1 s pulse plus its fade) belongs to it;
 // thirdMinS 1.0: the view from behind was on long enough to see the back (the camera eases in over 0.4 s).
 // R558 (hunt 2): carryMinM 0.2: the held brain carried at least 20 cm by W/A/S/D also counts as moved (dragBrain).
@@ -321,7 +321,7 @@ export function guideStep(state, events = [], now = 0, opts = GUIDE_OPTIONS) {
       }
       case 'flip': mark('flipPalm'); break;
       case 'moveKey': {
-        // R558 (Messages 55 and 56): a number key did a movement of the information card's list. One that was already
+
         // at its end moves nothing: the goal stays open and its line asks for another number (while a number-key goal
         // is the current one). A key that moved something completes numberKey; pressed with the look off the brain
         // (on the body, where the movement shows) it also completes watchBody.
@@ -481,9 +481,9 @@ function regionIndex(bodyMap) {
 /** R558: the hand actions a relax press sends back (ns-actions HAND_ACTION_IDS, kept equal by hand). */
 const RELAXABLE_HAND_ACTIONS = Object.freeze(['grasp_close', 'open_hand', 'spread_fingers', 'index_flexion', 'index_extension', 'thumb_mcp_flexion', 'thumb_mcp_extension',
   'fingers_together', 'middle_flexion', 'middle_extension', 'ring_flexion', 'ring_extension', 'little_flexion', 'little_extension', 'thumb_opposition', 'thumb_reposition']);
-/** True when "Relax left grip" would move the hand: a hand movement is contracting (ns-actions armJerk, its time still
- * running). 20 November 2026 (Message 206): nothing is held any more, so a relax press on a resting hand moves nothing;
- * (it was: a latched hand action, armLatch). */
+
+
+
 export function handLatched(a) {
   const n = a && a.armJerk && typeof a.armJerk === 'object' ? a.armJerk : null;
   return Boolean(n && RELAXABLE_HAND_ACTIONS.some(id => Array.isArray(n[id]) && n[id][0] > 0));
@@ -492,11 +492,11 @@ export function handLatched(a) {
 /** R558 (hunt 2): the game arm's elbow counts as straight below this flexion (radians; the reach solution's shown
  * elbow, ns-app state.elbowRad). Display choice: 2 degrees. */
 export const ARM_STRAIGHT_ELBOW_RAD = 2 * Math.PI / 180;
-/** R558 (hunt 2): false when a game-arm action (ns-actions ACTION_IDS id) would move nothing on the arm as it is now:
- * it straightens an elbow that is already straight (full reach) with no bend under way, or the game arm has no joint for
- * it (ARM_ACTIONS_MOVE_NOTHING). arm: { elbowRad, armJerk } of the activity state BEFORE the pulse; missing fields count
- * as "moves". 20 November 2026 (Message 206): every press contracts and returns, so nothing else is "already there"
- * (it was: a movement latched on with no jerk to repeat, armLatch). */
+
+
+
+
+
 /** 19 November 2026 (EASE, audit S14): game-arm movements that move nothing (ns-actions DISPLAY_ONLY_ARM_IDS, kept equal
  * by hand); the tip and the card dim them like a movement already at its end. Empty since 21 November 2026 (browser hunt
  * of update 62, H8): the left wrist's two sideways bends were the only ones, and the game arm's wrist now bends
@@ -553,34 +553,34 @@ const num = v => (isNum(v) ? v : null);
 /** R4-fix (RP3): the smallest per-frame hand movement that counts as "the hand moved" (NDC in x, metres in depth). */
 export const MOVE_MIN = Object.freeze({ xNdc: 2e-4, depthM: 2e-5 });
 
-/**
- * Guide events for one frame, from the ns-app frame loop:
- *   prev = simState BEFORE sim.stepFrame, next = step.state, out = step.out, inputs = the stepFrame inputs
- *   ({ axes: { x, z } }), bodyMap = BODY_MOTOR_MAP (for region kinds).
- * Reads only plain fields and tolerates any of them missing (then that event is simply not produced):
- *   out.marks[]                         -> 'activate' (each new look or click pulse)
- *   inputs.axes.x / .z != 0              -> 'move' x / z
- *   activity.spaceHeld false -> true     -> 'fist' on;  true -> false -> 'fist' off (heldS from the state clocks); R558
- *                                            (Message 40): spaceHeld is the slow turn of a double tap held
- *   activity.rotationSeq increased       -> 'flip' (a double tap; fallback: state.rotation.flips increased)
- *   activity.grabSeq increased           -> 'grab' on
- *   activity.brainGrab.active true->false -> 'grab' off with dragRad = |placement - placement at grab start|
- *   activity.orbitSeq increased          -> 'orbit' (fallback: state.view.orbit changed)
- *   activity.paused false <-> true       -> 'pause' / 'resume'
- * Round 5 (R5-text; every field optional, the first one found wins, see round5/R5-text-NOTES.md):
- *   view mode changed                    -> 'view' { mode }   from activity.viewMode | state.camera.view |
- *                                            state.view.mode | state.viewMode ('first' | 'third'), or the boolean
- *                                            activity.thirdPerson / state.thirdPerson
- *   mirror orbit counter increased       -> 'mirrorOrbit'     activity.mirrorOrbitSeq | state.mirror.orbitSeq
- *                                            (fallback: state.mirror.orbit { yaw, pitch } changed away from 0, 0)
- *   mirror blocked counter increased     -> 'mirrorBlocked'   activity.mirrorBlockedSeq | state.mirror.blockedSeq,
- *                                            or out.mirrorBlocked === true
- *   mirror arrows reachable changed      -> 'mirrorClear' { on }  activity.mirrorReachable | state.mirror.reachable
- *   glow links drawn this frame          -> 'glow' { regionId, onScreen, level }  from the `glow` argument (the
- *                                            scene's drawn links), else out.glow / out.glowLinks: an array of
- *                                            { regionId, level, onScreen } or { links: [...] }
- * Each event carries t = next.t (the simulation's wall clock, s) when it exists.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function guideEventsFromFrame({ prev = null, next = null, out = null, inputs = null, bodyMap = null, glow = null } = {}) {
   const ev = [];
   if (!next || typeof next !== 'object') return ev;
@@ -588,7 +588,7 @@ export function guideEventsFromFrame({ prev = null, next = null, out = null, inp
   const add = e => ev.push(t === null ? e : { ...e, t });
   const pa = prev && prev.activity && typeof prev.activity === 'object' ? prev.activity : null;
   // R558: Space makes no fist (it grasps and turns the limbs); a relax pulse moves the hand when a hand movement is under
-  // way. (arm: the activity has the arm's own state, its contraction notes: 20 November 2026, Message 206.)
+
   const ctx = pa ? { handHeld: handLatched(pa), rotationState: typeof pa.rotationState === 'string' ? pa.rotationState : prev.rotation && prev.rotation.rotation,
     arm: Boolean(pa.armJerk && typeof pa.armJerk === 'object'), elbowRad: num(prev.elbowRad),
     armJerk: pa.armJerk && typeof pa.armJerk === 'object' ? pa.armJerk : null } : null;
@@ -610,7 +610,7 @@ export function guideEventsFromFrame({ prev = null, next = null, out = null, inp
   const a0 = prev.activity && typeof prev.activity === 'object' ? prev.activity : {};
   const a1 = next.activity && typeof next.activity === 'object' ? next.activity : {};
   if (typeof a0.spaceHeld === 'boolean' && typeof a1.spaceHeld === 'boolean' && a0.spaceHeld !== a1.spaceHeld) add({ type: 'fist', on: a1.spaceHeld });
-  // R558 (hunt 2): the game arm really moved because of a left-arm area: 20 November 2026 (Message 206): a contraction
+
   // of a left-arm movement started (ns-actions moveSeq / lastMove; it starts at a click, or once the look has rested;
   // Reset body starts none; a straighten on an elbow already straight, or a movement the game arm has no joint for,
   // moves nothing), or a forearm turn toward the other side than the palm faces.

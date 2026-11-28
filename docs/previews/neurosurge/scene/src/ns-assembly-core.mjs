@@ -1,18 +1,18 @@
-/** NeuroSurge loading picture ("assembly"): while the game's files load, the bones, the muscles and the parts of the
- * brain are drawn as they arrive, each one flying into its place, so the player watches the body and the brain come
- * together instead of reading a loading page (user note of 17 November 2026).
- *
- * This is a PICTURE OF THE LOADING, nothing more. It draws the same atlas files the game loads (the bytes the game
- * fetched, parsed a second time here with a small reader of its own), in the atlas' own standing posture, with plain
- * colours. It checks nothing: the game's own loader still verifies every file's hash and shape before it uses it, and
- * a part shown here can still be refused there. Nothing in this module is read by the game.
- *
- * The module has no DOM: it runs in a worker on an OffscreenCanvas (ns-assembly-worker.mjs), so the picture keeps
- * moving while the page's main thread builds the body, or on the page itself where a worker canvas is not available.
- *
- * Coordinates: the atlas' millimetres (BodyParts3D: +x the body's left, +y its back, +z up). The camera stands in
- * front of the body and looks at it like a mirror, with +z up.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import { ROOM, createRoomBackdrop, roomGain, roomBeatStep, isAbyss } from './ns-room.mjs';
 import { ASSEMBLY_ORDER, ASSEMBLY_TIERS, assemblyDepth, createAssemblyRelease } from './ns-assembly-order.mjs';
@@ -21,14 +21,14 @@ import { buildEyeballs, buildNerves } from './ns-brain-eyes.mjs';
 import { BODY_SHAPE, limbLengthField, trunkShapeField } from './ns-body-shape.mjs';
 import { RAW_LOOK, patchRawShaders } from './ns-raw-look.mjs';
 
-/** 20 November 2026 (the owner: "Let's make the limbs longer", "a smaller and much flatter chest essentially, and a more
- * observable bottom torso"). The game draws its body with longer limbs and a flatter chest (ns-body-shape BODY_SHAPE, on
- * the rest meshes); the picture draws the atlas's bones and muscles the same way, so the body that comes together is
- * the body the game then shows: a part of a limb (the table's `limb` and `chain`, ns-assembly assemblyPartsTable) is
- * made longer by its limb's field, and every bone and muscle goes through the trunk rule. A muscle that also lies on the
- * trunk (limb ending in '*') is weighted by its distance from the limb's axes (the game asks its nearest bones, which
- * this picture does not have). The picture still shows the atlas's own build, without the game's trained build. Pure:
- * a new array (the parsed one may be shared). */
+
+
+
+
+
+
+
+
 const SHAPE_LIMB_FIELDS = new Map();
 let shapeTrunkField = null;
 export function assemblyShapedPositions(p, place, shape = BODY_SHAPE) {
@@ -53,17 +53,17 @@ export function assemblyShapedPositions(p, place, shape = BODY_SHAPE) {
   return q;
 }
 
-/** 20 November 2026 (the owner, 19 November: "this also means on the loading page, you'll also see the eyes come
- * together and connect to the brain"). Once the brain's strip has lit (or could not be lit), the two eyeballs and their
- * optic nerves, built by the game's own builders (ns-brain-eyes buildEyeballs / buildNerves, the same illustration the
- * game draws), come in last: the eyeballs fly in from far apart, in front of the brain and below it, and close on
- * their places while the nerves come up under the brain to meet them; each flashes as it lands, like every other part.
- *   delayS     after the strip has lit;
- *   eyeFromMm  where each eyeball starts, from its place (brain mm: sideways outward, forward toward the viewer, up);
- *   eyeFlyS    how long the eyeballs fly (the other parts fly ASSEMBLY.flyS);
- *   nerveFromMm / nerveLagS  the nerves' start (from below) and how long after the eyeballs they set off.
- * Under reduced motion they appear in place. The brain's two halves are drawn HEMI_GAP.eachMm apart here too, as in the
- * game (ns-brain-part), so the eyeballs, which follow their halves, sit where the game puts them. A picture only. */
+
+
+
+
+
+
+
+
+
+
+
 export const ASSEMBLY_EYES = Object.freeze({ delayS: 0.35, eyeFromMm: Object.freeze([95, -120, -45]), eyeFlyS: 1.25, nerveFromMm: Object.freeze([0, -10, -28]), nerveLagS: 0.45 });
 
 /** Kinds of part the picture knows, and their colour (sRGB hex). 'strip' is the precentral gyrus, where the game's
@@ -72,12 +72,12 @@ export const ASSEMBLY_KINDS = Object.freeze({
   bone: 0xe8dfc8, muscle: 0xb2343c, eye: 0xf4f1ea, brain: 0xe0a39c, strip: 0xff4f9a, vessel: 0xa3161d
 });
 
-/** 20 November 2026 (the owner, Message 196: "New look for everything not just body"): in the raw look (ns-raw-look
- * RAW_LOOK.on) the picture's models are drawn in the game's raw light (patchRawShaders, no tone curve) and its bodies in
- * the game's raw colours: the ivory bone and the reference pictures' rose red (RGB 196, 92, 88) for the outer muscles,
- * a step darker for each deeper storey as before; the cortex in the game's own crown pink (ns-brain-ink BRAIN_FLESH).
- * sRGB hex by kind or tier name; anything not listed keeps its colour below. (The picture knows no muscle's name, so it
- * shows the storeys, not the game's muscle groups.) */
+
+
+
+
+
+
 export const ASSEMBLY_RAW_COLOURS = Object.freeze({
   bone: 0xe8e0cd, muscle: 0xc45c58, 'deep muscles': 0x9e4744, 'intermediate muscles': 0xb1514e, 'outer muscles': 0xc45c58,
   brain: 0xedbdba, 'outer cortex': 0xedbdba, 'inner cortex': 0xe2aeab
@@ -131,7 +131,7 @@ export const ASSEMBLY = Object.freeze({
   // the same ones for a caller that passes none), so the backdrop does not jump when the game takes over.
   // (18 November 2026, late: the game's first view is now 54 degrees, 52 down: the launcher's numbers, package FLAT)
   room: Object.freeze({ fovYDeg: 54, pitchDeg: -25.5, eye: Object.freeze([0, 0.11, -0.04]), mirrorZ: -2.06 }),
-  // 21 November 2026 (the owner, Message 208: "Background should still be more of an abyss."; ns-room ROOM.abyss): there
+
   // is no room behind the parts any more. The backdrop is the game's abyss, seen by THIS picture's own viewer: the same
   // black, with the same faintly lit dark round this picture's own brain and two bodies (their middles are the layout's
   // above; their sizes for the glow, as balls: brainMm about the drawn brain's half width, bodyMm half a body's
@@ -216,10 +216,10 @@ export function meshNormalsAndCentre(positions, indices) {
 
 const easeOut = u => 1 - Math.pow(1 - Math.min(1, Math.max(0, u)), 3);
 
-/** The loading picture's brain beats, as an exposed brain does in surgery (user note of 17 November 2026: "a beating
- * reacting brain as you would see in neurosurgery"): a heartbeat-shaped swell (a quick rise, a slower fall with a small
- * second bump) on a slow rise and fall like breathing. Returns { beat: 0..1, breath: -1..1 } for a time in seconds.
- * A display rhythm for a picture; nothing is measured. Pure. */
+
+
+
+
 export const BRAIN_BEAT = Object.freeze({ beatS: 0.92, breathS: 4.4, swell: 0.014, breathSwell: 0.008 });
 export function brainBeat(t, o = BRAIN_BEAT) {
   const ph = ((t % o.beatS) + o.beatS) % o.beatS / o.beatS;

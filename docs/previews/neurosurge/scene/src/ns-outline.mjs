@@ -1,112 +1,112 @@
-/** NeuroSurge scene: the black ink lines of the comic look (R558, user Messages 20, 26, 27, 28, 29: outlines where limbs
- * and bodies overlap, a parting between touching muscles, "not so harsh that it hurts the viewer's eyes", "I quite like
- * the borderlands look", "the borderlands aesthetic should be applied throughout"; Message 18: "We should be able to
- * easily differentiate each brain node and muscle node from each other").
- *
- * THREE is injected (createOutlinePass({ THREE, renderer })); nothing here imports 'three', so the pure parts load in
- * Node. Built on Three.js r170 core only (WebGLRenderTarget, DepthTexture, BatchedMesh, ShaderMaterial and its standard
- * shader chunks); no add-on is needed.
- *
- * How it works (one extra geometry-only draw, two small screen passes, one screen composite; no change to any existing
- * material):
- *  1. ID PASS. Every opaque body mesh drawn in the main frame (your own body, your left arm, the mirror body and its
- *     arm, your in-place head in the view from behind) is an INSTANCE of one THREE.BatchedMesh in a private scene: a
- *     position-only copy of the same geometry, the same world matrix (the mirror's negative determinant included), the
- *     same visibility and the same faces, drawn with a flat ID material into a render target with a depth texture. The
- *     colour is the instance's code: red = the limb group (OUTLINE_GROUPS; mirror body + OUTLINE_MIRROR_OFFSET), green
- *     and blue = a 14-bit number of the mesh (each muscle and bone its own). One multi-draw call.
- *     R558 BB (Message 28, "harshness"): the ID target is SUPERSAMPLED, OUTLINE_AA.ssByLevel times the drawing buffer
- *     in each direction (2 at the better quality levels), so each screen pixel sees 2 x 2 samples of the boundaries.
- *  2. EDGE PASS (supersampled). Each sample next to a boundary, on the NEARER side, gets the boundary's class:
- *       - strong: between two bodies (yours and the mirror), between two limbs that do not join (a hand over a thigh,
- *         a forearm in front of the chest, one leg against the other), and where a joining limb folds over its
- *         neighbour with a depth step (a forearm folded onto the upper arm);
- *       - silhouette: around each body against the brain or the background;
- *       - inner: a depth step inside one limb (fingers over the palm, a lifted outer muscle over a deep one);
- *       - parting: between neighbouring muscles (or a muscle and a bone) that touch without a depth step, so each
- *         muscle reads as its own piece (Message 26); drawn on one side only.
- *  3. INK PASS (screen pixels). For each pixel, each of its samples takes the strongest line whose boundary sample lies
- *     within the line's width (the bold lines spread over their whole limb group, the inner and parting lines over their
- *     own mesh), with a one-sample soft edge; the pixel's ink is the mean of its samples: smooth coverage, no stair
- *     steps on diagonals, no crawling while the view turns (the boundary is known to half a pixel). The WEIGHT follows
- *     the style guide: bold silhouettes and overlaps, medium inner steps, fine partings, all tapered by the on-screen
- *     size of a centimetre at the pixel's depth (OUTLINE.taper*), so small or far figures get thin lines and lose the
- *     inner and parting lines before they could clot. The optional soft depth shading (OUTLINE_AO) is computed here
- *     too. The ID, edge and ink passes are skipped when nothing changed.
- *  4. COMPOSITE. A full-screen triangle in the MAIN scene, first in the transparent list (renderOrder OUTLINE.renderOrder),
- *     lays the ink (near-black, OUTLINE.colour) and the shading over the frame. Because it is drawn after the opaque
- *     bodies and BEFORE every transparent pass, the glass brain, the motor areas, the glow links and halos, the hints and
- *     the 3D arrows (drawn last, without depth test) are blended over the lines exactly as they are blended over the
- *     bodies: an arrow stays on top, a body behind the glass keeps its glass tint on its lines too, and glass never gets
- *     lines from here (it is not in the batch; the brain, glass and arrows draw their own ink in their materials). The
- *     HUD is HTML and is not touched.
- *  Line widths are CSS pixels (times the drawing buffer's pixel ratio and the supersampling); below one sample a line
- *  keeps one sample and fades instead.
- *
- * Display only: the codes, depths and lines are a drawing aid. They do not change a pose, a pick, a colour meaning, an
- * activity value or a collision.
- */
 
-/** Display choices (R558 O, re-tuned in R558 BB for the comic ink look; see the BB report).
- *  colour: the ink as drawn on the screen (sRGB 0..1): near-black #0b0809 (style guide), not grey and not a coloured shade.
- *  boldCss / innerCss / fineCss: line widths in CSS pixels on a NEAR body (style guide weight hierarchy: silhouettes and
- *  overlaps 2-3 px, inner depth steps 1-1.5 px, partings under 1 px).
- *  strong / silhouette / inner / faint: line opacities (faint = the parting between touching muscles).
- *  taperFullPxCm / taperMin: the widths are scaled by clamp(sqrt(px per cm / taperFullPxCm), taperMin, 1), px per cm being
- *  the CSS pixels one centimetre covers at the pixel's distance (your hands about 10, your knees about 6, the mirror body
- *  about 1.5): a far or small figure gets thinner lines, never a black clot.
- *  detailFromPxCm / detailFullPxCm: the inner and parting lines fade in between these on-screen sizes of one centimetre;
- *  strong and silhouette lines are always drawn. R558 BB: 1.8 / 3.5 -> 0.9 / 2.6, so the small mirror body (about 1.6 px
- *  per cm at the start) keeps faint, thin partings (Message 26: each muscle its own piece) instead of none; with the
- *  taper they stay under half a pixel wide there, so they cannot clot.
- *  maxRadiusSs: the widest line in supersampled pixels (the ink pass's search radius).
- *  stripCss / stripAlpha: the motor strip's silhouette (R558 BB, Message 24): seen from above it is the central and
- *  precentral sulci that bound the strip, plus its medial edge and its end at the Sylvian fissure; a bold line inside
- *  the strip where it meets the glass or the background (where a body lies next to it, the body's own line is drawn).
- *  holeCss (R558 BB check; lead note on the lifted build; Message 28 "clotted dense lines"): a foreign region (the
- *  background, a deeper mesh, another limb seen through) narrower than this along the probe, with the same limb (or a
- *  limb joining it at a joint: the hand's bones and the forearm muscles' finger tendons) at about the same depth on its
- *  far side, is a speck in a hairline gap or a small hole (a lifted muscle's parting showing the deeper muscle, a hole in
- *  a mesh): it gets no ring of ink, so those specks no longer draw rows of tiny dark rings. Never under the old
- *  one-sample pinhole rule. (Tried: also giving slits up to 6 CSS px the inner weight; it hardly changed the pictures,
- *  the remaining hand loops being real overlap outlines, and its longer probes cost frame rate in the dance. Rejected.)
- *  thinShare / thinFrom / thinFull (Message 30, "The bone tips probably shouldn't be so spikey"): where the bold boundary
- *  lies all round a sample (a thin finger, a tendon, the point of a tip: the mean direction to the boundary samples
- *  within reach is short) the bold line keeps only thinShare of its width, full width from a one-sidedness of thinFrom
- *  to thinFull (1 = boundary on one side only, a plain edge). So the ink tapers at points instead of drawing needles.
- *  jumpAdjM / jumpSameM / jumpRel: the depth step (metres; jumpRel times the pixel's distance is added) above which a
- *  boundary inside one limb, or between two joining limbs, counts as an overlap (strong line).
- *  levelM: depth difference under which two touching muscles count as level (the parting is then drawn on the side
- *  of the higher mesh number only, so it stays one line wide).
- *  renderOrder: the composite's place in the transparent list (first).
- *  R558 (user Message 49, "Maybe you've overdone it with the borderlands style?"): the lines are a little thinner
- *  (bold 2.4 -> 2.0, inner 1.2 -> 1.0, fine 0.8 -> 0.7 CSS px) and the lines INSIDE a figure lighter (silhouette
- *  0.94 -> 0.85, inner 0.8 -> 0.6, faint 0.7 -> 0.45); a line where one limb overlaps another keeps full strength.
- *  18 November (the owner: "telltale games art style rather than borderlands", "the difference ... can be somewhat
- *  subtle"; earlier: "not so harsh that it hurts the viewer's eyes"): thinner and softer contours over the painted
- *  bodies. bold 2.0 -> 1.6, inner 1.0 -> 0.9, fine 0.7 -> 0.6 CSS px; strong 1 -> 0.92, silhouette 0.85 -> 0.78, inner
- *  0.6 -> 0.5, faint 0.45 -> 0.3; the ink a very dark warm brown (#14090a) instead of the near-black #0b0809, so a
- *  line on red muscle reads as a deep shadow line, not as a pen. holeCss 2 -> 4: where two muscles lie in each other
- *  (the lower belly, the hip) the specks of one showing through the other, up to 4 px across, no longer get rings of
- *  ink (the owner, 18 November: "rough patchy small-poxy muscles"). thinShare 0.45 -> 0.3, thinFull 0.65 -> 0.75: the
- *  line thins more at finger tips and tendon ends (it clotted into black dots there).
- *  Second round, 18 November (checker: the hands on the thighs still had bold near-black loops round the fingers and
- *  blobs at the finger tips): slimCm / slimWidth / slimAlpha. A bold line (an overlap or a silhouette) round a SLIM
- *  piece keeps only slimWidth of its width and slimAlpha of its opacity. A piece is slim where, going from the line
- *  into the piece, the background or a limb that does not join it is reached again within slimCm centimetres (a
- *  finger, a tendon, a toe; not a forearm, a thigh or the trunk), or where, going the other way across what lies
- *  beyond the line, the same limb is reached again within that distance (a slim gap: the thigh seen between the
- *  bars of the hand's skeleton, the background between two fingers). Before, each finger carried the same bold line as a whole arm on both of its sides, and the
- *  hand read as black loops. The overlap is still marked (11 November: "If limbs are overlapping, make sure their
- *  clearly defined with outlines"), by a thin contour of even weight.
- *  Depth preference (ns-flesh BODY_DEPTH_PREFERENCE): a body geometry may carry the attribute nsLift (metres per
- *  vertex along the line of sight, negative = away from the eye); the ID pass then draws it, in depth only, that much
- *  nearer or further, exactly as its material draws it in the main picture, so the lines follow what is seen.
- *  stripColour: the ink of the motor strip's own line on the brain stays the near-black #0b0809 (the brain is not
- *  restyled with the bodies; it used to read `colour`).
- *  brainCss / brainAlpha (20 November 2026, the owner, Message 207: "And everything should get clear outlines."): the
- *  brain's own outline and the outline of its eyeballs and nerves, drawn like the strip's line (inside the brain where
- *  it meets the background, a body behind it or the eyes, in stripColour). Off (0) unless setInk turns it on. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const OUTLINE = Object.freeze({
   colour: Object.freeze([0x14 / 255, 0x09 / 255, 0x0a / 255]),
   boldCss: 1.6, innerCss: 0.9, fineCss: 0.6,
@@ -122,11 +122,11 @@ export const OUTLINE = Object.freeze({
   jumpAdjM: 0.012, jumpSameM: 0.022, jumpRel: 0.015, levelM: 0.0015,
   renderOrder: -1e6
 });
-/** Anti-aliasing of the lines (R558 BB, Message 28). ssByLevel: supersampling of the ID pass per ns-scene-three
- * QUALITY_LEVELS index (full, 0.75, 0.5, lite 0.5, lod 0.5, lod 0.4): 2 x 2 samples per drawing-buffer pixel at the
- * first four, 1 at the two cheapest (their buffer is drawn at a half or less and stretched by the browser, which
- * softens the lines anyway). maxSsPixels: a supersampled target is never larger than this many samples (a 4K buffer then
- * keeps 1 sample) and never larger than the GPU's texture limit. */
+
+
+
+
+
 // 22 November 2026 (LOOK2; hunt of update 64 H24: "At picture quality Low the brain's outline and the arrows show pale
 // and dark specks that sparkle as the look moves"): ssByLevel [2, 2, 2, 2, 1, 1] -> 2 at every level. The levels the
 // last two now name are lite-0.7 and lite-0.6 (scale 0.7 and 0.6, not 0.5 / 0.4 as the comment above still says), and
@@ -149,15 +149,15 @@ export const OUTLINE_GROUPS = Object.freeze({
   lThigh: 9, lShank: 10, lFoot: 11, rThigh: 12, rShank: 13, rFoot: 14
 });
 export const OUTLINE_MIRROR_OFFSET = 16;
-/**
- * 22 November 2026 (SEEMOVE, section 189; the owner: every movement clear from the start view, Message 204). The face's
- * moving edges: a code of their own in the ID pass (15; the mirror body's 31), adjacent to no other group, so the ink
- * line is drawn where the muscles that carry them border the rest of the face: the brow line (the forehead muscle's
- * edge), the eyelid margins (the eyelids' part of the ring muscle round each eye) and the lips (their ring muscle).
- * The face is about 40 px tall on the mirror body at the start view, where a move of 3 to 5 px reads on a dark line and
- * not on a matte pink surface. Within the group (the two halves of one muscle) no line. ns-scene-three FACE_EDGE_INK
- * chooses the muscles.
- */
+
+
+
+
+
+
+
+
+
 export const OUTLINE_FACE_EDGE_GROUP = 15;
 /** Groups that join each other at a joint (same body): a boundary between them without a depth step is a muscle
  * parting (faint), not an overlap. Every other pair of groups is set apart by a strong line. */
@@ -200,19 +200,19 @@ export function outlineGroupForPart(part, side = 0) {
   if (part === 'neck' || part === 'face') return G.head;
   return G.trunk;
 }
-/** How a muscle that spans several limb parts gets ONE group (R558 O check; display choices).
- * Plain "most weight wins" put several forearm and shank muscles in the hand or foot, because their long tendons
- * into the fingers and toes carry much of the weight (measured on the posed body: right extensor digitorum hand 0.54 /
- * forearm 0.46, right palmaris longus hand 0.76 / forearm 0.14 / upper arm 0.11, the long toe extensors and flexors
- * foot 0.52 and 0.63, one hamstring piece shank 0.39 / thigh 0.37 / pelvis 0.25). A hand and an upper arm do not
- * join, so the jagged origin of palmaris longus at the elbow got a STRONG line against the upper arm muscles and
- * stood out (the user's Message 21, "bits coming out at the elbow"). Two rules, both anatomical:
- *  - a muscle whose weights reach two parts of one limb chain that do not join (upper arm and hand, pelvis and shank,
- *    thigh and foot; each with at least spanMin of the weight) runs along the part between them, so it takes that
- *    part (the heaviest one in between);
- *  - a muscle that would be hand or foot keeps the forearm or shank when that part carries at least proximalShare:
- *    the belly of an extrinsic finger or toe muscle lies there. The intrinsic hand and foot muscles carry no forearm
- *    or shank weight and stay hand and foot. */
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const OUTLINE_GROUPING = Object.freeze({ spanMin: 0.05, proximalShare: 0.25 });
 const OUTLINE_CHAINS = Object.freeze([
   ['trunk', 'lUpper', 'lFore', 'lHand'], ['trunk', 'rUpper', 'rFore', 'rHand'],
@@ -298,15 +298,15 @@ void main() {
 /** 18 November 2026 (SEE, ns-see): the ID pass's vertex shader, for the hidden-limb pass that draws the same batch again
  * (same instances, matrices, depth preference and code). */
 export const OUTLINE_ID_VS = ID_VS;
-/* 19 November 2026 (the owner: "make sure the occluding muscles, neck muscles are gone, and the transition between is
- * smooth. So you don't just have, part of a muscle ripped off and detached"). The three ID vertex shaders and ID_FS
- * carry Three's clipping-plane chunks: the scene gives the pass the box that ends your own body at the collar in the
- * eye view (ns-scene-three EYE_COLLAR; setClip below), so the pieces of neck and shoulder muscle the picture does not
- * draw are not in the ID picture either. Until now they were, and their outlines were inked over the open neck as
- * loose dark lines. Without planes the chunks compile to nothing.
- * 20 November 2026, evening: the box no longer cuts anything (ns-scene-three EYE_COLLAR.cut false: it cut your own raised
- * right arm away while this pass kept its lines), so the scene hands no planes here; what it hides it hides whole, and a
- * hidden mesh is not in the ID picture either. setClip stays for EYE_COLLAR.cut true. */
+
+
+
+
+
+
+
+
+
 /* 18 November 2026 (performance): the ID pass of a mesh skinned on the graphics card (the left game arm's muscles,
  * ns-scene-three armSkinPrepare): Three's own skin chunks on the rest positions (attribute nsSkinRest), the code as a
  * uniform (one proxy draw per mesh; the batch's copy of the vertices would have to be skinned on the processor). */
@@ -504,7 +504,7 @@ void main() {
 	vec4 c = texelFetch( tId, p, 0 );
 	int g = groupOf( c );
 	// The strip's silhouette: a covered sample next to an uncovered one that shows no body (background or glass).
-	// 20 November 2026 (Message 207): the same for the brain (g) and its eyes and nerves (b); beyond the line lies the
+	//
 	// background or the glass, or a body when this sample has a body behind the brain too (a brain over a body). The
 	// brain's line is not drawn where the eyes lie beyond it (they get their own line).
 	bool stripEdge = false, brainEdge = false, eyeEdge = false;
@@ -882,7 +882,7 @@ export function createOutlinePass({ THREE, renderer, enabled = true } = {}) {
   stripCompMat.uniforms.uChannel = { value: 0 };
   const stripComposite = screenMesh(stripCompMat, 'ns-outline strip composite (ink silhouette of the motor strip; display only)');
   stripComposite.visible = false;
-  // 20 November 2026 (Message 207): the brain's outline and its eyes', laid on AFTER the glass (the scene sets its
+
   // renderOrder; the glass would cover it otherwise), with the strip's colour and beat
   const brainCompMat = new THREE.ShaderMaterial({
     uniforms: { tInk: compMat.uniforms.tInk, uColour: stripCompMat.uniforms.uColour, uLive: stripCompMat.uniforms.uLive, uChannel: { value: 1 } }, vertexShader: SCREEN_VS, fragmentShader: STRIP_COMPOSITE_FS,
@@ -892,7 +892,7 @@ export function createOutlinePass({ THREE, renderer, enabled = true } = {}) {
   brainComposite.visible = false;
   const stripScene = new THREE.Scene();
   stripScene.matrixWorldAutoUpdate = false;
-  // 20 November 2026 (Message 207): the coverage picture holds three things, one per channel, combined by MAX (none
+
   // writes depth): r the strip, g the brain's surface, b its eyes and nerves.
   // 21 November 2026 (a browser hunt, H14): b and a carry NEARNESS (patchCoverageNear): b the nearest eye there, a the
   // nearest brain surface or strip, so an eye counts only where it is in front of the brain (eyeShown); the outline of
@@ -1118,7 +1118,7 @@ export function createOutlinePass({ THREE, renderer, enabled = true } = {}) {
           // map as userData.nsOutlineLocal, a Matrix4 in its own frame, so its lines follow what is drawn. The map is
           // put on whenever the passes are drawn (render, `locals`), but a change of the map alone is no change: the
           // heart beats on every frame, and following it drew the ID, edge and ink passes and the hidden-things pass
-          // on every frame of a still view (a review of Body updates 60 and 61). Between two drawn frames the line
+
           // keeps the swell it was drawn with, at most 3 % of the heart.)
           const Lm = s.userData && s.userData.nsOutlineLocal && s.userData.nsOutlineLocal.isMatrix4 ? s.userData.nsOutlineLocal : null;
           r.local = Lm;
@@ -1311,7 +1311,7 @@ export function createOutlinePass({ THREE, renderer, enabled = true } = {}) {
       }
     }
     if (strip.mesh) strip.mesh.visible = strip.shown;
-    // 20 November 2026 (Message 207): the brain's surface and its eyes and nerves, for their outline: the group's matrix,
+
     // the surface's geometry (its level of detail), each part's matrix and visibility.
     let brainShown = false;
     if (brain.group && inkUni.uBrain.value.y > 0) {
@@ -1430,10 +1430,10 @@ export function createOutlinePass({ THREE, renderer, enabled = true } = {}) {
     force = true;
     return Boolean(strip.mesh);
   }
-  /** 20 November 2026 (Message 207): the brain for its own outline. { group, surface, parts }: group the Object3D whose
-   * world matrix and visibility the surface follows (the brain group), surface a mesh whose CURRENT geometry is drawn
-   * (the merged glass; it may change with the level of detail), parts meshes drawn with their own world matrices (the
-   * eyeballs and the nerves). null removes it. brainMaterials (returned below) can take the scene's vertex rule. */
+
+
+
+
   function setBrain(o) {
     const parts = [brain.surface, ...brain.parts].filter(Boolean);
     for (const p of parts) stripScene.remove(p.pic);
@@ -1453,13 +1453,13 @@ export function createOutlinePass({ THREE, renderer, enabled = true } = {}) {
     return true;
   }
   function invalidate() { force = true; }
-  /** 20 November 2026 (the raw look, ns-raw-look): the lines' opacities [strong, silhouette, inner, faint] (OUTLINE's by
-   * default), the motor strip's line opacity and (optional) its width in CSS pixels. All zero: the edge and ink passes
-   * are not run and nothing is laid over the picture (the ID pass still runs for the hidden-limb glass). Returns whether
-   * any line is drawn.
-   * more (20 November 2026, Message 207), each optional: widths [bold, inner, fine] CSS px (OUTLINE.boldCss ...), colour
-   * the bodies' ink (sRGB 0..1, OUTLINE.colour), taperMin (OUTLINE.taperMin), brainAlpha / brainCss the brain's own
-   * outline and its eyes' (OUTLINE.brainAlpha, brainCss; drawn in stripColour). */
+
+
+
+
+
+
+
   function setInk(alphas = null, stripAlpha = null, stripCss = null, more = null) {
     if (Array.isArray(alphas) && alphas.length === 4 && alphas.every(Number.isFinite)) inkUni.uAlpha.value.set(alphas[0], alphas[1], alphas[2], alphas[3]);
     if (Number.isFinite(stripAlpha)) inkUni.uStrip.value.y = stripAlpha;

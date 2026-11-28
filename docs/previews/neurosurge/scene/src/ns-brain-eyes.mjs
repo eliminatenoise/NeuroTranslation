@@ -1,47 +1,47 @@
-/** Two eyeballs and their optic nerves at the front of the brain (19 November 2026).
- *
- * The owner: "it would be much better from a control standpoint, ease of use standpoint, and learning standpoint if we
- * were to invert the brain altogether so that the motor strip changed direction. But to make clear the direction of
- * the body, let's also include eyeballs with nerves connected to the brain." and "we're inverting the brain altogether
- * so that the eyeballs will be at the bottom."
- *
- * WHAT THIS IS. An illustration that shows which way the brain faces. It is built here in code, in the brain's own
- * atlas frame (BodyParts3D 4.0 whole-body millimetres: +x subject left, +y posterior, +z superior), and drawn in the
- * brain's group, so it is moved, turned and carried with the brain. It is NOT a traced anatomy, NOT part of the game's
- * signal (no motor area, no activity, no link), and nothing about it is measured.
- *
- * WHAT IS TAKEN FROM THE ATLAS, AND WHAT IS NOT.
- *  - From the atlas: how far each eye is from the midline and how high it is. These are the centres of the atlas's own
- *    two scleras (packets/bodyparts3d-head-r1, FJ1317 and FJ1368, in the same frame as the brain meshes): 29.8 mm either
- *    side of the brain's midline, 1518.1 mm high, 151.1 mm in front of the frame's origin plane; and their size (the
- *    scleras are 24.6 to 26.3 mm across; drawn 24.4 mm).
- *  - NOT from the atlas: each eyeball is moved straight FORWARD by `forwardMm` (30 mm). In the atlas the eyes lie under
- *    the frontal lobes (the front of the brain is at y -169.7 mm, the eyes' own fronts at -163.5), so from above, which
- *    is how the game shows the brain, they would be hidden. Moved forward they hang in front of the frontal poles with
- *    about 9 mm of each nerve in sight between the eyeball and the brain's edge.
- *  - NOT from the atlas: the nerves, the chiasm and the short tracts. The packets hold no mesh of them. They are tubes
- *    through hand-placed points, drawn to READ as nerves at the size they are seen, not traced from anything:
- *      . each nerve leaves the back of its eyeball in a SHEATH, thick at the eyeball and tapering, which ends in a
- *        small step a few millimetres on; beyond it the nerve is striped along its length (fibre lines) and two fine
- *        red vessels come out from under the sheath and run along its upper side;
- *      . it passes under the frontal lobe (kept below the brain's own underside, measured from its meshes) and comes
- *        out into the gap between the two halves of the brain (ns-brain-part), where it can be seen from above;
- *      . at the CHIASM each nerve parts in two: a thicker strand that CROSSES the midline to the other side, one
- *        passing over the other (the one beneath is darkened where they cross), and a thinner strand that stays on
- *        its own side. That half of the fibres cross is textbook anatomy; which strand passes over, their
- *        thicknesses and the wide open X are choices made so that the crossing shows. The crossing is drawn 6 mm
- *        further forward than the earlier chiasm (which lay under the hypothalamus and could not be seen from above);
- *      . behind the chiasm each TRACT (the crossed strand of the other eye with the uncrossed one of its own side)
- *        runs back and outward and FANS into three thin bundles where it ends inside the brain.
- *    Because the eyeballs are moved forward the nerves are about 30 mm longer than a real optic nerve.
- *  - NOT anatomical: the eyes look forward AND `gazeUpDeg` (40 degrees) upward, toward whoever looks at the brain from
- *    above. Looking straight forward, each iris would be a thin edge at the lower rim of its eyeball in the view from
- *    above and the eyeballs would not read as eyes.
- *
- * Cost: about 4 600 triangles in three meshes (the nerves 2 800, each eyeball 900), built once; no per-frame work of
- * their own beyond the eyeballs' turn with the look (ns-scene-three updateBrainEyes).
- * Pure: no Three.js, no DOM. The scene (ns-scene-three) makes the meshes and the materials.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import { HEMI_GAP } from './ns-brain-part.mjs';
 

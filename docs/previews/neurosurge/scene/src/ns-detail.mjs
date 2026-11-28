@@ -1,29 +1,29 @@
-/**
- * NeuroSurge — finer detail of the body at load (18 November 2026; the owner: "everything should be in as much detail as
- * possible without destabilizing the game, which of course is browser based. So we should have far more detail on
- * everything"). Pure functions, no THREE, no DOM.
- *
- * Tried and left out (numbers in the package notes): refining the meshes near the eye with curved midpoints. Where
- * the curved surface leaves a straight edge by more than a fraction of a pixel of the start view, the 99 %-reduced
- * atlas meshes are already fine enough for their outlines (an 8 mm edge on a 20 mm belly sags 0.4 mm, about 0.3 px at
- * half a metre): at 0.12 px it added 58 k muscle and 31 k bone vertices and 350 k drawn triangles, seconds of load time
- * and 7 % more per-vertex skinning, and close-ups showed no difference. What does show close up is the LIGHT on the
- * decimated triangles (smoothNormalField below), which costs nothing per frame.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 
 const keyOf = (f32, u32, x, y, z) => { f32[0] = x; f32[1] = y; f32[2] = z; return (Math.imul(u32[0], 73856093) ^ Math.imul(u32[1], 19349663) ^ Math.imul(u32[2], 83492791)) >>> 0; };
 
-/**
- * 18 November 2026 (the owner: "far more detail on everything"; the brief: "smooth normals at load"). The decimated
- * atlas meshes are full of uneven triangles (long slivers beside small ones), and an area-weighted vertex normal leans
- * toward whichever big sliver touches the vertex: lit, every such vertex turns its own way and a smooth muscle reads as
- * flat facets close up, with highlights that break at the triangle edges. smoothNormalField evens the SHADING normals
- * out over the welded surface (the files' seam duplicates are one point): `passes` rounds in which each point's normal
- * becomes the normalised mean of its own and its neighbours', counting only neighbours within `creaseDeg` of its own (a
- * real edge, such as a bone's crest or the border of a thin sheet, keeps its turn). Positions never move: only the
- * light. normals (unit, layout of positions) are changed in place; returns the number of points changed. Pure apart
- * from writing `normals`.
- */
+
+
+
+
+
+
+
+
+
+
+
 export const NORMAL_SMOOTH = Object.freeze({ passes: 2, creaseDeg: 50 });
 export function smoothNormalField(positions, indices, normals, { passes = NORMAL_SMOOTH.passes, creaseDeg = NORMAL_SMOOTH.creaseDeg, groups = null } = {}) {
   const n = (positions && positions.length / 3) | 0;

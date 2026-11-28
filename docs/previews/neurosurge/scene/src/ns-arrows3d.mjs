@@ -1,62 +1,62 @@
-/**
- * NeuroSurge R558 (user Messages 7 and 19): COMPASS ORBIT ARROWS AS SOLID 3D V-SHAPED ARROW TIPS ON TWO FRAMES.
- *
- * The user: "Let's just make all the arrows basic v-shaped arrow tips." and "Don't have weird arrow placement (think
- * of the motor strip as a horizontal 16:9 frame and the mirror as a vertical 9:16 frame, the arrows will be at the
- * centered edges of each frame perimeter side)." Then (Message 19): "Let's make the arrows 3d and slightly chunky, with
- * their vertex heads turning (further) away and their tail ends towards (closer)." Standing notes that still hold: the
- * arrows stay in place after tapping on them, are easy to click and should not block the view; arrows look clean and
- * deliberate (Message 18).
- *
- * What this module does (one owner; the pure maths is Node-testable without a DOM, THREE is passed in):
- *  (a) SHAPE (pure): a SOLID chevron. The V outline (two straight strokes of equal width meeting at a mitred point,
- *      square open ends, mirror symmetric about its axis; no tail, ribbon or curl) is extruded to a modest thickness
- *      with softly bevelled edges and then tilted in depth about its across axis: the point of the V (its vertex head)
- *      lies FARTHER from the viewer, the two open tail ends NEARER, so each tip points outward and away into the scene.
- *      chevronSolid() builds it; arrowTipOutline() gives what the viewer sees of it (its silhouette, one convex hull per
- *      stroke, stroke centre lines, box, click point) in design units (1 unit = sizePx on screen), centred on that
- *      box; buildArrowGeometry() the mesh (positions, normals, triangles ordered far to near).
- *  (b) FRAME (pure, CSS px, y down): frameRect() is the smallest rectangle of a given aspect (16:9 for the motor strip,
- *      9:16 for the mirror body) that contains a target's on-screen box, centred on that box, then clamped (cut) to the
- *      usable view; frameArrowSpots() puts the four arrows at the midpoints of its four sides (forward = top centre,
- *      back = bottom centre, left middle, right middle), each pointing outward; the tips are placed in PAIRS (left +
- *      right at one height, forward + back on one vertical line; R558 Message 31, FRAME_PAIR), moved inward only as far
- *      as their drawn boxes (grown by the hover scale) need to stay inside the usable view (the side tips both by the
- *      same amount).
- *  (c) WORLD ANCHORS AND FRAMES (pure): frameArrowAnchors() lifts the screen spots into the world on the plane through
- *      the target's centre that is square to the reference camera's view axis: fixed world points, so the tips stay
- *      with their target like any object in the world when the player looks around. facingArrowFrames() places each
- *      tip for the camera in use: its outward and across axes lie in the picture plane, scaled to exactly sizePx on
- *      screen at the anchor, and its depth axis runs along the sight line through the anchor. So every tip is seen
- *      exactly as the same tilted solid seen straight on (its silhouette symmetric about its own pointing direction,
- *      at its planned place and size), also near the edge of the wide view and in third person, and it never becomes a
- *      thin sliver. planFrameArrows() does (a) to (c) in one call.
- *  (d) PICKING (pure): arrowHitShape() is a generous invisible hit shape fitted to the silhouette (each stroke's convex
- *      hull grown by hitStrokePad, and a capsule along the axis that fills the inside of the V); pickArrows() /
- *      pickArrowHits() meet a world ray (crosshair or free pointer, first or third person) with each tip's picture
- *      plane and test the hit shape there, with an extra screen padding (ARROW_LAYOUT.pickPadPx).
- *  (e) RIG (THREE): createArrowRig() draws the four tips of one target as translucent lit solids: a gentle key light
- *      from the upper left plus a soft rim, the faces that turn away from the viewer (bevels, walls) darkening toward
- *      the edge colour, so a light face with a darker edge stays readable over the dark background, the glass, the pale
- *      bones and the bright motor areas alike. The tips are drawn ON TOP of the scene (no depth test, last in the
- *      transparent list), so where a tip lies over a motor area the tip is what is seen there and what a tap there
- *      means; within a tip only the faces turned toward the viewer are drawn (back faces culled; seen along its sight
- *      line the solid covers each pixel once) and its triangles are ordered far to near. Hover: warm white, more solid,
- *      hoverScale larger (the existing hover response).
- *  (f) Helpers other code reads: the projection helpers (projectWorldPx, pixelRay, projectPointsPx), screenBoxOf,
- *      occupancyGrid (mirror placement and the mirror state readout) and convexHullPx.
- *
- * Coordinates: world metres; a camera is { width, height (CSS px, x right, y DOWN), fovYDeg } plus either Three's 'YXZ'
- * yaw / pitch at `position` (default the origin) or its matrixWorld (any camera, e.g. third person). Screen directions
- * per arrow: COMPASS_SCREEN. Orbit names are ns-app ORBIT_DIRS ('forward' | 'back' | 'left' | 'right'). Matrices are
- * column-major Float64Array(16) (THREE.Matrix4.fromArray). Local tip axes: x = u (outward, the compass direction),
- * y = depth (away from the viewer, along the sight line), z = across.
- *
- * Honesty: the arrows only turn the player's VIEW of the simulated brain (or of the mirror image of the body) around
- * its centre; they are controls, not anatomy, and say nothing about real brains.
- */
 
-// 20 November 2026 (Message 207): the raw look's one ink rule for every outline (pure module, no Three.js)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { RAW_LOOK } from './ns-raw-look.mjs';
 
 const DEG = Math.PI / 180;
@@ -83,8 +83,8 @@ export const COMPASS_SCREEN = freeze({ forward: freeze([0, -1]), back: freeze([0
  * thickness of about 0.6 of the stroke width, a bevel a third of the thickness, 40 degrees of tilt), chosen by
  * viewing in the browser; no anatomy is implied.
  */
-// 18 November 2026 (SMALL, audit S17; the owner, Note 19: "Let's make the arrows 3d and slightly chunky, with their
-// vertex heads turning (further) away and their tail ends towards (closer)"): the mirror body's small tips showed about
+
+
 // 3 px of wall (thickness x sin(tilt) = 0.084 units of a 40 px tip at 1280x720) and read as flat chevrons. thickness
 // 0.13 -> 0.18 (about 0.86 of the stroke width), tiltDeg 40 -> 46, bevel 0.042 -> 0.05: the wall is 0.129 units (5.2 px
 // at 40 px, 6.5 px at 50 px, 9.3 px on the brain's 72 px tips) and the heads turn further away. One design for both sets,
@@ -133,7 +133,7 @@ export const ARROW_LOOK = freeze({
   // the wrapped N.L and their levels, soft half-width), a crisp highlight (the specular term's step lo .. hi), and a
   // near-black ink line (#0b0809) inkCss CSS px wide inside the V's own outline (the solid's silhouette seen face-on,
   // measured in the V's design plane), opacity inkAlpha; the walls (seen edge-on) are inked by wallInk.
-  // 18 November 2026 (SMALL, audit S16; the owner, Note 18: "Arrows too."): the bodies moved to the painted, glossy look
+
   // (ns-flesh) and the arrows kept the comic one. Now: the two cel steps are widened into one smooth light ramp (soft
   // half-width 0.3 over steps at 0.3 / 0.6: the two overlap and leave no flat shoulder, so no bands), the highlight is a
   // tight wet glint that fades smoothly (step 0.05 .. 0.6 of a shininess-90 lobe, brighter), and the contour is thin and
@@ -141,18 +141,18 @@ export const ARROW_LOOK = freeze({
   // lightly inked (0.2). The colours that tell brain arrows from mirror arrows (ns-colors arrowLook) are unchanged.
   celSteps: freeze([0.3, 0.6]), celLevels: freeze([0.25, 0.62, 1.0]), celSoft: 0.3, specCrisp: freeze([0.05, 0.6]),
   ink: 0x14090a, inkCss: 0.9, inkAlpha: 0.8, wallInk: 0.2,
-  // 20 November 2026 (the owner, Message 196: "New look for everything not just body"): raw true lights the tips with
+
   // the raw look's one matte light (ns-raw-look: rawAmbient + rawDirect x |N.L| of keyLight, raised to rawGamma) in their
   // own colours; the scene passes the raw look's light and no highlight, rim, dark edge or ink with it (ARROW_LOOK_RAW).
   raw: false, rawAmbient: 0.25, rawDirect: 0.75, rawGamma: 2.2
 });
-/** The arrows' fields that the raw look changes (merged over ARROW_LOOK and the set's colours by the scene).
- * 20 November 2026 (the owner, Message 207: "And everything should get clear outlines."): the tips' contour follows the
- * raw look's ONE ink rule for every outline (ns-raw-look RAW_LOOK.ink: the same near-black, width and opacity as the
- * bodies', the strip's and the brain's lines), inside the V's outline; the walls (seen edge-on) are inked lightly (wallInk 0.25: at 0.5 a
- * wall seen edge-on read as a black slab).
- * (Before, the raw look set inkAlpha and wallInk to 0 but kept inkCss: the shader mixes the ink colour into the face
- * before the opacity is applied, so a dark contour was still drawn, by accident. Now it is drawn on purpose.) */
+
+
+
+
+
+
+
 export const ARROW_LOOK_RAW = freeze({ raw: true, keyLight: freeze([0.4, 0.6, 0.7]), specular: 0, rimLight: 0, edgeDark: 0, ink: RAW_LOOK.ink.hex, inkCss: RAW_LOOK.ink.css, inkAlpha: RAW_LOOK.ink.alpha, wallInk: 0.25 });
 
 const clamp = (x, lo, hi) => (x < lo ? lo : x > hi ? hi : x);
@@ -536,66 +536,66 @@ export function frameRect(box, aspect, bounds = null, keep = null) {
   return { ...r, aspect, fitted, clamped: { left: r.x0 !== fitted.x0, right: r.x1 !== fitted.x1, top: r.y0 !== fitted.y0, bottom: r.y1 !== fitted.y1 } };
 }
 
-/**
- * R558 (user Message 31, "left/right arrows of mirror body do not match in height level. Fix this across the board"):
- * how a frame's tips move off obstacles. The four tips are two PAIRS (left + right, forward + back), each placed as one
- * unit. Costs, in CSS px of movement (display choices):
- *  - moveCost per px a tip moves along its own pointing axis (in or out: the pair stays on the frame's centre line);
- *  - inwardCost per px a tip moves inward past its base place (over the brain's motor areas or the mirror body itself,
- *    the "key areas" the tips must not cover); and a tip never moves inward more than inwardMaxFrac of the way from its
- *    side to the frame's middle (further in it would read as belonging to something else, e.g. the brain's bottom tip
- *    pointing at the mirror body's top tip in a portrait window). R558 (Messages 55 / 56): a value above 1 (at most
- *    1.9) lets a tip pass the frame's middle; the pair's two tips then still keep their hit boxes apart. The brain's top
- *    / bottom pair is planned so (ns-scene-three BRAIN_TIP_RULES): the middle of its frame's bottom side is where the
- *    mirror body's top tip is, and the nearest place that covers no motor area is the hollow of the strip's U just
- *    above the leg areas;
- *  - asymCost per px the two tips of a pair end up at DIFFERENT insets (still on their centre line, so still level);
- *  - perpCost per px of the COMMON shift of both tips across their pointing axis (the side pair up or down together,
- *    the top / bottom pair sideways together): they stay level and mirror images of each other, off the centre line.
- * The pairs are weighted differently because a viewer compares left with right far more than top with bottom:
- *  - the side pair is ALWAYS a mirror image about the frame's vertical centre line (asymCost is a last resort: it is
- *    paid only when no equal inset and no common shift is clear); it moves in or out together, or up or down together
- *    (measured at 1600x900, start: your left hand covers the mirror body's left tip, so both side tips go down 116 px);
- *  - the top / bottom pair always stays on ONE vertical line and pays a lot for leaving the frame's vertical centre
- *    line (a sideways shift moves the set off the body's axis); unequal distances from the top and bottom edges are
- *    cheap, since the bodies and the brain are not symmetric top to bottom anyway (measured: the mirror body's top tip
- *    goes 30 px up to clear the crosshair box, where its bottom tip cannot follow because the brain's bottom tip is
- *    there: one tip 30 px out costs 60, a common sideways shift of 74 px would cost 444).
- * stepPx / perpStepPx: candidate spacing.
- * tieShift: which way a common shift goes when both ways cost the same (-1: up for the side pair, left for the top /
- * bottom pair; +1: down / right). R558 check: the side pair goes UP on a tie (was down by loop order). Your left hand
- * covers the mirror body's left side middle about equally far above and below it (measured: blocked from -112 to +112 px
- * at 1600x900 and from -136 to +136 px at 1920x1080, so up and down cost exactly the same), and down put both side tips
- * among the leg labels (1920x1080: the "Belly and back" and "Right leg" labels drawn over the left tip, the labels win
- * there); up puts them beside the mirror body's chest, nearer the eye line, clear of the leg labels and the bottom HUD.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const FRAME_PAIR = freeze({ stepPx: 2, perpStepPx: 4, moveCost: 1, inwardCost: 3, inwardMaxFrac: 0.5,
   side: freeze({ asymCost: 1e4, perpCost: 1, equalBase: true, tieShift: -1 }), ends: freeze({ asymCost: 1, perpCost: 3, equalBase: false, tieShift: 1 }) });
 
-/**
- * The four arrow places on a frame (pure, CSS px): the midpoints of its sides (forward = top centre, back = bottom
- * centre, left = left middle, right = right middle), each arrow pointing outward. halfAlongPx / halfAcrossPx: the
- * arrow's drawn half extent along / across its pointing direction. R558 (Message 31): the tips are placed in PAIRS
- * (FRAME_PAIR), so the left and right tips are always at exactly the same height and the top and bottom tips always on
- * one vertical line:
- *  - base: each tip is moved inward only as far as needed for its drawn box to lie inside `bounds`; the side tips both
- *    by the larger of their two amounts (the frame pulled in symmetrically at a screen edge), the top and bottom tips
- *    each by its own (FRAME_PAIR equalBase); across their pointing axis both tips of a pair share the frame's centre
- *    line, clamped into `bounds` once for both;
- *  - a pair whose base place is not clear moves to the cheapest clear place (FRAME_PAIR costs): both along their
- *    centre line by the same amount, or both shifted across their pointing axis by the same amount; only the top and
- *    bottom tips may also move along their vertical line by different amounts (the side tips only as a last resort);
- *    inward never more than inwardMaxFrac of the way to the frame's middle (above 1: past it).
- * Clear means: the drawn box inside `bounds`; the HIT box (hitHalfAlongPx / hitHalfAcrossPx, default the drawn halves)
- * clear of every `avoid` box by gapPx (other arrows' hit boxes, the box kept free round the crosshair); for a moved tip
- * the drawn box clear of `keepOut` (HUD boxes: cards, the hint line); and `blocked(dir, x, y)` false when given (e.g.
- * covered by your own body in the reference view, or on the mirror body's box). With no clear place the pair is placed
- * again ignoring `blocked`; with none still it keeps its base place and an overlapping tip is flagged `overlap`.
- * Returns { forward | back | left | right: { dir, screen, x, y (the arrow's middle), mid: [x, y] (the side's midpoint),
- * insetPx (how far it was moved from the midpoint), box: { x0, y0, x1, y1 }, overlap, pair: { family: 'base' |
- * 'centre-line' (both by the same inset) | 'centre-line-each' (different insets) | 'common-shift', insetPx (this tip's
- * inset along its axis), shiftPx (the common shift across it), blockedIgnored } } }.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function frameArrowSpots(rect, { halfAlongPx, halfAcrossPx, bounds = null, avoid = null, keepOut = null, gapPx = 4, hitHalfAlongPx = null, hitHalfAcrossPx = null, blocked = null, rules = FRAME_PAIR } = {}) {
   if (!rect || ![rect.x0, rect.y0, rect.x1, rect.y1].every(isNum)) fail('frameArrowSpots needs a frame rectangle');
   if (!(halfAlongPx > 0 && halfAcrossPx > 0)) fail('frameArrowSpots needs the arrow half extents > 0');
@@ -623,7 +623,7 @@ export function frameArrowSpots(rect, { halfAlongPx, halfAcrossPx, bounds = null
     const base = { [dA]: eqB ? bothB : own(needA), [dB]: eqB ? bothB : own(needB) };
     // moves m from the base (positive = inward): outward as far as the tip's side of the bounds allows, inward at most
     // inwardMaxFrac of the way from its base to the frame's middle
-    // (R558, Messages 55 / 56: above 1 a tip may pass the frame's middle, e.g. the brain's bottom tip going up the hollow
+
     // of the motor strip's U; the pair's two tips then still keep their hit boxes apart, see `apart`)
     // 21 November 2026 (hunt H15): inwardMaxFracBy { dir: frac } caps one tip of the pair on its own (the brain's TOP
     // tip keeps the default: only its bottom tip goes up the strip's hollow; with the mirror body lifted over the brain's
@@ -973,17 +973,17 @@ export function frameArrowFrames(spots, { cam, centre, sizePx } = {}) {
   return anchors ? facingArrowFrames(anchors, { cam, sizePx }) : null;
 }
 
-/**
- * One call for a target's four tips (pure): box: the target's on-screen box in the reference view (CSS px); aspect:
- * FRAME_ASPECT.brain | .mirror; bounds: the usable view (CSS px); cam: the reference camera; centre: the target's
- * centre (world m); sizePx: arrowTipSizePx(); hoverScale: the drawn growth under the pointer (the hovered tip stays on
- * screen too); avoid: boxes the tips' hit boxes keep clear of (other arrows' hit boxes, the crosshair box) and keepOut:
- * HUD boxes a moved tip keeps clear of; blocked(dir, x, y): extra places a tip may not take (frameArrowSpots; R558
- * Message 31: the tips move in pairs); rules: FRAME_PAIR overrides for this frame (e.g. { ends: { ...FRAME_PAIR.ends,
- * inwardMaxFrac: 1.6 } } for the brain, whose bottom tip may go into the hollow of the motor strip's U). Returns { rect, spots, anchors (world m), frames (facing the reference camera),
- * sizes: { sizePx }, layout: { arrows, sizePx, frame: rect, stable: true } } or null (empty box, or the centre not in
- * front of the camera).
- */
+
+
+
+
+
+
+
+
+
+
+
 export function planFrameArrows({ box, aspect, bounds = null, cam, centre, sizePx, design = ARROW_DESIGN, hoverScale = ARROW_LOOK.hoverScale, avoid = null, keepOut = null, keep = null, blocked = null, rules = null } = {}) {
   const rect = frameRect(box, aspect, bounds, keep);
   if (!rect) return null;

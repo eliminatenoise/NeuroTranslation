@@ -2,6 +2,18 @@
 
 [Open Full online](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Technical guide](PLAYER-GUIDE-TECHNICAL.md)
 
+## Play with the keyboard
+
+Choose **Play Full** or **Play Lite**. Both let you explore the same virtual body. Lite compresses the same body shapes into smaller downloads. To play without an internet connection, extract the Lite ZIP, install Node.js 18 or later, and open the launcher for your computer inside the **lite** folder.
+
+Select **Resume** if the pause menu is open. Press **Enter** to advance through the opening instructions. With the picture selected, press **Right Arrow** to aim at the next coloured area of the brain. **Left Arrow** steps in the other direction. Read the body-part name at the aiming mark and watch that part of the virtual body move.
+
+Press **4** to choose the right arm. In the view through the character’s eyes, press **Up Arrow** to look up and move the arm at the shoulder. Press **Down Arrow** to look down again. The mirror shows the movement from another angle. The colours and movements come from the simulation.
+
+Press **Tab** to reach the information card when it has more text than fits. Use **Up Arrow** and **Down Arrow** to read it. Select the picture again to use the arrows to aim. You can also drag on an empty part of the picture to look around. On a touchscreen, tap a coloured motor area to activate it.
+
+[Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-body-81-2026-11-28/NeuroSurge-Lite.zip)
+
 ## Move a body part from the brain
 
 1. Open either edition in a desktop browser with a keyboard and mouse or trackpad. Press and hold on an empty part of the picture, then drag to look around. Let go to stop turning.
@@ -11,7 +23,7 @@
 
 The **Resume** button keeps the pointer free. To turn the view with every mouse movement, choose **Capture mouse** in the controls. Press **Escape** to release it and open the controls again. If capture is unavailable, drag on an empty part of the picture to keep playing.
 
-If you turn far enough that the brain and both bodies leave the picture, a message says you have turned away. Drag the empty space back toward the brain, press an arrow key to aim at a motor area, or press Escape and choose Reset brain view. While the brain is out of view, Reset brain view returns the camera to its starting direction. The tutorial and information cards receive your clicks, so you can read them without pressing a motor area behind them. When the tutorial shows a Brain ring, aim at it and press Space to pick up the brain.
+If you turn far enough that the brain and both bodies leave the picture, a message says you have turned away. Drag the empty space back toward the brain, press Left Arrow or Right Arrow to aim at a motor area, or press Escape and choose Reset brain view. While the brain is out of view, Reset brain view returns the camera to its starting direction. The tutorial and information cards receive your clicks, so you can read them without pressing a motor area behind them. When the tutorial shows a Brain ring, aim at it and press Space to pick up the brain.
 
 A game link can still open when the app that shared it adds tracking information to the address. If the game shows an address error, select **Start the game** to open the usual address.
 
@@ -23,7 +35,7 @@ During play, press **1** for the left arm, **2** for the left leg, **3** for the
 
 While looking through the character’s eyes, look a little up or down to raise or lower the selected arm at the shoulder or the selected leg at the hip. You can do this without looking straight up or at the floor. After you select a limb, the aiming mark for this control sits about a quarter of the way down from the top of the screen. The mark stays there. The drawn wrist or ankle follows the joint, so it can move away from the mark when the limb reaches the end of its movement or the camera looks elsewhere.
 
-Step 4 lets you practise this movement. Drag up or down on an empty part of the picture. If you chose **Capture mouse**, move the mouse up or down. Watch the hand or foot on the limb you chose. The tutorial advances when the wrist or ankle moves at least 2.5 cm compared with its position beside the shoulder or hip just before you looked. The game gives it up to 0.35 seconds of game time to move. If you are looking from outside the body, press **E** to return to the eye view first.
+Step 4 lets you practise this movement. Press Up Arrow or Down Arrow, or drag up or down on an empty part of the picture. If you chose **Capture mouse**, move the mouse up or down. Watch the hand or foot on the limb you chose. The tutorial advances when the wrist or ankle moves at least 2.5 cm compared with its position beside the shoulder or hip just before you looked. The game gives it up to 0.35 seconds of game time to move. If you are looking from outside the body, press **E** to return to the eye view first.
 
 Press and drag on a limb to move the joint you pressed on. Press **Space** to grip. Aim at the brain or mirror body and hold Space to carry it, then release to put it down. You can drag the brain or mirror body to turn it. Hold **Shift** on the initial press to reach the item behind the one you would usually select.
 

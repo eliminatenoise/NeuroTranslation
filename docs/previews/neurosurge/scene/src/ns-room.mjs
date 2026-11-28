@@ -1,47 +1,47 @@
-/** NeuroSurge scene: THE ROOM (owner, 18 November 2026: "And perhaps something should be done about the endless black
- * space."; 11 November: "Everything should look clinical and surgical."; Message 24: "I liked the space black
- * background"; Message 25: "Contrast and high dynamic range are still visually key").
- *
- * The brain, your body and the mirror body used to hang in a flat black void. They now hang in a PLACE: a very large,
- * round, dark operating theatre seen out of focus. Far below there is a tiled floor with a soft pool of surgical light
- * on it; round the pool the floor falls away into the dark; very far off a faint band of light at the foot of the wall
- * gives a horizon; high overhead, a little ahead of straight up, hang the soft lights of the lamp heads (they show
- * which way is up and are in the picture only when you look up); the air round the brain and round a body seen from
- * outside is faintly lit (a soft halo), and each of the three casts a soft shadow on the floor. It is still a dark
- * picture: away from the pool, the lamps and the three things the room is the old
- * space black (ROOM.black is the old background colour), so the glows keep their contrast.
- *
- * One shader on one full-screen triangle, drawn at the far depth after the solid things (so it is shaded only where
- * nothing covers it). No texture, no shadow map, no extra pass. (There was dust, as a few hundred points: far motes
- * were too faint to see and near ones read as stars in a black sky, the very thing the room is there to end; it is
- * gone.) The room is
- * fixed in the world: it has a floor and a ceiling whichever way you look, and it shifts properly when the view
- * point moves (the view from outside).
- *
- * A PICTURE OF A PLACE and nothing more: it is not a model of a real theatre, its sizes are chosen for the eye (the
- * brain is drawn many metres across, so the room is a hall), and nothing here is measured.
- *
- * Under prefers-reduced-motion the light does not change at all (no beat, no answer to a movement).
- *
- * THE ABYSS (21 November 2026; the owner, Message 208, after Body update 63: "Background should still be more of an
- * abyss."; before it, Message 206: "let's make the background more of a black abyss, but still with a gradient",
- * Message 135: "not exactly pitch black, with the gradient changing as you go further or closer away", and Message 89:
- * "something should be done about the endless black space"). With ROOM.abyss.on (the default) there is no place any
- * more: no floor, no pool of light on it, no wall, no horizon, no lamps and no shadows. The things hang in a deep black
- * (ROOM.abyss.black), and the only light in it is the faintly lit dark round them:
- *  - a soft glow close round the brain, the mirror body and your own body seen from outside (ROOM.abyss.glow: the
- *    halo's own rule, wider and fainter, with no rim): brightest behind a thing, falling off through its outline into
- *    the black over about one of its sizes. It is measured in the thing's own size, so it grows in the picture as the
- *    thing comes nearer and shrinks as it goes away;
- *  - round the brain, the largest thing, a much wider and fainter light as well (ROOM.abyss.far): the whole side of
- *    the dark on which the brain stands is a few steps above the black, and it falls off evenly to the black itself on
- *    the side away from the brain. It is stronger the larger the brain stands in the view (nearer: more lit dark;
- *    further: less). So a look past the things, or straight up or down, is not one flat black either: it is lighter
- *    toward the brain.
- * Nothing in it has an edge, a shape or a place of its own, so nothing reads as a floor, a wall or an object. The
- * shader is shorter than the room's (no floor, wall, lamp or shadow arithmetic). abyss.on false brings the room back
- * exactly as it was.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { RAW_LOOK } from './ns-raw-look.mjs';
 
 /** Display choices (metres in the game's world: +y up, the eye near the origin, the look starts along -z).
@@ -76,19 +76,19 @@ import { RAW_LOOK } from './ns-raw-look.mjs';
 export const ROOM = Object.freeze({
   floorY: -13, ceilY: 16, wallR: 260,
   centre: Object.freeze([0, -7.5]), bodyAt: Object.freeze([-0.04, -0.23, -0.53]),
-  // 19 November 2026 (the owner: "Let's have much darker blacks instead of ugly grays"): the darkest the room gets is
+
   // now nearly black and neutral (0.0015, 0.0021, 0.0033 before: the old blue-black 0x05070b), and the lit air round
   // the brain and the bodies is halved (0.012 and 0.02 before), so what is left of the gradient is the floor's pool.
-  // 20 November 2026 (the owner, Messages 195 / 196: the look of the reference pictures "for everything"): in the raw
+
   // look (ns-raw-look RAW_LOOK.on) the darkest light is the pictures' near-black, RGB 18, 18, 22 (RAW_LOOK.room).
   black: RAW_LOOK.on ? RAW_LOOK.room : Object.freeze([0.0008, 0.0009, 0.0011]),
-  // 19 November 2026 (the owner: "Let's go back to far more black of a background, but with a little bit of a gradient.
-  // So not exactly pitch black, with the gradient changing as you go further or closer away"): the floor's pool of light
+
+
   // is the gradient (brightest under you, fading with distance) at about a third of its strength (0.020, 0.040, 0.042
   // before); no tile lines, no lamps, a wall that is nearly black.
-  // (later, the owner: "Let's have much darker blacks instead of ugly grays": about a third again, and neutral instead
+
   // of blue-grey: 0.0065, 0.0105, 0.0125 before.)
-  // (20 November 2026, Message 206: in the raw look the pool is RAW_LOOK.roomPool, the gradient left over a near-black room)
+
   pool: Object.freeze({ colour: RAW_LOOK.on && RAW_LOOK.roomPool ? RAW_LOOK.roomPool : Object.freeze([0.0028, 0.003, 0.0034]), radiusM: 19, amb: 0.05 }),
   // 19 November 2026 (eye comfort; the owner liked a plain dark background): the tile lines are barely there (dark 0.55 before).
   tile: Object.freeze({ sizeM: 3, groutM: 0.07, dark: 0 }),
@@ -98,8 +98,8 @@ export const ROOM = Object.freeze({
   gloss: Object.freeze({ f0: 0.05, wall: 0.7 }),
   aura: Object.freeze({ colour: Object.freeze([0.72, 0.96, 1]), brain: Object.freeze([0.006, 0.4, 1]), mirror: Object.freeze([0.01, 0.9, 0]), body: Object.freeze([0.01, 0.9, 0]), radii: Object.freeze([7, 0.85, 0.85]) }),
   shade: Object.freeze({ brain: Object.freeze([8, 0.6]), brainK: 0.75, mirror: Object.freeze([4, 0]), body: Object.freeze([4, 0]) }),
-  // 18 November 2026 (SMALL, audit S23; the owner, Note 10: "If we imagine an invisible ground, the mirror body should be
-  // touching the same ground"): seen from outside, both bodies hung high above a tiled floor that read as THEIR ground.
+
+
   // Under each body (its place on the floor, from the halo rows the scene gives: so it follows the mirror body wherever
   // it stands) the grout lines fade to `keep` within about `radiusM`, and the two bodies cast no floor shadow (shade
   // depth 0; the brain keeps its own): the floor reads as a distant room, not as ground under them. radiusM is about
@@ -108,7 +108,7 @@ export const ROOM = Object.freeze({
   // 19 November 2026 (plain look): the backdrop's light is steady (it swelled 0.3 with the beat and 0.4 with a movement).
   live: Object.freeze({ beat: 0, beatS: 0.11, active: 0, inS: 0.25, outS: 1.2 }),
   ditherLsb: 0.75,
-  // 21 November 2026 (the owner, Message 208: "Background should still be more of an abyss."): THE ABYSS (see the top
+
   // of this file). on: no floor, wall, lamps or shadows are drawn; false: the room above, exactly as it was.
   //  black: the darkest the abyss gets (linear light), RGB about 2, 2, 2 on the screen (the room's `black` above is
   //    4, 4, 5 and stays the room's; the scene's clear colour under the backdrop is the same 2, 2, 2).
@@ -157,7 +157,7 @@ const AURA_KEYS = Object.freeze(['brain', 'mirror', 'body']);
  * drawn at full sharpness here (footM = 0) unless a footprint in metres is given. */
 export function roomLight(eye, dir, st = {}, o = ROOM, footM = 0) {
   const C = st.centre || o.centre, gain = Number.isFinite(st.gain) ? st.gain : 1, shade = st.shade || [], aura = st.aura || [];
-  if (isAbyss(o)) { // 21 November 2026 (Message 208): the black and the lit dark round the things, nothing else
+  if (isAbyss(o)) {
     const K = o.abyss.black, col = [K[0], K[1], K[2]];
     auraInto(col, eye, dir, aura, o.abyss.glow, gain);
     farInto(col, eye, dir, aura[0], st.size ? st.size[0] : undefined, o.abyss, gain);
@@ -270,12 +270,12 @@ export function srgbOf(x) { const v = Math.min(1, Math.max(0, x)); return v <= 0
  * ROOM.abyss.glow); they add to `float au`. */
 const auraRowsGlsl = rules => AURA_KEYS.map((key, i) => `	{ vec4 A = uRoomAura[ ${i} ]; vec3 e = uRoomAuraN[ ${i} ] * ( A.xyz - eye ), d = uRoomAuraN[ ${i} ] * dir; float ed = dot( e, d ), dd = max( dot( d, d ), 1e-9 ), ee = dot( e, e ); vec3 q = e - d * max( ed / dd, 0.0 ); float over = max( length( q ) - ${f(rules[key][2])}, 0.0 );
 		au += ${f(rules[key][0])} * step( 0.5, A.w ) * smoothstep( ${f(auraNear(rules[key])[0])}, ${f(auraNear(rules[key])[1])}, sqrt( ee ) ) * smoothstep( 0.0, 0.3, ed * inversesqrt( max( ee * dd, 1e-18 ) ) ) * exp( - over * over / ${f(rules[key][1] * rules[key][1])} ); }`).join('\n');
-/** The shader text of the room: `vec3 nsRoom( vec3 eye, vec3 dir )` (dir a unit vector) returns linear light. It reads
- * uRoom (centre x, centre z, gain, 0), uRoomShade[3] (x, z, radius, depth), uRoomAura[3] (x, y, z, 1; 0: none) and
- * uRoomAuraN[3] (world -> the thing's own measure, where its outline is at 1). The numbers are ROOM's.
- * 21 November 2026 (Message 208): with ROOM.abyss.on, the abyss: the black and the lit dark round the things only. It
- * reads uRoom (z: the gain), uRoomAura[3], uRoomAuraN[3] and uRoomSize (the three things' radii, m; 0: none); the shade
- * rows and the centre are not read. */
+
+
+
+
+
+
 export function roomGlsl(o = ROOM) {
   if (isAbyss(o)) {
     const F = o.abyss.far, far = F && F.light > 0;

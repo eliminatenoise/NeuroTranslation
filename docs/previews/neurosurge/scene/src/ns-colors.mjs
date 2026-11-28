@@ -1,35 +1,35 @@
-/** NeuroSurge colours.
- *
- * R558 (user Message 2): the motor areas and the muscles are now coloured by AREA (AREA_COLORS at the end of this file:
- * one colour per motor area, one hue family per body part, the same colour on the brain area, the muscles it drives on
- * your body and the same muscles on the mirror body); the brightness of the glow shows the simulated level. The ramp
- * below is kept for older callers and fallbacks; the text about "one ramp, one meaning" describes the earlier design.
- *
- * NeuroSurge shared simulated-activity colour ramp (round 2, owner U2a-brain) and, since round 4 (R4-access, D9), the
- * identity KEY_COLORS (left-arm light blue / cyan, other-areas grey, outlines, gold marks) chosen to stay
- * distinguishable under colour-vision deficiency. The ramp itself is unchanged in round 4.
- *
- * ONE ramp, ONE meaning: the brain's motor-region activity AND the muscles' activation/contraction colours both come from
- * this module, so the same colour means the same simulated, unitless activity level everywhere (user requirement R2:
- * the brain's electrical-activity colour coding corresponds to the colour-coded contraction of the muscles).
- *
- * Pure, dependency-free ES module (browser and Node); no DOM, no I/O.
- *
- * Ramp: an inferno-like, perceptually ordered ramp, dark indigo -> purple -> crimson -> orange -> vivid yellow.
- * Polish round: the peak was a warm near-white that, on a fully driven muscle, looked like the ivory bone next to it;
- * it is now a saturated yellow (the order, the meaning and "brighter = more" are unchanged).
- * Stops are in LINEAR RGB and interpolation is piecewise linear in linear RGB. The relative luminance
- * (0.2126 R + 0.7152 G + 0.0722 B) of the stops rises strictly (0.0130 < 0.0628 < 0.1747 < 0.4281 < 0.8621), so the
- * luminance rises strictly and piecewise-linearly with the activity value: brighter always means more simulated
- * activity, which also keeps the order readable for common colour-vision deficiencies.
- *
- * Recommended use (the "same meaning" rule): activity is an EMISSIVE glow added on top of the lit base surface
- * (region tint on the brain, tissue colour on a muscle), not a replacement albedo. activityShade(base, v) returns both
- * terms; activityEmission(v) is the glow alone; activityGlsl() emits the identical ramp for shaders.
- *
- * Scientific limits: every value is a simulated, unitless display drive. It is not measured neural activity, not EMG,
- * not force and not a nerve recording. EMG is not nerve activity or force.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const freeze = Object.freeze;
 const clamp01 = x => (x > 1 ? 1 : x > 0 ? x : 0);
@@ -484,7 +484,7 @@ export function arrowLook(kind = 'brain') {
  *  - accent: the mirror's identity colour for its label / info-panel accent (= the mirror arrows' green). */
 export const MIRROR_VIEW = freeze({
   // R558 (R32): a dark red-brown under the now more solid areas, like tissue seen in depth (was the near-black 0x05070b).
-  // R558 (Message 22, "clinical and surgical"): a neutral mid-dark slate instead (OKLCH 0.30 0.012 240, #252d33), so
+
   // nothing under the areas reads as blood and the translucent areas look clean and light rather than muddy; the areas
   // keep their colours (the backing only dims what is behind them, as before).
   regionBacking: freeze({ color: 0x252d33, alpha: 0.85 }),
@@ -492,8 +492,8 @@ export const MIRROR_VIEW = freeze({
 });
 
 // ---------------------------------------------------------------------------------------------
-// R558 (user Message 2: "make the glow look like an optogenetic glow activation but with different colors/shades for
-// each area with the same corresponding color/shade across all 3 items for clarity"): ONE colour per motor area, used
+
+
 // by the brain area, the muscles it drives on your body and the same muscles on the mirror body.
 //
 // Design (display choices; no tissue or signal meaning):
@@ -514,7 +514,7 @@ export const MIRROR_VIEW = freeze({
 //    them apart there.
 // Every value stays a simulated, unitless display drive; the colour says WHICH area, the brightness HOW MUCH.
 
-// R558 (user, Message 17: "clear fluorescent glow correspondence across all 3 systems during activation"): the glow is
+
 // made VIVID: AREA_GLOW_VIVID of the white (the smallest linear channel) is taken out of the recorded glow colour and
 // the result renormalised to a largest channel of 1, so a light shade lights up as a saturated, light-like colour of the
 // same hue instead of a pastel. The recorded hex values stay the identity record; glowLinear / glowCss are the vivid ones.
@@ -533,30 +533,30 @@ const area = (family, color, glow) => {
   });
 };
 
-/** The 54 motor areas (ns-bodymap region ids, both hemispheres) -> { family, color, glow (sRGB 0xRRGGBB), css, glowCss,
- * colorLinear, glowLinear, chunk, chunkIndex, chunkSize }.
- * 18 November (owner: "redo the entire corresponding color coding of the motor strip and its corresponding areas from
- * scratch to make it look as good as possible"; "a visual chunking principle for easy learning ... that chunking
- * principle applies throughout"): the colour CODE, designed as a system and generated from three rules (the 17 November
- * table alternated a light shade of one hue with a deep shade of another along the strip, which read as a rainbow in the
- * right-arm half and as stripes the eye could not follow; both arm labels wore one cyan pill):
- *  1 hemisphere register: every area of the brain's RIGHT half (it moves your LEFT side) is COOL (violet, sea green,
- *    blue, cyan, orchid, purple), every area of the LEFT half WARM (yellow, lime, orange, amber, coral, raspberry). The
- *    warm-cool axis is the blue-yellow axis that red-green colour blindness keeps, and it shows the CROSSING at a
- *    glance: the cool keys lie on one side of the picture and light up muscles on the other side of your body.
- *  2 chunks: each body region is a chunk with its own hue family (AREA_CHUNKS): leg | trunk | arm | hand | neck | face |
- *    mouth, and the grey in-between areas; the hand is a sub-chunk of the arm (its family shifted toward cyan / amber),
- *    the mouth a sub-chunk of the face. The strip draws a wide dark gap at every chunk border (ns-scene-three
- *    regionChunkKey / REGION_BORDER territoryPx). The family words on screen stay true: blues for the left arm, oranges
- *    for the right arm, purples for the left leg, yellows for the right leg, greens for the trunk, pinks for the face.
- *  3 order: inside a chunk the areas step from LIGHT at the body's middle to DEEP at the far end (hip -> toes, shoulder
- *    -> wrist, hand -> thumb in strip order, brow -> jaw), with a small hue drift, so the eye follows the chunk, and a
- *    deep key meets a light key where two chunks meet (wrist | hand, thumb | neck).
- * Each colour is OKLCH (lightness, chroma, hue) from AREA_RAMPS at `share` of the largest chroma sRGB can show there;
- * `glow` is the most saturated colour of the same hue (made vivid below). Measured (OKLab distance, 0.1 = clearly
- * different; Machado 2009 simulation at full severity): neighbours inside a chunk >= 0.055 (protanopia 0.043,
- * deuteranopia 0.051), across a chunk border >= 0.147 (0.066 / 0.083), the same area of the two halves >= 0.053.
- * Display choices: the colour says WHICH area, the brightness HOW MUCH simulated, unitless activity. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /** Chunk of each strip key (both hemispheres; the left hemisphere's digits are r_hand ... in ns-bodymap): [chunk, index
  * from the body's middle outward]. */
 export const AREA_CHUNKS = freeze({
@@ -632,33 +632,33 @@ export const AREA_COLORS = freeze(codeTable());
 export const AREA_FAMILIES = freeze(['leftArm', 'rightArm', 'leftLeg', 'rightLeg', 'trunk', 'faceNeck', 'scan'].map(key =>
   freeze({ key, regions: freeze(Object.keys(AREA_COLORS).filter(id => AREA_COLORS[id].family === key)) })));
 
-/** How the area colours are drawn (unitless display factors).
- *  - tissue / restMix: an area at rest shows its identity colour mixed into the R32 tissue pink (restMix = share of the
- *    identity colour), so it stays fleshy and calm but the player can already see which colour belongs where;
- *  - activatedMix: a switched-on area (until Reset body) moves this far further toward its identity colour;
- *  - areaDarken: the lit albedo of an active area is multiplied by (1 - areaDarken x glow strength), so the emitted
- *    colour, not the lit surface, carries the look (light-activated tissue);
- *  - areaGain / muscleGain: emission = glow colour x glowIntensity(v) x gain (the GLOW onset keeps the resting 0.08
- *    muscle drive dark);
- *  - muscleAlbedo: a glowing muscle's lit albedo also moves toward its glow colour x muscleAlbedo by the glow strength,
- *    so it stays shaded and round (a lit, light-filled belly) instead of a flat painted patch;
- *  - areaRimGain / muscleRimGain: a fresnel rim of the same colour, strongest at the silhouette (the soft halo);
- *  - coreWhite: the brightest glow whitens a little toward its core (the luminous look) without losing its hue;
- *  - hintGain: a muscle lit only by an opposing-action hint (user Message 6, "faintly highlight") glows at this share of
- *    the normal emission and rim, keeps its resting red-brown surface and gets no halo, so the hint stays a faint sheen.
- *  - muscleRimPower: the exponent of the muscles' fresnel rim (areas keep GLOW.rimPower 2): a tighter rim that hugs
- *    the outline instead of washing over a muscle seen at a slant.
- * (The one soft line per newly active area has its own constants: ns-scene-three GLOW_LINK.)
- * Check pass (user Messages 9 and 17, "full, filled-out and plumpy" muscles and a "clear fluorescent glow"): with
- * muscleGain 0.55, muscleAlbedo 0.4 and a broad rim (gain 1.2, power 2) a glowing muscle clipped to one flat colour (the
- * lit cyan of the left arm measured sRGB 88..131 red, 204..255 green, 244..255 blue over the whole belly: a painted strip,
- * not a round belly; the resting red muscles beside it span 65..128 red, a light factor of about 0.3..1.1). Now the
- * emission is a smaller base (0.3), the lit albedo carries the light-to-shadow roll-off (0.5 x the glow colour, so
- * 0.3 + 0.5 x 1.1 stays below clipping) and the rim is tighter (gain 1.0, power 3.5). Tried muscleAlbedo 0.8 with the
- * old rim: no change (still clipped). The active AREAS keep areaDarken 0.45: 0.8 changed a lit area by a few sRGB steps
- * only (the lit left wrist 119, 221, 230 -> 102, 227, 241; the right knee unchanged), because a lit area already shows
- * its glow colour; the light shades of a family simply have light, pastel glow colours (left knee 0xbd88ff). */
-// 17 November (owner: far more colourful areas; the areas as keys; activation "much more obvious"): restMix 0.62 -> 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // (a resting area shows its OWN colour, not a pink-washed tint; activatedMix is then nothing), drawn as a calm unlit key
 // (restValue 0.72 of it, restLift 0.14 -> 0.06 self-light), so that the lit key has room above it. A lit area sends out
 // areaNeonInto light (areaGain 1.35 -> 2.4, far above display white: the scene's bloom gives it a halo; areaNeon 1.8
@@ -666,31 +666,31 @@ export const AREA_FAMILIES = freeze(['leftArm', 'rightArm', 'leftLeg', 'rightLeg
 // Looked at in the browser: gain 3 with a plain multiple of the glow colour turned an orange key pale yellow and a cyan
 // key white; power 1.6 at gain 3 still did for orange; 1.8 at 2.4 keeps orange orange and blue a bright blue.
 export const AREA_LOOK = freeze({
-  // R558 (Message 17): calmer resting tints (0.72 -> 0.5 of the identity colour in the tissue pink) and a stronger lit
+
   // glow (area gain 1.0 -> 1.35), so the switched-on area stands out from its neighbours at a glance.
-  // R558 (Message 22, "clinical", "motor areas clean"): a clearer resting identity colour (restMix 0.5 -> 0.62), so the
+
   // warm families read as clean orange / yellow bands instead of brown and olive; it also separates neighbours more
   // (smallest OKLab distance between strip neighbours at rest 0.038 -> 0.048, mean 0.085 -> 0.103; mirrored areas
   // 0.038 -> 0.048). The lit, active area still stands out by its emitted glow.
   tissue: KEY_COLORS.otherTint, restMix: 1, activatedMix: 0,
-  // R558 (Message 22, clean areas): a faint self-light of the area's own resting tint (restLift x tint, fading out as the
+
   // activation glow takes over), like a backlit teaching panel: the warm families no longer sink to brown and olive on
   // the side away from the key light. Small enough that a lit area still stands far above it (areaGain 1.35).
-  // 19 November 2026 (the owner: "we have to make the [motor] strip far more obvious, probably a good deal larger and
-  // far brighter and more colorful"): a resting key shows its whole colour (restValue 0.72 -> 1) and lights itself
+
+
   // strongly (restLift 0.06 -> 0.5), so the strip is the brightest, most colourful thing in the picture at rest.
   restLift: 0.5, restValue: 1,
   // 18 November (MAP, "a NEON GLOW: bright, saturated"): the lit key burned to white in the pictures (gain 2.4 above
   // display white with the bloom, and the white-hot frame): areaGain 2.4 -> 1.8 with areaNeon 1.8 -> 2.4 keeps an orange
   // key orange and a blue key blue while still above white (the bloom halo stays); the muscles' glow was hard to see on
   // the bodies: muscleGain 0.3 -> 0.42 and a stronger rim (1.0 -> 1.35), below the 0.55 that clipped a belly flat.
-  // 19 November 2026 (the owner: "let's make brain activation almost bright white"): areaWhite: the share of white in a
+
   // lit area's light (0 = its own neon colour alone, as before); at 0.8 a lit key is white-hot with a breath of its hue.
   // (areaGain 1.8 -> 1.3 with it: white light carries all three channels, and at 1.8 its bloom hid the key's own shape
   // and its neighbours)
-  // (20 November 2026, evening, the owner, Message 203: "And let's make the activation area as bright as possible": the
+
   // lit key's light pure white (areaWhite 0.8 -> 1) at more than twice the strength (areaGain 1.3 -> 3), its rim too)
-  // (21 November 2026, ns-area-halo; the owner: "there's essentially no glow, and it's too much before as well": areaGain
+
   // 3 -> 1.6. On the screen the lit block's middle is white either way (anything at or above 1 is cut at white), so
   // this changes nothing where the bloom pass does not run. Where it runs, light above white is what it spreads: at 3
   // (and 7.5 at the flash's peak) that was a white halo over the neighbours, on the full picture quality only. The
@@ -716,7 +716,7 @@ export function areaGlowCss(regionId) { const a = lookupArea(regionId); return a
 /** Family key ('leftArm' | 'rightArm' | 'leftLeg' | 'rightLeg' | 'trunk' | 'faceNeck' | 'scan') or null. */
 export function areaFamily(regionId) { const a = lookupArea(regionId); return a ? a.family : null; }
 
-// R558 (user Message 18: "We should be able to easily differentiate each brain node"): the resting tint is mixed in
+
 // OKLab with its CHROMA KEPT (the mix's chroma lifted to the mix of the two chromas, same lightness and hue as the OKLab
 // mix), so a cool identity colour over the warm tissue pink stays a calm, clear hint of its hue instead of turning grey.
 // Measured (OKLCH chroma of the resting tint at restMix 0.5): left-arm blues 0.027-0.072 -> 0.069-0.109 (the left elbow
@@ -870,15 +870,15 @@ export function areaMeterCss(regionId) {
 }
 
 // ---------------------------------------------------------------------------------------------
-// R558 (user Message 18: "anatomical realism and accuracy ... easily differentiate each brain node and muscle node from
-// each other ... visceral and fleshy but never disgusting (as some things are now, such as the bodies/muscles"): the
+
+
 // muscle LOOK. Display choices only: no tissue optics, no measured colour of any real muscle.
 //
-//  - Tones: every muscle mesh draws one of six muscle tones (since Message 22 the clean rose-salmon to soft red-brown of
+
 //    an anatomy model, OKLCH lightness 0.52..0.705, chroma 0.066..0.094, hue 17..40 deg; see MUSCLE_TONES: no purple,
 //    no raw-meat or blood red, no tan). The renderer picks the tone
 //    per muscle so that touching neighbours get tones far apart (assignMuscleTones), the same tone on the left and the
-//    right muscle of a pair (Message 15) and on your body, the mirror body and the left game arm.
+
 //  - Depth: a muscle the stack classification puts in the DEEP storey is drawn darker as a solid shade (deepShade x its
 //    tone, linear), the intermediate storey a little darker (intermediateShade); nothing becomes see-through.
 //  - Tendon: where a muscle ends on bone (per vertex, from the stack's own anchored ends; see ns-scene-three) the
@@ -886,7 +886,7 @@ export function areaMeterCss(regionId) {
 //  - Tissue light: a red-shifted scatter added to the lit muscle (scatterTint x scatterStrength x albedo) so a muscle in
 //    shade stays warm instead of grey-black, and a soft darkening toward each muscle's own outline (creaseStrength x
 //    (1 - |N.V|)^creasePower) so the groove between two bellies reads as a crease; both act on the LIT colour only,
-//    never on the activation glow (Message 17), and the crease eases off on a glowing muscle (glowCreaseRelief).
+
 //  - Fibres: a faint lengthwise striation along each muscle's long axis on near muscles (fades out with distance).
 //  - roughness: a faint moist sheen (between the old matte 0.55 and a glossy 0.3).
 //  - Sheen: the specular light on a muscle is tinted warm (sheenTint x sheenGain; tendon parts and glowing muscles
@@ -901,28 +901,28 @@ const muscleTone = (name, L, C, h) => {
   return freeze({ name, oklch: freeze([L, C, h]), lab: freeze([L, C * Math.cos(h * Math.PI / 180), C * Math.sin(h * Math.PI / 180)]),
     linear: freeze(lin), hex: hexOfSrgb(lin.map(linearToSrgb)) });
 };
-/** The six muscle tones (OKLCH is the record; linear RGB and sRGB hex are derived).
- * R558 (user Message 22: "Don't make the bodies look too gruesome and bloody. Make them clinical instead. Everything
- * should look clinical and surgical."): the tones are now those of an anatomy teaching model or a surgical
- * illustration: clean, muted rose-salmon to soft red-brown, lighter and a little less saturated than before (OKLCH
- * lightness 0.52..0.705 instead of 0.385..0.535, chroma 0.066..0.094 instead of 0.08..0.112, hue 17..40 deg; no purple,
- * no tan, no dark blood red). sRGB: #b8746b, #9b6552, #b0676a, #8f584f, #cc8e81, #b98483 (were #913f3b, #7d4230, #7d302b,
- * #673224, #a25251, #915041). Their smallest OKLab distance to each other is 0.040, the same as the previous six, so the
- * neighbour assignment separates touching muscles as well as before (Message 18). Display choices only. */
-// R558 (build brief style guide, Message 29: "CL's tones as a base, slightly more saturated for the comic look"): the
+
+
+
+
+
+
+
+
+
 // chroma of every tone x MUSCLE_TONE_CHROMA (1.2; lightness and hue unchanged), so the banded comic shading keeps clean,
 // clearly coloured tissue instead of greying out. Smallest OKLab distance between two tones 0.040 -> 0.041 (the
-// neighbour separation of Message 18 is kept; the lightness steps carry most of it).
-// 18 November (owner: "make sure the brain and the body are noticeably different, or at least noticeably different
-// shades"; package VESSELS): skeletal muscle a little deeper and warmer than the pale pearl-rose cortex (ns-brain-ink
+
+
+
 // BRAIN_FLESH). Every tone: lightness -0.055, hue +4 deg (toward red-brown, still short of tan), chroma factor 1.2 ->
 // 1.28. Old (L, h): 0.630 28, 0.560 40, 0.595 17, 0.520 30, 0.705 33, 0.665 20. The steps between the tones are kept,
-// so the neighbour separation (Message 18) is as before.
+
 export const MUSCLE_TONE_CHROMA = 1.28;
-// 19 November 2026, later (the owner: "go back to the art style before the overhaul ... borderlands-telltale"): the six
+
 // tones of 18 November again (for a few hours that day the muscles took the loading picture's reds: L 0.41 to 0.585,
 // chroma about 0.15, hue 19 to 24).
-// 20 November 2026 (the owner: "Muscles probably a little too light now"): half of the 0.07 lift of 19 November is
+
 // taken back (each tone 0.035 darker), and the shade bands below come down a little (BODY_CEL_EARLY.levels).
 export const MUSCLE_TONES = freeze([
   muscleTone('salmon rose', 0.610, 0.088 * MUSCLE_TONE_CHROMA, 32),
@@ -938,7 +938,7 @@ export function muscleToneDistance(i, j) {
   if (!a || !b) return 0;
   return Math.hypot(a.lab[0] - b.lab[0], a.lab[1] - b.lab[1], a.lab[2] - b.lab[2]);
 }
-// R558 (user Message 22, "clinical and surgical", "not too gruesome and bloody"): the look below is now a clean satin
+
 // anatomy-model finish instead of moist living tissue. Changed (old -> new): deeper storeys less murky (deepShade 0.78
 // -> 0.84, intermediateShade 0.9 -> 0.93); satin instead of a wet sheen (roughness 0.5 -> 0.6, sheenGain 0.8 -> 0.55,
 // sheen tint near-neutral [1, 0.84, 0.74] -> [1, 0.95, 0.92]); no blood-red scatter in shade (scatterTint [1, 0.42,
@@ -946,9 +946,9 @@ export function muscleToneDistance(i, j) {
 // -> 2.8) so grooves read as clean partings, not dark crevices; finer, fainter fibre streaks like an illustration's
 // hatching (fibreAmp 0.1 -> 0.055, fibreBumpM 0.25 -> 0.12 mm); clean pearly tendons, a touch cool and a little
 // glossier (0xdcd6cf -> 0xe1e4e7, OKLCH 0.92 0.006 240; tendonMix 0.85 -> 0.9, tendonRoughnessDrop 0.16 -> 0.2).
-// The per-muscle tones (Message 18) and the activation glow (Message 17) are kept apart from these: none of these
+
 // terms acts on the glow.
-// R558 (user Message 54, "it's very ugly and matte. Maybe we should add a bit of shine, a bit of glossiness"): a
+
 // polished finish instead of the satin one. roughness 0.6 -> 0.42 and sheenGain 0.55 -> 0.85: at 0.6 x 0.55 the
 // highlight of a belly under the key light measured about 0.035, UNDER the comic patch's highlight threshold (BODY_CEL
 // spec.bellyAt, 0.045 then), so no muscle showed any highlight at all (the matte look of the pictures); now it peaks near 0.2
@@ -968,7 +968,7 @@ export const MUSCLE_LOOK = freeze({
   /** Fibre striation: albedo +- fibreAmp and a bump of fibreBumpM metres, streaks about fibreMm wide (source mm) along
    * each muscle's long axis, changing along it over 1 / fibreAlong streak widths; fading out from fibreFadePx streaks
    * per pixel (gone at 2.5 x that), so it never shimmers on a far body. */
-  // R558 (Messages 24, 29): the striation is now drawn as ink lines by the comic patch (BODY_CEL); the old soft albedo
+
   // streaks are off (fibreAmp 0.055 -> 0) and so is their bump (0.12 mm -> 0: it frayed the cel band edges).
   fibreAmp: 0, fibreMm: 2.4, fibreAlong: 0.035, fibreFadePx: 0.3, fibreBumpM: 0,
   /** A glowing muscle's emission x (1 + glowYellowBoost x smoothstep(0.3, 0.8, min(r, g) - b) of its glow colour): a
@@ -979,80 +979,80 @@ export const MUSCLE_LOOK = freeze({
   goodDistance: 0.075, refinePasses: 12
 });
 
-/** R558 (user Messages 25 to 29; the build brief's style guide, Borderlands-style comic rendering of clean, clinical
- * anatomy): the CEL look of the bodies' muscles, tendons and bones (ns-scene-three patchComicShaders). Display
- * choices, all unitless or in the units named.
- *  - bands / soft / levels: the light factor L (lit luminance over albedo luminance; under LIGHT the flat fill alone
- *    gives 0.14 + the sky 0 to 0.32, the key up to 0.8 more: a surface facing the key measures about 1.0 to 1.2, one
- *    turned away 0.15 to 0.35) is drawn in four tones: below bands[0] the deep shadow (levels[0] x albedo: a surface
- *    the key does not reach), then the mid tone (key at a grazing angle), the light tone and the highlight (facing the
- *    key); each step a soft ramp of half-width `soft` in L (wider where L changes by more per pixel, so it is never a
- *    hard pixel step). First try 0.24 / 0.52 / 0.94: almost every surface seen from the eyes fell in the light and
- *    highlight bands (the fill and sky alone reach 0.3 to 0.45), so there was no deep shade at all (Message 27: "deep
- *    deep shades to light light shades"). soft 0.03 cut the bumpy surfaces right in front of the eyes (your own chest)
- *    into ragged light and dark patches ("never splotchy", Message 18): 0.05. boneHigh: the highlight level of bone
- *    and tendon parts (pale ivory and pearly white): at 1.1 the sternum seen from the eyes was a blown-out white patch
- *    that bloomed; 0.9 keeps it the brightest thing on the body without clipping.
- *  - deepTint / deepDesat: the deep band is desaturated by deepDesat toward its own luminance x deepTint (a cool
- *    neutral dark), so shadows on red muscle are never murky brown-red (style guide).
- *  - rim: a crisp rim band where 1 - |N.V| passes `at`, on the side of the camera's rim light (view-space 2D direction
- *    dir: up and to the left, where the LIGHT rim light comes from), adding gain x albedo x colour.
- *  - spec: the highlight SHAPE: the specular luminance through a step at bellyAt on a muscle belly and tendonBoneAt on
- *    a tendon part or a bone (soft half-width), times belly or tendonBone (crisp bright spots on tendon and bone, a
- *    small sheen on muscle).
- *  - gloss (user Message 54): the polished look of the highlight. coreMul: a brighter core where the specular passes
- *    coreMul x the shape's threshold, adding coreBelly on a muscle belly, coreTendonBone on tendon and bone; smooth /
- *    smoothMax: the share of the real, smooth highlight kept round the two crisp steps and the most its luminance may
- *    add (a soft falloff, so the highlight reads as gloss and not as a flat sticker); speckRad: the crisp steps fade
- *    out where the surface normal turns by more than this many radians per pixel (gone at twice that), so a highlight
- *    a pixel or two wide (finger bones, a far figure's bumps) is left out and nothing sparkles.
- *  - Message 49 ("Maybe you've overdone it with the borderlands style?"): the ink inside the forms is lighter than
- *    first drawn: mix fibre 0.3 -> 0.2, hatch 0.85 -> 0.5, stipple 0.32 -> 0.2, tendon 0.28 -> 0.18. The four tones,
- *    the deep shadow and the outline are kept (Messages 26 and 27: the look itself is liked, deep shades stay).
- *  - ink: the style guide's near-black ink (sRGB hex). line: minSpacingPx = lines closer than this fade out (far or
- *    small figures stay clean; full from 1.6 x that), fibrePx / hatchPx = line widths in drawing-buffer pixels;
- *    farFromM / farToM: the ink also fades out with the distance from the camera, from farFromM to farToM metres, so
- *    the mirror body at its start distance stays clean in any window size (first try, the pixel rule alone: at
- *    2560 x 1440 the mirror's trunk was hatched dark all over), while your own body and a mirror body carried near
- *    keep it. Measured at the start (inspect mirror.reflection, first person): the reflection plane is 0.97 m ahead of
- *    the eyes, your own body's foremost point (the toes) 0.99 m from them, the mirror image's nearest parts (its feet
- *    and hands) about 1.2 to 1.3 m, its trunk 1.6 to 1.9 m. Checker fix: the first numbers (1.7 to 2.3 m, from a guessed
- *    mirror distance of 2.5 to 3.5 m) left the mirror's trunk fully inked at 2560 x 1440 and half inked at 1600 x 900
- *    (fine dark hatching over its belly and flanks; most of the dirty look there was the bands, see farSoft); 1.0 to
- *    1.35 m keeps all of your own body inked in first person and the mirror image clean (its hands and feet keep at
- *    most a quarter of the ink, at the coarsest line level). In third person the camera is farther than that, so the
- *    bodies show soft bands without ink there, like any small figure.
- *    mix: opacities of the fibre striation (lit areas of a muscle), the shadow hatching, the bone stipple and the few
- *    long strokes on a tendon. stroke: strokes are about mm long, with soft ends (inShare, outShare of a stroke).
- *    stipple: bone grain cells cellMm, dots above `at` of the noise, fading out under minCellPx per cell.
- *  - spacingMm: the spacing of the ink lines round a muscle and round a bone (hatchFrame).
- */
-// 18 November (the owner: "telltale games art style rather than borderlands"; "rough patchy small-poxy muscles"): the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // bodies are now PAINTED (ns-flesh BODY_FLESH: one smooth tone curve, fibre bundles, a wet highlight). Of the numbers
 // below only rim.dir (the side the rim light comes from) is still read by the shader; the bands, the highlight shape,
 // the ink lines, the hatching and the bone stipple are no longer drawn. They are kept as the record of the comic look.
-/** 19 November 2026 (the owner: "go back to the art style before the overhaul ... borderlands-telltale"; "Yes, more of
- * the early Borderlands look without very much gloss at all"). The comic look's numbers as they stood before the bodies
- * were painted on 18 November (flat tone bands, hatching in the shadow bands, stipple, a rim light, ink), with the
- * highlight shapes turned almost off. ns-scene-three BODY_STYLE 'cel' draws the bodies with these and the shader of
- * that time (patchComicShadersCel). */
+
+
+
+
+
 export const BODY_CEL_EARLY = freeze({
   bands: freeze([0.42, 0.74, 1.04]), soft: 0.05,
-  // 19 November 2026 (the owner: "The muscle color tone is far too dark initially"): the two shade bands are lifted
+
   // (0.08 and 0.34 before: the side of a muscle away from the light was nearly black) and the six tones are 0.07
   // lighter (MUSCLE_TONES), so a resting muscle is a clear salmon with a soft shade, not a dark red-brown.
   // (20 November 2026, "a little too light": 0.3 / 0.56 / 0.84 -> 0.24 / 0.49 / 0.82; the shade side stays well clear
   // of the nearly black 0.08 that was "far too dark")
   levels: freeze([0.24, 0.49, 0.82, 1.1]), boneHigh: 0.9,
-  // R558 checker (Message 30, "The bone tips probably shouldn't be so spikey"): the deep and mid tones of BONE and of the
+
   // white TENDON parts. At the muscles' 0.08 / 0.34 every fingertip and toe tip turned away from the head-mounted key
   // light went near-black, so a thin white digit ended in a dark hooked point: the claws and talons of the pictures (own
   // right hand, left game hand, the mirror body's hands). White tissue keeps a light grey shadow instead (sRGB about
   // 0.51 and 0.67 on the ivory bone, below its 0.78 light and 0.84 highlight tones), so a bone end reads as a rounded
-  // ivory end; muscles keep their near-black deep band (Message 27).
+
   boneLevels: freeze([0.3, 0.54]),
-  // R558 checker (Message 18 "never splotchy", style guide: the mirror body at its start distance "must stay clean, never
-  // dirty"): the half-width of the band steps on a FAR figure (from line.farFromM to line.farToM it widens from `soft`
+
+
   // to farSoft). On the mirror body at its start distance (trunk 1.6 to 1.9 m) the light factor of the bumpy lifted
   // belly and flanks wanders around the deep / mid threshold, and the narrow 0.05 step turned that into near-black
   // streaks and blotches all over its trunk: the dirty look, measured with the ink switched off (it was the bands, not
@@ -1076,15 +1076,15 @@ export const BODY_CEL_EARLY = freeze({
 export const BODY_CEL = freeze({
   bands: freeze([0.42, 0.74, 1.04]), soft: 0.05,
   levels: freeze([0.08, 0.34, 0.78, 1.1]), boneHigh: 0.9,
-  // R558 checker (Message 30, "The bone tips probably shouldn't be so spikey"): the deep and mid tones of BONE and of the
+
   // white TENDON parts. At the muscles' 0.08 / 0.34 every fingertip and toe tip turned away from the head-mounted key
   // light went near-black, so a thin white digit ended in a dark hooked point: the claws and talons of the pictures (own
   // right hand, left game hand, the mirror body's hands). White tissue keeps a light grey shadow instead (sRGB about
   // 0.51 and 0.67 on the ivory bone, below its 0.78 light and 0.84 highlight tones), so a bone end reads as a rounded
-  // ivory end; muscles keep their near-black deep band (Message 27).
+
   boneLevels: freeze([0.3, 0.54]),
-  // R558 checker (Message 18 "never splotchy", style guide: the mirror body at its start distance "must stay clean, never
-  // dirty"): the half-width of the band steps on a FAR figure (from line.farFromM to line.farToM it widens from `soft`
+
+
   // to farSoft). On the mirror body at its start distance (trunk 1.6 to 1.9 m) the light factor of the bumpy lifted
   // belly and flanks wanders around the deep / mid threshold, and the narrow 0.05 step turned that into near-black
   // streaks and blotches all over its trunk: the dirty look, measured with the ink switched off (it was the bands, not
@@ -1112,7 +1112,7 @@ export const BODY_CEL = freeze({
 export function muscleToneKey(id, sourceName = null) {
   if (typeof sourceName === 'string' && sourceName.trim()) {
     // The face packet's source names carry the side as a suffix ('Frontalis muscle.r' / 'Frontalis muscle.l'): drop it too,
-    // or the two sides of a face muscle get different tones (Message 15).
+
     const k = sourceName.toLowerCase().replace(/\b(right|left)\b/g, ' ').replace(/[._\s-][rl]\s*$/, '').replace(/\s+/g, ' ').trim();
     if (k) return k;
   }
@@ -1173,23 +1173,23 @@ export function muscleBaseInto(toneIndex, level, out = [0, 0, 0], look = MUSCLE_
   return out;
 }
 
-/** 20 November 2026 (the owner, Message 195: "The new look aesthetic you've provided in the recent most images is good.
- * Apply it. But you need more clear contrast and differentiation between muscle groups"). In the raw look (ns-raw-look)
- * the muscles are coloured by GROUP, the groups a student learns, each group one TONE of ONE rose red: the reference
- * pictures' muscle colour (RGB 196, 92, 88 = OKLCH 0.602 0.134 24) at eight steps of lightness, the hue held at 22 to
- * 24 degrees and the chroma at 0.115 to 0.135 (a judge panel on the first version: its hue steps toward pink, mauve and
- * peach read as a candy colour code, not as one rose red; under one light the lightness step is what parts the groups
- * anyway). 'rose' is the reference colour itself. The tones are given out so that groups that lie side by side are at
- * least 0.15 apart in lightness wherever the views show their meeting: the upper arm's flexors (pale) against its
- * extensors (dark) with the shoulder between them in the reference rose; the forearm's flexors (darkest) against its
- * extensors (rose); the chest (darkest) against the shoulder and the pale abdominal wall; the thigh's front (rose)
- * against its pale inner side and its darkest back, the hip and buttock a step down from the front; the shin's front
- * (pale), its outer side (darkest) and the calf (deep). The upper arm's flexors are not the thigh's front tone (they lie
- * side by side in the start picture), nor is the abdominal wall. The back is two steps lighter than the upper arm's
- * extensors. Groups that never touch may share a tone. Within a group each muscle varies only slightly
- * (MUSCLE_GROUP_LOOK.vary), and the deep storeys are a little darker as before (muscleBaseInto). No line is drawn
- * between groups: the tone alone tells them apart. A display rule for teaching, not a property of the tissue; signals
- * stay simulated. OKLCH [lightness, chroma, hue in degrees]; linear RGB and sRGB hex are derived. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const MUSCLE_GROUP_TONES = freeze({
   pale: muscleTone('pale', 0.76, 0.12, 22),
   light: muscleTone('light', 0.71, 0.125, 23),
@@ -1227,23 +1227,23 @@ export const MUSCLE_GROUPS = freeze([
 /** vary: each muscle's own lightness within its group, one of `steps` steps over +- vary (linear light), from its
  * side-free key (so a left and a right muscle match); used only until the muscles' contacts are known (MUSCLE_STEP). */
 export const MUSCLE_GROUP_LOOK = freeze({ vary: 0.07, steps: 5 });
-/** 20 November 2026 (the owner, Message 202: "each muscle group, bundle, spindle, fiber, whatever you want to call it,
- * activation group, should have its own sort of shading system, such that muscles next to each other can be obviously
- * told apart, and you don't mix them up as one amorphous group"). On top of its group's tone each muscle takes one of
- * `steps` lightness steps (OKLCH lightness + step x stepL), given out like the colours of a map: from the muscles that
- * touch in the drawn body (ns-scene-three assignBodyMuscleTones: shared cells of the rest meshes, weighted by how much
- * they share), each muscle takes the step that keeps it furthest from its touching neighbours: at least sameGoal from a
- * neighbour of its own group (so the quadriceps' four heads, the forearm's flexors, the pectoral's parts read as
- * separate muscles) and otherGoal from a neighbour of another group (so a step never brings two groups together: a
- * muscle at a group's border steps away from the group beside it). Greedy, the most-connected muscle first, then
- * refined until nothing improves; deterministic. The hue and the chroma stay the group's: still one rose red. */
+
+
+
+
+
+
+
+
+
+
 // (A contact counts by how much the two meshes share and by how much of both is seen: `seen` per storey, so a deep
 // muscle under two others does not take the steps the outer ones need.)
 // (stepH: with each step the hue turns that many degrees too, toward rose for a darker step and toward warm red for a
 // lighter one, so two neighbours differ a little in colour as well as in lightness; the tones' hue 22-24 stays within
 // 16-32.)
-// 21 November 2026 (section 188; the owner, Messages 195 and 202, again: "more clear contrast and differentiation", "muscles
-// next to each other can be obviously told apart"). Measured on the screen (the colours drawn a few pixels inside each
+
+
 // side of every visible contact, OKLab distance; tests/browser-muscle-shades.mjs), three lightness steps left 1 to 13
 // contacts per view drawn nearly equal (under 0.03) and 7 to 44 weak (under 0.06), nearly all inside one group where four
 // or five muscles lie side by side (the forearm's flexors, the triceps' heads, the pectoral's parts and the serratus,
@@ -1290,7 +1290,7 @@ export const MUSCLE_GROUP_LOOK = freeze({ vary: 0.07, steps: 5 });
 // 604 weak, 115 muscles on a warm step; 0.01 and 0.01: 66 and 680, 82 muscles; 0.03 and 0.03: 84 and 732, 55 muscles;
 // without the lights 145 and 1 024): lower the two costs for more separation and a redder, duskier body.
 // 22 November 2026 (a check of the above, confirmed by a second reviewer, and the owner's colour rule: rose red, no
-// pink, grey or brown; Message 22: "clinical", not "bloody"). The quieter step made the big pale muscles a pale PINK
+
 // (the rectus abdominis 246, 175, 172 where update 63 had 216, 120, 124; the tibialis anterior, the gracilis, the short
 // head of the biceps) and the dark ones a dusty MAUVE that went grey-brown in shade (the clavicular and abdominal
 // pectoral, the palmaris longus 139, 75, 78; the pronator quadratus 105, 48, 55), and the fuller step drove the dark
@@ -1351,26 +1351,26 @@ export function drawnMuscleLab(group, level, step, warm = 0, so = MUSCLE_STEP) {
 export function drawnMuscleLightness(group, level, step, so = MUSCLE_STEP, warm = 0) {
   return drawnMuscleLab(group, level, step, warm, so)[0];
 }
-/** Steps for the muscles (pure, deterministic). keys: side-free muscle keys; contacts: Map key -> Map(neighbour key ->
- * shared cells); groupOf(key): the key's group; toneL(group): the group tone's OKLCH lightness (now only which keys take
- * part: a key whose toneL is not a number is left out). layerOf(key): its storey. Returns Map key -> lightness step (one of
- * o.steps), with .warm, Map key -> warm step (one of o.warm.steps), and on the map .worst { same, other, short,
- * heaviestShort, contacts, nearlyEqual }: the smallest distance left between two touching muscles (contacts of at least
- * minContact cells) of the same group (the whole colour, OKLab) and of different groups (lightness).
- * 20 November 2026 (a review of Body update 59): the colours compared are those DRAWN (drawnMuscleLab:
- * muscleGroupBaseInto's clamp, gamut and storey shade), not the model tone L + step x stepL. `lightOf(key, step)` may
- * replace the lightness (tests; the warm axis is then left out). Each refine pass also tries moving both ends of a
- * touching pair together (a single move can be stuck).
- * 21 November 2026 (section 188): each muscle takes a pair (lightness step, warm step); a contact inside one group is
- * scored by the OKLab distance of the two colours drawn (goal sameGoal), a contact between two groups by their lightness
- * gap (goal otherGoal), and a warm step costs warm.cost (a muscle with no conflict keeps its group's colour). `seen`
- * (Map key -> Map(neighbour key -> samples), ns-muscle-seen seenContactMap): the pairs the game's pictures show side by
- * side, counted as contacts too (weight samples x seenWeight; the larger of that and the touching weight).
- * .gaps lists every counted contact [key, key, weight, drawn distance] (OKLab inside a group, lightness between two).
- * `light` (Map key -> Map(neighbour key -> [[shade factor on the key, on the neighbour], ...]), ns-muscle-seen
- * seenLightMap; second part of section 188): the light the pictures show on the two sides of a seen pair; with o.light
- * the pair is also scored by its two colours as drawn under each of those lights (see MUSCLE_STEP). Left out with
- * lightOf. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function assignMuscleSteps(keys, contacts, groupOf, toneL, o = MUSCLE_STEP, layerOf = null, lightOf = null, seen = null, light = null) {
   const all = [...new Set(keys)].map(String);
   const G = new Map(all.map(k => [k, groupOf(k)]));
@@ -1538,7 +1538,7 @@ export function muscleGroupBaseInto(group, key, level, out = [0, 0, 0], o = MUSC
   const tone = muscleGroupTone(group);
   let t = tone.linear, v = 1;
   if (Number.isFinite(step)) {
-    // (Message 202: the muscle's own lightness step among its touching neighbours, assignMuscleSteps; section 188: and its
+
     // warm step, a turn of hue and chroma at the same lightness)
     const [L, C, h] = tone.oklch, w = Number.isFinite(warm) && so.warm ? warm : 0;
     // [chroma x, hue turn in degrees] for one step; on a dark tone the quieter step turns toward crimson more and loses
@@ -1572,10 +1572,10 @@ export function muscleGroupBaseInto(group, key, level, out = [0, 0, 0], o = MUSC
   return out;
 }
 
-/** 19 November 2026 (the owner: "Make sure every single muscle is differentiated from each other in shade"). A muscle's
- * OWN shade on top of its tone (pure): from its side-free key (so a left and a right muscle match), one of
- * MUSCLE_OWN_SHADE.steps lightness steps over +-`light` and a small warm / cool shift (+-`warm` on green against
- * blue), so that two muscles of the same tone still differ. Multiplies a linear RGB colour in place. */
+
+
+
+
 export const MUSCLE_OWN_SHADE = freeze({ steps: 9, light: 0.2, warm: 0.14 });
 export function muscleOwnShadeInto(key, rgb, o = MUSCLE_OWN_SHADE) {
   const h = toneHash(`shade:${String(key)}`);
@@ -1583,12 +1583,12 @@ export function muscleOwnShadeInto(key, rgb, o = MUSCLE_OWN_SHADE) {
   rgb[0] *= f; rgb[1] *= f * (1 + w); rgb[2] *= f * (1 - w);
   return rgb;
 }
-/** 19 November 2026 (the owner: "upon activation of any brain region or any body part, the shade changes. So
- * everything gets marked out upon activation, so you can see what's still left ... to activate"). VISITED: a muscle
- * or a motor area that has been switched on keeps a changed resting shade for the rest of the session: `value` of its
- * colour, mixed `grey` of the way toward its own grey. What is still bright and saturated has not been tried yet.
- * markLevel: the activity from which a muscle counts as switched on (a look's faint tint does not mark it). */
-// (later the same day, the owner: "Let's have much darker blacks instead of ugly grays": a visited muscle is DARKER in
+
+
+
+
+
+
 // its own hue, hardly greyer: value 0.5 -> 0.36, grey 0.45 -> 0.12; a visited area value 0.42 -> 0.3, lift 0.25 -> 0.12.)
 export const VISITED = freeze({ value: 0.36, grey: 0.12, areaValue: 0.3, areaLift: 0.12, markLevel: 0.5 });
 export function visitedShadeInto(rgb, o = VISITED) {
@@ -1622,7 +1622,7 @@ export function muscleGlowGainScale(glowLinear, look = MUSCLE_LOOK) {
   return 1 + look.glowYellowBoost * smoothstep(0.3, 0.8, y);
 }
 
-// R558 (user Message 20, builder FA): the eyes of the completed head (BodyParts3D sclera, iris and lens; packet
+
 // bodyparts3d-head-r1). An anatomy-atlas eye: a soft warm white sclera with a faint sheen (not paper white, so it never
 // glares next to the ivory bone), a muted brown iris and a near-black lens that reads as the pupil through the iris
 // opening. Display colours, not a measured eye. sRGB hex and roughness per part.
@@ -1638,7 +1638,7 @@ export function eyePartOf(entry) {
   return /sclera/.test(s) ? 'sclera' : /iris/.test(s) ? 'iris' : /lens/.test(s) ? 'lens' : null;
 }
 
-// R558 (user Message 20: "The arm and face muscles look the most wrong and disgusting"; builder FA, surface exceptions
+
 // where the face muscles' GEOMETRY needs them; their colours stay the body's, which builder CL owns): the face muscles
 // (the Z-Anatomy face packet, element ids zf-...) are thin sheets of 1-3 mm over bone that insert into skin.
 //  tendonScale: the stack's tendon estimate (anchored x thin x end of the long axis) is read from the head fill of at
@@ -1664,45 +1664,45 @@ export function muscleTendonScale(id, look = FACE_MUSCLE_LOOK) {
 export function muscleFibreScale(id, look = FACE_MUSCLE_LOOK) { return isFaceMuscleId(id) && look.noFibre.test(id) ? 0 : 1; }
 
 // ---------------------------------------------------------------------------------------------
-// R558 (user Message 53: "instead of making it a glowing power up, level up, let's make it more of a neon fluorescent
-// flash"; Message 17: "clear fluorescent glow correspondence across all 3 systems during activation"): the NEON FLASH.
-// When an area switches on, the area on the brain and the muscles it drives on your body and on the mirror body run the
-// SAME short sequence in the area's colour, from one shared start time, like a neon tube being switched on:
-//   1 strike (strikeS): the whole muscle / area comes on at once (no front runs along it) and rises straight to the
-//     flash peak; the surface colour goes from the resting tissue colour (strikeAlbedo of the glow tint) to the tint;
-//   2 flash: at the peak the glow is 1 + flashGain times the settled glow, with a white-hot core (flashWhite; on a
-//     brain area scaled by areaWhiteScale so the area keeps its own hue) and the muscle's halo shell flaring by
-//     haloBurst of its width; it settles exponentially (flashTau);
-//   3 steady glow: while the activity holds the glow is steady, like a lit tube (no pulse, no ripple);
-//   4 fade: the glow then follows the activity down (the activity's own fade; ns-actions DISPLAY_ENVELOPE).
-// It replaces the power-up charge of Message 22 (a 0.26 s energy front, a burst, a breathing pulse and running
-// ripples), which read as a game's level-up rather than as an area switching on, and it answers at once: the glow is
-// at full strength strikeS after the activation instead of 0.26 s after it.
-// One flash per activation, never a flicker: with rechargeS an area flashes at most about 1.7 times a second (below 3
-// a second). A glow that comes back within rearmS of going dark (the turns of the Space dance) stays steady, no new
-// flash. The STRENGTH scales with the activity (glowIntensity), so stronger activity is brighter. Opposing-action hints
-// are CALM (no flash: Messages 6 and 17, "faint"). Under prefers-reduced-motion there is no flash: one calm ramp to the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // steady glow over reducedRampS.
 // powerUpEnvelope is the CPU record of the rule; powerUpGlsl emits the identical function for the shaders. (The names
 // keep "powerUp" so the shader interface is unchanged.) Timings are UI choices, not physiology.
 // 22 November 2026 (LOOK2, hunt of update 64 H17: "A block switched on by an arrow-key step goes dark for one frame
-// before it lights ... and the muscle it lights shows a grey-mauve frame"; the owner, Message 133, no blinking):
-//  - areaStrikeFloor 0.6 (was none, 0): the strike multiplies ALL of an area's light, the look's glow and its white
-//    frame included, and on the frame where the glow turns on its age is only the processor time between the start and
-//    the clock (1 to 3 ms: gain 0.02 to 0.07; under reduced motion the 0.3 s ramp started from 0 too). The block that
-//    was lit by the look a frame before went dull grey for one frame (2 to 4 under reduced motion), then white. On an
-//    area the strike now starts from the light the block already shows: at least areaStrikeFloor of the settled glow
-//    (its white core is then at 0.96 of display white, its rim at 0.7) and up from there; the reduced ramp the same.
-//    A muscle has no light before it lights and keeps the strike from nothing. (Second pass, after a check: only a
-//    block that shows the look's light as its own light starts, the one under the look, starts at the floor; a block
-//    switched on from elsewhere (a muscle click, a number key) has no light of the look to carry and starts from
-//    nothing as before, also under reduced motion: ns-scene-three sets the area's nsPuFloor at each new start. A new
-//    start of a block that still glows (a second click) starts at the floor too.)
-//  - strikeAlbedo 0.2 -> 1: a muscle's surface took 20 % of its area's colour on that first frame (the rose red and an
-//    azure mixed to a dull grey-mauve, 112, 79, 93 measured on the mirror pectoral) and came to the colour over the
-//    45 ms strike; it now takes its area's colour at once and only its light rises (reduced motion: the slow ramp, as
-//    before). Not chosen: dating the start one frame back (the first frame would then show the flash's peak at once,
-//    and the reduced ramp would still start from nothing).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const POWER_UP = freeze({
   strikeS: 0.045, strikeAlbedo: 1, areaStrikeFloor: 0.6,
   flashTau: 0.14, flashGain: 1.5, flashWhite: 0.36, haloBurst: 0.6,
@@ -1755,8 +1755,8 @@ export function powerUpEnvelope(ageS, u = 0.5, { calm = false, reduced = false, 
   return { gain: on * (1 + p.flashGain * flash) * powerUpBlink(a), white: p.flashWhite * flash, sat: 1, albedo: p.strikeAlbedo + (1 - p.strikeAlbedo) * on, flash };
 }
 
-// 18 November (MAP; owner: "let's introduce a neon glowing blinking effect, shuddering effect upon activity and
-// corresponding activity"): the BLINK of a switched-on area. Like a neon tube striking, then a living flicker, in the
+
+
 // area's colour and in step on all three places (the strip key, the muscles on your body, the same muscles on the
 // mirror body) and on the link between them: they share one start time per area (the power-up start), and this rule is
 // a function of the time since that start only. The CPU (the links) and the shaders use the same numbers.
@@ -1767,7 +1767,7 @@ export function powerUpEnvelope(ageS, u = 0.5, { calm = false, reduced = false, 
 // Photosensitivity: three strike pulses in a quarter second, then at most about two shallow dips (40 % or less) a second;
 // a re-click restarts the strike no sooner than POWER_UP.rechargeS. Under prefers-reduced-motion there is no blink: a
 // steady glow (powerUpEnvelope's reduced ramp). Opposing-action hints are calm (no blink). Display choices.
-// 19 November 2026 (the owner: "The game currently physically hurts to look at with your eyes"): no strike pulses and no
+
 // flicker. The light of a switched-on area comes up once and stays steady (the earlier numbers: three strike pulses
 // [0.07, 1], [0.115, 0.12], [0.19, 1], [0.235, 0.3] and dips of up to 0.4 about twice a second).
 export const BLINK = freeze({

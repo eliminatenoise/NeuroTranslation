@@ -1,45 +1,45 @@
-/** NeuroSurge scene: keeping your body, the glass brain and the mirror body apart (R558, user Message 12: "Ensure that
- * your body, the brain and the mirror do not touch or collide so adjust their initial starting locations and ensure
- * that they can be moved to and around each other but not through").
- *
- * Pure maths, no DOM, no Three. Every item is a set of SPHERES that cover the item's drawn vertices:
- *   - a sphere table is built ONCE per mesh geometry, in the geometry's own coordinates: the vertices are put into a
- *     grid of small cells (leaf cells), and each occupied cell becomes one sphere: centre = the mean of its vertices,
- *     radius = the farthest of its vertices from that centre (so every vertex lies inside, and neighbouring spheres
- *     overlap where the surface runs on, so the surface between the vertices is covered too). Leaves are grouped by a
- *     coarser grid (group spheres enclose their leaves) and the whole table has one bounding sphere. A mesh whose
- *     vertices are rewritten often can be given a lazySphereTable instead: its bounding sphere is known at once
- *     and its spheres are made the first time something reads them;
- *   - an ITEM is a list of entries { table, matrix (geometry -> world metres, column-major 4x4), scale (the largest
- *     column length of the matrix, so a radius never shrinks under a squash), pad (extra world metres added to every
- *     radius, e.g. muscle thickness around a bone) }. A whole body is one item (one entry per mesh), the brain is one
- *     item (one entry per glass mesh), the mirror body is the body's entries seen through the mirror matrix.
- * Contact means: two spheres of different items closer than `clearance` (world metres, surface to surface). The test
- * runs from coarse to fine (item boxes, entry spheres, group spheres, leaf spheres) and stops at the first contact.
- *
- * Moving an item safely (stop at contact, never through, never a jump): given its matrix before and after a requested
- * move, clearFraction() finds by bisection the largest share f of the move (0..1) after which it is still clear, and
- * blendMatrix() gives the matrix at that share (a rigid turn about the item's centre plus the matching share of the
- * shift, so the item never shrinks or bends on the way). A move that starts already in contact is let through when it
- * does not bring the two closer (so an item that ended up touching can always be moved away again).
- *
- * The spheres are a conservative engineering cover of drawn display meshes, for a game rule. They are not a measured
- * body surface, not tissue contact and not physics.
- */
 
-/** Sizes (display choices, world metres unless named mm).
- *  clearanceM: the gap kept between items ("a few centimetres").
- *  bodyLeafMm / bodyGroupMm: cell sizes for body meshes (BodyParts3D millimetres). A leaf sphere is at most about
- *    half the cell diagonal; measured on a 100 mm ball of points the cover stands about 1 cm outside the surface, so
- *    two bodies stop about 2 cm + clearanceM (about 4 cm) apart.
- *  brainLeafMm / brainGroupMm: cell sizes for the brain glass (brain source millimetres; the brain is drawn many
- *    times life size, so a 4 mm source cell is a few decimetres in the world, about 2 % of the brain's drawn width).
- *  armBonePadM: the left game arm's muscles are skinned on the CPU every frame, so the arm is covered by its BONES
- *    plus this pad for the muscle around them (the upper arm and forearm bellies lie within about 4 cm of the bone).
- *  bisectSteps: bisection steps of clearFraction (2^-7 of a frame's move: well under a millimetre for any key move).
- *  brainSolidCellMm: cell size (brain source mm) of the brain's solid (solidGrid; R558, Message 12). 2 mm: the sealed
- *    inside of the shipped brain meshes holds about 76,000 cells (0.6 L of the source brain), built in about 0.1 s.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const COLLIDE = Object.freeze({
   clearanceM: 0.02,
   bodyLeafMm: 20, bodyGroupMm: 100,
@@ -607,7 +607,7 @@ export function clearFraction(test, { clearance = COLLIDE.clearanceM, steps = CO
   return lo;
 }
 
-/* ------------------------------------------------------------------ the way, not only the end (R558, Message 12) */
+
 
 /**
  * How far (world metres) any point of `item` can travel when it moves from matrix `from` to matrix `to` the way
@@ -678,7 +678,7 @@ export function walkFraction(gapAt, travelM, options = {}) {
   return walkMove(gapAt, travelM, options).share;
 }
 
-/* ------------------------------------------------------------------ the glass brain as a solid (R558, Message 12) */
+
 
 /**
  * A solid of the glass brain: the brain's meshes are open surface patches (gyri), so "inside" is not a ray parity.

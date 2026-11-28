@@ -1,41 +1,41 @@
-/**
- * NeuroSurge POV arm scene: functional-map binding, pose composition and virtual activation dynamics.
- *
- * Scientific limits. Every quantity in this module is a virtual, simulated, unitless display value
- * ("simulated drive", 0..1). Gaze, click, Space and WASD are virtual game-control inputs. Nothing here
- * is a measurement, a recording, real stimulation or neural decoding. The muscle-role display is a
- * qualitative anatomical constraint taken from Root's movement map (representative; cortical regions
- * overlap and vary between people), not fitted physiology. Pulse, rise and decay timings are UI
- * smoothing choices, not physiological latencies or doses.
- *
- * Integration note (see the returned activity API). Two SEPARATE signals per action (A1-activation, round 1):
- *   - POSE DRIVE: `drives(state)` (alias `poseDrives(state)`) is the smoothed commanded drive (rise tau 0.12 s,
- *     decay tau 0.25 s). It is the only drive that may feed `composePose` (and so the signed elbow-angle target
- *     `elbowDeltaDeg`); the arm eases in and relaxes back smoothly, so the arm's return may outlast the pulse.
- *   - DISPLAY ACTIVITY: `displayActivity(state)` is the crisp simulated activity envelope for the cortex colour:
- *     a fast rise (tau 0.035 s, so onset is visible within 100 ms), a hold, and a fade inside the last 0.08 s
- *     of the command, so a 1 s gaze/click pulse shows exactly zero from 1.0 s after its trigger.
- *     `displayDrives(state)` is that envelope plus the display-only WASD/reach linkage (for the strip);
- *     `muscleDisplayDrives(state)` is the same without the A/D share (for `muscleDrives`).
- *   Feeding a display signal into `composePose` would create the reach feedback loop that the design forbids.
- *
- * Clocks (browser-findings repair R2): the activity clock `t`, the 1 s pulse, the Space-release opening
- * window and the drive smoothing all run on ACTUAL elapsed wall time. Each event may carry `at`, its offset
- * in seconds into the step, so a pulse that starts at an input event ends exactly `pulseSeconds` of real
- * time after that event regardless of the frame rate. Pose/motion integration (W/S/A/D) is a separate,
- * capped step owned by ns-app.
- *
- * U1-controls round 2 (see createActivity): activation of ANY BODY_MOTOR_MAP region (ns-bodymap.mjs) by gaze (1 s
- * pulse) and click (re-trigger), left-arm regions driving the arm actions and every other region driving
- * bodyJointTargets, persistent activatedRegions with Reset body, the turn of all four limbs (R558, user Message 40: a
- * double tap of Space = one step, a double tap held = the slow turn, see ns-dance.mjs and ns-controls SPACE_GESTURE;
- * holding or tapping Space grasps, through the 'grasp' event), the brain
- * grab state, the orbit view state, the instructions/pause overlay state and the WASD coordinated joint channels.
- * The left upper limb is represented predominantly in the contralateral (right) hemisphere; region extents are the
- * map owner's representative, overlapping schematic, not a unique cortical point per muscle.
- *
- * Pure (browser and Node; no DOM). Errors: Error('ns:<code>: message').
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { DEG, clamp } from './ns-math.mjs';
 import { FIST_POSE_DEG, REST_HAND_POSE_DEG, PRONATION_STATES } from './ns-rig.mjs';
 import { DOUBLE_TAP_MS } from './ns-controls.mjs';
@@ -76,19 +76,19 @@ export const MOVEMENT_MAP_ACTION_IDS = Object.freeze([
   'wrist_flexion', 'wrist_extension', 'elbow_flexion', 'elbow_extension',
   'index_flexion', 'index_extension', 'thumb_mcp_flexion', 'thumb_mcp_extension'
 ]);
-/** R558 (Messages 14 and 15: as many activation points as possible; the left hand as detailed as the right): game-defined
- * left-hand actions that the pinned MOVEMENT-MAP (r2, sha-pinned in ns-app) does not have. bindMovementMap adds them to
- * the binding with the roles in EXTRA_ARM_ACTIONS (existing muscle_catalog keys only), so every per-action path
- * (targets, drives, display, latch, muscle colours, muscle taps) treats them like the map's own actions. */
+
+
+
+
 export const EXTRA_ARM_ACTION_IDS = Object.freeze([
   // Little, ring, middle: the strip's own order (the right hand's areas run the same way). A tap on a muscle shared by
   // several of these goes to the first action that lists it as a mover, so this order makes a tap on the left
-  // lumbricals bend the little finger, as a tap on the right lumbricals does (left-right symmetry, Message 15).
+
   'fingers_together', 'little_flexion', 'little_extension', 'ring_flexion', 'ring_extension',
   'middle_flexion', 'middle_extension', 'thumb_opposition', 'thumb_reposition',
   'wrist_radial_deviation', 'wrist_ulnar_deviation',
-  // 20 November 2026 (BODYMAP; the owner, Message 204: "make sure there's clear movement for each brain activation
-  // area"): the left shoulder area moved nothing (the look and W/A/S/D carry the left arm). Its four movements swing the
+
+
   // whole left arm at the shoulder on top of where the look and the keys hold it (SHOULDER_ACTION_DEG).
   'shoulder_flexion', 'shoulder_extension', 'shoulder_abduction', 'shoulder_adduction'
 ]);
@@ -203,26 +203,26 @@ function actionTarget(joints, { elbowFlexDeg = 0, shoulderLiftDeg = 0, shoulderO
   return deepFreeze(t);
 }
 
-/**
- * 20 November 2026 (BODYMAP; the owner, Message 204: "make sure there's clear movement for each brain activation area",
- * and Message 154: "as exaggerated and obvious as possible within reason"): how far a full drive of the left shoulder's
- * movements swings the whole left arm at the shoulder (degrees), on top of where the look and the keys hold the hand:
- * lift = forward and up (flexion; negative: down and back, extension), out = out to the left side (abduction;
- * negative: in across the body, adduction). ns-app turns the free hand's place about the shoulder by these (the hand's
- * own place, kept by the keys, is not changed: when the movement eases off the arm comes back to it); the shoulder's
- * range (ns-arm freeHandInRange) still bounds where the hand can go. A display rule of this game, nothing measured.
- */
+
+
+
+
+
+
+
+
+
 export const SHOULDER_ACTION_DEG = Object.freeze({ lift: 60, drop: 45, out: 50, across: 35 });
 
-/** Signed elbow-angle change (degrees, + = flexion) commanded by a full elbow_flexion / elbow_extension drive,
- * relative to the elbow angle of the current W/S/A/D reach solution. ns-app turns it into an explicit elbow target
- * (the hand stays on its screen ray, so the depth follows); clamps and reach limits are reported, never hidden.
- * 20 November 2026 (the left arm's movements now jerk and come half way back, JOINT_LATCH; the owner, Message 154: "as
- * exaggerated and obvious as possible within reason"): 30 -> 90. With 30 the elbow's jerk was 15 degrees, mostly along
- * the line of sight (the hand comes in toward the shoulder, which is beside the eye): the hand moved 2.4 % of the
- * picture, where the right elbow's jerk moves the right hand 31 %. With 90 the hand travels about 15 % of the picture
- * and waits 45 degrees more bent than its place gives (30 before this change). The elbow still stops at its own limits
- * (ns-arm ELBOW_MAX / fitHandAt), so a hand already brought in near the shoulder bends only as far as the elbow goes. */
+
+
+
+
+
+
+
+
+
 export const ELBOW_ACTION_DEG = 90;
 
 // relax_release targets the declared passive rest on the HAND joints only. The movement map says the
@@ -248,7 +248,7 @@ export const ACTION_TARGETS = Object.freeze({
     Object.fromEntries(RELAX_JOINTS.map(j => [j, REST_POSE[j]])),
     { releaseOf: ['grasp_close'] }
   ),
-  // R558 (Message 2: every movement to its maximum anatomically feasible range, never beyond): the open hand, a single
+
   // finger, the wrist and the spread now end at the game arm's own joint limits (JOINT_LIMITS, inside the adult norms:
   // finger MCP 90 / PIP 105 / DIP 75 of AAOS 90 / 100 / 90, MCP extension 10 of about 30, wrist flexion 70 / extension
   // 60 of AAOS 80 / 70, spread 20 at the index and little MCP). The rig and its hand-fit envelope (ns-arm
@@ -259,8 +259,8 @@ export const ACTION_TARGETS = Object.freeze({
   wrist_extension: actionTarget({ wrist_flex: -60 }),
   elbow_flexion: actionTarget({}, { elbowFlexDeg: ELBOW_ACTION_DEG }),
   elbow_extension: actionTarget({}, { elbowFlexDeg: -ELBOW_ACTION_DEG }),
-  // 21 November 2026 (SEEMOVE, section 189; Message 204: "make sure there's clear movement for each brain activation
-  // area"): a single finger's "Straighten" (-10 / 0 / 0: the finger as in the open hand) and "Straighten left thumb"
+
+
   // moved no joint at all from the lower half of their areas. The cause was not their end but the look's closing of the
   // hand (lookHandPose below has it); with that put right they uncurl the finger from its relaxed bend (22 to 40 degrees
   // at the knuckle) to straight. The thumb's "Straighten" also takes its tip joint to 20 past straight, as its long
@@ -272,7 +272,7 @@ export const ACTION_TARGETS = Object.freeze({
   index_extension: actionTarget(digitFlex(['index'], -10, 0, 0)),
   thumb_mcp_flexion: actionTarget({ thumb_mcp_flex: 50 }),
   thumb_mcp_extension: actionTarget({ thumb_mcp_flex: -10, thumb_ip_flex: -20 }),
-  // R558 (Messages 14 / 15): the game-defined left-hand actions (EXTRA_ARM_ACTIONS), at the same joint limits.
+
   // 20 November 2026 (BODYMAP): to the joints' own stop, -5 (the fingers pressed together); at 0, the relaxed hand's
   // own place, "Bring left fingers together" moved nothing from the start.
   fingers_together: actionTarget({ index_mcp_abd: -5, ring_mcp_abd: -5, little_mcp_abd: -5 }),
@@ -507,27 +507,27 @@ export function composePose(drives = {}, { targets = ACTION_TARGETS, rest: restP
   return out;
 }
 
-/**
- * 21 November 2026 (SEEMOVE, section 189; the owner, Message 204: "make sure there's clear movement for each brain
- * activation area"): how the look's closing and opening of the left hand (19 November: "as we look down, the fingers
- * close ... as we look up, they expand"; ns-app inputs.handLook) joins the pose the hand's own movements ask for.
- *   rule 'under' (in force): the look's pose takes the place of the hand's REST, and a movement goes from there to its
- *     own end. Per joint: pose + (look pose - rest) x (1 - share), share = how much of that joint the movements under
- *     way command (the sum of their pose drives, at most 1; "Relax" commands none: its end is the rest itself). With
- *     nothing under way the hand is exactly where the look puts it, as before; a movement at full drive is exactly at
- *     its own end, whatever the look; in between it is a straight blend of the two, so it stays inside the joints'
- *     limits. The Space grip (full drive on every digit) wins, as before.
- *   rule 'max' (before; kept): the more closed of the two (looking down), the more open of the two (looking up). It
- *     let the look CANCEL a movement: every strip area of the left hand lies where the look is a little below the
- *     point at which the closing begins (8 degrees under level), and there the look's pose, the rest hand closed by
- *     under 2 %, was "more closed" than any straightening, so "Open left hand", each finger's "Straighten",
- *     "Straighten left thumb" and "Move left thumb out from the palm" moved NOTHING (measured in the browser: the pose
- *     drive rose to 0.97 and no joint changed), while the same movements worked from a look a finger's width higher.
- *     Looking up past 8 degrees it did the same to every bend.
- * joints: the composed pose (composePose(drives).joints); drives: this frame's pose drives; look: { close, open }
- * (0..1 each; closing wins when both are given). Returns `joints` itself when the look asks for nothing, else a new
- * object. The wrist is never the look's. Pure. A display rule of this game, nothing measured.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LOOK_HAND = Object.freeze({ rule: 'under', openSpread: 0.8 });
 // (the rule runs every frame while the look is off level, so nothing is worked out twice: which kind each pose joint
 // is and which actions name it as a main term are tables built once, and the look's own pose is kept while the look's
@@ -645,67 +645,67 @@ export const DIGIT_FLEXING = Object.freeze(['grasp_close', 'index_flexion', 'thu
 const REACH_FULL_RATE_DEG_S = 90;    // |elbowRate| at which the legacy display-only reach linkage saturates
 const SNAP = 1e-9;                   // timers / drives within this of their goal snap to it
 
-/**
- * Gaze restart deadband (degrees of view angle). On the SAME strip region a 'moved' restart fires only once the
- * gaze direction has turned more than this from the direction at the last (re)trigger, seed or region change. At the
- * default look sensitivity (0.0038 rad/px = 0.218 deg/px) one pointer pixel stays inside it and two pixels leave it,
- * so sub-pixel/1-px jitter, resizes and re-framing never re-trigger, while any deliberate look movement does
- * (the user: activation stops "unless we move again"). A UI choice, not a physiological threshold.
- */
+
+
+
+
+
+
+
 export const GAZE_RESTART_DEADBAND_DEG = 0.31;
-/** R3-fix (review M3 / M5, display choices, seconds of continuous gaze on one area):
- *  replaceClickS  a CLICK-started pulse is not replaced by areas the crosshair only passes over while the player turns
- *                 to watch the body; a new area must hold the gaze this long first (a new click always replaces).
- *  markS          the persistent "switched on" mark (R11c) is added at once for a click (the user: "when you press a
- *                 part ... it slightly changes shade"), but for a look only after the gaze has stayed on the area this
- *                 long, so ordinary looking around does not mark every area gold. The 1 s look activation itself is
- *                 unchanged (it still starts the moment the crosshair reaches a new area).
- *  latchS         R558: a LOOK moves body parts only once the gaze has stayed on the area this long; the area's glow
- *                 still starts at once. With the strip filling the view the crosshair crosses many areas while the
- *                 player looks around, and each would otherwise move its joints. A click moves at once.
- *                 (20 November 2026, Message 206: a look that leaves before this moved nothing, so its glow ends then.) */
-// 19 November 2026 (the owner: "highlighting specific areas of the brain with our cursor just by running over, those
-// body parts not activating ... They have to activate at least once"): latchS 0.3 -> 0.07: an area the look runs over
+
+
+
+
+
+
+
+
+
+
+
+
+
 // does its movement almost at once; it no longer needs a third of a second of rest.
 export const GAZE_DWELL = Object.freeze({ replaceClickS: 0.3, markS: 0.5, latchS: 0.07 });
 
-/**
- * 18 November 2026 (the lead's decision on audit S4; the owner, Note 59: "if you highlight any part of the brand, you
- * see what it does ... the brain turns into a control panel essentially"): a LOOK only ARMS a motor area. The look's
- * pulse lights the area's key at full, shows the movement's muscles at `muscleLevel` only (a hint, not a contraction)
- * and moves nothing: no latch after latchS (the rest now only marks the area as taken for the card and the number keys,
- * lookTaken), no forearm turn and no relax for the pulse's second. A click, a number key or a tap on a muscle PRESSES
- * it, as before. Reading the tip no longer moves the body. This replaces Message 1's look-jerk of the head and neck
- * areas (the lead chose the control panel for every area). `on: false` (createActivity({ lookArms })) brings back the
- * old rule. A rule of this game, nothing measured.
- */
-// 19 November 2026 (the owner: "Let's also go back to activation simply by cursor highlight. The number overview is
-// very confusing and creates feedback delay"): on: false again: a look that rests on a motor area switches it on at
-// once; a click while it is highlighted does it again (JOINT_LATCH: since Message 206 it contracts and returns).
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const LOOK_ARMS = Object.freeze({ on: false, muscleLevel: 0.22 });
 
-/**
- * 18 November 2026 (SMALL, audit M3; the owner, Note 47: "And the limbs should be manipulatable to any position by brain
- * activation"): a number key held down drives its movement PROGRESSIVELY: the joints' goals run toward the movement's
- * end at rateDegS while the key is held, and the part stops where it is when the key comes up ('muscle' event with
- * progressive: true, then 'muscleRelease' { tap: false }). A short press (the app's tapMs) is still the whole movement
- * ({ tap: true } completes it). The stage rule is the same as a press's (a joint held on the other side is brought back
- * first). A click or a tap on a muscle is always the whole movement. A rule of this game, not a measured speed.
- * 20 November 2026 (Message 206: "no permanent movements"): withdrawn. A press from a number key ('muscle' with
- * progressive: true) is an ordinary press now: the part contracts and returns, whatever the key does after; the
- * 'muscleRelease' event is accepted and changes nothing. (The number keys choose limbs since 19 November, LIMB_KEYS in
- * ns-app, so no key sends these in play.) tapMs stays for the shell's own count of a short press.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 export const MOVE_HOLD = Object.freeze({ rateDegS: 90, tapMs: 220 });
 
-/**
- * Display (cortex colour) envelope defaults, seconds. UI timing choices, not physiological latencies:
- *   riseTau     fast first-order rise (63% at 35 ms, 94% at 100 ms) toward full display while a command is active;
- *   fadeSeconds smoothstep fade inside the last 0.25 s of a timed command, reaching exactly 0 at its deadline (R558,
- *               Message 22: 0.08 s read as a snap after the power-up charge; 0.25 s is a clean power-down, and the HUD
- *               meter follows the same envelope, so it stays honest);
- *   decayTau    fast decay for a command that ends early (replaced pulse, Space release of the fist, cancellation).
- */
+
+
+
+
+
+
+
+
 export const DISPLAY_ENVELOPE = Object.freeze({ riseTau: 0.035, fadeSeconds: 0.25, decayTau: 0.03 });
 
 /** Visible label for the display-only reach channel (A/D and the proximal share of W/S). */
@@ -722,7 +722,7 @@ export const ARM_REACH_LABEL = 'simulated arm reach activity (display-only, unit
  *                        layout) of the STRIP only; never fed to muscles;
  *   riseTau / decayTau   smoothing (s); after release the display falls below 2% within 0.3 s.
  */
-// R558 (Messages 48 and 50): horizontalFieldShare is 0. A and D are shoulder movements (the hand swings out or in at the
+
 // shoulder), so they light the shoulder area and its muscles only; lighting the elbow fields for them made the whole
 // arm zone glow and hid which part does the work.
 export const REACH_DISPLAY = Object.freeze({
@@ -756,41 +756,41 @@ const angleOrNull = v => v === null || isFiniteNumber(v);
 /** Soft union of two 0..1 levels: 1 - (1 - a)(1 - b). */
 const union = (a, b) => 1 - (1 - a) * (1 - b);
 
-/**
- * The jerk of a movement switched on from the brain. (History: R558 latch, the user's note of 11 Nov 2026: a limb did
- * not come back by itself after a muscle or brain activation; it had to be activated back by the opposing action, or
- * everything reset. WITHDRAWN on 20 November 2026 by Message 206: every activation contracts, then returns; see the
- * dated note inside.)
- *   omega, zeta        the jerk of a body joint to its movement's end: an under-damped spring (natural frequency in
- *                      rad/s, damping ratio) solved exactly per step, so the joint snaps there with one small recoil.
- *   restitution        R558 (user, Message 1: "when we look to any motor area of the brain, we are looking for a
- *                      violent jerking movement, not a graceful shift"): almost every latched goal IS the end of the
- *                      joint's range, where the overshoot of the spring cannot be shown without passing the range. The
- *                      joint therefore hits its end stop at full speed and rebounds off it with this share of its
- *                      speed (then the spring brings it back: a few quick, shrinking recoils), never past the stop.
- *   reducedMotion      the same for prefers-reduced-motion: slower, without recoil or rebound.
- *   snapDeg, snapDegS  within these of the goal (degrees, degrees/s) the joint is exactly at its goal.
- *   restEpsDeg         an angle within this of the start angle counts as "at the start position".
- *   armPoseTau         seconds: the game arm's ease of what is not a press (the Space grip, the hand opening after it, a
- *                      relax pulse; reducedArmPoseTau likewise).
- * R558 tuning (the lead's brief L; this very step function at 60 frames a second): omega 26 / zeta 0.55 / no rebound
- * took 6 frames (0.10 s) for a 70 degree turn to its end stop (5, 19, 34, 49, 61, 70) and stopped dead: a quick but
- * smooth swing. omega 50 / zeta 0.35 / restitution 0.4 takes 3 frames (19, 55, 70) and recoils about 5 degrees off the
- * stop before it settles (about 10 degrees on a 135 degree knee straightening; 31 % overshoot, then back, for a goal
- * inside the range). Compared: omega 70 is at the stop in 2 frames (one moving frame, too little to read as motion);
- * zeta 0.25 adds a third recoil (a wobble); restitution 0.3 / 0.5 recoil 4 / 7 degrees. The game arm's ease
- * 0.045 -> 0.022 s (53 % of the way in one 60 Hz frame, 90 % in three).
- * A display rule of this game. Nothing here is a measured movement speed, force or nerve signal.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const JOINT_LATCH = Object.freeze({
-  // 19 November 2026 (the owner: "as exaggerated and obvious as possible within reason ... imagine an extremely intense
-  // electroshock that causes a fierce contraction with acceleration and inertia. As if moving something heavy"; and
+
+
   // "it activates heavily relaxes slightly and repeats that process with each further click"): a slower, heavier
   // spring with far less damping (omega 50 -> 21, zeta 0.35 -> 0.26) and a harder rebound off the end stop (0.4 -> 0.55):
   // the part gathers speed over several frames, slams into its end, is thrown back a good part of the way and swings
   // in again two or three times before it holds.
-  // (History, withdrawn by Message 206 below: the owner's order of events was "activates heavily, relaxes slightly,
-  // and repeats that process with each further click": so after the slam the part eased back a little and waited
+
+
   // there, and the next click drove it in again. The first version of this threw the part BACK on a further click, a
   // jump in the picture, the wrong way round. The numbers of that time:)
   //   driveS       seconds a press drives the joint at its full end angle before it eases off
@@ -804,40 +804,40 @@ export const JOINT_LATCH = Object.freeze({
   //                would otherwise show nothing at all), and never more than minSwingRangeShare of the joint's whole
   //                range; nearShare: "already near its end" is within this share of the swing from the goal
   // Under reduced motion none of this happens (the reducedMotion spring has no kick, relax or rebound).
-  // (later the same day, the owner: "the neck moves and then returns, and then same for all the body parts. They move
-  // and then return. But they don't have to return fully, just partially ... They jerk one way and then they partially
-  // return back": the part is held at its end for 0.3 s (0.55 before) and comes back half of its swing (0.16 before).)
+
+
+
   // 20 November 2026 (the same words, for the LEFT arm: its strip movements eased into place and stayed there): the game
   // arm's latched movements use these very numbers on their pose drive (0 = the hand's neutral pose, 1 = the movement's
   // end): the drive is thrown to 1 by this spring and rebounds off it with `restitution`, is held there for driveS, then
   // eases back `relax` of the way (never more than relaxMaxShare) with relaxOmega and waits; a further press kicks it in
   // again (kick, nearShare). armPoseTau now only eases what is not a press: the way back to neutral after the opposite
   // movement, the Space grip, the hand opening after it. (createActivity armJerk, latchArmAction, integrate.)
-  // 20 November 2026, evening (the owner, Message 206: "I think it's better actually if there are no permanent
-  // movements ... when you tap any area of the brain, you activate any area, it will contract, then return to its
-  // previous place. But in returning to its previous place, you won't see corresponding activity and muscle activation.
-  // It will just return." It replaces Message 185's "they don't have to return fully, just partially" and the latch of
-  // 11 November): NOTHING IS HELD by the brain any more. (The name JOINT_LATCH is kept so callers need not change.)
-  //   driveS       the CONTRACTION: seconds from the press during which the part is driven to the movement's end by the
-  //                jerk spring above (omega, zeta, restitution: as before, the electroshock of Message 154). The area,
-  //                its muscles, the beam and the activity's display of the movement are lit for exactly this long.
-  //   lightFadeS   the light of a contraction fades out over its last lightFadeS and is exactly 0 when the return begins
-  //   relaxOmega   the RETURN: a critically damped spring of this frequency (soft, no wobble, no activity shown) back to
-  //                where the part was just before the press (the start posture, or wherever the player put it with the
-  //                keys, a drag, a Space carry or the limb turn), where it stays.
-  //   kick, minSwingDeg, minSwingRangeShare, nearShare   unchanged: a press that finds the part already at (or near) the
-  //                movement's end (a further click during the contraction, or a movement with little travel such as
-  //                straightening a knee that is nearly straight) throws it into the end stop, so it still shows.
-  //   The movement's end is a STOP for its contraction (the BODYMAP audit, same evening: the jerk spring overshot an end
-  //                in the middle of a joint's range by about 40 %, "Swing thigh in" threw the thigh 23 degrees past its
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //                end into the other leg and "Turn right arm inward" reached -70 where the forearm meets the thigh;
-  //                Message 204 asks for movements "as precise as possible"): the part slams into the end and rebounds
+
   //                off it with `restitution`, as at a joint's own limit, and never passes it. (The map's jerkStop flag on
   //                "Swing thigh in" asks for exactly this; every end now has it.)
   //   stopBounceShare, stopBounceMaxDeg   a movement that ends at a joint's own stop where the part already is (at the
   //                start: clench the jaw, lower the throat bone, right palm up, right fingers together, each on both
-  //                halves) would show nothing under contract-and-return (Message 204: "make sure there's clear
-  //                movement for each brain activation area"). Its contraction strikes the stop: the part is thrown into
+
+
   //                it and rebounds this share of the joint's range off it (never more than stopBounceMaxDeg), then is
   //                drawn back onto the stop: a visible twitch against the stop (measured at 60 frames a second: the
   //                jaw about 12 degrees, the right palm 30, the right fingers' spread 8, the throat bone 8). Only when
@@ -847,8 +847,8 @@ export const JOINT_LATCH = Object.freeze({
   // (reducedMotion) the part goes out and back on critically damped springs: no kick, no rebound, no bounce.
   omega: 21, zeta: 0.26, restitution: 0.55, driveS: 0.4, lightFadeS: 0.08, relaxOmega: 9, kick: 0.8, minSwingDeg: 70, minSwingRangeShare: 0.6, nearShare: 0.5,
   stopBounceShare: 0.5, stopBounceMaxDeg: 38,
-  // 21 November 2026 (SEEMOVE, section 189; the owner, Message 204: "make sure there's clear movement for each brain
-  // activation area. And you can clearly identify what type of movement it is for each area"):
+
+
   //   holdS        the HOLD: after the contraction (driveS, lit) the part STAYS at the movement's end for this long, then
   //                returns. 0 -> 0.3 s. Measured in the browser at 60 frames a second, every movement of the map: with
   //                0.4 s alone the part was within 80 % of its largest travel for 0.25 to 0.43 s, and still (after the
@@ -887,29 +887,29 @@ export const JOINT_LATCH = Object.freeze({
   reducedMotion: Object.freeze({ omega: 12, zeta: 1, restitution: 0, driveS: 0.45, holdS: 0.3, lightFadeS: 0.08, relaxOmega: 9 }),
   snapDeg: 0.02, snapDegS: 0.5, restEpsDeg: 0.5,
   armPoseTau: 0.022, reducedArmPoseTau: 0.12
-  // (Message 206: gone with the latch: relax / relaxMaxShare (the part way back), hintLevel (the faint opposing hint),
+
   // nearRestDeg / nearRestShare (the stage rule's "counts as at the start"))
 });
 
-/** R558 (issue hunt 2: "Raise right arm up" held together with "Swing right arm out to the side" left the arm out to the
- * side and down and back, matching neither label: ns-body turns abduction before flexion, so abduction 135 then flexion
- * 160 is not "up"). Rule: a held movement of the right shoulder in one plane (flexion / extension, or out to the side /
- * back in) brings the other plane's joint back to its start angle, so the LATER action wins the arm's direction and its
- * label stays true: raise up -> straight up beside the head; then out to the side -> straight out to the side at
- * shoulder height (flexion back to the start's 90, forward); then raise up again -> up (out to the side back to 0).
- * Bringing a joint back with its own opposite action does not touch the other plane. A rule of this game, chosen so
- * every held label stays true; not a measured coupling of the shoulder joints.
- * 20 November 2026 (Message 206: nothing is held): the same rule at the peak of a contraction: a contraction of one
- * plane takes the other plane's joint to its start angle for the same time (so "out to the side" is out to the side
- * even from a raised arm), and both then return to where they were. */
+
+
+
+
+
+
+
+
+
+
+
 export const JOINT_CONFLICTS = Object.freeze({
   r_shoulder_flex: Object.freeze(['r_shoulder_abd']),
   r_shoulder_abd: Object.freeze(['r_shoulder_flex'])
 });
 
-/** The opposing (antagonist) game-arm action of each arm action. 20 November 2026 (Message 206: nothing is held): a
- * contraction of one sends a contraction of its opposite that is still under way straight into its return (the two
- * never pull at once); a relax press does that for every hand movement. */
+
+
+
 export const ARM_OPPOSITES = Object.freeze({
   grasp_close: 'open_hand', open_hand: 'grasp_close',
   wrist_flexion: 'wrist_extension', wrist_extension: 'wrist_flexion',
@@ -936,14 +936,14 @@ const HAND_ACTION_IDS = Object.freeze(['grasp_close', 'open_hand', 'spread_finge
   'fingers_together', 'middle_flexion', 'middle_extension', 'ring_flexion', 'ring_extension', 'little_flexion', 'little_extension',
   'thumb_opposition', 'thumb_reposition']);
 
-/** 20 November 2026 (Message 206): the contraction notes of a state's body joints (jointId -> [the movement's end angle
- * (degrees), contraction seconds left (>= 0; 0 = on the way back), the side the end is a stop from (-1, 0 none, +1: the
- * joint may not pass the end going that way)]). A joint without a note is at, or springs to, its place (bodyGoal). */
+
+
+
 const jerkMapOk = m => m !== null && typeof m === 'object' && !Array.isArray(m)
   && Object.values(m).every(v => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite) && v[1] >= 0 && (v[2] === -1 || v[2] === 0 || v[2] === 1));
 const copyJerkMap = (m, n) => { const o = {}; if (m && typeof m === 'object') for (const k of Object.keys(m)) if (Array.isArray(m[k]) && m[k].length === n && m[k].every(Number.isFinite)) o[k] = m[k].slice(); return o; };
-/** 20 November 2026 (Message 206): the game arm's contraction notes (actionId -> [contraction seconds left (>= 0; 0 = on
- * the way back), the pose drive's speed (movements per second)]). */
+
+
 const armJerkOk = m => m !== null && typeof m === 'object' && !Array.isArray(m)
   && Object.entries(m).every(([k, v]) => ACTION_IDS.includes(k) && Array.isArray(v) && v.length === 2 && v.every(Number.isFinite) && v[0] >= 0);
 
@@ -1148,7 +1148,7 @@ export const BODY_JOINT_IDS = Object.freeze([
   'toe_flex_L', 'toe_flex_R',
   'trunk_flex', 'neck_flex', 'neck_rot', 'jaw_open', 'brow_raise', 'eye_close', 'lip_purse', 'smile',
   'r_shoulder_flex', 'r_shoulder_abd', 'r_elbow_flex', 'r_wrist_flex', 'r_wrist_ext', 'r_grasp', 'r_open', 'r_pronation',
-  // R558 (Messages 14 / 15 / 2): the new joints of ns-bodymap / ns-body BODY_JOINT_IDS (same order).
+
   'ankle_inv_L', 'ankle_inv_R', 'hallux_flex_L', 'hallux_flex_R', 'trunk_side', 'trunk_rot', 'neck_side', 'jaw_side',
   'hyoid_elev', 'nose_wrinkle', 'upper_lip', 'lower_lip',
   'r_wrist_dev', 'r_thumb_flex', 'r_thumb_opp', 'r_index_flex', 'r_middle_flex', 'r_ring_flex', 'r_little_flex', 'r_finger_spread',
@@ -1231,19 +1231,19 @@ export const GLOW_LINK_LABEL = 'The glow shows which brain area drives which mus
 export const BRAIN_GRAB = Object.freeze({ pitchLimitDeg: 88 });
 /** Double-tap window in seconds (press to press), from ns-controls DOUBLE_TAP_MS. */
 export const DOUBLE_TAP_SECONDS = DOUBLE_TAP_MS / 1000;
-/**
- * Forearm rotation defaults. defaultState 'supinated' since 18 November 2026 (the owner: "we start the game in an
- * underside view of the limbs": palm up, the front of the forearm showing; it was 'pronated' before; the BodyParts3D
- * rest pose is the anatomical, supinated position). A double-tap commands the other posture: the display
- * envelope of the commanded channel lasts commandSeconds (UI timing), the pose value eases with poseTau.
- * R3-arm: poseTau is the time constant (1/omega) of a CRITICALLY DAMPED ease (stepRotationEase) instead of a
- * first-order lag. The first-order lag (round 2, tau 0.1 s) started at full speed and covered 55 % of the flip in the
- * first 80 ms (a snap, then a slow settle); the critically damped ease starts from rest and accelerates smoothly, still
- * moves the forearm by about 16 deg within 33 ms (visible within two frames) and reaches 95 % at about 4.74 * poseTau
- * = 0.30 s, the same settle time as before. A double-tap mid-flip reverses without a jump (the speed carries over).
- * pronationRangeDeg is a SUGGESTED rig mapping: value 0 (pronated) = this many degrees of pronation away from the
- * anatomical (supinated) rest, value 1 (supinated) = 0. The rig owner (ns-arm/ns-rig) clamps and may choose its own.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const ROTATION = Object.freeze({ defaultState: 'supinated', commandSeconds: 0.5, poseTau: 1 / 16, pronationRangeDeg: 150,
   // R5-pronation (R27): the pose ease under prefers-reduced-motion (pass createActivity({ rotationTau:
   // ROTATION.reducedMotionPoseTau })): 95 % at about 0.15 s instead of 0.30 s; shorter, still eased (no snap). The whole
@@ -1318,39 +1318,39 @@ export const INSTRUCTIONS = Object.freeze({ introSeconds: 2, escLockDedupeSecond
 export const INSTRUCTION_REASONS = Object.freeze(['intro', 'escape', 'lock-lost', 'pause']);
 /** WASD coordinated (shoulder + elbow + wrist + hand) display channels. */
 export const WASD_CHANNELS = Object.freeze(['shoulder', 'elbow', 'wrist', 'hand']);
-/**
- * WASD joint-channel display shares (display-only game convention, not a measured synergy):
- *   shoulder  every reach key (the representative proximal reach field; direction is not a place on the cortex);
- *   elbow     W/S (elbow extension/flexion change the hand depth), plus elbowXShare of A/D (0 since R558);
- *   wrist     wristShare of any reach key (0 since R558);
- *   hand      handShare of any reach key (0 since R558).
- * R558 (Messages 48 and 50: "The entire left arm region activates, where only small regions should be activating"): a
- * reach key lights the shoulder area (every key) and the elbow area (W and S only): the two parts that move the hand.
- * The wrist, hand and finger areas stay dark until they are used themselves.
- * Each held channel shows holdLevel + (1 - holdLevel) * motion (REACH_DISPLAY), where motion is the realised base
- * rate, or the realised joint rate (deg/s, saturating at fullJointRateDegS) when the reach event carries jointRates.
- */
+
+
+
+
+
+
+
+
+
+
+
+
 export const REACH_JOINT_DISPLAY = Object.freeze({ elbowXShare: 0, wristShare: 0, handShare: 0, fullJointRateDegS: 90 });
 export const WASD_JOINT_LABEL =
   'simulated reach activity (display-only, unitless): the shoulder share of every reach key and the elbow share of W and S are a game convention, not a measured synergy';
 
-/**
- * R558 (Message 50: "it's not even showing which muscles are activating when we're using the D key and ... the A key"):
- * the muscles each reach key shows, and the brain area that drives them. Display only: standard textbook roles of the
- * shoulder muscles, simulated and unitless, not a measured pattern (the elbow muscles of W and S are shown by the
- * elbow_extension / elbow_flexion actions as before).
- *   forward (W)  the hand goes forward: the shoulder flexes (front deltoid, coracobrachialis, upper pectoralis major);
- *   back (S)     the hand comes back: the shoulder extends (rear deltoid, teres major, latissimus dorsi);
- *   left (A)     the left hand swings out, away from the midline: horizontal abduction (rear and middle deltoid,
- *                infraspinatus, teres minor);
- *   right (D)    the left hand swings in, across the chest: horizontal adduction (pectoralis major, front deltoid,
- *                coracobrachialis).
- * arm: lower-case name parts of the left-arm rig's meshes; body: plain names of body rig muscles (ns-body
- * bodyMuscleDrives rows). areaId: the area whose colour they take and to which their line runs.
- * Not drawn: the left teres major, infraspinatus and teres minor lie on the shoulder blade, which the left-arm rig
- * leaves out (ns-assets SHOULDER_GIRDLE_EXCLUDED), so their name parts match no mesh and only the drawn muscles light;
- * the information card (ns-text REACH_INFO) still names them.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const REACH_MUSCLES = Object.freeze({
   areaId: 'rh_shoulder',
   forward: Object.freeze({ label: 'Reach forward', arm: Object.freeze(['clavicular part of left deltoid', 'left coracobrachialis']), body: Object.freeze(['clavicular part of left pectoralis major']) }),
@@ -1379,20 +1379,20 @@ export function reachMuscleShow(levels, xSign, minLevel = 0.02) {
 }
 
 const KEY_DISPLAY_IDS = Object.freeze(['grasp_close', 'open_hand', 'relax_release']);
-/**
- * 22 November 2026 (browser hunt of update 64, H5; the owner, Message 206: "in returning to its previous place, you
- * won't see corresponding activity and muscle activation. It will just return"; section 174: the four limbs close and
- * open together). What letting go of the Space grip does to the game arm's LEFT hand:
- *  openOnRelease  false: the hand goes back to its place (the pose drive's grip share eases to 0 at armPoseTau, about
- *                 0.1 s), unlit, the same way as the right hand and the toes (ns-app GRIP_BOTH), and no "open hand"
- *                 movement is switched on. true: the rule of 18 November (Message 48): the release switched on open_hand
- *                 for spaceOpenSeconds (0.6 s): the hand opened past neutral, its finger straighteners and the strip's
- *                 Left hand area lit for 0.6 s and, with that area in view, a light beam ran from it to both bodies for
- *                 about half a second after every carry (measured on update 64: the beam from about 0.08 s to 0.55 s
- *                 after the release, the right hand and the toes dark from about 0.14 s). Only the left hand had it,
- *                 because only the game arm has a timed open_hand action.
- * Kept behind the switch, not deleted. A display choice of this game, not a claim about real hands.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const GRIP_RELEASE = Object.freeze({ openOnRelease: false });
 const HEMISPHERES = Object.freeze(['right', 'left', 'both']);
 const BODY_SIDES = Object.freeze(['left', 'right', 'midline']);
@@ -1650,29 +1650,29 @@ export const ACTIVITY_EDGE_TYPES = Object.freeze(['activate', 'fist', 'flip', 'g
 
 const seqOf = (st, k) => (st && Number.isSafeInteger(st[k]) && st[k] >= 0 ? st[k] : null);
 
-/**
- * R4-arm: the plain game events between two consecutive activity states (createActivity state before and after one
- * step), for the optional "Try this" guide (D7) and any HUD that wants edges instead of levels. Pure; reads only
- * documented state fields, all present since round 2 (counters only grow, except that a new state starts again at 0):
- *   spaceHeld         -> { type: 'fist', on }               the slow turn of a double tap held starts / stops (R558,
- *                                                            Message 40; the event keeps its old name)
- *   rotationSeq       -> { type: 'flip', to }                once per double tap of Space (R558: one turn step of all four
- *                                                            limbs); to = rotationState
- *   grabSeq           -> { type: 'grab', on: true }          once per brain grab (a Space hold or tap on the brain)
- *   brainGrab.active  -> { type: 'grab', on: false, dragRad } the grab ended; dragRad = the angle the brain was moved
- *                                                            (brainPlacement vs the grab's origin, radians)
- *   orbitSeq          -> { type: 'orbit', steps, dir }       orbit steps (an arrow click or hold); dir from the orbit change
- *                                                            ('left' | 'right' | 'forward' | 'back' | null when mixed)
- *   paused            -> { type: 'pause' } / { type: 'resume' }
- *   resetSeq          -> { type: 'resetBody' }
- *   pulseSeq + lastTriggerSource 'gaze' | 'click' -> { type: 'activate', regionId, source, isLeftArm }
- *                        a NEW area switched on by a look or a click (look-movement restarts on the same area are not
- *                        new activations). Only the latest start of the step is visible here; ns-app's per-step `marks`
- *                        (stepGated) list every start with its time. isLeftArm needs `binding` (activity.binding,
- *                        bindBodyMap), else null.
- * Keys (W/A/S/D) are not activity edges: the reach intent lives in ns-app (inputs.axes, state.reach).
- * Every event is a virtual game control edge (no signal is read from, or sent to, a body or a brain).
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function activityEdges(prev, next, binding = null) {
   const out = [];
   if (!isPlainObject(prev) || !isPlainObject(next)) return out;
@@ -1797,93 +1797,93 @@ export const BODY_MAP_STATUS = Object.freeze({ loaded: loadedBodyMap !== null, e
 /** The default body motor map: ns-bodymap.mjs BODY_MOTOR_MAP, or EMPTY_BODY_MAP when it could not be loaded. */
 export const DEFAULT_BODY_MAP = loadedBodyMap !== null ? loadedBodyMap : EMPTY_BODY_MAP;
 
-/**
- * Create the virtual activation model.
- * Events (processed in time order each step; every event may carry `at`, seconds into the step):
- *   { type: 'gaze', kind?, regionId?, actionId?, u?, arrow?, yaw?, pitch?, moved?, seed?, arrivedFrom? }  sent every frame
- *       kind: GAZE_KINDS ('region' needs regionId; legacy events with only an arm actionId are 'strip');
- *       regionId: a BODY_MOTOR_MAP region; actionId: that region's action id (or its armActionId), else `u` picks the
- *       action by its share of the region extent, else the first action; arrow: the orbit arrow under the crosshair
- *       ('left' | 'right' | 'forward' | 'back'), which then counts as empty space and turns the next click into an orbit.
- *       arrivedFrom (21 November 2026, late): the area (a state's gazeArea, or null for none) the look was on before the
- *       PLAYER moved it while the gaze was being recorded silently (ns-app CARRY_ARRIVAL: a neck or trunk movement
- *       carried the view). On an event that is not silent, an area other than that one is met as a new area although the
- *       silent frames had already recorded it: its pulse starts and it switches on after the usual rest. Without the
- *       field (the game's own slide of the view, a seed) a recorded area starts nothing, as before.
- *   { type: 'click' }   re-trigger the area under the crosshair, or orbit when an arrow is under it
- *   { type: 'turn', phase: 'step' | 'hold' | 'stop', safety? }   R558 (Message 40): the limb turn (ns-controls
- *       SPACE_GESTURE turns the Space key into these): 'step' = a double tap (one stroke per limb), 'hold' = that double
- *       tap is held (the slow turn), 'stop' = let go (every limb stays where it is).
- *   { type: 'space', down: boolean, safety? }   legacy: accepted and checked, but it moves nothing any more (R558,
- *       Message 40: Space reaches the activity as 'grasp' and 'turn' events)
- *   { type: 'reach', axes?: {x, z} | keys?: {KeyW, KeyA, KeyS, KeyD}, depthRate?, xRate?, elbowRate?, jointRates? }
- *   { type: 'orbit', dir, stepDeg? }  { type: 'reset' }  { type: 'escape' }  { type: 'lock', locked }  { type: 'resume' }
- *   { type: 'pause' }       (the ns-controls UI queue events)
- *
- * Areas. The area under the crosshair is a (region, action) pair (legacy: the arm action). Gaze on a NEW area starts
- * one pulse (pulseSeconds, single slot; a later start replaces it); a look movement beyond the deadband on the same
- * area restarts it; a click re-triggers it; empty space, glass and arrows start nothing and do not erase a running
- * pulse. A pulse lights its region (regionActivity; crisp envelope, exactly 0 from pulseSeconds after the trigger);
- * a new-area or click start (not a look-movement restart) counts it in activatedRegions (persistent until Reset body). A LEFT-ARM region action drives its arm action
- * (armActionId: the arm pose drive and display, as in round 1) or a transient forearm rotation (pronation/supination);
- * any OTHER region action lights its muscles through bodyDrive / bodyDisplay for the pulse and moves its `joints` by
- * the LATCH below. Keys never drive non-arm regions. Space/rotation/WASD light left-arm regions
- * through their channels (regionActivity) but never count as an activation.
- *
- * The limb turn (R558: Message 2's dance as reshaped by Message 40; ns-dance.mjs). All four limbs turn, each between its
- * inward end (pronation + internal rotation) and its outward end (supination + external rotation), each in the
- * direction it last moved, with its own tempo (not coordinated). { type: 'turn', phase: 'step' } (a double tap of Space)
- * = one stroke per limb, then it stops by itself (rotationSeq counts these); 'hold' (the double tap held) = the turn
- * goes on slowly (spaceHeld is true while it does); 'stop' (let go) = every limb stays where it is (the latch rule). A
- * pause or Reset body ends any turn where the limbs are. The turn owns the four limbs' rotation joints while it runs.
- * The touch-free hip range of the current leg posture arrives as a { type: 'danceRange', joints } event (ns-app, from
- * ns-body hipRotationClearRange).
- * R558 (user Message 40: "Holding the spacebar should again be grasping. And so should one tap spacebar"): holding or
- * tapping Space grasps (ns-controls SPACE_GESTURE; the F key is gone). { type: 'grasp', down, target? }: a press with
- * target 'brain' (or no target key at all while the gaze kind is 'region' or 'glass', new-style gaze with yaw/pitch; an
- * explicit target null holds nothing) starts a brain
- * grab: while held the brain keeps its angular offset to the camera (brainPlacement), gaze pulses are suppressed (the
- * gaze is recorded silently) and release leaves the brain where it is. { type: 'grip', on }: the left hand closes while
- * Space holds or keeps a grasp (graspHold; the hand area and the finger benders light) and opens when it lets go
- * (R558, Message 48). { type: 'limbPose', joints, regionId?, actionId? }
- * sets held own-limb joints at once (they stay, like a latch) and lights that area. { type: 'limbPlace', joints } (22
- * November 2026, SEEMOVE) moves the PLACE of those joints only: each springs there on its soft relaxOmega spring, unlit,
- * and a contraction of it still under way goes on and returns to the new place. { type: 'contractStop', joints }
- * stops a contraction still under way at those angles for the rest of its time (then it returns as usual; a joint not
- * contracting is left alone; 20 November 2026, night: the trunk's contact stop in ns-app).
- *
- * Contract, then return (20 November 2026, the owner's Message 206; JOINT_LATCH). A deliberate activation (a look that
- * rests on a new area for latchS, a click, a muscle tap; not the restart of the same area by a small look movement)
- * makes its part CONTRACT: for JOINT_LATCH.driveS its joints are driven to the movement's end angles (absolute degrees
- * in the rig's convention, inside bodyJointLimits) by the jerk spring, and its area, its muscles and its display level
- * are lit for exactly that time. Then the part RETURNS, unlit, on the soft relaxOmega spring to where it was just before
- * (bodyGoal: the start posture, or where the player put it with the keys, a drag, a Space carry or the limb turn; a
- * 'limbPose' event or the turn sets it), and stays. Nothing is held by the brain: there is no stage rule, no opposing
- * hint and no "already there". A movement whose end lies short of where the part already is (a bend asked of a joint
- * the player bent further) does not pull it back: it kicks it toward its end instead. A further press during the
- * contraction or the return drives the part again. Game-arm actions do the same on the arm's pose drive (0 neutral, 1
- * the movement's end; ARM_OPPOSITES: the opposite of a running contraction goes straight into its return; a relax press
- * sends every hand movement into its return); a forearm-turn area turns the forearm for the contraction and it turns
- * back to where it was (rotationState / the turn's held angle). motionView(state) lists what is contracting and what is
- * on its way back.
- *
- * Instructions/pause. The intro overlay is visible for introSeconds from the start (not paused). Esc toggles the
- * overlay (show + pause / hide + resume); a pointer-lock loss shows it and pauses; an Esc within escLockDedupeSeconds of
- * a lock-loss overlay is the same gesture; re-acquiring the lock resumes when resumeOnLock. While paused, gaze is
- * recorded silently and clicks, grasps, turn steps and reach intent are ignored (releases and turn stops still apply);
- * timers run on.
- *
- * Reset body ({ type: 'reset' } or resetBody(state)) clears activatedRegions, cancels the running pulse, snaps the body
- * drives/displays to 0 and every body joint to its start angle (contractions dropped), snaps arm drives/displays to 0 and
- * drops the arm's contractions, clears the open/relax windows, sets rotationState to defaultRotation (value snapped), the game arm's dance swivel to 0, ends any limb turn and ends any grab. It keeps the brain
- * placement and orbit (round-2 fix R1: the brain stays where it was released; ns-app resetBrainView resets the view),
- * the clock, the pulse/suppression counters, WASD levels and the instructions/pause state.
- *
- * Returns { options, binding, state, step, stepGated, seed, seedGaze, drives, poseDrives, displayActivity,
- * displayDrives, muscleDisplayDrives, reachOutputs, resetBody, orbitStep, regionActivity, activatedRegions,
- * bodyJointTargets, activeBodyActions, bodyMuscleDisplay, rotationOutputs, brainView, wasdChannels, instructionsView,
- * snapshot, motionView }. `state` is plain JSON data; no function mutates its input. `dt` is actual elapsed wall time.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function createActivity({
   pulseSeconds = 1, riseTau = 0.12, decayTau = 0.25, spaceOpenSeconds = 0.6,
   displayRiseTau = DISPLAY_ENVELOPE.riseTau, displayFadeSeconds = DISPLAY_ENVELOPE.fadeSeconds,
@@ -1954,7 +1954,7 @@ export function createActivity({
   }
   if (!(isFiniteNumber(armPoseTau) && armPoseTau > 0)) fail('activity_option', 'armPoseTau must be a positive number of seconds');
   const springOmega = jointSpring.omega, springZeta = jointSpring.zeta, springBounce = jointSpring.restitution === undefined ? 0 : jointSpring.restitution;
-  // Message 206: the return (soft, critically damped), the contraction's length and the fade of its light.
+
   const relaxOmega = Number.isFinite(jointSpring.relaxOmega) && jointSpring.relaxOmega > 0 ? jointSpring.relaxOmega : JOINT_LATCH.relaxOmega;
   const contractS = isFiniteNumber(jointSpring.driveS) ? jointSpring.driveS : JOINT_LATCH.driveS;
   const lightFadeS = isFiniteNumber(jointSpring.lightFadeS) && jointSpring.lightFadeS >= 0 && jointSpring.lightFadeS < contractS ? jointSpring.lightFadeS : Math.min(JOINT_LATCH.lightFadeS, contractS / 2);
@@ -1990,7 +1990,7 @@ export function createActivity({
     for (const [j, deg] of Object.entries(binding.bodyActions.get(k).joints)) e[j] = limitJoint(j, deg) + 0;
     ENDS.set(k, Object.freeze(e));
   }
-  // (20 November 2026, Message 206: the latch's tables are gone: LATCHING (which joints held), NEAR_REST (the stage
+
   // rule's margin). Every joint returns to its place after a contraction; the turn's joints too, to where the turn left
   // them.)
   for (const j of DANCE_BODY_JOINTS) if (!JOINT_IDS.includes(j)) fail('activity_option', `the body map binding lacks the dance joint ${j}`);
@@ -2011,7 +2011,7 @@ export function createActivity({
       pulseAction: null,       // arm action of the active pulse (single slot; null for body/rotation/display-only pulses)
       pulseRemaining: 0,       // wall seconds left in that pulse (logical target expiry)
       spaceHeld: false,
-      graspHold: false,        // R558 (Message 48): the left hand grips while Space holds (or keeps) a grasp ('grip' events)
+      graspHold: false,
       openRemaining: 0,        // wall seconds left of the open_hand window after the grip lets go
       relaxRemaining: 0,       // seconds left of the relax_release command after Space release
       reachRate: 0,            // last elbowRate (deg/s) received this step; legacy display linkage only
@@ -2048,9 +2048,9 @@ export function createActivity({
       markPending: null,                      // R3-fix M5: { area, regionId, since } a look that marks after markS
       latchPending: null,                     // R558: { area, hit, since } a look that moves its joints after latchS
       lookTaken: null,                        // R558: { regionId, n } the area whose movement a look's rest took last; n counts them
-      pulseMove: false,                       // Message 206: the running pulse is a contraction's light (JOINT_LATCH driveS long)
-      moveSeq: 0,                             // Message 206: count of contractions started (clicks, looks that rested, taps)
-      lastMove: null,                         // Message 206: { regionId, actionId, armAction, bodyKey, rotation } of the latest one
+      pulseMove: false,
+      moveSeq: 0,
+      lastMove: null,
       bodyDrive: zeroMap(BODY_KEYS),          // body POSE drive (smoothed, eases)
       bodyDisplay: zeroMap(BODY_KEYS),        // body DISPLAY envelope (crisp; for muscle colour)
       bodyJointTargets: restMap(),            // jointId -> absolute degrees (derived: the joint positions, bodyPos)
@@ -2058,7 +2058,7 @@ export function createActivity({
                                               // posture, or where a 'limbPose' event or the limb turn put it)
       bodyPos: restMap(),                     // jointId -> degrees: where the joint is now
       bodyVel: zeroMap(JOINT_IDS),            // jointId -> degrees/s
-      bodyJerk: {},                           // jointId -> [end angle, contraction seconds left (0 = on the way back), stop side] (Message 206)
+      bodyJerk: {},
       armJerk: {},                            // game-arm actionId -> [contraction seconds left (0 = on the way back), drive speed /s]
       rotationState: defaultRotation,         // persistent forearm posture (double-tap toggles)
       rotation: { value: rotValue(defaultRotation), speed: 0, remaining: 0, channel: null, hold: null, move: null }, // pose value 0 pronated..1 supinated; speed: R3-arm ease; hold: R558 dance-held value (null = follow rotationState); move: a strip turn under way, [its end 0 / 1, seconds left] (21 November 2026)
@@ -2266,16 +2266,16 @@ export function createActivity({
   function commandTargets(s, at) {
     const T = zeroMap(ACTION_IDS);
     if (s.pulseAction !== null && at < s.pulseRemaining) T[s.pulseAction] = armOnly && s.pulseLook ? armLevel : 1; // S4: a look's hint
-    if (s.graspHold) T.grasp_close = 1; // R558 (Message 48): the Space grip shows its hand area and finger benders
+    if (s.graspHold) T.grasp_close = 1;
     if (at < s.openRemaining) T.open_hand = 1;
     if (at < s.relaxRemaining) T.relax_release = 1;
     return T;
   }
 
-  /** What the game arm's POSE drive returns to when no contraction drives it (its PLACE, Message 206): the Space grip
-   * (graspHold: the hand is closed while Space holds or keeps a grasp, and the grip wins the fingers over any finger
-   * contraction), the opening window after the grip lets go and a running relax pulse; 0 (the hand's neutral pose)
-   * otherwise. A contraction (armJerk) drives its own action to 1 for its time and then returns to this. */
+
+
+
+
   function poseTargets(s, at) {
     const T = zeroMap(ACTION_IDS);
     if (at < s.openRemaining) T.open_hand = 1;
@@ -2284,28 +2284,28 @@ export function createActivity({
     return T;
   }
 
-  /** 20 November 2026 (the owner, Message 206: "when you tap any area of the brain, you activate any area, it will
-   * contract, then return to its previous place"): the CONTRACTION of body action `key`. Each joint it names gets a
-   * note [end angle, moveS]: integrate drives the joint to that angle with the jerk spring for moveS (the lit
-   * contraction, contractS, and the unlit hold at the end, JOINT_LATCH holdS, since 21 November 2026), then
-   * springs it softly back to its place (bodyGoal) and drops the note there. The place itself is not touched, so the
-   * part returns to where it was just before (the start posture, or where the keys, a drag, a Space carry or the turn
-   * left it), never to the start posture when it was elsewhere.
-   *  - A joint whose place already lies beyond the movement's end, on the movement's own side of the start angle (a
-   *    bend asked of a knee the player bent further), is driven to its place, not pulled back: the movement never works
-   *    against itself.
-   *  - kick (JOINT_LATCH): a joint already at, or near, that angle (a further press during the contraction, or a
-   *    movement with little travel) is thrown toward it, so it slams into its end stop and still shows (not under
-   *    reduced motion, whose spring has no kick).
-   *  - the end is a stop for the contraction (the note's third number: the side it may not be passed from), so the
-   *    jerk never throws the part past the movement's end (into another part); it rebounds off it.
-   *  - stop bounce (JOINT_LATCH stopBounceShare / stopBounceMaxDeg): a movement that ends at the joint's own stop where
-   *    the part already is (the jaw's clench with the jaw closed) strikes that stop: thrown into it, the part rebounds
-   *    a visible way off it and is drawn back.
-   *  - JOINT_CONFLICTS: the other plane of the right shoulder goes to its start angle for the same time, so the label
-   *    stays true at the peak; it returns to its place with the rest.
-   * A joint the action wants at its start angle ("Purse the lips" wants the upper lip down) goes there and back with
-   * the rest. Returns true when the action names a joint. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   function contractBody(s, key, isolateForearm = false) {
     const ends = ENDS.get(key);
     if (!ends) return false;
@@ -2359,13 +2359,13 @@ export function createActivity({
     return any;
   }
 
-  /** 20 November 2026 (Message 206): the CONTRACTION of game-arm action `id`: its pose drive is driven to 1 (the
-   * movement's end) with the jerk spring for moveS (the contraction and the hold), then springs softly back to its place (poseTargets: 0, or the
-   * grip's) and the note is dropped there. A press that finds the drive near 1 kicks it into the end (the body's kick,
-   * its whole travel being one unit). A contraction of the opposite action that is still under way goes straight into
-   * its return (ARM_OPPOSITES). relax_release sends every hand movement under way into its return and is itself the
-   * relax pulse it always was (poseTargets). Returns true
-   * when something on the arm is driven. */
+
+
+
+
+
+
+
   function contractArm(s, id) {
     if (!s.armJerk) s.armJerk = {};
     if (id === 'relax_release') { for (const h of HAND_ACTION_IDS) if (s.armJerk[h]) s.armJerk[h][0] = 0; return true; }
@@ -2386,8 +2386,8 @@ export function createActivity({
     const x = remaining / fadeS;
     return x * x * (3 - 2 * x);
   }
-  /** The fade window of the running pulse: a contraction's light (pulseMove) fades over JOINT_LATCH.lightFadeS, so it is
-   * full for most of the contraction and exactly 0 when the return begins (Message 206); any other pulse as before. */
+
+
   const pulseFade = s => (s.pulseMove === true ? lightFadeS : displayFadeSeconds);
 
   /** Display ceiling of action `id` at offset b1 for the commands active from offset b0 (1 when none is timed). */
@@ -2402,7 +2402,7 @@ export function createActivity({
 
   /** Space-only commanded targets (no pulse) and their ceilings, for the key lighting of left-arm regions. */
   function keyTarget(s, id, at) {
-    if (id === 'grasp_close') return s.graspHold ? 1 : 0; // R558 (Message 48): the grip of a Space grasp
+    if (id === 'grasp_close') return s.graspHold ? 1 : 0;
     if (id === 'open_hand') return at < s.openRemaining ? 1 : 0;
     return at < s.relaxRemaining ? 1 : 0;
   }
@@ -2436,15 +2436,15 @@ export function createActivity({
   const hitMoves = hit => Boolean(hit) && ((hit.bodyKey !== null && hit.bodyKey !== undefined) || (hit.armAction !== null && hit.armAction !== undefined)
     || (hit.rotation !== null && hit.rotation !== undefined));
 
-  /** 21 November 2026 (SEEMOVE, section 189; Message 204: "make sure there's clear movement for each brain activation
-   * area"): the left forearm's turn asked for where the forearm already is ("Turn left palm up" at the start: the palm
-   * is up; measured in the browser: nothing moved at all). As for a body joint that is at the stop its movement ends at
-   * (JOINT_LATCH stopBounceShare / stopBounceMaxDeg: the right palm does this), the turn STRIKES its stop: the forearm is
-   * thrown off it by the same share of its whole turn (never more than stopBounceMaxDeg: 38 of its 160 degrees) and is
-   * drawn straight back onto it by the turn's own ease, a visible twitch against the stop. With the ease's time
-   * constant tau (critically damped) a start speed v away from the goal carries the turn v x tau / e at the most, after
-   * tau seconds. Only when the forearm is at that end (within TURN_AT_END of its whole turn); a turn with room turns.
-   * Not under reduced motion (no kick there, as for the body). */
+
+
+
+
+
+
+
+
+
   function strikeTurn(s, channel) {
     if (!(kickShare > 0) || !(stopShare > 0) || !(rotationTau > 0) || !isPlainObject(s.rotation) || !isFiniteNumber(s.rotation.value)) return;
     const end = channel === 'supination' ? 1 : 0;
@@ -2453,10 +2453,10 @@ export function createActivity({
     if (share > 0) s.rotation.speed = (end === 1 ? -1 : 1) * share * Math.E / rotationTau + 0;
   }
 
-  /** 20 November 2026 (Message 206): commit a deliberate activation's movement: its CONTRACTION (contractBody,
-   * contractArm; a forearm-turn area turns the forearm for the contraction and it turns back, integrate). The area's
-   * pulse, when it is this activation's, becomes the contraction's light: exactly contractS long, with the short fade,
-   * so the area, its muscles, the beam and the display are dark when the return begins. moveSeq / lastMove count it. */
+
+
+
+
   function commitMove(s, hit) {
     if (!hitMoves(hit)) return;
     if (hit.rotation) {
@@ -2479,9 +2479,9 @@ export function createActivity({
     s.lastMove = { regionId: hit.regionId, actionId: hit.actionId, armAction: hit.armAction, bodyKey: hit.bodyKey, rotation: hit.rotation };
   }
 
-  /** Message 206: a look that left its area (or was silenced) before latchS moved nothing, so the glow its pulse
-   * started ends too (an area with a movement is lit only while it contracts). An area without a movement keeps its
-   * glow, as before. */
+
+
+
   function dropPendingLook(s) {
     const p = s.latchPending;
     s.latchPending = null;
@@ -2489,15 +2489,15 @@ export function createActivity({
     if (s.pulseRegion === p.hit.regionId && s.pulseBody === p.hit.bodyKey && s.pulseAction === p.hit.armAction && s.pulseRotation === p.hit.rotation) cancelPulse(s);
   }
 
-  /** R558 (Messages 55 and 56): note that the REST of a look took this area's movement. The shell reads it so the
-   * information card takes the area in the same frame; the movement itself can carry the look off the area at once
-   * (a neck movement moves the view). */
+
+
+
   function tookByLook(s, hit) {
     s.lookTaken = { regionId: typeof hit.regionId === 'string' ? hit.regionId : null, n: (s.lookTaken && Number.isFinite(s.lookTaken.n) ? s.lookTaken.n : 0) + 1 };
   }
 
   function startPulse(s, hit, source, at, collect, area = null, fromLook = false) {
-    // R558 (Message 48): while the Space grip holds the hand closed, an action that needs the same fingers does not
+
     // start (its area would light while nothing moved). Returns false; the count is kept for the shell.
     if (s.graspHold && hit.armAction !== null && SPACE_COMPETING.includes(hit.armAction)) {
       s.suppressedSeq += 1;
@@ -2509,7 +2509,7 @@ export function createActivity({
     s.pulseBody = hit.bodyKey;
     s.pulseRotation = hit.rotation;
     s.pulseRemaining = pulseSeconds;
-    s.pulseMove = false;      // (Message 206: commitMove makes it the contraction's light)
+    s.pulseMove = false;
     s.pulseSeq += 1;          // each start is a distinct pulse
     s.lastTriggerAt = s.t;
     s.lastTriggerSource = source;
@@ -2519,11 +2519,11 @@ export function createActivity({
     const look = source === 'gaze' || source === 'dwell';
     s.pulseLook = look || (source === 'moved' && fromLook === true && s.pulseLook === true);
     // A deliberate activation (not the restart of the same area by a small look movement, not a held limb's restart)
-    // makes its part contract (commitMove; Message 206: and then return). A click (or a look that already dwelt to
+
     // replace a click) commits at once; a look onto a new area commits once the gaze has stayed there latchS.
     // A look-movement restart ('moved', the same area) keeps a pending look: its dwell is still running.
     // 18 Nov (S4, LOOK_ARMS): a look commits nothing; its rest only arms the area (lookTaken, in step).
-    // (Message 206: a number key's progressive press is an ordinary press now: MOVE_HOLD.)
+
     if (source !== 'moved') {
       s.latchPending = null;
       if (source === 'gaze' && latchS > 0 && typeof area === 'string') s.latchPending = { area, hit: { ...hit }, since: s.t };
@@ -2600,7 +2600,7 @@ export function createActivity({
       fail('activity_event', 'gaze yaw and pitch must both be finite radians when given');
     }
     const g = resolveGaze(ev);
-    if (s.latchPending && g.area !== s.latchPending.area) dropPendingLook(s); // R558: the look left before latchS (Message 206: its glow ends)
+    if (s.latchPending && g.area !== s.latchPending.area) dropPendingLook(s);
     if (hasDir) { s.gazeYaw = ev.yaw; s.gazePitch = ev.pitch; }
     if (s.brainGrab.active && hasDir) s.brainPlacement = grabPlacement(s.brainGrab, ev.yaw, ev.pitch, grabLimitRad);
     // Silent: explicit seed (first frame, re-frame), the frame after an orbit/grab release/resume/reset, while paused,
@@ -2649,7 +2649,7 @@ export function createActivity({
         moved = ev.moved === true; // legacy per-frame boolean from the caller
       }
       if (moved) {
-        // 20 November 2026 (Message 206): a small look movement within an area with a movement starts nothing: its light
+
         // is its contraction, and a further contraction is a click. (It used to light the area for another second while
         // the part was held.) An area without a movement, and the look that only arms (LOOK_ARMS on), restart as before.
         if (armOnly || !hitMoves(g.hit)) startPulse(s, g.hit, 'moved', at, collect, null, true);
@@ -2680,27 +2680,27 @@ export function createActivity({
     s.seedNextGaze = true; // the brain stopped moving under the crosshair: the next gaze is recorded, not a new look
   }
 
-  /**
-   * Legacy Space key event. R558 (user Message 40): Space now grasps (hold or tap) and turns the limbs (double tap, held
-   * double tap); ns-controls SPACE_GESTURE turns the key into 'grasp' and 'turn' events, so a raw { type: 'space' }
-   * event is only checked and moves nothing (an older caller still sending it neither fails nor starts a turn).
-   */
+
+
+
+
+
   function applySpace(s, ev) {
     if (typeof ev.down !== 'boolean') fail('activity_event', 'space event needs a boolean down');
     if (ev.safety === true) s.spaceTapAt = null;
   }
 
-  /**
-   * R558 (user Message 40: "double tapping causes rotation, and double tapping and holding continues that rotation, but
-   * slowly"). { type: 'turn', phase }:
-   *   'step'  a double tap: every limb makes one stroke to its next end (ns-dance startTurnStep), then stops by itself.
-   *           rotationSeq counts these (the guide's flipPalm goal).
-   *   'hold'  the double tap is still held (ns-controls SPACE_GESTURE.tapMaxMs after its press): the turn goes on,
-   *           slowly (ns-dance startTurnHold), while spaceHeld is true.
-   *   'stop'  let go after a hold, or a safety release: every limb stays where it is (stopDance: the player's own turn,
-   *           which Message 206 keeps).
-   * While paused a step or a hold starts nothing; a stop always applies.
-   */
+
+
+
+
+
+
+
+
+
+
+
   function applyTurn(s, ev) {
     if (ev.phase === 'step') {
       if (s.paused) return;
@@ -2719,13 +2719,13 @@ export function createActivity({
     }
   }
 
-  /** R558 (user Message 40): holding or tapping Space grasps (ns-controls SPACE_GESTURE; the F key of Messages 2 and 12
-   * is gone). A press with the
-   * crosshair on the brain (target 'brain', or no target while the gaze is on a brain area or its glass) starts the
-   * brain grab: while held the brain keeps its angular offset to the camera, gaze pulses are
-   * recorded silently, and the release leaves it where it is. A press on another item (target 'mirror' or 'limb': the
-   * mirror body or one of your own limbs, which the app carries) never grabs the brain. A safety release is the same as
-   * a release. */
+
+
+
+
+
+
+
   function applyGrasp(s, ev) {
     if (typeof ev.down !== 'boolean') fail('activity_event', 'grasp event needs a boolean down');
     if (ev.down === true) {
@@ -2737,18 +2737,18 @@ export function createActivity({
     } else if (s.brainGrab.active) endGrab(s);     // the brain stays where it was released
   }
 
-  /**
-   * R558 (user Message 48: "the grasping action, you can't see the grasping action at all"). { type: 'grip', on }: the
-   * left hand of the game arm closes while Space holds or keeps a grasp and opens when the grasp lets go. The shell
-   * sends it whenever the Space gesture's grasp (ns-controls SPACE_GESTURE: held or kept) starts or ends, whatever the
-   * crosshair is on, so the grasp is always seen on your own hand and on the hand part of the strip.
-   *   on true   graspHold: the pose closes the hand (grasp_close wins the fingers: a finger contraction under way
-   *             ends), the hand area and the finger benders light for as long as the grip lasts. A running pulse of
-   *             an action that competes for the fingers ends. Ignored while paused.
-   *   on false  the grip lets go: the hand goes back to its place, unlit (22 November 2026, H5, GRIP_RELEASE); with
-   *             openOnRelease on, the old rule: it opens for spaceOpenSeconds (open_hand: a game rule, a real hand can
-   *             also let go by relaxing). Always applies. (Message 206: no movement of the brain's holds the hand closed.)
-   */
+
+
+
+
+
+
+
+
+
+
+
+
   function applyGrip(s, ev) {
     if (typeof ev.on !== 'boolean') fail('activity_event', 'grip event needs a boolean on');
     if (ev.on === true) {
@@ -2789,7 +2789,7 @@ export function createActivity({
     for (const j of DANCE_BODY_JOINTS) {
       const q = limitJoint(j, a[j]) + 0;
       s.bodyPos[j] = q; s.bodyGoal[j] = q; s.bodyVel[j] = 0;
-      if (s.bodyJerk) delete s.bodyJerk[j]; // (the turn owns these joints while it runs: Message 206 keeps the turn)
+      if (s.bodyJerk) delete s.bodyJerk[j];
     }
   }
 
@@ -2832,7 +2832,7 @@ export function createActivity({
     // could fall inside the double-tap window. A pause or resume always ends the tap chain.
     s.spaceTapAt = null;
     if (s.brainGrab.active) endGrab(s);
-    // R558 (Message 40): a pause ends a limb turn (a step or the slow turn) where the limbs are.
+
     if (s.dance.mode !== null || s.dance.active) s.dance = stopDance(s.dance);
     s.spaceHeld = false;
     s.graspHold = false; // the grip ends with the pause (no opening window: nothing moves while paused)
@@ -2880,7 +2880,7 @@ export function createActivity({
     s.rotationState = defaultRotation;
     s.rotation = { value: rotValue(defaultRotation), speed: 0, remaining: 0, channel: null, hold: null, move: null };
     s.armHumeral = armHumeralStart(); // 18 November 2026, late: back to the start side's upper-arm turn (was null: the coupled palm turn)
-    // R558 (Message 40): Reset body also ends a limb turn under way; every limb is back at its start angle.
+
     if (s.dance.mode !== null || s.dance.active) s.dance = stopDance(s.dance);
     s.spaceHeld = false;
     s.rotationDisplay = zeroMap(ROTATION_ACTION_IDS);
@@ -2920,12 +2920,12 @@ export function createActivity({
         const hit = ev.regionOnly === true || r.actions.length === 0
           ? { regionId: r.id, actionId: null, armAction: null, bodyKey: null, rotation: null }
           : resolveGaze({ kind: 'region', regionId: r.id, actionId: ev.actionId === undefined ? null : ev.actionId }).hit;
-        // (Message 206: a progressive press, a number key held, is an ordinary press: MOVE_HOLD)
+
         if (hit !== null) startPulse(s, ev.isolateForearm === true ? { ...hit, isolateForearm: true } : hit, 'click', at, collect);
         return;
       }
       case 'muscleRelease':
-        // 18 Nov (M3, MOVE_HOLD): the number key of a progressive press came up. 20 November 2026 (Message 206): the part
+
         // contracts and returns whatever the key does, so this changes nothing (accepted for older callers).
         return;
       case 'space':
@@ -2954,10 +2954,10 @@ export function createActivity({
         return;
       }
       case 'limbPose': {
-        // R558 (user Messages 2, 12 and 40): one of your own limbs, held with Space and moved, or turned by a drag. The app
+
         // solves its joints inside their anatomical ranges and hands them here: { joints: { jointId: degrees },
         // regionId?, actionId? }. They are set at once (place and position: the limb follows the hand that holds it, no
-        // jerk) and STAY there: this is the player placing the limb, not the brain (Message 206 keeps it), so a later
+
         // contraction returns to this place. A contraction of these joints still under way ends here (the hand that
         // holds the limb wins it). regionId / actionId (a motor-map area and, optionally, its action) light that area
         // and its muscles with the ordinary one-second pulse, restarted while the limb keeps moving; such a restart
@@ -2991,7 +2991,7 @@ export function createActivity({
         return;
       }
       case 'contractStop': {
-        // 20 November 2026, night (review of updates 60 and 61, R2; the owner's Message 206: "no permanent movements"):
+
         // { joints: { jointId: degrees } } (absolute degrees). A contraction of these joints still under way STOPS at this
         // angle, because the part would otherwise run into something (ns-app: a trunk bend that would bring your head
         // into the brain or the mirror body). The joint is set there and held there for the rest of the contraction's
@@ -3086,7 +3086,7 @@ export function createActivity({
   function integrate(s, h) {
     if (!(h > 0)) return;
     const cuts = [s.pulseRemaining, s.openRemaining, s.relaxRemaining, s.rotation.remaining];
-    // (Message 206: where a contraction ends inside h, its return starts exactly there)
+
     for (const k in s.bodyJerk) cuts.push(s.bodyJerk[k][1]);
     for (const k in s.armJerk) cuts.push(s.armJerk[k][0]);
     if (Array.isArray(s.rotation.move)) cuts.push(s.rotation.move[1]);
@@ -3103,7 +3103,7 @@ export function createActivity({
       for (const id of ACTION_IDS) {
         // The POSE drive eases to its place (poseTargets: the grip, the opening, a relax pulse; armPoseTau both ways);
         // the DISPLAY below follows the timed commands.
-        // 20 November 2026 (Message 206, contractArm): a contraction drives its action's drive to the end (1) with the
+
         // body's jerk spring for contractS (thrown back off the end with `restitution` of its speed), then springs it
         // softly back to its place (relaxOmega, critically damped) and the note is dropped there. While the Space grip
         // holds those fingers the grip wins them and the contraction ends.
@@ -3138,7 +3138,7 @@ export function createActivity({
         s.bodyDrive[k] = approach(s.bodyDrive[k], on && !armed ? 1 : 0, seg, riseTau, decayTau);
         s.bodyDisplay[k] = envelope(s.bodyDisplay[k], on ? (armed ? armLevel : 1) : 0, seg, on ? pc : 1);
       }
-      // 20 November 2026 (Message 206): every body joint is at, or springs back to, its PLACE (bodyGoal) on the soft
+
       // critically damped relaxOmega spring; a joint with a contraction note is driven to the note's end angle by the
       // jerk spring (JOINT_LATCH omega / zeta, exact per segment) while the note's time runs, then returns to its place
       // the same soft way, and the note is dropped when it is there. A joint stopped by its anatomical limit rebounds
@@ -3173,7 +3173,7 @@ export function createActivity({
         const ceil = key || pul ? Math.max(key ? rc : 0, pul ? pc : 0) : 1;
         s.rotationDisplay[c] = envelope(s.rotationDisplay[c], key ? 1 : pul ? (armed ? armLevel : 1) : 0, seg, ceil);
       }
-      // (Message 206: a forearm-turn area turns the forearm for its contraction, pulseMove, and it turns back to where it
+
       // was: the turn's held angle or rotationState, which a press no longer changes)
       // (21 November 2026, SEEMOVE: and for the hold after it, rotation.move)
       const turn = Array.isArray(s.rotation.move) && b0 < s.rotation.move[1] ? s.rotation.move : null;
@@ -3203,7 +3203,7 @@ export function createActivity({
       s.markPending = null;
     }
     // R558: a look's movement once the gaze has stayed on that area for latchS (GAZE_DWELL). Nothing moves behind the
-    // pause page or while the brain is held: a pending look is dropped then (Message 206: and its glow ends).
+
     if (s.latchPending && (s.paused || s.brainGrab.active)) dropPendingLook(s);
     if (s.latchPending && s.gazeArea === s.latchPending.area && s.t + h - s.latchPending.since >= latchS - SNAP) {
       const hit = s.latchPending.hit;
@@ -3427,17 +3427,17 @@ export function createActivity({
     return pick(state.bodyJointTargets, JOINT_IDS);
   }
 
-  /**
-   * 20 November 2026 (the owner, Message 206: "no permanent movements"): what is moving because of the brain right now,
-   * plain data for the display and for checks. (It replaces latchView: nothing is held, so there is nothing to bring
-   * back, no "already there" and no opposing hint.)
-   *   contracting  [jointId]    body joints being driven to a movement's end (their contraction's time runs, or,
-   *                             since 21 November 2026, the hold at the end after it: JOINT_LATCH holdS, unlit)
-   *   returning    [jointId]    body joints on their way back to their place (no activity is shown for these)
-   *   arm          { contracting: [actionId], returning: [actionId] }   the same for the game arm's movements
-   *   lit          the area whose contraction is lit now (regionId), or null
-   *   label        the honest scope line
-   */
+
+
+
+
+
+
+
+
+
+
+
   function motionView(state) {
     checkState(state);
     const contracting = [], returning = [], arm = { contracting: [], returning: [] };
@@ -3629,15 +3629,15 @@ export function createActivity({
     };
   }
 
-  /**
-   * R558 (Space dance; Message 40): what the limb turn is doing, plain data. { active, mode (null | 'step' | 'hold'),
-   * fast (true while a double tap's quick step runs; kept for older readers), angles: { jointId: degrees } (ns-dance
-   * DANCE_LIMBS conventions), levels: { jointId: 0..1 } (turning speed, the display level of its areas and muscles),
-   * limbs: { limb: { dir: 1 opening | -1 closing, level } }, ranges (the touch-free hip ranges in use),
-   * bodyMuscleRows: rows for ns-body bodyMuscleDrives (the right arm's and the hips' turning muscles of the current
-   * direction at their joint's level; the game arm's are in rotationOutputs().muscles), armHumeralDeg (null = the
-   * coupled palm turn) }.
-   */
+
+
+
+
+
+
+
+
+
   function danceView(state) {
     checkState(state);
     const d = state.dance && isDanceState(state.dance) ? state.dance : danceStart();
@@ -3701,7 +3701,7 @@ export function createActivity({
     bodyMuscleDisplay, rotationOutputs, brainView, wasdChannels, instructionsView, snapshot,
     // R5-input
     glowLinks,
-    // Message 206: contract, then return
+
     motionView,
     // R558 Space dance
     danceView

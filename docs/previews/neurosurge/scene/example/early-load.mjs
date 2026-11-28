@@ -1,20 +1,20 @@
-/** NeuroSurge: what can start before the game's own scripts are in (19 November 2026: "Game should load a lot faster").
- * The game's scripts are about fifty files; the anatomy is six packs. This small script comes first on the page and
- * starts the packs' download and decoding (a worker, ns-pack-loader) at once, so the packs travel while the scripts
- * do, and takes over the loading bar that is on the page (ns-load-progress), so its number moves from the start. The launcher (eye-view-r558.mjs) takes the loader from here. Only the ordinary start: the two test cases of the
- * launcher (?case=...) read the source files themselves.
- *
- * 20 November 2026 (the owner, 19 November: "Currently, I can't see the models being built on the loading page, which
- * they should be there, and the controls switch off halfway through. And the controls should stay visible the entire
- * time while loading"). Measured before: on a slow line (600 kB/s) the controls card and the loading picture both
- * waited for the launcher's own scripts (the card came at 17.6 s, the picture's first part at about 29 s, the game was
- * ready at 30.6 s). Now this script also
- *   - shows the controls card at once (ns-controls-card, a small file with no imports); the launcher takes it over and
- *     lets it go only when the game is ready;
- *   - starts the loading picture (ns-assembly, a dynamic import, so the bar and the packs above are not held up by it)
- *     and feeds it the meshes of each pack the moment the pack arrives, placed by the table of parts made beforehand
- *     (ns-assembly-parts), without the manifests or the game's scripts. The launcher takes the SAME picture over
- *     (startAssembly shared: true), so there is one picture from the start of the load to the game. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { startPackLoader } from '../src/ns-pack-loader.mjs';
 import { editionPacks } from './edition.mjs';
 import { createLoadBar } from '../src/ns-load-progress.mjs';

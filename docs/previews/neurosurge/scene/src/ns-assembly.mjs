@@ -1,34 +1,34 @@
-/** NeuroSurge loading picture, page side, and the five-second picture of the main controls (user note of
- * 17 November 2026: no start page and no loading page; "have a visual of all the parts and components coming
- * together" while they load; "for the first 5 seconds ... an overlay of the main controls. WASD, ER, space, and
- * trackpad with click").
- *
- * startAssembly() puts a canvas over the game's canvas and gives it to a worker (ns-assembly-worker.mjs), which draws
- * the parts as their files arrive. The launcher calls noteManifest() / noteBytes() from its ordinary fetch functions:
- * the picture gets a COPY of the bytes the game fetched and never changes what the game receives. finish() fades the
- * picture out over the running game. Where a worker canvas is not available the same picture is drawn on the page
- * (it then pauses while the page is busy); where even that fails there is no picture and the game loads as before.
- * With reduced motion the loading layer shows a stationary download progress bar instead of drawing the parts.
- *
- * A loading picture only: it verifies nothing and the game reads nothing from it.
- *
- * 18 November 2026 (owner: "for the loading animation, if possible, we want to go inside out always"): each file's
- * place in the inside-out order (ns-assembly-order assemblyDepth: its track, tier and place in the tier) is read here
- * from the manifests the game fetches, with the game's own layer of each muscle (ns-body bodyMuscleLayer), and sent
- * with the bytes; the worker holds each part back until its tier comes up.
- *
- * 20 November 2026 (the owner, 19 November: "Currently, I can't see the models being built on the loading page, which
- * they should be there"; measured: on a slow line the picture started only once the launcher's own scripts were in,
- * about 4 MB, and drew its first part a second or two before the game was ready). The picture is now started by the
- * page's first small script (early-load.mjs, through a dynamic import, so its first work is not held up) and fed from
- * the packs as they arrive (notePack), before the game has fetched a manifest: the place of every mesh the game waits
- * for is in a table made beforehand (ns-assembly-parts, tools/build-assembly-parts.mjs), so the picture needs neither
- * the manifests nor ns-body (600 kB) to begin. The launcher then takes the SAME picture over (startAssembly with
- * shared: true returns it) and goes on feeding it as before; a mesh it hands over that the picture has already drawn
- * is not drawn twice (each file is drawn once, by its packet and file name), and a mesh the table does not know is
- * drawn from the launcher's manifests as before. The game's own layer of each muscle (ns-body bodyMuscleLayer) is
- * handed in by the launcher (useMuscleLayer) for manifests the table does not cover.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { assemblyDepth, ASSEMBLY_TIERS } from './ns-assembly-order.mjs';
 import * as AssemblyParts from './ns-assembly-parts.mjs';
 const { ASSEMBLY_PARTS } = AssemblyParts, ASSEMBLY_LIMB_CHAINS = AssemblyParts.ASSEMBLY_LIMB_CHAINS || null; // (a table written before the chains: none)

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "bodyparts3d_body_vessels_acquisition_record",
   "writer": "package VESSELS (18 November 2026)",
-  "authority": "Package brief VESSELS: exactly the BodyParts3D vessel parts may be downloaded, with file ids, names and the licence recorded; nothing downloaded is executed.",
+  "authority": "Acquisition and verification of the named BodyParts3D source geometry used by the whole-body vessel illustration.",
   "method": "HTTP range requests against the official archive (serial, 1.5 s apart, no retries), ZIP CRC32, byte count and sha256 checked; the meshes were read by the project's own OBJ parser only to compute centre lines (derivation in BODY-VESSEL-CENTRELINES.json) and are not part of the packet.",
   "licence_check": {
     "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
@@ -1144,8 +1144,8 @@
   "outputs": {
     "centrelines": {
       "path": "BODY-VESSEL-CENTRELINES.json",
-      "sha256": "c86600f42d7541de96ab3e782b43bbecd9b19339c28f8a8c6132326ee0626c3f",
-      "bytes": 108620,
+      "sha256": "52ddde91d7ae96d0596f761f114619cd1fe898648aca16c9664ad2ea48dc4aa7",
+      "bytes": 108557,
       "vessels": 40
     }
   }

@@ -1,160 +1,160 @@
-/** NeuroSurge POV arm scene: Three.js scene adapter (THREE injected) and the DOM HUD.
- *
- * Nothing here imports 'three' or reads a global: createScene({ THREE, canvas }) receives the library, so this
- * module also loads in Node, where its pure helpers are tested. Three APIs used (all stable since r150): Scene,
- * PerspectiveCamera, WebGLRenderer, Group, Mesh, BufferGeometry, BufferAttribute, MeshStandardMaterial,
- * MeshBasicMaterial, Color, AmbientLight, DirectionalLight, Raycaster, Vector3, Object3D.matrix (Matrix4.fromArray)
- * and DoubleSide. No addons (R558: ns-outline also uses the r170 core WebGLRenderTarget, DepthTexture, DataTexture,
- * ShaderMaterial and BatchedMesh; without them the outlines are off). Colour handling assumes r152+ colour management (linear working space, sRGB output),
- * the default of the pinned three@0.170.0, so strip vertex colours come from ns-brain colormapLinear.
- * Framing/HUD repairs R2/R3 add no constructor (THREE_API unchanged); they set plain material properties (colorWrite,
- * polygonOffset*, forceSinglePass r150+, blending = THREE.AdditiveBlending when present) and, for the glass rim,
- * Material.onBeforeCompile + customProgramCacheKey with a guarded string patch of the vertex `project_vertex` and the
- * r154+ `opaque_fragment` (or older `output_fragment`) hooks; without them the glass stays plain
- * (objects.glassRim.applied === false). See RENDER_ORDER for the passes. resize() takes an optional fovYDeg.
- *
- * Frames: the arm group is a child of the camera. Bone meshes take their rig segment matrix (rest source mm ->
- * camera metres) as their own matrix, which is the same linear map as skinApply with a single weight of 1 but runs
- * on the GPU. Muscle meshes are CPU-skinned with ns-rig skinApply (positions) and skinNormals (normals), and only
- * when the pose matrices change. The brain group sits in the world under the ns-brain display transform (subject
- * right on screen right, anterior up, superior toward the camera; determinant +1, never mirrored).
- *
- * Scientific limits: every tint, colour and number is a simulated, unitless display value. Muscle tint follows the
- * simulated drive only (no bulging, no physiology). Strip colours are a representative, overlapping simulated
- * activity field. Gaze and WASD are virtual control inputs, not real stimulation or decoding.
- *
- * HUD: textContent-only DOM. Status and legend/controls cards seek clear edge positions using the existing
- * approximate arm-avoid shapes. Text stays readable; placement estimates are not full-hand collision proof.
- *
- * A2-render R1 (motor strip and rendering):
- *  - The strip is LIT, OPAQUE and DEPTH-WRITING (MeshStandardMaterial, DoubleSide) with a guarded shader patch
- *    (patchStripShaders) that evaluates per fragment, from the interpolated strip u and source position: faint region
- *    identity tints with soft borders at exactly the ns-brain actionForU pick boundaries, a hover outline of the
- *    region under the crosshair, and the two-scale simulated field (ns-brain activityAt) as an emissive glow through
- *    the ns-brain ramp (the legend is generated from the same ramp). Drives are 12 uniforms: no per-vertex CPU
- *    recolour or upload. Without the hooks the strip falls back to CPU vertex colours from ns-brain stripShade.
- *  - Optional decorative shimmer on active regions (off under prefers-reduced-motion); simulated and unitless.
- *  - Arm ghost window: arm fragments within a small radius of the crosshair become a dithered see-through ghost with a
- *    lit silhouette rim while the gaze is on the strip (automatic; setArmGhost overrides), so the gazed motor area
- *    stays visible. Display only: the arm geometry, fit and pick are unchanged.
- *  - Glass cost: the faint additive x-ray pass is limited to a subset (GLASS_XRAY default), the depth pre-pass sorts
- *    front-to-back (guarded setTransparentSort) and static brain children skip per-frame matrix updates.
- *  - Adaptive pixel ratio (adaptPixelRatio) under the maxPixelRatio cap; resize uses one drawing-buffer allocation.
- *  - HUD: no forced layout reads after writes (ResizeObserver sizes when available), orientation labels and panel
- *    styles are written only when changed, panels also avoid the band's projected box, a hover label near the
- *    crosshair, a region note under the legend, and the empty error box no longer shows at the crosshair.
- *
- * U2b-scene (round 2; feature-detected by ns-app SCENE_HOOKS, all additive and backwards compatible):
- *  - REGION MODE (setBrain({ ..., segmentation }) with an ns-brain segmentMotorStrips result of BOTH hemispheres): every
- *    BODY_MOTOR_MAP region of both precentral strips is drawn as its own translucent, lit surface (one material per
- *    region, a colour-less depth pre-pass so only the nearest strip layer is shaded). The shading follows the ONE
- *    ns-colors rule (activityShade: lit identity tint darkened with activity + the ramp as emission) so the brain and
- *    the muscles mean the same thing by the same colour. Activated regions (activatedRegions count >= 1, persistent
- *    until Reset body) are slightly more opaque and shade-shifted (ns-brain REGION_STYLE). LEFT-ARM regions (right
- *    hemisphere) carry a cyan identity tint, a cyan boundary outline and the label 'Left arm (right hemisphere)'; every
- *    other body-part group has its own muted label. The region under the crosshair gets a bright outline and a small
- *    emissive lift. The legacy focus strip is not drawn in region mode (the same triangles are region parts); the
- *    representative left-arm dots stay (classifyRegionGaze still picks them).
- *  - setBrainTransform(view): the brain group matrix is the ns-brain brainViewTransform matrix (orbit + grab carry).
- *  - Orbit ARROW BUTTONS: four DOM buttons placed a few cm (ORBIT_ARROWS.gapCm) outside the brain's projected bounds,
- *    clamped into the free viewport (never under the far-right info panel); they are not attached to the brain. Mouse
- *    hover highlights (CSS), a click calls onOrbit(dir) / setOrbitHandler(fn) (else a 'ns-orbit' CustomEvent);
- *    orbitArrowAt(x, y) and hoverOrbitArrow(dir) serve the pointer-captured crosshair.
- *  - Far-right INFORMATION OVERLAY (setInfo(model), ns-app infoOverlayModel): region, body part, muscles, pathway,
- *    activity, explanation, simulated vs known, caveats and citations; textContent only, no pointer events.
- *  - FULL BODY (setBody / setBodyFrame / updateBody): FULLBODY-MESH-MANIFEST meshes in the BodyParts3D frame under one
- *    body-to-world matrix (eye at the camera), each posed on the GPU by its ns-body poseBody matrix, bone/muscle
- *    materials like the arm, muscle colours from ns-colors, Three frustum culling. Head/face meshes and any mesh that
- *    comes within FACE_LAYER.nearClearM of the eye are never drawn in place (they would enclose the camera); they form
- *    the FACE LAYER: 'ghost' (default) = a translucent, labelled front view of the facial skeleton and attached muscles,
- *    displaced up and out in front of the eyes and faded in only at high pitch, so it never encloses the camera or
- *    blocks the forward view; 'inset' = a labelled inset view; 'off'. bodyVisibility() reports what is in view.
- *  - Allocation discipline: per-frame paths (render, updateRegions, overlay layout) reuse preallocated vectors and
- *    write DOM/material state only when a quantised value changed.
- * R3-scene (round 3; decisions D2 / D4, brain readability, labels; round3/R3-scene-NOTES.md):
- *  - ORBIT ARROWS from the brain SILHOUETTE: supportPoints of every glass + strip vertex (built once) give the brain's
- *    projected convex hull in the REFERENCE view (the default look carried with any grab, transform.grabYaw/grabPitch);
- *    placeOrbitArrows puts each arrow a gap (arrowGapPx: 1.2 cm, kept within 2.5-5.5 % of the view width) outside it on its
- *    side, clear of the info column / portrait band, the legend, the HUD card and the toast, preferring looks within 40
- *    deg (corner rays when a side has no room). The result is stored as WORLD anchors, so the arrows stay put relative to
- *    the brain when the player looks around and follow every orbit / drag (re-planned when the transform changes). An
- *    arrow under a panel at the current look is not drawn (visibility) and not hit; it is never `hidden` in the DOM.
- *  - GLASS READABILITY: patchGlassReadShaders adds a key-light crown term and a darker groove cue from a per-vertex
- *    sulcal depth (sulcalDepth: distance to the hull's support planes) to the fresnel shell.
- *  - OUTLINES: smoothTerritoryOutline (welded union, decimated, Chaikin-smoothed, lifted toward the viewer) for the
- *    territory and region outlines; other-body region outlines only on hover / activation; softer territory borders.
- *  - BODY VIEWS: the dithered windows are gone. Torso / neck (looking down), the arm ghost window and the face layer are
- *    smooth alpha (patchSeeThroughShaders) with colour-less depth pre-pass twins, so each shows ONE clean layer.
- *  - LABELS: fewer (cap LABEL_LAYOUT), larger (R3_SCENE_CSS), plainer (regionLabelDisplay from ns-text) and placed by
- *    declutterLabels clear of the arm, the arrows, the panels and each other. Visible wording comes from ns-text when it
- *    has the entry (orbit captions, colour key, face captions, on-brain labels).
- * R4-scene (round 4; decisions D5 / D8; round4/R4-scene-NOTES.md):
- *  - CAMERA RANGE independent of the brain distance: the far plane follows the brain's farthest support point
- *    (farPlaneFor), the near plane stays at the hand; every brain-relative effect is in source mm or projected pixels, so
- *    a brain k times farther and k times larger draws the same picture (proved at k = 1, 3, 6; QA hook ?qa=1&nsBrainK=k,
- *    createScene({ brainDistanceScale }) / setBrainDistanceScale, scaleBrainDistance).
- *  - ARROWS clear of the controlled arm: setArmEnvelope(armSweepEnvelope of the arm over its A/D x W/S range at the
- *    default look) is a placement obstacle; when a side has no spot off every pose the consistent fallback is the clear,
- *    comfortable spot the fewest poses cover (it fades while the arm is over it). HUD rectangles are re-read when a
- *    Mutation/ResizeObserver says they changed (same frame), not every 12 frames.
- *  - HELD BRAIN: setBrainHeld(true) while Space-drag holds the brain: a soft glow on the glass rim (HELD_CUE).
- *  - LEFT-ARM RIM: a cyan band along the inside of the left-arm territory border at every activity level (LEFT_ARM_RIM);
- *    the fill keeps the shared activity ramp.
- *  - ADAPTIVE QUALITY (D8): QUALITY_LEVELS (render scale, then the decorative x-ray pass, then vertex-clustered LOD
- *    copies of the glass, body and arm), an automatic controller with hysteresis (stepQuality), setQuality('auto' |
- *    'high' | 'low') for the Esc page and qualityState() in the QA snapshot. Colours, activity, labels and text never
- *    change with quality.
- * R5-scene (round 5; decisions D16-D19 and the P2 strip relief; round5/R5-scene-NOTES.md). The math of each feature has
- * one owner and is imported: ns-arrows3d (R5-arrows), ns-mirror (R5-mirror), the ns-camera pose (R5-camera), ns-actions
- * glowLinks (R5-input) and the ns-colors glow / arrow / backing colours (R5-access). This file draws them:
- *  - D16 3D COMPASS ARROWS replace the DOM orbit buttons: two ns-arrows3d rigs (brain; mirror, green). R558 (user
- *    Message 7): every arrow is a V tip at the middle of a side of its target's frame (the motor strip's 16:9
- *    frame, the mirror body's 9:16 frame; ns-arrows3d planFrameArrows), drawn on top of the scene; (Message 19) each
- *    tip is a solid, softly bevelled chevron tilted in depth, its point away from the viewer and its open ends nearer;
- *    pickArrows(x, y) returns the ray hit list for ns-controls resolveArrowHit (a tip is drawn on top, so a hit tip is
- *    never blocked by what lies behind it); setArrowHover highlights with a plain caption; orbitArrowAt /
- *    hoverOrbitArrow keep the round-4 crosshair API. The scene never orbits anything: presses and holds are R5-input's.
- *  - D17 GLOW LINKS (setGlowLinks, glowLinksForScene): a soft additive camera-facing ribbon on a gentle curve from the
- *    active area to each driven muscle group, on your body and on the mirror body, in the ns-colors glow colour; it fades
- *    in from the area, keeps only a thin core over the brain's drawn outline (never hiding an area), pulses gently (not
- *    under reduced motion); the area and the muscles get a fresnel glow rim (nsGlowRim). A picture of the link in this
- *    simulation, not a nerve.
- *  - D18 THIRD PERSON (setCameraPose(ns-camera pose | null)): the arm hangs on the EYE (eyeRig), the camera can leave the
- *    head; the head and face are drawn in place (copies) from headInPlace, the face ghost fades, the body is solid over the
- *    brain except a small window at the crosshair while it is on a motor area; distances and the far plane are measured
- *    from the camera; bodyKeepOut() gives the boom its keep-out spheres.
- *  - D19 MIRROR BODY: a twin of every body mesh and arm mesh (shared geometry and pose matrices, own opaque materials
- *    shaded by the same rule), under one ns-mirror reflection matrix (det < 0). R558: at the start and after a reset it
- *    is the literal reflection of your posed body in a vertical plane just in front of your toes and fingertips
- *    (ns-mirror mirrorReflectionPlacement, set from the posed body, independent of the brain); setMirrorView for the turn,
- *    the push along the ground or a whole ns-mirror state; tinted only where it lies beyond the brain's nearest point
- *    (BEHIND_GLASS) and dimmed behind the motor areas (ns-colors region backing); index-only LOD copies (2.5 mm at full
- *    quality, coarser first on slow renderers), built a few per frame; mirrorPartAt(x, y) names the part under a point.
- *  - P2 STRIP RELIEF: the lit motor areas (and the legacy strip) take the brain's rigid normal and the far-eye view vector
- *    under the perspective squash (patchRigidNormalShaders), as the glass did in round 4.
- *  - Retired with the DOM buttons: orbitIconSvg, the arrow plan (arrowPlanFor, projectArrowAnchors) and the pointer pins /
- *    DOM hold timers. Kept as unused pure exports for the round-3/4 tests until the integrator retires them:
- *    placeOrbitArrows, orbitArrowLayout, orbitArrowHit, arrowGapPx, ARROW_PLACEMENT, armEnvelopeHits; setArmEnvelope is
- *    a recording no-op.
- * R558 (user Message 2: an optogenetic-style glow with one colour / shade per area, the same on all three items, and a
- * fix for the confusing connecting lines):
- *  - AREA COLOURS (ns-colors AREA_COLORS / AREA_LOOK): every motor area has its own colour (one hue family per body
- *    part). regionDisplayStyle gives each area a calm tint of it at rest and, while active, its glow colour as emission
- *    plus a matching fresnel rim (applyRegionStyle). The shared activity ramp no longer colours areas or muscles.
- *  - MUSCLES glow in the colour of the area that drives them (assignMuscleAreas from the glow links: the stronger drive
- *    wins), shaded toward that colour, with a fresnel rim (and once a soft additive halo shell, MUSCLE_HALO: off since
- *    20 November 2026, it made lit muscles read as translucent); one call shades
- *    your body, its in-place head copy and the mirror body, so all three match. Muscles lit only by an opposing-action
- *    hint stay faint (AREA_LOOK.hintGain, no halo).
- *  - LINES (GLOW_LINK.mode 'held', R558 Messages 48 and 56): one line per lit area, in the area's colour, held for as
- *    long as the area is lit. It runs from the lit strip part to the muscle group it drives on the mirror body; with
- *    no mirror body shown it runs to your own body instead. The fan of ribbons to both bodies stays gone.
- *  - HUD: the legend bar is the glow strength; chips explain the colour families (HUD_LEGEND_FAMILIES); the info panel's
- *    swatch and meter use the area's colour.
- * Scientific limits (unchanged): every colour, opacity and label is a simulated, unitless DISPLAY of virtual inputs;
- * regions are control regions of a representative map, not cortical borders, and the face layer is a displaced view,
- * not something a person can see from their own eyes.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { SEGMENTS, HAND_SEGMENTS, skinApply, twistMapsFor } from './ns-rig.mjs';
 import { twistSkinPlan, twistPoseMaps, TWIST_TABLE_STEPS } from './ns-rig.mjs'; // 18 November 2026 (performance): the arm's skin on the graphics card
 import { ARM_DEFAULTS } from './ns-arm.mjs';
@@ -166,13 +166,13 @@ import * as NsBrain from './ns-brain.mjs';
 import * as NsMath from './ns-math.mjs';
 import {
   activityColor, activityColorCss, ACTIVITY_GLOW, RAMP_STOPS_LINEAR as SHARED_RAMP, hexToLinear, RAMP_LABEL, KEY_COLORS,
-  // R558 (Message 2): one colour per motor area, shared by the area and the muscles it drives on both bodies.
+
   AREA_LOOK, AREA_FAMILIES, areaRecord, areaRestTint, areaGlowInto, areaNeonInto, areaFamilySwatchCss, bodyPartArea, glowStrengthLegendStops,
-  // R558 (Message 18): the muscle look (per-muscle tones, storey shade, tendon ends, tissue light).
+
   MUSCLE_LOOK, MUSCLE_TONES, muscleToneKey, muscleToneFallback, assignMuscleTones, muscleBaseInto, muscleGlowGainScale, EYE_LOOK, eyePartOf, muscleTendonScale, muscleFibreScale,
-  // R558 (Messages 25 to 29): the comic cel look of the bodies (bands, rim, highlight shapes, ink).
+
   BODY_CEL,
-  // R558 (Message 22): the power-up charge of an activation (one shared start time per area; the same rule in GLSL).
+
   POWER_UP, powerUpGlsl, glowIntensity,
   // 18 November (MAP): the shudder of a switched-on area's tissue and the blink of its light (shared with the links).
   shudderGlsl, powerUpEnvelope, powerUpBlink
@@ -191,10 +191,10 @@ import * as RayBvh from './ns-raybvh.mjs';
 import * as NsCollide from './ns-collide.mjs';
 import { readAppliedArmPose } from './ns-body-arm-bridge.mjs';
 import { SHOULDER_GIRDLE_INFO } from './ns-assets.mjs';
-// R558 (Message 20): outlines where limbs and bodies overlap (an ID pass of the body meshes and a screen-space line pass).
+
 import { createOutlinePass, outlineGroupForArmSegment, outlineGroupForBlend, outlineGroupForPart, outlineGroupForShares, OUTLINE_GROUPS, OUTLINE_FACE_EDGE_GROUP } from './ns-outline.mjs';
 import { createGhostPass, seeAreaCode } from './ns-see.mjs'; // 18 November 2026 (SEE): hidden limbs drawn over the part in front; 19 November: everything hidden
-// R558 BB (Messages 24, 29): the comic ink look of the brain: folds from the atlas geometry, cel bands, ink and hatching
+
 // on the motor areas, inked contours and a crisp highlight on the glass.
 import { BRAIN_KEYS, BRAIN_INK, foldDepth, foldGrid, foldShade, envelopeNormals, reliefDepth, reliefShare, stripCover, patchAreaInkShaders, areaInkUniformValues, glassInkGlsl, glassInkUniformValues, GLASS_INK_HEAD, BRAIN_FLESH, BRAIN_FLESH_LOOK, cortexFleshGlsl, CORTEX_FLESH_HEAD, brainPickGainInto } from './ns-brain-ink.mjs';
 
@@ -224,7 +224,7 @@ import { ARTERY_LOOK, VEIN_LOOK, STRIP_GIVE, BODY_VESSEL_LOOK, VEIN_COURSES, bra
 import { hemisphereSideOf, partedPositions, partedOnBrain, partedBridging } from './ns-brain-part.mjs'; // 20 November 2026: the vessels follow the parted halves
 // 18 November 2026 (package DETAIL): smoother shading normals of the decimated body meshes (ns-detail smoothNormalField).
 import { smoothNormalField, boneEndWeights } from './ns-detail.mjs';
-// 20 November 2026 (the owner, Messages 195 / 196): the raw look, one matte light on everything (ns-raw-look RAW_LOOK).
+
 import { RAW_LOOK, patchRawShaders } from './ns-raw-look.mjs';
 import { seenContactMap, seenLightMap } from './ns-muscle-seen.mjs'; // 21 November 2026 (section 188): the muscles seen side by side, and the light seen on each
 import { FACE_MOVE, FACE_SHAPE_KEYS, buildFaceMoves, applyFaceMoves, faceWeightsKey, faceMuscleOf } from './ns-face-move.mjs'; // 20 November 2026 (FACE): face movements you can see
@@ -232,7 +232,7 @@ import { FACE_MOVE, FACE_SHAPE_KEYS, buildFaceMoves, applyFaceMoves, faceWeights
 // not lift (the fill alone), and of a lifted muscle (its gap plus the fill). Anything larger is refused (scene_input).
 const STACK_FILL_CAP_MM = Math.max(...Object.values(BODY_STACK_RULE.fill.mm)) + 0.01;
 const STACK_LIFT_CAP_MM = Math.max(...Object.values(BODY_STACK_RULE.gapMm)) + STACK_FILL_CAP_MM;
-// R558 (Message 32): a muscle CARRIED on lifted muscles (ns-body BODY_STACK_RULE.carry, exact ids) may move as far as what
+
 // it rides on can push it: the largest lift, its own fill and theirs, the carry margin and the source tolerance.
 const STACK_CARRY_CAP_MM = STACK_LIFT_CAP_MM + 2 * STACK_FILL_CAP_MM + BODY_STACK_RULE.carryRule.marginMm - BODY_STACK_RULE.carryRule.coverMm;
 const STACK_CARRY_IDS = new Set(BODY_STACK_RULE.carry.map(r => r.id));
@@ -249,30 +249,30 @@ export const CAMERA = Object.freeze({ fovYDeg: 110, near: 0.02, far: 500 });
 
 /** Display materials. Hex colours are sRGB (Three converts them to its linear working space). */
 export const MATERIAL = Object.freeze({
-  // R558 (user Message 24: "I liked the space black background"): back to the near-black space background (0x05070b).
-  // Message 22 had turned it into a cool slate gradient (backgroundGradientSlate below, kept for reference; backgroundGradient null
+
+
   // here means clinicalBackground draws nothing and the flat colour is used). Black also gives the glows and highlights
-  // their contrast (Message 25: "Contrast and high dynamic range are still visually key").
+
   background: 0x05070b,
   backgroundGradientSlate: Object.freeze({ centre: 0x465259, edge: 0x1e282f, centreX: 0.5, centreY: 0.42, radius: 0.78, ditherLsb: 1.5, size: 512 }),
   backgroundGradient: null,
-  // R558 (Message 18, "visceral and fleshy but never disgusting"): a softer ivory (was 0xe9dfc4, which glared white
+
   // under the headlight next to the muscles) and the fallback muscle colour = the first natural muscle tone of ns-colors
   // MUSCLE_TONES (was 0x7a2f24, a dark saturated raw-meat red); each muscle normally draws its own tone (muscleBaseOf).
-  // R558 (Message 22, clinical): a clean ivory-white like a bone model (0xd9cdb3 -> 0xe6dfd1, OKLCH 0.851 0.037 86 ->
+
   // 0.905 0.020 85: less yellow), a little smoother (roughness 0.7 -> 0.64).
   bone: 0xe6dfd1, // clean ivory-white
-  // R558 (Messages 25, 29: "real specular highlights", crisp highlight shapes on bone): a little smoother (0.64 -> 0.5),
+
   // so the key light's highlight on bone is a compact lobe the comic patch can cut into a crisp shape (BODY_CEL.spec).
-  // R558 (user Message 54, "a bit of shine, a bit of glossiness"): 0.5 -> 0.38, a polished bone model.
+
   boneRoughness: 0.38,
   muscleBase: MUSCLE_TONES[0].hex, // rose red
   muscleHot: 0xff5a1e, // bright red / orange
   muscleEmissiveMax: 0.35,
   // Visual-clarity candidate: the nearest shell carries the outline; deeper layers stay faint.
   // Alpha values are display choices, not tissue optics or measured electrical activity.
-  // R5-bigbrain (R26, user note 2026-11-08T23:40Z: the glass with no motor activity "should be considerably more
-  // transparent and see-through. But it should be still obvious that it's a brain"): face-on alpha 0.025 -> 0.01, rim
+
+
   // 0.46 -> 0.34 at power 4 -> 5 (a narrower rim: the outline and the gyral walls stay, the broad veil goes), with
   // GLASS_READ crown 0.11 -> 0.035 / 0.75 -> 0.45. Measured at the default 1280x720 view (round5/R5-bigbrain-NOTES.md):
   // the glass adds 9.1 instead of 21.3 per colour channel over the non-motor glass (-57 %); motor areas unchanged.
@@ -299,58 +299,58 @@ export const MATERIAL = Object.freeze({
 /** Lights (display choices). Polish: a lower flat ambient plus a sky/ground hemisphere light gives the muscles and
  * bones shape (the ambient-heavy mix looked flat), and a weak camera-space rim light from behind separates silhouettes
  * from the dark background. The key light is still the camera headlight. */
-// R558 (user Message 22, clinical and surgical): bright, even examination light. The flat fill rises (ambient 0.5 ->
+
 // 0.8) and the sky / ground hemisphere is a clean cool white over a light neutral grey floor bounce (sky 0xdfe9ff ->
 // 0xeef4fc, ground 0x3a2622 -> 0x868a8e: the old brown-red bounce filled every underside with a murky blood-brown;
 // hemi 1.15 -> 1.35), the camera headlight is a little cooler and softer (white -> 0xf4f8ff, key 2.2 -> 1.9) so the
 // shading is gentle, and the cool rim stays for the silhouettes (1.1 -> 0.85, 0xbcd4ff -> 0xcfe0ff). Worked out for a
 // surface facing the eye: about 1.2 times the light of before (0.68 -> 0.82 x albedo), on its side away from the key
 // light 1.6 times (0.32 -> 0.51 x albedo), so shadows are soft, never murky.
-// R558 (user Message 25: "Let's not make things bland. Contrast and high dynamic range are still visually key"): the
+
 // even examination fill above flattened the bodies against the black. Less flat fill (ambient 0.8 -> 0.45, hemi 1.35 ->
 // 1.0) over a dark NEUTRAL floor bounce (0x868a8e -> 0x2e3034: shadows go deep again, but grey, never the old murky
 // blood-brown), a stronger cool-white key (1.9 -> 2.5) and a brighter rim (0.85 -> 1.3) to cut the silhouettes out of
-// the black. The muscle tones stay the clinical ones (Message 22).
+
 export const LIGHT = Object.freeze({
   ambient: 0.45, key: 2.5, keyColor: 0xf4f8ff,
   hemi: 1.0, hemiSky: 0xeef4fc, hemiGround: 0x2e3034,
   rim: 1.3, rimColor: 0xcfe0ff
 });
 
-/** R558 (user Message 25: "Contrast and high dynamic range are still visually key"; style guide: the power-up glow
- * "rendered high dynamic range: bright cores that bloom on the space-black background, selective"): the HDR picture
- * and its BLOOM (createHdrBloom). Display choices.
- * How: the main scene is drawn into a half-float multisampled target instead of the canvas, with exactly the colour
- * values, blending and anti-aliasing the canvas would get (same programs: three.js r170 writes a render target's own
- * colour space when it is flagged as an XR target, so the target holds the canvas's sRGB-encoded values; nothing is
- * clamped at 1). Everything at or below display white is therefore unchanged pixel for pixel (glass, areas, the
- * outline pass's ink, the HUD is HTML); only light ABOVE white, i.e. the glows and the brightest highlights, is new
- * information. That excess (above `threshold`, soft knee `knee`, a brightness-weighted average so single bright
- * pixels do not flicker) is blurred down a chain of `levels` half-size targets and added back up (a tent filter per
- * step, each coarser level weighted upGain), and the composite draws min(picture, 1) plus strength x the bloom, plus a white-hot core where the brightest
- * channel passes crossFrom (crossK x the excess, toward white): the TONE CURVE is the identity below white, so area
- * colours and the near-black ink stay exactly as they are. A muscle's power-up peaks (the charge front, the flash,
- * the ripple: power-up gain above muscleFrom) are brightened by muscleBoost x the excess, which pushes their cores past
- * white so they bloom (only while HDR is on; held glows are not boosted). Off on a software renderer, without
- * half-float render targets, and at the coarse quality levels (index >= offFromLevel: lite / lod); at the 0.75 and 0.5
- * render scales one fewer blur level.
- * Tuning: a first try (strength 0.85, every blur level added at full weight, muscleBoost 1.5, white-hot from 1.45, and
- * picture + bloom over white mixed toward white) turned a tapped hand's flash into a white blob with a wide halo, and a
- * looked-at motor area's flash into a white disc: the area's colour was lost. Now the bloom is added and clamped per
- * channel (an orange area's core goes yellow-orange, never white), from 1.1 (a held area glow, about 1.13 encoded at
- * its brightest channel, hardly blooms; a flash, up to about 1.6, does), with a moderate halo.
- * Measured costs are in the build report (frame rate before and after).
- * safeMax (12 November): the bloom's first pass reads every picture value clamped to 0..safeMax and drops a value that
- * is not a number. One such pixel used to be spread by the blur chain into a white square about 280 px across (seen at
- * one exact look, where the x-ray glass's rim term took the power of a number a rounding step below zero; that term
- * and the two like it are now kept at or above zero). No real picture value is near safeMax (a flash peaks near 3), so
- * the picture is unchanged. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const HDR_BLOOM = Object.freeze({
   threshold: 1.1, knee: 0.3, strength: 0.45, upGain: 0.7, levels: 5, crossFrom: 2.0, crossK: 0.25,
   // (offFromLevel 3 -> 1, 19 November 2026: the bloom goes with the x-ray pass at the first cheaper level, before any
   // resolution does: QUALITY_LEVELS has the measurement)
   // (muscleBoost 0.6 -> 0, 22 November 2026, LOOK2; hunt of update 64 H25: "At quality high the lit muscles flash
-  // white-hot instead of showing their area's colour"; Message 2, "the same corresponding color/shade across all 3
+
   // items"; section 191 gave the areas their own colour, never a white-out. The boost multiplied a muscle's whole flash
   // by up to 1.81 on all three channels, so an azure muscle's weak red channel, already raised by the flash's whitening,
   // reached display white with the other two: a white blob for 50 to 100 ms at every switch-on, on the full level only
@@ -489,11 +489,11 @@ void main() {
   return { begin, end, setSize, setLevel, state: () => ({ ...st, cpuMs: Math.round(st.ms * 100) / 100 }), dispose };
 }
 
-/** R558 (Message 22): the clinical background (MATERIAL.backgroundGradient) as a screen-filling texture: a radial
- * gradient from `centre` to `edge` drawn once into a small canvas (size x size, stretched to the window like any scene
- * background texture, so it is an ellipse on a wide window), with +-ditherLsb of noise per texel so the slow ramp does
- * not band. One texture, drawn by Three's own background pass: no per-frame work. null without a canvas (then the flat
- * MATERIAL.background is used). */
+
+
+
+
+
 export function clinicalBackground(THREE, doc, g = MATERIAL.backgroundGradient) {
   if (!THREE || typeof THREE.CanvasTexture !== 'function' || !doc || typeof doc.createElement !== 'function' || !g) return null;
   try {
@@ -534,7 +534,7 @@ export function glassAlpha(facing, body, rim, power) {
  * wider (a soft glow along the brain's outline and gyri in the glass's own pale colour: not cyan, gold or the activity
  * ramp, so it never reads as activity or the left arm). It eases in (inS) and out (outS) and ends on release; under
  * prefers-reduced-motion it switches without easing. Display only. */
-// R558 (issue hunt 2, Message 18: transparency must look clean, not "shard-like"): the held cue was a strong, wide rim
+
 // (opacity 0.9, power 2.4) that lit every grazing gyral wall inside the glass as jagged white glints. Now it is a
 // thinner (power 3.6), fainter (opacity 0.55) rim on the CROWNS only (rimGroove 1: no rim at all down in the sulci, where
 // the shards sat), so it follows the brain's outer outline.
@@ -561,9 +561,9 @@ export function heldCueRim(amount, o = HELD_CUE) {
  * compatibility. The x-ray pass covers only the GLASS_XRAY subset; the glass DEPTH pass sorts front-to-back
  * (transparentSortNs) so occluded deep layers fail the depth test early.
  */
-/** R558 (Message 7): the V tips are drawn last of the transparent list and without a depth test, i.e. on top of the
- * scene (see makeArrowRig). Both sets share one order, so where a brain tip and a mirror tip overlap Three's
- * back-to-front sort draws the nearer one on top, which is also the one a pick returns first. */
+
+
+
 export const ARROW_RENDER_ORDER = Object.freeze({ brain: 100, mirror: 100 });
 export const RENDER_ORDER = Object.freeze({
   strip: 2, marker: 3, stripDepth: 4, glassXray: 1, glassDepth: 5, glass: 6,
@@ -682,7 +682,7 @@ export const MSAA_AT_LOW = Object.freeze({ on: true });
  * Costs nothing (one fewer change per frame). true = the swell at every level, as before. */
 // 22 November 2026 (the combined check of update 68: at Low the brain then no longer visibly beat: flat brain pixels
 // changed by at most 1 level of 255, as still as under reduced motion, because the swell was the only part of the beat
-// one could see; the owner asked for a living, beating brain). flushAtLow: at Low the beat is carried by light instead
+
 // of shape: the beat's flush is raised from BRAIN_LIVE.beat.flush (0.007) to this, at Low only. It changes colour, not
 // the outline, so the edge does not step. null = the same flush as every other level.
 export const LIVE_AT_LOW = Object.freeze({ swellAtLow: false, flushAtLow: 0.03 });
@@ -708,40 +708,40 @@ export function antialiasFor({ antialias = 'auto', quality = 'auto', rendererNam
  *    triangles, not pixels (SwiftShader: 975 k triangles per frame at the default view, 3-4 fps at any render scale;
  *    round4/R4-scene-NOTES.md). The motor regions, outlines, marks, the player's arm and every colour are unchanged.
  */
-/** 19 November 2026 (the owner: "Performance and reliability should be our number one priority. even if that means
- * extreme simplicity and streamlining ... everything should look a lot more like the loading screen models instead of
- * what you have right now, which is overkill"). SIMPLE_LOOK: the bodies, the arm and the mirror body are drawn as the
- * loading picture draws its models: plain smooth-shaded standard materials. The comic bands, painted fibres, wet
- * highlights and ink (muscleLookPatch, comicPatch), the ink outline pass, the hidden-limb ghost pass and the HDR bloom
- * are not applied and not run. The older look's code stays behind this one switch. */
-// 19 November 2026, later (the owner, after body update 35: "Muscles and bones look awful. Extremely low quality. Can we
-// please go back to the art style before the overhaul a while ago. Back when it was borderlands-telltale"): false
+
+
+
+
+
+
+
+
 // again. The bodies are drawn in the painted comic look of 18 November (smooth painted shading with fibre bundles,
 // tendon ends, ink outlines) with what was asked for since: a satin surface with little gloss, a steady light with
 // no blink or shudder, a near-black backdrop, no vessels. The plain look's code stays behind the switch.
 export const SIMPLE_LOOK = false;
-/** 'cel': the early comic look (BODY_CEL_EARLY, patchComicShadersCel); 'painted': the look of 18 November (BODY_FLESH).
- * 20 November 2026 (the owner, Message 195: "The new look aesthetic you've provided in the recent most images is good.
- * Apply it"; Message 196: "New look for everything not just body"): 'raw', one matte light and nothing drawn on top
- * (ns-raw-look RAW_LOOK, patchRawShaders), with each muscle GROUP in its own tone (ns-colors MUSCLE_GROUP_TONES). It
- * follows the one switch RAW_LOOK.on: false brings the early comic look back ('cel') everywhere. */
+
+
+
+
+
 export const BODY_STYLE = RAW_LOOK.on ? 'raw' : 'cel';
-/** 20 November 2026 (the raw look): the ink lines of the outline pass (ns-outline setInk: opacities of the strong line
- * between limbs and bodies, the silhouette, the inner depth step and the parting between muscles; and the motor strip's
- * line, its opacity and width in CSS pixels). The reference pictures have no line at all, so at first the bodies got
- * none, and no depth shading either (occlusion off, kept). The motor strip keeps a thin dark contour (a judge panel:
- * without it the pale bands of the strip's areas melted into the pink brain; it is the game's map, not a look): `strip`,
- * `stripCss`.
- * Later (the owner, Message 207: "And everything should get clear outlines."): the bodies, the game arm and
- * the organs get the outline pass's lines again, all by the raw look's ONE ink rule (ns-raw-look RAW_LOOK.ink: one
- * near-black, one width, one opacity, the same for the strip's contour, the brain's outline and the arrows): the strong
- * line where one limb or body lies over another and the silhouette of each body against the room or the brain at the
- * ink's width and opacity, the line of a depth step inside a limb lighter and thinner (innerAlpha, innerCss); no
- * parting between touching muscles (faint 0: the group tones and the steps between touching muscles, Message 202, tell
- * them apart). widthsCss: bold, inner, fine in CSS pixels on a near body; taperMin: a far body (the mirror body) keeps at
- * least this share of the width, so its limbs stay outlined. The brain's own outline and its eyes' and nerves' (brain,
- * brainCss) are drawn like the strip's line. The strip's blocks need no line of their own: the black gap between them
- * (REGION_SLICE) is their outline. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const RAW_INK = RAW_LOOK.ink;
 export const RAW_OUTLINE = Object.freeze({ alpha: Object.freeze([RAW_INK.alpha, RAW_INK.alpha, RAW_INK.innerAlpha, 0]), strip: RAW_INK.alpha, stripCss: RAW_INK.css, occlusion: false,
   widthsCss: Object.freeze([RAW_INK.css, RAW_INK.innerCss, 0.6]), colour: RAW_INK.colour, taperMin: RAW_INK.farShare, brain: RAW_INK.alpha, brainCss: RAW_INK.css });
@@ -761,15 +761,15 @@ const faceEdgeOutline = id => { if (!FACE_EDGE_INK.on) return false; const m = f
 export const RAW_TENDON_CUT = Object.freeze([0.55, 0.9]);
 /** The bones' colour: the raw look's ivory (the reference pictures' RGB 232, 224, 205), else MATERIAL.bone. */
 export const BONE_COLOUR = BODY_STYLE === 'raw' ? RAW_LOOK.bone : MATERIAL.bone;
-// 19 November 2026 (the owner: "Resolution for the body and the mirror body are far, far too low. They need to be far,
-// far higher. And far, far cleaner and far, far clearer ... sharp and not blurry or extremely pixelated. Or rough or
-// patchy"). On a slow frame the automatic controller used to halve the picture's resolution and then swap the bodies
+
+
+
 // for copies clustered at 4 to 7 mm: blurred, blocky and patchy, on exactly the high-density screens that are slow to
 // fill. The steps are now gentle and none of them touches the meshes: the picture never goes under 0.6 of the screen's
 // own pixels (it was 0.4) and the bodies always keep their full meshes. A slow machine gets a slower frame, not a
 // rough body. (Before: 1, 0.75, 0.5, 0.5 lite, 0.5 lite with 2.5 / 4 mm copies, 0.4 lite with 4 / 7 / 2.5 mm copies.)
-// 19 November 2026, later (the owner: "find a way for ... the bodies to be high resolution, yet not destabilize
-// performance"). THE PICTURE'S RESOLUTION IS THE LAST THING GIVEN UP, NOT THE FIRST. The first cheaper level used to
+
+
 // be a resolution step, which blurs the bodies; the two passes that only decorate (the glass x-ray of the deep brain
 // and the bloom of light above white, with the half-float target it needs) went last. Measured on a drawing buffer
 // too large for the lead's graphics card (5120 x 2880, 24.1 ms a frame): without the x-ray 21.8 ms, without the bloom
@@ -1333,12 +1333,12 @@ export function patchGlassShaders(vertexShader, fragmentShader) {
 // are lit from the same side. The groove input nsSulc is first the hull depth below and, once the background job has
 // run, the glass fold depth of ns-brain-ink (BRAIN_INK.glassFold, see glassFold in createScene).
 export const GLASS_READ = Object.freeze({ crownOpacity: 0.035, crownBright: 0.45, grooveLight: 0.38, grooveAlpha: 0.3, rimGroove: 0.65, lightDir: Object.freeze([0.6, 1.5, 1.8]), sulcLoMm: 1.5, sulcHiMm: 9, directions: 320 });
-/** R558 (user Message 18, "transparency effects too"; T): the glass clears next to the motor strip. In the start view the
- * neighbouring gyri's glass (in front of the strip in projection) laid a whitish veil over the motor areas (the left-arm
- * areas read lavender-grey instead of blue). Each glass vertex gets its closeness to the strip (1 on it, smoothly 0 at
- * radiusMm, stripProximity); the shell's alpha is multiplied by 1 - clear x closeness, so the glass stays a glass brain
- * everywhere else and the motor areas are seen through clear glass. Display choice. A geometry without the attribute
- * reads 0 (unchanged glass). */
+
+
+
+
+
+
 // R558 BB2: the glass OVER the strip (glassFold's stripCover) clears too, and a cleared glass keeps a tenth of its alpha
 // (clear 0.8 -> 0.9), so the strip's folds are not veiled; the contours and inked sulci of the glass fade with it.
 export const GLASS_CLEAR = Object.freeze({ radiusMm: 7, clear: 0.9 });
@@ -1396,8 +1396,8 @@ export function patchGlassReadShaders(vertexShader, fragmentShader, { flesh = Bo
   const hook = GLASS_FRAGMENT_HOOKS.find(h => fragmentShader.includes(h));
   if (v < 0 || !hook || !fragmentShader.includes('outgoingLight')) return null;
   const ve = v + GLASS_VERTEX_HOOK.length, f = fragmentShader.indexOf(hook);
-  // 20 November 2026 (ns-brain-gap; the owner: "Through the gap, you should be able to peak into the brain's inner
-  // structures"): each half's cortex is cut away next to the gap (the depth pre-pass leaves out the same fragments) and
+
+
   // the inner parts and the cortex's cut are drawn in atlas colours. Needs the nsGap attribute; a geometry without it
   // reads 0 (never cut, flesh).
   const G = gap ? brainGapGlsl() : null;
@@ -1476,39 +1476,39 @@ export function patchOverBrainShaders(vertexShader, fragmentShader, { edge = BOD
   return { vertexShader, fragmentShader: 'uniform vec4 nsOvl;\nuniform vec4 nsOvlWin;\n' + fragmentShader.slice(0, f) + body + fragmentShader.slice(f) };
 }
 export const ARM_SEE = Object.freeze({ radiusFrac: 0.11, edge: 0.6, alpha: 0.22, rimAlpha: 0.85 });
-/** R558 (the user's notes of 2026-11-10: "the individual's head is entirely gone", then "If that's the first person
- * view, then the camera should really be sitting on top of the shoulder and not show the back of the body"):
- * IN THE ORDINARY VIEW YOUR OWN BODY IS DRAWN ONLY IN FRONT OF YOUR FACE.
- * What was wrong. To keep the whole left arm in view, the picture camera of the ordinary view backs away from the eye
- * along the line of sight (about 0.3 m at the start, more for a long reach). From there it looked at the back of your
- * own neck, shoulders and trunk, which filled the lower third of the screen, and at a neck that ended in a stump,
- * because the head is never drawn around the camera. That is neither a first-person view (you cannot see your own back)
- * nor a view from behind (the head was missing).
- * The rule now. In the ordinary view a point of your own body (trunk, neck, legs, right arm; never the left arm you
- * control) is drawn only in front of the upright plane through your eye point that faces the way your body faces (the
- * plane of your face): hidden up to planeHideM in front of it, fully drawn from planeFullM, soft in between. The legs
- * use legsHideM / legsFullM instead (behind the plane), so each thigh is drawn whole from the hip joint rather than as
- * a stump that fades in at mid-thigh (viewed both ways). What is left is what you see of yourself without a mirror:
- * your lap, knees and feet, and a forearm and hand resting in front of you. Your back, shoulders, neck and head are behind that plane, however far the camera has backed away and
- * wherever you look. Fragments below `cutoff` are not drawn at all, so a hidden part never blocks what is behind it.
- * Tried and not kept (viewed in the browser): a plane square to the line of sight, with a ball around the eye. Looking
- * down it showed the lower ribs, spine and pelvis from behind as a cut-off trunk. Drawing the head in place, see-through
- * where it covers the motor areas, put a grey-brown smudge over the mirror body and the leg areas at the crosshair.
- * The view from behind (E) draws the whole body, head and face in place, as before; the change between the two views
- * fades with ns-camera's own first-person share. With the camera at the eye (no backing away) the rule is off and the
- * round-3 near-eye rule stands. pickFrom: a click on your own body counts only where it is drawn at least this much.
- * Display only: the pose, the arm fit, the gaze and the camera are untouched. The eye point is the anatomy's own eye
- * reference in the body frame; it is not a measured eye. */
-/** R558 (user note 2026-11-11: "No invisible or transparent body parts", "Transparency effects should not be applied to
- * your body when the glass brain is overlapping or near"): your own body is always drawn solid. With this on, none of
- * the see-through rules is applied to an own-body material: not the arm's window at the crosshair (ARM_GHOST / ARM_SEE),
- * not the torso's look-down translucency (BODY_TRANSLUCENT), not the window over the brain's outline (BODY_OVER_BRAIN)
- * and not the first-person plane rule (FIRST_PERSON_BODY). The materials stay plain opaque materials, drawn in the
- * opaque pass with depth written, so the glass brain is blended over the body where it is in front and is hidden by
- * the body where the body is in front, like any solid thing behind or in front of glass. The camera now sits at the
- * eye (scene/example/eye-view-r558.mjs), so nothing has to be cut away to see past your own back. The retired rules
- * stay in this file as pure functions (their tests and the engineering pages still name them) but are not applied.
- * The mirror body's behind-the-glass colour tint is not a transparency of your body and stays. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const OWN_BODY_SOLID = true;
 export const FIRST_PERSON_BODY = Object.freeze({ planeHideM: 0.03, planeFullM: 0.15, legsHideM: -0.16, legsFullM: -0.04, cutoff: 0.02, pickFrom: 0.35, minBackM: 0.02 });
 /** Fragment patch for FIRST_PERSON_BODY (pure). Uniforms: nsFp = (the eye point in view space, metres; amount 0..1),
@@ -1562,15 +1562,15 @@ export function firstPersonShare(aheadM, amount, legs = false, o = FIRST_PERSON_
  * low arc along the picture's lower edge between the collar bones. */
 export const NECK_SHADE = Object.freeze({ hostId: 'FJ3290', centreMm: Object.freeze([0, -100, 1356]), radiiMm: Object.freeze([92, 62, 88]),
   core: 0x0b0607, rim: 0x4a2a27, rimFrom: 0.2 });
-/* 18 November 2026, late (package FLAT; the owner: the dark shape "reads as a black hole"). The eye view's camera now
- * stands behind the collar bones (ns-camera EYE_DOLLY), where both shoulders are in the picture, and from there the
- * root of the neck is seen from above. Instead of a dark plug at the root, your own NECK is drawn there: the neck
- * muscles and the neck vertebrae (the in-place twins of the meshes that are never drawn round the eye itself, part
- * 'neck') are shown in the eye view whenever the camera stands at least minCameraM from the eye, so they are always
- * well in front of the camera. Only their top, where they would meet the skull that is not drawn, goes into a soft
- * shadow (shade: an ellipsoid riding on the top neck vertebra, hostId, in its rest frame: centreMm / radiiMm; nearly
- * black where you look straight into it and fading to clear toward its outline from softFrom, so it has no edge).
- * NECK_SHADE's dark shape on the breastbone is no longer made. A display device; no licensed mesh is changed. */
+
+
+
+
+
+
+
+
+
 /* 19 November 2026: minCameraM 0.06 -> null: the neck is not drawn in the eye view any more (see EYE_COLLAR below). */
 export const EYE_NECK = Object.freeze({ minCameraM: null,
   shade: Object.freeze({ hostId: 'FJ3176', centreMm: Object.freeze([0, -100, 1478]), radiiMm: Object.freeze([70, 66, 42]), core: 0x0b0607, softFrom: 0.05 }) });
@@ -1597,12 +1597,12 @@ export const EYE_COLLAR = Object.freeze({
   // of the breastbone and the inner ends of the collar bones. Now lower and smaller: radii 90 x 76 x 44 -> 78 x 66 x 22
   // and its centre 16 mm higher, so its top is 6 mm lower: it lies below the collar bones, whose inner ends and the
   // top of the breastbone show again. No opening at looks all round, seen on pictures.)
-  // 19 November 2026, later (the owner: "get rid of the red plate where the head used to be. If we're not going to have
-  // a head, let's just have bones then"): on false: the cap is not drawn. The root of the neck is open and shows the
+
+
   // bones under it (the top of the rib cage and the spine).
   cap: Object.freeze({ on: false, centreMm: Object.freeze([0, -72, 1358]), radiiMm: Object.freeze([78, 66, 22]), color: 0xa5323a, roughness: 0.62 }),
-  // 20 November 2026 (the owner: "make sure the occluding muscles, neck muscles are gone, and the transition between is
-  // smooth. So you don't just have, part of a muscle ripped off and detached"). hide: a muscle or bone of your own body
+
+
   // with at least shareFrom of its vertices inside the box is not drawn at all in the eye view (it is gone, not cut):
   // the neck's own muscles that reach down to the collar (the posterior scalenes, semispinalis cervicis, the left
   // levator scapulae), the upper fibres of the trapezius (71 % of them are in the box; what the box left was a torn
@@ -1610,9 +1610,9 @@ export const EYE_COLLAR = Object.freeze({
   // rest vertices in the breastbone's baked frame (collarCuts). What the box still cuts is 2 to 5 % of four muscles and
   // of the first thoracic vertebra: their tops, at the back. From outside (the head in place) everything is drawn.
   hide: Object.freeze({ shareFrom: 0.2 }),
-  // 20 November 2026, evening (the owner: "ensure, especially with the right arm, that muscles do not become transparent
-  // under certain angles, because in previous versions, if you hold the arm up in certain angles, muscles will disappear
-  // and turn transparent"). cut false: the box no longer CUTS anything; the clean end at the collar is made by `hide`
+
+
+
   // alone. Cause found: the box's clipping planes were on every material of your own body (the muscles of a class share
   // one material, so all of them), so whatever came into the column over the collar was cut away in the eye view: your
   // right hand held up over the head vanished but for two finger tips, the deltoid by the neck was cut open with a look
@@ -1704,25 +1704,25 @@ export function weldNormalsByPosition(positions, normals, { minDot = 0.2, groups
   }
   return { shared, changed, groups: g };
 }
-/** R558 (user Message 30: "The bone tips probably shouldn't be so spikey"): the DISPLAY copy of a finger or toe phalanx
- * (a documented derivative; the OBJ files and the arrays passed in are never changed).
- * Diagnosis (pictures and the mesh files): the BodyParts3D phalanges of the 99 % reduced set are coarse (distal
- * phalanges 112 to 440 triangles, a shaft of 2 to 6 vertices per slice), with small spurs and folds left by the
- * reduction; bare of soft tissue and inked by the outline, the distal ones read as thin pointed hooks. (The larger
- * cause, the lifted finger and toe tendons diving back to their insertions as hooked slivers, is fixed in ns-body
- * BODY_STACK_RULE.digits.) This copy:
- *  1. Taubin smoothing (lambda, mu: a shrink step and an inflate step, so the shape keeps its size) of `passes`
- *     passes over the mesh welded by position (the files repeat vertices along seams), which irons out the reduction's
- *     spurs and creases without rounding the joint ends away;
- *  2. on a DISTAL phalanx (distal: true), the rounded tuft the reduction cut down to a cone (the measured left thumb:
- *     a 25 mm cone from a 4 mm radius down to a point; a real distal phalanx ends in an ungual tuft about as wide as its
- *     shaft): the end with the smaller mean radius is the free tip; over its last tipLenShare of the length no vertex
- *     lies closer to the bone's axis (the centre line of that end third) than a capsule of radius R would put it: R
- *     at a distance d >= R from the extreme point, sqrt(R^2 - (R - d)^2) closer to it (a round cap), where
- *     R = tipShare x the mean radius of the MIDDLE third (the shaft), at least minTipMm and at most maxTipMm; the push
- *     fades out over the inner fadeShare of that length, so there is no ridge. Vertices are only pushed outward from
- *     the axis, never along it: the bone keeps its length and its joint end is untouched.
- * positions: flat xyz (source mm); indices: triangles. Returns a new Float32Array (null for an unusable mesh). Pure. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BONE_TIP_DISPLAY = Object.freeze({ lambda: 0.5, mu: -0.53, passes: 6, tipShare: 1.1, minTipMm: 1.8, maxTipMm: 4.5, tipLenShare: 0.45, fadeShare: 0.35 });
 export function boneTipDisplay(positions, indices, { distal = false } = {}, o = BONE_TIP_DISPLAY) {
   const n = positions && indices ? Math.floor(positions.length / 3) : 0;
@@ -2054,8 +2054,8 @@ export function regionStyleConstants() {
  * hovered region's identity tint added as emission. quantize: updates below 1/quantize activity are skipped. */
 export const REGION_RENDER = Object.freeze({
   // R558 (R32, "a little fleshy"): a moister surface (roughness 0.48 -> 0.36) and the tissue scatter below.
-  // R558 (Message 22, clinical): a clean satin finish again (0.36 -> 0.5), no wet sheen.
-  // R558 (user Message 54, "very ugly and matte ... add a bit of shine, a bit of glossiness"): glossy (0.5 -> 0.32), so
+
+
   // the key light draws a bright highlight along the gyrus crowns.
   // 17 November (keys): the hovered area lights up clearly (hoverEmission 0.14 -> 0.5 of its own colour).
   activityOpacityGain: 0.65, maxOpacity: 0.92, hoverEmission: 0.5, quantize: 256, roughness: 0.32, metalness: 0,
@@ -2068,9 +2068,9 @@ export const REGION_RENDER = Object.freeze({
    * never black in shade and glows a little warm toward its silhouette. tissueTint x tissueStrength x (tissueFloor +
    * (1 - tissueFloor) x a view-angle term) of the area's own colour is added to its lit colour. The geometry, the
    * folds, the area borders, the activity colours (emission) and the opacity rules are untouched. Display choice. */
-  // R558 (Message 22, clinical): a cleaner, weaker scatter (tint [1, 0.62, 0.58] -> [1, 0.84, 0.8], strength 0.42 -> 0.28),
+
   // so the areas read like a painted teaching model, not like raw tissue.
-  // R558 BB (Message 25, deep shadows): weaker again (0.28 -> 0.12), so the cel shadow bands can go dark.
+
   tissueTint: Object.freeze([1.0, 0.84, 0.8]), tissueStrength: 0.12, tissueFloor: 0.4, tissuePower: 2.2,
   /** Polish: the per-region borders inside a body-part territory are faint (they were full-strength and made the strip
    * look like cracked shards); each body-part GROUP (the on-brain label groups) gets one welded outline instead. */
@@ -2088,12 +2088,12 @@ export const REGION_RENDER = Object.freeze({
    * players), so the left-arm / other-body distinction reads at a glance. */
   territoryLine: KEY_COLORS.leftArmLine, territoryLineOpacity: 1, groupLine: KEY_COLORS.otherGroupLine, groupLineOpacity: 0.32
 });
-/** R558 (user, Message 6: "Maybe faintly highlight the opposing area on the brain to reset after brain activation ...
- * Agonist vs antagonist principles"): while a joint is held where an action put it, the area that brings it back gets
- * a faint, steady hint: the opposing action's own sub-band of that area (the same rule the look uses to pick an action,
- * ns-brain regionActionAt), or the whole area when that action has no sub-band of its own (pronation / supination).
- * Additive pale light over the area's own colour, never picked, no animation (calm under reduced motion). `color` is
- * linear RGB; a hint may bring its own colour. Display choices. */
+
+
+
+
+
+
 export const REGION_HINT = Object.freeze({ color: Object.freeze([0.62, 0.86, 1.0]), opacity: 0.28, renderOrderOffset: 0.2, minTriangles: 8 });
 /** R3-scene outline smoothing (smoothTerritoryOutline options, source mm): Chaikin rounds, lift off the surface, specks
  * shorter than minChainMm dropped. Display choices. */
@@ -2102,39 +2102,39 @@ export const REGION_HINT = Object.freeze({ color: Object.freeze([0.62, 0.86, 1.0
 // within about 65 deg.
 export const REGION_OUTLINE = Object.freeze({ iterations: 2, liftMm: 0.8, minChainMm: 4, quantum: 1e-3, decimate: 2, liftDir: Object.freeze([0, 0, 1]) });
 
-/** R558 (user Message 18: "We should be able to easily differentiate each brain node ... from each other"; issue hunt 1:
- * the borders between motor areas were sawteeth 20-40 px wide at 1600x900). Measured on FJ1801 / FJ1800 with the body
- * map: 4497 of the 8084 strip triangles have corners in two or more areas (the areas are narrower than the atlas
- * triangles), so whole-triangle areas interleaved into a patchwork that read as "flat triangles" and sawteeth. Now an
- * area is drawn PER FRAGMENT: the strip coordinate s (the same per-vertex coordinate the segmentation assigns by,
- * interpolated across the triangle) is looked up against the segmentation's own owner rule (ns-brain regionOwnerAt over
- * the hemisphere's owner list, sampled into exact runs: ownerRuns / ownerTextureData). Each area draws its own triangles
- * plus the neighbours' triangles that reach into its runs, and keeps only the fragments it owns, so every point of the
- * strip is drawn exactly once and the border is the smooth level line of s. The picker uses the same per-point rule
- * (ns-brain classifyRegionGaze), so what is drawn is still what is picked.
- * Borders are drawn in the same pass, constant in CSS pixels (screen gradient of s times the pixel ratio): a thin dark seam between areas of one body
- * part, a light line between body parts (cyan on the left-arm side), and the hovered / switched-on area outlined from
- * the inside. The opposing-action hint (REGION_HINT) is the hinted sub-band of s, soft-edged, in the same pass.
- * Display choices (colours, widths); the area extents are the body map's. */
-/** 20 November 2026 (the owner, Message 206: "let's actually make the motor strip completely segmented, so it's a bunch
- * of slice blocks with a little bit of gap in between"): every motor area is a separate block. Where two areas meet
- * along the strip (a seam inside a body part or the gap between body parts) a GAP of the abyss's black is drawn, halfS
- * of the strip coordinate on each side (the same on the picker: ns-brain classifyRegionGaze `sliceHalfS`, so a look into
- * a gap takes no area), never narrower than minCss CSS pixels a side so a far strip keeps its blocks (at the start view
- * that minimum is about the strip width of halfS; from further away the picture's gap is wider than the picker's, by
- * at most a pixel a side). on: false = the old seams. colour: linear, matte (the gap carries no light of its own and no
- * glow). The gap is the blocks' outline (Message 207): no other line is drawn round a block. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const REGION_SLICE = Object.freeze({ on: true, halfS: NsBrain.SEGMENT_DEFAULTS.sliceHalfS, minCss: 1.0, colour: Object.freeze([0.0012, 0.0011, 0.0013]) });
 export const REGION_BORDER = Object.freeze({
   /** Owner lookup resolution (texels over s 0..1; every run of the body map is wider than 0.02). */
   texels: 2048,
   /** Seam between two areas of the same body part: dark warm crease, half-width per side (CSS px), opacity. */
-  // R558 (Message 22, clinical): a neutral graphite seam (was a dark red crease [0.075, 0.022, 0.026], #4d292d).
-  // R558 BB (Messages 26, 28, style guide): the finest ink line of the hierarchy: near-black #0b0809 (linear here),
+
+
   // 1 CSS px across (0.5 each side) at 0.62 opacity, so neighbouring areas read as their own pieces without a heavy grid.
   // 17 November (keys): a clear dark GAP between neighbouring areas (0.5 px at 0.62 -> 1.1 px a side at 0.92), so each
   // area is a separate key (ns-brain-ink BRAIN_KEYS draws the bevel inside it).
-  // 19 November 2026 (the owner: the strip is "so liney"): the seam between two areas of one body part is a hairline
+
   // (1.1 px a side at 0.92 -> 0.45 px at 0.4): neighbours part by their colours; only the gaps between body parts stay dark.
   seamColor: Object.freeze([0.0033, 0.0024, 0.0027]), seamAlpha: 0.4, seamPx: 0.45,
   /** Line between two body parts (or at a map gap): warm ivory, the left-arm side in the territory cyan. */
@@ -2152,22 +2152,22 @@ export const REGION_BORDER = Object.freeze({
   // 17 November (keys): the hovered key's frame is wider and brighter (1.8 -> 2.8 px, glow 0.55 -> 1); the gold mark
   // of an area switched on earlier is thinner (1.4 -> 1 px), so it cannot be taken for the area that is on now.
   // 22 November 2026 (LOOK2; hunt of update 64 H21: "Every block you have tried gets a gold double outline, so a used
-  // strip is covered in gold lines"; Message 144, the strip "so liney"): activatedPx 1.0 -> 0, no gold frame on a
-  // tried block. The black gap that is every block's outline (REGION_SLICE) is painted over the frame's middle, so only
-  // its antialiased fringe showed, on both blocks of a shared border: gold, black, gold along every border of a used
-  // strip (a broader solid gold band at Low). A tried block keeps its quieter mark, the darker shade (ns-colors
-  // VISITED, section 126), lifted while the look is on it (section 191). 1.0 brings the frame back.
+
+
+
+
+
   hoverPx: 2.8, activatedPx: 0, highlightGlow: 1.0,
   /** Antialiasing ramp of every line (CSS px), never under aaMinDevicePx drawing-buffer pixels (at the 0.5 / 0.4 quality
    * scales a 0.6 CSS px ramp is under a third of a buffer pixel and the lines alias into stair steps). */
   aaPx: 0.6, aaMinDevicePx: 0.75,
   /** Hint (REGION_HINT): soft edge of the hinted sub-band (CSS px) and emission strength of the hint colour. */
   hintSoftPx: 7, hintGain: 0.45, hintAlpha: 0.12,
-  /** Tissue depth (Message 18, "visceral and fleshy"): the lit colour darkens by up to `cavity` where the strip dives into
-   * its sulci (the glass's own sulcal depth rule, sulcalDepth over the whole brain's support planes, cavityLoMm ..
-   * cavityHiMm), so the gyrus reads as a rounded, living fold instead of flat painted bands. Lighting only. */
-  // R558 (Message 22, clinical): softer (0.4 -> 0.28), so the sulci read as clean folds rather than dark crevices.
-  // R558 BB (Messages 24, 25): the fold depth now comes from the atlas's own brain geometry (ns-brain-ink foldDepth) and
+
+
+
+
+
   // the floors go deeper (0.28 -> 0.4 here, and ns-brain-ink BRAIN_INK.area.floorDark 0.5 on the lit light: a floor keeps
   // about 30 % of a crown's light), so the crowns stay lit, the floors go dark and the area colours still read on the banks.
   // R558 BB2: the cavity input is now the strip's own relief share (ns-brain-ink reliefShare), which also bands the light
@@ -2176,9 +2176,9 @@ export const REGION_BORDER = Object.freeze({
   cavity: 0.2, cavityLoMm: 1.5, cavityHiMm: 10
 });
 
-/** Owner runs of one owner list over the strip coordinate (pure): ownerAt(s) -> owner (any value compared with ===, null
- * in a map gap). Scans [0, 1] at `samples` steps; every change is refined by bisection to `tol`. A run narrower than
- * 1 / samples can be skipped (none in the body map). Returns [{ lo, hi, owner }], first lo 0, last hi 1. */
+
+
+
 export function ownerRuns(ownerAt, { samples = 4096, tol = 1e-7 } = {}) {
   if (typeof ownerAt !== 'function') fail('scene_input', 'ownerAt must be a function');
   const runs = [];
@@ -2394,7 +2394,7 @@ export function weldedBoundarySegments(parts, quantum = 1e-3) {
  * territory's outer border. The fill keeps the ONE shared activity ramp (same colours on brain and muscles); only a band
  * widthMm wide at the territory edge mixes toward the territory cyan (REGION_RENDER.territoryLine), so the left-arm
  * strip is still told apart from every other area when its activity is low (dark ramp colours) or high. Display only. */
-// R558 (Message 2): every area now has its own colour and the left-arm areas are the blue family, so the cyan band is
+
 // only a faint edge (mix 0.85 -> 0.3, glow 0.45 -> 0.12): at full strength it read as one more cyan area and hid the
 // colours of the border areas (shoulder, thumb).
 export const LEFT_ARM_RIM = Object.freeze({ widthMm: 2.5, mix: 0.3, alpha: 0.9, glow: 0.12 });
@@ -2467,14 +2467,14 @@ export function regionDisplayStyle(region, { activity = 0, activatedCount = 0, h
   const n = Number.isFinite(activatedCount) ? activatedCount : 0;
   const activated = n >= 1;
   if (SCAN_AS_BRAIN && isScanArea(region)) {
-    // 20 November 2026 (the owner, Message 199): an inter-effector area, where no movement is mapped, is drawn as the
+
     // brain itself (its crown colour, opaque, no light of its own), not as a black band. It still answers the look.
     for (let i = 0; i < 3; i++) { o.tint[i] = SCAN_BRAIN_LINEAR[i]; o.albedo[i] = SCAN_BRAIN_LINEAR[i]; o.emission[i] = 0; o.rim[i] = 0; }
     o.opacity = 1; o.glow = 0; o.activated = activated;
     return o;
   }
   if (areaRecord(region.id)) {
-    // R558 (Message 2, optogenetic look): every area has its OWN colour (ns-colors AREA_COLORS). At rest a calm tint of
+
     // it over the R32 tissue pink; switched on, a little more of it; active, the area emits its glow colour (strength =
     // ns-colors glowIntensity of the activity) with a matching fresnel rim, and its lit surface darkens so the emitted
     // colour carries the look. The muscles it drives glow in the very same colour (shadeMuscle).
@@ -2490,13 +2490,13 @@ export function regionDisplayStyle(region, { activity = 0, activatedCount = 0, h
     // brighter AND still its own colour.
     // 19 November 2026 (VISITED): an area switched on earlier rests dimmer (areaValue of its colour, areaLift of its
     // self-light), so the areas not tried yet are the bright ones; a lit area is as bright as ever.
-    // 21 November 2026 (ns-area-halo LOOK_GLOW; the owner: "Right now, there's essentially no glow"): under the look an
+
     // area shows its full colour and self-light whether it was tried before or not: a visited area under the look
     // emitted about what an untried area shows at rest, on 30 % of its colour. The dimming comes back when the look leaves.
     const seen = activated && !(hovered && LOOK_GLOW.unvisit) ? NsColors.VISITED : null, sv = seen ? seen.areaValue + (1 - seen.areaValue) * k : 1;
     const d = (1 - AREA_LOOK.areaDarken * k) * (Number.isFinite(AREA_LOOK.restValue) ? AREA_LOOK.restValue : 1) * sv;
     for (let i = 0; i < 3; i++) o.albedo[i] = o.tint[i] * d;
-    // R558 (Message 22): the faint resting self-light of the area's own tint (AREA_LOOK.restLift), gone once it glows.
+
     const lift = (Number.isFinite(AREA_LOOK.restLift) ? AREA_LOOK.restLift : 0) * (1 - k) * (seen ? seen.areaLift : 1);
     for (let i = 0; i < 3; i++) o.emission[i] += o.tint[i] * lift;
     o.glow = k;
@@ -2533,14 +2533,14 @@ export function boundaryEdges(indices, vertexCount) {
   return Uint32Array.from(out);
 }
 
-/** 20 November 2026 (the owner, Message 199: "Let's make the brain black areas where there's no mapped activity, just
- * transparent"): the strip's inter-effector areas (SCAN, chunk 'scan'; the game moves nothing there) were drawn near
- * black. They are pieces of the brain's own surface (the strip meshes are not in the brain's shell), so leaving them out
- * would open a hole into the dark: with SCAN_AS_BRAIN they are drawn as the brain is, in the cortex's crown colour
- * (ns-brain-ink BRAIN_FLESH_LOOK), opaque and without a light of their own, and the strip's dark contour (ns-outline
- * setStrip) leaves them out, so the brain reads as one surface between the coloured areas. */
-// (20 November 2026, later, the owner, Message 206: "perhaps let's go back to making the non-active parts of the motor
-// strip a black abyss": false again. The inter-effector areas are drawn in their own near-black, matte, so the coloured
+
+
+
+
+
+
+
+
 // areas stand out; and with REGION_SLICE every area is a block with a gap of the same black round it.)
 export const SCAN_AS_BRAIN = false;
 /** 21 November 2026 (ns-area-halo AREA_LIT): the look of a lit area's fresnel rim: its own neon colour, no white. */
@@ -2564,10 +2564,10 @@ export function regionGroupKey(region) {
   return 'other';
 }
 
-/** 18 November (MAP, owner: "a visual chunking principle for easy learning ... that chunking principle applies
- * throughout"): the CHUNK of a motor area (ns-colors AREA_COLORS chunk: leg, trunk, arm, hand, neck, face, mouth, scan),
- * which decides where the strip draws its wide dark gap between chunks (REGION_BORDER territoryPx; a thin seam inside a
- * chunk). Falls back to regionGroupKey for an area the colour code does not know. Pure. */
+
+
+
+
 export function regionChunkKey(region) {
   const rec = region && typeof region.id === 'string' ? areaRecord(region.id) : null;
   return rec && rec.chunk ? rec.chunk : regionGroupKey(region);
@@ -2856,30 +2856,30 @@ export function rectHitsConvexHull(hull, rect) {
   return true;
 }
 
-/** R4-integrator (D7): where the "Try this" line goes while the brain covers its place in the status card: a small chip
- * of chipMaxW x chipH CSS px (about the card line's width) inside the usable view (`usable`, CSS px { x0, y0, x1, y1 }:
- * left of the information column, above the portrait band). Candidates, in order: bottom right, bottom centre, top right,
- * top centre, bottom left (the bottom row stays above a bottomReservePx row kept for the look-around toast; the top left
- * is the status card itself). `clear(rect)` says whether a box is free (of the brain, the arrows ...).
- * R558 (motor strip fills the view): with topCentreFirst the order is top centre, bottom centre, top right, bottom
- * left: at the start the motor areas leave the top centre free (the notch between the two halves), so the line has one
- * steady place under the limits line; the bottom-right corner is the information card's and is not tried.
- * R558 (Message 7): the brain's forward arrow now sits at the top centre (the middle of the motor strip's frame's top
- * side). `beside` (its box, CSS px) puts the line just beside it first, right of it, then left of it, level with it,
- * so the two never collide and the line keeps its place near the top centre. `beside` may also be a list of boxes,
- * tried in order (the top arrow first, then the bottom arrows), and `under` (a box or a list) adds, after those, the
- * place centred just below each, above the bottom reserve: in a squarer window (4:3) the motor strip leaves no room
- * beside the top arrow, while the view below the strip is free.
- * R558 (issue hunt 2: looking down, the chip wandered to the middle of the view over your legs): topBandPx (CSS px)
- * keeps every candidate inside the top band of the usable view (its bottom edge at most topBandPx below the usable
- * top); with no clear spot there the result is null (ns-app then shows the line in the status card).
- * R558 (user Message 31, symmetry): `centreBelow` (a box, CSS px, or null): with topCentreFirst the first spots of all
- * are the chip CENTRED on the usable view's vertical centre line, just below that box (the brain frame's planned top
- * tip, which sits on the same centre line), then at the top of the view. They come before `prefer`, so the chip goes
- * back to the centre as soon as one of them is clear again (a tip moving across it while you look around sends it to
- * the other centred spot or aside for a moment; the centred spots never move with the look). Before, the chip sat
- * beside the top tip, to its right (1600x900: x 851-1131 round a tip at x 800).
- * Returns { x, y, w, h } or null when no spot is clear (the line then is not drawn). Pure. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const GUIDE_FLOAT = Object.freeze({ chipMaxW: 280, gapPx: 12, bottomReservePx: 48, besideMinW: 170, besideStepPx: 20 });
 export function guideFloatSpot({ usable, chipH = 40, clear = () => true, o = GUIDE_FLOAT, preferTop = false, prefer = null, topCentreFirst = false, beside = null, under = null, topBandPx = null, centreBelow = null } = {}) {
   if (!usable || ![usable.x0, usable.y0, usable.x1, usable.y1].every(Number.isFinite)) return null;
@@ -2909,7 +2909,7 @@ export function guideFloatSpot({ usable, chipH = 40, clear = () => true, o = GUI
   // R4-fix (review RP9): the spot the chip already has comes first while it stays clear, so the line does not jump
   // between screen places during one goal (prefer = { x, y, w? } of the last chip).
   if (prefer && Number.isFinite(prefer.x) && Number.isFinite(prefer.y)) order.unshift([prefer.x, prefer.y, Number.isFinite(prefer.w) ? prefer.w : w]);
-  // R558 (Message 31): ... but the centred spot comes before it (see centreBelow above).
+
   // (two centred spots: just below the planned top tip, then at the top of the view, which is clear where the top tip
   // is seen lower down: in third person, or while you look up)
   if (topCentreFirst) {
@@ -3207,12 +3207,12 @@ export function declutterLabels(items, { width, height, topPx = 0, obstacles = [
       const A = items[live[0]], B = items[live[1]];
       s0 = A.mirror === 1 || A.mirror === -1 ? A.mirror : B.mirror === 1 || B.mirror === -1 ? -B.mirror : A.x >= B.x ? 1 : -1;
     }
-    // R558 (user Message 31, symmetry): twins are always LEVEL. Seen straight on, their anchors (the same body part on
+
     // the two halves) project at one height and the labels mirror each other about the brain's midline; once the brain
     // is turned (or seen from the side) the anchors project at different heights (perspective), and both labels then
     // take the height halfway between them (and are clamped to the view with the taller one's height), so the pair
     // still reads as one row. Their sideways offsets stay mirrored round their own anchors.
-    // R558 check (Message 31): only where NO level place can be near both anchors (each label within its rings of its
+
     // own anchor: anchors more than about 2 x rings x dy apart in height, e.g. 104 px for the 22 px labels, as when the
     // brain is turned far or seen far from the side) is the pair placed as before, each label at its own anchor height
     // with the same mirrored offset, instead of being hidden (measured: "Face and neck" twins hidden at 120 px apart):
@@ -3346,11 +3346,11 @@ export function declutterLabels(items, { width, height, topPx = 0, obstacles = [
  * frames. Display choices (harness/run-R4-fix-6-shots markDots). */
 /** 19 November 2026: the depth offset that keeps the thin face muscles in front of the skull they lie on. */
 export const FACE_MUSCLE_OFFSET = Object.freeze({ factor: -2, units: -12 });
-/** 19 November 2026 (the owner: "have the whole brain light up slightly, faintly, with whatever color area is being
- * picked"): while an area is looked at or switched on the whole cortex lights up faintly in its colour; easeS: how
- * quickly it comes and goes. Faint by design: the keys stay the bright things. (21 November 2026: how much, and how,
- * is ns-brain-ink BRAIN_PICK_LOOK / brainPickGainInto: a gain on the cortex's own colour; `level` 0.06 was the share of
- * the area's glow colour ADDED, which turned the matte cortex lilac or grey-blue, a browser hunt's H25.) */
+
+
+
+
+
 export const BRAIN_PICK_TINT = Object.freeze({ easeS: 0.18, look: 1 });
 /** 19 November 2026: how the brain's eyeballs follow the player's look (updateBrainEyes): the share of the look's turn
  * they take, the most they turn either way (degrees), and the signs that make them turn the way the look goes as seen
@@ -3361,8 +3361,8 @@ export const BRAIN_EYE_TURN = Object.freeze({ gain: 0.7, maxDeg: 38, yawSign: 1,
  * an arm and of a leg. Display choices. */
 export const LIMB_FLASH = Object.freeze({ colour: Object.freeze([1, 0.86, 0.42]), alpha: 0.6, veil: 0.3, liftShare: 1.25,
   halfM: Object.freeze({ arm: Object.freeze([0.075, 0.06, 0.05]), leg: Object.freeze([0.12, 0.09, 0.065]) }),
-  // 19 November 2026, later (the owner: "let's have the whole limb highlight ... we should have this obvious highlight
-  // feature for basically all the controls"): the limb ITSELF lights (PART_GLOW below). bandAlpha: the share of the
+
+
   // earlier band of light that is still drawn over it (0: none; beside a lit limb the band read as a flat strip of
   // glass standing in the air).
   bandAlpha: 0 });
@@ -3661,10 +3661,10 @@ export function bodyMeshName(entry, id) {
   const eid = id || (entry && entry.element_id) || 'mesh';
   return `${label ? String(label) : 'body part'} (${eid})`;
 }
-/** 18 November 2026 (SMALL, audit S15; the owner: "We should be able to easily differentiate each brain node and muscle
- * node from each other"): the name a picked part shows in the tip. Drops "mirror image: ", a trailing [layer] and
- * (element id), and turns the face packet's file names ("Orbicularis oris muscle.r", "Corrugator supercilii.l") into
- * plain side-first names ("Right orbicularis oris", "Left corrugator supercilii"). */
+
+
+
+
 export function partPickName(n) {
   return String(n || '').replace(/^mirror image: /, '').replace(/ \[[^\]]*\]$/, '').replace(/ \([A-Za-z0-9-]+\)$/, '')
     .replace(/^(.+?)(?: muscle)?\.([rl])$/, (m, x, s) => `${s === 'r' ? 'Right' : 'Left'} ${x.charAt(0).toLowerCase()}${x.slice(1)}`);
@@ -3756,7 +3756,7 @@ export const ARM_FALLBACK_AREA = 'rh_forearm';
  * body (ownMm) and on the mirror body (mirrorMm, wider because it is drawn farther away); power: alpha = (power x
  * |N.V| of the shell, clamped to 1)^2, 0 at the shell's outer edge and full near the muscle's outline; the halo colour
  * gain (x the area glow colour x the glow strength). */
-// 20 November 2026, evening (the owner, Message 198: muscles must not "turn transparent"): on false: no halo shell. A
+
 // lit muscle shows its glow on itself, solid: its own colour, light and rim (shadeMuscle). The shell is an additive copy
 // of the muscle pushed out along its normals, drawn wherever its back faces lie in front of something; on the mirror
 // body (12 mm) held near, the shells of the neck muscles that the look's head turn lights (HEAD_GLOW) lay over the
@@ -3788,15 +3788,15 @@ export const INFO_FIT = Object.freeze({ on: true, footPx: 16 });
  * (fitInfoCard; the numbered movements under it say the same) and the way "Keep in mind" lines go (INFO_FIT). Key R's
  * opened card scrolls, so there it is always whole. Measured where the short card's parts are fitted (when the card's
  * words, the window or the view change), never per frame. false: the clamp and its ellipsis, as before. */
-/* 22 November 2026 (UI4; the combined check of update 68, finding 5: at 800 by 600 the short cards grew 40 to 56 px
- * taller once the lead sentence was whole: 6 or 7 lines of it in the card's 112 px column, the left hip card 343 px tall
- * against 287, over more of the lower right corner; the owner: "Way too much text now"). maxLines: in the short card the
- * lead sentence is shown whole only when it takes at most this many lines; a longer one is left out whole where the card
- * has other lines (its muscles, or the numbered movements; the tip by the crosshair names the movement, and key R's card
- * keeps the sentence). Measured on update 68: 2 to 3 lines at 1600 by 900 (a 300 px card), 6 to 7 at
- * 800 by 600 (150 px). The other way the check offered, a wider short card at 800 px, was not taken: a sentence that
- * long needs about 190 px of column for 4 lines, a card of 230 px, nearly a third of the window over the picture.
- * 0: no line rule (the card's height alone decides, as in section 200). */
+
+
+
+
+
+
+
+
+
 export const INFO_WHOLE = Object.freeze({ on: true, maxLines: 4 });
 /** PURE (INFO_WHOLE): the lead sentence's mark: 'whole', 'drop' (the short card with the whole sentence is taller than
  * its box: overPx, its scroll height less its height, above 1; or, UI4, the sentence takes more than maxLines lines),
@@ -3836,6 +3836,23 @@ export function caveatsToDrop(bottoms, limit, overflows = true) {
  * "Game rule" line, 5 the first sentence. The title, the key and the strip part always stay; the text keeps its size.
  * on false: no fit (as before). */
 export const KEY_CARD_FIT = Object.freeze({ on: true, max: 5 });
+/**
+ * 25 November 2026 (FIX76; a hunt of Body update 74, finding 3). INFO_UNDER_MAP: the information card ends under the
+ * Electrical map's card. Both stand at the right edge, the map's card from the top and the information card from the
+ * bottom corner, each with its own greatest height, and nothing told one of the other: at 800 by 600 with the map on
+ * and the full reading level they shared 150 by 249 px (the information card's title lay under the map's honesty line),
+ * and at 1280 by 720 the grip card of Space shared 236 by 55 px with it at the short level. Now the map card's foot is
+ * measured where the HUD's boxes are read and written on the information card as --ns-emap-foot (CSS px from the top of
+ * the card's own box); quiet.css takes it into the card's greatest height in wide windows (the card is fitted again, so
+ * a key's card gives up whole parts and an area's card scrolls from its title), and leaves the map's More detail out
+ * in a wide window under 901 px, where both cannot be whole: the map's card is a legend and gives way first.
+ * PURE: the foot to write (whole px), or null when the map's card is not drawn. rect: its box; boxTop: the top of the
+ * information card's containing box (both in the page's px). */
+export const INFO_UNDER_MAP = Object.freeze({ on: true });
+export function emapFootPx(rect, boxTop = 0, o = INFO_UNDER_MAP) {
+  if (!o.on || !rect || !(rect.width > 0) || !(rect.height > 0) || !Number.isFinite(rect.bottom)) return null;
+  return Math.round(rect.bottom - (Number.isFinite(boxTop) ? boxTop : 0));
+}
 /** PURE (KEY_CARD_FIT): the first stage at which the card no longer runs over. overAt(stage): how far the card's words
  * run over its box at that stage (CSS px; the caller sets the stage on the card and measures). Returns 0..max (max when
  * even that runs over: nothing more to give up). */
@@ -3993,7 +4010,7 @@ export function infoPanelContent(model) {
       more = { summary: T.moreDetail, items, explanation: expl, note: act ? s(act.note) : '', caveats, sources: citations ? `${T.sourcesPrefix}${citations}` : '' };
     }
   }
-  // R558 (Messages 55 and 56: easier to play; a learning tool): the numbered movement list (ns-app infoMoves): every
+
   // movement of the area with the number key that does it. The one shown now is marked and its muscles are the rows
   // below it, so the Movement row is not written a second time.
   const moves = region && Array.isArray(model.moves)
@@ -4071,7 +4088,7 @@ export function infoPanelContent(model) {
 // the cluster copies drop the thin triangles of sheet-like face and neck muscles, which shows as holes and blotches.
 // At full quality the mirror body is now drawn from the full meshes (mirrorLodFullMm 0 = no copy); the coarser copy
 // used from the first reduced quality level is 3 mm instead of 4 mm. Costs GPU triangles, not frame logic.
-// R558 (Message 14, "everything that should be as detailed as possible"): the mirror body keeps its full meshes through
+
 // the render-scale and lite levels too and is simplified only from the first triangle-reducing ('lod') level, index 4,
 // with the glass and the own body: the D8 order (render scale first, then passes, then triangles). The scale levels
 // help a fill-limited GPU, where fewer mirror triangles saved nothing but cost detail.
@@ -4082,25 +4099,25 @@ export function infoPanelContent(model) {
 // past the last level). Its own copy stays at 5 mm cells: drawn from the full meshes, or from a 3 mm copy, looking
 // around fell from 59 to 47 to 49 frames a second on the lead's machine. Making it finer without that cost is open.)
 export const R5_SCENE = Object.freeze({ mirrorLodFullMm: 5, mirrorQualityLodFrom: 99, mirrorLodBodyMm: 3, mirrorLodSliceMs: 4, headInPlaceFrom: 0.5, mirrorPointsPerMesh: 24, arrowCaptionPx: 8 });
-/** 19 November 2026, later (the owner: "find a way for ... the bodies to be high resolution, yet not destabilize
- * performance"). THE MIRROR BODY'S MESHES FOLLOW ITS SIZE ON THE SCREEN. One copy for every case was wrong both ways:
- * the 5 mm copy is a pixel at the usual distance on a plain screen, but two pixels on a double-density screen and
- * many when the body is carried near (rough edges, small holes in thin sheets); the full meshes are right when it is
- * near, and at the usual distance they are two million triangles smaller than a pixel each, which cost a sixth of
- * the frame rate and showed nothing. So the copy is chosen from what one source millimetre measures in the DRAWN
- * picture (the drawing buffer's own pixels, so the screen's density and the quality level's render scale count):
- * the coarsest of cellsMm (0 = the full meshes) whose cell is at most maxCellPx there. `hysteresis`: a copy is left
- * for a finer one only when its cell passes maxCellPx by that share, and for a coarser one only when the coarser
- * cell is under it by that share, so a body carried slowly through a step does not swap back and forth. The copies
- * are index-only and cached (mirrorIndexLod), built a few a frame the first time a cell is wanted; a swap is a
- * pointer per mesh. Your own body is always drawn from its full meshes. on false: R5_SCENE.mirrorLodFullMm, as before. */
-/** 20 November 2026 (found by a scripted hunt: holding the mirror body with Space and pulling it into you with S stopped
- * the game, "bounded strict current mirror near-plane check failed"). The owner (19 November): "let's also change it
- * such that we can move both the mirror body and the brain into ourselves. And basically through ourselves and through
- * anything" (ns-reference-graph CARRY_THROUGH). A held mirror body was still pushed back in front of the camera's near
- * plane each frame (reconcileMirrorCarry), and once four pushes could not clear it (the body all round the camera) the
- * scene refused the frame and the game stopped. true: a held mirror body is not pushed back and may cross the near
- * plane, as a released one already could; the camera then sees into it, as it passes through you. false: as before. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const MIRROR_PASS_THROUGH = true;
 export const MIRROR_DETAIL = Object.freeze({ on: true, cellsMm: Object.freeze([0, 2.5, 5]), maxCellPx: 1.3, hysteresis: 0.12 });
 /** MIRROR_DETAIL: the cell (source mm; 0 = full meshes) for a body of which one source mm is pxPerMm drawn pixels;
@@ -4128,90 +4145,90 @@ export function mirrorDetailCell(pxPerMm, current = null, o = MIRROR_DETAIL) {
 export const MIRROR_RESET = Object.freeze({ keepStart: true });
 /** The compass arrows (top = forward, bottom = back, left, right): ns-arrows3d COMPASS_DIRS. */
 export const ARROW_DIRS = NsArrows.COMPASS_DIRS;
-/** R5-bigbrain (R25 / R26; round5/R5-bigbrain-NOTES.md): motorSamples = at most this many motor-area sample points
- * (region-mesh vertices) for "never over a motor area" (the brain's edge arrows, the mirror body's place and arrows);
- * avoidCellPx / avoidDilate: their occupancy grid (CSS px cell, cells marked round each point and triangle; 2 = an 8 px
- * margin for the arrows, whose drawn hook is a little larger than their planned box); mirrorAvoidDilate: the same for the
- * mirror body's place (its arrows' rooms already keep it apart; 1 lets it fit on a phone); crosshairKeepPx: half
- * size of the box round the crosshair that no orbit arrow's CLICK AREA may come within 4 px of (an arrow obstacle).
- * R558 (Messages 55 / 56): 40 -> 8. The mirror body's top tip belongs on the middle of its frame's top side, just above
- * its head, which with a literal reflection is only 40 to 60 px above the crosshair at the start (measured: 59.8 px at
- * 1920x1080, 49.8 at 1600x900, 42.5 at 1366x768); the old 40 px box pushed that tip 86 to 116 px up, onto the brain's
- * leg areas. A tip's click area is larger than its drawn shape (about 31 px from its middle along its pointing
- * axis at 52 px), so with 8 + 4 px the crosshair mark (11 px half size) and a start look are still never on a tip. */
+
+
+
+
+
+
+
+
+
+
+
 export const R5_BIGBRAIN = Object.freeze({ motorSamples: 12000, avoidCellPx: 4, avoidDilate: 2, mirrorAvoidDilate: 1, crosshairKeepPx: 8 });
-/** R558 (Messages 55 / 56): how the brain's top / bottom arrow tips move off obstacles (ns-arrows3d FRAME_PAIR
- * overrides; display choices). With the brain just above the mirror body's head, the middle of the brain frame's bottom
- * side is where the mirror body's top tip is. The brain's bottom tip therefore goes UP the hollow of the motor strip's U
- * to the lowest place where its click area covers no motor area (inwardMaxFrac 1.6: it may pass the frame's middle;
- * measured 196 px up at 1920x1080, 170 px at 1600x900), and the pair does not move sideways off the brain's midline
- * instead (perpCost 12: a sideways move costs 24 per px, the way up 5 per px).
- * 21 November 2026 (hunt H15): the TOP tip keeps the default cap (inwardMaxFracBy.forward, FRAME_PAIR.inwardMaxFrac
- * 0.5). With the mirror body lifted over the brain's top and let go, the top tip went 146 px down the same way, into the
- * gap between the halves next to the crosshair, just above the mirror body's down tip; now, with no place on its centre
- * line, it moves along the top side past the mirror body (rescueTips), and the brain's up arrow stays on its top side. */
-/**
- * 22 November 2026 (browser hunt of update 64, H6 and H7; the owner: performance first, nothing that makes the game
- * stutter). What letting go of a carried item plans again (updateArrows), all display and timing choices:
- *  keepUnmoved   true: the item that was NOT carried keeps its tips. Letting go of the brain used to plan the mirror
- *                body's frame again as well (its key held the brain's plan serial), so the green tips jumped (measured:
- *                the top one 94 px sideways, the side ones 52 px up) although the mirror body had not moved, and that
- *                second plan was half of the hang at the release. Now the brain's new tips keep off the mirror body's
- *                tips where they are (as boxes to avoid), and the mirror body's frame is planned again only for its own
- *                reasons (a carry of it, a reset, the window). The same the other way: letting go of the mirror body
- *                leaves the brain's tips where they are unless the mirror body (padded) or its top tip's room now lies on
- *                one of them. A reset or a new window plans both as before, so a reset puts every tip back as at the
- *                start. false: the rule of before.
- *  liveCrosshair true: no tip of a frame planned now lies under the crosshair of the view the player is in now. The
- *                brain's frame after a carry is planned along the brain's placement direction, about 12 degrees above
- *                the look, so the box kept free round the crosshair was kept free in a view the player was not in, and
- *                the brain's back tip landed on the real crosshair (a click just after letting go turned the brain).
- *                The real crosshair's box is mapped into the plan's view (ns-arrows3d viewPointInPlan) and avoided too,
- *                by the brain's frame at any release and by the mirror body's at a brain release (second pass: not at
- *                the mirror body's own release, whose frame is planned in the start view as before; the wider box
- *                below kept browser-keyboard-aim from carrying the mirror body until a tip lay under the crosshair).
- *  keepClearOfMotor (second pass, a check of this package: after ordinary sideways carries of 120 to 170 px the kept
- *                mirror tips lay over the brain's motor areas at its new place, 3 of 5 times, and took the click there,
- *                against Messages 55 / 56) true: a mirror tip kept at a brain release must lie on none of the brain's
- *                motor areas at the brain's new place (ns-arrows3d keptTipsClear against motorRestGrid of the mirror
- *                body's own plan camera); else the mirror body's frame is planned again, as before keepUnmoved.
- *  liveCrossPx   (second pass) the half size of that crosshair box at least (CSS px): with the plan's own 8 px the brain's
- *                back tip came out 38 px above the crosshair after a carry, so a small look up put it there again.
- *  restGrids     how many cameras' motor-area grids are kept (motorRestGrid; 1 before).
- *  spreadFrames  (second pass, H6 measured again: the release frame still 18 to 50 ms, 14 ms of it the plan) the frames
- *                the released item's arrows stay hidden after the release, as while it was held, counted in drawn frames
- *                (ns-arrows3d releasePlanStage): the release frame and the one after it do no arrow work (that one
- *                already skins the hand opening: 4 to 5 ms; with the grids on it, it was the longest frame of the
- *                release, 50 ms with the profiler on), the next builds the motor-area grid the plan needs and decides
- *                whether the mirror body's tips may stay, the one after plans. About 50 ms with the arrows hidden at
- *                60 frames a second. 0: everything on the first frame after the release, as before.
- *  hudReadLag    (second pass) the HUD cards' boxes are read one frame after the information card changed size, not in
- *                the same frame (readHudRects, fitInfoCard): read at once, the read forced the page to be laid out
- *                again inside the frame (3 to 4 ms at a release, when the grip's card goes).
- *  startPlans    (H8) how many plans made before anything was first held are kept by their key: a later plan with the
- *                same key (a reset brings both back to their start places in the same window) takes the start's plan
- *                back instead of planning again from wherever the look is (0: always plan again, as before).
- *  stepped       (22 November 2026, UI3; H6 measured again on update 67, 1600 x 900 at High, the game's own frame timer
- *                round nine releases: the frame that planned was 28 to 70 ms against held frames of 7 to 13 ms and
- *                ordinary ones of 12 to 14; a profile put 31 of its 83 ms, profiler on, in the planner's search, most of
- *                it the sight lines against your own body and the cover of your body they are tested against, built
- *                on that frame, and, after a carry aside by the look, both frames planned on it) true: the work after
- *                a release is done one piece per drawn frame (ns-arrows3d releaseStep, RELEASE_STEPS): after
- *                holdFrames frames that do nothing, the grids and the mirror body's keep decision; the cover of your
- *                body seen from the brain's plan view, built ahead (sightAheadFor); the brain's plan; and only when
- *                the mirror body's frame is planned too, its cover, then its plan. Each item's arrows stay hidden
- *                until its own plan (the mirror body's, at a brain release, from the frame that decides it is planned
- *                again: its old tips lay on the brain's motor areas). About 50 to 110 ms without arrows at 60 frames
- *                a second, against 50 before. false: spreadFrames, as in section 196.
- *  holdFrames    (UI3) the frames after a release that do no arrow work (the release frame skins the hand going back).
- *  holdMax       (UI3) the first step may wait, up to this many drawn frames after the release, until the bodies are
- *                still (the pose counters unchanged since the frame before): while the hand goes back to rest after
- *                the grip its skin, outline and pose already make each frame 5 to 15 ms longer, and a step on top of
- *                that made the longest frames of a release (a step of 16 ms on such a frame gave 58 ms). Tried at 12:
- *                in all 36 measured releases the counters were already unchanged at the third frame, so it never held;
- *                with a look that moves on through the release (the arm follows the look) it would only hold the
- *                arrows back. 0 (at most holdFrames): no wait.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const ARROW_REPLAN = Object.freeze({ keepUnmoved: true, keepClearOfMotor: true, liveCrosshair: true, liveCrossPx: 32, restGrids: 4, startPlans: 8,
   spreadFrames: 3, hudReadLag: true, stepped: true, holdFrames: 2, holdMax: 0 });
 /** 22 November 2026 (UI4; the combined check of update 68, finding 3, and the package's "look at the left hand's skin on
@@ -4305,10 +4322,10 @@ export const BRAIN_TIP_RULES = Object.freeze({ ends: Object.freeze({ ...NsArrows
  * Checked every everyFrames frames while the camera, a pose, a plan or a target changed (a few dozen sight lines against
  * the sphere cover, about 0.1 to 4 ms; frameVis.lastMs in the arrow readback). Display choice. */
 export const FRAME_VIS = Object.freeze({ minShare: 0.3, gridX: 4, gridY: 4, everyFrames: 6 });
-/** R558 (issue hunt 2; Message 18: hints must look clean and deliberate, "never ... diseased-looking"): how a muscle
- * that only an opposing-action hint names is drawn: its resting tissue colour (no emission over the belly) plus a thin
- * fresnel rim (rimPower: the higher, the thinner) in its area's glow colour lightened rimWhite toward white, at rimGain.
- * Display choice. */
+
+
+
+
 export const MUSCLE_HINT_LOOK = Object.freeze({ rimGain: 0.5, rimWhite: 0.35, rimPower: 5 });
 
 /* ---- R5-scene: glow links (D17, R21) --------------------------------------------------------------------------------- */
@@ -4320,15 +4337,15 @@ export const MUSCLE_HINT_LOOK = Object.freeze({ rimGain: 0.5, rimWhite: 0.35, ri
  * pulse: a soft brighter band travelling from the brain to the muscle (period pulseS, strength pulseAmp; none under
  * prefers-reduced-motion); maxLinks / segments: buffer sizes; mirrorAlpha: links to the mirror body are fainter (they
  * run behind the glass). */
-// R558 (user Message 2: "All the connective lines might get a little confusing, you'll need a fix"): the colour of an
+
 // area and of its muscles now carries the link (ns-colors AREA_COLORS), so the fan of ribbons (one per driven muscle
 // group, on your body AND on the mirror body, up to 24 at once) is gone. mode 'one-per-area': at most ONE soft line per
 // area that has just switched on, from the area to the muscle group of YOUR body it drives most, in the area's own
 // colour; it shows for holdS and fades out over fadeS even while the area stays lit, and the mirror body gets none
 // (its muscles light in the same colour). No line to a group nearer the camera than minTargetM (your own neck or face
 // from the eyes). mode 'off' draws no line at all. Display choices.
-// R558 (user Messages 48 and 56: "it's not clear which brain part is being activated by each body movement at all. So
-// maybe you need to reintroduce linking lines"; the game is a learning tool): mode 'held' keeps the ONE line of a lit
+
+
 // area for as long as the area is lit (it fades with the area's own level), a little thicker, and draws it to the
 // MIRROR body too (mirror: true): the mirror body stands whole beside the strip, so the line "this strip part -> this
 // body part" is short and always on screen, also when the part of your own body is at the camera (your left shoulder
@@ -4486,19 +4503,19 @@ export function patchGlowRimShaders(vertexShader, fragmentShader) {
   return { vertexShader, fragmentShader: 'uniform vec4 nsGlowRim;\n' + fragmentShader.slice(0, f) + body + fragmentShader.slice(f) };
 }
 
-/** 19 November 2026 (the plain look; the owner: "There should be clear outline / contrast between limbs so that they
- * don't merge and mush into each other, and surely there should be still exposed white bone, such as for fingertips
- * and toes"). The plain look's one small patch (pure; returns null when a hook is missing, and the material then
- * stays a plain standard material):
- *  - kind 'muscle': the per-vertex tendon value (attribute nsTendon: 0 over a belly, 1 on an end attached to bone, 0.85
- *    all over the sleeves round the finger and toe bones) turns the surface toward bone white by PLAIN_LOOK.tendonMix,
- *    so tendon ends, fingertips and toes are pale again;
- *  - both kinds: the lit colour falls to PLAIN_LOOK.edge of itself toward the silhouette (where the surface turns
- *    away from the eye, inside PLAIN_LOOK.edgeWidth of |N.V|), so every limb and muscle has a dark edge of its own
- *    and two overlapping limbs part without an outline pass.
- * boneLinear: the bone colour, linear RGB. */
-// 19 November 2026, later (the owner: "Maybe we were much better off with the matte look that we had from the original
-// Telltale Borderlands look, similar to that"): the plain look is MATTE and flat-toned, like that comic look but in
+
+
+
+
+
+
+
+
+
+
+
+
+
 // this one patch: no specular light at all (matte), the lit colour stepped into `bands` flat tones with a soft join
 // (bandSoft, as a share of a band), and the dark edge drawn as an ink line (below inkAt of |N.V|, soft over inkSoft,
 // down to inkDark) inside the wider shade (edge, edgeWidth).
@@ -4529,42 +4546,42 @@ export function patchPlainShaders(vertexShader, fragmentShader, kind, boneLinear
   return { vertexShader: vs, fragmentShader: fs };
 }
 
-/** R558 (user Message 18): the muscle LOOK shader patch (pure). Per vertex the attribute nsTendon (0 over the belly, 1 on
- * an end attached to bone) becomes the varying vNsTendon. Per fragment:
- *  - the albedo turns toward the tendon white nsMuscleTendon.rgb by vNsTendon x nsMuscleTendon.a (half as much on a
- *    glowing muscle, so the glow stays whole), and that part is a little glossier (roughness - nsMuscleShade.w x it);
- *    R558 (hunt 2): the tendon part fades out as it gets small on screen (MUSCLE_TENDON_FADE: a far body is not speckled);
- *  - a red-shifted tissue scatter, albedo x nsMuscleScatter.rgb x nsMuscleShade.z, is added to the indirect light (a
- *    muscle in shade stays warm, never grey-black; not on the tendon part, and not on a glowing muscle, where it would
- *    pull the glow colour toward red);
- *  - the LIT light (diffuse and specular, never the emission or the glow rim) is multiplied by
- *    1 - nsMuscleShade.x x (1 - nsMuscleScatter.a x glow) x (1 - |N.V|)^nsMuscleShade.y: a soft darkening toward the
- *    muscle's own outline, so the groove between two neighbouring bellies reads as a crease.
- *  - fibre striation: the albedo varies by +-nsMuscleFibre.x with a smooth noise that runs ALONG the muscle's own long
- *    axis (per-material nsFibre.xyz, object frame; nsFibre.w = 1 / streak width in object units, 0 = none) and changes
- *    across it, so a near belly shows fine lengthwise fibre streaks; it fades out where a streak would be narrower than
- *    about a pixel (fwidth between nsMuscleFibre.z and 2.5 x that), so a far body shows no shimmer; not on the tendon
- *    part and not on a glowing muscle. The same noise x nsMuscleFibre.w (view units, metres) is a tiny height for a
- *    derivative bump of the normal, so the streaks also catch the light (hook '#include <emissivemap_fragment>', after
- *    the normal is known). The coordinate is the vertex position, or the rest position nsRest when NS_FIBRE_REST is
- *    defined (the CPU-skinned left arm, so the streaks stay on the skin while it moves).
- *  - sheen: the lit specular is tinted by nsMuscleSheen.rgb (warm, a little weaker), toward white on the tendon part and
- *    on a glowing muscle: the cool sky and rim lights otherwise laid a white-blue veil over the red (mauve-grey bellies).
- * glow = smoothstep(0.02, 0.2, the largest emissive channel) (the activation glow of shadeMuscle).
- * Hooks: vertex '#include <begin_vertex>'; fragment '#include <color_fragment>', '#include <roughnessmap_fragment>',
- * '#include <aomap_fragment>' (MeshStandardMaterial r170). null when any hook or the emissive / vViewPosition names are
- * missing (the material then draws as before). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Smooth 3D value noise (0..1) for the fibre striation: cheap, no texture, no derivative discontinuities.
 const MUSCLE_FIBRE_NOISE_GLSL = 'float nsHash3( vec3 p ) { p = fract( p * 0.1031 ); p += dot( p, p.yzx + 33.33 ); return fract( ( p.x + p.y ) * p.z ); }\n' +
   'float nsVNoise( vec3 x ) { vec3 i = floor( x ); vec3 f = fract( x ); f = f * f * ( 3.0 - 2.0 * f );\n' +
   '  return mix( mix( mix( nsHash3( i ), nsHash3( i + vec3( 1.0, 0.0, 0.0 ) ), f.x ), mix( nsHash3( i + vec3( 0.0, 1.0, 0.0 ) ), nsHash3( i + vec3( 1.0, 1.0, 0.0 ) ), f.x ), f.y ),\n' +
   '    mix( mix( nsHash3( i + vec3( 0.0, 0.0, 1.0 ) ), nsHash3( i + vec3( 1.0, 0.0, 1.0 ) ), f.x ), mix( nsHash3( i + vec3( 0.0, 1.0, 1.0 ) ), nsHash3( i + 1.0 ), f.x ), f.y ), f.z ); }\n';
-/** R558 (issue hunt 2, Message 18 "never ... splotchy"): the tendon white fades with its size on screen. Measure: the
- * length of fwidth of the fragment's view position (metres the surface spans across one drawing-buffer pixel, about
- * 1.4 x the pixel's footprint). Full white below fullM, none above noneM. At 1600x900 and the 90-degree view the own
- * body seen from the eyes measures about 1 to 3 mm (unchanged), your back in third person about 5 to 6 mm (partly
- * faded) and the mirror body, 2.5 to 3.5 m away, 8 mm and more (gone): there its tendon ends were a pixel or two wide
- * and read as a white speckle over the face, chest and shoulders. Display choice. */
+
+
+
+
+
+
 export const MUSCLE_TENDON_FADE = Object.freeze({ fullM: 0.004, noneM: 0.008 });
 export const MUSCLE_LOOK_HOOKS = Object.freeze({
   vertex: '#include <begin_vertex>', color: '#include <color_fragment>', roughness: '#include <roughnessmap_fragment>',
@@ -4624,20 +4641,20 @@ export function patchMuscleLookShaders(vertexShader, fragmentShader, tendonCut =
   return { vertexShader: vs, fragmentShader: fs };
 }
 
-/** R558 (user Message 22: "the fluorescent glow up should almost look like a video game power up charge"): the
- * POWER-UP shader patch (pure) for a glowing muscle (kind 'muscle') or motor area (kind 'area'). Uniforms: nsClock
- * (x = the scene clock in seconds, y = 1 under prefers-reduced-motion), nsCharge (x = the charge's start on that clock,
- * y = 1 for a calm opposing-action hint, z = 1 while the glow is on) and, for a muscle, nsChargeRest (its resting albedo)
- * and nsSweep (u = dot(fibre coordinate, nsFibre.xyz) x nsSweep.x + nsSweep.y: 0 at the origin end, 1 at the insertion
- * end; powerUpSweep). While the glow is on, per fragment: pu = ns-colors powerUpEnvelope(clock - start, u) (its GLSL
- * twin powerUpGlsl); a muscle's albedo goes from its resting colour to the glow-tinted one by pu.albedo (hook
- * '#include <color_fragment>', before the muscle look's tendon and fibre terms); the emission (the glow and its fresnel
- * rim, which glowRimPatch adds just before '#include <lights_fragment_begin>') is desaturated toward its luminance by
- * 1 - pu.sat, multiplied by pu.gain and whitened toward its brightest channel by pu.white (a white-hot core of the same
- * brightness; on an area by pu.white x POWER_UP.areaWhiteScale, so the area keeps its hue). On an area, u runs from
- * the middle of its band (the strip-coordinate run of patchRegionBorderShaders) out to its borders; without that run,
- * or without the muscle look's fibre coordinate, u = 0.5. Off (nsCharge.z = 0) the material draws exactly as before. Compose AFTER glowRimPatch and, for muscles, muscleLookPatch. null when a hook is
- * missing. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const POWER_UP_HOOKS = Object.freeze({ color: '#include <color_fragment>', light: '#include <lights_fragment_begin>' });
 export function patchPowerUpShaders(vertexShader, fragmentShader, kind = 'muscle') {
   if (typeof vertexShader !== 'string' || typeof fragmentShader !== 'string') return null;
@@ -4662,11 +4679,11 @@ export function patchPowerUpShaders(vertexShader, fragmentShader, kind = 'muscle
   return { vertexShader: patchShudderVertex(vertexShader, muscle), fragmentShader: head + fragmentShader.replace(H.color, color).replace(H.light, light) };
 }
 
-/** 18 November (MAP; owner: "a neon glowing blinking effect, shuddering effect upon activity"): the SHUDDER of a lit
- * muscle or key in the vertex shader (ns-colors SHUDDER / shudderGlsl), right after `#include <project_vertex>`: a muscle
- * moves along its view-space normal, a key (area) as a whole in the screen plane, by a few CSS pixels (nsClock.z = 1 /
- * the view's CSS height) times its glow strength (nsCharge.w, written with the charge), never while calm (nsCharge.y),
- * off (nsCharge.z) or under prefers-reduced-motion (nsClock.y). Unchanged shader when a hook is missing. Pure. */
+
+
+
+
+
 export function patchShudderVertex(vertexShader, muscle = true) {
   const P = '#include <project_vertex>';
   if (typeof vertexShader !== 'string' || !vertexShader.includes(P) || !vertexShader.includes('void main()')) return vertexShader;
@@ -4684,10 +4701,10 @@ export function patchShudderVertex(vertexShader, muscle = true) {
   return head + vertexShader.replace(P, body);
 }
 
-/** R558 (Message 22): the trunk axis (source mm, BodyParts3D frame: the midline x = 0, y = -40, from the hips at z = 880
- * to the shoulders at z = 1360) that tells a muscle's ORIGIN end from its insertion end for the power-up sweep: the end
- * nearer this axis is the proximal one, where a limb muscle arises. A rough display rule (it does not read the atlas's
- * own attachment records); on the trunk and the face either direction is possible. */
+
+
+
+
 export const POWER_UP_TRUNK = Object.freeze({ y: -40, z0: 880, z1: 1360, endShare: 0.08 });
 /** Sweep coefficients [a, b] of a muscle mesh (pure): u = dot(p, axis) x a + b is 0 at the end nearer the trunk axis
  * (POWER_UP_TRUNK; the mean of the vertices within endShare of the length from each end) and 1 at the other end.
@@ -4715,9 +4732,9 @@ export function powerUpSweep(positions, axis, trunk = POWER_UP_TRUNK) {
   return dist(e[0]) <= dist(e[1]) ? [1 / span, -lo / span] : [-1 / span, hi / span];
 }
 
-/** R558 (Message 18): the long axis of a muscle mesh (pure): the principal direction of its vertex cloud (power
- * iteration on the covariance; every `stride`-th vertex). These meshes run along their fibres, so it is the
- * striation direction of patchMuscleLookShaders. Returns [x, y, z] unit, or null for a degenerate cloud. */
+
+
+
 export function fibreAxis(positions, stride = 2) {
   const n = Math.floor(positions.length / 3);
   if (n < 3) return null;
@@ -4739,20 +4756,20 @@ export function fibreAxis(positions, stride = 2) {
   return a.every(Number.isFinite) ? a : null;
 }
 
-/** R558 (user Messages 24 and 29, the comic ink of the bodies): the per-vertex HATCH FRAME of a muscle or bone mesh
- * (pure). Ink lines along a muscle's fibres (or a bone's long axis) are the level lines of an angle that runs ROUND the
- * mesh's long axis: each vertex gets the direction from the centre of its own cross-section to it, measured in that
- * cross-section's own spread (so a flat sheet is mapped round like a tube and its broad faces get lines, not just its
- * edges), and N lines are drawn at equal steps of that angle. On a fusiform belly the lines run along it and converge
- * into the tendon, as fibres do; on a sheet they fan along its long axis. Object-anchored (the attribute rides the
- * mesh), so nothing swims when the camera turns.
- *  - axis: fibreAxis (the principal direction); u, v: a fixed basis across it; `bins` slices between the 1st and 99th
- *    percentile along the axis, each with its centroid and its spread (rms) along u and v, smoothed 1-2-1 and filled
- *    from neighbours where a slice holds fewer than minCount vertices; per vertex the slice values are interpolated.
- *  - N: the perimeter of the 75th-percentile slice (the ellipse with semi-axes sqrt(2) x the spreads) / spacingMm,
- *    rounded to a multiple of 4 (at least 4): every coarser line level (every 2nd, every 4th line) then also wraps
- *    round without a seam.
- * Returns { attr: Float32Array(4 n) = [qx, qy, along (mm), N] per vertex, N, axis } or null for a degenerate mesh. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function hatchFrame(positions, { spacingMm = 3, bins = 16, minCount = 4 } = {}) {
   const n = positions ? Math.floor(positions.length / 3) : 0;
   const a = n >= 8 ? fibreAxis(positions, 1) : null;
@@ -4803,53 +4820,53 @@ export function hatchFrame(positions, { spacingMm = 3, bins = 16, minCount = 4 }
   return { attr, N, axis: a };
 }
 
-/** 18 November: the look this patch draws is now the PAINTED one of ns-flesh (fleshFibreGlsl before the lights,
- * fleshLightGlsl after them); the numbered description below is the comic look it replaced, kept as the record. The
- * hooks, the attribute name nsHatch (now the muscle's fibre frame) and the uniforms are unchanged.
- * R558 (user Messages 25 to 29, Borderlands-style comic shading of the bodies; style guide of the build brief): the
- * COMIC patch (pure) for the lit MeshStandardMaterial of a muscle (kind 'muscle', composed after the muscle look and the
- * power-up) or a bone (kind 'bone'). It runs after the lights are summed (hook '#include <aomap_fragment>'), so it reads
- * the final lit colour of every other patch (tissue tones, crease, sheen, the outline pass's soft shading comes later
- * on screen) and never touches the emission (the activation glow and its rim stay exactly as they are).
- *  1. BANDS. The light factor L = luminance(direct + indirect diffuse) / luminance(albedo) is mapped to four tone bands
- *     (nsCelLv: deep shadow, mid, light, highlight, as factors of the albedo; on bone and tendon parts the highlight is
- *     nsCelSpecAt.y and the deep and mid tones nsCelSpecAt.z and .w, a light grey: BODY_CEL.boneLevels) at the
- *     thresholds nsCelBand.xyz, each
- *     transition a smoothstep of half-width max(nsCelBand.w, 0.75 fwidth(L)) (narrow but anti-aliased, never a hard
- *     pixel step; on a far figure, over the ink's fade distance nsInkFar.xy, the half-width widens to nsInkFar.z so its
- *     bands become soft tonal shading instead of blotches); the light's own hue is kept. The deep band goes neutral
- *     and a touch cool (nsCelDeep: rgb tint, a = how far it is desaturated), never murky brown-red.
- *  2. RIM. A crisp cool rim band where 1 - |N.V| passes nsCelRim.x (anti-aliased), on the side the camera's rim light
- *     comes from (nsCelRimDir, view space), adding nsCelRim.y x albedo x the rim colour (nsCelRimCol).
- *  3. SPECULAR. The direct specular becomes a flat, crisp highlight SHAPE: its luminance through a smoothstep at
- *     nsCelSpec.x on a muscle belly, nsCelSpecAt.x on a tendon part or bone (half-width nsCelSpec.y or the pixel
- *     width), times nsCelSpec.z on a belly, nsCelSpec.w on tendon and bone, in the light's own colour.
- *     GLOSS (R558, user Message 54, "a bit of shine, a bit of glossiness"): inside that shape a brighter CORE where the
- *     luminance passes nsCelGloss.x times the shape's threshold (plus nsCelGloss.y on a belly, .z on tendon and bone),
- *     and round both a SMOOTH share of the real highlight (nsCelGloss2.x x the specular, its luminance kept under
- *     nsCelGloss2.y), so the highlight has a soft falloff like a polished surface instead of one flat patch. The two
- *     crisp steps fade out where the normal turns by more than nsCelGloss2.z radians per pixel (gone at twice that): a
- *     highlight that would be a pixel or two wide (a finger bone, a far figure's bumps) is left out, never a sparkle.
- *  4. INK (attribute nsHatch from hatchFrame: the cross-section direction, the position along the axis in mm, the
- *     line count N). Lines are the level lines of h = N x angle / 2 pi, drawn with an analytic pixel width (no texture,
- *     no stair steps) and broken into strokes of varying length along the axis. Lines are kept at least nsInkLine.x
- *     pixels apart by drawing a coarser LEVEL as the figure gets smaller (every 2nd line, every 4th line: a subset of
- *     the same object-anchored lines, the in-between ones fading, so nothing jumps or swims); past the coarsest level
- *     allowed the ink fades out, so a far or small figure (the mirror body at its start distance) stays clean; it also
- *     fades with the distance from the camera (nsInkFar.xy metres), whatever the window size. Off
- *     when nsInkLine.w = 0 (the coarse quality levels).
- *      - fibre striation on a muscle (Message 24): levels 0 to 1, nsInkLine.y px wide, nsInkMix.x opacity; on the
- *        tendon part every 4th line only, at nsInkMix.w (a few long fine strokes on the pearly white);
- *      - hatching in the shadow bands (style guide): levels 0 to 2, one level finer in the deep band (denser where
- *        darker), nsInkLine.z px wide, nsInkMix.y opacity x the shadow depth (none in the light bands);
- *      - bone grain (Message 24): a fine ink stipple of 3D value noise in the bone's own frame (cells nsInkStip.x mm,
- *        dots above nsInkStip.y), nsInkMix.z opacity (more in shadow), fading out where a cell is under nsInkStip.z px;
- *        bones get the shadow hatching along their long axis but no striation.
- *     A glowing muscle keeps its glow clean (ink x (1 - 0.85 glow)). Ink colour nsInk.rgb (linear), the style guide's
- *     near-black.
- *  5. HDR (muscles with the power-up patch): while the HDR picture is on, the power-up peaks (gain nsPu.x above
- *     nsHdrBoost.y) brighten the emission by nsHdrBoost.x x the excess (HDR_BLOOM.muscleBoost), so the cores bloom.
- * Hooks: vertex '#include <begin_vertex>', fragment '#include <aomap_fragment>'. null when a hook is missing. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const COMIC_HOOKS = Object.freeze({ vertex: '#include <begin_vertex>', project: '#include <project_vertex>', normal: '#include <emissivemap_fragment>', lit: '#include <lights_fragment_end>', light: '#include <aomap_fragment>' });
 /* Anti-aliased coverage of the level lines of h (lines at integer h / 2^l), sp0 = pixels between neighbouring lines of
  * level 0, lf = log2(min spacing / sp0) = the level needed so lines are at least the minimum spacing apart, maxL the
@@ -4944,30 +4961,30 @@ export function patchComicShadersCel(vertexShader, fragmentShader, kind = 'muscl
   return { vertexShader: vs, fragmentShader: fs };
 }
 
-/** R558 (Message 18): per-vertex tendon weight of a muscle from its stack display geometry (pure). rest / full: the
- * drawn positions without and with the full stack display (ns-body: lift plus fill, both ZERO on the vertices the stack
- * rule anchors on bone, ramping up over the belly). d = |full - rest| per vertex, ref = its 75th percentile (the belly's
- * displacement); anchored = 1 - smoothstep(0, share x ref, d): 1 on an anchored vertex, falling to 0 a few millimetres in.
- * Anchored alone is not a tendon: the stack also anchors a belly that LIES on bone along its length (tibialis anterior
- * on the tibia, the lower gluteus maximus over the ischium, the deltoid over the humerus), and those bellies turned
- * grey-white over half their length. So the weight is anchored x endness, where endness says "this is where the
- * muscle narrows into its tendon or ends": along the mesh's long axis (fibreAxis; s = position scaled to -1..1 between
- * its endPercentile and 1 - endPercentile values) the mesh is cut into `bins` slices, each slice's spread across the
- * axis (rms distance from the slice centre) is compared with the widest slice; a slice narrower than thinFrom .. thinTo
- * of it counts as tendon (a fusiform belly narrowing into a cord, a fan converging on its insertion), away from the
- * middle of the muscle (gateFrom .. gateTo of |s|); and the very tips (tipFrom .. tipTo of |s|) always count (every
- * muscle ends on its attachment, even a broad one such as a midline origin). A broad, long sheet (widest slice spread
- * / length from sheetFrom .. sheetTo and length from sheetLenFrom .. sheetLenTo mm: the trapezius parts, the external
- * oblique, the gluteus maximus, the pectoralis major) counts as end everywhere it is anchored, since a sheet attaches
- * through aponeuroses along whole borders (a midline origin, the rectus sheath), not only at the tips of its long
- * axis; the thickness test below then keeps only its thin, aponeurotic parts. Last, where `indices` are given, the
- * weight is kept only where the muscle is THIN (tendonThickness: the depth to the opposite surface of the same mesh,
- * full below thinMm, none from thickMm): a tendon or aponeurosis is a cord or sheet a few millimetres thick, a belly is
- * not, so a thick belly the stack anchors as a whole end cap (the lower gluteus maximus) stays muscle-coloured.
- * Then smoothed over the surface
- * (smoothPasses neighbour means over `indices`, when given). A geometric estimate from the anchor rule and the mesh
- * shape, not a dissection record of where tendon tissue begins. Returns Float32Array(vertexCount) (all 0 when nothing
- * moved). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function patchComicShaders(vertexShader, fragmentShader, kind = 'muscle') {
   if (typeof vertexShader !== 'string' || typeof fragmentShader !== 'string') return null;
@@ -4979,7 +4996,7 @@ export function patchComicShaders(vertexShader, fragmentShader, kind = 'muscle')
   const boneEnd = muscle ? '' : 'attribute vec2 nsBoneEnd;\nvarying vec2 vNsBoneEnd;\n';
   const vs = 'attribute vec4 nsHatch;\nvarying vec4 vNsHatch;\nvarying vec3 vNsObj;\n' + boneEnd + FLESH_DEPTH_LIFT_PARS_GLSL +
     vertexShader.replace(H.vertex, `${H.vertex}\n\tvNsHatch = nsHatch;\n\tvNsObj = position;${muscle ? '' : '\n\tvNsBoneEnd = nsBoneEnd;'}`).replace(H.project, `${H.project}\n\t${FLESH_DEPTH_LIFT_GLSL}`);
-  // 18 November (the owner: "telltale games art style rather than borderlands", "rough patchy small-poxy muscles"): the
+
   // bands, the highlight sticker, the ink lines, the hatching and the bone stipple are gone; ns-flesh paints the tone
   // curve, the fibre bundles (from the same hatch frame), the warm shadow, the soft rim and the wet highlight.
   const light = `${H.light}
@@ -4994,49 +5011,49 @@ export function patchComicShaders(vertexShader, fragmentShader, kind = 'muscle')
   return { vertexShader: vs, fragmentShader: fs };
 }
 
-/** R558 (Message 18): per-vertex tendon weight of a muscle from its stack display geometry (pure). rest / full: the
- * drawn positions without and with the full stack display (ns-body: lift plus fill, both ZERO on the vertices the stack
- * rule anchors on bone, ramping up over the belly). d = |full - rest| per vertex, ref = its 75th percentile (the belly's
- * displacement); anchored = 1 - smoothstep(0, share x ref, d): 1 on an anchored vertex, falling to 0 a few millimetres in.
- * Anchored alone is not a tendon: the stack also anchors a belly that LIES on bone along its length (tibialis anterior
- * on the tibia, the lower gluteus maximus over the ischium, the deltoid over the humerus), and those bellies turned
- * grey-white over half their length. So the weight is anchored x endness, where endness says "this is where the
- * muscle narrows into its tendon or ends": along the mesh's long axis (fibreAxis; s = position scaled to -1..1 between
- * its endPercentile and 1 - endPercentile values) the mesh is cut into `bins` slices, each slice's spread across the
- * axis (rms distance from the slice centre) is compared with the widest slice; a slice narrower than thinFrom .. thinTo
- * of it counts as tendon (a fusiform belly narrowing into a cord, a fan converging on its insertion), away from the
- * middle of the muscle (gateFrom .. gateTo of |s|); and the very tips (tipFrom .. tipTo of |s|) always count (every
- * muscle ends on its attachment, even a broad one such as a midline origin). A broad, long sheet (widest slice spread
- * / length from sheetFrom .. sheetTo and length from sheetLenFrom .. sheetLenTo mm: the trapezius parts, the external
- * oblique, the gluteus maximus, the pectoralis major) counts as end everywhere it is anchored, since a sheet attaches
- * through aponeuroses along whole borders (a midline origin, the rectus sheath), not only at the tips of its long
- * axis; the thickness test below then keeps only its thin, aponeurotic parts. Last, where `indices` are given, the
- * weight is kept only where the muscle is THIN (tendonThickness: the depth to the opposite surface of the same mesh,
- * full below thinMm, none from thickMm): a tendon or aponeurosis is a cord or sheet a few millimetres thick, a belly is
- * not, so a thick belly the stack anchors as a whole end cap (the lower gluteus maximus) stays muscle-coloured.
- * Then smoothed over the surface
- * (smoothPasses neighbour means over `indices`, when given). A geometric estimate from the anchor rule and the mesh
- * shape, not a dissection record of where tendon tissue begins. Returns Float32Array(vertexCount) (all 0 when nothing
- * moved). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const TENDON_FROM_STACK = Object.freeze({
   share: 0.22, percentile: 0.75, smoothPasses: 3,
   endPercentile: 0.02, bins: 24, thinFrom: 0.3, thinTo: 0.55, gateFrom: 0.15, gateTo: 0.35, tipFrom: 0.82, tipTo: 0.97,
   sheetFrom: 0.08, sheetTo: 0.12, sheetLenFrom: 110, sheetLenTo: 160,
   thinMm: 4, thickMm: 9, cellMm: 3, stepMm: 1.5
 });
-/** 20 November 2026 (the owner: "Finger/toe tendons should be there and white-ish"). The long finger and toe muscles'
- * meshes (BodyParts3D) run on as their tendons right to the fingertips and toe tips, but the stack rule above left
- * those parts muscle-coloured: they lie free of bone, so they are not "anchored". So, for the muscles named here, the
- * part beyond the wrist or the ankle is tendon by its PLACE, and drawn in the same pearly tendon white:
- *   arm: the long finger and thumb muscles; tendon where the rest position lies below the wrist (BodyParts3D atlas mm,
- *        +z up, the atlas standing with the arms down): full below fullZ, none above noneZ (the wrist joint's centre
- *        is at z 800 in the body rig);
- *   leg: the long toe muscles; full below fullZ, none above noneZ (the ankle joint's centre is at z -14; their bellies
- *        end some 10 to 15 cm above it, where the tendons begin);
- *   foot: the short toe muscles on the foot; tendon where the rest position lies forward of the toes' joints with
- *        the foot (the metatarsophalangeal joints at y -165; forward is -y): full forward of fullY, none behind noneY.
- * The largest of this and the stack's own estimate is kept. Names are matched without the side. A display rule from
- * the joints' places, not a dissection record of where each tendon begins. */
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const DIGIT_TENDONS = Object.freeze({
   arm: Object.freeze({ names: Object.freeze(['flexor digitorum superficialis', 'flexor digitorum profundus', 'extensor digitorum', 'extensor indicis', 'extensor digiti minimi',
     'flexor pollicis longus', 'extensor pollicis longus', 'extensor pollicis brevis', 'abductor pollicis longus']), fullZ: 815, noneZ: 860 }),
@@ -5046,12 +5063,12 @@ export const DIGIT_TENDONS = Object.freeze({
   // tendon below the knuckles (the third metacarpal's head ends at z 721)
   hand: Object.freeze({ match: /\b(lumbricals|interossei) of (left |right )?hand\b/, fullZ: 712, noneZ: 735 })
 });
-/** 20 November 2026 (the owner: "Let's make the limbs longer"; ns-body-shape BODY_SHAPE). The places above are the
- * source atlas's; the body is drawn with longer limbs and its rest positions (the "source" positions the rule reads)
- * are the reshaped ones. digitTendonPlaces moves each place the way the limbs were made longer (ns-body-shape
- * limbLengthField on the right limbs' reference chains, at the point of the forearm, shin, hand or foot line at that
- * height), so the rule still starts at the wrist, the ankle, the knuckles and the ball of the foot of the drawn body.
- * DIGIT_TENDONS_DRAWN is what the game uses. Pure. */
+
+
+
+
+
+
 export function digitTendonPlaces(o = DIGIT_TENDONS, shape = BODY_SHAPE) {
   const arm = bulkLimbChain('arm', 'r'), leg = bulkLimbChain('leg', 'r');
   if (!shape || !shape.limbs || !shape.limbs.on || !arm || !leg) return o;
@@ -5265,11 +5282,11 @@ export function patchBehindGlassShaders(vertexShader, fragmentShader, o = BEHIND
   return { vertexShader, fragmentShader: 'uniform vec4 nsBg;\nuniform vec4 nsBgWin;\n' + fragmentShader.slice(0, f) + body + fragmentShader.slice(f) };
 }
 
-/** R558 (performance; Messages 42, 48, 50): the per-muscle values that a CLASS of muscles carries as vertex attributes
- * (one value for the whole mesh) in place of uniforms, so the whole class can draw with ONE material (createScene: "ONE
- * material per class of muscle"). on: the one switch (false: every muscle keeps its own material, as before).
- * rowFloats / chunkRows: the layout of the value rows (24 numbers a muscle, 64 muscles a buffer). uniforms: the
- * declarations patchMuscleShareShaders replaces. */
+
+
+
+
+
 export const MUSCLE_SHARE = Object.freeze({
   on: true, rowFloats: 24, chunkRows: 64,
   uniforms: Object.freeze(['vec3 diffuse', 'vec3 emissive', 'vec4 nsGlowRim', 'vec4 nsCharge', 'vec3 nsChargeRest', 'vec2 nsSweep', 'vec4 nsFibre'])
@@ -5481,9 +5498,9 @@ export function createScene({
   const transparentSortApplied = typeof renderer.setTransparentSort === 'function';
   if (transparentSortApplied) renderer.setTransparentSort(transparentSortNs);
   const scene = new THREE.Scene();
-  { // R558 (Message 22; Message 24 put space black back: MATERIAL.backgroundGradient null): a gradient texture if one is set, else the flat colour
+  {
     const bg = clinicalBackground(THREE, canvas && canvas.ownerDocument);
-    // 20 November 2026: the raw look's near-black (Message 206: an abyss); 21 November (Message 208): the abyss's own black (ns-room ROOM.abyss.black) while it is on
+
     const abyssHex = roomClearHex();
     scene.background = bg ? keep(bg) : new THREE.Color(BODY_STYLE === 'raw' ? (abyssHex === null ? 0x040405 : abyssHex) : MATERIAL.background);
   }
@@ -5504,7 +5521,7 @@ export function createScene({
   let eyeFovY = fovYDeg; // the eye view's own angle (the view from outside may use another: setCameraPose)
   camera.rotation.set(0, 0, 0, 'YXZ');
   scene.add(camera); // the camera must be in the scene graph for its children (the arm) to render
-  // R558 (Message 20, ns-outline): body meshes register below (setArm, setBody); the composite draws first of the
+
   // transparent list, so glass, areas, glow and arrows are blended over the lines as over the bodies.
   const outline = createOutlinePass({ THREE, renderer, enabled: !SIMPLE_LOOK });
   if (BODY_STYLE === 'raw' && typeof outline.setInk === 'function') outline.setInk(RAW_OUTLINE.alpha, RAW_OUTLINE.strip, RAW_OUTLINE.stripCss, { widths: RAW_OUTLINE.widthsCss, colour: RAW_OUTLINE.colour, taperMin: RAW_OUTLINE.taperMin, brainAlpha: RAW_OUTLINE.brain, brainCss: RAW_OUTLINE.brainCss }); // 20 November 2026
@@ -5512,20 +5529,20 @@ export function createScene({
   // R558 BB: the motor strip's ink silhouette, after the areas and before the glass (RENDER_ORDER.regionLine + 0.05).
   outline.stripComposite.renderOrder = RENDER_ORDER.regionLine + 0.05;
   scene.add(outline.stripComposite);
-  // 20 November 2026 (Message 207): the brain's own outline and its eyes', right after the glass
+
   if (outline.brainComposite) { outline.brainComposite.renderOrder = RENDER_ORDER.glass + 0.05; scene.add(outline.brainComposite); }
   disposables.push({ dispose: () => outline.dispose() });
   // 18 November 2026 (SEE, ns-see): a limb covered by another limb or the trunk is drawn over it as a ghost (its line and a
   // soft fill, stronger when the limb is locked away).
-  // 19 November 2026 (the owner: "Whenever anything is occluded behind something, we want to see it through as well with
-  // a highlighted outline, light bluish glass thing"): every hidden thing is a ghost now, the brain's included, and a
+
+
   // body part behind the brain shows through the brain. So the ghosts are drawn AFTER the brain's surface (RENDER_ORDER
   // glass) and the bodies' own late passes (BODY_ORDER torso, arm), and still under the links, beams and arrows.
   const ghost = createGhostPass({ THREE, renderer, outline, reducedMotion });
   if (ghost.afterBrain) ghost.composite.renderOrder = BODY_ORDER.arm + 1; // (with the brain's rule off: right after the outline's ink, as before)
   scene.add(ghost.composite);
   disposables.push({ dispose: () => ghost.dispose() });
-  // R558 (Message 25): the HDR picture and its bloom (HDR_BLOOM); off on a software renderer. Its target is always
+
   // multisampled (a game started at Picture quality Low has a canvas without MSAA; switched to High it still gets
   // smooth edges through this target).
   const hdr = createHdrBloom({ THREE, renderer, msaa: true, enabled: !softwareRenderer && !SIMPLE_LOOK });
@@ -5601,7 +5618,7 @@ export function createScene({
   disposables.push(armDepthMaterial);
   const armTwins = [];
   let armTwinsOn = false;
-  const boneTips = { meshes: 0 }; // R558 (Message 30): phalanges drawn from their rounded display copy (boneTipDisplay)
+  const boneTips = { meshes: 0 };
   /** A colour-less depth pre-pass twin of `mesh` (child: inherits its pose; shares the geometry). */
   const depthTwin = (mesh, material, order, list) => {
     const t = new THREE.Mesh(mesh.geometry, material);
@@ -5783,7 +5800,7 @@ export function createScene({
     liveAfter(outline.stripMaterial, u);
     outline.stripMaterial.customProgramCacheKey = () => 'ns-live-outline-strip';
   }
-  // 20 November 2026 (Message 207): and its picture of the brain and its eyes (the brain's own outline)
+
   for (const m of outline.brainMaterials || []) {
     const u = { ...liveUniforms, nsLive: { value: liveNoBeat } };
     liveAfter(m, u);
@@ -6179,7 +6196,7 @@ export function createScene({
   const regionById = new Map();
   const regionMeshes = [];
   const unassignedGlass = [];
-  // R558 (Message 18, REGION_BORDER): per-fragment areas. applied: null until an area program compiles, then whether
+
   // every hook was found (false: the neighbours' fill meshes are hidden and the areas draw whole triangles as before).
   const regionBorder = { applied: null, rows: 0, fillMeshes: 0, fillTriangles: 0, ms: null, reason: null };
   const borderShared = {
@@ -6229,7 +6246,7 @@ export function createScene({
       return rowOf.get(`${h}|${medial ? 'medial' : 'all'}`);
     };
     const normals = new Map(), cavity = new Map(), relief = new Map();
-    // R558 BB2 (Messages 24, 35, gyri and sulci): the strip's OWN relief from the atlas geometry (ns-brain-ink
+
     // reliefDepth: below a large ball rolled over the strip meshes alone, along the brain's envelope normal from the
     // hull support planes): 0 on the crown top, about 1.5 mm at the lip of each sulcus, deeper down the banks. The
     // relief share (reliefShare) is the cavity input; the depth itself (nsRelief) drives the banded light and the
@@ -6298,7 +6315,7 @@ export function createScene({
   let brainBoundsMeet = null;
   let brainSupport = null; // R3-scene: supportPoints of every brain vertex (the silhouette hull basis)
   let brainDepthBounds = null; // R22 all glass+strip SOURCE positions, conservative AABB cached only on normal load
-  let brainSolid = null, brainSolidMs = 0, brainSolidError = null; // R558 (Message 12): ns-collide solidGrid of the brain meshes (source mm)
+  let brainSolid = null, brainSolidMs = 0, brainSolidError = null;
   let brainHullPoints = null; // R3-fix: the segmentation outline points (denser hull basis for the arrow plan)
   let compassBrainSourceRevision = 0; // R345 source replacement identity; no geometry/hash work in the cached getter
   let brainSampleCentre = null; // fix F2: their centroid (cached per sample array)
@@ -6443,14 +6460,14 @@ export function createScene({
     eyeNeckOn = on;
     for (const b of body) if (b.inPlace && b.inPlace.userData.anatomicalPart === 'neck') b.inPlace.visible = headIn || on;
   }
-  /* 20 November 2026 (the owner: "it's nice to have a view within the body and the rib cage. Perhaps put some organs in
-   * there for fun"). ORGANS (ns-organs): a heart, two lungs, the great vessels and the windpipe inside the rib cage of
-   * BOTH bodies. They are illustrations placed by proportion, not traced anatomy and not part of the game's signal: no
-   * motor area, activity, link, collision or aim (raycast off); they are not in the picking lists or the see-through
-   * glass's things (the outline pass draws their ink with the trunk's code, so a lung behind a rib is the trunk behind
-   * itself). Two meshes per body (the heart alone, for its beat), the geometry shared by your body and the mirror body,
-   * in source mm riding on the host segment: their matrix is that segment's pose (written only when it changed; nothing
-   * else per frame) and the heart's swell is one uniform from the living brain's beat (none under reduced motion). */
+
+
+
+
+
+
+
+
   const organs = { made: false, own: [], mirror: [], seg: -1, key: new Float64Array(16).fill(NaN), poses: 0, triangles: 0, parts: null,
     beat: { value: new Float32Array(4) } };
   function makeOrgans() {
@@ -6504,9 +6521,9 @@ export function createScene({
       }
     }
     organs.beat.value[3] = reducedMotion ? 0 : ORGANS.beatSwell * brainLive.beat;
-    // 20 November 2026 (Message 207): the outline pass draws the heart with the same swell (ns-outline nsOutlineLocal,
+
     // the one matrix both hearts were given in makeOrgans), so its line beats with it instead of standing at the
-    // resting size. (A review of Body updates 60 and 61: the beat alone no longer makes the outline draw; it takes the
+
     // swell of whichever frame it draws, so a still view stays still. Nothing is allocated here.)
     { const b = organs.beat.value, k = 1 + b[3], L = organs.local;
       if (L && organs.localK !== k) { organs.localK = k; L.set(k, 0, 0, b[0] * (1 - k), 0, k, 0, b[1] * (1 - k), 0, 0, k, b[2] * (1 - k), 0, 0, 0, 1); } }
@@ -6523,13 +6540,13 @@ export function createScene({
       // what lies partly in it and is drawn whole), how many materials carry its planes, and, QA only
       // (globalThis.__nsLimbDraw = true), what of your own body the picture drops: limbDrawState
       cuts: Boolean(collar.planes), clipped: collar.materials, draw: globalThis.__nsLimbDraw === true ? limbDrawState() : undefined } });
-  /** QA only (20 November 2026, evening; the owner: muscles must not "disappear and turn transparent" when the arm is held
-   * up): per part of your own body (rightArm, leftLeg, rightLeg by their part or outline group, else trunk; the left arm
-   * is the game arm, drawn apart and never cut) the meshes, how many are shown, how many of their posed vertices lie in
-   * the collar box while it is on (inBox: what the old cut took away; inBoxSeen: those in the picture), how many of
-   * those the box cuts now (cut; those in the picture: cutSeen), and the meshes Three's culling drops although a posed
-   * vertex of theirs is in the picture (culled; the mirror body's too). Every second vertex; the muscles skinned on the
-   * graphics card are posed on the processor for it (bodyGpuCpu). A few tens of ms: never on a game frame. */
+
+
+
+
+
+
+
   function limbDrawState() {
     camera.updateMatrixWorld(true); bodyGroup.updateMatrixWorld(true);
     const fr = new THREE.Frustum(), M = new THREE.Matrix4(), v = new THREE.Vector3(), out = {};
@@ -6681,7 +6698,7 @@ export function createScene({
   }
   const el = (tag, cls, parent) => { const e = doc.createElement(tag); e.className = cls; parent.appendChild(e); return e; };
   // ---- R5-scene (D16): compass arrows round the brain and round the mirror body (ns-arrows3d) ----------------------
-  // The round-2..4 DOM orbit buttons are gone. Two ns-arrows3d rigs of four arrows each. R558 (user Message 7): every
+
   // arrow is a basic V tip, placed at the middle of a side of its target's frame (updateArrows): the motor strip's
   // horizontal 16:9 frame and the mirror body's vertical 9:16 frame, as they stand at rest in the reference view. The
   // scene draws them, highlights the hovered one (setArrowHover), answers ray picks (pickArrows: the hit list R5-input's
@@ -6692,13 +6709,13 @@ export function createScene({
     try {
       // R5-access B1: the colours at the call site (brain grey-white, mirror green, so the two sets read apart): the
       // light fill is ns-colors' arrow colour, the edge band its dark outline colour.
-      // R558 (Message 7): the tips are drawn ON TOP of everything (no depth test, last in the transparent list): where a
+
       // tip lies over a motor area, over the glass or over the body, the tip is what is seen there and what a tap there
-      // means (pickArrows). They are translucent, so what lies under them still shows through. (Message 19) Each is a lit
+
       // solid chevron; its rim light takes the set's rim colour.
       const c = typeof NsColors.arrowLook === 'function' ? NsColors.arrowLook(kind) : null;
       const look = { ...NsArrows.ARROW_LOOK, ...(c ? { fill: c.tip, edge: c.outlineColor, hover: c.hover, rim: c.rim } : {}), renderOrder: ARROW_RENDER_ORDER[kind],
-        // 20 November 2026 (Message 196): the raw look's light on the tips, their own colours kept
+
         ...(BODY_STYLE === 'raw' && NsArrows.ARROW_LOOK_RAW ? { ...NsArrows.ARROW_LOOK_RAW, keyLight: RAW_LOOK.light, rawAmbient: RAW_LOOK.ambient, rawDirect: RAW_LOOK.direct, rawGamma: RAW_LOOK.gamma } : {}) };
       const rig = NsArrows.createArrowRig(THREE, { kind, look });
       rig.group.visible = false;
@@ -6713,12 +6730,12 @@ export function createScene({
   // screen) and the single tips your own body is in front of.
   for (const target of ['brain', 'mirror']) arrowSets[target] = { target, rig: makeArrowRig(target), plan: null, frames: null, key: '', shown: false, boxes: {}, clicks: {}, boxKey: '', frameHidden: false, occluded: new Set(), vis: null };
   let arrowHover = null; // { target, dir, blocked } (setArrowHover)
-  /** R558 (performance; user Messages 42, 48 and 50): the item the player holds now ('brain' | 'mirror' | null; ns-app
-   * says so on every frame, before the picture is drawn). A held item is at a new place on every frame, and every new
-   * place used to plan BOTH arrow frames again (the fit, the pair moves and a sight test against your own body for each
-   * place tried): about a fifth of the time of a carried frame. So while an item is held its own arrows are not drawn
-   * (it is in the hand; its arrows turn or tilt it once it is let go) and no frame is planned again; the first frame
-   * after it is let go plans both frames for the new place, as before. The other item's arrows stay where they were. */
+
+
+
+
+
+
   let arrowHeld = null;
   // (22 November 2026, ARROW_REPLAN.liveCrosshair: the item just let go, until the next updateArrows plans for its new place)
   let arrowReleased = null, arrowReleaseAt = 0, arrowsCarried = false, renderSerial = 0;
@@ -6836,7 +6853,7 @@ export function createScene({
     // known, the region's own caveat), then everything technical in a collapsed <details> "More detail" (its summary is
     // the panel's only pointer target, for the drag-to-look mode; with the mouse captured it stays collapsed).
     info.plain = el('p', 'ns-infopanel-plain', p);
-    // R558 (Messages 55 and 56): the area's movements, each with its number key (1 to 9).
+
     info.movesHeading = el('div', 'ns-infopanel-moves-heading', p);
     info.moves = el('ol', 'ns-infopanel-moves', p);
     info.movesHeading.hidden = true; info.moves.hidden = true;
@@ -6853,7 +6870,7 @@ export function createScene({
     info.moreBody = el('div', 'ns-infopanel-detail-body', info.more);
     info.moreKey = null;
     info.actRow = act;
-    // R558 (Message 48, the R key "read information"): a small key prompt in the card's top right corner says what R
+
     // does next ("R more", "R hide"; ns-app toggleInfoDetail sets the word), and a chip in the same corner of the view
     // says how to bring the information back while it is hidden (CSS shows it only then: data-ns-read="off").
     const hintText = NsText.INFO.keyHint || { read: '', more: '', off: '' };
@@ -6903,7 +6920,7 @@ export function createScene({
       '  outgoingLight += diffuseColor.rgb * nsTissue.rgb * ( nsTissue.a * nsScatter );\n}\n' + TISSUE_HOOK);
     tissue.applied = tissue.applied !== false;
   });
-  // ---- R558 BB (Messages 24, 29): the comic ink of the motor areas (ns-brain-ink patchAreaInkShaders) ---------------
+
   // Cel bands of the direct light, the sulcus ink line along the fold depth, the gyrus contour and the hatching across
   // the gyrus; one shared uniform set for every area material. applied: null until an area program compiles.
   const areaInk = { applied: null, cel: null, materials: 0, foldMethod: null, foldMs: null, foldCloudPoints: 0 };
@@ -6963,7 +6980,7 @@ export function createScene({
       shader.uniforms.nsGlowRim = u;
     });
   };
-  // ---- R558 (Message 18): the muscle LOOK (patchMuscleLookShaders; one set of uniforms shared by every muscle) -------
+
   // Every muscle material (your body, its in-place head twin, the mirror body, the left game arm and its mirror twin)
   // takes this patch, so all three items show the same tissue light, tendon ends and outline creases.
   const muscleLook = { applied: null, materials: 0 };
@@ -6981,7 +6998,7 @@ export function createScene({
     return { value: a ? new THREE.Vector4(a[0], a[1], a[2], 1 / MUSCLE_LOOK.fibreMm) : new THREE.Vector4(0, 0, 1, 0) };
   };
   const noFibre = { value: new THREE.Vector4(0, 0, 1, 0) };
-  // ---- 20 November 2026 (the owner, Messages 195 / 196): the RAW look (ns-raw-look patchRawShaders) ---------------------
+
   // One matte light from up and to the side in front of the viewer, the same on everything it is composed on; composed
   // LAST on a material (in comicPatch's place on the bodies), so every colour, glow and alpha patch before it still works.
   const rawLook = { applied: null, materials: 0, kinds: {} };
@@ -7023,7 +7040,7 @@ export function createScene({
       shader.uniforms.nsFibre = (m.userData && m.userData.nsFibre) || noFibre;
     });
   };
-  // ---- R558 (Messages 25 to 29): the COMIC look of every muscle and bone (patchComicShaders; one shared uniform set) --
+
   // Composed LAST on each muscle material (after the muscle look and the power-up) and on every bone material, so all
   // three items (your body, the left game arm, the mirror body, the in-place head) show the same bands, rim, highlight
   // shapes and ink. The ink is off at the coarse quality levels (comic.inkOn, QUALITY_LEVELS with a lod).
@@ -7101,10 +7118,10 @@ export function createScene({
     return true;
   };
   for (const m of [boneMaterial, bodyBoneMaterial, torsoBoneMaterial, legBoneMaterial]) comicPatch(m, 'bone');
-  // ---- R558 (Message 22): the POWER-UP CHARGE of an activation (ns-colors POWER_UP, patchPowerUpShaders) -------------
+
   // One clock uniform (x = seconds since this scene was made, y = 1 under prefers-reduced-motion) shared by every muscle,
   // motor area and halo, and ONE start time per AREA: the area on the brain, the muscles it drives on your body and the
-  // same muscles on the mirror body charge, flash and pulse together (Message 17). A start is taken when the area, or the
+
   // first of its muscles, begins to glow; a muscle that begins to glow while its area glows, or within POWER_UP_JOIN_S
   // of the area's last start, takes that same start. Per frame this costs one uniform write; per change of a glow, one.
   const POWER_UP_JOIN_S = 0.35;
@@ -7169,9 +7186,9 @@ export function createScene({
     }
     return c.t0;
   }
-  /** R558 (Message 22): the areas whose glow this frame shows a held posture, not an activation (ns-app: the neck and
-   * trunk areas lit only by the mouse look's head turn). Called before the frame's muscles and areas are shaded; an
-   * area that begins to glow while listed starts settled (POWER_UP.settledAgeS). `ids`: array of area ids. */
+
+
+
   function setSettledRegions(ids) {
     powerUpSettled.clear();
     if (Array.isArray(ids)) for (const id of ids) if (typeof id === 'string' && id) powerUpSettled.add(id);
@@ -7231,9 +7248,9 @@ export function createScene({
   function muscleBaseOf(id, out = [0, 0, 0]) {
     if (typeof id !== 'string' || !id) return muscleBaseInto(0, null, out);
     const key = muscleToneKeyOf(id);
-    // 20 November 2026 (the owner: "more clear contrast and differentiation between muscle groups"): in the raw look a
+
     // muscle draws its GROUP's tone (ns-colors MUSCLE_GROUPS / MUSCLE_GROUP_TONES) with a small step of its own.
-    // (Message 202: and its own lightness step among the muscles it touches, muscleTones.steps)
+
     // (section 188: and its warm step, muscleTones.steps.warm)
     if (BODY_STYLE === 'raw') return NsColors.muscleGroupBaseInto(NsColors.muscleGroupOf(muscleSourceNameOf(id)), key, typeof bodyMuscleLayer === 'function' ? bodyMuscleLayer(id) : bodyStackLevel(id), out,
       undefined, undefined, muscleTones.steps && muscleTones.steps.has(key) ? muscleTones.steps.get(key) : null, undefined,
@@ -7274,7 +7291,7 @@ export function createScene({
     shader.uniforms.nsBg = bgUniform; shader.uniforms.nsBgWin = bgWinUniform;
   });
   const mirrorBoneMaterial = comicPatch(behindGlassPatch(keep(new THREE.MeshStandardMaterial({ color: BONE_COLOUR, roughness: MATERIAL.boneRoughness, metalness: 0 }))), 'bone');
-  // R558 (user Message 20, builder FA): the eyes of the completed head (tissue 'eye': sclera, iris, lens) get their own
+
   // materials (ns-colors EYE_LOOK), never the ivory bone; one per part for your body in place and one for the mirror
   // (behind-glass patched like every mirror material). The face-layer copy keeps the face bone material (not drawn).
   const eyeMaterials = new Map();
@@ -7291,7 +7308,7 @@ export function createScene({
     return m;
   };
   const mirrorMuscleMaterial = () => comicPatch(powerUpPatch(muscleLookPatch(behindGlassPatch(glowRimPatch(keep(new THREE.MeshStandardMaterial({ color: MATERIAL.muscleBase, roughness: MUSCLE_LOOK.roughness, metalness: 0 }))))), 'muscle'), 'muscle');
-  // ---- R558 (performance; Messages 42, 48, 50): ONE material per class of muscle --------------------------------------
+
   // Every muscle used to draw with its own material (several hundred of them), and what the renderer does at each change of
   // material (sending every value of the standard shader again) was the largest single part of a frame. Two muscles
   // of the same kind differ only in seven values (MUSCLE_SHARE.uniforms: colour, glow, glow rim, charge, charge rest
@@ -7468,9 +7485,9 @@ export function createScene({
   const mirror = {
     enabled: true, ready: false, posed: false, body: null, samples: null, headSample: null, placement: null, state: null, orbit: { yaw: 0, pitch: 0, push: 0 },
     external: null, worldCentre: null, transform: null, serial: 0, planeSerial: 0, measured: null, lod: false, twins: 0, error: null,
-    correction: null, pipelineMatrix: null, reachForemostM: null, // R558 (Message 12): the stop-at-contact correction, the placement before it, the body's reach
-    reachSphere: null, // R558 (Message 45): your left hand's reach, { centre (world m), radiusM }: a turned mirror body stands back for its image
-    viewAwayM: 0, // R558 (Message 52): the outside view's slide (ns-mirror MIRROR_OUTSIDE), set from the camera pose
+    correction: null, pipelineMatrix: null, reachForemostM: null,
+    reachSphere: null,
+    viewAwayM: 0,
     // 22 November 2026 (H8, MIRROR_RESET): the start's measure { body, eye, drawnForemostM, foremostPoint } and a reset
     // waiting for the next frame
     start: null, resetPending: false
@@ -7585,7 +7602,7 @@ export function createScene({
   const onRestored = () => {
     lost = false;
     lastMatrices = null; // re-skin and recolour on the next frame
-    outline.invalidate(); // R558 (Message 20): the ID target's pixels are gone with the context
+    outline.invalidate();
     ghost.touchBrain(); // 19 November 2026 (SEE): and the brain's picture
     armAppliedReady = false; // R173: a replacement arm has no retained applied pose yet.
     lastStripDrives = null;
@@ -7617,11 +7634,11 @@ export function createScene({
     for (const b of boneList) {
       checkMesh(b, `bone ${b && b.name}`);
       if (!SEGMENTS.includes(b.segment)) fail('scene_input', `bone ${b.name} has unknown segment ${b.segment}`);
-      // R558 (Message 30): the digit bones (thumb and finger phalanges) are drawn from their rounded display copy.
+
       const tipPos = /phalan/i.test(String(b.name || '')) ? boneTipDisplay(b.positions, b.indices, { distal: /distal phalanx/i.test(String(b.name)) }) : null;
       if (tipPos) boneTips.meshes++;
       const geo = indexedGeometry(tipPos || b.positions, b.indices);
-      hatchAttr(geo, geo.attributes.position.array, 'bone'); // R558 (Messages 24, 29): the ink lines' frame
+      hatchAttr(geo, geo.attributes.position.array, 'bone');
       geo.computeVertexNormals();
       weldGeometryNormals(geo); // R558 (R33): no lit seams across the files' duplicated vertices
       const mesh = new THREE.Mesh(geo, boneMaterial);
@@ -7656,13 +7673,13 @@ export function createScene({
       geo.setAttribute('normal', norAttr);
       geo.setIndex(new THREE.BufferAttribute(m.indices, 1));
       const mat = comicPatch(powerUpPatch(muscleLookPatch(glowRimPatch(ghostPatch(keep(new THREE.MeshStandardMaterial({ color: MATERIAL.muscleBase, roughness: MUSCLE_LOOK.roughness, metalness: 0 }))))), 'muscle'), 'muscle');
-      tendonAttr(geo); // R558 (Message 18): tendon ends, written by setArmLayers
+      tendonAttr(geo);
       if (m.softTissue === true) softTissueTone(geo); // package BULK: a digit pad
-      hatchAttr(geo, m.positions, 'muscle', m.id); // R558 (Messages 24, 29): the ink lines' frame, from the rest positions
-      // R558 (Message 18): the fibre streaks follow the REST positions (source mm), so they stay on the skinned arm.
+      hatchAttr(geo, m.positions, 'muscle', m.id);
+
       geo.setAttribute('nsRest', new THREE.BufferAttribute(m.positions instanceof Float32Array ? m.positions : Float32Array.from(m.positions), 3));
       const armFibre = fibreUniform(m.positions);
-      const armSweep = sweepUniform(m.positions, armFibre); // R558 (Message 22): the power-up front, origin -> insertion
+      const armSweep = sweepUniform(m.positions, armFibre);
       mat.defines = { ...(mat.defines || {}), NS_FIBRE_REST: '' };
       mat.userData.nsFibre = armFibre;
       mat.userData.nsSweep = armSweep;
@@ -7674,7 +7691,7 @@ export function createScene({
       depthTwin(mesh, armDepthMaterial, BODY_ORDER.arm - 0.5, armTwins);
       // R5-scene (D19): the mirror twin shares the CPU-skinned buffers (skinned once for both bodies).
       const tw = haloHost(new THREE.Mesh(geo, mirrorMuscleMaterial()), true);
-      setMuscleBase(mat, m.id); setMuscleBase(tw.material, m.id); // R558 (Message 18): its own tone and storey shade
+      setMuscleBase(mat, m.id); setMuscleBase(tw.material, m.id);
       tw.material.defines = { ...(tw.material.defines || {}), NS_FIBRE_REST: '' };
       tw.material.userData.nsFibre = armFibre;
       tw.material.userData.nsSweep = armSweep;
@@ -7685,7 +7702,7 @@ export function createScene({
       mesh.raycast = rawRaycast; tw.raycast = rawRaycast; // R558 (P2): Three's test in a typed loop (vertices move)
       mirrorArmGroup.add(tw);
       mesh.userData.nsMirrorTwin = tw;
-      // R558 (Message 20): the outline group of a skinned arm muscle from its skin weight per group (ns-outline
+
       // outlineGroupForShares: a forearm muscle with long finger tendons stays forearm).
       {
         const sum = new Map(), W = m.weights;
@@ -7745,7 +7762,7 @@ export function createScene({
         const ext = L ? liftExtent(m.restBase, L) : null;
         if (ext && ext.maxMm > stackCapMm(level)) fail('scene_input', 'arm lift moves a muscle further than the stack rule allows');
         m.lifted = L; m.liftExtent = ext; changed = true;
-        // R558 (Message 18): tendon white on the anchored ends (the same rule as the body; 0 without stack geometry).
+
         const tg = m.mesh.userData.nsFullGeometry || m.mesh.geometry;
         if (L) writeTendon(tg, m.restBase, L, m.id);
         else if (!softTissueGeos.has(tg)) { const ta = tendonAttr(tg); if (ta) { ta.array.fill(0); if (m.id) digitTendonsFor(m.id, ta, m.restBase); ta.needsUpdate = true; } }
@@ -8002,13 +8019,13 @@ export function createScene({
    * U2b-scene REGION MODE: with `segmentation` (ns-brain segmentMotorStrips of both hemispheres) every body-map region
    * is drawn (buildRegions), glass entries whose id is a segmented strip mesh are replaced by the segmentation's
    * unassigned strip triangles (drawn as glass) and the legacy focus strip is not drawn (`focus` is then optional). */
-  /** 19 November 2026 (the owner: "to make clear the direction of the body, let's also include eyeballs with nerves
-   * connected to the brain"; "the eyeballs will be at the bottom"): the two eyeballs and the nerves of ns-brain-eyes,
-   * as two lit meshes in the brain's own group (atlas mm, like every brain mesh), so the brain's placement, its turns
-   * and a carry move them with it and nothing is computed for them each frame. They take the brain's rigid normals
-   * under the far-eye squash (rigidPatch: otherwise the squash would flatten their shading to two discs) and the living
-   * brain's small movement. They are not motor areas: the picker reports them as the brain's bare surface with the
-   * part's name (controlLayersAt `part`), so Space on an eyeball takes the brain and the tip names it. */
+
+
+
+
+
+
+
   const brainEyes = { on: false, meshes: [], triangles: 0, balls: [], look0: null, ty: 0, tp: 0 };
   let seeAreas = null, seeAreaCodes = null; // 19 November 2026 (SEE): every motor area in one geometry with its ghost code per vertex, and each area's code (buildRegions)
   function buildBrainEyes(still) {
@@ -8020,15 +8037,15 @@ export function createScene({
       const mat = keep(new THREE.MeshStandardMaterial({ vertexColors: true, roughness, metalness: 0 }));
       rigidPatch(mat);
       composePatch(mat, 'ns-live-r18', shader => { liveCompile(shader); });
-      rawPatch(mat, 'brain-eye'); // 20 November 2026 (Message 196: "New look for everything")
+      rawPatch(mat, 'brain-eye');
       const mesh = still(new THREE.Mesh(geo, mat));
       mesh.name = name; mesh.userData.nsBrainPart = part;
       brainGroup.add(mesh);
       brainEyes.meshes.push(mesh); brainEyes.triangles += data.triangles;
     };
     make(buildNerves(), BRAIN_EYES.nerveRoughness, 'nerve', 'optic nerves, chiasm and tracts (illustration)');
-    // 19 November 2026 (the owner: "when we move our head around, the eyes also move ... The eyes attached to the brain
-    // ... whatever direction our head points in, the mirror eyes move also"): each eyeball is its own mesh turning about
+
+
     // its own centre, so it can turn with the player's look (updateBrainEyes). The two halves of buildEyeballs' buffers
     // are the two eyes (left first), each with the same number of vertices and triangles.
     // 21 November 2026 (a browser hunt, H14: during a quick circle roll an eyeball sank into the brain and its outline
@@ -8179,7 +8196,7 @@ export function createScene({
       for (const list of [glass, glassDepth, glassXray]) for (const m of list) m.layers.set(GLASS_PIECE_LAYER);
       raycaster.layers.enable(GLASS_PIECE_LAYER);
     }
-    // R558 (Message 12: "moved to and around each other but not through"): the glass brain as a solid, from every brain
+
     // mesh as given (the strip meshes included): the sealed inside of its surface patches (ns-collide solidGrid, source
     // mm, about 0.1 s once at load). The app's stop-at-contact rule refuses any move that would leave a point of either
     // body in it. Null when it cannot be built (the rule then rests on the sphere covers alone).
@@ -8199,7 +8216,7 @@ export function createScene({
     // draw), its motor areas (one draw, a code per vertex) and the eyeballs with their nerves.
     ghost.setBrain({ group: brainGroup, surface: glassAll.shell, areas: seeAreas, parts: brainEyes.meshes,
       areaOwners: regionBorder.applied !== false && borderShared.nsOwnTex.value ? { texture: borderShared.nsOwnTex.value, texels: REGION_BORDER.texels, codes: seeAreaCodes } : null });
-    // 20 November 2026 (Message 207): the same surface and the eyeballs for the brain's own outline (ns-outline setBrain).
+
     // (Not the optic nerves: a few pixels thick, the line of 1.4 px a side covered them whole and drew them black.)
     if (typeof outline.setBrain === 'function') outline.setBrain({ group: brainGroup, surface: glassAll.shell, parts: brainEyes.balls });
     rayTargets = regionMode ? [...glass, ...regionMeshes, ...brainEyes.meshes] : [...glass, strip.mesh, ...brainEyes.meshes]; // HUD-only raycast targets, built once
@@ -8498,7 +8515,7 @@ export function createScene({
     }
     // R4-scene: the left-arm territory's outer border (welded union of every left-arm part) and, per part, each vertex's
     // closeness to it (the cyan rim, LEFT_ARM_RIM).
-    // R558 (Message 18): per-fragment areas with in-pass borders (REGION_BORDER). Without them (older ns-brain), the
+
     // whole-triangle areas, the left-arm rim and the line outlines as before.
     const border = regionBorderSetup(seg);
     const leftParts = [];
@@ -8530,8 +8547,8 @@ export function createScene({
       // R5-scene: the lit area keeps its gyral relief under the perspective squash (rigid normals, P2) and can glow (D17).
       glowRimPatch(rigidPatch(material));
       tissuePatch(material); // R558 (R32): soft tissue scatter (lighting only)
-      powerUpPatch(material, 'area'); // R558 (Message 22): the power-up charge, in step with its muscles
-      if (border) areaInkPatch(material); // R558 BB (Messages 24, 29): cel bands, folds, contour and hatching in ink
+      powerUpPatch(material, 'area');
+      if (border) areaInkPatch(material);
       composePatch(material, 'ns-live-r18', shader => { liveCompile(shader); }); // 18 November: the keys move with the living brain
       // 21 November 2026 (ns-area-halo): the lit block's rim in its own colour, the other areas' halos on this block and
       // a black block's edge glow; after every other patch of the area's light
@@ -8600,7 +8617,7 @@ export function createScene({
         rec.markPts = n >= 3 ? Float32Array.from(pts) : null;
         rec.markCentre = n >= 1 ? c : null;
       }
-      // 19 November 2026 (the light beam; the owner: "match the relevant surface area of both brain and muscle";
+
       // "Ensure it's precise to its correlates"): the part of this area that does each of its movements (its KEY: the
       // picker's own rule, ns-brain regionActionAt, asked for each of the area's vertices), as up to BEAM_KEY_POINTS
       // sample points and their mean, under the movement's id (and its game-arm id). A beam of that movement starts
@@ -8687,7 +8704,7 @@ export function createScene({
       haloStats.blocks = regions.map(rec => (rec.halo ? { id: rec.id, kind: rec.halo.kind, widthMm: Math.round(rec.halo.width * 100) / 100, reachMm: Math.round(rec.halo.reach * 100) / 100, lengthMm: Math.round(rec.halo.length * 10) / 10 } : { id: rec.id, kind: null })); // (QA, made once)
     }
     if (border) buildRegionFills(seg, border, still);
-    // R558 BB (Message 24): the whole strip as ONE geometry in the brain group's frame for the outline pass's strip
+
     // silhouette (seen from above: the central and precentral sulci that bound it), drawn after the areas.
     {
       let nv = 0, ni = 0;
@@ -8822,7 +8839,7 @@ export function createScene({
     const s = regionDisplayStyle(rec.region, { activity: q / REGION_RENDER.quantize, activatedCount: n, hovered, posture }, shadeScratch, regionStyle);
     rec.material.color.setRGB(s.albedo[0], s.albedo[1], s.albedo[2]);
     rec.material.emissive.setRGB(s.emission[0], s.emission[1], s.emission[2]);
-    // R558 (Message 2): the area's own fresnel rim (its glow colour), set here from its activity, not from the links.
+
     const rimU = rec.material.userData && rec.material.userData.nsGlowRim;
     if (rimU) rimU.value.set(s.rim[0], s.rim[1], s.rim[2], GLOW_K.rimPower);
     rec.material.opacity = s.opacity;
@@ -9149,13 +9166,13 @@ export function createScene({
    * faceGhost, and the body is no longer see-through over the brain's outline (overBrainSeeThrough); instead a small
    * soft window opens at the crosshair while it is on a motor area. Returns cameraState(). */
   const camMul = { headInPlace: 0, faceGhost: 1, overBrain: 1, nearM: null };
-  /* 18 November 2026, late (package FLAT, audit S20; the owner, Message 52: "if ... your body gets further away, then
-   * the mirror body should also get further away equally. Otherwise, then it's just getting far too close"). The slide
-   * was a fixed boom length, made for a camera straight behind you; the outside camera now stands to the side, already
-   * about as far from the mirror body as your eyes are, so the fixed slide took it far off. Now it slides only as far
-   * as the camera in use is NEARER the mirror body than your eye: never nearer than in the eye view, no further than
-   * that (continuous: the camera's place eases with the view). At most MIRROR_OUTSIDE.maxM. Not clamped by the
-   * stop-at-contact guard (the slide is along the ground, away from you, into the open). */
+
+
+
+
+
+
+
   function outsideMirrorAwayM(p) {
     const T = mirror.transform;
     if (!T || !p) return 0;
@@ -9248,7 +9265,7 @@ export function createScene({
       camMul.overBrain = Number.isFinite(pose.overBrainSeeThrough) ? fin01(pose.overBrainSeeThrough) : 1 - far0;
       camMul.nearM = Number.isFinite(pose.nearM) && pose.nearM > 0 ? pose.nearM : null;
     }
-    // R558 (Message 52): in the outside view the mirror body backs away from your body as far as the camera does.
+
     const viewAwayM = camPose && !pose.fixedObserver ? outsideMirrorAwayM(camPose.position) : 0;
     const viewOutside = camPose && !pose.fixedObserver ? camPose.blend : 0;
     if (Math.abs(viewAwayM - mirror.viewAwayM) > 1e-4 || Math.abs(viewOutside - (mirror.viewOutside || 0)) > 1e-4) { mirror.viewAwayM = viewAwayM; mirror.viewOutside = viewOutside; if (mirror.transform) applyMirror(); }
@@ -9978,17 +9995,17 @@ export function createScene({
     }
   }
 
-  /** R558 (Message 2): a muscle glows in the colour of the area that drives it (ns-colors AREA_COLORS), with the same
-   * strength rule as the area (ns-colors glowIntensity of its drive) and a fresnel rim of that colour (the soft halo).
-   * The lit tissue albedo keeps the shared darkening rule (activityShadeInto), so a resting muscle looks as before
-   * (the resting 0.08 drive is below the glow onset: no emission at all). areaId null = no area claims it (a neutral
-   * warm glow). The SAME call shades your body, its in-place head copy and the mirror body, so all three match. */
+
+
+
+
+
   const muscleRim = [0, 0, 0], partGlowFill = [0, 0, 0], partGlowEdge = [0, 0, 0];
   function shadeMuscle(mat, t, areaId = null, hint = false) {
-    // A muscle lit only by an opposing-action hint (Message 6) stays faint: AREA_LOOK.hintGain of the emission and rim,
+
     // no halo, and its RESTING red-brown surface (darkening it under a faint blue emission read as a grey, discoloured
     // muscle on the near arm, not as a highlight).
-    // R558 (Message 18): the muscle's own tone and storey shade (setMuscleBase), else the shared fallback colour.
+
     let base = mat.userData && mat.userData.nsMuscleBase ? mat.userData.nsMuscleBase : muscleBaseLinear;
     // 19 November 2026 (VISITED): a muscle that has been switched on keeps a dimmed, greyer resting shade
     if (mat.userData) {
@@ -9996,7 +10013,7 @@ export function createScene({
       if (!hint && t >= NsColors.VISITED.markLevel && mat.userData.nsVisited !== true) { mat.userData.nsVisited = true; mat.userData.nsVisitedBase = (BODY_STYLE === 'raw' ? NsColors.visitedLightnessInto : NsColors.visitedShadeInto)([base[0], base[1], base[2]]); }
       if (mat.userData.nsVisited === true && mat.userData.nsVisitedBase) base = mat.userData.nsVisitedBase;
     }
-    // R558 (Message 22): the power-up charge. The resting albedo (for the part the energy front has not reached yet),
+
     // and the start: a muscle that begins to glow joins its area's start (powerUpJoin), so all three items run in step;
     // a hint glows calm (no charge, flash, pulse or ripple).
     const cu = mat.userData && mat.userData.nsCharge;
@@ -10026,10 +10043,10 @@ export function createScene({
     }
     activityShadeInto(base, hint ? MUSCLE_REST_DRIVE : t, muscleShade);
     const hk = hint ? AREA_LOOK.hintGain : 1;
-    // R558 (Message 18): a dim yellow glow reads as olive on a belly in shade; yellows emit a little more (ns-colors).
+
     const rcG = areaRecord(areaId), gs = rcG ? muscleGlowGainScale(rcG.glowLinear) : 1;
     const k = areaGlowInto(areaId, t, AREA_LOOK.muscleGain * hk * gs, muscleShade.emission);
-    // R558 (issue hunt 2, Message 18 "never ... diseased-looking"): a hint no longer lays its faint emission over the
+
     // whole belly (a dim green over red-brown tissue read as a murky olive belly); the hinted muscle keeps its resting
     // tissue colour and gets only a thin, clean rim in a lighter tint of its area's colour (MUSCLE_HINT_LOOK).
     if (hint) muscleShade.emission[0] = muscleShade.emission[1] = muscleShade.emission[2] = 0;
@@ -10063,14 +10080,14 @@ export function createScene({
       } else if (ud.nsHalo && ud.nsHalo.visible) { ud.nsHalo.visible = false; haloState.shown--; }
     }
   }
-  /** R558 (Message 2, "optogenetic glow"): a glowing muscle gets a soft additive HALO, a copy of its own surface pushed
-   * out along its normals (MUSCLE_HALO: ownMm on your body, mirrorMm on the far mirror body, so both read on screen),
-   * drawn from the inside (back faces) with alpha rising from 0 at the halo's outer edge toward the muscle, so the light
-   * seems to spill a little past the muscle's outline. The muscle itself hides the halo's middle (depth test); no
-   * depth write, no picking, built only when a muscle first glows and hidden again at rest. Display only. */
+
+
+
+
+
   const haloOk = typeof THREE.ShaderMaterial === 'function' && THREE.AdditiveBlending !== undefined;
   const haloState = { built: 0, shown: 0 };
-  // R558 (Messages 22 and 53): the halo runs its muscle's neon flash too (the host's own nsCharge / nsSweep / nsFibre
+
   // uniforms and the shared clock): the same strike and flash, and at the peak the shell flares outward by
   // POWER_UP.haloBurst of its width, settling back with the flash.
   const HALO_PU = 'uniform vec4 nsClock;\nuniform vec4 nsCharge;\nuniform vec4 nsFibre;\nuniform vec2 nsSweep;\n' + powerUpGlsl('nsPowerUp') + '\n';
@@ -10118,7 +10135,7 @@ export function createScene({
     const offset = sc > 0 && Number.isFinite(sc) ? ud.nsHaloMm / 1000 / sc : 0;
     const hm = keep(new THREE.ShaderMaterial({
       uniforms: { nsHaloColor: { value: new THREE.Vector3(0, 0, 0) }, nsHaloShape: { value: new THREE.Vector2(offset, MUSCLE_HALO.power) },
-        // R558 (Message 22): the host muscle's own power-up state (shared objects, so they stay in step).
+
         nsClock: powerUpClock, nsCharge: ud.nsCharge || { value: new THREE.Vector4(-1e4, 0, 0, 0) }, nsFibre: ud.nsFibre || noFibre, nsSweep: ud.nsSweep || noSweep },
       vertexShader: HALO_VS, fragmentShader: HALO_FS, transparent: true, depthWrite: false, side: THREE.BackSide,
       blending: THREE.AdditiveBlending, toneMapped: false
@@ -10283,7 +10300,7 @@ export function createScene({
           haloSet(areaHalo, rec.id, rec.halo, gl[0], gl[1], gl[2], hp.lit, hp.look, rec.index);
         }
       }
-      // R558 (Message 22): the area's power-up starts when it begins to glow (its muscles join the same start).
+
       const cu = rec.material.userData && rec.material.userData.nsCharge;
       if (cu) {
         const on = glowIntensity(Number.isFinite(a) ? a : 0) > 0;
@@ -10342,7 +10359,7 @@ export function createScene({
     return changed;
   }
 
-  // R558 (Message 6, REGION_HINT): faint hints on the areas whose action would bring a held joint back. Built lazily,
+
   // once per (area, action), from the area's own parts: the triangles whose centre the look rule gives to that action.
   const hintMeshes = new Map(); // `${regionId}/${actionId}` -> { meshes, whole, triangles, material }
   let hintKey = '';
@@ -10399,7 +10416,7 @@ export function createScene({
     hintMeshes.set(key, entry);
     return entry;
   }
-  // R558 (Message 18, REGION_BORDER): with the per-fragment areas the hint is drawn by the area's own material: the
+
   // hinted action's sub-band of the strip coordinate (the same look rule, ns-brain regionActionAt), soft-edged in CSS
   // pixels, so it follows the drawn area exactly (no extra meshes, no additive overlap). Built once per (area, action).
   const hintBands = new Map(); // `${regionId}/${actionId}` -> { lo, hi, whole, triangles }
@@ -10631,7 +10648,7 @@ export function createScene({
     const sig = JSON.stringify(c);
     if (sig === info.last) return false;
     info.last = sig;
-    // R558 (performance; user Messages 42, 48 and 50): only what changed is written. While an area's activity rose or
+
     // fell, its number changed on every frame, and every such frame used to empty and fill all the rows, the caveats and
     // the "More detail" text again and made the browser lay the page out anew for the arrows and labels (the cards'
     // boxes are read again when the panel may have changed size). Now `grew` says that something that can change the
@@ -10767,11 +10784,11 @@ export function createScene({
   const entryList = entries => (entries instanceof Map ? [...entries.values()] : Array.isArray(entries) ? entries : entries && Array.isArray(entries.assets) ? entries.assets : []);
   const meshOf = (meshesById, id) => (meshesById instanceof Map ? meshesById.get(id) : meshesById ? meshesById[id] : null);
 
-  /** R558 (Message 18, "easily differentiate each ... muscle node"): which muscles touch (they share a cell of
-   * MUSCLE_TONE_CONTACT.cellMm in the drawn rest geometry; every `stride`-th vertex sampled; contact weight = shared
-   * cells) -> ns-colors assignMuscleTones (side-free keys: a left / right pair is one node, so both sides share a tone)
-   * -> every muscle's base colour; then every muscle (your body, its twins, the left game arm) is shaded again. Once,
-   * at setBody. A display choice: the tones do not stand for any tissue property. */
+
+
+
+
+
   const MUSCLE_TONE_CONTACT = Object.freeze({ cellMm: 8, stride: 2 });
   function assignBodyMuscleTones() {
     const t0 = nowMs();
@@ -10801,7 +10818,7 @@ export function createScene({
     for (const [pk, w] of pairs) { const [a, b] = pk.split('\u0000'); add(a, b, w); add(b, a, w); }
     muscleTones.byKey = assignMuscleTones(keys, contacts);
     if (BODY_STYLE === 'raw') {
-      // 20 November 2026 (the owner, Message 202): touching muscles take different lightness steps of their group's tone
+
       const groupOfKey = new Map(), layerOfKey = new Map();
       recs.forEach((b, i) => {
         if (groupOfKey.has(keys[i])) return;
@@ -10865,7 +10882,7 @@ export function createScene({
       const kind = bodyKindOf(entry);
       const near = nearestDistance(m.positions, eyeBp, m.positions.length > 30000 ? 2 : 1) < nearMm;
       const face = part === 'face' || (near && !isBodyGirdleEntry(entry));
-      // R558 (Message 30): a finger or toe phalanx is drawn from its rounded display copy (boneTipDisplay; documented
+
       // derivative, the packet arrays are not changed).
       const tipName = kind === 'bone' ? String(entry.embedded_source_name || (Array.isArray(entry.matched_concept_names) && entry.matched_concept_names[0]) || entry.label || entry.requested_structure || '') : '';
       const tipPos = /phalan/i.test(tipName) ? boneTipDisplay(m.positions, m.indices, { distal: /distal phalanx/i.test(tipName) }) : null;
@@ -10874,26 +10891,26 @@ export function createScene({
       geo.computeVertexNormals();
       const welded = weldGeometryNormals(geo); // R558 (R33): own body, its in-place head and the mirror twin all draw this geometry
       if (geo.attributes.normal && geo.index) { smoothNormalField(geo.attributes.position.array, geo.index.array, geo.attributes.normal.array, { groups: welded && welded.groups }); geo.attributes.normal.needsUpdate = true; } // 18 November 2026 (DETAIL)
-      hatchAttr(geo, geo.attributes.position.array, kind === 'muscle' ? 'muscle' : 'bone', id); // R558 (Messages 24, 29): ink frame
+      hatchAttr(geo, geo.attributes.position.array, kind === 'muscle' ? 'muscle' : 'bone', id);
       if (kind === 'bone' && boneEnds && boneEnds.has(id) && boneEnds.get(id).length === 2 * geo.attributes.position.count) geo.setAttribute('nsBoneEnd', new THREE.BufferAttribute(boneEnds.get(id), 2)); // 18 November 2026 (DETAIL)
       if (typeof geo.computeBoundingSphere === 'function') geo.computeBoundingSphere();
       let material;
       const trunk = !face && (part === 'torso' || part === 'neck');
       if (kind === 'muscle') {
         material = keep(new THREE.MeshStandardMaterial({ color: MATERIAL.muscleBase, roughness: MUSCLE_LOOK.roughness, metalness: 0 }));
-        tendonAttr(geo); // R558 (Message 18): tendon ends, written by setBodyLift
+        tendonAttr(geo);
         if (entry.soft_tissue === true) softTissueTone(geo); // package BULK: a digit pad
         setMuscleBase(material, id);
         depthLift(geo, material, id); // 18 November: the depth preference round rectus abdominis (ns-flesh BODY_DEPTH_PREFERENCE)
         material.userData.nsFibre = fibreUniform(geo.attributes.position.array, id);
-        material.userData.nsSweep = sweepUniform(geo.attributes.position.array, material.userData.nsFibre); // R558 (Message 22)
+        material.userData.nsSweep = sweepUniform(geo.attributes.position.array, material.userData.nsFibre);
         if (face) { material.transparent = true; material.opacity = FACE_LAYER.muscleOpacity; material.depthWrite = false; }
         else if (trunk) torsoPatch(material);
         if (!face) overBrainPatch(material, part === 'legs');
         glowRimPatch(material); // R5-scene (D17)
-        muscleLookPatch(material); // R558 (Message 18)
-        powerUpPatch(material, 'muscle'); // R558 (Message 22): the power-up charge
-        comicPatch(material, 'muscle'); // R558 (Messages 25 to 29): bands, rim, highlight shapes, ink
+        muscleLookPatch(material);
+        powerUpPatch(material, 'muscle');
+        comicPatch(material, 'muscle');
         shadeMuscle(material, MUSCLE_REST_DRIVE);
       } else material = face ? faceBoneMaterial : trunk ? torsoBoneMaterial : part === 'legs' ? legBoneMaterial : bodyBoneMaterial;
       const eyePart = kind === 'bone' ? eyePartOf(entry) : null; // R558 (builder FA): sclera / iris / lens
@@ -10917,7 +10934,7 @@ export function createScene({
         const c = geo.boundingSphere ? geo.boundingSphere.center : null;
         rec.side = c ? (c.x > 15 ? -1 : c.x < -15 ? 1 : 0) : 0;
       }
-      // R558 (Message 2): the area whose colour this muscle shows when no area claims it (ns-colors bodyPartArea).
+
       if (kind === 'muscle') { rec.owner = null; rec.fallbackArea = bodyPartArea(part, rec.side); }
       // R5-scene (D19): the mirror twin (same geometry and pose matrix, opaque, head and face in place).
       {
@@ -10925,7 +10942,7 @@ export function createScene({
         if (kind === 'muscle' && geo.attributes.nsLift) tm.defines = { ...(tm.defines || {}), NS_DEPTH_LIFT: 1 };
         if (kind === 'muscle') { tm.userData.nsFibre = material.userData.nsFibre; tm.userData.nsSweep = material.userData.nsSweep; }
         if (kind === 'muscle') shadeMuscle(tm, MUSCLE_REST_DRIVE);
-        // 19 November 2026 (the owner: the mirror body's head "very patchy ... and smallpoxy"): the face's muscles are
+
         // sheets lying on the skull, and the bone showed through them in specks. They are drawn a hair nearer the eye
         // than they lie (a depth offset only; nothing moves).
         if (kind === 'muscle' && face) { tm.polygonOffset = true; tm.polygonOffsetFactor = FACE_MUSCLE_OFFSET.factor; tm.polygonOffsetUnits = FACE_MUSCLE_OFFSET.units; }
@@ -10952,7 +10969,7 @@ export function createScene({
         rec.inPlace = ip;
         mesh.userData.nsInPlaceTwin = ip;
       }
-      // R558 (Message 20): outline codes (a coarse group from the part and side until setOutlineSegments brings the rig's).
+
       {
         const g = outlineGroupForPart(part, rec.side);
         rec.limbPart = limbPartOfOutlineGroup(g); // (PART_GLOW; setOutlineSegments brings the rig's finer answer)
@@ -10968,7 +10985,7 @@ export function createScene({
       bodyById.set(id, rec);
       fastPick(rec.mesh); if (rec.mirror) fastPick(rec.mirror); if (rec.inPlace) fastPick(rec.inPlace); // R558: rigid body meshes
     }
-    assignBodyMuscleTones(); // R558 (Message 18): neighbouring muscles get clearly different natural tones
+    assignBodyMuscleTones();
     // 18 November 2026, late (EYE_NECK): NECK_SHADE's dark shape on the breastbone is no longer made (see EYE_NECK).
     // 18 November 2026, late (EYE_NECK): the soft shadow where your own neck meets the skull that is not drawn; it rides
     // on the top neck vertebra's in-place twin, so it is drawn only when the neck is; from outside, where the head is
@@ -11178,7 +11195,7 @@ export function createScene({
         if (geo.boundingBox) { const bp = new THREE.Vector3(); for (let i = 0; i < full.length; i += 3) geo.boundingBox.expandByPoint(bp.set(full[i], full[i + 1], full[i + 2])); }
         bodyLift.set(id, L);
         bodyLiftGeos.set(geo, L);
-        writeTendon(geo, rest, full, id); // R558 (Message 18): tendon white on the anchored ends
+        writeTendon(geo, rest, full, id);
         // Level-of-detail copies built before the lift hold their own (unlifted) vertices: drop them; lodGeometry now
         // makes index-only copies over the shared buffers.
         const byCell = lodOf.get(geo);
@@ -11209,9 +11226,9 @@ export function createScene({
     return { ...bodyLiftInfo, registered };
   }
 
-  /** R558 (Message 20, ns-outline): the limb group of each body mesh from the rig's segment membership (ns-body
-   * buildBodyRig meshSegment: { id: { segment, blend } }); a muscle spanning a joint takes the segment with most of its
-   * weight. Meshes the rig does not list keep their coarse group. Returns how many meshes were set. */
+
+
+
   function setOutlineSegments(meshSegment) {
     if (!meshSegment || typeof meshSegment !== 'object') return 0;
     let n = 0;
@@ -11261,18 +11278,18 @@ export function createScene({
    * frame, mm -> mm), drives = bodyMuscleDrives(...) ({ muscleMeshId: 0..1 }, missing ids keep the rest tint). GPU
    * transforms only (no CPU skinning); a matrix or drive is written only when it changed. Returns the number of meshes
    * whose matrix changed. */
-  /* R558 (Messages 14 / 15: each finger of the right hand on its own, as on the left game hand). The long finger and
-   * thumb muscles and the hand's own muscle sets are ONE mesh across several digits (and across the wrist), so a single
-   * rigid matrix cannot follow one bent finger next to a straight one: the tendon of the bent finger would stick out.
-   * These meshes are skinned per vertex instead, with the same two-influence weights that baked the start posture (ns-body
-   * bodySkinWeights on the source vertices), exactly as the left game arm's muscles are skinned (ns-rig skinApply).
-   * setBodySkin(records, bakedSegments) registers them once: records Map(element id -> { src (source positions), i0, i1,
-   * w0, w1 }), bakedSegments the bake's Map(segment -> source->drawn matrix). updateBodySkin(segments) poses them from
-   * poseBodyDetailed().segments (source->drawn) on top of the rigid matrix updateBody has just set (the vertices are
-   * written in the mesh's own frame, so culling, picking, the mirror twin and the in-place head share one buffer as with
-   * the lift); updateBodySkin(null) puts the rigid rest geometry back. The Body Worlds lift rides on the skin: the lift's
-   * per-vertex offset is turned with the vertex's blended rotation. Written only when called (ns-app calls it when the
-   * right hand or wrist is away from the start posture and the pose changed). Display choice on licensed anatomy. */
+
+
+
+
+
+
+
+
+
+
+
+
   const bodySkin = new Map(), bodySkinGeos = new Map();
   let bodySkinOn = false, bodySkinSegs = null, bodySkinBaked = null, bodySkinWrites = 0;
   let anconeusMix = 0, anconeusDeepMix = 0, skinElbowDeg = 0; // (skinElbowDeg: the drawn right elbow bend, ELBOW_SKIN)
@@ -11300,18 +11317,18 @@ export function createScene({
     muscleLook.digitTendonBody = n;
     return n;
   }
-  /* 20 November 2026 (the owner, Message 204: "make sure there's clear movement for each brain activation area. And you
-   * can clearly identify what type of movement it is for each area"; package FACE). The face areas' movements used to
-   * change only the face muscles' colour. Now they move the face muscles' vertices (ns-face-move: the brows go up, the
-   * eyelids close over the eyeballs, the mouth corners go up and back, the lips purse ...). setFaceMoves() works every
-   * shape out once from the drawn face muscles (call it after setBody, the lift and the skin records); setFaceShape(w)
-   * draws the face for the shapes' strengths (ns-face-move faceShapeWeights of the face's display joints, so the face
-   * follows each activation's contraction and return like every other joint). The face muscles' buffers are shared by
-   * your own head (drawn from outside), its in-place twin and the mirror body, so all of them move. A muscle drawn as one
-   * rigid piece gets its moved positions and normals written into its buffer (on the graphics card's identity skin they
-   * are copied once a frame, bodyGpuAliasSync); one skinned between the skull and the jaw takes the movement through
-   * skinBase. Nothing is written while the face is still; with every strength at 0 each buffer holds its resting
-   * contents again exactly. */
+
+
+
+
+
+
+
+
+
+
+
+
   const faceMove = { rig: null, w: null, key: '', recs: new Map(), note: null, writes: 0, ms: 0, entries: 0, buildMs: null };
   function setFaceMoves() {
     faceMove.rig = null; faceMove.recs.clear(); faceMove.key = ''; faceMove.w = null; faceMove.note = null; faceMove.entries = 0; faceMove.tops = null;
@@ -11355,7 +11372,7 @@ export function createScene({
     const sk = fr.sk;
     if (sk) {
       // (both skins start again from the moved face: the graphics card's offset (liftFor) and the processor copy's cache
-      // (cacheAt). 20 November 2026, from a review of Body updates 60 and 61: the graphics card's branch left the cache,
+
       // so the picks, the mirror envelope and the triangle query saw the lips at rest during a lip movement, and a lift
       // change during one baked that face into the cache until the next lift change. inspect: faceMoves.cpuOff.)
       sk.cacheAt = NaN;
@@ -11421,7 +11438,7 @@ export function createScene({
       const a = fr.L ? fr.L.applied || 0 : 0, base = fr.L ? (a <= 0 ? fr.L.rest : a >= 1 ? fr.L.full : null) : fr.baseP, P = fr.pos.array;
       if (base) for (let i = 0; i < P.length; i++) { const d = Math.abs(P[i] - base[i]); if (d > restOff) restOff = d; }
     }
-    // (cpuOff, 20 November 2026, from a review of Body updates 60 and 61: the largest difference, mm, between the face a
+
     // muscle skinned to the jaw is drawn with on the graphics card (its lift offset nsSkinD) and the face its processor
     // copy is posed from (skinCache's qa, turned back into the drawn frame by the bake's rigid segment map): what the
     // picks, the mirror envelope and the triangle query see. 0 = they see the face as it is drawn.)
@@ -11752,16 +11769,16 @@ export function createScene({
   /** How many skinned muscles still wait for their turn (see SKIN_FRAME_VERTICES). */
   function bodySkinPending() { return bodySkinWaiting + (swell.on && swell.busy ? 1 : 0); }
 
-  /* 18 November 2026 (package BULK, ns-body MUSCLE_SWELL; the owner: "ensure naturalistic stacking deformation during
-   * muscle contraction"). A muscle that is active and shortens swells at its belly; what lies over it is lifted with it;
-   * a lengthened muscle (the antagonist on the other side of the limb) goes slimmer. setBodySwell(Map id -> { own, under,
-   * underIdx, unders, anchors }) registers the baked data on the per-vertex skinned muscles; each skin adds, after the
-   * blend, own x s (this muscle's amount) + under x s(the muscle beneath) along the vertex's posed normal, so picking,
-   * the outlines and the mirror body (one shared buffer) get the same surface. s eases toward muscleSwellTarget(activity,
-   * shortening) with MUSCLE_SWELL.easeS (easeSReduced under prefers-reduced-motion: no quiver, only a slow change),
-   * quantised to MUSCLE_SWELL.step, and a muscle is re-skinned only when its own or a beneath muscle's quantised amount
-   * changed (the frame's skin budget applies). Shortening: the distance between two points of the muscle carried by its
-   * two main segments, against the start posture. Simulated and unitless; not measured muscle shape. */
+
+
+
+
+
+
+
+
+
+
   const swell = { on: false, recs: [], busy: false, lastMs: 0, muscles: 0, applied: 0 };
   function setBodySwell(data) {
     if (!(data instanceof Map)) fail('scene_input', 'setBodySwell needs a Map of swell records');
@@ -12256,7 +12273,7 @@ export function createScene({
         if (p && p.box) arrowsOut.push({ dir: d, target: 'brain', x0: Math.max(0, (p.box.x0 - 4) / cssW), y0: Math.max(0, (p.box.y0 - 4) / cssH), x1: Math.min(1, (p.box.x1 + 4) / cssW), y1: Math.min(1, (p.box.y1 + 4) / cssH) });
       }
     }
-    // R558 (Message 7): the mirror body's V tips are drawn on top of the scene too, so the HUD keeps off them as well
+
     // (target 'mirror'; callers that need the brain's own tips select target 'brain').
     const MS = arrowSets.mirror;
     if (MS.shown && MS.boxes && cssW > 0 && cssH > 0) {
@@ -12270,16 +12287,19 @@ export function createScene({
     for (const r of hudRectCache || []) if (r.info) infoBottom = r.y1;
     // R4-polish (labels never overlap): the shown capture / drag-to-look toast (viewport fractions), so the HUD's
     // orientation labels keep clear of it too (at 390x844 "Back (posterior)" sat under the full-width toast).
-    const toasts = [];
-    if (cssW > 0 && cssH > 0) for (const r of hudRectCache || []) if (r.toast) toasts.push({ x0: r.x0 / cssW, y0: r.y0 / cssH, x1: r.x1 / cssW, y1: r.y1 / cssH });
+    // (25 November 2026; the hunt of update 78, finding 9: from outside, at 1600 by 900 at the full reading level, "Front
+    // (anterior)" and "Brain's right half" lay under the limb buttons, which only the region labels kept off) the limb
+    // buttons' bar as drawn (viewport fractions), for the orientation labels as well.
+    const toasts = [], limbs = [];
+    if (cssW > 0 && cssH > 0) for (const r of hudRectCache || []) if (r.toast || r.limbs) (r.toast ? toasts : limbs).push({ x0: r.x0 / cssW, y0: r.y0 / cssH, x1: r.x1 / cssW, y1: r.y1 / cssH });
     // R4-fix (review RP8): the region labels drawn this frame (CSS px), so the guide chip keeps clear of them.
     const labelsPx = [];
     for (let i = 0; i < labelEls.length; i++) { const L = labelEls[i], b = labelBoxes[i]; if (L.shownNow && b && !b.skip) labelsPx.push({ x0: b.x - b.w / 2, y0: b.y - b.h / 2, x1: b.x + b.w / 2, y1: b.y + b.h / 2 }); }
-    // R558 (Message 31): the brain frame's planned top tip (its drawn box at hover size, CSS px, in the plan's reference
+
     // view; look-independent), so the guide chip can sit centred just below it.
     const bp = arrowSets.brain.plan && arrowSets.brain.plan.spots && arrowSets.brain.plan.spots.forward;
     const brainTopPlanPx = arrowSets.brain.shown && bp && bp.box ? { ...bp.box } : null;
-    return { brainInView: brainInViewAttr === 'true', brainSeenShare, brainBoundsMeet, arrows: arrowsOut, infoBottom, toasts, labelsPx, brainTopPlanPx };
+    return { brainInView: brainInViewAttr === 'true', brainSeenShare, brainBoundsMeet, arrows: arrowsOut, infoBottom, toasts, limbs, labelsPx, brainTopPlanPx };
   }
   /** R558 (issue hunt 2: the "Try this" chip covered your shin, forearm; "Front (anterior)" was printed across the mirror
    * body's belly): the on-screen boxes (CSS px, clipped to the view) of your own body and of the mirror body, for the
@@ -12602,16 +12622,31 @@ export function createScene({
     try { return readHudRectsNow(key); } finally { hudReadMs += nowMs() - tRead; }
   }
   let hudReadMs = 0, hudLagged = 0;
-  /** R558 (Messages 44 and 48, text that is easy to read): the short card shows each of its parts whole or leaves it
-   * out; nothing is cut through. The short card has a greatest height (INFO_PANEL.cornerShortVh). On a card with many
-   * lines the lead sentence used to give way pixel by pixel and ended as a sliver of a line, and in a small window the
-   * card's last rows were cut through the middle. Here the card is tried with everything, and while it runs over one
-   * more part is left out, in this order: the lead sentence (the numbered movements say the same), the signal path, the
-   * muscles that work the other way, the muscles that pull. Title, strip part, signal bar and the numbered movements
-   * always stay. The mark (data-ns-trim on the panel, "0" to "4") is read by the CSS of the short card only, so the
-   * opened card (key R) always has every part. Tried again only when the card's content, the view's size or the card's
-   * mode changed: the mark's own write makes the HUD boxes be read once more, not this. */
+
+
+
+
+
+
+
+
+
   const INFO_TRIM_MAX = 4;
+  /** INFO_UNDER_MAP: the map card's foot written on the information card (only when it changed). */
+  let emapFoot = null;
+  function noteEmapFoot() {
+    const p = info && info.panel, parent = overlay && overlay.parentNode;
+    if (!p || !p.style || typeof p.style.setProperty !== 'function' || !parent || typeof parent.querySelector !== 'function') return;
+    const card = parent.querySelector('.ns-emap-card');
+    let foot = null;
+    if (card && !card.hidden && typeof card.getBoundingClientRect === 'function') {
+      const box = p.offsetParent && typeof p.offsetParent.getBoundingClientRect === 'function' ? p.offsetParent : parent;
+      foot = emapFootPx(card.getBoundingClientRect(), box.getBoundingClientRect().top);
+    }
+    if (foot === emapFoot) return;
+    emapFoot = foot;
+    if (foot === null) p.style.removeProperty('--ns-emap-foot'); else p.style.setProperty('--ns-emap-foot', `${foot}px`);
+  }
   function fitInfoCard() {
     const p = info && info.panel;
     if (!p || p.hidden || typeof p.setAttribute !== 'function' || typeof p.getAttribute !== 'function') return;
@@ -12619,7 +12654,7 @@ export function createScene({
     const root = typeof p.closest === 'function' ? p.closest('.ns-app') : null;
     const open = Boolean(info.more && info.more.open) || Boolean(root && root.getAttribute('data-ns-unfold') === 'true');
     // (UI3, INFO_WHOLE: and whether the brain is in view; the body views lay the card out with other clamps)
-    const sig = `${cssW}x${cssH}|${info.grewN | 0}|${open ? 1 : 0}|${INFO_WHOLE.on ? brainInViewAttr : ''}`;
+    const sig = `${cssW}x${cssH}|${info.grewN | 0}|${open ? 1 : 0}|${INFO_WHOLE.on ? brainInViewAttr : ''}|${emapFoot === null ? '' : emapFoot}`; // (INFO_UNDER_MAP: and the map card's foot)
     if (sig === info.fitSig) return;
     info.fitSig = sig;
     // 24 November 2026 (KEY_CARD_FIT): a key's card (the grip, a reach key) has its own stages, at every reading level:
@@ -12656,6 +12691,7 @@ export function createScene({
   }
   function readHudRectsNow(key) {
     hudRectCache = [];
+    try { noteEmapFoot(); } catch { /* the card keeps the foot it had */ }
     try { fitInfoCard(); } catch { /* the card keeps its last mark */ }
     const parent = overlay && overlay.parentNode;
     if (!parent || typeof parent.querySelectorAll !== 'function' || typeof parent.getBoundingClientRect !== 'function') return hudRectCache;
@@ -12974,11 +13010,11 @@ export function createScene({
     arrowObsKey =out.map(r => `${Math.round(r.x0 / 8)},${Math.round(r.y0 / 8)},${Math.round(r.x1 / 8)},${Math.round(r.y1 / 8)}`).join(';');
     return out;
   }
-  /** R558 (Message 7): the mirror body's on-screen box (CSS px) seen from a reference camera { yaw, pitch, position },
-   * from the body sample as the renderer places it NOW (mirror.transform) but WITHOUT its moves along the ground (the
-   * push, the outside view's slide and a tilt's clearance, a pure shift: transform centre minus carryCentre), or null
-   * when it is not shown. The frame is planned again only for a new place (planFrames' key), so an arrow tap never moves
-   * the tips (the user: arrows "stay in place after tapping on them"). */
+
+
+
+
+
   // (22 November 2026, browser hunt of update 64, H6: one plan asks for this box from up to four cameras; the body's
   // world points without the moves along the ground are worked out once per placement, mirror.serial)
   let mirrorBoxWorld = null;
@@ -13067,10 +13103,10 @@ export function createScene({
     const cam = { width: cssW, height: cssH, fovYDeg: camera.fov, yaw: look.yaw, pitch: look.pitch, position: look.position || activePosition() };
     return NsArrows.occupancyGrid(NsArrows.projectPointsPx(P, Array.from(brainGroup.matrixWorld.elements), cam).xy, { width: cssW, height: cssH, cellPx: R5_BIGBRAIN.avoidCellPx, dilate, indices: motorIndices });
   }
-  /** R558 (Messages 55 / 56): the motor areas' occupancy grid (CSS px, no margin) with the brain at REST (un-turned,
-   * ns-brain restMatrix) seen from a plan's reference camera: tipBlocker tests a tip's click area against it, so at the
-   * start a click on a motor area never lands on an arrow. Kept for the last camera asked (the brain's and the mirror
-   * body's plans usually share it). null before the region meshes and the rest matrix exist. */
+
+
+
+
   // 22 November 2026 (browser hunt of update 64, H6): the last few cameras' grids are kept (ARROW_REPLAN.restGrids), not
   // only the last one: the brain's plan (from the look the brain was carried along) and the mirror body's (from the
   // start look) ask for different cameras, so one memo built the grid twice on every plan after a carry.
@@ -13090,8 +13126,8 @@ export function createScene({
     }
     return motorRestGridMemo[at].grid;
   }
-  /** R558 (Messages 55 / 56): the box the mirror body's 9:16 arrow frame is built from, seen from a reference camera
-   * (see updateArrows): its on-screen box padded by a tip and cut to the usable view U. { box, keep } or null. */
+
+
   function mirrorFrameBox(refCam, U, mSize) {
     const full = mirrorBoxPx(refCam);
     if (!full) return null;
@@ -13103,8 +13139,8 @@ export function createScene({
     }
     return { box: full, keep: null };
   }
-  /** R558 (Message 7): plan one target's four V tips on its frame (ns-arrows3d planFrameArrows) and keep the evidence
-   * record the read-only arrow trace reports. */
+
+
   function planFrame(set, args, record) {
     set.planningCamera = arrowCameraRecord(args.cam); set.planningCameraKey = arrowCameraKey(args.cam);
     set.planningTarget = { centreWorldM: Array.from(args.centre), supportRows: null };
@@ -13135,19 +13171,19 @@ export function createScene({
     } catch (err) { set.planningOutcome = 'error'; set.planningError = arrowRigError = String((err && err.message) || err); return null; }
   }
   let mirrorSamplesSeen = null, mirrorSamplesRev = 0; // R558 (hunt 2): the mirror body's measured sample, as a key part
-  /** R558 (user Message 31: "left/right arrows of mirror body do not match in height level"): the places a tip may not
-   * take while its frame is planned, as one test for ns-arrows3d frameArrowSpots `blocked`, which moves the tips in
-   * PAIRS (left + right at one height, forward + back on one vertical line; FRAME_PAIR). Hunt 2 slid each tip on its own
-   * along its side instead (TIP_BODY_SLIDE, slideTipsOffBox): at 1600x900 the mirror body's left tip went 120 px down off
-   * your left hand while its right tip stayed, and in a portrait window the brain's bottom tip went 204 px aside off the
-   * mirror body while its top tip stayed. Blocked (CSS px in the plan's reference view `cam`):
-   *  - covered by your own body: two of three sight lines through the tip (its middle and 0.35 x sizePx either way
-   *    along its side) meet your body nearer than the tip's world anchor (the FRAME_VIS rule, which would hide it);
-   *  - `box` (optional): the tip's drawn box at hover size, padded by gapPx, overlaps it (the brain's tips keep off the
-   *    mirror body's box, padded so the mirror's own tips keep their room);
-   *  - `grid` (optional, R558 Messages 55 / 56): the tip's CLICK area (ns-arrows3d arrowHitHalfPx, or its hovered drawn
-   *    size where that is larger) lies over a marked cell (motorRestGrid: the motor areas at rest). The motor areas are
-   *    what the player aims at and learns from; a tip over one hid it and took its clicks. */
+
+
+
+
+
+
+
+
+
+
+
+
+
   let blockedCalls = 0; // (UI3: places a plan tested, for the arrow readback's lastPlans)
   function tipBlocker({ cam, centre, sizePx, box = null, gapPx = 4, grid = null, ownBody = true }) { // ownBody false (18 November 2026, late): rescueTips' second pass
     const o = NsArrows.arrowTipOutline(NsArrows.ARROW_DESIGN), grow = NsArrows.ARROW_LOOK.hoverScale;
@@ -13192,10 +13228,10 @@ export function createScene({
       return false;
     }
   }
-  /** R558 (Message 7): where the V tips may lie (CSS px): the arrows' usable view (the view minus a margin, the top
-   * line and the portrait band) and, in a portrait window, below the status card's planned full-width band at the top
-   * (ns-app brainUsableNdc keeps the same room: top line + 12 + statusCardPlanPx + 8). View size only, so a frame never
-   * moves while playing. */
+
+
+
+
   function tipBounds() {
     const U = arrowUsable();
     if (cssW / cssH < 1) {
@@ -13204,49 +13240,49 @@ export function createScene({
     }
     return U;
   }
-  /** R558 (Message 7): the motor strip's on-screen box at REST (every motor-area sample point through the brain's
-   * un-turned matrix, ns-brain restMatrix) seen from a reference camera; null before the region meshes and the rest
-   * matrix exist or when a point lies behind that camera. */
+
+
+
   function motorRestBoxPx(refCam) {
     const P = motorSamplePoints(), e = brainRestElements;
     if (!P || !e) return null;
     const { xy, behind } = NsArrows.projectPointsPx(P, Array.from(e), refCam);
     return behind > 0 ? null : NsArrows.screenBoxOf(xy);
   }
-  /** Both rigs. R558 (user Message 7): "think of the motor strip as a horizontal 16:9 frame and the mirror as a vertical
-   * 9:16 frame, the arrows will be at the centered edges of each frame perimeter side".
-   *  - Brain: the smallest 16:9 rectangle containing the motor strip's on-screen box at REST (the brain un-turned), seen
-   *    from the fixed reference eye with the brain's reference look (arrowRef: the start look, or the look the brain
-   *    was last carried along), centred on that box and clamped to the usable view (tipBounds: the view minus a
-   *    margin, the top line and the HUD bands); its four tips at the midpoints of its four sides, pointing outward, moved
-   *    inward only as far as their drawn boxes (hovered size) need to stay inside the usable view (the left and right
-   *    tips both by the same amount).
-   *  - Mirror body: the smallest 9:16 rectangle containing its on-screen box (its body sample as the renderer places it
-   *    now, read at run time, less its moves along the ground; a tap on an arrow never moves a tip), the same way,
-   *    seen from the reference eye with the START look while the body's centre
-   *    lies well inside that view, else with the look straight at its centre (a body carried far aside). Where its
-   *    tips would overlap a brain tip (the brain's tips come first), the crosshair box or your own body, they move.
-   *  - R558 (Message 31, symmetry): the tips always move in PAIRS (ns-arrows3d frameArrowSpots, FRAME_PAIR): the left
-   *    and right tips stay at exactly one height and the top and bottom tips on one vertical line, by preference on the
-   *    frame's centre lines and at mirrored insets; a pair that must clear something moves together (along its centre
-   *    line by the same amount, or both across it by the same amount); only where one tip cannot follow does each move
-   *    along its own pointing axis alone (still level). Exact mirror symmetry about the view's centre is not the rule:
-   *    the frames are fitted to the targets as they stand (a mirror body carried aside has its frame there).
-   *  - No tip of either set is planned on the box kept free round the crosshair of its reference view; a tip that has
-   *    to move keeps clear of the HUD cards and the hint line.
-   *  - R558 (Messages 55 / 56, the brain above the mirror body): no tip of either set is planned where its click area
-   *    covers a motor area of the brain at rest (motorRestGrid), and the brain's tips keep off the click area of the
-   *    mirror body's top tip, which stays on the middle of its frame's top side. The brain's BOTTOM tip therefore does
-   *    not sit on the middle of its frame's bottom side (that is where the mirror body's top tip is): it moves up its
-   *    centre line into the hollow of the strip's U (BRAIN_TIP_RULES). This is a known departure from "the centered
-   *    edges of each frame" for that one tip; the other three brain tips are on their sides' middles or a few px out.
-   *    (The brain's plan uses the brain's reference look and the mirror's its own; they are the same look at the
-   *    start, which is when the two frames meet.)
-   * A frame is made again only when something it depends on changes: the view size, field of view or usable view, the
-   * reference eye and look, the target's place (a carry, or a reset that puts it back), the brain's rest matrix and
-   * source, the mirror body's scale and measured sample. Turning a target, tapping an arrow or looking around changes
-   * none of these, so the tips stay where they are. (A frame made while the mirror body is turned, e.g. after a window
-   * resize, is fitted to the body as it then stands.) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // 22 November 2026 (browser hunt of update 64, H8; ARROW_REPLAN.startPlans): the plans made before anything was first
   // held, by key, with what the arrow readback reports of them. A later plan with the same key (a reset brings the brain
   // and the mirror body back to their start places in the same window) takes the start's plan back: planned again, the
@@ -13504,8 +13540,8 @@ export function createScene({
         const bSize = NsArrows.arrowTipSizePx(cam, 'brain');
         // R558 (issue hunt 2, portrait: the brain's bottom tip lay across the mirror body's chest): the brain's tips keep off
         // the mirror body's box (padded by a mirror tip, so the mirror's own tips keep their room) and off places your own
-        // body covers in this view. R558 (Message 31): they move in pairs to do so (tipBlocker, ns-arrows3d FRAME_PAIR).
-        // R558 (Messages 55 / 56): the brain now sits just above the mirror body's head, so three more things hold:
+
+
         //  - the mirror body's TOP tip keeps its own place (the middle of its frame's top side): its click area there is
         //    kept free of the brain's tips, which are planned first (mTop);
         //  - no brain tip lies over a motor area (motorRestGrid): the left and right tips move out off the strip's ends;
@@ -13563,7 +13599,7 @@ export function createScene({
     B.shown = showB && Boolean(B.frames) && !B.frameHidden && !hideNow('brain');
     if (B.rig && B.rig.group.visible !== B.shown) B.rig.group.visible = B.shown;
     if (showM) {
-      // R558 (Message 19 check): planned on the body's place WITHOUT its moves along the ground (carryCentre), and the
+
       // key leaves the orbit out, so an arrow tap (a turn or a tilt) neither re-plans nor moves the tips; a carry or a
       // reset does.
       const c = mCentreNow;
@@ -13600,8 +13636,8 @@ export function createScene({
         const mSize = NsArrows.arrowTipSizePx(cam, 'mirror'), fb = mirrorFrameBox(refCam, U, mSize);
         const mBox = fb ? fb.box : null, keep = fb ? fb.keep : null;
         // R558 (hunt 2): a place your own body covers in this view is not taken (it would be hidden from the start,
-        // FRAME_VIS); R558 (Message 31): the tips move in pairs to keep off it (tipBlocker, ns-arrows3d FRAME_PAIR).
-        // R558 (Messages 55 / 56): nor a place over a motor area of the brain at rest (motorRestGrid).
+
+
         const mBlocked = tipBlocker({ cam: refCam, centre: Array.from(c), sizePx: mSize, grid: showB ? motorRestGrid(refCam) : null });
         M.plan = planFrame(M, { box: mBox, keep, aspect: NsArrows.FRAME_ASPECT.mirror, bounds: U, cam: refCam, centre: Array.from(c), sizePx: mSize, avoid, keepOut, blocked: mBlocked },
           { target: 'mirror body', refLook: { yaw: look.yaw, pitch: look.pitch }, startLook: look === start, cutToView: keep });
@@ -13631,7 +13667,7 @@ export function createScene({
     if (releaseWarm === 'no' && arrowReleased === null && !arrowHeld) askReleaseWarm(); // (UI4, RELEASE_WARM)
     // (the release is over once its last step has run: both frames are planned, or kept; before UI3, on one call)
     if (relNow.last) { arrowReleased = null; releaseKeepsM = null; overlayDirty = true; sightAhead.length = 0; }
-    // R558 (Message 7): the planned anchors are fixed world points; each tip FACES the camera in use and keeps its
+
     // planned size on screen (ns-arrows3d facingArrowFrames: its depth axis along its own sight line, so the tilted solid
     // looks the same everywhere in the wide view). A tip fixed in the world and seen from the side, e.g. when the player
     // turns to look at a tip near the edge of the wide view, would be a thin sliver. Redone only when the camera or the plan
@@ -13709,14 +13745,14 @@ export function createScene({
       arrowStats.boxes++;
     }
   }
-  /** R5-scene (D16 / D19): what a ray through CSS point (x, y) hits, nearest first: [{ kind: 'arrow', target: 'brain' |
-   * 'mirror', dir, distance (m along the ray) }, { kind: 'brain', distance } (the point is inside the brain's drawn
-   * outline; distance = its nearest point from the camera)] (ns-arrows3d pickArrows per rig, with its hit shape and
-   * pick padding). Feed it to ns-controls resolveArrowHit.
-   * R558 (Message 7): the V tips are drawn on top of everything, so a tip under the point always wins: over a motor
-   * area (the motor area no longer takes priority over a brain tip) and over the glass (no 'brain' entry is reported
-   * with a tip hit, so a mirror tip drawn over the brain is not 'blocked'). Away from the tips' hit shapes nothing
-   * changes: the motor areas, the glass and the bodies keep their own picking. */
+
+
+
+
+
+
+
+
   function pickArrows(x, y) {
     const hits = [];
     if (!(Number.isFinite(x) && Number.isFinite(y)) || !(cssW > 0 && cssH > 0)) return hits;
@@ -13734,7 +13770,7 @@ export function createScene({
         try { h = only && !only.length ? null : NsArrows.pickArrows(ray, set.frames, only ? { only } : {}); } catch { h = null; }
         if (h && Number.isFinite(h.t)) hits.push({ kind: 'arrow', target: set.target, dir: h.dir, distance: h.t, onTip: h.dist <= 0 });
       }
-      // R558 (Message 19 check): where a brain tip and a mirror tip lie close (third person, portrait), a point ON one
+
       // tip's hit shape wins over a tip it only reaches through the pick padding, even if that one is nearer.
       if (hits.length > 1 && hits.some(q => q.onTip)) for (let i = hits.length - 1; i >= 0; i--) if (!hits[i].onTip) hits.splice(i, 1);
     }
@@ -13800,20 +13836,20 @@ export function createScene({
   // first try with Three's triangle raycasts: 25 to 45 ms for 48 sight lines, far too slow for a check every few frames).
   const frameVis = { tick: 0, at: -1e9, key: '', runs: 0, rays: 0, lastMs: 0, lastRays: 0 };
   let ownPartIds = null, ownPartCount = -1;
-  /** A sight-line tester for this pass: (x, y, maxM) -> true when your own body's cover lies on the sight line through
-   * CSS point (x, y) nearer than maxM metres from the camera. In first person the head and neck (round the eye, not
-   * drawn) are left out, and a hit counts only where the first-person view draws the body (FIRST_PERSON_BODY).
-   * refCam (optional, a plain ns-arrows3d camera at the first-person eye): sight lines from that camera instead (tip
-   * planning in the reference view; the head and neck are left out, the drawn-share rule is not applied).
-   * R558 check (Message 31): with refCam, the left game arm's bones (part 'arm') are tested with the sight line through
-   * the same pixel of the EYE as it looks now, not from the reference eye. The game arm hangs on the eye (eyeRig, camera
-   * metres), so it keeps its place on screen whatever the look, while the rest of your body stays put in the world.
-   * Tested from the reference eye, a plan made while you looked elsewhere saw the arm where THAT look put it (carrying
-   * the brain while looking up at it: the arm high above its place in the start view), so the tips it judged clear sat
-   * under your left hand again once you looked back (measured at 1600x900: the mirror body's left tip hidden, its right
-   * tip shown alone; the brain's top and bottom tips shifted 228 px aside). The body's own muscles on the left upper arm
-   * segment, which follow the game arm, are still tested from the reference eye (near the shoulder, rarely in front of
-   * a tip). At the start look the eye and the reference eye coincide, so nothing changes there. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   function ownSightTester(refCam = null) {
     const items = collisionItems(), own = items && items.own;
     if (!own || !own.entries.length) return () => false;
@@ -13829,7 +13865,7 @@ export function createScene({
     camera.updateMatrixWorld(true);
     const o = refCam ? Array.from(refCam.position) : [camera.position.x, camera.position.y, camera.position.z];
     const shareRule = fp && !refCam;
-    // R558 check (Message 31): the eye as it looks now, for the game arm's sight lines in the reference view (see above)
+
     const eyeCam = refCam ? { width: refCam.width, height: refCam.height, fovYDeg: refCam.fovYDeg, yaw: lookYaw, pitch: lookPitch, position: [eyeRig.position.x, eyeRig.position.y, eyeRig.position.z] } : null;
     // nearest entry distance along the unit ray d from origin a of sphere (cx, cy, cz, r), or Infinity
     const hitT = (d, cx, cy, cz, r, a = o) => {
@@ -13936,15 +13972,15 @@ export function createScene({
    * so without this an occluded tip came back on the next look movement, drawn on your body but answering no click
    * (seen in third person: the mirror body's left tip on your right shoulder). The brain's tips get the same rule in
    * arrowScreenLayout (with the under-panel rule). */
-  /* 18 November 2026, late (package FLAT; the owner: "make sure that even if it's not visible, there's still a down
-   * arrow for the brain"). With the flat view your own legs lie over the middle of the strip and the mirror body stands
-   * above your feet, so the pair planner (frameArrowSpots) found no free place for the brain's top and bottom tips on
-   * their centre line and kept them where your body or the mirror body is (blockedIgnored). rescueTips moves each such
-   * tip, alone, ALONG ITS OWN SIDE of the frame to the nearest place that is free (not covered by your body, not over a
-   * motor area or the mirror body, inside the usable view, clear of the other tips and the avoided boxes), trying both
-   * ways in RESCUE_TIP.stepPx steps; a tip with no free place keeps its planned place and is drawn in front (the tips
-   * never test depth) and keeps its click (stepArrowVisibility). The pair rule (Message 31) gives way here because a
-   * reachable arrow matters more than a symmetric one. */
+
+
+
+
+
+
+
+
+
   const RESCUE_TIP = Object.freeze({ stepPx: 8, maxSteps: 90, outPx: Object.freeze([0, 20, 40]) });
   function rescueTips(set, plan, { cam, centre, sizePx, blocked, looseBlocked = null, bounds, avoid = [] }) {
     const r = plan.rect, o = NsArrows.arrowTipOutline(NsArrows.ARROW_DESIGN), grow = NsArrows.ARROW_LOOK.hoverScale;
@@ -14315,8 +14351,8 @@ export function createScene({
             if (k >= 2) occ.add(d);
           }
           if (occ.size) vis.occluded = [...occ];
-          // 18 November 2026, late (package FLAT; the owner: "make sure that even if it's not visible, there's still a
-          // down arrow for the brain"): an arrow that exists is always reachable. A tip your own body is in front of is
+
+
           // no longer hidden: the tips are drawn over everything (their material does not test depth) and keep their
           // click. Where a free place exists the plan already put the tip there (rescueTips); this is the fallback.
           if (occ.size) { vis.coveredShown = [...occ]; occ.clear(); }
@@ -14360,7 +14396,7 @@ export function createScene({
       const w = T.w || Math.min(260, 7.2 * T.el.textContent.length + 18), h = ARROW_CAPTION_H;
       // just past the arrow's outer end, along its compass direction
       const xMax = Math.max(4, cssW - reserveRight - w - 4), yMax = Math.max(topPx, cssH - reserveBottom - h - 4);
-      // R558 (Message 7): never on top of ANY shown tip (the two sets' tips can be near each other), its own first.
+
       const tipBoxes = [box];
       for (const st of [arrowSets.brain, arrowSets.mirror]) if (st.shown) for (const dd of ARROW_DIRS) { const b2 = st.boxes[dd]; if (b2 && b2 !== box) tipBoxes.push(b2); }
       // R558 (issue hunt 2, portrait third person: "Slide the mirror body away from you" covered the "Right arm" label):
@@ -14759,7 +14795,7 @@ export function createScene({
       const ex = from ? { foremostM: from.drawnForemostM, foremostPoint: from.foremostPoint, meshesRead: 0, vertices: 0 }
         : drawnBodyExtremes('own', eye, [f[0], 0, f[2]], 0.05, { fore: true, low: false, high: false });
       if (recordStart) mirror.start = { body: mirror.body, eye: eye.slice(), drawnForemostM: ex.foremostM, foremostPoint: ex.foremostPoint };
-      // R558 (Message 12: your body and the mirror body never touch): the plane stands in front of the farthest point your
+
       // body can ever REACH with every joint in range (setMirrorReach, measured by the app: the legs with the toes pointed,
       // the hands), not only of the start pose, so no reachable pose ever meets its own reflection.
       const drawnF = Number.isFinite(ex.foremostM) ? ex.foremostM : null, reachF = Number.isFinite(mirror.reachForemostM) ? mirror.reachForemostM : null;
@@ -14782,7 +14818,7 @@ export function createScene({
       else if (mirror.state) T = NsMirror.mirrorTransform(Object.freeze({ ...mirror.state, placement: mirrorPlacementNow(), orbit: Object.freeze({ yaw: mirror.orbit.yaw, pitch: mirror.orbit.pitch, push: mirror.orbit.push, roll: mirror.orbit.roll || 0 }), viewAwayM: mirror.viewAwayM, viewOutside: mirror.viewOutside || 0 }));
     } catch (err) { mirror.error = String((err && err.message) || err); T = null; }
     if (!T || !T.matrix || T.matrix.length !== 16) return false;
-    // R558 (Message 12): the stop-at-contact correction (setMirrorCorrection) rides on top of the placement.
+
     mirror.pipelineMatrix = Array.from(T.matrix);
     mirror.pipelineCarryCentre = T.carryCentre ? Array.from(T.carryCentre) : Array.from(T.centre);
     const C = mirror.correction || null;
@@ -14928,8 +14964,8 @@ export function createScene({
       scale: T ? T.scale : null, centre: T ? T.centre.map(v => Math.round(v * 1000) / 1000) : null, determinant: T ? T.det : null,
       matrix: T ? T.matrix.slice() : null,
       reflection: Pl && Pl.plane ? { rule: Pl.rule, normal: Pl.plane.normal.slice(), offsetM: Pl.plane.offsetM, eyeM: Pl.plane.eyeM.slice(), distanceM: Pl.plane.distanceM, foremostM: Pl.plane.foremostM, boxForemostM: Pl.plane.boxForemostM, clearanceM: Pl.plane.clearanceM,
-        drawnForemostM: mirror.measured && Number.isFinite(mirror.measured.drawnForemostM) ? mirror.measured.drawnForemostM : null, reachForemostM: Number.isFinite(mirror.reachForemostM) ? mirror.reachForemostM : null, // R558 (Message 12)
-        reach: Pl.reach ? { centreM: Pl.reach.centre.slice(), radiusM: Pl.reach.radiusM } : null, // R558 (Message 45): the reach sphere a turned body stands back for
+        drawnForemostM: mirror.measured && Number.isFinite(mirror.measured.drawnForemostM) ? mirror.measured.drawnForemostM : null, reachForemostM: Number.isFinite(mirror.reachForemostM) ? mirror.reachForemostM : null,
+        reach: Pl.reach ? { centreM: Pl.reach.centre.slice(), radiusM: Pl.reach.radiusM } : null,
         pureMatrix: Pl.matrix.slice(), atRest: rest, restMaxDiff: rest ? restDiff : null, tolerance: NsMirror.MIRROR_REFLECTION.matrixTolerance, planeSerial: mirror.planeSerial, measured: mirror.measured } : null,
       body: mirror.body ? { heightM: Math.round(mirror.body.height * 1000) / 1000, radiusM: Math.round(mirror.body.radius * 1000) / 1000, points: mirror.body.count } : null,
       lodCellMm: mirror.lod || 0, detailPxPerMm: Number.isFinite(mirrorDetailPx) ? Math.round(mirrorDetailPx * 1000) / 1000 : null, lodPending: mirrorLodPending, lodBuildMs: Number.isFinite(mirror.lodBuildMs) ? Math.round(mirror.lodBuildMs) : 0, behindGlass: { applied: behindGlass.applied, amount: behindGlass.amount, brainNearM: behindGlass.nearM }, onScreen: null, check: null };
@@ -15045,21 +15081,21 @@ export function createScene({
       behindBrain: covered && !(Number.isFinite(cameraRange.brainNearM) && hits[0].distance < cameraRange.brainNearM) };
   }
 
-  /** R558 (user Messages 33 and 34: "You should be able to grasp-move items even if they are behind another item." ...
-   * "Same for the other controls of course."): everything a ray through CSS point (x, y) meets, nearest first, as the
-   * controls see it. { layers, mirror } or null:
-   *  - layers: [{ item: 'brain', kind: 'area' (a motor area: regionId) | 'glass' (the clear glass) | 'outline' (inside
-   *    the brain's drawn outline where the ray meets no brain surface, a concavity; the old conservative input blocker),
-   *    distance (m), point ([x, y, z] world m or null) } | { item: 'own' | 'mirror', kind: 'muscle' | 'bone', distance,
-   *    point, rec: { source, part: 'body' | 'arm', kind, id (atlas element id), name, side (-1 your left, +1 your right,
-   *    0 middle), bodyPart, armKey } }], one entry per mesh (its nearest DRAWN hit: a part of your own body that the
-   *    ordinary first-person view does not draw is passed through, FIRST_PERSON_BODY, as a click always did). The orbit
-   *    arrows are not in the list (pickArrows: they are drawn on top of everything).
-   *  - mirror: { centreWorldM (the carry's centre, without the slide), radiusM, mirrorEnvelope } while the mirror body is
-   *    shown, else null (what a carry of the mirror body starts from).
-   * Which of these a control acts on (what you see, or the item behind it) is the app's rule (ns-app controlTargets).
-   * Only meshes drawn now are tested; the left arm's CPU-skinned muscles get fresh bounding spheres first. A mirror-body
-   * hit names the same anatomical part as on your own body (the mirror copies you, it does not swap left and right). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   let musclePickIndex = null, musclePickCount = -1;
   function bodyPickIndex() {
     if (!musclePickIndex || musclePickCount !== body.length + bones.length + muscles.length) {
@@ -15211,13 +15247,13 @@ export function createScene({
     return { layers, mirror: mirrorInfo };
   }
 
-  /** R558 (genuine note R31: "if we tap on the body, on any muscles, those muscles will activate"): the nearest body
-   * part seen along a ray through CSS point (x, y), on your own body (trunk, legs, right arm, the in-place head seen
-   * from behind, the left arm) or on the mirror body: the first body entry of controlLayersAt. The brain's CLEAR GLASS is
-   * see-through (a body part behind it is what you see); null when nothing is hit or a MOTOR AREA of the brain is nearer
-   * along the same ray (a click on a motor area belongs to that area). Returns { ...rec, distance } (controlLayersAt).
-   * R558 (Messages 33 and 34): the controls now read controlLayersAt themselves (what is seen, or the item behind it);
-   * this is the same answer as before for what is seen. */
+
+
+
+
+
+
+
   function muscleAt(x, y) {
     const L = controlLayersAt(x, y);
     if (!L) return null;
@@ -15228,11 +15264,11 @@ export function createScene({
     return null;
   }
 
-  /** R22 normal crosshair pick: { target: 'brain' | 'mirror' | null, blocked, pointWorldM?, centreWorldM?, radiusM?,
-   * mirrorEnvelope, source }. Compass arrows block (an arrow tip under the point is an arrow press). R558 (Messages 33
-   * and 34): the brain's clear glass no longer blocks the mirror body behind it: the nearest of the two that is SEEN wins
-   * (a motor area is seen; clear glass is seen only when nothing of the mirror body lies behind it); your own body is not
-   * an item here (ns-app controlTargets handles it). */
+
+
+
+
+
   function graspTargetAt(x, y) {
     if (!(cssW > 0 && cssH > 0 && Number.isFinite(x) && Number.isFinite(y))) return { target: null, blocked: 'unavailable-viewport' };
     const arrows = pickArrows(x, y);
@@ -15251,7 +15287,7 @@ export function createScene({
     return { target: null, blocked: null, mirrorEnvelope: env };
   }
 
-  /* ---- R558 (user Message 12): the three items as sets of spheres (ns-collide) -------------------------------------- */
+
   // "Ensure that your body, the brain and the mirror do not touch or collide ... they can be moved to and around each
   // other but not through." Each drawn mesh gets a sphere table once (cached by geometry). A body mesh whose vertices
   // are rewritten afterwards (the look, the arm, the Body Worlds lift) gets a lazy table: see collideLazyTable.
@@ -15421,7 +15457,7 @@ export function createScene({
       brain: brainGroup.visible && brainTransformSet && brainEntries.length ? NsCollide.item(brainEntries) : null,
       bodyFrame: Float64Array.from(bodyGroup.matrixWorld.elements), mirrorMatrix: Float64Array.from(mm), brainMatrix: Float64Array.from(bm),
       mirrorCentre: mirror.transform && mirror.transform.centre ? mirror.transform.centre.slice() : null,
-      // R558 (Message 12): the brain as a solid (ns-collide insideSolid with brainMatrix's inverse: the glass meshes sit
+
       // at the brain group's own matrix, identity below it).
       brainSolid: brainGroup.visible && brainTransformSet ? brainSolid : null
     });
@@ -15435,12 +15471,12 @@ export function createScene({
   function collisionStats() {
     return { pass: collidePass, lazyMade: collideLazyMade, lazyBuilt: collideLazyBuilt, lateBuilds: collideLate, mirrorBuilds: collideMirrorBuilds };
   }
-  /** R558 (Message 12): how far in front of the eye (metres, along the body's forward axis) your body can ever reach (the
-   * app measures it over the joint ranges). The mirror plane is set in front of it; when it arrives after the plane was
-   * set and the mirror body is still untouched, the plane is set again at once (the start picture, before any input).
-   * `sphere` (optional, R558 Message 45): { centre (world m), radiusM }, everything your left hand can reach; it is
-   * kept on the placement so a turned or tilted mirror body stands back for its mirror image (ns-mirror
-   * MIRROR_ORBIT.reachClear). It never moves the plane. */
+
+
+
+
+
+
   function setMirrorReach(m, sphere = null) {
     mirror.reachForemostM = Number.isFinite(m) && m > 0 ? m : null;
     const sc = sphere && sphere.centre;
@@ -15452,16 +15488,16 @@ export function createScene({
     if ((nearer || noSphere) && Pl && mirrorAtRest()) setMirrorPlane(MIRROR_RESET.keepStart && mirror.start ? mirror.start : null);
     return mirror.placement && mirror.placement.plane ? { distanceM: mirror.placement.plane.distanceM, foremostM: mirror.placement.plane.foremostM } : null;
   }
-  /** R558 (Message 12): the mirror body's matrices: drawn (what is shown), pipeline (the placement, turn and carry before
-   * the stop-at-contact correction), correction (null = none), the drawn centre and the pipeline's carried centre (the
-   * point the carry places; the app folds a held-back move into it). */
+
+
+
   function mirrorMatrices() {
     return { drawn: Float64Array.from(mirrorRoot.matrix.elements), pipeline: mirror.pipelineMatrix ? Float64Array.from(mirror.pipelineMatrix) : null,
       correction: mirror.correction ? Float64Array.from(mirror.correction) : null, centre: mirror.transform && mirror.transform.centre ? mirror.transform.centre.slice() : null,
       pipelineCarryCentre: mirror.pipelineCarryCentre ? mirror.pipelineCarryCentre.slice() : null };
   }
-  /** R558 (Message 12): a rigid world correction applied on top of the mirror body's placement, so a move that would
-   * pass through your body or the brain stops at contact (the app computes it; null removes it). Re-applies at once. */
+
+
   function setMirrorCorrection(m) {
     if (m !== null && !(m && m.length === 16 && Array.prototype.every.call(m, Number.isFinite))) fail('scene_input', 'setMirrorCorrection needs a finite 4x4 matrix or null');
     mirror.correction = m === null ? null : Float64Array.from(m);
@@ -15481,12 +15517,12 @@ export function createScene({
     assignMuscleAreas(glowState.links);
     return glowState.links.length;
   }
-  /** R558 (Message 2): which area's colour each driven muscle shows. Rule (ns-colors strongestArea): the STRONGER drive
-   * wins, score = the link's level x the muscle's weight in it; ties keep the earlier link (map order). A muscle keeps
-   * its last area after the links end, so its glow fades out in the same colour. A change of area re-shades the muscle
-   * at once on all three bodies (the drives were applied earlier in the frame). A muscle that no hint names any more
-   * keeps its colour but stops being drawn as a hint (else a later drive with no area of its own, such as the Space
-   * dance, would light it at the faint hint strength without a halo). */
+
+
+
+
+
+
   const ownerBest = new Map();
   const hintOwned = new Set(); // muscle records (body and left arm) drawn as an opposing-action hint
   let assignStamp = 0;
@@ -15794,7 +15830,7 @@ export function createScene({
     return reached;
   }
   /* ---- 19 November 2026: the chosen limb lit whole for a moment (ns-app LIMB_KEYS) -------------------------------- */
-  // The owner: "let's have the whole limb highlight when we're switching between them, just so it's obvious". Drawn
+
   // with the light beams' own strips (no new pass): one soft band of light along the limb, root to bend to end, on your
   // body and on the mirror body, in LIMB_FLASH.colour. A mark of the game's controls; it says nothing about activity.
   const limbFlashState = { limb: null, level: 0, ptsMm: null };
@@ -15955,7 +15991,7 @@ export function createScene({
     // The age of each lit area's line (from the frame it lit); an area that goes dark forgets it.
     for (const id of [...glowState.lineStart.keys()]) if (!byArea.has(id)) glowState.lineStart.delete(id);
     for (const id of byArea.keys()) if (!glowState.lineStart.has(id)) glowState.lineStart.set(id, now);
-    // R558 (Message 48): the same line to the mirror body, when it is shown (group matrices only; the twins share the
+
     // pose matrix of their own-body mesh).
     const mirrorOn = GLOW_LINK.mirror === true && byArea.size > 0 && mirrorRoot.visible && mirror.transform !== null;
     if (mirrorOn) { mirrorRoot.updateWorldMatrix(true, false); mirrorBodyGroup.updateWorldMatrix(false, false); mirrorArmGroup.updateWorldMatrix(false, false); }
@@ -16021,7 +16057,7 @@ export function createScene({
       // No line to a muscle group right at the camera (your own neck or face seen from the eyes): it would be a long
       // streak across the view toward the eye, not a pointer to the muscles.
       const b = best ? [best.x / best.w, best.y / best.w, best.z / best.w] : null;
-      // R558 (Messages 48 and 56): ONE line per lit area. It goes to the mirror body when that body is shown (the
+
       // whole body is in view there, so the line reads as "this strip part drives that muscle group"); the line to
       // your own body is drawn only when there is no mirror body (GLOW_LINK.own 'no-mirror'): from the eyes it was a
       // long streak toward the bottom of the screen.
@@ -16045,7 +16081,7 @@ export function createScene({
     const flag = glowOwn.n + glowMirror.n + beamOwn.n + beamMirror.n > 0 ? 'on' : 'off';
     if (flag !== glowFlag) { glowFlag = flag; try { if (doc && doc.documentElement && doc.documentElement.dataset) doc.documentElement.dataset.nsGlow = flag; } catch { /* a flag only */ } }
     // 19 November 2026 (BRAIN_PICK_TINT): the whole brain takes a faint light of the picked area's colour, eased.
-    // 21 November 2026 (the owner, Message 177: "whatever color area is being picked"): the tint follows the LOOK: the
+
     // area the look rests on gives it for as long as the look stays (BRAIN_PICK_TINT.look), a lit area during its
     // contraction as before. It followed only the strongest link that draws a line, and since the look's own link
     // went (section 184) that was the 0.4 s of a contraction, hardly eased in before it eased out.
@@ -16072,10 +16108,10 @@ export function createScene({
       lineMode: GLOW_LINK.mode, beams: LIGHT_BEAM.on ? { own: beamOwn.n, mirror: beamMirror.n, last: glowState.beamLast || null, keyHidden: glowState.keyHidden || 0 } : null,
       // (20 November 2026, evening) the control marks asked for now (PART_GLOW: { 'limb:part': level }), for checks
       partGlows: { ...partGlow.want },
-      // R558 (Message 22): the power-up charge (patch state, materials, starts taken, clock).
+
       powerUp: { shader: powerUp.applied, materials: powerUp.materials, starts: powerUp.starts, settledStarts: powerUp.settledStarts, recharges: powerUp.recharges, clockS: Math.round(powerUpClock.value.x * 1000) / 1000, lastStartS: powerUp.lastStart === null ? null : Math.round(powerUp.lastStart * 1000) / 1000, lastStartArea: powerUp.lastStartArea, reduced: powerUpClock.value.y > 0.5 },
-      // R558 (Message 18): the muscle look (patch state, tendon meshes written, tone assignment summary).
-      // R558 (Messages 25 to 30): the comic look (patch state, materials, meshes with an ink frame, ink on) and the
+
+
       // phalanges drawn from their rounded display copy.
       comic: { shader: comic.applied, materials: comic.materials, hatchMeshes: comic.hatchMeshes, inkOn: comic.inkOn, boneTips: boneTips.meshes, hdr: hdr.state() },
       muscleLook: { shader: muscleLook.applied, materials: muscleLook.materials, tendonMeshes: muscleLook.tendonMeshes || 0, digitTendons: muscleLook.digitTendons || 0, digitTendonBody: muscleLook.digitTendonBody || 0, tendonMs: Math.round(muscleLook.tendonMs || 0),
@@ -16084,13 +16120,13 @@ export function createScene({
   }
 
   /** Per-frame DOM overlay: orbit arrows, region group labels, face label / inset frame. Style writes only on change. */
-  /* 18 November 2026 (SMALL, audit S21; the owner, Note 31: "There are clear issues with the symmetry of button placement
-   * in some places. ... Fix this across the board."): a twin label's anchor is the mean of its own group's anchor and its
-   * twin's, mirrored, so that seen straight on the pair mirrors about the strip's middle. Once the brain is turned (or
-   * seen from the side) that mirrored point can lie off the group's own area, and its label hung beside the brain over
-   * no area. So as the eye moves off the brain's midline plane (LABEL_TURN: its sideways share of the eye's distance from
-   * the brain's centre) the anchor slides to the group's own anchor, and a label whose anchor faces away from the eye
-   * (outward = from the brain's centre) is not shown. Scratch objects are made once; nothing is allocated per frame. */
+
+
+
+
+
+
+
   const LABEL_TURN = Object.freeze({ fromShare: 0.08, toShare: 0.25 });
   let labelTurnScratch = null;
   function labelTurnStep(mw) {
@@ -16344,8 +16380,8 @@ export function createScene({
       if (typeof renderer.setDrawingBufferSize === 'function') renderer.setDrawingBufferSize(width, height, pr);
       else { renderer.setPixelRatio(pr); renderer.setSize(width, height, false); }
     }
-    outline.setSize(width, height, pr); // R558 (Message 20): the ID target follows the drawing buffer (no-op when unchanged)
-    { const b = typeof renderer.getDrawingBufferSize === 'function' ? renderer.getDrawingBufferSize(hdrSize) : null; hdr.setSize(b ? b.x : width * pr, b ? b.y : height * pr); } // R558 (Message 25)
+    outline.setSize(width, height, pr);
+    { const b = typeof renderer.getDrawingBufferSize === 'function' ? renderer.getDrawingBufferSize(hdrSize) : null; hdr.setSize(b ? b.x : width * pr, b ? b.y : height * pr); }
     const w = armWinUniform.value;
     w[0] = (width * pr) / 2; w[1] = (height * pr) / 2; w[2] = ARM_SEE.radiusFrac * Math.min(width, height) * pr; w[3] = ARM_SEE.edge;
     cssPr = pr;
@@ -16387,11 +16423,11 @@ export function createScene({
       if (glassAll.xray) glassAll.xray.visible = !L.lite;
     }
     const lodKey = L.lod ? `${L.lod.glassMm}/${L.lod.bodyMm}/${L.lod.armMm || 0}` : '';
-    // R558 (Messages 24, 29): the bodies' ink (striation, hatching, stipple) is drawn at every level without a lod
+
     // (BODY_CEL; the bands, rim and highlight shapes stay at every level).
     comic.inkOn = !L.lod;
     comicUniforms.nsInkLine.value.w = comic.inkOn ? 1 : 0;
-    // R558 (Message 25): the HDR bloom at the full level (HDR_BLOOM.levels), one blur level fewer at the 0.75 / 0.5 render
+
     // scales, off from the lite / lod levels; the muscle peaks are boosted only while it is on.
     const hdrLevels = qState.level >= HDR_BLOOM.offFromLevel ? 0 : qState.level === 0 ? HDR_BLOOM.levels : HDR_BLOOM.levels - 1;
     hdr.setLevel(hdrLevels);
@@ -16476,7 +16512,7 @@ export function createScene({
     }
     const sulc = geo.attributes.nsSulc ? geo.attributes.nsSulc.array : null;
     const near = geo.attributes.nsNear ? geo.attributes.nsNear.array : null; // R558: glass clearing (GLASS_CLEAR)
-    const tend = geo.attributes.nsTendon ? geo.attributes.nsTendon.array : null; // R558 (Message 18): muscle tendon ends
+    const tend = geo.attributes.nsTendon ? geo.attributes.nsTendon.array : null;
     const carry = sulc || near || tend ? { ...(sulc ? { nsSulc: sulc } : {}), ...(near ? { nsNear: near } : {}), ...(tend ? { nsTendon: tend } : {}) } : null;
     const d = clusterDecimate(pos.array, idx.array, cell, carry);
     lod = keep(indexedGeometry(d.positions, d.indices));
@@ -16711,7 +16747,7 @@ export function createScene({
     if (lost || disposed) return;
     renderSerial++; // (22 November 2026, ARROW_REPLAN.spreadFrames / hudReadLag: frames counted by drawing)
     const now = nowMs();
-    powerUpClock.value.x = (now - powerUpEpoch) / 1000; // R558 (Message 22): the power-up clock (one uniform write)
+    powerUpClock.value.x = (now - powerUpEpoch) / 1000;
     powerUpClock.value.z = cssH > 0 ? 1 / cssH : 0; // 18 November (MAP): CSS px -> view size, for the shudder
     const notLive = Boolean(opts && opts.live === false);
     const dtMs = lastRenderAt === null ? 0 : now - lastRenderAt; // eases (held cue, ghosts): every drawn frame
@@ -16885,9 +16921,9 @@ export function createScene({
     checkCameraProjectionPlan();
     applyCollar(!camState.headInPlace); // 19 November 2026 (EYE_COLLAR): the clean end at the collar while your own head is not drawn
     applyOrgans(); // 20 November 2026 (ORGANS): the organs' pose (when the trunk moved) and the heart's swell
-    // R558 (Message 20): the outline ID pass of this frame's body meshes (the composite in `scene` reads it). The soft
+
     // depth shading (ns-outline OUTLINE_AO) is drawn only at the full quality level; the lines at every level.
-    // R558 BB (Message 28): the lines' supersampling follows the quality level too (ns-outline OUTLINE_AA).
+
     outline.setOcclusion(qState.level === 0 && !(BODY_STYLE === 'raw' && RAW_OUTLINE.occlusion === false)); // (none on the raw look's bodies)
     outline.setQuality(qState.level);
     // R558 (performance, P3): the scene's world matrices are brought up to date ONCE for the frame, here, instead of by
@@ -16901,7 +16937,7 @@ export function createScene({
       if (!SIMPLE_LOOK) outline.render(scene, camera);
       if (!SIMPLE_LOOK) ghost.frame(); // 18 November 2026 (SEE): the ghost composite follows the outline; which limbs are locked away
       lastOutlineMs = nowMs() - outlineAt;
-      // R558 (Message 25): into the HDR target when it is on (createHdrBloom), then bloom and composite to the canvas.
+
       hdrOn = hdr.begin();
       stripCut.on = stripCut.supported && (hdrOn || stripCut.canvasStencil); // 17 November: the strip cuts the brain surface (STRIP_CUT)
       glassClearUniform.value = stripCut.on ? 0 : GLASS_CLEAR.clear;
@@ -17104,14 +17140,14 @@ export function createScene({
     // U2b-scene (ns-app SCENE_HOOKS)
     setBrainTransform,
     updateRegions,
-    setSettledRegions, // R558 (Message 22)
+    setSettledRegions,
     setBrainLiveHeld, // 18 November (ns-brain-live): the hand area of a Space grip while it holds
     contactFlash: (points, opts) => contactFx.flash(points, opts), // 18 November 2026 (package CONTACT): a contact's mark
     contactKick, // 18 November 2026 (package CONTACT): a touch gives the living brain's tissue a push
     contactFxState: () => contactFx.state(),
     setBrainVessels, // 18 November (package VESSELS): the cerebral arteries, veins and sinuses
     setBodyVessels, // 18 November (package VESSELS): the vessels of the limbs on both bodies
-    setRegionHints, // R558 (Message 6)
+    setRegionHints,
     regionHintState,
     brainOrientationAnchors,
     setInfo,
@@ -17154,7 +17190,7 @@ export function createScene({
     setMirror: setMirrorView,
     mirrorState,
     mirrorPartAt, graspTargetAt, controlLayersAt, rayAt, reconcileMirrorCarry, setHeldItem, setLimbFlash, setPartGlows,
-    collisionItems, collisionStats, mirrorMatrices, setMirrorCorrection, setMirrorReach, // R558 (Message 12): keep the three items apart
+    collisionItems, collisionStats, mirrorMatrices, setMirrorCorrection, setMirrorReach,
     mirrorPlacementNow,
     bodyKeepOut,
     // R5-integrate-core (D15): the Body Worlds layer labels of the body's muscle meshes, and the lifted left arm.
@@ -17164,7 +17200,7 @@ export function createScene({
     setBodySkin, setDigitTendonSources, updateBodySkin, bodySkinPending, setBodySwell,
     setFaceMoves, setFaceShape, faceMoveState, // 20 November 2026 (FACE): face movements you can see (ns-face-move)
     setArmLayers,
-    setOutlineSegments, // R558 (Message 20)
+    setOutlineSegments,
     // 18 November 2026 (SEE, ns-see): the limbs locked away ([9] by ghost code; their ghosts are filled and taken by the
     // crosshair), what Shift would take (a line round that limb), and the pass's state.
     ghostLocked: () => ghost.locked(), setGhostFocus: code => ghost.setFocus(code), ghostState: () => ghost.state(),
@@ -17239,7 +17275,7 @@ export function createScene({
       return {
         regionMode, brainTransformSet, regions: regions.length, hoveredRegionId, gazeOnRegion,
         activatedRegionIds: regions.filter(r => r.activated >= 1).map(r => r.id),
-        regionHints: regionHintState(), // R558 (Message 6)
+        regionHints: regionHintState(),
         // R5-scene (D16): the brain's 3D arrows on screen (x, y: a good point to click, on the outer bend), as in round 4;
         // arrows3d has both sets (brain, mirror) with boxes, distances and materials.
         arrows: arrowsShown && arrowLayout ? Object.fromEntries(ARROW_DIRS.map(d => { const c = arrowSets.brain.clicks[d]; return [d, { x: c ? Math.round(c[0]) : null, y: c ? Math.round(c[1]) : null, clamped: false, usable: Boolean(arrowLayout[d]) }]; })) : null,
@@ -17255,7 +17291,7 @@ export function createScene({
         // last received them (viewport fractions).
         quality: qualityState(), census: lastCensus,
         ghost: ghost.state(), // 18 November 2026 (SEE): the hidden-limb pass
-        outline: outline.state(), // R558 (Message 20): the outline pass (batch size, last ID pass draw calls and CPU ms)
+        outline: outline.state(),
         // 18 November 2026 (performance): the left game arm skinned on the graphics card (pose tables written, processor
         // copies made for the picks and the mirror envelope, sparse copies for the glow links' ends)
         armSkin: { on: armGpu.on, ok: armGpu.ok, note: armGpu.note, tables: armGpu.tables, cpuPoses: armGpu.cpuPoses, subsetPoses: armGpu.subsetPoses, meshes: armGpu.marked.length },
@@ -17337,8 +17373,8 @@ export const HUD_DETAILS_SUMMARY = NS_TEXT.LEGEND.detailsSummary;
 /** Polish: the colour key under the activity legend (plain words, ns-text LEGEND.key rows [class, long, short]). One
  * swatch per on-brain cue, so the brain colours, the muscle colours and the activation marks are explained in one place. */
 export const HUD_LEGEND_KEY = Object.freeze(NS_TEXT.LEGEND.key.map(r => Object.freeze([r[0], r[1], r[2]])));
-/** R558 (Message 2): one chip per area colour family ([family key, words]); the chip shows the family's shades
- * (ns-colors areaFamilySwatchCss), so the key matches the areas and the muscles. */
+
+
 export const HUD_LEGEND_FAMILIES = Object.freeze((NS_TEXT.LEGEND.families || []).map(r => Object.freeze([r[0], r[1]])));
 export const HUD_LEGEND_SHARED = NS_TEXT.LEGEND.shared;
 /** Always-visible simulated/representative limits notice. It wraps at a fixed readable font size.
@@ -17460,10 +17496,12 @@ export function essentialNoticeRect({ width, height } = {}, text = HUD_LIMITS_SH
 /** Orientation label alignment: the fraction of the label box left of / above its anchor (CSS translate). Each label
  * extends away from the band: R to the right, L to the left, anterior upward, posterior downward. */
 /** Polish: orientation-label edge clearances (px): below the top limits line, above the bottom hint toast, and the
- * centre-ward nudge used when no projected anchor is clear. */
+ * centre-ward nudge used when no projected anchor is clear. 25 November 2026 (hunt of update 78, finding 9): rowGapPx,
+ * the room a label keeps from the rows under the picture it is handed (opts.labelRects: the hint and the limb buttons,
+ * wherever they stand), so it never sits flush against them either. */
 /** R4-polish: an orientation label moves to a better clear place after this many placeOrientation calls in a row. */
 export const ORIENT_UPGRADE_FRAMES = 12;
-export const ORIENTATION_EDGE = Object.freeze({ topGapPx: 6, bottomPx: 46, nudgePx: 24, nudgeSteps: 20, axisNudgeSteps: 4 });
+export const ORIENTATION_EDGE = Object.freeze({ topGapPx: 6, bottomPx: 46, nudgePx: 24, nudgeSteps: 20, axisNudgeSteps: 4, rowGapPx: 4 });
 /* 19 November 2026 (ns-brain BRAIN_VIEW.spinDeg 180: the brain's right half is on the left of the picture and its front
  * at the bottom): each label still extends AWAY from the brain, so with the turn the right-half label extends to the
  * left, the left-half label to the right, the front label downward and the back label upward. */
@@ -17748,7 +17786,7 @@ export function createHud(hudRoot) {
           showOrientText(k, orientText[k].shortWanted);
         }
       } else if (key === 'crosshairActive' || key === 'crosshairHold' || key === 'crosshairAway') {
-        // R558 (Message 48): crosshairHold '' | 'empty' | 'item': a ring closes round the crosshair while Space grips
+
         // (white on nothing, the accent colour while something is held).
         // 24 November 2026 (ns-app FREE_AIM, section 206): crosshairAway true while the free pointer is the aim: the mark
         // at the middle of the picture is drawn faint.
@@ -18099,7 +18137,7 @@ export function createHud(hudRoot) {
       const hs = shownHover ? ((ro && sizeOf(hover)) || [Math.min(260, 0.4 * W, 7.2 * hover.textContent.length + 12), 18]) : [0, 0];
       // R3-fix (review m1 / SL-9): the caption sits beside the crosshair in the first corner (right-below, left-below,
       // right-above, left-above) where no orbit arrow covers it (opts.arrows: viewport-fraction boxes).
-      // R558 check (Message 31): then centred below and centred above the crosshair. The mirror body's side tips sit as a
+
       // level pair either side of its head at the start view (both moved up off your left hand, FRAME_PAIR tieShift), so
       // every corner beside the crosshair touched one of them (measured at 1600x900: the caption 818-921 x 462-480 over
       // the right tip 896-924 x 440-500) and the caption was drawn over the tip.
@@ -18142,7 +18180,7 @@ export function createHud(hudRoot) {
     // inward steps; orientationCandidates) and the height where the first side label went, so the second tries the
     // same kind of place first, at exactly that height when it is clear there, and the pair stays level.
     let sidePairIndex = null, sidePairY = null, firstSide = null;
-    const sideHide = {}; // R558 (Message 31): this call's hidden flags of the two side labels (written as a pair below)
+    const sideHide = {};
     const candIndex = key => { const d = key.indexOf('.'); return d < 0 ? 0 : Number(key.slice(d + 1)); };
     // write one label's place (A2-render R1: attribute and style writes only when the value changes, no per-frame DOM
     // invalidation) and record its box for this call (a label placed again replaces its earlier box)
@@ -18197,7 +18235,10 @@ export function createHud(hudRoot) {
         return { x, y, box: { x0: x - a[0] * fw, y0: y - a[1] * fh, x1: x + (1 - a[0]) * fw, y1: y + (1 - a[1]) * fh } };
       };
       const band = { x0: 0, y0: 0, x1: 1, y1: H > 0 ? Math.max(ESSENTIAL_BAND, essentialHeight / H) : ESSENTIAL_BAND }; // measured HUD text only
-      const labelRects = opts && Array.isArray(opts.labelRects) ? opts.labelRects : []; // R4-polish: e.g. the shown toast
+      // R4-polish: e.g. the shown toast; (25 November 2026) and the limb buttons, each grown by ORIENTATION_EDGE.rowGapPx
+      const gx = W > 0 ? ORIENTATION_EDGE.rowGapPx / W : 0, gy = H > 0 ? ORIENTATION_EDGE.rowGapPx / H : 0;
+      const labelRects = (opts && Array.isArray(opts.labelRects) ? opts.labelRects : []).filter(r => r && [r.x0, r.y0, r.x1, r.y1].every(Number.isFinite))
+        .map(r => ({ x0: r.x0 - gx, y0: r.y0 - gy, x1: r.x1 + gx, y1: r.y1 + gy }));
       // R4-fix (reviews SL4-2, RP11): a side label ("← Your left" / "Your right →", short "← Left" / "Right →") is a
       // claim about a side: its whole box stays on its own side of the brain's projected midline (the anterior ->
       // posterior anchor line), and it never sits on the brain's drawn outline (opts.brainCovers, viewport-fraction
@@ -18227,7 +18268,7 @@ export function createHud(hudRoot) {
       }
       const current = placed.find(c => c.key === orientPick[k]);
       const best = placed.find(free) || null;
-      // R558 (user Message 31, symmetry): the second side label takes the first one's height whenever any of its own
+
       // places is clear there (its own x, the shared y): a level place wins over its sticky current place, so the two
       // never stay at different heights (seen: 1280x720 third person "← Your left" at y 68, "Your right →" at y 426).
       const level = side && sidePairY !== null ? cands.map(c => ({ key: c.key, ...placeOf({ x: c.p.x, y: sidePairY }) })).find(free) || null : null;
@@ -18256,7 +18297,7 @@ export function createHud(hudRoot) {
       if (!chosen && W > 0 && H > 0) { if (sideKey) sideHide[k] = true; else if (!el.hidden) el.hidden = true; continue; }
       if (!sideKey && el.hidden) el.hidden = false;
       const use = chosen || placed[0];
-      // R558 (Message 31): no level place for this second side label: the first one moves to this one's height instead
+
       // when one of ITS places is clear there; with neither, the two stay where they are (rare; both still shown).
       if (side && chosen && firstSide && Math.abs(use.y - sidePairY) * H > 0.5) {
         const re = firstSide.cands.map(c => ({ key: c.key, ...firstSide.placeOf({ x: c.p.x, y: use.y }) }))
@@ -18270,7 +18311,7 @@ export function createHud(hudRoot) {
       }
       commitOrient(k, el, use, chosen);
     }
-    // R558 (Message 31): the two side labels are a pair, like the region label twins: both show or neither does (seen:
+
     // portrait third person, "Right →" alone at the right edge while "← Left" had no clear place). Their hidden flags
     // are written here once per call, only when they change.
     if (W > 0 && H > 0 && (sideHide.left === true || sideHide.right === true)) {

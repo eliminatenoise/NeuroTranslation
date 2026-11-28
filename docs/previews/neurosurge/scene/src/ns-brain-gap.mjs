@@ -1,34 +1,34 @@
-/** Seeing into the brain through the gap between its halves (20 November 2026).
- *
- * The owner: "Through the gap, you should be able to peak into the brain's inner structures."
- *
- * WHAT THIS IS. Since section 151 the two cerebral halves are drawn apart (ns-brain-part HEMI_GAP). Looking down into the
- * parting one saw each half's inner wall of cortex and, at the bottom, the parts of the middle. Now each half's CORTEX
- * is cut away next to the gap: within `cutMm` of a half's inner face, along the stretch of the gap where the ventricles
- * lie (fromY .. toY, tapering off at both ends), the half's gyri are not drawn. What the cut lays open is drawn in the
- * colours of an anatomy atlas (the loading picture's ASSEMBLY_TIER_COLOURS): the white matter's inner face cream, the
- * lateral ventricles and the third ventricle pale blue, the deep grey parts grey, the internal capsule a lighter cream,
- * the cortex's own cut a grey-pink. Looking down into the gap one now sees, from the outside in, the cut edge of the
- * cortex, the white matter, the lateral ventricles and, in the middle, the third ventricle over the midbrain. The cut is
- * in the brain's own frame (atlas millimetres), so it turns, rolls and is carried with the brain.
- *
- * HOW. No new mesh and no new draw. The brain surface is ONE merged geometry drawn twice (a depth pre-pass, then the
- * nearest surface shaded as flesh; ns-scene-three). Each vertex gets two numbers (`nsGap`): its half (+1 the left half,
- * -1 the right half, 0 a part of the middle) and its kind (GAP_KIND). Both passes leave out the cortex's fragments inside
- * the cut, so the next surface behind is drawn. The gyri of the atlas are closed meshes; where the cut opens one, its
- * inside (its back face) is seen: it is drawn flat in the cortex's cut colour and lit as the cut plane (the cap trick
- * of a section view; the cap lies at the gyrus's far wall, not on the plane). Only the cortex is cut: the white matter,
- * the ventricles, the internal capsule and the hippocampus are drawn whole, so their smooth faces show, not the ragged
- * section of meshes that, in this atlas, leave much of the inside of a half empty. The inner parts take their colours
- * only inside the opening (and `tintMm` round it): the white matter that shows between two gyri at the side of the
- * brain keeps the flesh, so the brain looks the same from outside wherever there is no cut. The motor strip (both
- * precentral gyri) and the parts of the middle are never cut, so every motor area stays whole and aimable.
- *
- * Not anatomy: the atlas (BodyParts3D) has no thalamus, caudate, putamen or corpus callosum meshes, so the opening shows
- * what the atlas has. Where a half is cut is a display choice; nothing is measured.
- *
- * Pure: no imports of Three.js, no DOM.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { ASSEMBLY_TIERS, assemblyDepth } from './ns-assembly-order.mjs';
 import { HEMI_GAP, hemisphereSideOf } from './ns-brain-part.mjs';
 

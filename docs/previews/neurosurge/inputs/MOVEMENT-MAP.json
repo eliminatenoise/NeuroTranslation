@@ -2,13 +2,12 @@
   "schema_version": 1,
   "map_version": "neurosurge-functional-map-r2-current-control-overlay",
   "created_at_utc": "2026-11-05T20:56:23.750356+00:00",
-  "task_id": "neurosurge_functional_map_r1",
   "game_name": "NeuroSurge",
   "model_name": "NeuroTranslate 0.0",
   "limb": "human_left",
   "claim": "Source-informed educational simulation candidate; no measured/learned neural-to-muscle decoder, stimulation interface or biological validation supplied.",
   "source_contract": {
-    "path": "<neurosurge-project-root>/NEUROSURGE-DEMO-CONTRACT-R6.json",
+    "path": "NEUROSURGE-DEMO-CONTRACT-R6.json",
     "bytes": 13333,
     "sha256": "a0b1e193451fd195d6c316c6273e825cfba549d973ae4357c2a650af52fd567b"
   },
@@ -47,7 +46,7 @@
     "FJ1801_exact_subpatch_registration": "HOLD",
     "mesh_coordinates": null,
     "resolution": "Do not transplant published voxel sizes, measured patch sizes, group coordinates or TMS scalp-map distances as this mesh’s functional accuracy.",
-    "release_hold_condition": "Root/source reviewer verifies anatomical laterality and central-sulcus landmarks and accepts clearly labelled representative placement. A claim of measured functional registration requires an independent registered individual map and task-specific validation; not provided."
+    "release_hold_condition": "Verify anatomical laterality and central-sulcus landmarks for the representative display. Measured functional registration requires an independent registered individual map and task-specific validation, both outside the present evidence."
   },
   "muscle_catalog": {
     "FDS": {
@@ -912,26 +911,11 @@
     "Exact individual cortical registration is unsupported/HOLD.",
     "No calibrated neural→EMG→force→displacement physiology supplied.",
     "Live anatomical rig, rendering and clinical/real-stimulation claims are unadmitted.",
-    "All inherited genuine input/auth/safety/funds/budget/quota/unknown-ACK and scientific/rights/held-out gates remain."
+    "Exact registration requires independently verified anatomical source evidence."
   ],
-  "citation_manifest": {
-    "path": "<neurosurge-project-root>/neurosurge-functional-map-r1/citation-manifest.json",
-    "sha256": "2e4bd3c0e2947310065cd56aadf62d14734d9ead67e4ba44c5e69a614f6d62b1",
-    "bytes": 26971
-  },
-  "previous_immutable_map": {
-    "path": "<neurosurge-project-root>/neurosurge-functional-map-r1/movement-map.json",
-    "bytes": 37392,
-    "sha256": "99de36d02c19c022667da63540d4bc04678b75022fd03401a4c23a8e8e74c43a"
-  },
-  "independent_scientific_review": {
-    "path": "<neurosurge-project-root>/neurosurge-scientific-asset-review-r1/REVIEW.json",
-    "bytes": 35544,
-    "sha256": "40ff721e78a282ce2bc3a21e2b3c886b1bc0397f2ca9330e649a324c1978dc17"
-  },
   "actions_unchanged_from_reviewed_r1": true,
   "current_control_overlay": {
-    "authority": "Current genuine originals supersede only conflicting earlier optional UI choices; all reviewed action anatomy and uncertainty remain.",
+    "authority": "Virtual limb control, input timing, and movement display rules.",
     "space_keydown_and_held": "Select grasp_close for all five digits including thumb opposition. Finger target remains a fist for the entire hold. Wrist/elbow commands may compose within anatomical limits.",
     "space_keyup": "Immediately replace the finger target with open_hand for all five digits and display corresponding simulated opening drive. Begin opening in the next animation update; finite visible joint motion is permitted. Active opening is mandatory, not merely passive relaxation or optional extension.",
     "release_precedence": "Clear any earlier grasp-directed gaze/click finger pulse on Space release so stale state cannot reclose the hand on the next frame. New deliberate valid gaze movement or click after release may select a new action.",
@@ -942,7 +926,7 @@
     "wasd": "W/S control reach depth, A/D the horizontal screen relation; simultaneous keys compose, opposite keys cancel on the corresponding axis. Show linked representative arm/hand activation without inventing a one-muscle or unique cortical-point encoding.",
     "screen_constraint": "Hand anchor height stays at the screen mid-height. Only A/D changes its horizontal screen relation; view yaw/pitch and finger/wrist/elbow pose changes must not introduce independent horizontal anchor drift. Pose deformation changes the silhouette around that anchor. Clamp the entire current posed hand including fingertips/thumb within the viewport, using the feasible A/D range or camera-relative fit at every supported depth/aspect/resize while preserving the anchor constraints.",
     "selective_visibility": "Only representative RIGHT upper-limb motor territory relevant to LEFT hand/arm is clear and color-coded. Remaining brain stays glassy. FJ1801 is an anatomical anchor, not an all-M1 mesh; no whole-precentral activation or false functional registration.",
-    "arm_hand_language": "User game requests use hand/arm inclusively; anatomical joint and muscle labels remain specific.",
+    "arm_hand_language": "Use ordinary hand, wrist and arm words for simulated motions, with specific anatomical joint and muscle labels.",
     "visual_quantities": "Color is unitless simulated drive. Never label it measured electrical current, EMG, neural firing, force or a validated NeuroTranslate prediction."
   },
   "publication_status": "LOCAL_ONLY_CANDIDATE_PENDING_CURRENT_OVERLAY_REVIEW_AND_ACTUAL_GAME_ACCEPTANCE"

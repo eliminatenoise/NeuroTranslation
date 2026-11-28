@@ -1,31 +1,31 @@
-/** NeuroSurge loading picture: the ORDER in which the parts appear (owner, 18 November 2026: "for the loading
- * animation, if possible, we want to go inside out always. So whatever's the deepest structure, such as the bones and
- * then the deepest muscles, and then include that for the brain's anatomy as well, where you load the inside of the
- * brain as well to show the innermost structures").
- *
- * Two tracks build side by side, each from the inside out, and neither waits for the other:
- *   body:  the bones from the core outward (spine and skull; ribcage, pelvis, face and eyes; the shoulder girdle; upper
- *          arm and thigh; forearm and leg; wrist and ankle; hand and foot), then the muscles layer by layer, deep,
- *          intermediate, outer (the game's own layer of each muscle: ns-body bodyMuscleLayer, passed in by the caller).
- *          Inside a tier the parts follow one another outward (up the spine into the skull; from the trunk out to the
- *          fingers and toes), so each layer is seen spreading over the last.
- *   brain: the brain stem, the cerebellum, the ventricles, the deep nuclei, the white matter, the cortex hidden in the
- *          depths (insula, cingulate, parahippocampal and fusiform gyri), the outer cortex, the motor strip (precentral
- *          gyrus), and last the arteries that lie on the surface. Inside a tier: from the brain's middle outward.
- *
- * The files arrive in whatever order the game fetches them (by packet: the arm and the brain, then the body, then the
- * missing muscles, the head and the face). The picture HOLDS an arrived part back until its tier comes up and releases
- * the tiers in order (createAssemblyRelease): a tier opens when the one before it is complete and has been seen for a
- * moment. While files are still coming, a tier waits for its own missing files (the game fetches by packet, so a tier's
- * files are spread over the whole fetch, and waiting is the only way to keep the order); it gives up on a missing file
- * only when no file at all has come for `stallS` (a stalled or failed fetch) or when the game is ready, and the late
- * file then comes in as soon as it arrives. The game never waits for the picture: it gets its bytes as before, and the
- * picture only decides when to draw what it was given. Since the game spends most of its loading time building after
- * the last file has come, holding parts back costs the picture nothing at the end.
- *
- * Pure: no DOM, no three.js, no clock of its own (the caller passes the time). A display order from general anatomy
- * (which structure lies on which), not a measurement.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** The tiers of each track, deepest first. */
 export const ASSEMBLY_TIERS = Object.freeze({

@@ -311,7 +311,7 @@ Exact sha256 values are in SHA256SUMS. See CREDITS-AND-LICENCES.md.
 
 ## packets/bodyparts3d-head-r1 (10 meshes, listed in packets/bodyparts3d-head-r1/HEAD-MESH-MANIFEST.json)
 
-Added in R558 (builder FA, user Message 20): byte-exact members of the same official BodyParts3D 4.0 archive (CC BY 4.0, DBCLS), not in SHA256SUMS yet (that file is regenerated at release).
+The head meshes come from the BodyParts3D 4.0 archive (CC BY 4.0, DBCLS).
 
 | File | BodyParts3D ID | Structure (embedded source name) | Concept | Group |
 | --- | --- | --- | --- | --- |
@@ -328,7 +328,7 @@ Added in R558 (builder FA, user Message 20): byte-exact members of the same offi
 
 ## packets/bodyparts3d-cerebral-arteries-r1 (80 meshes, listed in packets/bodyparts3d-cerebral-arteries-r1/CEREBRAL-ARTERIES-MESH-MANIFEST.json)
 
-Added on 18 November 2026 (package VESSELS, owner: "let's get the vascularity right, especially with the cerebral veins"): byte-exact members of the same official BodyParts3D 4.0 archive (CC BY 4.0, DBCLS), not in SHA256SUMS yet (that file is regenerated at release). The veins and sinuses drawn on the brain are project code (scene/src/ns-vessels.mjs), not BodyParts3D data.
+The cerebral artery meshes come from the BodyParts3D 4.0 archive (CC BY 4.0, DBCLS). The veins and sinuses drawn on the brain are project code (`scene/src/ns-vessels.mjs`).
 
 | File | BodyParts3D ID | Structure (embedded source name) | Concept | Group |
 | --- | --- | --- | --- | --- |

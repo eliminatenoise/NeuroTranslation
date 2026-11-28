@@ -56,13 +56,13 @@ export const BONE_SEGMENTS = Object.freeze(SEGMENTS.filter(s => !/^forearm_tw[12
  * forearm twist pass, see skinWeights). */
 export const SKIN_CANDIDATES = Object.freeze(SEGMENTS.slice(0, 18));
 
-/** Pose joint names (degrees). Positive = anatomical flexion; abduction positive away from digit 3;
- * opposition positive toward the palm. middle_mcp_abd is the reference digit and is normally 0.
- * 21 November 2026 (browser hunt of update 62, H8: "Bend left wrist toward the thumb" lit its area and moved nothing,
- * against the owner's Message 204, "make sure there's clear movement for each brain activation area"): wrist_dev, the
- * wrist's sideways bend, positive = radial deviation (the hand bends toward the thumb side), negative = ulnar deviation
- * (toward the little finger). It turns the hand about the same wrist pivot as wrist_flex, about the axis across the
- * palm (rig.axes.wrist_dev, built from the hand's long axis and its radial direction), after the flexion. */
+
+
+
+
+
+
+
 export const POSE_JOINTS = Object.freeze([
   'wrist_flex', 'thumb_cmc_opp', 'thumb_mcp_flex', 'thumb_ip_flex',
   ...DIGITS.flatMap(d => [`${d}_mcp_flex`, `${d}_pip_flex`, `${d}_dip_flex`, `${d}_mcp_abd`]),
@@ -129,28 +129,28 @@ export const TWIST_REFINE_MAX_STEP = 0.08;
 /** R558: steps of the per-pose twist table (twistTable): a twisted influence blends two table entries 1/64 of the turn
  * apart (at most 2.8 deg; linear blending shrinks by at most 0.03 %). */
 export const TWIST_TABLE_STEPS = 64;
-/**
- * R558 (user Messages 36 and 48: the left shoulder muscle jutted out, and at a far-left look the joint looked torn
- * open). Every arm muscle vertex near the shoulder followed the humerus rigidly, so when the upper arm swung or turned
- * about its own axis against the chest (up to about 110 deg at a far-left look), the deltoid's origin and the upper ends
- * of the biceps, coracobrachialis and triceps left the shoulder girdle with it (the deltoid's origin by up to 9.5 cm).
- * With `shoulder: true` (continuous twist weights only) skinWeights gives each vertex with an upper-arm influence a
- * place `sf` along the humeral axis: s = the distance (mm) of the vertex below the joint centre along the rest axis
- * shoulder -> elbow, sf = (s - s0Mm) / (twistMm - s0Mm) clamped to 0..1. At sf 0 the vertex follows the chest frame of
- * the pose (matrices 'chest': the trunk's orientation, placed so the joint centre is where the arm has it), at sf 1 the
- * humerus. Between, the upper arm's rotation against the chest is split in two (shoulderFrames): the SWING of the axis,
- * about the joint centre, so each vertex keeps its distance from the centre, taken up from s0Mm to swingMm; and the
- * TURN about the axis, so each vertex keeps its distance from the shaft, taken up from s0Mm to twistMm. Both are eased
- * at their two ends (smoothstep). The two stretches are the same here: from 35 mm above the joint centre, where the
- * deltoid's origin lies on the girdle, to 130 mm below it, about the deltoid's insertion, so the whole deltoid spreads
- * the rotation along its length. Measured over 61 looks: the origin of the three parts of the deltoid moves at most
- * 0.6 cm against the chest, and no edge of them is stretched beyond 2.4 times its rest length or shortened below 0.3 of
- * it. Above fadeDeg[0] of swing the split fades back to the humerus frame, and from fadeDeg[1] the tissue is rigid with
- * the humerus again (the swing axis is undefined with the arm opposite its rest direction). The rule is by place only,
- * the same for every muscle, so neighbouring muscles stay together; bones are not changed. A pose without a 'chest'
- * matrix skins exactly as before. Display constants: no measured muscle path, origin, insertion or scapulohumeral
- * rhythm.
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const SHOULDER_SKIN = Object.freeze({ s0Mm: -35, swingMm: 130, twistMm: 130, fadeDeg: Object.freeze([150, 170]) });
 
 export const CAP_FRACTION = 0.15;

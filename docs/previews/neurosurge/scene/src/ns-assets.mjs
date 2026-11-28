@@ -1278,9 +1278,9 @@ export function fullbodyAppInputs(manifest, result) {
  * name can use the alias FACE_PACKET_ID from here. */
 export const FACE_PACKET = 'face-muscles-r1';
 export const FACE_PACKET_ID = FACE_PACKET;
-/** R558 (user Message 20, builder FA): the BodyParts3D cranium and eyes (both parietal bones, the occipital bone, the
- * sphenoid; sclera, iris and lens of each eye), byte-exact archive members that close the head the full-body packet left
- * open behind the frontal and temporal bones (packets/bodyparts3d-head-r1/README.md). Loaded with the face stage. */
+
+
+
 export const HEAD_PACKET = 'bodyparts3d-head-r1';
 /** R558 (builder AN, anatomy completion): the large muscles the full-body packet lacked (latissimus dorsi, the erector
  * spinae columns, rectus abdominis, the internal oblique, transversus abdominis, quadratus lumborum, gracilis, the
@@ -1355,7 +1355,7 @@ export const PACKET_SPECS = Object.freeze({
     frameRegions: Object.freeze(['head_face', 'neck']),
     frameMarginMm: 60,
     manifestPath: 'HEAD-MESH-MANIFEST.json',
-    manifestSha256: 'dff794c0f34ca75de8264ace4790c95de524fb7c98c178d02550cf3f9b567e20',
+    manifestSha256: '9a71a4b9663f509a0e4861435ad561202a9eebf85fea1d52b9d513741b70b52c',
     frame: 'BodyParts3D 4.0 whole-body millimetres (+x subject left, +y posterior, +z superior), unchanged archive coordinates',
     licence: 'CC BY 4.0 (DBCLS BodyParts3D; the game code stays CC0)'
   }),

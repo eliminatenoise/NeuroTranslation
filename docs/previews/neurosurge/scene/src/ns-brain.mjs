@@ -171,13 +171,13 @@ export const MARKER_WINDOW = 0.015;
 export const MARKER_KIND = 'representative';
 export const CROWN_NOTE = 'visible crown may be premotor (BA6); M1 (BA4) lies largely in the sulcal bank';
 
-/** Representative marker u per action, in movement-map action order, on the LEGACY |x| fraction u of FJ1801 (stripParam).
- * Educational control targets only. R558: the hand markers sit on the atlas's own hand knob (|x| about 29 mm, u 0.44)
- * instead of about 8.5 mm lateral of it; all stay inside ARM_BAND, which is unchanged. R558 (strip audit round 2): these
- * u values serve only the legacy single-band path (no segmentation). Region mode picks the left-arm actions at the body
- * map's own positions in the along-gyrus coordinate (ns-bodymap LEFT_ARM_ACTION_U = action uCentre; regionActionAt) and
- * draws the dots there (placeRegionMarkers). The values are the left-arm actions' positions in the activation-point
- * layout of the |x| fraction (R558, Message 14), the coordinate this legacy path still uses. */
+
+
+
+
+
+
+
 export const MARKERS = Object.freeze([
   ['grasp_close', 0.40657],
   ['relax_release', 0.41691],
@@ -904,7 +904,7 @@ export function fieldIntensities(uValues, drives, out) {
 // focalRadiusMm; without marker positions the radial factor is 1).
 //   activity(u, p) = clamp01(broadGain * sum_a d_a broad_a + focalGain * sum_a d_a focal_a)
 // With equal drives the argmax over actions of broadGain*broad_a + focalGain*focal_a is still actionForU(u): the focal
-// term is non-zero only for the region owner, and the broad term peaks at the nearest u. Every value is a simulated,
+
 // unitless display drive; the focal emphasis marks the selected control region near its representative point and is
 // NOT a measured focus or a unique cortical point.
 
@@ -1349,8 +1349,8 @@ export const MEDIAL_WALL = freezeR2({ bandMm: 4.5, minFacing: 0.5, motorMarginMm
  * left-arm region (action uCentre). R558 (strip audit round 2): both hysteresis widths were 0.01 / 0.004 in the old |x|
  * fraction (about 0.6 / 0.25 mm of |x|); one unit of v is about 2.7 times longer on the gyrus (about 0.006 v per mm along
  * it on FJ1801 / FJ1800), so they are 0.004 / 0.0015 now, the same distances on the brain as before. */
-// sliceHalfS (20 November 2026, the owner, Message 206: the strip "completely segmented, so it's a bunch of slice blocks
-// with a little bit of gap in between"): the half-width (strip coordinate) of the gap the renderer draws where two
+
+
 // areas meet (ns-scene-three REGION_SLICE); a gaze point inside it takes no area (classifyRegionGaze: 'glass'). 0.001: the
 // gap is cut out of the first and the last movement's share of an area (regionActionAt splits the core), and the
 // narrowest shares are 0.0036 (the hip's six movements); at 0.003 the first hip movement kept a sixth of its share and
@@ -1601,31 +1601,31 @@ export const ALONG_GYRUS = freezeR2({ tipMm: 3, tol: 1e-8, maxIter: 4000, minCot
  * toes back on the medial wall (5 to 8 mm2 left on the crest, from 824). The medial-wall rule (the toes' place) is
  * unchanged. Display layout, not a measured border. */
 export const CREST_COMPRESS = freezeR2({ crestFloor: 0.0279, crestTop: 0.135, gamma: 0.56 });
-/** 20 November 2026 (the owner, Message 204: "make sure there's clear movement for each brain activation area"; the
- * lead's BODYMAP audit: the toe areas of both halves lay on the medial wall, facing the gap between the halves, and in
- * some 6 000 looks from the start view one spot of one toe movement was hit): the medial end of the strip is TURNED UP
- * OVER THE TOP EDGE. The toe block now runs from the depth of the medial wall over its dorsal margin onto the crest of the
- * convexity, where it faces the player, and the rest of the strip follows in the same order (toes, ankle, knee, hip ...).
- *  sTop: the medial wall's strip coordinate runs from the medial regions' start (0, the toes' medial end) at its
- *  deepest point to sTop at its dorsal margin (was the medial regions' end, 0.0663, with the ankle on the upper 58 % of
- *  the wall). 0: the whole medial wall is the medial end itself (the toes, their first movement), so all four toe
- *  movements (the four quarters of the toes' core, regionActionAt) lie on the crest, where they can be aimed at. (Tried:
- *  sTop 0.01395, half of the toes' core on the wall; the deepest movement, curl the big toe, was then still never hit
- *  from the start view.)
- *  crestV / gamma: on the primary convexity strip, the along-gyrus v from 0 (the dorsal margin) to crestV is mapped
- *  linearly to sTop .. crestFloor (the toe block), and v from crestV to crestTop by a power curve (exponent gamma, in
- *  place of CREST_COMPRESS.gamma) to crestFloor .. crestTop (ankle, knee, hip, the superior in-between area and the
- *  trunk's start, in their order). From crestTop on (the trunk and everything lateral of it) nothing moves. The
- *  harmonic v is pinned to 0 on the whole medial wall, so the crest next to the margin holds much area in little v:
- *  crestV 0.006 gives the toes about 300 mm2 of crest per hemisphere (each of its four movements 40 to 120), and gamma
- *  0.53 puts the trunk's border (s 0.11655) at the same v as before (0.0963), so the trunk and everything lateral of it
- *  is exactly where it was (and its label keeps its place), while ankle, knee and hip share the rest (atlas, right / left
- *  hemisphere: ankle 349 / 365, knee 250 / 239, hip 232 / 264 mm2; before: toes 5 / 8 on the crest, ankle 797 / 766 with
- *  the upper medial wall, knee 386 / 392, hip 266 / 289). (Tried: crestV 0.024 with the old gamma, toes about 730 mm2
- *  against ankle 160 and knee 150; gamma 0.45, the trunk grew toward the legs by about 50 mm2 and its label "Belly and
- *  back" lost its place at the start view and was hidden.) on: false = the layout
- *  before (toes on the medial wall only). Display layout, not a measured border (the map's text says so: the strip's
- *  medial edge stands in for the medial wall). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const MEDIAL_TURN = freezeR2({ on: true, sTop: 0, crestV: 0.006, gamma: 0.53 });
 /** The strip coordinate of a primary convexity vertex from its along-gyrus v (CREST_COMPRESS, and MEDIAL_TURN when it
  * is given and on): v at or above crestTop is kept; below it, with the turn, v 0 .. crestV goes linearly to sTop ..
@@ -2565,12 +2565,12 @@ export function classifyRegionGaze(rayOriginSrc, rayDirSrc, seg, {
       const w0 = (md.zTop - point[2]) / (md.zTop - md.zBottom), w = w0 < 0 ? 0 : w0 > 1 ? 1 : w0;
       s = md.sLo + (md.sHi - md.sLo) * (1 - w);
     }
-    // R558 (Message 18): the region is the owner of the gaze POINT's strip coordinate (the segmentation's own rule per
+
     // point instead of per triangle centre), as the renderer draws the areas per fragment (ns-scene-three REGION_BORDER);
     // a point in a map gap keeps its triangle's assignment, as drawn.
     const pointList = owners ? (medialRule ? owners.medial : owners.all) : null;
     const pointOwner = pointList ? regionOwnerAt(pointList, s, seg.options.gapTolU) : null;
-    // 20 November 2026 (Message 206): the gap the renderer draws between two blocks takes no area
+
     if (pointOwner && sliceHalfS > 0) {
       const a = regionOwnerAt(pointList, s - sliceHalfS, seg.options.gapTolU), b = regionOwnerAt(pointList, s + sliceHalfS, seg.options.gapTolU);
       if ((a && a !== pointOwner) || (b && b !== pointOwner)) return regionResult('glass', { hemisphere: S.hemisphere, u, s, surface, meshId: S.id, point, t: best.t, via: 'gap' });
@@ -2610,135 +2610,135 @@ export function classifyRegionGaze(rayOriginSrc, rayDirSrc, seg, {
 // ---------------------------------------------------------------------------------------------
 // Brain view math: default tilt, orbit about the locked brain centre, grab carry about the player, framing.
 
-/** Brain view constants.
- *  tiltDeg 25: the default view is overhead (looking down the superior axis, anterior toward the top of the screen)
- *    tilted 25 deg about the screen's left-right axis so the anterior brain comes toward the camera (viewpoint above
- *    and in front). Measured on FJ1801 + FJ1800 with an ID-buffer at 16:9 (regionVisibility; notes U2a-brain): the
- *    picked area of the lateral face territory (u 0.8 .. 1) rises from about 180 px per hemisphere at 0 deg to about
- *    815 px at 25 deg (x4.5), and the whole visible strip by about 30 %, because the lateral precentral gyrus runs
- *    forward and down and its crown faces antero-laterally. Beyond about 30 deg the gain flattens while the view
- *    stops reading as overhead. The anterior axis still projects straight up the screen (cos 25 = 0.91).
- *  The medial-wall (paracentral) leg/foot territory faces the midline and is seen edge-on at the default; orbiting
- *    one or two steps toward the opposite side shows it (orbit left shows the right hemisphere's medial wall).
- *  orbitStepDeg / orbitYawLimitDeg / orbitPitchLimitDeg: Google-Earth-style orbit about the locked brain centre;
- *    yaw > 0 moves the viewpoint toward screen right (subject right), pitch > 0 toward the front (anterior, screen top).
- *  fill / compactFill / compactAspect: projected half-extent (NDC) of both strips in the limiting dimension.
- *  aimDistance: metres from the camera to the strips' top plane at the default view.
- *  reachM: camera-to-fingertip bound of the left arm (>= ns-arm REACH_STATE_MAX_DEPTH = 1.0 m); clearanceM: extra gap.
- *    frameBrain scales the whole brain outward (projection unchanged) until every brain point stays at least
- *    reachM + clearanceM from the camera for every orbit within the limits and every grab carry.
- *  grabPitchLimitDeg: the carried brain's elevation is clamped to +- this.
- *
- * Round 3 (R3-brain, design decision D1 "optimal overview"; evidence in round3/R3-brain-NOTES.md):
- *  framing 'brain' (new default): frameBrain fits the WHOLE brain's silhouette (all brain meshes, both hemispheres),
- *    not just the two strips, into the usable screen area (free of the far-right info column / portrait bottom band
- *    and the top limits line), so the brain reads as a whole brain seen from above (front at the top, the midline gap,
- *    front and back ends visible) while the motor belt stays as wide as that allows. The round-2 rule (both strips
- *    fill 0.85 of the view, which overflowed the brain's glass far beyond the screen) is kept as framing 'strips'.
- *  tiltDeg 35 (was 25): see the notes' tilt sweep (the lateral-most face regions of BOTH hemispheres become reachable
- *    at the default orbit, the motor belt faces the player more, the view still reads as overhead with the front up).
- *  facing true: the brain's default orientation is defined relative to the line of sight from the player to the
- *    brain centre (yaw/pitch toward it), not to the straight-ahead axis. The brain sits left of the screen centre (it
- *    avoids the far-right panel); without facing the player saw it from its right side, which hid the left
- *    hemisphere's lateral-most areas. With facing it looks exactly like the centred overhead view, front still up.
- *  heightFill: the brain silhouette spans at most this fraction of the usable height (0.96: front and back ends
- *    inside the view with a small margin).
- *  comfortDeg: every brain point and every orbit arrow can be put under the crosshair with |yaw| and |pitch| at or
- *    below this (D1 c/d: comfortable looks). On a 16:9 screen with the 70 deg vertical FOV a 40 deg yaw reaches only
- *    NDC |x| <= 0.674 (the horizontal FOV is about 102 deg), so this limits the usable width.
- *  arrowGapFrac / arrowSizePx / refHeightPx: room kept beside the silhouette for the orbit arrows: a gap of this
- *    fraction of the view width ("a centimetre or a few", D1 d: 2-6 %) plus the button (arrowSizePx CSS px; the view
- *    height in CSS px is refHeightPx when the caller does not pass viewportPx).
- *  topReservePx: the always-visible limits line at the top of the view.
- *  centreShare: when frameBrain gets no usableNdc it infers the usable area from centreNdc with the ns-app
- *    brainCentreForPanel convention (centre = share x the free area's centre offset). Pass usableNdc to avoid it.
- *  arrowsOnScreen false: the forward / back arrows may sit just beyond the top / bottom screen edge (a look of at most
- *    comfortDeg reaches them), so the brain can be about 25 % larger on a 16:9 screen; true keeps all four arrows inside
- *    the view at the default look (smaller brain). Evidence for both in the notes.
- *  R3-fix (review F1 / B1, decision recorded in round3/FIX-REPORT.md): fit 'belt' (default) sizes the brain by the
- *    MOTOR BELT, not the whole outline: the belt (both precentral strips) spans beltFrac (0.62: D1(b) asks >= 0.6) of the usable width,
- *    its centre sits beltCentreShare (0.4) of the way from the screen centre (the crosshair) toward the usable area's
- *    centre, and vertically as close to the crosshair as the brain allows: the back of the brain stays inside the usable
- *    area and at most frontCropMax (0.12) of the brain's on-screen height may pass the top edge (the front end is cut by
- *    at most that much; D1(a) "most of the front end"). When that limit binds (wide screens: the usable height is what
- *    limits a front-up brain), the belt is as wide as the limit allows. fit 'brain' is the round-3 whole-outline fit.
- *    (Round 3 kept tilt 35 with frontCropMax 0.12: the smallest tilt at which all 44 regions stayed reachable within
- *    40 deg on nine screens with the eye about 0.8 brain lengths from the brain centre; superseded by R4-view below.)
- * R4-view (round-4 decision D5 "framing with less perspective"; evidence in round4/R4-view-NOTES.md):
- *  perspectiveK 6: the brain is drawn as an eye perspectiveK times farther away would see it through a perspectiveK
- *    times zoom (about 4.4 brain lengths instead of 0.8 at 16:9), so its on-screen size is unchanged and the near-eye
- *    perspective that hid the back of the brain and the lateral slivers is gone. It is done by squashing the brain
- *    along the line of sight about its centre (brainViewTransform); every ray from the eye then meets the squashed
- *    brain exactly where the matching ray from the far eye meets the real brain, so the picture, the gaze picking and
- *    the silhouette are those of the real brain seen from afar. (Moving the brain k times farther AND scaling it by k
- *    is a similarity about the eye and changes nothing on screen; that is what aimDistance and the clearance scale-up
- *    already do.) Lighting: the scene's normals become those of the squashed shape (flatter shading) unless it uses
- *    view.rotation for normals (wiring in the notes).
- *  tiltDeg 0 (was 35): straight overhead, front up. With the far eye this keeps all 44 regions within 40 deg at the
- *    default orbit on all nine screens (worst 31.7 deg at 1280x720) and shows BOTH the front and the back end and the
- *    lobes behind the motor strip; any forward tilt hides the back end again (0.52 of its top-down share at 5 deg).
- *  frontCropMax 0.03 (was 0.12): at most 3 % of the brain's height may pass the top edge, so the front end stays
- *    visible. On height-bound screens (16:9, 21:9) the belt is then 0.54 / 0.35 of the usable width (round 3: 0.62 /
- *    0.40): the lead's D5 order puts "both ends visible" above "belt >= 0.60" and no framing found meets both there.
- *    (Round-4 values kept as BRAIN_VIEW_R4 for comparison: frameBrain(seg, { ...BRAIN_VIEW_R4 }).)
- * R5-bigbrain (round 5; the user's note of 2026-11-08T23:40Z, requirement R25: "make the brain much larger so that the
- * motor areas take up more of the focus of the screen. In fact, the motor areas should fill most of the screen. But of
- * course you'll be able to move around and see the rest of the brain and drag it around."; lead thresholds and the
- * measurements in round5/R5-bigbrain-NOTES.md):
- *  fit 'motor' (new default): the MOTOR AREAS (the motor belt: every motor region of both hemispheres) are framed, not
- *    the whole brain. The belt's box is centred on motorCentreNdc (the crosshair, [0, 0]) and sized so that its part
- *    inside the usable area spans motorFrac of the usable width, capped so that (a) the belt's two lateral ends stay
- *    within a look of motorEdgeDeg from straight ahead (each end region keeps a part within the comfortDeg look range)
- *    and on the screen (motorMarginPx), and (b) the belt's whole height stays inside the usable height (motorMarginPx
- *    off its top and bottom; in portrait the belt is moved up or down only as far as that needs). The brain's front and
- *    back ends (and on narrow screens its sides) MAY leave the screen at the default view: this supersedes the round-4
- *    rule "both ends visible" (D5 priority 2); looking around, the orbit arrows and Space-drag show the rest.
- *    beltFit then reports { fit: 'motor', motorFrac, beltWidthFrac (inside the usable width), beltCentreNdc, limiting,
- *    endsOffNdc { front, back, left, right } (how far the outline passes each usable edge, NDC, <= 0 = inside) }.
- *    R558 (motor strip fills the view; the user: "should take up the entire view from top to bottom of screen and left
- *    to right of screen ... so there is more cursor area for fine motor control"): motorFrac 0.82 -> 1, the look limit
- *    motorEdgeDeg 40 -> 80 (it no longer binds on a normal window) and a side gap of motorSideFrac of the view width
- *    (0.015) on each side, so in a window that is width-limited the left-most and right-most motor area end 1.5 % of
- *    the width from the screen edges; a very wide window is height-limited instead (motorMarginPx off the top and the
- *    bottom) and keeps side gaps. This is a contain fit of the strip's TRUE shape: the whole brain is brought nearer
- *    and scaled uniformly (frame.k), the strip is never moved, stretched or reshaped on the brain (a display choice).
- *    perspectiveK 6 -> 20 (pictureAxis 'view'): at this size a nearer picture eye hid the outer (face) areas behind
- *    the curve of the hemispheres; 20 keeps all 44 motor areas in sight at the start (6, 12 and 16 were tried).
- *    The flat screen stretches the picture towards its edges, so the outer areas gain little look angle and the
- *    middle ones most (1600x900: the median area grows from about 4.8 to 9.3 degrees of look across; the thinnest
- *    slivers at the outer ends stay under 1 degree wide).
- *    R558 (user Message 43, 12 Nov: "The brain is far too big, it should only take up 50% of the width of the panorama
- *    screen view"): motorFrac 1 -> 0.475, so the WHOLE brain (its outline is a little wider than the motor belt) spans
- *    about half the width of a 16:9 view at the start; this supersedes the fill-the-view rule above.
- *    R558 (user Messages 55 / 56, 12 Nov: "a lot easier to use and play", "a learning tool for people learning motor
- *    neuroanatomy"): motorFloorNdc (default null = no floor; ns-app brainFloorNdc gives it for every window size). The
- *    belt's box stays ABOVE this height of the view (NDC, +1 = the top edge), so the leg and foot areas at the bottom
- *    of the belt's U are not hidden behind the mirror body's head; with the box centred on the floor it rests on it,
- *    and when the belt at motorFrac is taller than the room between the floor and the top line it is made smaller
- *    (limiting 'height'; measured at 1920x1080: the belt 801 px = 0.88 of its motorFrac size = 42 % of the width, the
- *    whole brain about 45 % of the width).
- *  fit 'belt' (round 3 / 4) and fit 'brain' (round 3) stay available with their options.
- * R558 (the user's note of 2026-11-10: "the highlighted motor areas look far too low in the brain to be anatomically
- * realistic, the brain is probably too narrow"; measurements in DESIGN-DECISIONS.md, decision 13):
- *  What was wrong. With the 110 degree view and the motor areas filling the screen, the eye sat about 0.7 brain lengths
- *    from the brain centre (about 65 mm above the top of a 180 mm brain, in the brain's own scale). From that close the
- *    drawn outline is only the horizon of the dome: the back of the brain shrank to a thin rim just below the motor
- *    areas, the sides ended barely outside them, and the front swept far above the screen. The areas themselves were
- *    in the right place on the mesh; the picture of the brain around them was not.
- *  perspectiveK 6 (was 1): the round-4 far-eye picture again (the brain as seen from six times farther through a six
- *    times zoom), so the outline is the brain's real outline and the motor band crosses it where it does in an
- *    ordinary view from above.
- *  pictureAxis 'view' (new): the far-eye picture is laid PARALLEL TO THE SCREEN of the default look (the squash is
- *    along the straight-ahead axis, and the brain's top faces straight back at the player), instead of square to the
- *    line of sight to the brain centre. With the motor band on the crosshair that line of sight points about 22
- *    degrees above straight ahead, and a picture square to it is tilted against a 110 degree screen: its front half was
- *    stretched to several times its size (the outline reached 1.7 screen half-heights above the middle) and its back
- *    half compressed. Parallel to the screen the picture has the brain's own proportions everywhere at the default
- *    look. 'centre' is the round-4 rule (kept for comparison; it is also what perspectiveK 1 always uses). The far eye
- *    then looks along the straight-ahead axis; the brain centre is a few degrees off that axis for it (the offset on
- *    the picture divided by perspectiveK), which is why facing is not applied with 'view'.
- *  tiltDeg 0 (was 10): straight overhead, as in round 4 with the far eye. A forward tilt hides the back of the brain
- *    and pushes the motor band toward the lower edge of the outline, which is the fault being fixed. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const BRAIN_VIEW = freezeR2({
   tiltDeg: 0, orbitStepDeg: 15, orbitYawLimitDeg: 60, orbitPitchLimitDeg: 30,
   fill: 0.85, compactFill: 0.78, compactAspect: 1.45, aimDistance: 6,
@@ -2749,18 +2749,18 @@ export const BRAIN_VIEW = freezeR2({
   motorFrac: 0.475, motorEdgeDeg: 80, motorMarginPx: 6, motorSideFrac: 0.015, motorCentreNdc: freezeR2([0, 0]),
   motorFloorNdc: null, perspectiveK: 20, pictureAxis: 'view', spinDeg: 180
 });
-/* 19 November 2026 (the owner: "it would be much better from a control standpoint, ease of use standpoint, and learning
- * standpoint if we were to invert the brain altogether so that the motor strip changed direction"; "turning it 180
- * degrees, such that the U becomes an inverted U, almost an N. Lowercase n, that is"; "the eyeballs will be at the
- * bottom"). spinDeg is a turn of the drawn brain about the axis from its top toward the player, applied before the
- * tilt and the orbit. 180 (the game): the brain's FRONT is toward the BOTTOM of the picture and its RIGHT half is on
- * the LEFT of the picture, as on someone who faces you. The right half moves the left side of the body, so the areas
- * for your left arm and leg are on your left, over your own left arm, and the strip is an n: the leg areas at the top
- * in the middle, the face areas at the lower ends. 0: the earlier picture (front at the top, the brain's right on the
- * right, the strip a U). Nothing inside the brain changes: the same meshes, areas and picking, turned as one; the
- * crossing is the same (each half still moves the other side of the body). The top of the brain still faces the
- * player. The tilt, the orbit and the carry are turns in the picture's own axes and are untouched: the arrow at the top
- * of the brain still brings the far (upper) side toward you, which is now the brain's BACK (ns-text says so). */
+
+
+
+
+
+
+
+
+
+
+
+
 /** R558: the framing of the preceding preview (near eye, 10 degree forward tilt), for comparison:
  * frameBrain(seg, { ...BRAIN_VIEW_R5 }). */
 export const BRAIN_VIEW_R5 = freezeR2({ tiltDeg: 10, perspectiveK: 1, pictureAxis: 'centre', spinDeg: 0 });
@@ -2771,11 +2771,11 @@ export const BRAIN_VIEW_R4 = freezeR2({ fit: 'belt', tiltDeg: 0, perspectiveK: 6
  * frameBrain(seg, { ...BRAIN_VIEW_R3 }). */
 export const BRAIN_VIEW_R3 = freezeR2({ tiltDeg: 35, perspectiveK: 1, pictureAxis: 'centre', frontCropMax: 0.12, spinDeg: 0 });
 
-/* 19 November 2026 (the owner: "let's center the motor strip on either side of the head of the mirror body. So maybe
- * we'll keep a bigger gap between the hemispheres."): the game draws the two halves of the brain a little apart. That
- * is done once on the loaded meshes, before this module sees them (ns-brain-part HEMI_GAP, applied in ns-app), so
- * everything here (the areas, the framing, the picker, the outline) works on the parted brain and needs no rule of
- * its own for the gap. */
+
+
+
+
+
 
 /** The round-2 strips framing defaults (frameBrain framing 'strips'): tilt 25 deg, both strips fill 0.85 (0.78 below
  * aspect 1.45) of the view, strips' top plane at 6 m. Kept for comparison and for callers that ask for it. */
@@ -3555,7 +3555,7 @@ function frameWholeBrain(strips, {
     // The belt stays inside the usable width (R558: in landscape the whole view, less motorSideFrac of the width on each
     // side; in portrait above the bottom band) and within the lateral look limit; its centre is as near
     // motorCentreNdc as that allows.
-    // R558 (Messages 55 / 56): with motorFloorNdc the belt also stays above that height (see BRAIN_VIEW).
+
     // 19 November 2026 (motorCeilNdc): the height the belt's top (and the kept points) may reach, in place of the usable
     // top less the margin. It may pass 1 a little: this picture is the one seen from the eye, and a camera that stands
     // back from the eye (ns-camera EYE_DOLLY) draws it smaller, so a top just over 1 here is still under the top edge there.
@@ -3690,8 +3690,8 @@ export function brainViewTransform({ frame, orbitYaw = 0, orbitPitch = 0, orbitR
   const spin = spinOf(frame);
   const K = Number.isFinite(frame.perspectiveK) && frame.perspectiveK > 0 ? frame.perspectiveK : 1;
   const u0 = frame.squashAxis && frame.squashAxis.length === 3 && Array.prototype.every.call(frame.squashAxis, Number.isFinite) ? frame.squashAxis : null;
-  // 20 November 2026 (orbitRoll, the owner: "a great big circling motion, clockwise or anti-clockwise ... we can turn it
-  // clockwise or anti-clockwise"): a turn about the default line of sight (the squash axis, or the line from the eye to
+
+
   // the brain's centre), DEGREES, positive clockwise as the player sees it. It is applied after the orbit and before the
   // squash and the carry, so it turns the brain in the picture about its own centre; it commutes with the squash (the
   // same axis). 0 gives the transform as before bit for bit.

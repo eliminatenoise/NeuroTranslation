@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "bodyparts3d_head_acquisition_record",
   "writer": "builder FA (R558 face and arm muscle quality)",
-  "authority": "User Message 20 (2026-11-11) allows free tools and asks that the face muscles stop looking wrong; the earlier user authorisation (2026-11-08) to download the needed BodyParts3D parts in the same way, with hashes, licence and attribution, is followed.",
+  "authority": "Acquisition and verification of BodyParts3D head meshes for the virtual body.",
   "method": "HTTP range requests against the official archive (serial, 1.5 s apart, no retries): HEAD for identity (ETag and size must equal the recorded ones), the end of central directory, the central directory, then each member's local header and compressed bytes; raw-deflate decompressed; ZIP CRC32 and uncompressed byte count must match the central directory; then sha256.",
   "licence_check": {
     "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",

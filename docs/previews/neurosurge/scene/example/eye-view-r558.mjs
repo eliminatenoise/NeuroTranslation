@@ -1,12 +1,12 @@
-/** R558 preview launcher (user note 2026-11-11): the first-person camera sits at the person's eye reference point,
- * FOV 108 vertical since 17 November 2026 (EYE_FOV_Y_DEG below; it was 90 from 11 November, and 120 before that, whose
- * edge stretching the user called absurd), ordinary look0, explicit placement0. No backed-off camera and no whole-arm engineering display: the whole
- * own body is drawn solid from the eyes. The eye point is the atlas-derived display reference, not a measured eye.
- * Normal constructor/loading/input path; an experimental preview, not production qualification.
- * Exact C353/R302 loading, validation, streams, ready/firstView/render and input paths are retained.
- * Fixed configuration assertions check these inputs only, not framing/anatomy/normal-mechanics/production acceptance.
- * Original P1F90 evidence remains historical; every new runtime/pixel/native gate is UNRUN. No QA setters or new APIs.
- */
+
+
+
+
+
+
+
+
+
 import * as THREE from '../../vendor/three.module.js';
 import { start, startFullBodyStream, startFaceStream, BRAIN_START_MOTOR_FRAC } from '../src/ns-app.mjs';
 import { PAGE, SHELL } from '../src/ns-text.mjs';
@@ -18,14 +18,14 @@ import { showControlsCard } from '../src/ns-controls-card.mjs';
 import { createLoadBar } from '../src/ns-load-progress.mjs';
 import { installLoadGuard, ADDRESS_REFUSED } from '../src/ns-load-guard.mjs';
 import { startPackLoader, readAll } from '../src/ns-pack-loader.mjs';
-import { editionPacks, isLiteEdition } from './edition.mjs';
+import { editionPacks, editionOf } from './edition.mjs';
 import { packKeyOfUrl } from '../src/ns-pack.mjs';
 
-// 17 November 2026 (user: "the field of view should be even wider, such that you can see everything from your eyes.
-// Including everything from the neck down"): 108 degrees up and down (about 136 across at 16:9), between the 90 of
+
+
 // 11 November and the 120 whose edge stretching the user called absurd.
-// 18 November 2026 (the owner: "Remember, all of the torso has to be visible at once, even if that means you're a
-// little flat-chested. Maybe we need an even greater field of view."): 108 -> 116 degrees up and down (about 141
+
+
 // across at 16:9). With the look starting 41 degrees below level the picture now reaches from 17 degrees above level
 // down to 99 below: the collar bones lie inside its lower edge with both shoulders in the lower corners, and the
 // chest, stomach and pelvis above them. The price: things in the middle are drawn about a seventh smaller and the
@@ -35,19 +35,19 @@ import { packKeyOfUrl } from '../src/ns-pack.mjs';
 // neck shade of ns-scene-three NECK_SHADE), where both shoulders, the collar bones, the chest, the stomach and the
 // pelvis fit inside 100 degrees; things in the middle of the picture are drawn about a third larger than at 116 and
 // the corners are stretched far less.
-// 18 November 2026, late (the owner: "a very wide field of view, but a very narrow depth of field ... things that are far
-// away look extremely close to us"; "a much larger set of four limbs, and perhaps that involves dialing down the field
+
+
 // of view"): 100 -> 54. The camera stands further back behind the eye (ns-camera EYE_DOLLY: 30 cm back on the line of
 // sight, 10 cm up along the head), so this longer lens flattens depth: your shins, feet, the mirror body and the brain
 // are drawn far larger for their distance and your chest smaller. Measured at the start, 1600x900 (middle widths):
 // thigh 65 -> 144 px, shin 25 -> 55, right upper arm 61 -> 118, forearm 42 -> 86. Across, the picture is 85 degrees.
 const EYE_FOV_Y_DEG = 54;
-// 17 November 2026 (user: "what if we made the brain far lower so that the relevant body parts were always in view?";
+
 // "You will naturally be looking a little downwards and that is where the motor strip should naturally be"): the game
 // starts with the look a little below level, as someone leaning back on a sofa looks, and the brain starts there too,
 // over the body that lies out below your eyes, so the limbs an area moves stay on screen while you aim at it.
-// 18 November 2026 (user, after playing: "And you are gazing diagonally downwards. You should be able to see your own
-// shoulders and stomach/abs"): the game now starts with the look 34 degrees below level, down your own front (the
+
+
 // head bowed 12 degrees, the eyes lowered the rest: ns-body POSTURE_EYES). The brain stays where it was (20 below
 // level): the mirror body is a reflection that stands where the body puts it, just under the motor strip, and your
 // own feet come up to it, so the brain cannot come lower without the mirror body or your feet covering the leg
@@ -60,8 +60,8 @@ const EYE_FOV_Y_DEG = 54;
 // the picture above your own legs, and your arms, belly and chest are seen around and under it. The brain still
 // stands 20 below level, on the mirror body's head, for the reason given above; the crosshair therefore starts on
 // your own knees, about 22 degrees under the strip's lower edge, not on the strip itself.
-// 18 November 2026, fourth pass (the owner: "I want flat depressed chest ... you are gazing diagonally downwards. You
-// should be able to see your own shoulders and stomach/abs"; the lead: the crosshair should start on, or as near as
+
+
 // can be to, the motor strip, and the strip should be large again). The camera now stands a little behind the eye on
 // its own line of sight (ns-camera EYE_DOLLY), so both shoulders, the collar bones, the chest and the belly are in
 // the lower part of the picture at a shallower look than before, and the look starts 25 degrees below level (the
@@ -78,8 +78,8 @@ const EYE_FOV_Y_DEG = 54;
 // the chest hide the belly and pelvis. At 52 the line of sight crosses the trunk's front at about 17 degrees: the
 // whole front, shoulders to pelvis, is seen at once, the legs run up the picture to the feet under its top edge, and
 // the crosshair starts on the strip between the knees. The brain is placed on the same look.
-// 19 November 2026 (the owner: "Both the brain and mirror body are far too low. The brain should actually be a lot
-// higher, I was wrong about that before."; this withdraws "the motor strip, the middle bit, to be below our ankles" of
+
+
 // 18 November). The look now starts 24 degrees below level (it was 52) and the brain stands 13 degrees below level,
 // straight ahead and ABOVE your feet: the whole motor strip is in the upper part of the picture, clear of your hands
 // and feet, the mirror body stands directly under it between your hands (ns-mirror MIRROR_NEAR), and your own body
@@ -102,8 +102,8 @@ const EYE_FOV_Y_DEG = 54;
 // part of the picture (your neck ends in a plain cap at the collar: ns-scene-three EYE_COLLAR). The price: your own
 // limbs are drawn about a sixth smaller than on 18 November, and the mirror body is about 235 px tall at 1600x900
 // (it was 290 between your knees).
-// 19 November 2026, later (the owner: "invert the brain altogether so that the motor strip changed direction ... include
-// eyeballs with nerves connected to the brain"; "turning it 180 degrees, such that the U becomes an inverted U, almost
+
+
 // an N. Lowercase n"; "let's have the mirror body so close that the toes are almost touching and they're level"). The
 // look and the brain's placement are unchanged (25.5 and 13 degrees below level). What changed is in the modules:
 // the brain is drawn turned half a turn (ns-brain BRAIN_VIEW.spinDeg 180: front down, the brain's right half on the
@@ -112,10 +112,10 @@ const EYE_FOV_Y_DEG = 54;
 // with you, sitting inside the n's arch (ns-mirror MIRROR_NEAR). The brain's front with its two eyeballs
 // (ns-brain-eyes) is then behind your own body in this picture; ns-app BRAIN_START.keepEyes says why and what the
 // other choice costs.
-// 19 November 2026, later still (the owner: "let's center the motor strip on either side of the head of the mirror
-// body. So maybe we'll keep a bigger gap between the hemispheres. So it looks like almost hair coming out of either side
-// of the mirror body's head."). The look and the brain's placement are again unchanged, and so is the mirror body (the
-// literal reflection, toe to toe: the owner asked for that the same day). What changed is in the modules: the two
+
+
+
+
 // halves of the brain are drawn 12 mm further apart (ns-brain-part HEMI_GAP), and the strip's top no longer stands
 // just under the top edge: it stands where the middle of the two leg areas, the inner ends of the n, is level with the
 // mirror body's head (ns-app BRAIN_START, brainStartCeilNdc), so the head is IN THE GAP and the two halves run outward
@@ -132,17 +132,19 @@ const FACE_COMPLETENESS_ERROR = 'ns:app_args: configured viewGraph requires the 
 const FRIENDLY_FACE_ERROR = 'The face anatomy could not finish loading. Reload the page to try again.';
 const params = new URLSearchParams(window.location.search);
 const mode = params.get('case') || 'boot';
-const lite = isLiteEdition(params);
+const edition = editionOf(params), lite = edition === 'lite';
 // 25 November 2026 (DESIGN-DECISIONS section 212): a parameter the game does not know is left alone. It was refused,
 // and sites that pass a link on add their own (fbclid, utm_source, gclid ...): a visitor who followed such a link got
 // "Loading did not finish. Check your connection, then try again", and "Try again" loaded the same address. Nothing
 // in the game reads such a parameter, so the rule above stands: no raw coordinate or query overrides. Still refused:
-// a value the game does not know for one of its own two parameters, and the scene's test switches (`qa`, and every
-// name that starts with `ns`: ns-scene-three reads nsQuality and nsBrainK under qa=1, which draws the brain at another
-// distance), which this page has never offered.
-const TEST_SWITCH = /^(?:qa$|ns)/i;
+// a value the game does not know for one of its own two parameters, and the scene's test switches (`qa`, `nsQuality`
+// and `nsBrainK`: ns-scene-three reads the last two under qa=1, which draws the brain at another distance), which
+// this page has never offered.
+// (section 217: only the three names the scene reads, not every name that starts with "ns": "nsukey" is a parameter
+// some apps add to a shared link. "edition=full" and an empty edition are the Full game.)
+const TEST_SWITCH = /^(?:qa|nsquality|nsbraink)$/i;
 if ([...params.keys()].some(k => TEST_SWITCH.test(k)) || !['boot', 'stop-during-body', 'missing-face'].includes(mode)
-    || (params.has('edition') && (!lite || mode !== 'boot'))) {
+    || edition === 'unknown' || (lite && mode !== 'boot')) {
   throw new Error(ADDRESS_REFUSED); // (the load guard then offers the game's usual address, not the same one again)
 }
 const packProfile = editionPacks(params);
@@ -156,8 +158,8 @@ const shellRoot = document.getElementById('ns-shell-root');
 const ownedBodyJobs = [], ownedFaceJobs = [], ownedStreamBindings = [];
 // 17 November 2026: no start page and no loading page; the main controls are shown for the first five seconds.
 // 19 November 2026, late: the separate loading picture (ns-assembly: a worker drew the arriving meshes inside out, in
-// an arrangement of its own, and cross-faded into the game) is switched off. The owner: "perhaps the it should be the
-// actual game models loading not loading page models"; "Performance and reliability should be our number one priority.
+
+
 // even if that means extreme simplicity and streamlining". A check found what the picture really was in a load of a
 // few seconds: a brain in one corner and two skeletons with a few muscle slivers, for two or three seconds, then half
 // a second of two different arrangements on top of each other. The game's own scene cannot yet be drawn part by part
@@ -165,8 +167,8 @@ const ownedBodyJobs = [], ownedFaceJobs = [], ownedStreamBindings = [];
 // simple choice is taken: the game's own dark backdrop (assembly.css) with the loading bar, then the game itself,
 // faded in. It also frees a worker, a second graphics context and a copy of every mesh during the build.
 // LOADING_PICTURE = true brings the worker picture back as it was.
-// 19 November 2026, later (the owner: "Currently, I can't see the models being built on the loading page, which they
-// should be there"): the picture is back on. It is short on a fast line; the owner wants it there.
+
+
 // 20 November 2026: the switch is LOADING_PICTURE in ns-assembly.mjs (the page's first small script, early-load.mjs,
 // starts the picture and the controls card now, at the start of the load, and feeds the picture from the packs as they
 // arrive; on a slow line both used to wait for this launcher's own scripts). This launcher takes the same picture and
@@ -178,7 +180,7 @@ if (assembly) assembly.useMuscleLayer(bodyMuscleLayer);
 if (mode === 'boot') app.dataset.nsPhase = 'loading';
 const controlsCard = mode === 'boot' ? (earlyStart && earlyStart.controlsCard) || showControlsCard({ host: document.body }) : null;
 const controlsCardAt = earlyStart && earlyStart.controlsCard && Number.isFinite(earlyStart.controlsCardAt) ? earlyStart.controlsCardAt : performance.now();
-// 19 November 2026 (the owner: "it just stays on the loading page forever. There should be a loading progress bar"):
+
 // one bar with a percentage for the whole wait (ns-load-progress), and a guard (ns-load-guard, the page's first script,
 // which needs no other file): when nothing has advanced for 20 s, a script cannot be had, or loading fails, a panel
 // says so with a "Try again" button. Only the ordinary boot case.
@@ -190,7 +192,7 @@ const loadBar = mode !== 'boot' ? null : earlyBar || createLoadBar({ host: docum
 if (earlyBar) { window.__nsEarly.launched = true; earlyBar.pageLoaded(); }
 const guard = mode === 'boot' ? installLoadGuard() : null;
 if (guard) guard.attach({ bar: loadBar, lastAdvance: () => loadBar.model.lastAdvance() });
-// 19 November 2026 (the owner: "Game should not take long to load at all. Minutes are a liability"): the anatomy comes
+
 // as six mesh packs (19 MB, fetched and decoded in a worker) instead of 691 OBJ text files (166 MB); see ns-pack.
 // A file a pack cannot give is fetched as before. Only the ordinary boot case; the two test cases read the files.
 const loadCount = { fetched: 0, served: 0 };
@@ -516,7 +518,7 @@ export async function assertConfiguredBoot() {
   // and that no motor area is cut off.
   requireCase(fit && fit.fit === 'motor' && fit.motorFrac === BRAIN_START_MOTOR_FRAC && bx && [bx.x0, bx.x1, bx.y0, bx.y1].every(Number.isFinite), 'start framing must be the motor-strip fit at the app\'s own share of the view');
   requireCase(bx.x0 >= -1 && bx.x1 <= 1 && bx.y0 >= -1 && bx.y1 <= 1 && bx.x1 > bx.x0 && bx.y1 > bx.y0, 'no motor area may be cut off by a screen edge at the start');
-  // R558 (user Message 7): every turn arrow is a V tip at the middle of a side of its target's frame: the motor strip's
+
   // horizontal 16:9 frame and the mirror body's vertical 9:16 frame. No earlier launcher check pinned the ribbon arrows
   // or the compass rose; this is the strict check of the new placement, read from the plan the App itself holds (its
   // numbers are rounded to 0.1 px there): the exact aspect, the smallest such rectangle round the target's box and
@@ -576,8 +578,8 @@ export async function assertConfiguredBoot() {
   requireCase(initialPose && initialPose.firstPerson === true && initialPose.thirdPerson === false && initialPose.position.length === 3 && initialPose.position.every(Number.isFinite), 'the first frame must be a FIRST-person snapshot with a finite eye position; not measured eye anatomy');
   requireCase(Number.isFinite(initialPose.yaw) && Number.isFinite(initialPose.pitch) && Math.abs(initialPose.yaw) < 1e-6, 'the first-frame look must be finite and straight ahead');
   requireCase(observations.bodyFactoryCalls === 1 && observations.faceFactoryCalls === 1, 'one real factory/job per normal body and face stage');
-  // R558 (user: "The mirror body should literally be a 1:1 perpendicular perfect reflection ... from the exact same
-  // reflection angle at the beginning until manipulated"). The earlier start placement (a scaled, turned copy fitted
+
+
   // into a free box inside the brain) is overturned; this is the equally strict check of the new one, from the matrix
   // the renderer actually uses: untouched at the start, a VERTICAL plane (unit normal with no vertical part) in front of
   // the eye and of the posed body's foremost point, and every one of the 16 entries within 1e-9 of the pure reflection
@@ -587,22 +589,22 @@ export async function assertConfiguredBoot() {
   requireCase(mr.orbit && mr.orbit.yawDeg === 0 && mr.orbit.pitchDeg === 0 && mr.orbit.pushM === 0 && mr.carriedPlacement && mr.carriedPlacement.worldCentreM === null && mr.external === null && rf.atRest === true, 'the mirror body must be untouched at the start');
   const rn = rf.normal, rc = rf.offsetM;
   requireCase(Array.isArray(rn) && rn.length === 3 && rn[1] === 0 && Math.abs(Math.hypot(rn[0], rn[1], rn[2]) - 1) <= 1e-12 && Number.isFinite(rc), 'the mirror plane must be vertical with a unit normal');
-  // R558 (Message 12: your body and the mirror body never touch): the plane stands a few cm in front of the farthest point
+
   // the body can REACH with every joint in range (when the game has measured it), which is never nearer than the posed
   // body's own foremost point.
   requireCase(Number.isFinite(rf.distanceM) && Number.isFinite(rf.foremostM) && rf.foremostM > 0 && rf.distanceM > rf.foremostM && rf.distanceM <= rf.foremostM + 0.1, 'the mirror plane must stand just in front of the posed body (a few cm)');
   requireCase((rf.drawnForemostM === null || rf.drawnForemostM === undefined || rf.foremostM >= rf.drawnForemostM - 1e-9) && (rf.reachForemostM === null || rf.reachForemostM === undefined || rf.foremostM >= rf.reachForemostM - 1e-9), 'the mirror plane must stand in front of the posed body and of everything it can reach');
   const pure = [1 - 2 * rn[0] * rn[0], -2 * rn[0] * rn[1], -2 * rn[0] * rn[2], 0, -2 * rn[0] * rn[1], 1 - 2 * rn[1] * rn[1], -2 * rn[1] * rn[2], 0,
     -2 * rn[0] * rn[2], -2 * rn[1] * rn[2], 1 - 2 * rn[2] * rn[2], 0, 2 * rc * rn[0], 2 * rc * rn[1], 2 * rc * rn[2], 1];
-  // 19 November 2026 (the owner: "make the two bodies more level"; the mirror body higher and under the strip): the
+
   // start matrix is the plane reflection followed by the app's own placement, so it is no longer the pure reflection
   // entry for entry. It must still be a mirror image (its 3 x 3 part has a negative determinant) of unchanged size.
   const det3 = mx[0] * (mx[5] * mx[10] - mx[6] * mx[9]) - mx[4] * (mx[1] * mx[10] - mx[2] * mx[9]) + mx[8] * (mx[1] * mx[6] - mx[2] * mx[5]);
   // (its drawn size is the app's own choice for the start picture: between a fifth of the body's size and one and a half times it)
   requireCase(pure.every(Number.isFinite) && det3 < 0 && Math.cbrt(-det3) > 0.2 && Math.cbrt(-det3) < 1.5, 'the start mirror matrix must be a mirror image of the body, between a fifth and one and a half times its size');
-  // 19 November 2026, later (the owner: "let's center the motor strip on either side of the head of the mirror body. So
-  // maybe we'll keep a bigger gap between the hemispheres. So it looks like almost hair coming out of either side of the
-  // mirror body's head."). A NEW rule of the start picture, in a landscape window (an upright one plans its arrows in
+
+
+
   // another view, so the strip's box read here is not its place on screen): the mirror body stands on the middle of
   // the strip, the top of its head lies within the height of the strip's two inner ends (the leg areas, the upper 0.3
   // of the n; until now the strip's top was pinned 15 px under the top edge and the head stood under those ends), and
