@@ -3,7 +3,7 @@
 
 **[Try NeuroTranslate 0.0 in your browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Download model 0.0](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip) · [Read the papers](papers/)**
 
-**NeuroSurge** · [Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-body-81-2026-11-28/NeuroSurge-Lite.zip) · [Player guide](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/PLAYER-GUIDE.html)
+**NeuroSurge** · [Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-body81-reach-view-2026-11-28/NeuroSurge-Lite.zip) · [Player guide](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/PLAYER-GUIDE.html)
 
 [Download the 0.1 walking checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip) · [0.1 setup and requirements](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24) · [All model downloads](models/#current-downloads) · [Model versions explained](models/versions/SIMPLE.md) · [Technical version guide](models/versions/TECHNICAL.md)
 

@@ -9458,7 +9458,7 @@ export function start(params = {}) {
         if (!PORTRAIT_HINT.on || !(W < H)) { hintPortSpot = null; hintPortFor = ''; return null; }
         if (forKey === hintPortFor && nowMs - hintPortAt < PORTRAIT_HINT.everyMs) return hintPortSpot;
         hintPortFor = forKey; hintPortAt = nowMs;
-        let top = Infinity, upperFoot = 0;
+        let top = Infinity, upperFoot = 0, hintHeight = 0, tutorialFoot = 0;
         try {
           const o = canvas.getBoundingClientRect();
           for (const e of doc.querySelectorAll('.ns-infopanel, .ns-hud .ns-panel')) {
@@ -9468,11 +9468,20 @@ export function start(params = {}) {
             if (y0 > H * PORTRAIT_HINT.lowerFrom) { if (y0 < top) top = y0; }
             else if (r.bottom - o.top > upperFoot) upperFoot = r.bottom - o.top; // (the status panel at the top)
           }
+          const prompt = doc.querySelector('.ns-prompt');
+          const hint = doc.querySelector('.ns-shell-toast');
+          if (prompt && !prompt.hidden) tutorialFoot = Math.max(0, prompt.getBoundingClientRect().bottom - o.top);
+          if (hint && !hint.hidden) hintHeight = hint.getBoundingClientRect().height;
           // (the map's card starts under the panel at the top: quiet.css reads --ns-top-panel-foot in a tall window)
           const rootEl = doc.querySelector('.ns-app'), foot = Math.round(upperFoot);
           if (rootEl && rootEl.style && foot !== hintPortFoot) { hintPortFoot = foot; if (foot > 0) rootEl.style.setProperty('--ns-top-panel-foot', `${foot}px`); else rootEl.style.removeProperty('--ns-top-panel-foot'); }
         } catch { top = Infinity; }
-        hintPortSpot = portraitHintPlace(top, W, H);
+        // Stack the drag instruction underneath the actual tutorial in the top band when it fits.
+        // Keep the quarter-height aim marker free. Short windows retain the usual lower-panel placement.
+        const gap = PORTRAIT_HINT.gapPx;
+        const shelfBottom = Math.max(upperFoot, tutorialFoot) + gap + hintHeight;
+        const fitsAboveAim = hintHeight > 0 && shelfBottom < H * 0.25 - 2 * gap;
+        hintPortSpot = portraitHintPlace(fitsAboveAim ? shelfBottom + gap : top, W, H);
         return hintPortSpot;
       }
       /** 25 November 2026 (FIX76; a hunt of update 74, finding 9; ns-rows-place ROWS_OUTSIDE): the strip beside your head

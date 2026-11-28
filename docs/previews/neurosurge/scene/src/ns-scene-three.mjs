@@ -6746,6 +6746,7 @@ export function createScene({
   if (overlay) {
     const p = el('aside', 'ns-infopanel', overlay);
     p.setAttribute('data-ns-info', '');
+    p.tabIndex = 0; // The region card can scroll in a short window.
     p.setAttribute('aria-live', 'polite');
     p.setAttribute('aria-label', `Information: ${NsText.INFO.heading}`);
     p.hidden = true;

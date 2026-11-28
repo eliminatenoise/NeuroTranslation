@@ -8,11 +8,13 @@ Full and Lite use the same game controls. Lite uses Brotli compression for the s
 
 When the game canvas has keyboard focus, **Left Arrow** and **Right Arrow** step through the motor areas. **Up Arrow** and **Down Arrow** change the vertical look angle. In the eye view, this input also moves the selected arm at the shoulder or the selected leg at the hip. Press **4** and then **Up Arrow** to test that response on the right arm.
 
-The scrollable information card accepts focus with **Tab**. While the card has focus, the vertical arrows scroll its text. Selecting the canvas returns the keyboard to the scene. To carry the mirror body with the keyboard, use the arrows to place the aiming mark on its head or trunk and hold **Space**. Release it to finish the hold.
+Press **Tab** until the region information card has a focus outline. While it has focus, the vertical arrows scroll the text and **R** cycles from the short card to more detail, then hidden, then back to the short card. Entering the card releases held gameplay input. Select the canvas to resume keyboard aiming. To carry the mirror body, place the aiming mark on its head or trunk and hold **Space**. Release it to finish the hold.
+
+The first-person start adds 0.82 m of backward displacement along the initial line of sight. The lens stays fixed during a reach. A deliberate turn can put a limb outside the frame, and an expanded card can obscure it. In small landscape windows the default region card has a lower, scrollable layout. In portrait, the drag hint is placed below the measured tutorial and status panels when it fits above the aiming mark. Otherwise the lower placement is used.
 
 Press **E** for the outside view. When the layout has room, the limb selector and hint move to the side of the simulated head and trunk. On narrower screens their position depends on the space left by the information cards. The camera position stays under player control.
 
-[Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-body-81-2026-11-28/NeuroSurge-Lite.zip)
+[Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-body81-reach-view-2026-11-28/NeuroSurge-Lite.zip)
 
 ## Input and movement
 

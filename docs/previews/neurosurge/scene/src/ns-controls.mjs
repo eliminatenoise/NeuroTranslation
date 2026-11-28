@@ -1060,8 +1060,8 @@ function isPageControl(el) {
   return Boolean(el?.isContentEditable || el?.closest?.('button, input, select, textarea, summary, a[href]'));
 }
 
-function insideMovementPanel(el) {
-  return Boolean(el?.closest?.('#ns-motion-camera, .joint-overlay'));
+function insideGamePanel(el) {
+  return Boolean(el?.closest?.('#ns-motion-camera, .joint-overlay, [data-ns-info]'));
 }
 
 /** Game toolbar buttons also accept the shortcuts that open the command and camera panels. */
@@ -1069,7 +1069,7 @@ export function isPanelShortcut(event, code) {
   if (event.code !== code || event.defaultPrevented || event.repeat || event.isComposing ||
       event.ctrlKey || event.metaKey || event.altKey) return false;
   const target = event.target;
-  if (target?.isContentEditable || target?.closest?.('dialog[open]') || insideMovementPanel(target)) return false;
+  if (target?.isContentEditable || target?.closest?.('dialog[open]') || insideGamePanel(target)) return false;
   return !isPageControl(target) || Boolean(target?.closest?.('[data-ns-panel-shortcuts] button:not(:disabled)'));
 }
 
@@ -1082,7 +1082,8 @@ export function isPanelShortcut(event, code) {
 
 
 export function keyStaysWithControl(el, code) {
-  if (insideMovementPanel(el)) return true;
+  if (el?.closest?.('[data-ns-info]')) return code !== DETAIL_CODE;
+  if (insideGamePanel(el)) return true;
   if (!isPageControl(el)) return false;
   if (el.isContentEditable || el.closest?.('input, select, textarea')) return true;
   if (el.closest?.('.ns-shell, dialog, [role="dialog"]')) return true;
@@ -1512,7 +1513,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
   });
   on(view, 'blur', releaseAll);
   on(doc, 'focusin', e => {
-    if (insideMovementPanel(e.target) && !insideMovementPanel(e.relatedTarget)) releaseAll(e);
+    if (insideGamePanel(e.target) && !insideGamePanel(e.relatedTarget)) releaseAll(e);
   });
   on(doc, 'visibilitychange', releaseAll);
   on(doc, 'pointerlockchange', e => {

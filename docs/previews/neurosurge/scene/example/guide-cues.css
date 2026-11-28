@@ -1,3 +1,34 @@
+/* Leave space between the default teaching cards and the hands at smaller desktop sizes.
+   All of the region text remains scrollable. Opening More detail keeps its existing layout. */
+@media (max-width: 1366px) and (min-aspect-ratio: 1/1) {
+  .ns-app[data-ns-read="read"] .ns-infopanel[data-mode="region"] {
+    top: auto; bottom: 12px; max-height: min(108px, 19vh) !important;
+    overflow: auto; pointer-events: auto; scrollbar-width: thin; overscroll-behavior: contain;
+    padding: 8px 10px;
+  }
+  .ns-app[data-ns-read="read"] .ns-infopanel-title { font-size: 16px; margin-right: 38px; }
+  .ns-app[data-ns-read="read"] .ns-infopanel-rows { margin-top: 5px; padding-top: 5px; }
+  .ns-prompt { left: 6px; top: 4px; max-width: min(292px, 47vw); font-size: 14px; line-height: 1.18; }
+  .ns-prompt-count { padding: 3px 8px; }
+  .ns-prompt-words { padding: 4px 8px 1px; }
+  .ns-prompt-skip { padding: 0 8px 4px; }
+}
+
+.ns-infopanel:focus-visible { outline: 2px solid #ffe9a8; outline-offset: 2px; }
+
+/* The short action card and the long region card share the same focused reading surface.
+   They can both scroll even when the optional detail element is closed. */
+#ns-app[data-ns-read="more"] [data-ns-info],
+#ns-app [data-ns-info]:focus-within {
+  overflow-y: auto !important; overflow-x: hidden; pointer-events: auto;
+  overscroll-behavior: contain; scrollbar-width: thin;
+}
+
+/* Give the instruction its own upper row in portrait. The drag hint sits beneath this measured card. */
+@media (max-aspect-ratio: 999/1000) {
+  .ns-prompt { max-width: min(370px, calc(100vw - 16px)); }
+}
+
 /* This layer is a visual annotation. All pointer, touch and keyboard actions go to the game. */
 .ns-guide-cues{position:absolute;inset:0;overflow:hidden;z-index:2}
 .ns-guide-cues,.ns-guide-cues *,.ns-guide-sr{pointer-events:none;user-select:none}

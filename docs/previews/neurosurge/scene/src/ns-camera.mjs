@@ -649,11 +649,13 @@ const checkState = s => { if (!s || s.kind !== 'ns-camera-state') fail('camera_s
 export function createPlayerCamera(eye, initialLook) {
   const startingEye = vec3(eye, 'starting eye position');
   const stand = eyeDolly(initialLook);
-  // Leave room to raise either arm at normal desktop aspect ratios without changing the lens during play.
+  // The horizontal offset clears the body at rest. The additional 0.82 m along the starting sightline
+  // leaves room for the outstretched hands in a narrow window without lifting them above the neutral aim.
   const backM = 0.46;
   const forward = gazeDirection(initialLook.yaw, 0);
+  const sight = gazeDirection(initialLook.yaw, initialLook.pitch);
   return Object.freeze({
-    first: Object.freeze(startingEye.map((value, i) => value + stand.offset[i] - backM * forward[i])),
+    first: Object.freeze(startingEye.map((value, i) => value + stand.offset[i] - backM * forward[i] - 0.82 * sight[i])),
     centre: Object.freeze(followCentre(startingEye, LEVEL_AHEAD)),
     distanceM: THIRD_PERSON.distanceM
   });

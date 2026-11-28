@@ -8,11 +8,13 @@ Choose **Play Full** or **Play Lite**. Both let you explore the same virtual bod
 
 Select **Resume** if the pause menu is open. Press **Enter** to advance through the opening instructions. With the picture selected, press **Right Arrow** to aim at the next coloured area of the brain. **Left Arrow** steps in the other direction. Read the body-part name at the aiming mark and watch that part of the virtual body move.
 
-Press **4** to choose the right arm. In the view through the character’s eyes, press **Up Arrow** to look up and move the arm at the shoulder. Press **Down Arrow** to look down again. The mirror shows the movement from another angle. The colours and movements come from the simulation.
+Select the picture and press **4** to choose the right arm. **Up Arrow** turns the view upward and raises the arm at the shoulder. **Down Arrow** turns it downward. Watch the hand and its reflection. This version starts the view 82 centimetres farther back along the direction you first face. The starting distance gives the hands more room on screen. Reaching keeps the lens fixed. You can still turn far enough to move a hand or foot out of sight, and an expanded card can cover it.
 
-Press **Tab** to reach the information card when it has more text than fits. Use **Up Arrow** and **Down Arrow** to read it. Select the picture again to use the arrows to aim. You can also drag on an empty part of the picture to look around. On a touchscreen, tap a coloured motor area to activate it.
+Press **Tab** until the information card has a focus outline. Use **Up Arrow** and **Down Arrow** to scroll its text. Press **R** for more detail, press it again to hide the cards, and once more to return to the short cards. Moving focus into the card releases a held movement key. Select the picture to steer the body again. You can also drag an empty part of the picture to look around, or tap a coloured motor area on a touchscreen.
 
-[Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-body-81-2026-11-28/NeuroSurge-Lite.zip)
+In a small landscape window, the short card for a brain region sits near the bottom and its text scrolls. In a tall window, the drag hint fits below the tutorial when there is room above the aiming mark. If there is less room, the hint uses the lower part of the display.
+
+[Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-body81-reach-view-2026-11-28/NeuroSurge-Lite.zip)
 
 ## Move a body part from the brain
 
