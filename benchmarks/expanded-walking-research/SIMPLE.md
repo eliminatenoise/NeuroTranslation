@@ -1,5 +1,7 @@
 # Forecasting force underfoot
 
+A separate CPU timing trial measured how long an invented two-plate forecast took to return. All 176 measured requests took longer than the 100 ms forecast window. [Forecast return times](forecast-timing/SIMPLE.md)
+
 The treadmill test compares all five pass counts on new people using force readings alone. [Treadmill test](cross-lab-force/SIMPLE.md)
 
 The [five-pass-count comparison](pass-count/SIMPLE.md) adds tests at one, seven and nine passes on the same recordings.

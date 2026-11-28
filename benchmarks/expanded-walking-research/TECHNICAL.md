@@ -1,5 +1,7 @@
 # Research Edition walking force evaluation
 
+A separate CPU timing trial measured how long an invented two-plate forecast took to return. All 176 measured requests took longer than the 100 ms forecast window. [Forecast return times](forecast-timing/TECHNICAL.md)
+
 The treadmill test compares all five pass counts on new people using force readings alone. [Treadmill test](cross-lab-force/TECHNICAL.md)
 
 The [inference depth comparison](pass-count/TECHNICAL.md) reports five pass counts and timing for their shared computation.
