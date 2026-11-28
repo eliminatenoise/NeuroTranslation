@@ -1,0 +1,29 @@
+# Walking-force forecasts with two, three or four passes
+
+On nine recorded walks, NeuroTranslate 0.1 made its closest force forecasts when it went through the middle part of the model three times. The average miss was **2.895 newton-seconds** at three passes, **3.036** at two, and **3.035** at four. A rule that held force steady at its average over the last 20 milliseconds missed by **3.237**. Every method predicted the same moments in the same walks.
+
+## What the model predicted
+
+As a person walked, two plates in the floor measured how hard the ground pushed upward. Sensors on the skin also recorded electrical activity from six muscles. The model received the previous fifth of a second of readings. It had to forecast what each plate would measure over the next tenth of a second.
+
+One forecast was the *impulse*. This combines the strength of a force with the time it acts. A steady upward force of 100 newtons over a tenth of a second produces an impulse of 10 newton-seconds. The researchers could calculate the actual impulse from the later plate readings and measure how far each forecast missed. The simple comparison took the average force over the final 20 milliseconds and assumed it would continue for the next tenth of a second. For the other forecast, its estimate of the chance of new loading came from the frequency of new loads during training.
+
+The other forecast was the chance that the plate would start taking a new load. Here the answer was either yes or no. The score measured how close the forecast probability was to that outcome. For example, giving an event a 20% chance when it did not happen gives an error score of 0.04. Smaller scores are better.
+
+## What changed between runs
+
+The walking model had learned from 36 walks by 12 people. During training, a middle set of layers processed each input three times. We used those same saved weights and let the middle layers process the very same readings twice, three times or four times. The model has 24 main layers. The middle 12 are the ones that repeat. During the original walking training, it adjusted about 28.7 million numerical settings, including how measurements enter the model and how the repeated layers use them. Two formats were used to store those settings. The same stored numbers were used for each forecast in this comparison. Repeating three passes also checked the software. All 432 forecasts of each outcome at three passes exactly reproduced the saved predictions from the earlier study.
+
+Six people were assigned to the comparison. Three had recordings with all six required muscle signals. They supplied three walks each. We reused the same 216 times from the earlier study of those nine walks. Each time contributed two forecasts, one for each plate. We could check the impulse on all 432 plate readings and the loading outcome on 427. Only 18 of the 427 forecasts with a loading answer covered the start of a new load. Several forecasts could cover the same start. Those 18 answers represented eight separate starts.
+
+To calculate the average miss, we first averaged the available plate errors at a given time. Then we averaged the times within each walk, the walks for each person, and finally the three people. This way, a person with more usable plate readings still counted just as much as either of the other two. We also repeated the force calculation using just the 427 readings for which both answers were available. Three passes again led the two other settings. Its average force miss was 2.710 newton-seconds on that smaller set.
+
+## What the scores show
+
+For impulse, three passes beat two for all three people. Four passes beat three for one person, but the larger errors for the other two outweighed that gain. For the chance of new loading, the average scores were **0.03881** at two passes, **0.03863** at three, and **0.03866** at four. These are small differences. An earlier comparison on the same walks found that five passes gave a slightly smaller loading error still. The compact 0.0 model also had a smaller loading error in that earlier study, alongside a much larger impulse error.
+
+The computer took just over five minutes to load the model and calculate the three sets of forecasts. About a minute of that time went into loading the model. Once loaded, the computer typically took just over one second to produce all three sets of forecasts for one two-plate reading. The three settings shared the early steps of the calculation. At the first, middle and last recorded times, we also ran each setting separately and got exactly the same answers. The run used about 50 GiB of memory at its peak. These were calculations on saved recordings. Measuring how quickly the same system could receive signals and respond during a live step would require a separate test.
+
+The nine walks had already been used to study other pass counts. The separate group of people reserved for the final test stayed out of this comparison. We chose the two new settings and saved their forecasts before reopening those walks to score them. A separate test on eight treadmill walkers illustrates why the setting matters. That study used only floor force. On 384 plate readings, extending the recent force trend missed by 9.64 newton-seconds on average. The best model setting for impulse missed by 10.69. These larger numbers apply to the treadmill study, with different walkers and inputs. One pass gave the smallest loading error. That earlier treadmill test did not include two or four passes.
+
+The walking example still uses three passes. This study identifies a useful setting for a particular model and recording setup. It leaves open how many passes will suit the next person or a different movement. [Earlier pass-count comparison](../SIMPLE.md) · [Treadmill comparison](../../cross-lab-force/SIMPLE.md) · [Technical report](TECHNICAL.md) · [Aggregate scores](results.json)

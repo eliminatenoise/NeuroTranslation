@@ -1,5 +1,7 @@
 # Inference depth with frozen Research Edition weights
 
+A follow-up tests two and four inference passes alongside a repeated three-pass control on the same forecasts. [Results and methods](near-three/TECHNICAL.md)
+
 We varied the number of passes through the middle 12 of 24 decoder layers while holding the 547-update native-recurrence checkpoint fixed. Fitting used three passes and 9,586 rows from 12 people. The comparison uses the same three qualifying people from the six-person validation assignment. There are nine walks and 216 same-tick force-plate pairs. The reserved final test was unopened. [Original recordings](https://doi.org/10.6084/m9.figshare.24192480.v1)
 
 Each forecast uses ten 20 ms history bins of six named muscle voltages and signed vertical plate force. It estimates signed force impulse and the probability of new loading over 100 ms. The reference extends the latest force and uses the fitted event prior. There are 432 impulse rows and 427 rows with a usable event target. The 18 positive rows represent eight distinct confirmed onsets. We averaged errors within each person before weighting people equally. Brier error is squared probability error. The impulse measure is mean absolute error.

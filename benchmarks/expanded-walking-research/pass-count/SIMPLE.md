@@ -1,5 +1,7 @@
 # Five pass counts for the Research Edition
 
+A follow-up on the same nine walks compares two, three and four passes. [Read the follow-up](near-three/SIMPLE.md)
+
 Three passes gave the lowest error when forecasting how much force would build up on the floor over the next tenth of a second. Five passes did slightly better at estimating the chance that a plate would start taking load. Both results come from the same nine recorded walks.
 
 ## What a pass does
