@@ -26,7 +26,7 @@ This folder holds no recording, no extracted array, no forecast and no target. I
 
 ## Published checkpoints that were scored
 
-The results also score models that the project had published earlier ([protocol](PROTOCOL.md) section 8). They were scored as published. None was refitted here and none is redistributed in this folder. Scoring a checkpoint is not training on its sources, and none of the material below enters the ladder's fits.
+The results also score models that the project had published earlier ([protocol](PROTOCOL.md) section 8). The scored files are the published ones; no refit replaced them, and none is redistributed in this folder. Two of them were also refitted, and the refits replaced no scored file. A gate before the run refitted the F4 baselines and reproduced the published file array for array ([protocol](PROTOCOL.md) section 13). The ladder's M3 at 12 people is this track's own refit of the model that F2 exports; it is scored as M3, beside F2. Scoring a checkpoint is not training on its sources: the sources named below that lie outside the Van Criekinge healthy cohort enter none of the ladder's fits.
 
 - **F1**, the three-pass checkpoint of the [walking neural-scaling benchmark](../../benchmarks/walking-neural-scaling/README.md), was fitted on the 12 earlier fit people and on 8 people recorded in İzmir. The İzmir data are under CC BY 4.0 (`10.48623/aperta.286865`).
 - **F2** (the same benchmark's tree models as ONNX files) and **F4** (the linear [force baselines](../force-baselines/README.md)) were fitted on the 12 earlier fit people of the Van Criekinge healthy cohort only.

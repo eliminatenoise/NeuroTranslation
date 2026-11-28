@@ -47,12 +47,12 @@ The numbers come from two files in this folder. [RESULTS.json](RESULTS.json) was
 - **Evaluation group**: the 20 people on whom the scores are measured. Their recordings were downloaded only after every model had been fitted.
 - **Training pool**: the 35 people who were added to the 12 starting people on the higher rungs.
 - **Control**: a simple forecast that needs no fitting on the pool, used as a reference point.
-- **Frozen checkpoint**: a model file the project had already published. It is scored exactly as it is and never refitted.
+- **Frozen checkpoint**: a model file the project had already published. It is scored exactly as it is; no refit replaces it.
 - **Secondary arm**: an extra comparison that helps to explain the main result. It is reported with its uncertainty but cannot change a label.
 - **95% interval**: a range that shows how much a figure could vary by chance with a different sample of people. Here it comes from a bootstrap.
 - **Bootstrap**: a way to measure that uncertainty. The 20 evaluation people are drawn again at random 10,000 times, each time 20 people with repeats allowed, and the figure is recomputed each time. The 95% interval holds the middle 95% of the 10,000 values.
 - **p-value**: a number between 0 and 1 that is small when a change of this size would be unlikely to arise by chance alone.
-- **Holm correction**: an adjustment for running three tests at once. The smallest of the three p-values is multiplied by 3, the next by 2 and the largest by 1.
+- **Holm correction**: an adjustment for running three tests at once. The smallest of the three p-values is multiplied by 3, the next by 2 and the largest by 1, and no adjusted value may be smaller than the one before it.
 - **Label**: one of four verdicts fixed in advance: HELPED, HARMED, PRACTICALLY NO CHANGE or INCONCLUSIVE (section 3).
 - **Hash (sha256)**: a fingerprint of a file, written as 64 letters and digits. Any change to the file gives a different fingerprint.
 - **Commit and push**: a commit is one saved version of the project's files, made on the project's own computer and named by a short code such as `3f2bae7`. Pushing copies commits to the public repository, where anyone can see them, so a pushed step has a public time.
@@ -201,7 +201,7 @@ Change from 12 to 47 people, all issue times, in N·s. "People with lower error"
 
 All three families are labelled HELPED.
 
-- **The p-values.** In none of the 10,000 redraws was the change zero or positive. Each p-value is therefore the smallest this bootstrap can give, 2 divided by 10,001, shown as 0.0002. Multiplied by 3 for the Holm correction it is 0.0006.
+- **The p-values.** In none of the 10,000 redraws was the change zero or positive. Each p-value is therefore the smallest this bootstrap can give, 2 divided by 10,001, shown as 0.0002. The Holm correction multiplies the first of the three by 3, which gives 0.0006. The other two would be multiplied by 2 and by 1; they are raised to 0.0006 as well, because no adjusted value may be smaller than the one before it.
 - **The size.** The rule asks that the estimated relative change be −3% or better. Beyond what the rule asks, each 95% interval of the relative change lies wholly below −3%.
 - **The people.** The error fell for all 20 evaluation people with M1 and with M2. With M3 it fell for 18 of the 20 and rose for two, SUBJ059 and SUBJ078.
 - **The compact model.** The protocol allowed the statement that the NeuroTranslate compact model gains from more people only if M1 was labelled HELPED. It was; RESULTS.json records this as `compact_model_claim_allowed` set to true. The statement holds for this setting: these 12 fit people, this pool, this laboratory and task, and a fixed 900 updates.
@@ -416,7 +416,7 @@ F2 is the ONNX export of the model that M3 refits at 12 people, so the two shoul
 
 ### F4 penalties chosen on the training pool
 
-The choices, from the four values 0.001, 0.01, 0.1 and 1, are sealed in FIT-COMPLETE.json. For the impulse: 1 for EMG only and 0.001 for every other version. For the new load: 1 for EMG only, 0.001 for force only and 1 for force and EMG. On the rows with an earlier EMG window (section 7): 1 for force and EMG and 0.1 for force and earlier EMG.
+The choices, from the four values 0.001, 0.01, 0.1 and 1, are sealed in FIT-COMPLETE.json. For the impulse: 1 for EMG only and 0.001 for every other version, including both versions on the rows with an earlier EMG window (section 7). For the new load: 1 for EMG only, 0.001 for force only and 1 for force and EMG. For the new load on the rows with an earlier EMG window: 1 for force and EMG and 0.1 for force and earlier EMG.
 
 ## 7. Secondary arms
 
@@ -510,7 +510,7 @@ The fixed recipe of M1 is therefore held back by its 900 updates and by its widt
 
 ### A fixed number of rows (S4)
 
-With 9,586 rows at every rung, M1 and M2 keep most of their gain from 12 to 47 people: −4.18% (−5.47% to −2.99%) and −3.28% (−3.85% to −2.70%). For the trees the gain is not detectable (−2.15%, with an interval from −5.85% to +1.40%), and S4-M3 falls further behind M3 at each rung, from +3.14% at 18 people to +10.04% at 47. So M1 and M2 gain from having more different people even at an equal number of rows, while the gain of the trees needs the added rows.
+With 9,586 rows at every rung, M1 and M2 keep most of their gain from 12 to 47 people: −4.18% (−5.47% to −2.99%) and −3.28% (−3.85% to −2.70%). For the trees the gain is not detectable (−2.15%, with an interval from −5.85% to +1.40%), and S4-M3 falls further behind M3 at each rung, from +3.14% at 18 people to +10.04% at 47. At an equal number of rows M1 and M2 still gain in this setting (uncorrected intervals, no label); for the trees no gain is detectable at an equal number of rows.
 
 ### The contribution of EMG (S2)
 
@@ -577,7 +577,7 @@ Brier score:
 
 No change can be detected for M1 or M2 when the EMG window ends 500 ms earlier. The protocol treats this as a check of timing and not as a removal of muscle information, because the rhythm of walking can still be read from the earlier window.
 
-The F4 version with the earlier window has a lower impulse error than its version with EMG up to the issue time (−3.46%, −6.10% to −1.04%). Neither version is below persistence on these rows. The two F4 versions against persistence and against the families on the same rows, first for the impulse error and then for the Brier score:
+The F4 version with the earlier window has a lower impulse error than its version with EMG up to the issue time (−3.46%, −6.10% to −1.04%). In impulse error neither version is below persistence on these rows. In Brier score the version with EMG up to the issue time is 0.93% below C1 (−1.29% to −0.61%), and the version with the earlier window cannot be told apart from it (−1.94%, −4.32% to +0.56%). The two F4 versions against persistence and against the families on the same rows, first for the impulse error and then for the Brier score:
 
 | Arm | Against C1 | Against M1 at N = 12 | Against M1 at N = 47 | Against M2 at N = 12 | Against M2 at N = 47 | Against M3 at N = 12 | Against M3 at N = 47 |
 |---|---|---|---|---|---|---|---|
@@ -717,7 +717,7 @@ M1's mean forecast never exceeds 0.2, and its few rows above 0.1 have no more ne
 
 ### Rankings
 
-Ranking by impulse error on all issue times, with the fitted families at each rung. The ranking lists the families, the controls, the frozen checkpoints and C4. S1 and S3, which have lower errors than F1, are not part of it:
+Ranking by impulse error on all issue times, with the fitted families at each rung. The ranking lists the families, the controls, the frozen checkpoints and C4. S1 and S3 are not part of it; S1 has a lower impulse error than F1 from 36 people on and S3 from 18 people on (at 47 people 1.5964 and 1.5484 N·s against 1.8099):
 
 - **N = 12:** F1 1.8099; F2 2.1653; M3 2.1653; M1 2.3187; F3, gate, trainable 3.3460; F3, gate, frozen 3.5385; C1, persistence 3.5604; C4 3.5625; M2 3.6196; F4, force only 3.6513; F4, force and EMG 3.8146; C3, linear trend 3.9467; F3, expanded, trainable 10.0999; C2, unconditional 10.6517; F3, expanded, frozen 10.6723; F4, EMG only 17.4080.
 - **N = 18:** F1 1.8099; M3 2.0826; F2 2.1653; M1 2.2652; F3, gate, trainable 3.3460; F3, gate, frozen 3.5385; M2 3.5472; C1, persistence 3.5604; F4, force only 3.6513; F4, force and EMG 3.8146; C3, linear trend 3.9467; F3, expanded, trainable 10.0999; C2, unconditional 10.6517; F3, expanded, frozen 10.6723; F4, EMG only 17.4080.
@@ -741,7 +741,7 @@ Ranking by impulse error on the 24-position schedule:
 - **N = 36:** F1 1.6639; M3 1.8298; M1 1.9971; F2 2.0409; F3, gate, trainable 3.1320; F3, gate, frozen 3.2318; C1, persistence 3.2381; M2 3.2510; F4, force only 3.4698; F4, force and EMG 3.6515; C3, linear trend 3.7574; F3, expanded, trainable 9.1315; C2, unconditional 9.6248; F3, expanded, frozen 9.6701; F4, EMG only 16.8181.
 - **N = 47:** F1 1.6639; M3 1.8088; M1 1.9944; F2 2.0409; F3, gate, trainable 3.1320; M2 3.2307; F3, gate, frozen 3.2318; C1, persistence 3.2381; C4 3.2393; F4, force only 3.4698; F4, force and EMG 3.6515; C3, linear trend 3.7574; F3, expanded, trainable 9.1315; C2, unconditional 9.6248; F3, expanded, frozen 9.6701; F4, EMG only 16.8181.
 
-The order of the three families is M3, M1, M2 at every rung, on both sets of rows. On all issue times M2 passes persistence between 12 and 18 people. On the 24-position schedule it passes persistence only at 47 people.
+By impulse error the order of the three families is M3, M1, M2 at every rung, on both sets of rows. By Brier score on all issue times M3 is first at every rung; M1 is ahead of M2 at 12 people and M2 is ahead of M1 from 18 people on, each time by less than 0.0001. In impulse error M2 passes persistence between 12 and 18 people on all issue times. On the 24-position schedule it passes persistence only at 47 people.
 
 ## 10. Limits
 
@@ -761,12 +761,12 @@ The order of the three families is M3, M1, M2 at every rung, on both sets of row
 
 Custody means who could read which file, and when. The protocol's safeguard is an order of events: the fitted models are sealed before the evaluation recordings are downloaded, the forecasts are sealed before they are scored, and the trend prediction is sealed before the largest rung is scored. Each of the protocol's seals (C1 to C5) was committed before the stage that depends on it began. [README-CODE.md](README-CODE.md) and [README-CODE-SIMPLE.md](README-CODE-SIMPLE.md) give the commands and the records.
 
-Two kinds of time appear below. A commit time is the author time written in the commit record on the project's computer, that is, the time at which the commit was first made. A push time is the time at which the commit was copied to the public repository, taken from this computer's record of each push.
+Two kinds of time appear below. A commit time is the author time written in the commit record on the project's computer, that is, the time at which the commit was first made. A push time is the time at which the commit was copied to the public repository, taken from this computer's record of each push. Three commits also carry a later second time, the committer time, from a step made after D1; "The header check before the allocation" below sets this out.
 
 | Event | Time (UTC) | Record |
 | --- | --- | --- |
 | C1: protocol, pool and hash orders pushed | 11:33:22 | commit `3f2bae7` |
-| Fixes from the run-code review committed | 11:54:47 | [DECISIONS.md](DECISIONS.md) items 13 to 17 |
+| Fixes from the run-code review committed | 11:54:47 | [DECISIONS.md](DECISIONS.md) items 13 to 17, commit `f5b7103` |
 | D1: header probe | 11:55:07 to 12:03:58 | `QUALIFICATION.json`, `receipts/D1-requests.jsonl`, `receipts/D1-walks.jsonl` |
 | C2: allocation committed; texts corrected after its review; both pushed | 12:04:59, 12:53:48, 13:04:52 | `ALLOCATION.json`, commits `8a8fab5` and `0fc1bb7` |
 | D2: training pool downloaded | 13:08:41 to 13:14:17 | `receipts/D2-RECEIPT.json` |
@@ -808,7 +808,9 @@ The fit seal, with the F4 penalties and P1, was public at 14:03:24, before the f
 
 D1 read header bytes of people who later became evaluation people. The hash order that assigns the groups was fixed and published at C1, before D1, so the outcome of the check could not steer who went into which group.
 
-D1 ran on fixes for the review of the run code. They were committed 20 s before D1 began and were first reviewed at C2. The two fixes that D1 uses ([DECISIONS.md](DECISIONS.md) items 13 and 14) change only what happens when a request has to be repeated or the stage has to halt, and neither happened.
+D1 ran on fixes for the review of the run code. They were first committed at 11:54:47, 20 s before D1 began, and were first reviewed at C2. The two fixes that D1 uses ([DECISIONS.md](DECISIONS.md) items 13 and 14) change only what happens when a request has to be repeated or the stage has to halt, and neither happened.
+
+A commit record holds two times: the author time, when the change was first committed, and the committer time, when the commit was last rewritten. The time 11:54:47 is the author time of commit `f5b7103`. That commit, the run-code commit before it (`f28ed67`) and the allocation commit after it (`8a8fab5`) also carry a committer time of 12:05:32, after D1 ended at 12:03:58. At 12:05:32 the branch was moved onto newer commits of the main branch (a rebase); none of those commits changes a file of this folder. The rebase gave the three commits their present ids and that committer time, and left their author times and this folder's content unchanged. The commit as first made at 11:54:47 is recorded only in this computer's own branch log, and it was not pushed before D1. That the fixes came before D1 therefore rests on local records and not on a public time.
 
 ### What has never been read
 
@@ -816,13 +818,14 @@ This experiment has read no recording byte of the 12 test people and the 6 valid
 
 ### Recomputation
 
-The program `replay.py` recomputed 300 per-person averages with plain loops (largest difference 7.9e-14, that is, 0.000000000000079) and 40 target rows directly from the decoded walks (difference 0). Separate private recomputations of S-b and S-c agreed to 6.7e-15 and 5.3e-15. A second independent recomputation, made before this text was written, compared 3,318 numbers of RESULTS.json (largest difference 2.5e-10). The records of these recomputations are private.
+Section 14 of the protocol asks for an independent recomputation (a replay) of every average and of sample rows from each plate. The program `replay.py` in this folder covers the main impulse averages and the sample rows. With plain loops it recomputed each evaluation person's impulse error for M1, M2 and M3 at the five rungs: 300 numbers (largest difference 7.9e-14, that is, 0.000000000000079). It also recomputed 40 target rows, 20 per plate, directly from the decoded walks (difference 0). The other averages of S-b and S-c were recomputed by separate private checks, which agreed to 6.7e-15 and 5.3e-15. A second independent recomputation, made before this text was written, compared 3,318 numbers of RESULTS.json (largest difference 2.5e-10). Those checks are not code in this folder, and the records of these recomputations are private.
 
 ### Differences from the plan
 
 - The fits ran on 8 single-thread lanes on CPUs 24 to 31, inside the protocol's limit of 12 lanes.
 - The private folder holds 1,005,701,390 bytes, above the protocol's estimate of under 0.7 GB ([DECISIONS.md](DECISIONS.md) item 18). This concerns storage only.
 - The protocol's time plan assumed 28 November. Every stage up to the final scoring (S-c), and the supplement, ran on 27 November 2026 (UTC).
+- The replay program in this folder covers the main impulse averages and 40 target rows, where section 14 of the protocol asks for every average. The other averages were recomputed by private checks (see Recomputation above).
 - F5 was not issued.
 
 ## 12. What is published
