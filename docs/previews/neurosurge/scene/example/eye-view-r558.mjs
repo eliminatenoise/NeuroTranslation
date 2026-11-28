@@ -23,43 +23,19 @@ import { packKeyOfUrl } from '../src/ns-pack.mjs';
 
 
 
-// 11 November and the 120 whose edge stretching the user called absurd.
+// The wider field of view stretched the edges.
 
 
-// across at 16:9). With the look starting 41 degrees below level the picture now reaches from 17 degrees above level
-// down to 99 below: the collar bones lie inside its lower edge with both shoulders in the lower corners, and the
-// chest, stomach and pelvis above them. The price: things in the middle are drawn about a seventh smaller and the
-// corners are stretched more (120 was called absurd on 17 November; 116 stays under it).
-// 18 November 2026, after a check (the chest filled the lower third of that picture, the stomach was a narrow band
-// and the limbs were thin): 116 -> 100. The camera now stands higher and further back (ns-camera EYE_DOLLY, with the
-// neck shade of ns-scene-three NECK_SHADE), where both shoulders, the collar bones, the chest, the stomach and the
-// pelvis fit inside 100 degrees; things in the middle of the picture are drawn about a third larger than at 116 and
-// the corners are stretched far less.
+// The field of view is measured in the vertical plane.
 
 
-// of view"): 100 -> 54. The camera stands further back behind the eye (ns-camera EYE_DOLLY: 30 cm back on the line of
-// sight, 10 cm up along the head), so this longer lens flattens depth: your shins, feet, the mirror body and the brain
-// are drawn far larger for their distance and your chest smaller. Measured at the start, 1600x900 (middle widths):
-// thigh 65 -> 144 px, shin 25 -> 55, right upper arm 61 -> 118, forearm 42 -> 86. Across, the picture is 85 degrees.
+// The field of view narrows from 100 to 54 degrees.
 const EYE_FOV_Y_DEG = 54;
 
-// "You will naturally be looking a little downwards and that is where the motor strip should naturally be"): the game
-// starts with the look a little below level, as someone leaning back on a sofa looks, and the brain starts there too,
-// over the body that lies out below your eyes, so the limbs an area moves stay on screen while you aim at it.
+// The initial view points slightly down toward the motor strip.
 
 
-// head bowed 12 degrees, the eyes lowered the rest: ns-body POSTURE_EYES). The brain stays where it was (20 below
-// level): the mirror body is a reflection that stands where the body puts it, just under the motor strip, and your
-// own feet come up to it, so the brain cannot come lower without the mirror body or your feet covering the leg
-// areas. From the start look the arm, leg and trunk areas are inside the top of the picture and the face areas are
-// just above it. (Tried: 35 with the brain 8 lower: the mirror body then stood in front of the leg areas; 30: the
-// crosshair started on the mirror body's lower arrow, so the first click tilted it instead of taking the pointer.)
-// 18 November 2026, third pass (a check: at 34 the upper part of the strip was cut off by the top edge and the first
-// prompt lay over it): the look now starts 36 degrees below level (the head bowed 14, the eyes 22) and the brain is
-// drawn smaller at the start (ns-app BRAIN_START_MOTOR_FRAC), so the WHOLE motor strip, face areas included, is inside
-// the picture above your own legs, and your arms, belly and chest are seen around and under it. The brain still
-// stands 20 below level, on the mirror body's head, for the reason given above; the crosshair therefore starts on
-// your own knees, about 22 degrees under the strip's lower edge, not on the strip itself.
+// The initial viewing angle combines head pitch with eye position.
 
 
 // can be to, the motor strip, and the strip should be large again). The camera now stands a little behind the eye on
@@ -104,23 +80,12 @@ const EYE_FOV_Y_DEG = 54;
 // (it was 290 between your knees).
 
 
-// an N. Lowercase n"; "let's have the mirror body so close that the toes are almost touching and they're level"). The
-// look and the brain's placement are unchanged (25.5 and 13 degrees below level). What changed is in the modules:
-// the brain is drawn turned half a turn (ns-brain BRAIN_VIEW.spinDeg 180: front down, the brain's right half on the
-// left, the strip an n with the leg areas at its top), the n's top is pinned under the top edge and its lower ends
-// stay above your toes (ns-app BRAIN_START, BRAIN_FLOOR), and the mirror body is the literal reflection, toe to toe
-// with you, sitting inside the n's arch (ns-mirror MIRROR_NEAR). The brain's front with its two eyeballs
-// (ns-brain-eyes) is then behind your own body in this picture; ns-app BRAIN_START.keepEyes says why and what the
-// other choice costs.
+// The mirror feet are close and aligned.
 
 
 
 
-// halves of the brain are drawn 12 mm further apart (ns-brain-part HEMI_GAP), and the strip's top no longer stands
-// just under the top edge: it stands where the middle of the two leg areas, the inner ends of the n, is level with the
-// mirror body's head (ns-app BRAIN_START, brainStartCeilNdc), so the head is IN THE GAP and the two halves run outward
-// and down from either side of it. The floor (your own fingertips) did not move, so the brain is drawn 0.88 of the
-// size it had on a 16:9 window. assertConfiguredBoot below states the new rule.
+// The hemispheres use the configured separation.
 const START_LOOK_PITCH_DEG = -25.5, BRAIN_START_PITCH_DEG = -13;
 const viewGraph = Object.freeze({ reference: 'eye', initialLook: Object.freeze({ yaw: 0, pitch: START_LOOK_PITCH_DEG * DEG }), fovYDeg: EYE_FOV_Y_DEG, initialBrainPlacement: Object.freeze({ yaw: 0, pitch: BRAIN_START_PITCH_DEG * DEG }) });
 // Fixed explicit constructor placement above; no raw coordinate or query overrides.

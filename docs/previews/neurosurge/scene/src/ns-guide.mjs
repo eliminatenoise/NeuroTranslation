@@ -44,7 +44,7 @@
 //
 // State is plain JSON (serialisable); every function returns a NEW state, or the SAME object when nothing changed.
 //
-// Round 5 (R5-text, 2026-11-09; the user's overhaul R21-R23): three more goals, each tied to a round-5 feature and
+// Round 5 (R5-text, 2026-11-09; the interface update ): three more goals, each tied to a round-5 feature and
 // switched on only when the build has that feature (createGuide / guideFromStorage / restartGuide `features`), so a
 // player is never asked for something the game cannot do:
 //   glow (feature glow, D17)          after otherPart: switch an area on WHILE this line shows and see its glow drawn.
@@ -102,12 +102,7 @@ export const GUIDE_ALL_GOAL_IDS = Object.freeze(['leftArmArea', 'numberKey', 'ot
 
 
 
-// (19 November 2026, later the same day: the owner took the numbered lists away, "The number overview is very confusing
-// and creates feedback delay", so the step that held a number key gave way to the limb drag. 'holdPart' stays a known
-// id, so progress saved with it still loads.)
-// (19 November 2026, later again: the owner's limb keys, "you can now switch between which of the four limbs you want
-// to control ... 1 ... 2 ... 3 ... 4": the choice of the limb and the keys that move it come right after the first
-// press, before the drags: 'chooseLimb' is new, 'moveHand' moved up.)
+// The tutorial introduces the limb-selection keys.
 export const TUTORIAL_GOAL_IDS = Object.freeze(['lookStrip', 'pressArea', 'chooseLimb', 'aimJoint', 'moveHand', 'dragLimb', 'dragBrain', 'orbit', 'thirdPerson', 'readInfo']);
 /** Every goal id the guide knows: the older guide's twelve and the tutorial's own. */
 export const GUIDE_KNOWN_GOAL_IDS = Object.freeze([...new Set(['leftArmArea', 'numberKey', 'otherPart', 'watchBody', 'glow', 'moveHand', 'flipPalm', 'fist', 'dragBrain', 'orbit', 'thirdPerson', 'mirror', 'holdPart', ...TUTORIAL_GOAL_IDS])]);

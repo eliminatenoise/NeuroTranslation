@@ -303,12 +303,7 @@ export function createAssemblyView({ THREE, canvas, width, height, pixelRatio = 
     if (!m) { m = rawMaterial(base[kind].clone()); m.color.setHex(hex); if (name === 'ventricles') { m.roughness = 0.25; } tierBase.set(key, m); }
     return m;
   };
-  // 18 November 2026 (PKG-LOAD: the brain is built "out to the cortex and the motor strip ... then the strip's areas
-  // lighting in their colours"): once both precentral gyri are in, the picture asks the game's own modules for the
-  // motor areas on them (ns-brain segmentMotorStrips with the game's body map, ns-bodymap BODY_MOTOR_MAP, and the game's
-  // area colours, ns-colors areaColor), loaded only then, and the areas light one after another from the medial end of
-  // the strip to the Sylvian end, each in its own colour (STRIP_LIGHT.sweepS), glowing with the beat. If that fails the
-  // strip stays pink. A picture of the game's map, nothing measured.
+  // Assembly reaches the cortex before colouring the motor-strip areas.
   const STRIP_LIGHT = { sweepS: 2.6, edge: 0.06, delayS: 0.5 };
   const stripLit = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.42, metalness: 0.02, emissive: 0xffffff, emissiveIntensity: 0.3 });
   stripLit.onBeforeCompile = sh => { sh.fragmentShader = sh.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n\ttotalEmissiveRadiance *= vColor.rgb;'); };

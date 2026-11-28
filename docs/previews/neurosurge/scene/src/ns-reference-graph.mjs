@@ -1,4 +1,4 @@
-/** R266 source-derived engineering reference graph. R22 selects a110degree display FOV default; this is not a measured anatomical eye or physiological field of view. */
+/** R266 source-derived engineering reference graph. selects a110degree display FOV default; this is not a measured anatomical eye or physiological field of view. */
 import { DEG, multiply, translation, rotationY, lookRotation, rigidInverse, transformDirection, bpToWorldAxes } from './ns-math.mjs';
 const known = new WeakSet();
 const fail = m => { throw new Error('ns:reference_graph: ' + m); };
@@ -107,7 +107,7 @@ export function advanceBrainState(state, view, origin, actualTransform) {
   return { translation: shift, pivotWorld, anchor,
     initialPivotWorld: state.initialPivotWorld ? vec(state.initialPivotWorld, 'configured initial world pivot') : pivotWorld.slice() };
 }
-/** R22: translate the already-carried brain without losing its next-frame mouse anchor. */
+/** translate the already-carried brain without losing its next-frame mouse anchor. */
 export function offsetBrainState(state, view, actualTransform, movementWorld) {
   const delta = vec(movementWorld, 'brain keyboard movement world m');
   if (delta.every(v => v === 0)) return state;
@@ -204,7 +204,7 @@ export function offsetMirrorCarry(state, movementWorld) {
   if (!state || !state.mirror || !state.held || state.target !== 'mirror') fail('only a held mirror can reconcile placement');
   const m = state.mirror; let anchor = m.anchor;
   if (anchor) {
-    // R17: the held mirror body follows the whole look (turn and up / down), as the brain does (see stepObjectCarry).
+    // the held mirror body follows the whole look (turn and up / down), as the brain does (see stepObjectCarry).
     const relative = multiply(lookRotation(state.lastLook.yaw, state.lastLook.pitch), rigidInverse(lookRotation(anchor.startLook.yaw, anchor.startLook.pitch)));
     const local = transformDirection(rigidInverse(relative), delta);
     anchor = { ...anchor, pivotWorld: anchor.pivotWorld.map((x, i) => x + local[i]) };
@@ -329,14 +329,12 @@ export function stepObjectCarry(previous, { pick = null, events = [], gazeAt = 0
         // R558: the near / far limits and the sideways limit in the horizontal (yaw-only) frame; the height stays.
         const local = transformDirection(rigidInverse(groundRotation), next.map((v, i) => v - o[i]));
         let depth = -local[2]; const b = mirror.bounds;
-        // R17: a lifted mirror body keeps its level depth (the far cap never pulls it in because of its height).
+        // a lifted mirror body keeps its level depth (the far cap never pulls it in because of its height).
         const depthNow = -transformDirection(rigidInverse(groundRotation), before.map((v, i) => v - o[i]))[2];
         const far = Math.max(Math.sqrt(Math.max(0, b.farM * b.farM - local[1] * local[1])), depthNow);
         const nearLimit = CARRY_THROUGH ? -Math.max(b.nearM, far) : b.nearM; // through you and as far again behind
         const wantedDepth = depth; depth = Math.max(nearLimit, Math.min(Math.max(b.nearM, far), depth));
-        // Sideways: inside the view, and within MIRROR_CARRY.maxSideDeg of straight ahead (or no farther out than now).
-        // R558 (hunt 3): "no farther out" is an ANGLE (sideways over depth), not a sideways distance: kept as a distance,
-        // S (pulling it in) let the angle grow to the edge of the view. The depth before is floored at nearM.
+        // The mirror placement limit is an angle from straight ahead.
         const lb = transformDirection(rigidInverse(groundRotation), before.map((v, i) => v - o[i]));
         const xBefore = lb[0], depthBefore = Math.max(b.nearM, -lb[2]);
         const tan = Math.tan(viewport.fovYDeg * DEG / 2), side = Math.tan(MIRROR_CARRY.maxSideDeg * DEG);

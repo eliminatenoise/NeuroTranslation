@@ -28,10 +28,7 @@ export function tipMoveWords(label, title) {
   return out.length >= 3 ? out : l;
 }
 
-/** 18 November (MAP: "pair opposite movements visually (bend / straighten) instead of listing them as unrelated
- * rows"): whether two actions of one area are OPPOSITES (pure): both move the same first joint to different ends (the
- * body map's absolute end angles, e.g. elbow flex 145 / 0), or, for the game arm's actions (no joints of their own),
- * their arm action ids are a known pair (flexion / extension of one part, pronation / supination, ...). */
+/** Opposing movements are grouped together. */
 const ARM_PAIRS = [['flexion', 'extension'], ['pronation', 'supination'], ['opposition', 'reposition'], ['radial_deviation', 'ulnar_deviation'],
   ['spread_fingers', 'fingers_together'], ['grasp_close', 'open_hand']];
 export function oppositeActions(a, b) {
@@ -99,8 +96,7 @@ export function quietTipModel({ area = null, moves = null, actionId = null, pick
     const out = { kind: 'area', title, rows, groups, key: `a|${str(area.id)}|${rows.map(r => `${r.n}${r.now ? '*' : ''}${r.dim ? '-' : ''}`).join('')}|${groups.map(g => g.join('+')).join(',')}|${str(color)}` };
     if (str(color)) out.color = color;
     if (hint) { out.hint = hint; out.key += `|${hint}`; }
-    // 19 November (EASE: "It's not clear what the numbers do"): one short line under the choices, the first times only
-    // (the caller stops passing it once the player has pressed a few areas), and only when there is something to choose.
+    // The guide explains the number keys.
     if (str(teach) && rows.length) { out.teach = teach; out.key += '|t'; }
     return out;
   }

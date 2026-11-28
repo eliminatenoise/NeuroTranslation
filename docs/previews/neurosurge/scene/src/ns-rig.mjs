@@ -6,7 +6,7 @@
  *
  * U3a (round 2): the ulna is its own rigid segment and the radius ('forearm') turns about the forearm rotation axis
  * (radial head -> ulnar head) for the forearm_pronation DOF; three twist frames carry forearm muscle tissue between them.
- * R5-pronation (round 5, R27): this rig's forearm_pronation stays the radius' OWN turn about the ulna. The game's palm
+ * R5-pronation (round 5, ): this rig's forearm_pronation stays the radius' OWN turn about the ulna. The game's palm
  * turn is shared with the shoulder by ns-arm (ROTATION_COUPLING): ns-arm turns the whole arm outward at the shoulder
  * through the shoulderMatrix it passes to forwardKinematics and gives this rig the rest of the turn as
  * forearm_pronation, so nothing in the rig itself changed.

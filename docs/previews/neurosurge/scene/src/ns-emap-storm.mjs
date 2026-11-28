@@ -372,9 +372,7 @@ export function trafficOf(wireId, cls, o = EMAP_STORM) {
   return { hz: o.traffic.hz[0] + (o.traffic.hz[1] - o.traffic.hz[0]) * h, spacing: o.traffic.spacingMm[cls] || o.traffic.spacingMm.brain, phase: (h * 7.31) % 1, dir: h < 0.5 ? 1 : -1 };
 }
 
-/** How many times a curve (samples at a fixed rate) brightens and darkens within any one second, at most: the number
- * of its peaks (a rise and then a fall, each more than `minStep` of the curve's range) in the busiest one-second
- * window. The owner's rule is about three. Pure; for tests. */
+/** The event-rate limit is about three per second. */
 export function peaksPerSecond(samples, rateHz, minStep = 0.06) {
   let lo = Infinity, hi = -Infinity;
   for (const v of samples) { if (v < lo) lo = v; if (v > hi) hi = v; }

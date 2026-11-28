@@ -466,9 +466,7 @@ export function vesselFragmentGlsl({ pulseGlow = 0 } = {}) {
   return `\n\tdiffuseColor.rgb *= 1.0 + ${f(pulseGlow)} * nsLive.y;`;
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// The vessels of the bodies (18 November 2026, package VESSELS): "and for all other items as well"
-//
+// The display rule also applies to the other items.
 // The named vessels of both legs and the right arm, from BodyParts3D 4.0 (packet bodyparts3d-body-vessels-r1): the
 // great and small saphenous veins, the femoral artery and vein, the popliteal artery and vein, the anterior and
 // posterior tibial arteries, the posterior tibial vein, the dorsalis pedis artery, the superficial epigastric vein; the

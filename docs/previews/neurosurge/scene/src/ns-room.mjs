@@ -90,7 +90,7 @@ export const ROOM = Object.freeze({
   // of blue-grey: 0.0065, 0.0105, 0.0125 before.)
 
   pool: Object.freeze({ colour: RAW_LOOK.on && RAW_LOOK.roomPool ? RAW_LOOK.roomPool : Object.freeze([0.0028, 0.003, 0.0034]), radiusM: 19, amb: 0.05 }),
-  // 19 November 2026 (eye comfort; the owner liked a plain dark background): the tile lines are barely there (dark 0.55 before).
+  // Tiles use a low-contrast dark backdrop.
   tile: Object.freeze({ sizeM: 3, groutM: 0.07, dark: 0 }),
   wall: Object.freeze({ colour: Object.freeze([0.0006, 0.0007, 0.0008]), heightM: 30, lobes: 7, uneven: 0.16 }),
   lamps: Object.freeze([Object.freeze([0.3, 4.9, 3.8, 1]), Object.freeze([-5, 9.3, 1.7, 0.75]), Object.freeze([-6.2, 5.1, 1.2, 0.6])]),

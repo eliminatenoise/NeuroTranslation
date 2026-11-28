@@ -19,7 +19,7 @@
 //   bodyPostureTargets(activeBodyActions, { posture })            -> absolute joint targets on top of the rest posture
 //   poseBody(rig, targets, { baked })                             -> matrices relative to the baked geometry
 //   bodyPostureAngles(posture), BODY_POSTURE_TEXT (plain words)
-//   GENITAL_DENY_TERMS, genitalTermsIn, genitalAnatomyTerms, excludeGenitalAnatomy -> R15: never rig, pose, bake
+//   GENITAL_DENY_TERMS, genitalTermsIn, genitalAnatomyTerms, excludeGenitalAnatomy -> never rig, pose, bake
 //   or draw genital anatomy (buildBodyRig refuses such entries; none exist in the packets).
 //
 // Round 4 (R4-body):
@@ -306,15 +306,7 @@ export const QUAD_WRAP = Object.freeze({ zoneMm: 200, heightsMm: Object.freeze([
 
 export const ARM_WRAP = Object.freeze({ segment: 'r_armwrap' });
 const QUAD_SEGMENTS = Object.freeze(['r', 'l'].map(s => Object.freeze(QUAD_WRAP.heightsMm.map((_, k) => `${s}_quad${k + 1}`))));
-/* 18 November 2026, later (a check: "the right shoulder blade stands off the ribs ... shows as a thin pointed sliver";
- * the sweep's start posture: the blade 9 to 24 mm off the ribs, the muscles between blade and ribs up to 20 mm off): the
- * collar bone is its own piece, a STRUT between the breastbone and the shoulder blade, as in a real shoulder (it turns
- * at the sternoclavicular joint and the blade turns on its outer end). Before, collar bone and blade were one rigid
- * girdle pinned at the breastbone, and when the chest sank (the breastbone goes down some 30 mm against the ribs under
- * the blade in the start posture) the blade could not stay on the ribs. Now the girdle (the blade, and the arm on it)
- * follows the ribs under the blade, and each collar bone is fitted between its inner end on the breastbone and its
- * outer end on the blade (buildRibLinks; a 'late' link: it needs the girdle's own matrix). Both sides: the left
- * girdle's matrix may come from the left-arm rig, the strut joins it to the breastbone all the same. */
+/* The shoulder blade follows the rib cage. */
 const CLAVICLE_STRUTS = Object.freeze(['r_clav', 'l_clav']);
 export const LINKED_SEGMENTS = Object.freeze(['sternum', ...RIB_SEGMENTS, ...CARTILAGE_SEGMENTS, ...GIRDLE_BASES]);
 /** Every segment of the lumbar spine / of the rib cage: a packet hint 'lumbar' or 'thorax' means any of them. */
@@ -325,28 +317,7 @@ const spineShares = list => { const t = list.reduce((a, b) => a + b, 0); return 
 /** How one agreed joint id is shared between rig joints (documented approximations, not measured kinematics). */
 export const BODY_JOINT_SHARES = Object.freeze({
 
-  // side bend and turn are shared between all seventeen joints from the sacrum to the first thoracic vertebra
-  // (SPINE_STAGES), in proportion to commonly quoted ranges per level (after White and Panjabi's tables, rounded, cited
-  // from memory): flexion most at L4-S1 and the thoracolumbar junction and least between the rib-bearing vertebrae,
-  // side bend fairly even. Flexion is weighted toward the thoracic spine (about a third lumbar, two thirds thoracic:
-  // at the start posture's 70 degrees the low back flattens by about 25 and the upper back rounds by about 45), because
-  // it is the rounding of the upper back that carries the eyes over the chest ("almost full kyphosis ... for full
-  // view"). (Tried later, with flexion weighted to the low back and the thoracolumbar junction instead: the chest then
-  // takes less of the picture from the eyes but hides the belly behind it.) The side bend and the turn have their own
-  // tables, below. Each table sums to 1, so trunk_flex / trunk_side / trunk_rot keep their meaning
-  // and limits. Display shares on one reference body, not measured segmental motion. (Before: two hinges, at the
-  // lumbosacral and thoracolumbar joints.)
-  // 18 November 2026, third pass (a check, and the owner again: "flat depressed chest not booby pumped out chest";
-  // from the eyes the chest was a broad plate filling the lower 38 % of the picture and the legs were seen end-on):
-  // the bend is now weighted to the LOW back, about two thirds lumbar and one third thoracic: at the start posture's
-  // 80 degrees the low back gives 51 (the lordosis flattens and reverses, most at L4 to S1) and the rib-bearing spine
-  // 29 (the ribs limit it). That is also nearer to what a spine does. With the thoracic-heavy shares (first and second
-  // pass: [12, 10, 9, 8, 7 | 9, 9, 8, 6, 6, 6, 6, 6, 6, 6, 7, 7]) the whole rib cage lay back some 40 degrees under
-  // the chin, so the eyes looked at the chest muscles from just above as at a table top; now the trunk rises more
-  // steeply from the pelvis, the eyes are 42 cm above the hips instead of 37, the breastbone hangs more nearly
-  // upright below the chin, and belly, pelvis and thighs get a real share of the picture. (The earlier remark "hides
-  // the belly behind it" held for a head carried straight above the chest; the head is now carried forward as well,
-  // HEAD_FORWARD.)
+  // The trunk pose preserves visibility of the torso.
   trunk_flex: spineShares([16, 14, 13, 12, 10, 8, 6, 5, 4, 3, 3, 3, 3, 3, 3, 3, 3]),
   // 18 November 2026 (pelvic_tilt, see BODY_JOINT_IDS): the low back only, most at the lumbosacral joint and L4-L5,
   // as a low back flattens when the pelvis rolls under; nothing between the rib-bearing vertebrae.
@@ -801,7 +772,7 @@ function normalizeEntry(e) {
     sourcePacket: e.source_packet || null,
     extraPacket: extra,
     sha256: e.sha256 || null,
-    // R15 deny-list terms over every name field of the raw entry (empty for every packet entry).
+    // deny-list terms over every name field of the raw entry (empty for every packet entry).
     denyTerms: genitalAnatomyTerms(e)
   };
 }
@@ -898,14 +869,7 @@ const MUSCLE_EXTRA_CANDIDATES = Object.freeze([
     segments: Object.freeze(['skull']), basis: 'the descending part of the trapezius arises from the superior nuchal line and the external occipital protuberance' }))
 ]);
 const QUADRICEPS_RE = /\b(rectus femoris|vastus (lateralis|medialis|intermedius))\b/;
-/**
- * 21 November 2026 (a browser hunt, H26: "a thin grey rod sticks out of the curled right hand at the thumb"): the
- * extensor indicis and the extensor digiti minimi end in the extensor expansion of their finger, which runs over the
- * proximal and middle phalanges to the base of the distal one; their source meshes run along the finger's back that far.
- * Their packet hints end at the finger's proximal phalanx, so the part of the tendon over the middle and distal phalanges
- * was carried by the proximal one: in a fist it stood straight out of the knuckle as a thin rod (the extensor digitorum
- * beside it, hinted to the digits, folded with the finger). The finger's middle and distal phalanges are candidates too.
- */
+/** Thumb extension remains aligned with the hand. */
 const EXPANSION_RE = /\bextensor (indicis|digiti minimi)\b/;
 
 
@@ -1495,11 +1459,11 @@ export function buildBodyRig(entries, meshesById = null, options = {}) {
   const maxSamples = Number.isInteger(options.muscleSamples) && options.muscleSamples > 0 ? options.muscleSamples : 400;
   const warnings = [];
   const warn = m => warnings.push(m);
-  // R15: genital anatomy is never rigged, posed or baked (none is in the packets; this is defence in depth).
+  // genital anatomy is never rigged, posed or baked (none is in the packets; this is defence in depth).
   const list = [], excludedGenital = [];
   for (const e of entryList(entries)) {
     const terms = e.denyTerms;
-    if (terms.length) { excludedGenital.push(e.id); warn(`entry ${e.id} (${e.name}) is genital anatomy (${terms.join(', ')}); it is excluded (R15)`); }
+    if (terms.length) { excludedGenital.push(e.id); warn(`entry ${e.id} (${e.name}) is genital anatomy (${terms.join(', ')}); it is excluded`); }
     else list.push(e);
   }
 
@@ -1618,7 +1582,7 @@ export function buildBodyRig(entries, meshesById = null, options = {}) {
   const hipAxis = P('l_hip') && P('r_hip') ? sub(P('l_hip'), P('r_hip')) : LEFTX;
   for (const s of ['r', 'l']) {
     const kneeP = P(`${s}_knee`) || segC(`${s}_shank`);
-    // R558 (genuine note R27): `rot` is the thigh's own long axis, from the hip centre to the knee centre (pointing
+    // `rot` is the thigh's own long axis, from the hip centre to the knee centre (pointing
     // down the limb). Turning about it is hip internal / external rotation, a different joint and axis from the
     // forearm's radius-on-ulna turn; the shank and foot follow because they hang from the thigh.
     // R558 (start posture with the limbs straight forward): `abd` is the front-to-back axis through the hip centre, at
@@ -2085,7 +2049,7 @@ function checkRig(rig) {
 }
 
 /** Per-joint local rotations (rest frame, about each pivot) for the clamped targets. */
-/** R558 (genuine note R27): the optional coordinated limb turn that rides on the palm turn: { hipRotDegR, hipRotDegL }
+/** the optional coordinated limb turn that rides on the palm turn: { hipRotDegR, hipRotDegL }
  * in degrees about each thigh's long axis (positive = the toes turn toward the subject's right: external rotation of
  * the right hip, internal rotation of the left). Kept inside LIMB_TURN_LIMIT_DEG, which lies within commonly quoted
  * active hip rotation (about 30 to 45 degrees each way); not measured on this body. null = no turn. */
@@ -3798,7 +3762,7 @@ export function bodyMuscleDrives(activeActions, options = {}) {
 }
 
 /**
- * R5-pronation (R27): the LEFT body muscles lit by the left forearm turn. byName is ns-actions rotationOutputs(state)
+ * R5-pronation: the LEFT body muscles lit by the left forearm turn. byName is ns-actions rotationOutputs(state)
  * .muscles ({ 'pectoralis major': 0.6, ... }: name fragment -> 0..1 simulated display level; the left-arm view-model
  * meshes are lit from the same object by the scene's updateMuscles). Returns { meshId: level } for every left-side body
  * muscle whose name contains a fragment (case-insensitive), e.g. the three parts of the left pectoralis major for the
@@ -3820,17 +3784,7 @@ export function rotationBodyDrives(byName, options = {}) {
   return out;
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Rest postures. R558 (genuine note of 11 November 2026, "start with the limbs fully straight out"): the game now starts
-// in the 'open' posture, standing with every limb straight and spread. The older 'seated' posture stays available.
-//
-// Round 3 (R3-body) history, why the body used to sit: from the first-person eye of the upright BodyParts3D body the chest (anterior surface about y = -214 mm)
-// lies in front of the line of sight to the thighs and feet, so a standing body shows only the chest when you look down
-// (round 2 needed an eye shift and a dithered see-through window). Seated, the thighs run forward from the hips, so
-// looking down shows the chest and belly near you, then the lap, the knees and, past the knees, the feet: nothing has
-// to be see-through. A seated player is also the ordinary way to play a desktop game. The upper body is NOT moved
-// (no trunk, neck or jaw angle), so the head, the first-person eye, the face layer and the left-arm shoulder stay
-// exactly where they were. No chair or floor is drawn; the posture is a display choice, not a measured pose.
+// The rest pose extends the limbs.
 
 
 
@@ -3870,54 +3824,10 @@ export const BODY_POSTURES = deepFreezeRig({
   anatomical: {},
 
 
-  // should be declining back in an invisible imaginary decline sofa"; "the shoulders rolled forward and the back
-  // convexly curved"; "see all of the front of the torso at once without the chest pumping out but depressed
-  // down/inwards"; "full neutral hip extension. The bend is from the back and not the hips"): the body lies back as on
-  // a declined sofa with the upper back curled up. The hips are NEUTRAL (0: the thighs in line with the pelvis), and
-  // the pelvis and legs lie level on the ground. All of the bend is in the back and neck ("Almost full kyphosis /
-  // flexion of the spine for full view").
-  // 18 November 2026, first build (superseded by the note above `open` below: trunk 70, neck 20, eyes lowered) (the same
-  // notes, read again with a spine that bends at every vertebra; SPINE_STAGES): trunk 60 of
-  // its 80 degrees and neck 30 of its 50 (17 November: 68 and 22). The trunk's 60 is shared by BODY_JOINT_SHARES: the
-  // low back flattens by about 22 degrees and the upper back rounds by about 38, one even curve from the sacrum to the
-  // neck. With the bend moved up the back and into the neck the eyes sit OVER the chest instead of behind a steep one:
-  // at the start look the chest lies face-on below the chin and the belly, thighs, knees and feet show beyond it
-  // (17 November: the chest stood like a wall and hid the belly). The breastbone sinks with the upper ribs and both
-  // shoulder girdles roll forward (SHOULDER_ROLL). The start look (20 degrees down) takes the neck to its 50; past
-  // that the trunk bends with the look, to 40 degrees down as before.
-  // The head keeps its place (the bake keeps the skull), so the body lies out ahead of the eyes, chin to toes. The
-  // right arm is raised 54 from the trunk so it still points level forward. No sofa is drawn. A display choice inside
-  // the joints' ranges (trunk 80 forward, neck 50), not a measured pose.
+  // The reclined pose uses trunk curvature and neutral hips.
 
 
-  // its 80 and neck 20 (still 90 together: the pelvis and legs lie level), and the eyes are lowered in the head
-  // (POSTURE_EYES below). The game starts with the look 34 degrees below level: the head is bowed 12 of them (the neck
-  // at 32 of its 50) and the eyes do the other 22. With the chin no longer pressed down (the neck was at its 50) the
-  // eyes are 14 cm from the breastbone instead of 11 and further back: the chest takes less of the picture, the belly
-  // more, and both shoulders are inside the lower corners. The right arm is raised 63 so it still points level.
-  // 18 November 2026, third pass (a check of the second: the chest still filled the lower 38 % of the picture as a broad
-  // plate, the legs were seen end-on, the right armpit showed its inside in the lower corner of the first picture, and
-  // the right hand lay over the mirror body): trunk 80 and neck 10 (still 90 together), with the bend now mostly in the
-  // LOW back (BODY_JOINT_SHARES.trunk_flex) and the head carried forward (HEAD_FORWARD). The right arm no longer points
-  // level at the mirror body: it rests, the upper arm hanging beside the trunk (5 degrees behind it, a little out), the
-  // elbow bent 80, the forearm lying palm down on the right thigh, as an arm lies on someone slumped back. The armpit
-  // is closed and the hand is in the picture on the thigh. (Tried 25 forward with the elbow at 55: seen from the side
-  // the forearm pointed up into the air.) The game starts with the look 36 degrees below level (the head bowed 14 of
-  // them, the eyes 22).
-  // 18 November 2026, the owner after seeing the rounded back ("maybe I was wrong about the spinal flexion. I think we
-  // need to go into spinal extension ... while still leaning quite a bit back"; "we want maximum posterior pelvic tilt
-  // with some degree of neck flexion so that you can look down upon your body"; "minimal elbow and knee flexion
-  // initially, although they must still look naturalistic, but yet be fully extended out"; "we start the game in an
-  // underside view of the limbs"): slumped back on a sofa. The PELVIS is rolled under as far as it goes (pelvic_tilt
-  // 55: all of the forward bend sits in the low back, most of it at the lumbosacral joint), the rib-bearing spine is
-  // straight to slightly extended (trunk_flex -5) and leans back about 35 degrees from upright, and the neck is bent
-  // forward 40 (of its 50) so the eyes look down the body. 55 - 5 + 40 = 90: the legs still lie level under an upright
-  // head, hips neutral. The shoulders sit a little forward and the head is carried a little forward, as on someone
-  // slumped back (SHOULDER_ROLL and HEAD_FORWARD now follow the pelvis roll as well: 15.5 and 10 degrees here). Legs
-  // spread 12 degrees each (were 6), so the motor strip beyond them shows between them. Both arms are stretched out
-  // along the body toward the knees: the right upper arm 37 degrees forward of the leaning trunk, the elbow 8 (soft,
-  // not locked), the forearm palm UP (r_pronation 0, the limb turn's open end); the knees keep their soft 10
-  // (EXTENSION_SOFT_BEND). A display choice inside the joints' ranges, not a measured pose.
+  // The reclined pose combines trunk extension and a backward lean.
 
 
   // (r_pronation 0) and both legs at the limb turn's underside end (leg_turn 25: the feet 45 degrees outward, a V;
@@ -4019,7 +3929,7 @@ export const BODY_POSTURE_LIMITS = deepFreezeRig({
 /** The posture the game uses (R558 decisions 21 and 22: limbs straight forward, sitting on an invisible flat ground;
  * it replaces decision D4, seated, and the first R558 standing star). */
 export const DEFAULT_BODY_POSTURE = 'open';
-/** Plain-language posture lines for the HUD / Esc page (R17). */
+/** Plain-language posture lines for the HUD / Esc page. */
 export const BODY_POSTURE_TEXT = Object.freeze({
   open: 'Your body is slumped back as on a sofa (none is drawn): pelvis rolled under, upper back straight and leaning back, head bowed, legs and arms stretched out, palms up. Your chest, belly, arms and legs lie in view in front of the brain.',
   seated: 'Your body sits still (no chair is drawn). Your right forearm rests forward, as if on an armrest. Look down to see your chest, lap, knees and feet. Look right and a little down to see your right arm.',
@@ -4479,7 +4389,7 @@ function bakeSkinWeights(rig, id, p, avail, near, useCache, indices = null) {
  * square distance), so it bends with the joint instead of sliding off as one rigid piece would. Other muscles move
  * rigidly. Hand `meshesById` of the result to the scene (setBody) instead of the source meshes, and pose with
  * poseBody(rig, targets, { baked }) so the matrices are relative to this geometry.
- * Genital anatomy is never baked (R15): only meshes the rig knows are returned, and buildBodyRig excludes genital
+ * Genital anatomy is never baked: only meshes the rig knows are returned, and buildBodyRig excludes genital
  * entries.
  * @param meshesById Map | object id -> { positions, indices, ... } (the source meshes; they are not modified)
  * @param options { posture = DEFAULT_BODY_POSTURE, keep = 'skull', nearest = 'index' }: `keep` is the segment that
@@ -4749,11 +4659,11 @@ export const BODY_LAYER_PIECE_TEXTBOOK = Object.freeze({
 export const BODY_LAYER_RULE = Object.freeze({
   metric: 'topExposure: mean share of the muscle\'s own silhouette that is front-most, over its best quarter of 128 directions (source pose, 1 mm pixels)',
   superficialAtLeast: Object.freeze({ S: 0.3, I: 0.6, D: 0.9 }),
-  // 0.15 (3 to about 12 mm in this body), not 0.2: viewed and measured (round5/R5-body-NOTES.md), 0.2 pushed the external
+  // 0.15 (3 to about 12 mm in this body), not 0.2: viewed and measured (development check), 0.2 pushed the external
   // obliques far enough over the lap that the first-person look-down lost belly contrast (e2e S35); 0.15 keeps it.
   offset: Object.freeze({ perCubeRootMm: 0.15, minMm: 3, maxMm: 15 }),
   peel: 'about the end nearest the first attachment; at peel 1 the far end lifts by one more offset',
-  // Viewed (round5/R5-body-NOTES.md): peel 1 fans the knee and ankle tendons out; 0.5 keeps the lift readable and tidy.
+  // Viewed (development check): peel 1 fans the knee and ankle tendons out; 0.5 keeps the lift readable and tidy.
   peelDefault: 0.5
 });
 
@@ -8023,16 +7933,7 @@ export function syncBodyInstance(target, source) {
   return changed;
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Round 5 (R5-body, D20): optional extra body packets (the face and chewing muscles)
-//
-// BodyParts3D 4.0 has no facial-expression or chewing muscles. The user chose (2026-11-09) to download only those meshes
-// from an openly licensed atlas (R5-face: packet face-muscles-r1, share-alike meshes; the game code stays CC0). This
-// module loads such a packet generically (manifest URL, packet base, expected manifest sha256, a sha256 per file) and
-// adds its muscles to the rig. They are posed with the skull (rig_hint 'skull'), and the jaw muscles (rig_hint
-// ['skull', 'mandible']) follow the mandible during jaw actions through the same two-nearest-bone weights and rigid fit
-// as every other muscle. Nothing of the base packet changes: bones (and so every joint) come from the base packet.
-// The exact manifest entry format is in round5/R5-body-NOTES.md ("Face packet format").
+// The face-muscle supplement uses open atlas meshes.
 
 /** The face packet the game looks for (relative URLs; expectedManifestSha256 is pinned once R5-face delivers it). */
 export const FACE_MUSCLE_PACKET = Object.freeze({
@@ -8052,7 +7953,7 @@ const EXTRA_MAX_BYTES = 16 * 1024 * 1024;
  * Validate an extra packet manifest. Refuses (throws ns:body_packet) a manifest that is not an object with assets, a
  * packet id mismatch, an id clash with baseIds, a path outside meshes/<id>.obj, a missing sha256/bytes, a kind other
  * than muscle or bone, a rig_hint outside EXTRA_PACKET_HINTS, a laterality that disagrees with the centroid side, and
- * any genital anatomy (R15). Returns { packet, entries: frozen snapshots in manifest order (source_packet set) }.
+ * any genital anatomy. Returns { packet, entries: frozen snapshots in manifest order (source_packet set) }.
  */
 export function validateExtraBodyManifest(manifest, { packet = null, baseIds = [] } = {}) {
   const bad = msg => { throw new Error(`ns:body_packet: ${msg}`); };
@@ -8082,7 +7983,7 @@ export function validateExtraBodyManifest(manifest, { packet = null, baseIds = [
     const cx = vec(a.centroid) ? a.centroid[0] : (a.bounds_min[0] + a.bounds_max[0]) / 2;
     if (a.laterality === 'left' && !(cx > 0)) bad(`${id}: a left-sided entry needs centroid x > 0 (subject left is +x)`);
     if (a.laterality === 'right' && !(cx < 0)) bad(`${id}: a right-sided entry needs centroid x < 0 (subject right is -x)`);
-    if (genitalAnatomyTerms(a).length) bad(`${id}: genital anatomy is never loaded (R15)`);
+    if (genitalAnatomyTerms(a).length) bad(`${id}: genital anatomy is never loaded`);
     const name = typeof a.name === 'string' && a.name ? a.name : typeof a.embedded_source_name === 'string' ? a.embedded_source_name : '';
     if (!name) bad(`${id}: name (plain anatomical name with its side, e.g. "left zygomaticus major") is required`);
     out.push(Object.freeze({ ...a, sha256: a.sha256.toLowerCase(), source_packet: pid, rig_hint: Array.isArray(hint) ? Object.freeze([...hint]) : hint, name }));
@@ -8151,7 +8052,7 @@ export function mergeBodyPackets(base, ...extras) {
       const id = e && (e.element_id || e.id);
       if (!id) throw new Error(`ns:body_packet: ${label} has an entry without element_id`);
       if (seen.has(id)) throw new Error(`ns:body_packet: ${id} appears twice`);
-      if (genitalAnatomyTerms(e).length) throw new Error(`ns:body_packet: ${id} is genital anatomy (R15)`);
+      if (genitalAnatomyTerms(e).length) throw new Error(`ns:body_packet: ${id} is genital anatomy`);
       seen.add(id);
       entries.push(e);
       const m = get(id);
@@ -8164,7 +8065,7 @@ export function mergeBodyPackets(base, ...extras) {
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// No genital anatomy (R15: "no genitalia. Obviously.")
+// No genital anatomy ("no genitalia. Obviously.")
 //
 // The packets hold no genital meshes (checked by tests/unit/R3-body-genital.test.mjs over both manifests and every OBJ
 // header). This deny-list is defence in depth: buildBodyRig refuses such entries (so bakeBodyPosture never returns
@@ -8216,7 +8117,7 @@ export function genitalAnatomyTerms(entryOrName) {
   return [...new Set(entryNames(entryOrName).flatMap(genitalTermsIn))];
 }
 
-/** Split manifest entries into the ones to keep and the genital ones to drop (R15). Accepts an array or a manifest. */
+/** Split manifest entries into the ones to keep and the genital ones to drop. Accepts an array or a manifest. */
 export function excludeGenitalAnatomy(entries) {
   const raw = Array.isArray(entries) ? entries : entries && Array.isArray(entries.assets) ? entries.assets : [];
   const kept = [], excluded = [];

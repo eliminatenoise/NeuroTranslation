@@ -1,7 +1,7 @@
 /* NeuroSurge visual-clarity source candidate. Root owns integration and native qualification.
  * U2b-scene (round 2): scene overlay (orbit arrow buttons, region group labels, far-right information panel, face-layer
  * label and inset frame), HUD cards on the left edge. INFO_PANEL / ORBIT_ARROWS in ns-scene-three mirror the sizes.
- * A2-render R1: cards get a light translucent backdrop (text contrast over the bright strip and hand, VD02) that
+ * A2-render cards get a light translucent backdrop (text contrast over the bright strip and hand, VD02) that
  * never hides what is under it; compact layouts use a narrower column so the larger framed strip stays clear; the
  * hover label sits next to the crosshair; the region note explains tints/spot/shimmer under the legend; the legend
  * fallback gradient matches the ns-brain ramp (createHud sets the exact generated gradient at runtime).
@@ -504,7 +504,7 @@ html, body {
   overflow: hidden;
 }
 
-/* R5-integrate-core (D16, R20): the round-2..4 DOM orbit buttons (.ns-orbit*) are retired; the orbit arrows are 3D objects
+/* R5-integrate-core (D16, ): the round-2..4 DOM orbit buttons (.ns-orbit*) are retired; the orbit arrows are 3D objects
  * in the scene (ns-arrows3d), lit, at the compass points, bent toward the viewer and inward. Their plain hover caption is
  * the scene's .ns-arrow-tip (styled here; ns-scene-three injects the same rule as a fallback). */
 .ns-arrow-tip {
@@ -537,16 +537,13 @@ html, body {
   text-align: center;
   white-space: nowrap;
   /* R4-access proposal (wired by R4-integrator): a warm neutral that matches the warm-grey other areas (KEY_COLORS). */
-  /* R558 ("brain labels should be a little more transparent"): one step lower fill and edge (was 0.62 / 0.32); the
-     words keep full strength and their dark shadow so they stay readable over the glass. */
+  /* Brain labels have a translucent background. */
   color: #e2ddd4;
   background: rgba(8, 10, 18, 0.46);
   border: 1px solid rgba(212, 204, 188, 0.26);
   text-shadow: 0 1px 2px #05070b;
 }
-/* Polish: the arm labels are the strong labels (cyan pill, matching the cyan left-arm territory outline). R558 ("match
-   on both sides"): the right-arm label on the other half wears the same pill, and the pill is one step more see-through
-   (fill 0.92 -> 0.72, halo 0.18 -> 0.14). */
+/* Labels use the same appearance on both sides. */
 .ns-region-label-arm {
   font-size: 12.5px;
   font-weight: 700;
@@ -562,7 +559,7 @@ html, body {
 .ns-region-label[data-hover="true"] { color: #fff3a0; border-color: #fff3a0; }
 .ns-region-label-arm[data-hover="true"] { color: #05161b; background: #fff3a0; border-color: #fff3a0; }
 
-/* Far-right information overlay (R14). Never takes pointer events; long content is clipped, not scrolled. */
+/* Far-right information overlay. Never takes pointer events; long content is clipped, not scrolled. */
 .ns-infopanel {
   position: absolute;
   right: var(--ns-gap);
@@ -904,7 +901,7 @@ html[data-ns-glow="on"] .ns-scene-overlay[data-ns-brain-in-view="false"] .ns-inf
 
 
 
-/* ---- R558 (genuine note R28): the keyboard picture on the start page and the Esc page --------------------------------
+/* ---- the keyboard picture on the start page and the Esc page --------------------------------
    Lit keys are the keys the game uses; faint blank keys only show where those sit on a keyboard. System sans-serif
    (inherited). The sizes follow the view width, so the picture stays readable from a phone-sized window to a wide one. */
 /*

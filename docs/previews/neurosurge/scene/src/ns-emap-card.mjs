@@ -1,14 +1,4 @@
-/** NeuroSurge: the electrical map's legend (21 November 2026, section 192; the map itself is ns-emap.mjs).
- *
- * One small chunk, away from the other cards (top right), shown while the map is on (the app root's
- * data-ns-emap="on") and following the reading levels of the R key (data-ns-read): the short card at the start (a
- * title and three short lines: the command going down, the report coming up, one line of honesty), More detail under
- * it at "more" (the route of the area under the look in plain words, then what kind of picture this is), nothing at
- * "off" (scene/example/quiet.css, .ns-emap-*). Little text; every word comes from ns-text (EMAP, emapRouteLines,
- * emapSlowLine) and is written with textContent.
- *
- * DOM by createElement only (the page's content security policy needs nothing new). No three.js.
- */
+/** The electrical map presents its legend in groups. */
 
 /** Build the card into `root`. text: ns-text EMAP. Returns { el, setRoute(title, lines), setNotes(lines), setColour(css),
  * dispose() }, or null when the document cannot build it. setRoute and setNotes write only what changed. */

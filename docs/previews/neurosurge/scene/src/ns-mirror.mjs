@@ -177,10 +177,7 @@ export const MIRROR_ORBIT = Object.freeze({
 
 /** The four mirror orbit directions, named like the brain's (ns-app ORBIT_DIRS) so one arrow module serves both. */
 export const MIRROR_DIRS = Object.freeze(['forward', 'back', 'left', 'right']);
-/** Fixed compass position of each arrow on screen (R20: "a top arrow, a bottom arrow, a left arrow, and a right
- * arrow"). For the mirror body 'forward' (top) tilts its top toward you (your viewpoint goes up over it: you see it
- * from above), 'back' (bottom) tilts its top away (you see it from below), 'left' / 'right' turn it about its vertical
- * axis (your viewpoint goes round its side, the body turns the other way). */
+/** The four view arrows remain at the screen edges. */
 export const MIRROR_COMPASS = Object.freeze({ forward: 'top', back: 'bottom', left: 'left', right: 'right' });
 /** Step sign per direction ({ yaw, pitch, push } in steps): yaw > 0 = viewpoint toward screen right, pitch > 0 =
  * viewpoint up, the body's top toward you (the same names and signs as ns-brain ORBIT_DIRECTIONS); push > 0 = farther
@@ -191,7 +188,7 @@ export const MIRROR_ORBIT_DIRECTIONS = Object.freeze({
 });
 const DIR_ALIASES = Object.freeze({ top: 'forward', up: 'forward', bottom: 'back', down: 'back', left: 'left', right: 'right', forward: 'forward', back: 'back' });
 
-/** Plain texts (R17: simple words). The integrator may move them into ns-text; the honesty meaning must stay. */
+/** Plain texts (simple words). The integrator may move them into ns-text; the honesty meaning must stay. */
 export const MIRROR_TEXT = Object.freeze({
   name: 'Mirror body',
   tag: 'A mirror image of your body',
@@ -412,9 +409,7 @@ export function mirrorOrbitStep(orbit, dir, { stepDeg = MIRROR_ORBIT.stepDeg, pi
   return freeze({ yaw: wrapDeg(yaw + s.yaw * stepDeg), pitch: clamp(pitch + s.pitch * stepDeg, -pitchLimitDeg, pitchLimitDeg) + 0,
     push: clamp(p0 + s.push * stepDeg * push.perDegM, 0, push.maxM) + 0, ...(orbit && Number.isFinite(orbit.roll) && orbit.roll !== 0 ? { roll: orbit.roll } : {}) });
 }
-/** 20 November 2026 (the owner's circling gesture): the orbit with its roll turned by deltaDeg (positive clockwise as the
- * player sees the mirror body; kept in -180 .. 180). The roll turns the body about the line toward the eye, after the
- * yaw and the tilt (mirrorTransform). Pure. */
+/** Pointer rotation controls mirror roll. */
 export function mirrorOrbitRoll(orbit, deltaDeg) {
   if (!Number.isFinite(deltaDeg)) fail('input', 'deltaDeg must be finite');
   const r0 = orbit && Number.isFinite(orbit.roll) ? orbit.roll : 0, r = ((r0 + deltaDeg) % 360 + 540) % 360 - 180;

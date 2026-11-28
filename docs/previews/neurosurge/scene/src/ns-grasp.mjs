@@ -133,14 +133,7 @@ export const LIMB_HOLD_WAIT = Object.freeze({ ...LIMB_HOLD_FOLLOW, keepColumns: 
  * limb is; run once per place at rest, not every frame. */
 export const LIMB_HOLD_REACH = Object.freeze({ ...LIMB_HOLD_TRACK, solveIters: 10, minGain: 0.01 });
 
-/**
- * 19 November 2026 (a check: "a few ordinary looks tear the shoulder ... a controlled arm stays inside poses that draw
- * whole"). The range a HELD or CONTROLLED limb's joints are solved in (Space, a click and the keys; degrees), inside
- * the body's own limits. The right shoulder only: carried by the look or the keys its solve ran to the ends of the
- * anatomical range (sideways lift 180, the arm straight up beside the head), where the upper arm's muscles are drawn
- * as stretched sheets and the hand passes the view point. A movement switched on from the brain still has the whole
- * range. Display choice, found on pictures.
- */
+/** The arm pose remains within its supported range during a grasp. */
 
 
 

@@ -129,10 +129,7 @@ export const ARROW_LOOK = freeze({
   keyLight: freeze([-0.38, 0.56, 0.74]), ambient: 0.42, diffuse: 0.62, specular: 0.62, shininess: 90, rimLight: 0.34,
   edgeDark: 0.55, edgeFacing: freeze([0.12, 0.6]), farDim: 0.66,
   hoverScale: 1.1, renderOrder: 100,
-  // R558 BB (style guide, "the 3D arrows: cel bands and a black ink contour"): the key light in three tones (cel steps of
-  // the wrapped N.L and their levels, soft half-width), a crisp highlight (the specular term's step lo .. hi), and a
-  // near-black ink line (#0b0809) inkCss CSS px wide inside the V's own outline (the solid's silhouette seen face-on,
-  // measured in the V's design plane), opacity inkAlpha; the walls (seen edge-on) are inked by wallInk.
+  // The arrows have a stepped highlight and a dark silhouette.
 
   // (ns-flesh) and the arrows kept the comic one. Now: the two cel steps are widened into one smooth light ramp (soft
   // half-width 0.3 over steps at 0.3 / 0.6: the two overlap and leave no flat shoulder, so no bands), the highlight is a

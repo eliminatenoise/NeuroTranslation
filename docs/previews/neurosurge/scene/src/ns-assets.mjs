@@ -213,7 +213,7 @@ export function tryParseObjFast(text, { maxBytes = OBJ_LIMITS.maxBytes, maxVerti
  * Drop-in replacement for ns-obj parseObj(text, limits): the same return shape and values (positions bit-for-bit,
  * indices, counts, bounds, comments) and, for text outside the fast grammar, parseObj's own result or refusal.
  * About 4.7x faster than parseObj on the 436 pinned BodyParts3D files in Node (perf/r3/NODE-PARSE-BENCH.json: about 1030 ms
- * -> 220 ms); in the browser the load's OBJ parsing drops from about 940 ms to about 280 ms (round3/R3-perf-NOTES.md).
+ * -> 220 ms); in the browser the load's OBJ parsing drops from about 940 ms to about 280 ms (development check).
  */
 export function parseObjFast(text, options = {}) {
   const fast = tryParseObjFast(text, options || {});
@@ -1510,7 +1510,7 @@ function snapshotPacketEntry(raw, index, sp, box) {
  * spec's (or, without a top-level `packet`, whose every entry has source_packet equal to it). Every entry is checked before anything is read (id, a meshes/<file>.obj path with no traversal, byte count
  * within the spec's limits, sha256, vertex count, kind, laterality against the manifest centroid, bounds inside the
  * registration box when `frameBox` is given); ids and paths are unique; an id already loaded elsewhere (excludeIds: the
- * arm, brain and full-body ids) is refused, so nothing is listed twice; with `deny` (R15: e.g. ns-body
+ * arm, brain and full-body ids) is refused, so nothing is listed twice; with `deny` (e.g. ns-body
  * genitalAnatomyTerms) an entry whose names match is refused (ns:packet_denied). Throws ns:packet_* / ns:asset_duplicate.
  * Returns { packet, entries (frozen snapshots, manifest order), counts }.
  */
@@ -1558,7 +1558,7 @@ export function validatePacketManifest(manifest, spec, { excludeIds = [], frameB
   };
 }
 
-/** R15 defence in depth: `deny(x)` (for example ns-body genitalAnatomyTerms) returns the deny-list terms found in an entry
+/** defence in depth: `deny(x)` (for example ns-body genitalAnatomyTerms) returns the deny-list terms found in an entry
  * or a name; any term refuses the entry (ns:packet_denied). The loader holds no list of its own, so there is one list. */
 function denyCheck(deny, what, id, where) {
   if (typeof deny !== 'function') return;
@@ -1612,7 +1612,7 @@ function packetVerifier(sp, box, deny = null) {
  * equal to the manifest bounds within 1 mm, and inside the registration box `frameBox` when given). The parsed geometry
  * is exactly what ns-obj parseObj returns for the same file.
  * Options: manifest (the parsed packet manifest; null/undefined -> status 'absent'), spec (a PACKET_SPECS name or a spec
- * object), frameBox (packetFrameBox(...) or null), deny (R15: a function such as ns-body genitalAnatomyTerms; applied to
+ * object), frameBox (packetFrameBox(...) or null), deny (a function such as ns-body genitalAnatomyTerms; applied to
  * every manifest entry before anything is read and to every OBJ's comment header after its checks), excludeIds, readText + sha256Hex or readBytes + sha256HexBytes (paths
  * are the manifest's relative meshes/<file>.obj; the caller resolves them against the packet's base URL), parse,
  * concurrency, allOrNothing, priorityIds (default [] = no priority part), bulkOrder (default 'bytes'), autoStart (default

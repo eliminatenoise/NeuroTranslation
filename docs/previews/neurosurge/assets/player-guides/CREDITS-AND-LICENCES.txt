@@ -157,7 +157,7 @@ legacy embedded notice is retained.
 
 ### 1.3 Packet `packets/bodyparts3d-fullbody-r1/` (full body; 294 meshes when this file was written)
 
-Acquired on 2026-11-08 with the user's explicit authorisation, from the official host only, using the same rules. It
+Acquired from the official host on 2026-11-08 under the same rules. It
 contains the right arm, torso, pelvis, both legs, neck and head/face bones and muscles. The left arm and the brain stay
 in the packets above, and nothing is duplicated.
 
@@ -227,8 +227,7 @@ The source packets, their manifests, hash lists, acquisition records and licence
 
 Round 5 adds 54 mesh files (27 facial-expression and chewing muscles, left and right) taken from **Z-Anatomy**, the
 open source 3D atlas of anatomy, which is itself built on BodyParts3D. BodyParts3D 4.0 has no facial-expression or
-chewing muscles (except the platysma), so these meshes come from Z-Anatomy. They were downloaded after the user chose
-"Download open models" for the missing face muscles, from the source's own repository, after a licence check.
+chewing muscles (except the platysma), so these meshes come from Z-Anatomy. The meshes came from the source repository after a licence check.
 
 **Required credit (quoted exactly as the source asks):**
 

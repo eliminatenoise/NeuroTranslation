@@ -147,17 +147,14 @@ export function rampLegendGradientCss(n = 9, direction = 'to right') {
  *
  * Units: tints are LINEAR RGB 0..1 (they multiply the lighting like REGION_STYLE tints); lines are sRGB 0xRRGGBB
  * (Three.js Color.setHex); legend swatches are CSS colours. Display choices only: no tissue or signal meaning.
- * Wiring (the integrator; exact steps in round4/R4-access-NOTES.md): ns-brain REGION_STYLE.leftArmTint / otherTint /
+ * Wiring (the integrator; exact steps in development check): ns-brain REGION_STYLE.leftArmTint / otherTint /
  * otherTintAlt, ns-scene-three REGION_RENDER.groupLine / otherLine and REGION_STYLE_FALLBACK, CSS --ns-other and the
  * two legend swatch backgrounds take these values. */
 export const KEY_COLORS = freeze({
   /** Light-blue left-arm areas (right hemisphere; sRGB #59c4f9 before lighting). Round 3: [0.10, 0.52, 0.62] (teal). */
   leftArmTint: freeze([0.10, 0.55, 0.95]),
   /** Warm grey areas of every other body part (even strip order). Round 3: [0.33, 0.33, 0.45] (slate-violet). */
-  // R558 (genuine note R32: the motor areas should be "clearer" and "at least look a little fleshy"): the other body
-  // parts' areas are now a soft tissue pink instead of warm grey (grey was the least tissue-like part of the brain).
-  // Still far from the left arm's light blue in hue and in lightness, also for red-green colour-blind players (the
-  // difference is on the blue / yellow axis). Was [0.345, 0.300, 0.232].
+  // The resting motor-area palette uses flesh tones.
   otherTint: freeze([0.560, 0.300, 0.290]),
   /** The darker alternate grey (odd strip order), same ratio as before. Round 3: [0.27, 0.27, 0.37]. */
   otherTintAlt: freeze([0.470, 0.250, 0.245]),
@@ -465,7 +462,7 @@ export const ARROW_COLORS = freeze({
  * 'brain' | 'mirror'): { base (far end), tip (head), hover, rim, outlineColor, xrayOpacity, xrayDarkOpacity }.
  * xrayOpacity is occluded.edgeOpacity: that shader draws xrayOpacity x (0.45 + 0.55 x rim), i.e. about 0.3 in the
  * middle and edgeOpacity at the silhouette. xrayDarkOpacity (occluded.darkEdgeOpacity) is the alpha of the dark
- * outermost silhouette band in the proposed two-tone x-ray shader (round5/R5-access-NOTES.md step B2); ARROW_LOOK has
+ * outermost silhouette band in the proposed two-tone x-ray shader (development check step B2); ARROW_LOOK has
  * no such field yet, so it is ignored until that shader is wired. */
 export function arrowLook(kind = 'brain') {
   const c = ARROW_COLORS[kind];
@@ -483,7 +480,7 @@ export function arrowLook(kind = 'brain') {
  *    clear glass (85 % of its pixels).
  *  - accent: the mirror's identity colour for its label / info-panel accent (= the mirror arrows' green). */
 export const MIRROR_VIEW = freeze({
-  // R558 (R32): a dark red-brown under the now more solid areas, like tissue seen in depth (was the near-black 0x05070b).
+  // a dark red-brown under the now more solid areas, like tissue seen in depth (was the near-black 0x05070b).
 
   // nothing under the areas reads as blood and the translucent areas look clean and light rather than muddy; the areas
   // keep their colours (the backing only dims what is behind them, as before).
@@ -576,7 +573,7 @@ export const AREA_CHUNK_SIZE = freeze({ leg: 4, trunk: 1, arm: 4, hand: 6, neck:
 export const AREA_RAMPS = freeze({
   rh: freeze({ leg: freeze([289, 310, 0.80, 0.44, 0.93]), trunk: freeze([170, 170, 0.70, 0.70, 0.93]), arm: freeze([235, 266, 0.82, 0.44, 0.93]),
     hand: freeze([199, 226, 0.88, 0.50, 0.93]), neck: freeze([334, 334, 0.76, 0.76, 0.93]), face: freeze([344, 328, 0.85, 0.50, 0.93]),
-    mouth: freeze([320, 312, 0.78, 0.52, 0.93]), scan: freeze([250, 250, 0.13, 0.13, 0.08]) }), // 19 November 2026 ("much darker blacks instead of ugly grays"): the in-between areas near black (L 0.40 before)
+    mouth: freeze([320, 312, 0.78, 0.52, 0.93]), scan: freeze([250, 250, 0.13, 0.13, 0.08]) }), // The dark palette uses a lower black level.
   lh: freeze({ leg: freeze([104, 87, 0.95, 0.74, 0.93]), trunk: freeze([140, 140, 0.80, 0.80, 0.93]), arm: freeze([65, 34, 0.86, 0.60, 0.93]),
     hand: freeze([92, 61, 0.94, 0.68, 0.93]), neck: freeze([15, 15, 0.78, 0.78, 0.93]), face: freeze([17, 30, 0.85, 0.56, 0.93]),
     mouth: freeze([0, 354, 0.76, 0.50, 0.93]), scan: freeze([70, 70, 0.13, 0.13, 0.06]) })
@@ -680,14 +677,9 @@ export const AREA_LOOK = freeze({
 
   // strongly (restLift 0.06 -> 0.5), so the strip is the brightest, most colourful thing in the picture at rest.
   restLift: 0.5, restValue: 1,
-  // 18 November (MAP, "a NEON GLOW: bright, saturated"): the lit key burned to white in the pictures (gain 2.4 above
-  // display white with the bloom, and the white-hot frame): areaGain 2.4 -> 1.8 with areaNeon 1.8 -> 2.4 keeps an orange
-  // key orange and a blue key blue while still above white (the bloom halo stays); the muscles' glow was hard to see on
-  // the bodies: muscleGain 0.3 -> 0.42 and a stronger rim (1.0 -> 1.35), below the 0.55 that clipped a belly flat.
+  // Active regions have a saturated highlight.
 
-  // lit area's light (0 = its own neon colour alone, as before); at 0.8 a lit key is white-hot with a breath of its hue.
-  // (areaGain 1.8 -> 1.3 with it: white light carries all three channels, and at 1.8 its bloom hid the key's own shape
-  // and its neighbours)
+  // A high activation level mixes the region hue with white.
 
   // lit key's light pure white (areaWhite 0.8 -> 1) at more than twice the strength (areaGain 1.3 -> 3), its rim too)
 
@@ -772,13 +764,7 @@ export function areaGlowInto(regionId, v, gain, out, look = AREA_LOOK, glow = GL
 }
 const NEUTRAL_GLOW = freeze([1.0, 0.86, 0.72]);
 
-/** The light of a switched-on motor AREA (LINEAR RGB, above display white): glow colour ^ look.areaNeon (its largest
- * channel stays 1) x glowIntensity(v) x gain. 17 November ("neural activation should be much more obvious on the motor
- * strip"; earlier: "a neon fluorescent flash"): the lit key is drawn far above display white so that the scene's bloom
- * gives it a halo, and a picture value is cut at white per channel, so a plain multiple of the glow colour turned every
- * lit key pale (an orange key at 3 x (1, 0.3, 0.1) shows as pale yellow). Raising the colour to a power first keeps
- * the weaker channels low: the same key shows as a bright, saturated orange, and its halo is orange. Unknown ids glow
- * a neutral warm white. Returns the intensity; `out` receives the colour. */
+/** The motor-strip highlight distinguishes activation. */
 export function areaNeonInto(regionId, v, gain, out, look = AREA_LOOK, glow = GLOW) {
   const a = lookupArea(regionId);
   const c = a ? a.glowLinear : NEUTRAL_GLOW;
@@ -1039,10 +1025,7 @@ export const MUSCLE_LOOK = freeze({
 export const BODY_CEL_EARLY = freeze({
   bands: freeze([0.42, 0.74, 1.04]), soft: 0.05,
 
-  // (0.08 and 0.34 before: the side of a muscle away from the light was nearly black) and the six tones are 0.07
-  // lighter (MUSCLE_TONES), so a resting muscle is a clear salmon with a soft shade, not a dark red-brown.
-  // (20 November 2026, "a little too light": 0.3 / 0.56 / 0.84 -> 0.24 / 0.49 / 0.82; the shade side stays well clear
-  // of the nearly black 0.08 that was "far too dark")
+  // The palette reduces excess brightness.
   levels: freeze([0.24, 0.49, 0.82, 1.1]), boneHigh: 0.9,
 
   // white TENDON parts. At the muscles' 0.08 / 0.34 every fingertip and toe tip turned away from the head-mounted key
@@ -1060,10 +1043,7 @@ export const BODY_CEL_EARLY = freeze({
   farSoft: 0.16,
   deepTint: freeze([0.9, 0.95, 1.07]), deepDesat: 0.55,
   rim: freeze({ at: 0.55, gain: 1.0, colour: freeze([0.8, 0.9, 1.0]), dir: freeze([-0.45, 0.89]) }),
-  // spec: GGX peaks under the key measured from the materials: muscle belly (roughness 0.6) about 0.06, tendon part
-  // (0.4) about 0.3, bone (boneRoughness 0.5) about 0.13. A first try (one step at 0.05, gain 1.25 on bone) turned
-  // every bone face toward the headlight into a white patch that bloomed (the pelvis seen from the eyes).
-  // (19 November 2026, "without very much gloss at all": belly 0.14 -> 0.02, tendonBone 0.26 -> 0.05, and no gloss core.)
+  // The surface has low gloss.
   spec: freeze({ bellyAt: 0.05, tendonBoneAt: 0.1, soft: 0.012, belly: 0.02, tendonBone: 0.05 }),
   gloss: freeze({ coreMul: 0, coreBelly: 0, coreTendonBone: 0, smooth: 0.55, smoothMax: 0.3, speckRad: 0.1 }),
   ink: 0x0b0809,
@@ -1244,6 +1224,7 @@ export const MUSCLE_GROUP_LOOK = freeze({ vary: 0.07, steps: 5 });
 // 16-32.)
 
 
+// The selected hue is rose red.
 // side of every visible contact, OKLab distance; tests/browser-muscle-shades.mjs), three lightness steps left 1 to 13
 // contacts per view drawn nearly equal (under 0.03) and 7 to 44 weak (under 0.06), nearly all inside one group where four
 // or five muscles lie side by side (the forearm's flexors, the triceps' heads, the pectoral's parts and the serratus,
@@ -1285,11 +1266,6 @@ export const MUSCLE_GROUP_LOOK = freeze({ vary: 0.07, steps: 5 });
 // body read redder than the group tones of section 168 (drawn and looked at: the chest crimson); with the quieter step
 // cheap the largest muscles took it (the sternocostal chest a dusky wine-rose). Now every warm step costs the same, a
 // muscle takes one only where a long contact needs it, and two thirds of the muscles keep their group's own colour.
-// The cost is paid in separation (counted on the recorded lights, the lights from half of the views and the contacts
-// of the other half, four splits summed, about 9 800 contacts: costs 1e-4 and 0.01 with the lights 54 nearly equal and
-// 604 weak, 115 muscles on a warm step; 0.01 and 0.01: 66 and 680, 82 muscles; 0.03 and 0.03: 84 and 732, 55 muscles;
-// without the lights 145 and 1 024): lower the two costs for more separation and a redder, duskier body.
-// 22 November 2026 (a check of the above, confirmed by a second reviewer, and the owner's colour rule: rose red, no
 
 // (the rectus abdominis 246, 175, 172 where update 63 had 216, 120, 124; the tibialis anterior, the gracilis, the short
 // head of the biceps) and the dark ones a dusty MAUVE that went grey-brown in shade (the clavicular and abdominal

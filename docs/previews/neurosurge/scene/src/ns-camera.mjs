@@ -69,7 +69,7 @@ export const CAMERA_VIEWS = Object.freeze(['first', 'third']);
 /** The view key (KeyboardEvent.code, layout independent) and its label for the Esc page / intro. */
 export const VIEW_KEY_CODE = 'KeyE';
 export const VIEW_KEY_LABEL = 'E';
-/** Plain text proposals for ns-text (R17: simple words; the integrator owns ns-text). */
+/** Plain text proposals for ns-text (simple words; the integrator owns ns-text). */
 export const VIEW_TEXT = Object.freeze({
   controlsRow: Object.freeze(['E', 'see your body from behind (third person). Press E again to look out of your own eyes']),
   thirdPersonBadge: 'Seen from behind · E: back to your eyes',
@@ -165,12 +165,7 @@ export const FIRST_PERSON = Object.freeze({ position: Object.freeze([0, 0, 0]), 
 
 
 
-/* 19 November 2026, after a check ("the whole torso visible at the start" was not met: the shoulders were cut by the
- * lower edge; and at far side looks the near plane, which stood at the eye's own plane, cut your neck and shoulder
- * open): backM 0.3 -> 0.5 and upM 0.1 -> 0.14: from further back your whole front, both shoulders included, is inside
- * the lower part of the start picture under the strip (the launcher has the layout). nearBehindEyeM 0 -> null: the
- * near plane is the scene's own again and cuts nothing; your head and neck are left out above the collar by the
- * scene (ns-scene-three EYE_COLLAR: a box that is not drawn and a plain cap), the same from every look. */
+/* The opening composition includes the torso. */
 
 
 
@@ -181,10 +176,7 @@ export const EYE_DOLLY = Object.freeze({
   standPitchMaxDeg: -25, standYawMaxDeg: 110,
 
 
-  // degrees down: about a quarter of the travel, and under half a centimetre for each degree of look)
-  // (and then: "there should essentially be no zoom effect when moving ... the camera view up and down ... There can be
-  // some ... zoom effects when we're doing WASD": downShare 1 = the look's pitch moves the camera no nearer at all; the
-  // stand-off is one length at every look again. A zoom tied to the keys is not built; the rule stays here for it.)
+  // Vertical look does not change the viewing scale.
   downFromDeg: 27, downToDeg: 75, downShare: 1,
   zRefM: null, nearBehindEyeM: null
 });
@@ -434,7 +426,7 @@ export const THIRD_PERSON = Object.freeze({
 /**
  * A coarse, hand-placed keep-out proxy of the SEATED upper body (BodyParts3D mm relative to the eye, i.e. add eyeBp;
  * radius mm): the FALLBACK when the scene gives no posed-mesh bounding spheres (opts.avoid). Not a measurement. The
- * measured path is the scene's own spheres (round5/R5-camera-NOTES.md: 369 posed body / face / arm spheres; with them the
+ * measured path is the scene's own spheres (development check: 369 posed body / face / arm spheres; with them the
  * shipped boom kept >= 0.498 m and a forced 0.45 m boom >= 0.073 m from every drawn vertex). The 'head' sphere also
  * decides when the head is drawn in place (headInPlace); the eye lies inside it and the measured face meshes reach
  * about 6 cm behind the eye (this packet has no parietal or occipital bone).

@@ -295,10 +295,7 @@ export const SPACE_GESTURE = Object.freeze({ tapMaxMs: 250, doubleTapMs: DOUBLE_
  *   sentTurn a turn step was sent since the game last answered (so a press right after it cannot take hold first) */
 export const noSpaceGesture = () => ({ role: null, downMs: null, grasp: 'none', turn: 'none', tapMs: null, behind: false, holding: false, turning: false, sentTurn: false });
 const SPACE_ROLES = Object.freeze([null, 'grasp', 'release', 'turn', 'wait']);
-/** R558 (genuine note R31: "if we click on the brain or body and if we drag it ... it will orbit, shift by how much we
- * drag"): a press that began on the brain or the mirror body and then moves this many CSS px or more is a DRAG (it
- * turns that item about its centre, in proportion to the movement); a press that moves less is a CLICK (it switches on
- * what is aimed at) and is delivered when the button is let go. The items a drag can turn. */
+/** A drag of at least five CSS pixels rotates the selected item in proportion to pointer travel. Releasing a shorter press delivers a click. */
 export const DRAG_CLICK_SLOP_PX = 5;
 export const DRAG_TARGETS = Object.freeze(['brain', 'mirror', 'limb']);
 
@@ -668,7 +665,7 @@ export function createControls({
     return { ...state, pitch, lookMs: Number.isFinite(timeMs) ? timeMs : state.lookMs === undefined ? null : state.lookMs };
   }
 
-  /** R5-input (R22, D18): the E key: queue { type: 'view', seq } (a request to switch first person <-> third person;
+  /** R5-input (D18): the E key: queue { type: 'view', seq } (a request to switch first person <-> third person;
    * the camera owner decides and answers with setLook). Releases nothing: W/A/S/D, Space and double-tap Space keep
    * working in both views. */
   function toggleView(state, timeMs) {
@@ -854,9 +851,9 @@ export function createControls({
     buttonUp,
     tap,
     buttonState,
-    // R558 (R31): press-and-drag on the brain or the mirror body
+    // press-and-drag on the brain or the mirror body
     dragStart, dragMove, dragEnd, takeDrag, dragState,
-    // R17: hold-and-move (a grasp that holds an item takes the pointer movement)
+    // hold-and-move (a grasp that holds an item takes the pointer movement)
 
     setReach,
 
@@ -869,7 +866,7 @@ export function createControls({
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// R5-input (R20 / R23, D16 / D19): 3D compass-arrow interaction (pure; no DOM)
+// R5-input (, D16 / D19): 3D compass-arrow interaction (pure; no DOM)
 // ---------------------------------------------------------------------------------------------------------------------
 
 const isTarget = t => typeof t === 'string' && ARROW_TARGETS.includes(t);
@@ -1406,7 +1403,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
       return;
     }
     if (code === VIEW_CODE) {
-      // R5-input (R22): first person <-> third person. Not in a text field or on a page control (the page keeps it).
+      // R5-input: first person <-> third person. Not in a text field or on a page control (the page keeps it).
       if (e.altKey) return;
       e.preventDefault();
       if (e.repeat === true || typeof controls.toggleView !== 'function') return;
@@ -1629,7 +1626,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
     const behind = reachOf(e);
     syncReach(e);
     if (isLocked()) {
-      // R558 (R31): a press with the crosshair on the brain, the mirror body or one of your own limbs may become a drag
+      // a press with the crosshair on the brain, the mirror body or one of your own limbs may become a drag
       // that turns it. Its click is then held back until the button is let go (and dropped if the press became a drag).
       // Any other press (empty space, an arrow) is a click at once, exactly as before.
       const t = dragTarget(null, behind);
@@ -1662,7 +1659,7 @@ export function bindDom(target, controls, getState, setState, options = {}) {
       if (!lockPending) requestLock();
       return;
     }
-    // R558 (R31), free pointer (the browser refused to capture it): a press on the brain or the mirror body may become a
+    // R558, free pointer (the browser refused to capture it): a press on the brain or the mirror body may become a
     // drag that turns it instead of a drag that turns the look; its click waits for the release, as above.
     const t = dragTarget(local, behind);
     if (t) { pressDrag = true; dragging = false; apply(s => controls.dragStart(s, t.target, { behind, binding: t.binding })); }

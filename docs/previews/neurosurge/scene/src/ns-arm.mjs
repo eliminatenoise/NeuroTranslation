@@ -72,16 +72,7 @@ const fail = (code, message) => { throw new Error(`ns:${code}: ${message}`); };
 
 export const HAND_Y_NDC = -0.28;
 
-/**
- * Elbow pole direction in the BODY frame (world axes at body yaw 0: +x the person's right, +y up, +z backward): DOWN and
- * OUT (about 27 deg lateral of straight down, to the left of the left shoulder) and slightly back. The user moved the hand to three quarters
- * height "so that you can see more of the arm": with the elbow down the forearm rises from the bottom of the screen to
- * the hand (about 90% of the forearm in view at look 0/0, the elbow just below the bottom edge, and the elbow plus a
- * quarter to two thirds of the upper arm in view when looking 30-60 deg down). A lateral pole ([-0.9, -0.35, 0.25],
- * tried first) gave wider pose-independent A/D ranges but threw the elbow off the left edge and showed only ~43-57% of the
- * forearm; straight down ([-0.15, -1, 0.1]) gave the same view with a narrower W/S window (U3a notes, pole sweeps).
- * Every shoulder report of the sweeps stayed inside SHOULDER_LIMITS.
- */
+/** The arm remains visible in the opening view. */
 export const BODY_POLE_DIR = Object.freeze(normalize([-0.45, -0.9, 0.15]));
 /** Pole for an OVERHEAD reach (elbow out to the side): armAttachment blends BODY_POLE_DIR toward it by
  * smoothstep over POLE_OVERHEAD_ELEVATION_DEG of the anticipated humeral elevation (see GIRDLE_ELEVATION), so looking
@@ -149,7 +140,7 @@ export const ARM_DEFAULTS = Object.freeze({
   // R5-input: the W/S wind-up guard (fitHand depthLimits.maxDepth) ends at the anchor window's far end, where the game
   // keeps a held W's intent, instead of the arm's full reach along the ray (fitHand, WS_GUARD_SNAP_M). false = round 4.
   wsGuardAtWindow: true,
-  // R5-pronation (R27): the palm turn shared by the forearm, the shoulder, the shoulder blade and the upper trunk
+  // R5-pronation: the palm turn shared by the forearm, the shoulder, the shoulder blade and the upper trunk
   // (ROTATION_COUPLING; false = round 4: the forearm alone turns).
   rotationCoupling: true,
   // R558 (Space dance): an extra outward (+) / inward (-) turn of the whole arm about the shoulder -> hand-centre line
@@ -166,13 +157,7 @@ export const ARM_DEFAULTS = Object.freeze({
 
 
 export const HUMERAL_ROTATION_RANGE_DEG = Object.freeze([-70, 90]);
-/**
- * 18 November 2026, late (the limb switch turns the whole arm over, ns-dance ARM_TURN; "make sure limbs can't be put
- * into impossible positions"): the game arm's upper-arm turn range at the arm's present elevation, the pair of the right
- * arm's rule (ns-body COMBINED_RANGE.shoulder, ns-dance shoulderTurnRange): HUMERAL_ROTATION_RANGE_DEG up to shoulder
- * height, narrowing to +-30 with the arm straight up (the joint is close-packed there). The elevation is that of the
- * shoulder -> hand line in the body frame (shoulderReport's convention: 0 = hanging straight down). Pure.
- */
+/** Joint limits constrain the arm pose. */
 export function humeralRangeAt(targetCam, shoulderCam, bodyToCamera = null) {
   const d = sub(targetCam, shoulderCam), n = length(d);
   if (!(n > 1e-9)) return HUMERAL_ROTATION_RANGE_DEG;
@@ -425,7 +410,7 @@ export const PRONATION_EASE_S = 0.4;
 export const PRONATION_EASE_S_REDUCED = 0.15;
 
 /**
- * R5-pronation (R27): how the double-tap palm turn is shared by the forearm, the shoulder joint, the shoulder blade and
+ * R5-pronation: how the double-tap palm turn is shared by the forearm, the shoulder joint, the shoulder blade and
  * the upper trunk ("normal joint mechanics"; display choices, cited from memory, Root reference qualification pending).
  *
  * The commanded palm turn T (joints.forearm_pronation, +80 palm down .. -80 palm up, eased by ns-actions / stepPronation)
@@ -876,7 +861,7 @@ function rayInterval(ctx, xNdc, o, tanHalf, aspect) {
   return rayIntervalM(dMin, dMax, xNdc, o.yNdc, tanHalf, aspect, sh.shoulderCam, o.minDepth);
 }
 
-/* ------------------------------------------------------------------ R5-pronation: the coupled palm turn (R27) */
+/* ------------------------------------------------------------------ R5-pronation: the coupled palm turn */
 
 /** Reach kept inside the coupled arm's own reach ends (m), so the solve there stays reachable although the shoulder's
  * share psi (a function of the elbow angle) differs a little between the end pose and the solved pose. */
@@ -2062,7 +2047,7 @@ export function fitHand(rig, boxes, request, viewport, options = {}) {
   // envelopeReach.maxDepth), not at the arm's full reach along the ray (iv.hi, 0.6-1.4 mm deeper). The game keeps a held
   // W's intent at win.far (ns-app nextReach), so with the guard at iv.hi every frame stepped the request past win.far,
   // stepReach reset its ramp level at the guard, and the shown hand alternated between two depths 0.6-0.7 mm apart at the
-  // W limit on every screen (harness/run-R5-input-r2-tools/jitter-probe.mjs; round5/R5-input-NOTES.md). Now a held W
+  // W limit on every screen (harness/run-R5-input-r2-tools/jitter-probe.mjs; development check). Now a held W
   // rests at win.far, the depth where the hand also rests after W is let go (it used to step back 1.4 mm on release).
   // Unchanged: the S end, the A/D range, the rest depths and the intent range [win.near, win.far]. A hand already more
   // than WS_GUARD_SNAP_M beyond win.far (pushed by its pose) keeps its own depth as the limit, so S starts from it.
@@ -2396,7 +2381,7 @@ export function rampAxis(l0, k, h, rampS = REACH_RAMP_S) {
  *    the elbow change of a sideways sweep. Measured on the real rig and app (harness/run-R3-arm-probe-1/probe.mjs, 30
  *    timing variants of the e2e S21 protocol at the e2e look yaw 1.2 / pitch 0.1), minimum NET elbow change A / D:
  *    round 2 0.92 / 3.74 deg; R3 rest pose with the +12 sign 2.33 / 4.77; this convention with the input ramp
- *    3.84 / 7.13 (round3/R3-arm-NOTES.md). The sideways term follows the forearm turn (times sin(forearm_pronation),
+ *    3.84 / 7.13 (development check). The sideways term follows the forearm turn (times sin(forearm_pronation),
  *    +1 palm down, -1 palm up, 0 at mid-turn), so the hand tilts the same way on screen and the wrist keeps working with
  *    the elbow in both forearm states.
  * Capped at maxDeg; the whole-hand fit may still limit it (fitHand clamped.wrist).

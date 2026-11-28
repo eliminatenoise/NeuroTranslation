@@ -127,14 +127,7 @@ export const OUTLINE = Object.freeze({
 
 
 
-// 22 November 2026 (LOOK2; hunt of update 64 H24: "At picture quality Low the brain's outline and the arrows show pale
-// and dark specks that sparkle as the look moves"): ssByLevel [2, 2, 2, 2, 1, 1] -> 2 at every level. The levels the
-// last two now name are lite-0.7 and lite-0.6 (scale 0.7 and 0.6, not 0.5 / 0.4 as the comment above still says), and
-// at one sample per pixel the 1-px ink of the brain's outline (scaled with the heartbeat's swell on the screen) landed
-// a pixel inside the shell's edge in places, leaving its outermost pale pixels over the black: a broken pale line that
-// changed with every pixel the look moved. The reproducer's browser check: 2 x 2 ink with multisampling (ns-scene-three
-// antialiasFor, now on at Low too) makes Low as clean as High; either alone does not. Cost: at lite-0.6 the ID pass
-// draws 0.6 x 0.6 x 4 = 1.44 of the screen's pixels (the full level draws 4).
+// Low-quality outlines avoid isolated bright and dark pixels.
 export const OUTLINE_AA = Object.freeze({ ssByLevel: Object.freeze([2, 2, 2, 2, 2, 2]), maxSsPixels: 16.7e6 });
 
 /** Depth shading (soft ambient occlusion from the outline pass's own depths; display choices, see the O report).

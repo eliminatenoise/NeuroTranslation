@@ -297,7 +297,7 @@
   .ns-shell-toast { bottom: auto; top: calc(100% - var(--ns-info-portrait-vh, 36vh) - 12px); left: 12px; transform: none;
     max-width: calc(100% - min(var(--ns-portrait-notice-px, 320px), var(--ns-portrait-notice-vw, 86vw)) - 36px); text-align: left; }
 }
-/* Fallback far-right information overlay (R14): what is happening neurophysiologically for the viewed area. It sits
+/* Fallback far-right information overlay: what is happening neurophysiologically for the viewed area. It sits
  * just left of the HUD's right column (neurosurge.css .ns-panel: min(300px, 26vw) at the right edge), so it never
  * covers the HUD's always-visible honesty lines; it never takes pointer events. ns-scene-three may replace it. */
 .ns-info {

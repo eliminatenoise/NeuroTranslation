@@ -166,7 +166,7 @@ export const JOINT_SEMANTICS = deepFreeze({
 //      face text names a muscle that neither this list nor BodyParts3D has);
 //   3. fill `source` and the ZANATOMY citation (verified: true once R5-face has confirmed the page, file and licence);
 //   4. update the technical-layer pin in tests/unit/R3-text-bodymap.test.mjs (the loaded value is in
-//      round5/R5-text-NOTES.md and in R3-text-bodymap's FACE_LOADED_SHA256).
+//      development check and in R3-text-bodymap's FACE_LOADED_SHA256).
 /** The face-muscle packet record. muscles: the concept names the packet is EXPECTED to carry (R5-face selection table
  * acquisition/face-r1/tools/selection.py, read 2026-11-09, PRELIMINARY), both sides, plus the unsided and whole-muscle
  * aliases the map's action lists use ("procerus", "orbicularis oris", "left masseter", "left lateral pterygoid",
@@ -1542,8 +1542,7 @@ const PLAIN_ACTION = {
   neck_turn_left: () => ({ plainLabel: 'Turn head to the left', pull: 'a right side-neck muscle and a left back-of-neck one', relax: 'a left side-neck muscle and a right back-of-neck one' }),
   neck_turn_right: () => ({ plainLabel: 'Turn head to the right', pull: 'a left side-neck muscle and a right back-of-neck one', relax: 'a right side-neck muscle and a left back-of-neck one' }),
   neck_side: c => ({ plainLabel: `Tilt head to the ${c.S}`, pull: `side-neck muscles on your ${c.S} side`, relax: `side-neck muscles on your ${c.So} side` }),
-  // R5-integrate-core (D20 "plain names with the technical name in brackets"): with the face-muscle packet loaded (c.face) the
-  // face and jaw cards name the muscles the game now draws: the plain group first, the technical names in brackets.
+  // The control text pairs common names with anatomical terms.
   brow_raise: c => ({ plainLabel: 'Raise both eyebrows', pull: c.face ? 'the forehead muscle (frontalis)' : 'the forehead muscle', relax: c.face ? 'frown muscles between the eyebrows (corrugator, procerus)' : 'frown muscles between the eyebrows' }),
   brow_lower: c => ({ plainLabel: 'Frown', pull: c.face ? 'frown muscles between the eyebrows (corrugator, procerus)' : 'frown muscles between the eyebrows', relax: c.face ? 'the forehead muscle (frontalis)' : 'the forehead muscle' }),
   eye_open: () => ({ plainLabel: 'Open both eyes wide', pull: 'eyelid-lifting muscles (levator palpebrae)', relax: 'ring muscles around the eyes' }),
@@ -1990,14 +1989,7 @@ const LEFT_WRIST_SIDE_PLAIN = 'The hand bends sideways at the wrist, pulled by t
 const NECK_CHOICE_PLAIN = 'This is a game choice: each half of the brain turns the head toward the other side (each ' +
   'hemisphere, opposite side). Which half really drives head turning is not known (unresolved).';
 /** Action plain notes (restating `note`), keyed like PLAIN_ACTION. */
-// R4-fix (review SL4-1): the body sits (round 4): knees bent about 45 deg, the right elbow bent about 85 deg on the
-// armrest, the right palm mostly down. These notes said the round-3 standing pose "starts out straight".
-// R558 (notes of 11 November 2026, "start with the limbs fully straight out", then "out straight forward" and "like a
-// stick"): the body sits on an invisible ground with every limb straight forward (ns-body BODY_POSTURES.open), so the
-// knees and the right elbow start straight and the right palm faces down.
-// 18 November 2026 (SMALL, audit S19): the body now lies back as on a sofa (BODY_POSTURES.open); the words that still
-// said "long sitting", "you sit with your legs straight out" or "the arm starts straight out in front" are reworded,
-// and the palm notes no longer say which way the palm starts (the limb switch and the start turn numbers decide it).
+// The opening pose extends the limbs.
 const PLAIN_NOTE = {
 
   knee_flex: () => 'Your thigh stays where it is and your lower leg swings down and back under it, all the way. ' +

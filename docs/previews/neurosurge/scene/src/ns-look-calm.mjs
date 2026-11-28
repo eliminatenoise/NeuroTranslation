@@ -7,22 +7,7 @@
 
 const freeze = Object.freeze;
 
-/**
- * AREA_WALK_QUIET (hunt of update 64, H18: "Holding Left or Right arrow lights block after block about 4 to 5 times a
- * second: a run of white flashes at the crosshair"). Each accepted step of a held arrow key (ns-controls
- * AREA_KEY_REPEAT_MS, then 180) put the look on a new block, and a look that arrives on a block switches it on at once: every
- * block passed flared white for up to 0.4 s and was cut by the next step, about 4.4 flares a second at the same spot.
- * The walk stays as it was (the look still moves one block per step, the block under the look still shows the look's
- * soft glow and its card); what changes is that the blocks PASSED while the key is held are not switched on: from the
- * key's first auto-repeat the gaze is recorded silently (as during a neck movement's carry, CARRY_ARRIVAL), and when
- * the key comes up the block the look stopped on is met as an arrival and switches on, once. A single press (no
- * repeat) switches its block on at once, as before.
- *  - keepMs: the walk also ends when no held key repeat has come for this long (a lost key-up: the window lost focus,
- *    the browser ate the release). Longer than the controls' repeat gate (AREA_KEY_REPEAT_MS 270; with a 33 ms key
- *    repeat a held repeat comes through every 297 ms) and than a slow key repeat (about 400 ms at 2.5 a second). Every
- *    repeat counts, also one the app's queue drops while the steps wait (a neck movement's swing).
- * on: false = every block passed switches on, as before. A rule of this game, nothing measured.
- */
+/** Holding a navigation arrow suppresses repeated gaze flashes. */
 // (22 November 2026, second pass: keepMs 450 -> 600, with the controls' gate at 270 ms a held step comes about every
 // 300 ms, and every held repeat now counts, also one the app's full queue drops while the steps wait)
 export const AREA_WALK_QUIET = freeze({ on: true, keepMs: 600 });
@@ -58,19 +43,7 @@ export function walkUiEvent(ev, queued = 0, limit = 2) {
   return { push: area && queued < limit, held: area && ev.held === true, released: Boolean(ev && ev.type === 'areaUp') };
 }
 
-/**
- * FOCUS_RING (hunt of update 64, H19: "A 2-pixel light-blue frame is drawn round the whole game picture during play").
- * The canvas's keyboard focus ring (preview.css `.ns-canvas:focus-visible`) is for players who use the keyboard alone:
- * since 17 November nothing is clicked before the game focuses its canvas by script, so the browser counted that focus
- * as keyboard focus and drew the ring round the whole picture for the whole session, for mouse players too, and again
- * after every resume by mouse. The rule now follows the browser's own idea of focus-visible, kept by the game: once the
- * pointer is used on the page (a press of a mouse button, a pen or a finger) the ring is not drawn on the canvas; a Tab
- * key (moving focus by keyboard) brings it back. The game's own keys (arrows, W A S D, Space, numbers, E, M, R) do not:
- * they play, they do not move focus. Every other control keeps its own ring. Before any pointer use (a keyboard player
- * from the start) the ring shows as before.
- *  - attr: the data attribute on the document's root element ('pointer' while the pointer was used last).
- * on: false = the ring whenever the browser says focus-visible, as before.
- */
+/** Show the canvas focus indicator during keyboard interaction. */
 export const FOCUS_RING = freeze({ on: true, attr: 'data-ns-input', movePx: 4 });
 
 /** The input that decides the canvas's focus ring after an event (pure): 'pointer' after a pointer press, 'keys' after

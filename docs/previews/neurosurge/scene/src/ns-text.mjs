@@ -19,7 +19,7 @@
 //  - The e2e honesty regexes (e2e/requirements.e2e.mjs HONESTY, OVERCLAIM, CONTROL_TOPICS, INFO_TOPICS) are met by the
 //    plain wording itself (tests/unit/R3-text-honesty.test.mjs runs them on this module).
 //
-// Round 5 (R5-text, 2026-11-09; the user's overhaul of 2026-11-08T21:54Z, R19-R24): wording for the E key (third person,
+// Round 5 (R5-text, 2026-11-09; the interface update ): wording for the E key (third person,
 // VIEW), the 3D compass arrows round the brain and the mirror body (ARROWS; the round-4 ORBIT captions stay for the HUD
 // buttons until they are retired), the mirror body (MIRROR, mirrorInfoCard), the brain-to-muscle glow (GLOW, glowNote),
 // the lifted outer muscles (BODY_WORLDS), the face and chewing muscles (FACE_R5, faceLayerText, faceAttributionLine)
@@ -105,7 +105,7 @@ export const HONESTY = deepFreeze({
     more: 'The visible crown of the precentral gyrus is thought to be largely premotor (BA6); most primary motor cortex ' +
       '(BA4) lies in the anterior bank of the central sulcus, which is not shown separately.'
   },
-  // R558 (genuine note R26: "no floating face at the top"): the separate own-face display is gone; the face is on the
+  // The interface omits the separate face overlay.
 
   // FIRST_PERSON_BODY): the ordinary view draws only what is in front of your face. R558 (notes of 2026-11-11): the
   // picture is taken from between the eyes, the whole body is solid, and the body sits with every limb straight forward.
@@ -130,7 +130,7 @@ export const HONESTY = deepFreeze({
       'were fitted to the frontal, temporal and facial bones; where they would lie inside the parietal or occipital bone ' +
       'they are drawn lifted onto its outer surface (display only, in memory; their shape and thickness are kept).'
   },
-  // R558 (genuine note R31): what a tap on a muscle does and does not show.
+  // what a tap on a muscle does and does not show.
   muscleTap: {
     id: 'muscle-tap',
     plain: 'Clicking a muscle switches on the game’s whole motor area for that body part, the same one you can look ' +
@@ -207,8 +207,7 @@ export const CORE_HONESTY_IDS = Object.freeze(['H1-simulated', 'H2-unitless', 'H
 export const BRAND = deepFreeze({
   name: 'NeuroSurge',
   /** What the game is, in one plain line. */
-  // R4-fix (review SL4-3): "everything in it is made up" also called the CC BY anatomy (real 3D bone and muscle shapes)
-  // invented; the made-up parts are the brain signals and the muscle activity.
+  // The anatomy meshes come from an atlas. Muscle and brain activity are simulated.
   tagline: 'A first-person game about how your brain moves your body. The brain signals and muscle activity in it are ' +
     'made up by the computer (simulated).',
   /** The model-name rule, always with its not-validated qualifier. */
@@ -490,7 +489,7 @@ export const SHELL = deepFreeze({
   invertY: 'Flip up and down (invert Y)',
 
   crosshairCaption: 'Also show the name next to the crosshair (the “Looking at” card always shows it)',
-  // R558 (genuine note R28): the keyboard picture on the start page and the Esc page. Short words sit on the keys; the
+  // the keyboard picture on the start page and the Esc page. Short words sit on the keys; the
   // two lines under the picture say the same in full. Every key named here is a key the game really handles.
   keyboard: {
     title: 'Where the keys are',
@@ -574,8 +573,7 @@ export const QUALITY_LABELS = deepFreeze({
   low: 'Low (for slow computers)'
 });
 
-/** R558 (genuine note R26): the face-view choice is retired. The floating own face (a see-through layer or a small
- * box) is no longer offered; the mirror body shows the face. Only 'off' remains, so an old saved choice has no name. */
+/** The separate face view is disabled. */
 export const FACE_VIEW_LABELS = deepFreeze({ off: 'Off' });
 
 /* ------------------------------------------------------------------ HUD */
@@ -900,8 +898,7 @@ export const INFO = deepFreeze({
   // (21 November 2026, section 189: the forearm now twitches against its stop there, so "nothing moves now" was untrue)
   alreadyDown: ' (your palm is already down, so it does not turn further)',
   alreadyUp: ' (your palm is already up, so it does not turn further)',
-  /** R558: this movement moves nothing now (a left-arm movement: an elbow already straight; 20 November 2026, Message
-   * 206: a body movement always moves). (bringsBack, "the first time only brings it back", is gone with the latch.) */
+  /** This label describes a movement already at its limit. */
   alreadyThere: ' (already there, so nothing moves now)',
 
 
@@ -1305,18 +1302,16 @@ export const LEGEND = deepFreeze({
   licenceLinks: ['Licence: CC BY 4.0', 'BodyParts3D licence page (DBCLS)', 'BodyParts3D source']
 });
 
-/** R558 (R26): the floating own-face display and its captions are removed. The keys stay (the renderer reads them when
+/** the floating own-face display and its captions are removed. The keys stay (the renderer reads them when
  * it loads) but are empty, and nothing shows them. */
 export const FACE = deepFreeze({ ghostLabel: '', insetLabel: '' });
 
-/* ------------------------------------------------------------------ R558 (genuine note R31): tapping a muscle */
+/* ------------------------------------------------------------------ tapping a muscle */
 
 /** Where a tapped muscle was: on your own body or on the mirror body (which copies you; it does not swap sides). */
 export const MUSCLE_TAP = deepFreeze({ onYou: 'on your body', onMirror: 'on the mirror body' });
 const brainHalf = h => (h === 'left' ? 'the brain’s left half' : h === 'right' ? 'the brain’s right half' : 'the brain');
-/** The plain line shown after a muscle is tapped. The link is the game's whole-area map (the same one used when you look
- * at the area), so the line says "area" and never names a spot for one muscle. movement: the area's action label when
- * the map moves this muscle, else null (only the area lights). */
+/** The displayed line explains the mapped region. */
 export function muscleTapLine({ muscle, where, area, hemisphere = null, movement = null } = {}) {
   const head = `You tapped ${muscle} ${where}.`;
   const lit = `It switched on the ${area} area in ${brainHalf(hemisphere)}`;
@@ -1447,19 +1442,10 @@ export function mirrorInfoCard({ part = 'other', activity = null, turned = false
 
 
 
-// activity and neural activity and networks and pathways ... from brain to body and body to brain"). The words of the
-// electrical map (the M key; ns-emap). Little text, one chunk: a title and three short lines on the short card (the
-// command going down, the report coming up, one line of honesty); under More detail the route of the area under the
-// look in plain words (the area's own sentences about its fibres where its text has them: emapRouteLines) and what
-// kind of picture this is. Honesty in the four words the game uses: the signal is simulated, the routes are schematic
-// (typical, simplified, drawn by hand, not traced from a scan), nothing was recorded or measured, and the travel is
-// slowed (emapSlowLine states by how much, from the map's own display speed).
-// Later the same day, after a picture of the "more" level: More detail was 26 lines of small type (about 1070
+// The electrical display describes simulated activity between brain and body.
 
 
-// route of the area under the look (one sentence of the area's own, without its bracketed terms, which the
-// information panel beside it gives in full; how the signal goes on; the report; "typical, simplified"), or, before
-// any area was looked at, what kind of picture this is (the bridge, typical paths, simulated and how much slower).
+// The information panel displays the route associated with the selected area.
 export const EMAP = deepFreeze({
   title: 'Electrical map',
   keyHint: 'Press M to hide',
@@ -1558,7 +1544,7 @@ export const BODY_WORLDS = deepFreeze({
  * muscles are still missing (the face packet has only face and chewing muscles). On the mirror body and in the view
  * from behind the head is drawn in place. */
 export const FACE_R5 = deepFreeze({
-  // R558 (R26): no floating own-face display, so no caption for it (keys kept empty for the renderer).
+  // no floating own-face display, so no caption for it (keys kept empty for the renderer).
   ghostLabel: '', insetLabel: '',
   /** Shown until R5-face confirms the exact source, version, author and licence of the face meshes (faceAttributionLine). */
   // TODO(R5-face / integrator): replace with faceAttributionLine(<R5-face ATTRIBUTION-AND-LICENCES fields>).
@@ -1628,11 +1614,7 @@ export function faceAttributionDetail(meta = null) {
     (changes ? ` Changes: ${changes}.` : '') + ` These shapes stay under ${licence}.`;
 }
 
-/** Plain names of the face and chewing muscles (D20: "plain names with the technical name in brackets"), keyed by the
- * R5-face selection slugs (acquisition/face-r1/tools/selection.py, read 2026-11-09, PRELIMINARY). Same everyday words
- * as the body map's muscle groups ("the forehead muscle", "ring muscles around the eyes", "smile muscles", "the ring
- * muscle around the mouth", "jaw-closing (chewing) muscles"). TODO(R5-face / integrator): a slug the final packet adds
- * gets its label from faceMuscleLabel's fallback (the packet's own name) until it is added here. */
+/** The display pairs everyday names with technical ones. */
 export const FACE_MUSCLE_NAMES = deepFreeze({
   frontalis: 'Forehead muscle (frontalis: frontal belly of occipitofrontalis)',
   occipitalis: 'Back-of-head muscle (occipitalis: occipital belly of occipitofrontalis)',
@@ -1728,7 +1710,7 @@ export const GUIDE = deepFreeze({
     // (21 November 2026, evening, FIX63, review of update 63, U6: since the right wrist has its drag, section 183, a drag
     // on the right hand bends the wrist, also sideways; the line said every drag sideways turns the limb)
     dragLimb: "Drag a visible arm or leg to move it. Drag the right hand to bend the wrist.",
-    // 19 November 2026 (the owner's limb keys): the step that teaches the choice of the limb
+    // This step explains the limb-selection keys.
     chooseLimb: "Press 2, 3 or 4 to select another limb, or double click to cycle through the limbs.",
     readInfo: "Press R to change how much information is shown."
   },
@@ -1814,7 +1796,7 @@ export const GUIDE = deepFreeze({
   },
   nice: 'Nice!',
   finished: 'All done! Press Esc any time to see all the controls.',
-  // Esc page: a small "Try this guide" row in Settings (ns-guide wiring, round4/R4-text-NOTES.md).
+  // Esc page: a small "Try this guide" row in Settings (ns-guide wiring, development check).
   cue: {
     simpleHeading: "Simple instructions",
     technicalHeading: "Technical notes",
@@ -1880,9 +1862,7 @@ export const TIP = deepFreeze({
     const l = str(label).trim();
     return l ? `Click: ${l.charAt(0).toLowerCase()}${l.slice(1)}` : 'Click switches it on';
   },
-  /** (A third review: for a muscle the line had no verb, "Click: left temporoparietalis".) What a click on a muscle
-   * does: its brain area switches on (the controls' "Click a muscle"). name: the muscle, for the hold's own tip, whose
-   * title names what is held; without it, for the muscle's own tip, whose title names the muscle. */
+  /** Clicking a muscle activates its mapped area. */
   carryMuscleClick(name) {
     const n = str(name).trim();
     return n ? `Click: switch on the brain area for ${n.charAt(0).toLowerCase()}${n.slice(1)}` : 'Click: switch on its brain area';

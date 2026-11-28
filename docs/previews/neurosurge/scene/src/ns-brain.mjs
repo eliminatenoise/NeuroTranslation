@@ -207,7 +207,7 @@ function ownsU(mi, ui) {
 /** Representative marker DOT geometry in source mm: vertex radius radiusMm, lift liftMm along superior (+z), activeScale
  * x when highlighted. With MARKER_OCTAHEDRON and markerSolid this is the ONE definition both the scene draws
  * (ns-scene-three builds every marker mesh from MARKER_OCTAHEDRON and places/scales it with markerSolid) and the picker
- * intersects (classifyGaze, repair R5: the same transformed triangles, not an inscribed sphere). */
+ * intersects (classifyGaze, repair the same transformed triangles, not an inscribed sphere). */
 export const MARKER_GEOMETRY = Object.freeze({ radiusMm: 0.8, liftMm: 0.8, activeScale: 1.7 });
 /** The drawn marker mesh: a unit regular octahedron (vertex radius 1, vertices on the source axes), 8 outward
  * counter-clockwise triangles, drawn FrontSide. ns-scene-three draws exactly these arrays (as Float32/Uint32 buffers);
@@ -239,7 +239,7 @@ export function markerSolid(marker, active = false) {
  * Ray.intersectTriangle with backface culling). From outside, the first front face hit is the surface entry; a ray
  * starting inside meets only back faces, which a FrontSide mesh does not draw, so it does not hit. */
 export function rayMarkerSolid(rayOrigin, rayDir, solid) {
-  // A2-render R1: scalar form of the R5 arithmetic (identical operations and order, no per-face arrays).
+  // A2-render scalar form of the R5 arithmetic (identical operations and order, no per-face arrays).
   const P = MARKER_OCTAHEDRON.positions, I = MARKER_OCTAHEDRON.indices;
   const c0 = solid.centre[0], c1 = solid.centre[1], c2 = solid.centre[2], s = solid.scale;
   const o0 = rayOrigin[0], o1 = rayOrigin[1], o2 = rayOrigin[2], d0 = rayDir[0], d1 = rayDir[1], d2 = rayDir[2];
@@ -269,7 +269,7 @@ export function rayMarkerSolid(rayOrigin, rayDir, solid) {
 
 /** Inscribed sphere of a marker's drawn octahedron: { centre (source mm, lifted), radius (vertex radius / sqrt 3) }.
  * Every point within it is inside the drawn solid, so it is a guaranteed-inside region for placement checks and test
- * construction. It is NOT the pick target (repair R5: classifyGaze picks the drawn solid itself, markerSolid). */
+ * construction. It is NOT the pick target (repair classifyGaze picks the drawn solid itself, markerSolid). */
 export function markerDot(marker, active = false) {
   const p = vec3(marker && marker.position, 'marker.position');
   const r = (MARKER_GEOMETRY.radiusMm * (active ? MARKER_GEOMETRY.activeScale : 1)) / Math.sqrt(3);
@@ -645,7 +645,7 @@ export function placementForFocus(focusPositions, viewport = {}) {
 /** Default band framing: fill = projected half-extent of the band in the limiting dimension (NDC). Viewports with
  * aspect < compactAspect use compactFill, which leaves room for the compact top/bottom HUD (ns-scene-three HUD_LAYOUT).
  * The 6 m distance keeps the nearest brain point >= 2 m from the camera at these fills (giant-brain near plane).
- * A2-render R1: fill raised from 0.66 / 0.58 to 0.85 / 0.75 so the looked-at strip fills most of the screen (user
+ * A2-render fill raised from 0.66 / 0.58 to 0.85 / 0.75 so the looked-at strip fills most of the screen (user
  * requirement); the crosshair still lands on the band's top surface at yaw = pitch = 0 (frameBand aimOnBand). The
  * R2 history values are kept in BAND_FRAME_R2 for A/B checks. */
 export const BAND_FRAME = Object.freeze({ fill: 0.85, compactFill: 0.75, compactAspect: 1.45, distance: 6 });
@@ -792,13 +792,13 @@ export function placementForBand(focus, { fovYDeg = 70, aspect, frame = BAND_FRA
  * x ~ -0.35) and clear of the forearm, which enters low left. `gap` separates each label from the band box. */
 export const ORIENTATION_ANCHOR_RULE = Object.freeze({
   gap: 0.035, leftY: 0.6, rightY: -0.3,
-  /** R3: alternate positions the HUD may use when the arm (or a panel) covers the primary one (ns-scene-three
+  /** alternate positions the HUD may use when the arm (or a panel) covers the primary one (ns-scene-three
    * placeOrientation). Side labels keep their side of the band and change height; axis labels shift sideways. */
   alternates: Object.freeze({
     right: Object.freeze([Object.freeze({ y: 0.6 }), Object.freeze({ y: 0.15 }), Object.freeze({ y: -0.62 })]),
     left: Object.freeze([Object.freeze({ y: 0.45 }), Object.freeze({ y: 0.3 }), Object.freeze({ y: 0.85 }), Object.freeze({ y: -0.35 })]),
     anterior: Object.freeze([Object.freeze({ x: 0.3 }), Object.freeze({ x: -0.3 })]),
-    posterior: Object.freeze([Object.freeze({ x: 0.3 }), Object.freeze({ x: -0.3 }), Object.freeze({ x: 0.55 })]) // R4: +0.55 clears a right-forward forearm
+    posterior: Object.freeze([Object.freeze({ x: 0.3 }), Object.freeze({ x: -0.3 }), Object.freeze({ x: 0.55 })]) // +0.55 clears a right-forward forearm
   })
 });
 
@@ -1250,7 +1250,7 @@ export function classifyGaze(rayOriginSrc, rayDirSrc, focus, actionsAt, opts = {
     const uDot = Number.isFinite(dotHit.uVertex) ? dotHit.uVertex : Number.isFinite(dotHit.u) ? dotHit.u : null;
     return { kind: 'strip', actionId: dotHit.actionId, point: add(o, scale(d, dotT)), u: uDot, via: 'dot' };
   }
-  // 2. strip (A2-render R1: cached AABB and in-band triangle table; scalar rayTriangle arithmetic, identical results)
+  // 2. strip (A2-render cached AABB and in-band triangle table; scalar rayTriangle arithmetic, identical results)
   const pos = focus.positions, idx = focus.indices;
   const n = pos.length / 3, m = idx.length / 3;
   if (n === 0 || m === 0) return EMPTY();
@@ -1639,19 +1639,7 @@ export function crestStripS(v, turn = MEDIAL_TURN) {
   return t && v < x0 ? t.sTop + (f0 - t.sTop) * (Math.max(0, v) / x0) : f0 + (f1 - f0) * Math.pow(Math.max(0, v - x0) / (f1 - x0), g0);
 }
 
-/**
- * 22 November 2026 (LOOK2; hunt of update 64 H20: "The leg blocks and the upper black block at the top of the strip have
- * jagged, stair-stepped borders"). crestStripS is strongly bent below crestTop (infinitely steep at crestV), and it
- * was applied per VERTEX: the strip coordinate went to the screen as a per-vertex value interpolated in straight lines
- * over triangles of about 2.4 mm (12 to 27 px at the start view), so every border in the leg stretch ran straight
- * inside a triangle and turned at its edges: steps the size of a triangle, at any pixel density (16 to 26 degrees a mm
- * on the crown, against 8 to 15 for the same bend per point). CREST_PER_POINT: the renderer (ns-scene-three
- * patchRegionBorderShaders) and the picker (classifyRegionGaze) take the vertices' coordinate back to the smooth
- * along-gyrus v (crestStripV, the exact inverse), interpolate THAT, and bend it at each point (crestStripS), so the
- * borders follow v's own smooth level lines. The vertices' values, the segmentation and the owner runs are unchanged
- * (crestStripS(crestStripV(s)) = s), so every block keeps its place and its area; at and above crestTop both are the
- * identity, and the medial wall's s (all 0) stays 0. on: false = the straight interpolation, as before.
- */
+/** The boundaries of adjacent leg regions share the same geometry. */
 export const CREST_PER_POINT = freezeR2({ on: true });
 /** The exact inverse of crestStripS (pure): the along-gyrus v whose strip coordinate is s. Below the turn's sTop (a
  * value crestStripS never gives on the strip) and from crestTop on: s - sTop / s itself, so the pair stays continuous
@@ -1686,29 +1674,7 @@ export function crestStripGlsl(name = 'nsCrest', turn = MEDIAL_TURN) {
   ].join('\n');
 }
 
-/**
- * 22 November 2026 (UI4; the hunt of update 64, H20, and what section 198 left: "the purple Left leg block still
- * waves"). The leg blocks lie in the first one or two rings of triangles next to the medial wall, where the along-gyrus
- * v is pinned to 0 on the vertices of whole medial triangles: a staircase. Several block borders cross one triangle
- * there, as parallel straight lines, and all of them turn at its edges, where the field's gradient jumps from one
- * triangle to the next (most where the staircase steps). Measured on the atlas strips (work probe, the borders' turn in
- * the surface's own plane, on the crest that faces up): 11.6 to 12.0 degrees a mm with 11 to 13 kinks sharper than
- * 45 degrees over the leg borders, against 5 to 9 degrees a mm and none to 3 kinks for the arm and face borders far from
- * the wall. STRIP_DRAWN: the strip coordinate that is DRAWN and PICKED per point (the area shader's nsS and
- * classifyRegionGaze) comes, in the leg stretch, from vertex values that keep the gradient as even as they can from
- * triangle to triangle while staying near v (smoothStripDrawnV); the staircase's own vertices are free in it. Which
- * block each triangle is, every area's mm2 (section 176), the anchors and the owner runs keep coming from v itself; only
- * the borders drawn between the blocks move, by a fraction of a triangle. Measured with mu 1, vBand 0.12: 6.9 to 7.0
- * degrees a mm, 1 to 2 kinks; each leg block's drawn area within 2.5 % of before (toes 285 -> 279 and 316 -> 308 mm2,
- * the trunk unchanged). Tried and dropped: a second harmonic solve with a soft, smoothed medial pull (borders longer and
- * kinkier, the toes 15 % larger); v from the distance to a smoothed medial edge (new creases); interpolating with
- * per-vertex gradients (wiggles inside the triangles); smoothing v along its own level lines (kinkier); the same as
- * here with the staircase held at 0 (8 to 11 degrees a mm, 4 to 9 kinks). on: false = the drawn coordinate is v (as
- * before). mu: how strongly the values stay near v (area-weighted); vBand: vertices with v at or above it keep v; vTop:
- * every corner of a triangle that reaches it keeps v too, so from crestTop on (the trunk's end, the arms, the face)
- * nothing is drawn or picked any differently, not even inside a long triangle that spans the band (a shoulder movement's
- * border moved there before this rule); tol / maxIter: the solve. Display layout, not a measured border.
- */
+/** The leg-region border remains smooth. */
 export const STRIP_DRAWN = freezeR2({ on: true, mu: 1, vBand: 0.12, vTop: CREST_COMPRESS.crestTop, tol: 1e-10, maxIter: 3000 });
 /**
  * The drawn along-gyrus value per vertex (STRIP_DRAWN, pure): positions / indices: one strip mesh (source mm); v: its
@@ -2896,7 +2862,7 @@ function stripPositionsList(input) {
  * facing: the frame's facing rotation (null = none). Returns { bound (m, lower bound of the camera-to-brain distance
  * over the orbit limits after scaling), scaleUp (>= 1: multiply k and pivotWorld by it), basis }. Grab carry rotates
  * about the camera and preserves distances, so the bound holds for every carry too. */
-// R22: private reuse of the SAME coverage samples already built by brainClearance.
+// private reuse of the SAME coverage samples already built by brainClearance.
 // No frame JSON field, source-point dump, model advance or second grid construction.
 const frameClearanceCoverage = new WeakMap();
 /** Pure placement constraint, not a new physiological rule. All source sample balls
@@ -3543,7 +3509,7 @@ function frameWholeBrain(strips, {
     }
     return converged;
   };
-  // R5-bigbrain (R25): motor-first fit (see BRAIN_VIEW fit 'motor'). The belt box is centred on motorCentreNdc and its
+  // R5-bigbrain: motor-first fit (see BRAIN_VIEW fit 'motor'). The belt box is centred on motorCentreNdc and its
   // part inside the usable area spans motorFrac of the usable width, capped by the lateral look limit (motorEdgeDeg), the
   // screen (motorMarginPx) and the usable height; the outline may leave the screen (the ends are shown by looking, the
   // orbit arrows and Space-drag).
@@ -3822,11 +3788,7 @@ export function projectedStripBounds(seg, view, { aspect, fovYDeg = 70, yaw = 0,
   return { x0, x1, y0, y1, onScreen: n ? inside / n : 0, behind };
 }
 
-/** Orbit arrow anchors (NDC) a small gap OUTSIDE the strips' projected bounds, NOT attached to the brain: 'forward'
- * above (the anterior is toward the top), 'back' below, 'left' / 'right' at the sides, each at the middle of its side
- * and clamped into [-limit, limit] so the buttons stay clickable when the brain is large or partly off-screen.
- * gapNdc ~0.05 is "a centimetre or a few centimetres" off the brain on a laptop screen. Returns { forward, back, left,
- * right: { x, y, clamped } } or null when the strips are not in front of the camera. */
+/** The target spacing is measured in centimetres. */
 export function orbitArrowAnchors(bounds, { gapNdc = 0.05, limit = 0.93 } = {}) {
   if (!bounds || !Number.isFinite(bounds.x0) || !Number.isFinite(bounds.x1) || !Number.isFinite(bounds.y0) || !Number.isFinite(bounds.y1)) return null;
   const cx = clampAbs((Math.max(bounds.x0, -1) + Math.min(bounds.x1, 1)) / 2, limit);
@@ -4131,14 +4093,9 @@ export function regionVisibility(seg, view, { width = 320, height = 180, fovYDeg
  * until Reset body) become slightly more opaque and shift shade toward `activatedShade`; left-arm regions carry a
  * distinct cyan identity tint and an outline, all other body-part regions a neutral warm-grey tint (alternating
  * lightness by order so neighbours read apart). Activity itself is the shared ns-colors emissive glow. */
-// R4-polish (R11c, R4-player 2.1): the switched-on fill change was too faint to "see which parts of the brain you've
-// activated" (0.7 % of pixels changed after 55 marks). It is now clearly visible and still slight (the unit tests keep
-// the "slightly" bound: under +0.25 opacity per first switch-on): opacity 0.30 -> 0.54 (was 0.44; cap 0.64, was 0.52)
-// and a shade shift of 0.34 toward the warm switched-on shade (was 0.24). The gold edge is unchanged. Evidence: round4/POLISH.md (14-marks before/after), e2e S15 / S44.
+// The overlay distinguishes activated areas.
 export const REGION_STYLE = freezeR2({
-  // R558 (genuine note R32, "clearer"): the motor areas are more solid at rest (0.3 -> 0.56), so their folds and
-  // borders read as tissue rather than as a tint on the glass. A switched-on area is still only a little more solid
-  // than a resting one (0.56 -> 0.68, at most 0.78), as R8 asked ("slightly ... more opaque").
+  // The resting motor-area opacity is 0.56.
   restOpacity: 0.56, activatedOpacity: 0.68, activatedOpacityMax: 0.78, activatedOpacityPerExtra: 0.025,
   activatedShadeMix: 0.34,
   activatedShade: freezeR2([0.88, 0.80, 0.62]),

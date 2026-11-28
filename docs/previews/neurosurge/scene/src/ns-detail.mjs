@@ -92,20 +92,7 @@ export function smoothNormalField(positions, indices, normals, { passes = NORMAL
   return changed;
 }
 
-/**
- * 18 November 2026 (the brief: "bone with its smooth shafts, rougher ends ..., cartilage caps on the joint surfaces in
- * a bluish white"). Two numbers per bone vertex, for the bone's shading (ns-flesh fleshLightGlsl, attribute nsBoneEnd):
- *   x  CARTILAGE: 1 on a joint surface, where another bone's surface comes within capNearMm (articular cartilage
- *      covers exactly the surfaces that meet another bone: the head of the femur in its socket, the condyles, the
- *      kneecap's back, the carpals and the small joints of the hand and foot), falling to 0 at capFarMm; the costal
- *      cartilages (hyaline cartilage from end to end) are 1 everywhere;
- *   y  END: how near the vertex lies to a joint surface along the bone (1 within endNearMm of a cap, 0 from endFarMm):
- *      the epiphysis, whose thin cortex over spongy bone is less smooth than the shaft.
- * Measured on the bones as handed in (one frame: the drawn posture; the joints of the start posture are where the atlas
- * has them, rotated about their own centres). Bones of the skull, the teeth and the hyoid are left out (their joints are
- * sutures, not cartilage caps). bones: [{ id, name, positions, indices }]. Returns Map(id -> Float32Array(2 x vertices)).
- * A geometric estimate for the picture, not a map of real cartilage thickness. Pure.
- */
+/** The surface shader distinguishes bone shafts, ends and cartilage. */
 export const BONE_ENDS = Object.freeze({ capNearMm: 2.5, capFarMm: 7, endNearMm: 6, endFarMm: 28, smoothPasses: 2,
   skip: /\b(skull|cranium|frontal bone|parietal|occipital bone|temporal bone|sphenoid|ethmoid|nasal bone|lacrimal|zygomatic|maxilla|palatine|vomer|concha|tooth|teeth|incisor|canine|premolar|molar|hyoid|mandible)\b/i,
   whole: /\bcostal cartilage\b/i });

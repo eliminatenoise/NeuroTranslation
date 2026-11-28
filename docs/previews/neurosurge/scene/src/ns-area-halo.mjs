@@ -32,44 +32,36 @@
 const glslFloat = x => (Number.isInteger(x) ? `${x}.0` : `${x}`);
 const srgbToLinear = v => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
 
-/** The halo (display choices).
- *  slots: how many areas can throw a halo at once (the looked-at area, the lit one, both hands' and both feet's areas
- *    of a Space grip); with more, the weakest are left out.
- *  lit / look / held: the strength of the halo of a movement that is switched on (x the area's glow strength, so it
- *    rises and ends with the 0.4 s of the contraction: nothing of it stays on the way back), of the area the look
- *    rests on (steady; it starts no movement, no beam and no muscle light), and of an area lit by a Space grip while
- *    it holds.
- *  easeS: the look's halo comes and goes over this time (no pulse; at once under prefers-reduced-motion). The lit
- *    halo is not eased here: it follows the area's own display level, which has its own short rise and fade.
- *  crownMm / bankMm / bankFrom / shoulder / middle / maxHalfMm: the block's shape (haloShape): its crown is its part
- *    up to crownMm of relief depth, a bank ends between bankFrom x bankMm and bankMm of depth (what is seen of it;
- *    deeper, the mesh closes under the surface and would pull the shape into the brain); the crown's two shoulders
- *    are its points in the outer `shoulder` share of its span on each side, its middle those in the middle
- *    `middle` share; the half width is never over maxHalfMm, and a block's width is held between fitLo and fitHi
- *    of what its run of the strip coordinate gives at the strip's own scale (haloFitWidths).
- *  reachWidths / reachMinMm / reachMaxMm: how far past the block's edge the pool reaches before it is gone:
- *    reachWidths block widths, never under reachMinMm (a 3 mm block still gets a pool that is seen) nor over
- *    reachMaxMm. The falloff is (1 - d)^2, so the pool is at a quarter at half the reach: what the eye takes for the
- *    pool is about one block width. (reachMaxMm 16 at first: the look's pool of the wide neck block lay over four of
- *    the narrow finger blocks beside it and turned them from teal to lilac for as long as the look rested there.)
- *  tissue: on the cortex. mix: how far the tissue's colour moves to the halo's colour at the block's edge (x the
- *    strength); gain / lift: the tissue's own light and shade x gain + lift carries that colour (the folds stay); add:
- *    light of the halo's colour added on top, so the pool also shows in the shade of a fold; the result is cut at
- *    display white (haloTissueInto is the same rule in numbers); grazeLo / grazeHi / grazeKeep: where the surface is
- *    seen edge-on the pool keeps only grazeKeep (it smeared into a long stain there).
- *    (22 November 2026, an independent check: in a shadowed fold beside the gold hand block the pool read as a dull
- *    olive stain, not light: the tissue's colour was replaced by the glow's but kept its darkness. mix 0.85 -> 0.6,
- *    add 0.1 -> 0.2: less of the dark replacement, more light of the colour.)
- *  strip: on the neighbouring blocks. add: light of the halo's colour added (x the strength x the falloff): their own
- *    colour stays readable under it (at 0.8 the cyan hand blocks beside a lit pink neck block read lilac). look /
- *    lookReachMm: the share of the LOOK's part they take, and only within lookReachMm past the block's edge (the lit
- *    part has the full reach). (22 November 2026, the check: with the look resting on the wide neck block the cyan
- *    thumb and finger blocks beside it turned violet for as long as the look stayed, the look's part at the full reach;
- *    look 1 -> 0; then 0.6 within 1.5 mm, see below.) The gaps between the blocks and the black blocks take none.
- * Tried and dropped: the halo as more slots of the tissue bloom (ns-brain-live BRAIN_LIVE.bloom): its slots also carry
- * the swell of the vertices, a disc, and ease out over 0.8 s, so the tissue stayed tinted long after the contraction
- * (a browser hunt saw it "turn lilac and fade only slowly"); and the tint as added light only: on the pale cortex it
- * clipped to a near-white stain without the colour. */
+/** The activation colour fades gradually.
+ * The halo (display choices).
+ * slots: how many areas can throw a halo at once (the looked-at area, the lit one, both hands' and both feet's areas
+ * of a Space grip); with more, the weakest are left out.
+ * lit / look / held: the strength of the halo of a movement that is switched on (x the area's glow strength, so it
+ * rises and ends with the 0.4 s of the contraction: nothing of it stays on the way back), of the area the look
+ * rests on (steady; it starts no movement, no beam and no muscle light), and of an area lit by a Space grip while
+ * it holds.
+ * easeS: the look's halo comes and goes over this time (no pulse; at once under prefers-reduced-motion). The lit
+ * halo is not eased here: it follows the area's own display level, which has its own short rise and fade.
+ * crownMm / bankMm / bankFrom / shoulder / middle / maxHalfMm: the block's shape (haloShape): its crown is its part
+ * up to crownMm of relief depth, a bank ends between bankFrom x bankMm and bankMm of depth (what is seen of it;
+ * deeper, the mesh closes under the surface and would pull the shape into the brain); the crown's two shoulders
+ * are its points in the outer `shoulder` share of its span on each side, its middle those in the middle
+ * `middle` share; the half width is never over maxHalfMm, and a block's width is held between fitLo and fitHi
+ * of what its run of the strip coordinate gives at the strip's own scale (haloFitWidths).
+ * reachWidths / reachMinMm / reachMaxMm: how far past the block's edge the pool reaches before it is gone:
+ * reachWidths block widths, never under reachMinMm (a 3 mm block still gets a pool that is seen) nor over
+ * reachMaxMm. The falloff is (1 - d)^2, so the pool is at a quarter at half the reach: what the eye takes for the
+ * pool is about one block width. (reachMaxMm 16 at first: the look's pool of the wide neck block lay over four of
+ * the narrow finger blocks beside it and turned them from teal to lilac for as long as the look rested there.)
+ * tissue: on the cortex. mix: how far the tissue's colour moves to the halo's colour at the block's edge (x the
+ * strength); gain / lift: the tissue's own light and shade x gain + lift carries that colour (the folds stay); add:
+ * light of the halo's colour added on top, so the pool also shows in the shade of a fold; the result is cut at
+ * display white (haloTissueInto is the same rule in numbers); grazeLo / grazeHi / grazeKeep: where the surface is
+ * seen edge-on the pool keeps only grazeKeep (it smeared into a long stain there).
+ * (22 November 2026, an independent check: in a shadowed fold beside the gold hand block the pool read as a dull
+ * olive stain, not light: the tissue's colour was replaced by the glow's but kept its darkness. mix 0.85 -> 0.6,
+ * add 0.1 -> 0.2: less of the dark replacement, more light of the colour.)
+ * strip: on the neighbouring blocks. add: light of the halo's colour added (x the strength x the falloff): their own */
 const LOOK_SET = 0.8, TISSUE_ADD = 0.3;
 export const AREA_HALO = Object.freeze({
   on: true, slots: 6,

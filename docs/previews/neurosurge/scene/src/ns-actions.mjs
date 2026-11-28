@@ -144,7 +144,7 @@ const limits = {
   thumb_ip_flex: range(-20, 70)
 };
 for (const d of DIGITS) {
-  // Repair R2: MCP to 90 and PIP to 105 so the reference-grounded full fist (ns-rig FIST_POSE_DEG) is reachable.
+  // Repair MCP to 90 and PIP to 105 so the reference-grounded full fist (ns-rig FIST_POSE_DEG) is reachable.
   // (21 November 2026, SEEMOVE, tried and dropped: MCP extension to 30 for the fingers' own "Straighten": see
   // ACTION_TARGETS index_extension)
   limits[`${d}_mcp_flex`] = range(-10, 90);
@@ -240,7 +240,7 @@ const RELAX_JOINTS = JOINT_NAMES.filter(j => j !== 'wrist_flex' && j !== 'wrist_
  * wrist flexion with every grasp").
  */
 export const ACTION_TARGETS = Object.freeze({
-  // Repair R2: the full five-digit fist with the thumb folded across the index/middle middle phalanges
+  // Repair the full five-digit fist with the thumb folded across the index/middle middle phalanges
   // (ns-rig FIST_POSE_DEG; qualitative arrangement from Root-accepted pose references, literature-range angles not
   // re-verified here; display rig only, not calibrated contraction or force).
   grasp_close: actionTarget({ ...FIST_POSE_DEG }, { synergy: ['wrist_flex'] }),
@@ -785,25 +785,10 @@ const union = (a, b) => 1 - (1 - a) * (1 - b);
 export const JOINT_LATCH = Object.freeze({
 
 
-  // "it activates heavily relaxes slightly and repeats that process with each further click"): a slower, heavier
-  // spring with far less damping (omega 50 -> 21, zeta 0.35 -> 0.26) and a harder rebound off the end stop (0.4 -> 0.55):
-  // the part gathers speed over several frames, slams into its end, is thrown back a good part of the way and swings
-  // in again two or three times before it holds.
+  // Activation rises on a click and relaxes between clicks.
 
 
-  // there, and the next click drove it in again. The first version of this threw the part BACK on a further click, a
-  // jump in the picture, the wrong way round. The numbers of that time:)
-  //   driveS       seconds a press drives the joint at its full end angle before it eases off
-  //   relax        how far it then eases back, as a share of the swing (and never more than relaxMaxShare of the
-  //                joint's own travel from its start angle, so a small movement stays on its own side)
-  //   relaxOmega   the ease back: a critically damped spring of this frequency (soft, no wobble)
-  //   kick         a press that finds the joint already near its end (a further click, or a movement with little
-  //                travel such as straightening a knee that is nearly straight) gives it this speed toward the end,
-  //                as kick x swing x omega degrees a second: it slams into the end stop and is thrown back off it
-  //   minSwingDeg  the swing a small movement is given for the kick and the ease (a knee 6 degrees from straight
-  //                would otherwise show nothing at all), and never more than minSwingRangeShare of the joint's whole
-  //                range; nearShare: "already near its end" is within this share of the swing from the goal
-  // Under reduced motion none of this happens (the reducedMotion spring has no kick, relax or rebound).
+  // Repeated activation uses the current movement state.
 
 
 
@@ -1214,12 +1199,12 @@ export const ORBIT_DIRS = Object.freeze(['left', 'right', 'forward', 'back']);
  * WITHIN ITS limits, so keep these at or inside BRAIN_VIEW's (createActivity({ orbit }) can pass them explicitly).
  */
 export const ORBIT = Object.freeze({ stepDeg: 15, yawLimitDeg: 60, pitchMinDeg: -30, pitchMaxDeg: 30 });
-/** R5-input (R23, D19): orbit event targets the ACTIVITY applies: only 'brain' (the round-2 orbit above). The mirror
+/** R5-input (D19): orbit event targets the ACTIVITY applies: only 'brain' (the round-2 orbit above). The mirror
  * body's orbit belongs to ns-mirror (R5-mirror: createMirrorState / mirrorOrbitStep / resetMirror); an orbit event or
  * orbitStep for target 'mirror' is refused here so that one state never has two owners (ns-controls stepArrowInput
  * requests carry their target; ns-app routes 'mirror' ones to ns-mirror). */
 export const ORBIT_TARGETS = Object.freeze(['brain']);
-/** R5-input (R21, D17): glow links are listed for levels above minLevel (a fading envelope below it draws nothing). */
+/** R5-input (D17): glow links are listed for levels above minLevel (a fading envelope below it draws nothing). */
 export const GLOW_LINKS = Object.freeze({ minLevel: 0.02 });
 /** R5-input (D17): the plain honesty label of the glow links (the text owner may shorten it; keep its meaning). */
 export const GLOW_LINK_LABEL = 'The glow shows which brain area drives which muscles in this game. It is a picture, not a nerve: ' +
@@ -1245,7 +1230,7 @@ export const DOUBLE_TAP_SECONDS = DOUBLE_TAP_MS / 1000;
 
 
 export const ROTATION = Object.freeze({ defaultState: 'supinated', commandSeconds: 0.5, poseTau: 1 / 16, pronationRangeDeg: 150,
-  // R5-pronation (R27): the pose ease under prefers-reduced-motion (pass createActivity({ rotationTau:
+  // R5-pronation: the pose ease under prefers-reduced-motion (pass createActivity({ rotationTau:
   // ROTATION.reducedMotionPoseTau })): 95 % at about 0.15 s instead of 0.30 s; shorter, still eased (no snap). The whole
   // coupled motion (ns-arm ROTATION_COUPLING: upper arm, shoulder blade, trunk) follows the same eased value.
   reducedMotionPoseTau: 1 / 32 });
@@ -1273,7 +1258,7 @@ export function stepRotationEase(value, speed, goal, h, tau = ROTATION.poseTau) 
 }
 /**
  * Representative forearm rotators by mesh-name fragment (standard anatomy; display roles only, not EMG or force).
- * R5-pronation (R27): `shoulder` lists the shoulder rotators that turn the upper arm with the forearm (ns-arm
+ * R5-pronation: `shoulder` lists the shoulder rotators that turn the upper arm with the forearm (ns-arm
  * ROTATION_COUPLING), by standard muscle roles: toward palm down (pronation) the upper arm turns INWARD (internal
  * rotation: subscapularis, teres major, pectoralis major, latissimus dorsi, the front (clavicular) part of the deltoid); toward palm up
  * (supination) OUTWARD (external rotation: infraspinatus, teres minor, the back (spinal) part of the deltoid). The
@@ -1293,11 +1278,11 @@ export const ROTATION_MUSCLES = deepFreeze({
 /** R5-pronation: display level of the shoulder rotators relative to the forearm turn's display (a display choice: they
  * help, the forearm muscles do most of the turn). Simulated, unitless. */
 export const ROTATION_SHOULDER_LEVEL = 0.6;
-/** R5-pronation (R27, R17): one plain sentence for the panel / Esc page (text owner's choice where), saying what the
+/** R5-pronation (): one plain sentence for the panel / Esc page (text owner's choice where), saying what the
  * coupled palm turn shows and that it is a picture of normal joint movement in this game, not a measurement. */
 export const ROTATION_FOLLOW_TEXT = 'When your palm turns, your upper arm turns at the shoulder too, more when the elbow is straight. ' +
   'Your shoulder blade and upper body follow a little. This shows normal joint movement in this game; it is not a measurement.';
-/** R5-pronation (R17 plain language): plain names, technical name in brackets, for every ROTATION_MUSCLES fragment. */
+/** R5-pronation (plain language): plain names, technical name in brackets, for every ROTATION_MUSCLES fragment. */
 export const ROTATION_MUSCLE_PLAIN = deepFreeze({
   'pronator teres': 'forearm turner near the elbow (pronator teres)',
   'pronator quadratus': 'forearm turner near the wrist (pronator quadratus)',
@@ -2828,7 +2813,7 @@ export function createActivity({
   function showInstructions(s, reason) {
     s.instructions = { visible: true, reason, shownAt: s.t, autoHideAt: null };
     s.paused = true;
-    // Round-2 fix R2: the shell freezes the activity clock while paused, so a tap before the pause and one after it
+    // Round-2 fix the shell freezes the activity clock while paused, so a tap before the pause and one after it
     // could fall inside the double-tap window. A pause or resume always ends the tap chain.
     s.spaceTapAt = null;
     if (s.brainGrab.active) endGrab(s);
@@ -2886,7 +2871,7 @@ export function createActivity({
     s.rotationDisplay = zeroMap(ROTATION_ACTION_IDS);
     s.rotationKeyDisplay = zeroMap(ROTATION_ACTION_IDS);
     s.spaceTapAt = null;
-    // Round-2 fix R1: a released brain stays where the player left it (R4) and the orbit is kept; Reset body clears
+    // Round-2 fix a released brain stays where the player left it (R4) and the orbit is kept; Reset body clears
     // the body only. The separate Reset brain view (ns-app resetBrainView) returns placement and orbit to { 0, 0 }.
     if (s.brainGrab.active) endGrab(s);
     s.seedNextGaze = true;
@@ -2908,7 +2893,7 @@ export function createActivity({
         }
         return;
       case 'muscle': {
-        // R558 (genuine note R31): a tap on a body muscle. The caller (ns-app) names the motor-map region, and the
+        // a tap on a body muscle. The caller (ns-app) names the motor-map region, and the
         // region action that lists the tapped muscle as a mover when the map has one. This starts that area's ordinary
         // one-second pulse, exactly as a click on the area does (same colours, joint movement, gold mark and glow), so
         // nothing new is claimed about the brain: it is the same whole-area link, reached from the muscle's end.
@@ -3473,7 +3458,7 @@ export function createActivity({
   }
 
   /**
-   * R5-input (R21, D17): the glow-link data. For every brain area lit right now (regionActivity > minLevel), which
+   * R5-input (D17): the glow-link data. For every brain area lit right now (regionActivity > minLevel), which
    * muscle groups it drives right now and how strongly, read from the SAME values that colour the muscles (no new
    * science; the body map and the movement map as they are):
    *   - a body (not left-arm) area: each of its actions with a display level (bodyDisplay, the value bodyMuscleDisplay
@@ -3538,7 +3523,7 @@ export function createActivity({
           actionId: a.id, actionLabel: a.label, source, areaLevel, groupLevel, level: Math.min(areaLevel, groupLevel),
           muscles, catalog, meshNames
         });
-        // R5-pronation (R27): a forearm turn also turns the upper arm at the shoulder, so the same area links to the
+        // R5-pronation: a forearm turn also turns the upper arm at the shoulder, so the same area links to the
         // shoulder rotators of that direction (ROTATION_MUSCLES.shoulder, at ROTATION_SHOULDER_LEVEL), as a second link.
         if (r.isLeftArm && a.armActionId !== null && ROTATION_ACTION_IDS.includes(a.armActionId)) {
           const sl = groupLevel * ROTATION_SHOULDER_LEVEL;
@@ -3568,7 +3553,7 @@ export function createActivity({
       ? (state.pulseRotation === 'supination' ? 1 : 0) : rotValue(state.rotationState);
     const muscles = {};
     for (const c of ROTATION_ACTION_IDS) for (const m of ROTATION_MUSCLES[c].agonists) muscles[m] = Math.max(muscles[m] || 0, d[c]);
-    // R5-pronation (R27): the shoulder rotators that turn the upper arm with the forearm, at ROTATION_SHOULDER_LEVEL.
+    // R5-pronation: the shoulder rotators that turn the upper arm with the forearm, at ROTATION_SHOULDER_LEVEL.
     const shoulder = {};
     for (const c of ROTATION_ACTION_IDS) for (const m of ROTATION_MUSCLES[c].shoulder) shoulder[m] = Math.max(shoulder[m] || 0, d[c] * ROTATION_SHOULDER_LEVEL);
     for (const [m, v] of Object.entries(shoulder)) muscles[m] = Math.max(muscles[m] || 0, v);

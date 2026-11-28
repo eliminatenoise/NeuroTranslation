@@ -45,65 +45,27 @@ const f = x => (Number.isInteger(x) ? `${x}.0` : `${x}`);
 const v3 = c => `vec3( ${c.map(f).join(', ')} )`;
 const freeze = Object.freeze;
 
-/** The numbers of the look (all unitless unless a unit is named).
- *  ramp: the light factor L (about 0.14 where only the flat fill reaches, about 1.0 to 1.25 facing the key light) is
- *    mapped by smoothstep(lo, hi, L) ^ curve from the deep level to the high level.
- *  muscle / white: deep and high levels (factors of the albedo) of a muscle belly and of white tissue (tendon parts
- *    and bone: a white digit must not end in a black point, so its deep level stays a light grey-tan), and the tint
- *    the shadow side takes (multiplied in fully at L <= lo, not at all at L >= hi).
- *  fibre: THREE LEVELS of fibres, each a row of rounded bundles lying side by side with a parting between them:
- *    groupMm (bundle groups), bundleMm (bundles) and strandMm (fine strands, seen only when a muscle is close) = their
- *    widths in millimetres at the muscle's typical girth; *RunMm = how far along the muscle one keeps its shade;
- *    amp = the colour change (+-) and shares = how much of it each level carries; partAmp = how much darker the
- *    parting between two bundles is, partShares per level; bumpMm = the height of a bundle of each level in
- *    millimetres; maxSlope = the steepest tilt the bump may give the normal (tangent of the angle); bumpViewFrom /
- *    bumpViewTo = |N.V| between which the bump fades in (it is at full height only on a surface seen from the front:
- *    on a slanted one its flanks turned in and out of the light and drew dark streaks); bumpVary = a bundle's height
- *    goes from the first to the second of these (x bumpMm) with its own shade, so no two neighbours stand equally
- *    proud; widthWaves = the bundles are of UNEVEN width: the fibre number is stretched and squeezed by `share`
- *    (+-, their sum under 1) over a wavelength of 2 pi x acrossMm across the muscle, drifting sideways once in
- *    2 pi x alongMm along it (this is also the fibres' gentle waviness) (third round: the checker saw very even
- *    parallel ridges on the big sheets, "like pleated cloth or corrugated card"); capFrom / capTo = the sine of the
- *    angle between the surface and the muscle's long axis between which the fibres fade in (none on an end cap, where
- *    lines would meet in a star or run in rings); crossFrom / crossTo = the sine of the angle between the fibre lines
- *    and the long axis between which they fade out (the frame cannot give lengthwise lines there: smooth wet muscle
- *    rather than lines that run across); tendonAmp = the share kept on a tendon part;
- *    glowKeep = the share kept on a glowing muscle; fadeFrom / fadeTo = bundles per pixel between which a level fades
- *    out (it is gone before a bundle is two pixels wide: nothing can shimmer); aaPx = the half-width of the edge
- *    between two bundles in pixels (never under edgeMin of a bundle); viewFrom / viewTo = |N.V| between which all of
- *    it fades out on a surface seen edge-on (checker's blocker, 18 November: at a grazing angle the bump broke into
- *    dark blocks that changed from frame to frame; an edge-on muscle is now one clean smooth piece).
- *  wet: gain x the summed highlight, compressed toward max (belly) or maxWhite (tendon, bone); glint = the extra a
- *    peak adds between glintLo and glintHi of the highlight's luminance; partKeep = the share of the highlight a
- *    parting between bundles keeps (the highlight sits on the bundles: a run of streaks, never one round patch);
- *    glowKeep = the share of the highlight a glowing muscle keeps, and it takes the GLOW'S OWN COLOUR there (third
- *    round, the checker: broad yellow and white bands lay over a lit green muscle; yellow share of the lit belly 4 %
- *    in the comic look, 25 % in the second painted build).
- *  rim: gain x a soft (1 - |N.V|) ^ power toward the silhouette on the rim light's side, in `colour`, tinted by the
- *    tissue's own colour (white = the share of plain white in it). film (a wet film at grazing angles all round) is
- *    0: it laid a grey-lilac veil over a muscle seen edge-on.
- *  glowForm: a glowing muscle keeps its form: its glow is multiplied by lo in its deepest shade and hi in full light
- *    (third round: lo 0.6 -> 1.3, and the warm shadow tint is left off a glowing muscle: a lit muscle in shade was a
- *    dull khaki strip, because a dark yellow IS khaki. A glowing thing makes its own light: in shade the glow now
- *    makes up for part of the light that is missing, so shade to light is about 0.45 to 0.9 of the glow colour
- *    instead of 0.2 to 0.9 (lo 2 was tried: the same brightness everywhere, a flat pale colour); the fibres show at
- *    full contrast in the glow, fibre.glowKeep 0.6 -> 1); tint = how far the lit surface itself takes the glow's
- *    hue at the same brightness (the white tendon parts of a glowing muscle become the lightest places of the same
- *    colour); glowTint = how far the glow itself takes that hue (the glow colour carries some white: a yellow
- *    area's muscle in shade was sand-coloured beside its saturated yellow area on the brain; half-way, so the
- *    white-hot moment of the flash stays whiter than the held glow); hueDeepen = the share of the glow colour's
- *    weakest channel taken out of the hue (the hue is the glow colour without most of its white); max = the brightest channel a glowing muscle
- *    may reach: above it the WHOLE colour is scaled down, so the brightest places keep the glow's hue instead of
- *    clipping toward yellow or white.
- *  bone: mottle = the +- shade change of the large-scale mottling, mottleMm = its size, warm = the tint its darker
- *    patches lean to.
- *  Second round, 18 November (the checker measured the first painted build LESS glossy and flatter than the comic
- *  one: tone spread down 9 to 19 %, the brightest muscle pixels almost gone): the curve is steeper and reaches
- *  higher (lo 0.14 -> 0.2, hi 1.35 -> 1.1, deep 0.13 -> 0.075, high 1.02 -> 1.14: the comic look's own lowest and
- *  highest levels were 0.08 and 1.1; white tissue's high level 0.9 -> 0.8, so that the gloss on bone and tendon
- *  has room to show), and the highlight may be far brighter (max 0.3 -> 0.62, maxWhite 0.2 -> 0.5,
- *  gain 1.4 -> 4, the glint from a highlight of 0.1 on): it cannot become a white patch again because the bundles
- *  break it into streaks. */
+/** The material avoids broad parallel ridges.
+ * The numbers of the look (all unitless unless a unit is named).
+ * ramp: the light factor L (about 0.14 where only the flat fill reaches, about 1.0 to 1.25 facing the key light) is
+ * mapped by smoothstep(lo, hi, L) ^ curve from the deep level to the high level.
+ * muscle / white: deep and high levels (factors of the albedo) of a muscle belly and of white tissue (tendon parts
+ * and bone: a white digit must not end in a black point, so its deep level stays a light grey-tan), and the tint
+ * the shadow side takes (multiplied in fully at L <= lo, not at all at L >= hi).
+ * fibre: THREE LEVELS of fibres, each a row of rounded bundles lying side by side with a parting between them:
+ * groupMm (bundle groups), bundleMm (bundles) and strandMm (fine strands, seen only when a muscle is close) = their
+ * widths in millimetres at the muscle's typical girth; *RunMm = how far along the muscle one keeps its shade;
+ * amp = the colour change (+-) and shares = how much of it each level carries; partAmp = how much darker the
+ * parting between two bundles is, partShares per level; bumpMm = the height of a bundle of each level in
+ * millimetres; maxSlope = the steepest tilt the bump may give the normal (tangent of the angle); bumpViewFrom /
+ * bumpViewTo = |N.V| between which the bump fades in (it is at full height only on a surface seen from the front:
+ * on a slanted one its flanks turned in and out of the light and drew dark streaks); bumpVary = a bundle's height
+ * goes from the first to the second of these (x bumpMm) with its own shade, so no two neighbours stand equally
+ * rim: gain x a soft (1 - |N.V|) ^ power toward the silhouette on the rim light's side, in `colour`, tinted by the
+ * tissue's own colour (white = the share of plain white in it). film (a wet film at grazing angles all round) is
+ * 0: it laid a grey-lilac veil over a muscle seen edge-on.
+ * bone: mottle = the +- shade change of the large-scale mottling, mottleMm = its size, warm = the tint its darker
+ * patches lean to. */
 export const BODY_FLESH = freeze({
   ramp: freeze({ lo: 0.2, hi: 1.1, curve: 1.25 }),
   muscle: freeze({ deep: 0.075, high: 1.14, shadowTint: freeze([1.0, 0.62, 0.55]), chroma: 1.2 }),
@@ -123,30 +85,18 @@ export const BODY_FLESH = freeze({
   rim: freeze({ gain: 0.42, power: 3.4, colour: freeze([0.8, 0.9, 1.0]), white: 0.15, film: 0 }),
   glowForm: freeze({ lo: 1.3, hi: 1.0, max: 0.97, tint: 0.85, glowTint: 0.5, hueDeepen: 0.8 }),
   bone: freeze({ mottle: 0.06, mottleMm: 18, warm: freeze([1.0, 0.94, 0.86]),
-    // 18 November 2026 (package DETAIL; the brief: "bone with its smooth shafts, rougher ends ..., cartilage caps on the
-    // joint surfaces in a bluish white"): from the per-vertex nsBoneEnd (ns-detail boneEndWeights; x cartilage, y end).
-    // cart = the cartilage cap's tint over the bone's ivory (a cool, slightly lighter pearly white), cartMottle = the share
-    // of the mottling left on it (hyaline cartilage is smooth), cartWet = its highlight's ceiling (wet and glassy: brighter
-    // than the bone's maxWhite); endMottle = the mottling's strength on the ends against the shaft, endGrain / endGrainMm =
-    // a faint finer grain there (thin cortex over spongy bone), never on the cap.
+    // The shader distinguishes bone and cartilage.
     cart: freeze([0.8, 0.9, 1.1]), cartMottle: 0.25, cartWet: 0.62, endMottle: 1.7, endGrain: 0.035, endGrainMm: 3.5 })
 });
 
-/** How the fibre frame is packed into the four numbers a vertex carries (fibreFrame writes them, fleshFibreGlsl
+/** Shading avoids visible contour bands.
+ * How the fibre frame is packed into the four numbers a vertex carries (fibreFrame writes them, fleshFibreGlsl
  * reads them): the `along` number also carries the muscle's roundness as a whole multiple of `roundStep` (in
  * `roundLevels` steps), after an offset `alongOffset` that keeps it positive; minRadiusShare = the least a slice's
  * radius counts for (share of the typical radius). The fourth number carries the cone's radius share (under
  * `radiusStep`) plus `radiusStep` x a whole CODE of the muscle's typical radius: radius = 2 ^ (code x radiusLog2 /
  * radiusCodes) millimetres (codes 0 .. radiusCodes: 1 mm to 256 mm in steps of a fifth; the same for every vertex of
  * a mesh, so it comes through the interpolation unchanged). centreDegree = the highest degree of the centre line's
- * polynomial, centreFloorDegree the lowest. Two faults pull opposite ways:
- *  - a centre line that does not follow the muscle (a parabola through an S-shaped or sharply bent muscle) draws the
- *    fibres along ITSELF, in arcs across the muscle (the checker's "rings like a contour map" on a head of
- *    gastrocnemius seen from the lifted thigh: the slice centres lay half a radius off the parabola);
- *  - a bent centre line is not a straight-line function of the position, so inside ONE triangle the frame is off by
- *    about (the line's second derivative) x (the triangle's length along the muscle) squared / 8, and the fibre lines
- *    kink by that much at the triangle's edges. On a fine mesh that is nothing; on a coarse one (the chest and the
- *    shoulder right under the eyes: triangles 30 mm long) a degree-4 line drew zigzags.
  * So: the parabola (the second round's line) unless it kinks by more than parabolaKinkMaxMm (then a straight line,
  * which never kinks); and degree 3 or 4 only where that brings the line at least centreGain typical radii closer to
  * the slice centres AND its kink is under kinkMaxMm, on all but kinkShare of the surface (the area of up to

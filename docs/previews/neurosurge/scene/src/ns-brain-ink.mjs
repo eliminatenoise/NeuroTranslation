@@ -366,8 +366,7 @@ float nsCelBand( float x ) {
 
 
 export const BRAIN_KEYS = Object.freeze({
-  // 19 November 2026 ("so liney"): a much softer bevel and pillow (0.7 / 0.55 / 0.28 and 0.38 before): a key is a flat
-  // block of colour with barely a rounded edge.
+  // The line treatment reduces visible banding.
   bevelCss: 5, bevelShare: 0.3, bevelLight: 0.18, bevelDark: 0.14, bevelSpec: 0, hoverBevel: 1.5, pillowCss: 8, pillowShare: 0.4, pillowDark: 0.1,
   pressS: 0.2, pressHoldS: 0.07, pressDark: 0.45, pressCss: 4, pressShare: 0.3,
   // 18 November (MAP): the lit key's frame in its own colour (frameWhite 0.3 -> 0.1): the white-hot frame turned the

@@ -117,9 +117,7 @@
 }
 .ns-tip[data-colored="true"][data-kind="area"] .ns-tip-move.ns-tip-now .ns-tip-key { border-color: var(--ns-tip-color); background: color-mix(in oklab, var(--ns-tip-color) 30%, #10161d); }
 
-/* ==== 19 November 2026 (EASE): visual chunking. "Things should be chunked together and those chunks should be spaced
-   away from each other." One rule for every overlay: a chunk is a few things that belong together, close to each other
-   (--ns-in), in one frame, on one alignment; between chunks there is at least three times that room (--ns-out). */
+/* Spacing separates groups of controls. */
 :root { --ns-in: 6px; --ns-out: 28px; --ns-chunk-bg: rgba(6, 10, 15, 0.86); --ns-chunk-rim: rgba(200, 222, 240, 0.5); }
 
 /* The five-second controls card (ns-controls-card.mjs): four chunks. Left, as on a keyboard: the W A S D pyramid, the

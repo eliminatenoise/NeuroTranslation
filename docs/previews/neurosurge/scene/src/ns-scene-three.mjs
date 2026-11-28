@@ -274,7 +274,7 @@ export const MATERIAL = Object.freeze({
 
 
   // 0.46 -> 0.34 at power 4 -> 5 (a narrower rim: the outline and the gyral walls stay, the broad veil goes), with
-  // GLASS_READ crown 0.11 -> 0.035 / 0.75 -> 0.45. Measured at the default 1280x720 view (round5/R5-bigbrain-NOTES.md):
+  // GLASS_READ crown 0.11 -> 0.035 / 0.75 -> 0.45. Measured at the default 1280x720 view (development check):
   // the glass adds 9.1 instead of 21.3 per colour channel over the non-motor glass (-57 %); motor areas unchanged.
   glass: 0xd6ebff,
   glassOpacity: 0.01,
@@ -351,11 +351,7 @@ export const HDR_BLOOM = Object.freeze({
   // resolution does: QUALITY_LEVELS has the measurement)
   // (muscleBoost 0.6 -> 0, 22 November 2026, LOOK2; hunt of update 64 H25: "At quality high the lit muscles flash
 
-  // items"; section 191 gave the areas their own colour, never a white-out. The boost multiplied a muscle's whole flash
-  // by up to 1.81 on all three channels, so an azure muscle's weak red channel, already raised by the flash's whitening,
-  // reached display white with the other two: a white blob for 50 to 100 ms at every switch-on, on the full level only
-  // (the reproducer's no-boost pages looked like the cheaper levels, pale azure; no-bloom pages were still white). Now
-  // a lit muscle peaks in its area's colour at every level and the bloom only softens what lies above white.)
+  // The highlight preserves the atlas region colour.
   muscleBoost: 0, muscleFrom: 1.15, offFromLevel: 1, msaaSamples: 4, ditherLsb: 0.6, safeMax: 64
 });
 
@@ -556,7 +552,7 @@ export function heldCueRim(amount, o = HELD_CUE) {
  * The opaque arm still depth-tests every pass. No mesh, index, vertex, normal, shader hook, depth flag,
  * marker solid or draw call is removed. Reordering and alpha changes require actual rerender qualification;
  * this is a representative simulated field, not a refined motor ROI or a performance improvement.
- * A2-render R1: the strip is now OPAQUE and depth-writing, so it is drawn in the opaque list (after the arm, by
+ * A2-render the strip is now OPAQUE and depth-writing, so it is drawn in the opaque list (after the arm, by
  * renderOrder) and the separate strip DEPTH pass (stripDepth) is no longer created; the key is kept for
  * compatibility. The x-ray pass covers only the GLASS_XRAY subset; the glass DEPTH pass sorts front-to-back
  * (transparentSortNs) so occluded deep layers fail the depth test early.
@@ -636,7 +632,7 @@ export const QUALITY_MODES = Object.freeze(['auto', 'high', 'low']);
 
 /* R4-integrator (D8, R4-load measurement): multisample anti-aliasing (MSAA) is the largest single cost on a software
  * renderer: SwiftShader 1280x720 default view 253-296 ms -> 76-85 ms per frame with antialias: false, 4.1 -> 12.6 fps
- * (round4/R4-load-NOTES.md section 6.2; screenshots: only the edges are slightly less smooth). MSAA is fixed when the
+ * (development check section 6.2; screenshots: only the edges are slightly less smooth). MSAA is fixed when the
  * WebGL context is created, so it is decided before the renderer exists: off on a software renderer or when the saved
  * Quality is Low, on everywhere else (the real GPU keeps MSAA and 60 fps). It changes edge smoothing only: colours,
  * activity, the left-arm distinction and every text stay the same. */
@@ -662,13 +658,7 @@ export function probeRendererName(doc) {
 }
 /** MSAA on or off: antialias true / false is kept; 'auto' = off for a software renderer (and, with
  * MSAA_AT_LOW.on false, for Quality Low). Pure. */
-// 22 November 2026 (LOOK2; hunt of update 64 H24 and the map checkers' "old fault of update 64": at Low the brain's
-// outline and the arrows sparkled with single pale and dark pixels as the look moved, and the mirror body's edge in
-// front of a strip block flickered up to 14 to 17 times a second with the look still). Quality Low was the only level
-// drawn with no multisampling at all: the canvas's MSAA was off, and Low has no HDR target (whose own MSAA every other
-// full-level picture gets). An edge pixel was then all one surface or all the other, and a sub-pixel movement (the
-// heartbeat's swell, the breathing, a look step) flipped it. MSAA_AT_LOW.on: Low keeps the canvas's MSAA, as every
-// automatic level already does; it still draws 0.6 of the pixels, no bloom and no x-ray pass. false = off at Low.
+// The low-quality render uses antialiasing to stabilize the outline.
 export const MSAA_AT_LOW = Object.freeze({ on: true });
 /** 22 November 2026 (UI3; LOOK2's limit in section 198: "At Low 34 pixels of the start view still rise and fall 4 or
  * more times a second (at most 6 a second), on the strip's top borders, the mirror body's shoulders and a few points of
@@ -706,7 +696,7 @@ export function antialiasFor({ antialias = 'auto', quality = 'auto', rendererNam
  *  - lod: the glass and the full-body meshes are drawn from vertex-clustered copies (clusterDecimate, cells of
  *    lodGlassMm / lodBodyMm; the brain then has about 30 % of its glass triangles). A software renderer is limited by
  *    triangles, not pixels (SwiftShader: 975 k triangles per frame at the default view, 3-4 fps at any render scale;
- *    round4/R4-scene-NOTES.md). The motor regions, outlines, marks, the player's arm and every colour are unchanged.
+ *    development check). The motor regions, outlines, marks, the player's arm and every colour are unchanged.
  */
 
 
@@ -716,9 +706,7 @@ export function antialiasFor({ antialias = 'auto', quality = 'auto', rendererNam
 
 
 
-// again. The bodies are drawn in the painted comic look of 18 November (smooth painted shading with fibre bundles,
-// tendon ends, ink outlines) with what was asked for since: a satin surface with little gloss, a steady light with
-// no blink or shudder, a near-black backdrop, no vessels. The plain look's code stays behind the switch.
+// The material uses a low-gloss finish and steady illumination.
 export const SIMPLE_LOOK = false;
 
 
@@ -786,8 +774,8 @@ export const QUALITY_LEVELS = Object.freeze([
   Object.freeze({ name: 'lite-0.6', scale: 0.6, lite: true, lod: null })
 ]);
 /* LOD cells (source mm): 2.5 mm glass = 314 k -> 93 k triangles, about 5 px at the 0.5 render scale; 4 mm glass = 52 k.
- * The body is 0.4-1.5 m from the eye, where 4-7 mm is 1-3 px. Measured in round4/R4-scene-NOTES.md. */
-/** Automatic controller (hysteresis; display choices, measured on SwiftShader and the real GPU, round4/R4-scene-NOTES.md).
+ * The body is 0.4-1.5 m from the eye, where 4-7 mm is 1-3 px. Measured in development check. */
+/** Automatic controller (hysteresis; display choices, measured on SwiftShader and the real GPU, development check).
  *  - A frame interval is a sample only when it is in (0, gapMs]: a longer gap is a pause, a tab switch or a QA step, not
  *    a frame time, and it is ignored. The decision uses the MEDIAN of the last `window` samples (one hitch, a screenshot
  *    or a first upload, does not move it).
@@ -1122,7 +1110,7 @@ export function farPlaneFor(brainFarM, baseFar = CAMERA.far, o = CAMERA_RANGE) {
  * the eye, about 0.1 m of world per source mm) resolves 0.001-0.016 brain-mm; drawn k = 6 times farther (36-138 m, 0.6 m
  * per mm) 0.006-0.095 brain-mm. Both stay far below the outline lift (REGION_OUTLINE.liftMm 0.8 mm), and the depth
  * pre-passes draw the SAME triangles, so the brain's own layers keep their order (renders at k = 1 / 3 / 6:
- * round4/R4-scene-NOTES.md). The near plane cannot grow: the player's hand is 0.2-0.6 m from the eye. */
+ * development check). The near plane cannot grow: the player's hand is 0.2-0.6 m from the eye. */
 export function depthStepAt(d, near = CAMERA.near, far = CAMERA.far, bits = CAMERA_RANGE.depthBits) {
   return (d * d * (far - near)) / (near * far * 2 ** bits);
 }
@@ -1456,9 +1444,7 @@ export function patchSeeThroughShaders(vertexShader, fragmentShader, { rimLo = 0
 // front of the lap and the thighs, knees and feet beyond them; the see-through torso is no longer needed and made the
 // chest and belly a 20 % ghost (and a flat grey patch at the groin). enabled: false draws the torso opaque.
 export const BODY_TRANSLUCENT = Object.freeze({ enabled: false, pitchStartDeg: 40, pitchFullDeg: 60, alpha: 0.2, rimAlpha: 0.75, easeS: 0.12 });
-/** R3-fix (review M4, the user's "brain overlay"): where the player's own body (legs, torso, right arm, neck; never the
- * controlled left arm or the face layer) covers the brain's on-screen outline, it is drawn see-through (alpha), so a
- * dragged-down brain and the moving legs can be watched together. edge: soft edge of the ellipse (fraction of radius). */
+/** The overlay reduces opacity when a body surface obscures the brain. */
 export const BODY_OVER_BRAIN = Object.freeze({ alpha: 0.3, edge: 0.12, padFrac: 0.04 });
 /** Fragment patch for BODY_OVER_BRAIN: alpha drops inside the ellipse nsOvlWin (device px: cx, cy, rx, ry). */
 export function patchOverBrainShaders(vertexShader, fragmentShader, { edge = BODY_OVER_BRAIN.edge } = {}) {
@@ -1613,22 +1599,12 @@ export const EYE_COLLAR = Object.freeze({
 
 
 
-  // alone. Cause found: the box's clipping planes were on every material of your own body (the muscles of a class share
-  // one material, so all of them), so whatever came into the column over the collar was cut away in the eye view: your
-  // right hand held up over the head vanished but for two finger tips, the deltoid by the neck was cut open with a look
-  // down, and the trunk muscles a raised arm carries along (the pectoralis, latissimus, the collar bone and the shoulder
-  // blade) went the same way; the outline's ID pass and the glass cut only the trunk and the head, so the cut arm kept
-  // its ink lines and glass: muscles that "disappear and turn transparent". The left arm is the game arm (its own
-  // materials, never cut): hence "especially with the right arm". A rule by part or outline group does not do: several
-  // of the arm's own muscles (the deltoid's front, the rotator cuff) and the pectoralis ride on the trunk's segments. What
-  // the box cut besides (the top few per cent of the trapezius's transverse part, rhomboid minor, serratus posterior
-  // superior, the first ribs and the top thoracic vertebrae, at the root of the neck) is now drawn whole, ending at its
-  // own attachments; seen on pictures at looks all round. true brings the old cut back (as it was, limbs included).
+  // Near-body clipping retains visible parts of the right arm.
   cut: false });
 export const BODY_ORDER = Object.freeze({ torsoDepth: 7, torso: 8, faceDepth: 1, face: 2, arm: 10 });
 
 /** Marker dot size, highlight scale and lift toward superior (source mm, before the giant display scale): ns-brain
- * MARKER_GEOMETRY. Repair R5: each marker mesh is ns-brain MARKER_OCTAHEDRON, placed and scaled by ns-brain markerSolid,
+ * MARKER_GEOMETRY. Repair each marker mesh is ns-brain MARKER_OCTAHEDRON, placed and scaled by ns-brain markerSolid,
  * the same triangles, centre and scale classifyGaze intersects, so the drawn solid is exactly the pick target. */
 export const MARKER_RADIUS_MM = MARKER_GEOMETRY.radiusMm;
 export const MARKER_ACTIVE_SCALE = MARKER_GEOMETRY.activeScale;
@@ -1652,21 +1628,14 @@ function requireThree(THREE) {
 /* ------------------------------------------------------------------ pure helpers (Node-testable) */
 
 /** Area-weighted unit vertex normals of an indexed triangle mesh. Vertices without a face get [0, 0, 1]. */
-/**
- * R558 (genuine note R33: the face, neck and torso muscles and some skull bones look "splotchy" with "lots of gaps").
- * Diagnosis from the mesh files: almost every BodyParts3D OBJ repeats some vertices (about a fifth of all body vertices
- * share a position with another one), the loader ignores the files' own `vn` normals, and normals were then computed
- * per vertex INDEX. Two copies of one point on a smooth surface so got two different normals, and every such seam was
- * lit as a hard crease: a patchwork of facets across a muscle. Welding by position leaves no open edge in any of these
- * meshes, so the seams are an artefact of the files, not anatomy.
+/** Additional surface samples fill gaps in the face, neck, torso and skull.
  * This function makes vertices that share a position share a normal: the normalised sum of their normals. No vertex is
  * added, moved or removed and no triangle changes (the arm's strict vertex counts are untouched); only the lighting
  * across the seam becomes continuous. A copy whose own normal differs from the shared one by more than about 78 degrees
  * (dot < minDot) keeps its own: two surfaces that merely touch back to back, or a real sharp edge, stay as they were.
  * positions, normals: flat xyz arrays of equal length (normals is changed in place). groups (optional): a cached
  * Int32Array from an earlier call for the same mesh (same vertex order and coincidences). Returns { shared (vertices
- * that had a twin), changed (normals rewritten), groups }. Pure apart from writing `normals`.
- */
+ * that had a twin), changed (normals rewritten), groups }. Pure apart from writing `normals`. */
 export function weldNormalsByPosition(positions, normals, { minDot = 0.2, groups = null } = {}) {
   const n = (positions.length / 3) | 0;
   if (!(n > 0) || normals.length < 3 * n) return { shared: 0, changed: 0, groups: null };
@@ -1808,7 +1777,7 @@ export function boneTipDisplay(positions, indices, { distal = false } = {}, o = 
   return out;
 }
 
-/** R558 (R33): weldNormalsByPosition on a THREE BufferGeometry's position / normal attributes (after its normals were
+/** weldNormalsByPosition on a THREE BufferGeometry's position / normal attributes (after its normals were
  * computed). Returns the same report, or null when the geometry has no such attributes. */
 export function weldGeometryNormals(geometry) {
   const p = geometry && geometry.attributes && geometry.attributes.position, nr = geometry && geometry.attributes && geometry.attributes.normal;
@@ -1847,7 +1816,7 @@ export function computeNormals(positions, indices, out, weldCache = null) {
     const l = Math.hypot(o[k], o[k + 1], o[k + 2]);
     if (l > 0) { o[k] /= l; o[k + 1] /= l; o[k + 2] /= l; } else { o[k] = 0; o[k + 1] = 0; o[k + 2] = 1; }
   }
-  // R558 (R33): one normal per POSITION across the files' duplicated vertices (see weldNormalsByPosition).
+  // one normal per POSITION across the files' duplicated vertices (see weldNormalsByPosition).
   const cache = weldCache && typeof weldCache === 'object' ? weldCache : null;
   const cached = cache && cache.groups && cache.groups.length === n ? cache.groups : null;
   const welded = weldNormalsByPosition(positions, o, { groups: cached });
@@ -2053,18 +2022,15 @@ export function regionStyleConstants() {
  * reads clearly through the glass and fades back to its rest (or persistent activated) opacity. hoverEmission: the
  * hovered region's identity tint added as emission. quantize: updates below 1/quantize activity are skipped. */
 export const REGION_RENDER = Object.freeze({
-  // R558 (R32, "a little fleshy"): a moister surface (roughness 0.48 -> 0.36) and the tissue scatter below.
+  // The resting surface roughness is 0.36.
 
 
   // the key light draws a bright highlight along the gyrus crowns.
   // 17 November (keys): the hovered area lights up clearly (hoverEmission 0.14 -> 0.5 of its own colour).
   activityOpacityGain: 0.65, maxOpacity: 0.92, hoverEmission: 0.5, quantize: 256, roughness: 0.32, metalness: 0,
-  /** 17 November ("only small regions should be activating"): a glow that only shows a HELD POSTURE (the neck and
-   * trunk areas while the mouse look turns the head: ns-app setSettledRegions) keeps this share of the glow and none of
-   * the lit key's frame, pulse and ring, so it is a calm background light and never competes with the area that was
-   * switched on. */
+  /** The overlay confines activation to a small region. */
   postureGlow: 0.3,
-  /** R558 (R32): tissue look of the motor areas, LIGHTING ONLY. Living tissue lets light in and scatters it, so it is
+  /** tissue look of the motor areas, LIGHTING ONLY. Living tissue lets light in and scatters it, so it is
    * never black in shade and glows a little warm toward its silhouette. tissueTint x tissueStrength x (tissueFloor +
    * (1 - tissueFloor) x a view-angle term) of the area's own colour is added to its lit colour. The geometry, the
    * folds, the area borders, the activity colours (emission) and the opacity rules are untouched. Display choice. */
@@ -2475,7 +2441,7 @@ export function regionDisplayStyle(region, { activity = 0, activatedCount = 0, h
   }
   if (areaRecord(region.id)) {
 
-    // it over the R32 tissue pink; switched on, a little more of it; active, the area emits its glow colour (strength =
+    // it over the tissue pink; switched on, a little more of it; active, the area emits its glow colour (strength =
     // ns-colors glowIntensity of the activity) with a matching fresnel rim, and its lit surface darkens so the emitted
     // colour carries the look. The muscles it drives glow in the very same colour (shadeMuscle).
     const a = fin01(activity);
@@ -2590,25 +2556,17 @@ export function regionLabelChunkCss(group) {
   return `#${hex.join('')}`;
 }
 
-/** The required left-arm label (round 3, R17: ns-text plain wording, "Left arm (brain’s right half)"). */
+/** The required left-arm label (round 3, ns-text plain wording, "Left arm (brain’s right half)"). */
 export const LEFT_ARM_LABEL = NsText.LEFT_ARM_LABEL;
 
 /** On-brain group label text for a label group key and hemisphere, or null (SCAN and unknown groups carry no group
  * label; the info overlay explains them when looked at). */
 export function regionGroupLabel(key, hemisphere) {
-  // Round 3 (R17): ns-text plain group labels ("Right leg (brain’s left half)"); null for SCAN / unknown groups.
+  // Round 3: ns-text plain group labels ("Right leg (brain’s left half)"); null for SCAN / unknown groups.
   return NsText.regionGroupLabel(key, hemisphere);
 }
 
-/** Label groups of a segmentation's regions: [{ key, hemisphere, text, isLeftArm, regionIds, anchor (source mm),
- * ownAnchor (source mm, the area-weighted mean of the member regions' byHemisphere anchors), pair, areaMm2 }], left-arm
- * group first. R558 ("brain labels ... match on both sides"): a group and its twin on the other half (arm with arm, leg
- * with leg, belly with belly, face with face) share `pair` and are anchored at mirrored places: `anchor` is the mean of
- * the group's own anchor and the twin's anchor mirrored in the plane source x = midX. The scene passes the middle of
- * the motor strip's own left-right extent, which is what the start view centres on screen: the two halves of a real
- * brain are not exact mirror images, and with source x = 0 every pair sat about 9 px left of the middle at 1600 px.
- * A display choice for where a label sits; no area is moved. A group without a twin keeps anchor = ownAnchor and
- * pair = null. */
+/** The labels have matching appearances across hemispheres. */
 export function regionLabelGroups(regions, { midX = 0 } = {}) {
   const mx = Number.isFinite(midX) ? midX : 0;
   const groups = new Map();
@@ -2645,19 +2603,18 @@ export function regionLabelGroups(regions, { midX = 0 } = {}) {
   return list;
 }
 
-/** Orbit arrow buttons (R12): size, a gap of gapCm on screen (CSS reference 96 px per inch) outside the brain's
+/** Orbit arrow buttons: size, a gap of gapCm on screen (CSS reference 96 px per inch) outside the brain's
  * projected bounds, margins, the crosshair hit padding, glyphs and accessible labels. */
-/** Round-2 fix F4 (R16): a click on an orbit arrow is one full step; holding it (or holding a mouse button while the
+/** Round-2 fix F4: a click on an orbit arrow is one full step; holding it (or holding a mouse button while the
  * crosshair is on it) keeps orbiting gently: stepDeg every everyMs after delayMs. Display choices; ns-app mirrors
  * them for the crosshair hold. */
-/** Hold-to-orbit (R16 "slightly shift orbit"): after delayMs, stepDeg every everyMs. R3-fix (review F9 / m4): 1.2 deg per
- * 100 ms = 12 deg/s (was 30 deg/s, which swept the whole 60 deg range in about 2 s); a click stays one 15 deg step. */
+/** After the hold delay, each 100 ms step turns 1.2 degrees, or 12 degrees per second. A click turns 15 degrees. */
 export const ORBIT_HOLD = Object.freeze({ delayMs: 300, everyMs: 100, stepDeg: 1.2, maxStepsPerFrame: 5 });
 export const ORBIT_ARROWS = Object.freeze({
   gapCm: 1.5, pxPerCm: 96 / 2.54, sizePx: 44, marginPx: 10, hitPadPx: 4, minVisibleFrac: 0.2, minOnScreenFrac: 0.06,
   dirs: Object.freeze(['forward', 'back', 'left', 'right']),
   glyph: Object.freeze({ forward: '▲', back: '▼', left: '◀', right: '▶' }),
-  /** Polish (R16/R17): short plain hover captions shown beside each arrow. R5-integrate-core (R5-text W5): the 3D arrows'
+  /** Polish (): short plain hover captions shown beside each arrow. R5-integrate-core (R5-text W5): the 3D arrows'
    * words, ns-text ARROWS.brain ("Turn the brain: show more of its front" ...; no "curved"), else the round-4 ORBIT words. */
   tip: dirText((NS_TEXT.ARROWS && NS_TEXT.ARROWS.brain && NS_TEXT.ARROWS.brain.tip) || NS_TEXT.ORBIT.tip),
   label: dirText((NS_TEXT.ARROWS && NS_TEXT.ARROWS.brain && NS_TEXT.ARROWS.brain.label) || NS_TEXT.ORBIT.label)
@@ -2926,18 +2883,10 @@ export function guideFloatSpot({ usable, chipH = 40, clear = () => true, o = GUI
   return null;
 }
 
-/** R3-scene arrow rules (display choices). gap: "a centimetre or a few centimetres" off the brain, read as gapCm on screen
- * (CSS 96 px/in) and kept within gapMinFrac..gapMaxFrac of the view WIDTH (round-3 decision D1(d): roughly 2-6 %).
- * maxLookDeg: an arrow should be reachable by the crosshair with |yaw| and |pitch| <= maxLookDeg (D1(c)/(d)).
- * slideStepPx: candidate spacing when an arrow slides along its side of the brain to clear an obstacle. */
+/** The spacing is measured in centimetres. */
 /** Fallback distance (m) of the arrows' world anchors when the transform has no pivot (they are directions). */
 export const BRAIN_ANCHOR_DIST_FALLBACK_M = 6;
-// R4-integrator (R4-player 1.6): separationPx 8 -> 24 (half an arrow between two arrows): at 2560x1080 the forward and
-// left arrows sat 11 px apart at the top-left corner and read as one control (run-R4-integrator-2-shots).
-// R4-fix (reviews F8 / RP7, "one arrow per side"): when the forward or back arrow has no clear spot on its own side
-// (the brain fills the view's height) it goes beside a corner of the brain; a turn toward the LEFT costs
-// cornerLeftCostFactor times more, so it takes a right-hand corner where it can. The left side holds the player's arm,
-// the status card and the left arrow, and the forward and left arrows stacked at the top left (720x1280, 2560x1080).
+// Arrow placement is constrained to its assigned side when a clear position is available.
 export const ARROW_PLACEMENT = Object.freeze({ gapCm: 1.2, gapMinFrac: 0.03, gapMaxFrac: 0.055, slideStepPx: 6, maxLookDeg: 40, padPx: 4, separationPx: 24, cornerStepDeg: 5, cornerMaxDeg: 60, cornerCostPerDeg: 8, cornerLeftCostFactor: 1.6 });
 
 /** The arrow gap in CSS px for a view width (pure): clamp(gapCm on screen, gapMinFrac x width, gapMaxFrac x width). */
@@ -3115,25 +3064,12 @@ export function placeOrbitArrows(hull, {
 export const LABEL_LAYOUT = Object.freeze({ maxShown: 8, maxShownCompact: 6, gapPx: 4, marginPx: 6, ringSteps: 2, requiredRingSteps: 5, requiredMaxRings: 2, sideCrossFrac: 0.15, ringFrac: 0.5,
   ownArea: true, ownAreaRatio: 0.75, wrongAreaCost: 1e7, gridRetry: true, retryFrac: 0.125, retryMax: 400 });
 
-/**
+/** The same label style applies on both sides.
  * Label declutter (pure). items: [{ id, x, y (anchor, CSS px), w, h, priority (higher first), required }]; a label whose
  * anchor is off screen is hidden. Each label tries its anchor, then rings of offsets around it, and takes the first box
  * that is inside the view (margins, below topPx) and clear of every obstacle rect { x0, y0, x1, y1 } and of the labels
  * already placed (gapPx apart). A non-required label with no clear box, or beyond maxShown, is hidden; a required label
- * with no clear box keeps its least-overlapping candidate. Returns [{ id, x, y, shown, moved, faded }] in the items' order.
- * R4-fix (review RP1, blocker): an item may carry `side` { x0, y0, dxdy, sign }: the screen line x = x0 + (y - y0) dxdy
- * (the brain's projected midline) that its box must stay on (sign +1: right of it, -1: left of it; at most
- * rules.sideCrossFrac of its width may cross it, so on a phone, where one half of the brain is narrower than the tag,
- * it can still sit over its area), and
- * `maxRings` (default rules.requiredMaxRings for required labels): it never moves more than that many rings from its
- * anchor. A required label with no clear candidate inside those limits keeps its least-overlapping ALLOWED candidate
- * and is marked faded (drawn see-through) instead of jumping far away or onto the other half of the brain.
- * R558 ("brain labels ... match on both sides"): items that share a `pair` key are twins (the same body part on the two
- * halves of the brain). Twins are one unit: they take the same offset, mirrored sideways (`mirror` +1 / -1 = which side
- * of the midline the item's anchor is on), both boxes must be clear (also of each other), and both show or neither
- * does; the unit ranks by its best member (required first) and counts as two toward maxShown. A twin whose anchor is
- * off screen is left out and the other is placed alone. Items without `pair` behave exactly as before.
- */
+ * with no clear box keeps its least-overlapping candidate. Returns [{ id, x, y, shown, moved, faded }] in the items' order. */
 // (UI4, LABEL_LAYOUT.gridRetry) the retry's offsets, sorted nearest first, kept per grid (a few label sizes); and how
 // often it ran, found a place and how many offsets it tested (readback: inspect({ labels: true }).labelRetry)
 const retryOffsetMemo = new Map();
@@ -3322,8 +3258,7 @@ export function declutterLabels(items, { width, height, topPx = 0, obstacles = [
     }
     let forced = false;
     if (!pick && required && (bestDry || bestBad)) { pick = (bestDry || bestBad).boxes; forced = true; }
-    // 20 November 2026 (package HUD: "nothing that matters may cover anything else"): a forced label is not laid over
-    // the HUD's words (an obstacle flagged `words`); it is left out instead.
+    // The layout separates labels and identifiable structures.
     if (forced && pick.some(q => obstacles.some(o => o && o.words && overlap(q.b, o) > 0))) pick = null;
     if (!pick) { for (const i of live) hide(i); continue; }
     for (const q of pick) {
@@ -3337,13 +3272,7 @@ export function declutterLabels(items, { width, height, topPx = 0, obstacles = [
   return res;
 }
 
-/** R4-fix (review F2, R11c "so you can see which parts of the brain you've activated"): a switched-on area whose
- * outline covers less than areaPx CSS px² on screen (the medial toes, tongue, jaw and lower in-between slivers at the
- * default view: 0-41 changed pixels when marked, harness/run-R4-review-spec-4-marks) also gets a small gold ring at its
- * centre, drawn over the brain, so its mark does not depend on its drawn size. "Small" = the convex hull of
- * samplePoints of the region's vertices, projected with the live camera, covers less than areaFrac of the view
- * (1280x720: 2396 px²; there the medial toes measure 1720, the jaw 1452, the elbow 3386); re-measured every everyFrames
- * frames. Display choices (harness/run-R4-fix-6-shots markDots). */
+/** Activated regions remain distinguishable. */
 /** 19 November 2026: the depth offset that keeps the thin face muscles in front of the skull they lie on. */
 export const FACE_MUSCLE_OFFSET = Object.freeze({ factor: -2, units: -12 });
 
@@ -3405,7 +3334,7 @@ export const LABEL_FADED_OPACITY = 0.4;
 /** R3-scene label font sizes (CSS px; mirrored by R3_SCENE_CSS) used for the label box estimates. */
 export const R3_LABEL_FONT = Object.freeze({ otherPx: 13, leftArmPx: 14.5, subPx: 10.5, padXPx: 10, padYPx: 3 });
 /** R3-scene injected stylesheet (larger, plainer labels). Selectors are one class stronger than neurosurge.css so they
- * apply now; the CSS owner can move these rules into neurosurge.css (R3-scene-NOTES.md wiring). */
+ * apply now; the CSS owner can move these rules into neurosurge.css (development check wiring). */
 export const R3_SCENE_CSS = [
   `.ns-region-label.ns-r3 { font-size: ${R3_LABEL_FONT.otherPx}px; padding: ${R3_LABEL_FONT.padYPx - 1}px ${R3_LABEL_FONT.padXPx - 1}px; max-width: none; white-space: nowrap; line-height: 1.3; }`,
   `.ns-region-label.ns-r3 .ns-region-label-hemi { display: block; font-size: ${R3_LABEL_FONT.subPx}px; font-weight: 600; opacity: 0.9; }`,
@@ -3681,7 +3610,7 @@ export function nearestDistance(positions, p, stride = 1) {
   return Math.sqrt(best);
 }
 
-/** Face layer (body view, R7): FACE_VIEW_MODES 'ghost' | 'inset' | 'off'. In first person the own face cannot be seen,
+/** Face layer (body view, ): FACE_VIEW_MODES 'ghost' | 'inset' | 'off'. In first person the own face cannot be seen,
  * so head/face meshes (and any body mesh within nearClearM of the eye) are never drawn around the camera:
  *  - 'ghost': a translucent front view of the facial skeleton and attached muscles (the same posed meshes), rotated to
  *    face the player (a rotation, never a mirror: det +1), scaled x scale and placed distanceM out along elevationDeg
@@ -3690,7 +3619,7 @@ export function nearestDistance(positions, p, stride = 1) {
  *  - 'inset': the same front view in a labelled inset box (inset.sizePx, top centre) while looking up.
  *  - 'off': not drawn.
  * Display choices, not anatomy measurements. */
-// R558 (genuine note R26): the floating own face is retired. 'off' is the only mode; the two old names are still
+// the floating own face is retired. 'off' is the only mode; the two old names are still
 // accepted by setFaceView and createScene (an old caller or saved setting) and mean 'off'. The head and face meshes
 // are still loaded: the mirror body's face and the in-place head seen from behind are built from them.
 export const FACE_VIEW_MODES = Object.freeze(['off']);
@@ -3764,7 +3693,7 @@ export const ARM_FALLBACK_AREA = 'rh_forearm';
 // (a small version of the same on your own lit muscles, 3 mm). The code stays for the switch.
 export const MUSCLE_HALO = Object.freeze({ on: false, ownMm: 3, mirrorMm: 12, power: 2.5, gain: 0.7, mirrorGain: 0.6 });
 
-/** Far-right information overlay (R14) layout mirror of the CSS (.ns-infopanel): column width min(colPx, colVw vw),
+/** Far-right information overlay layout mirror of the CSS (.ns-infopanel): column width min(colPx, colVw vw),
  * the bottom panel height in portrait (portraitVh), and how many caveats / citations are listed. */
 // Round-2 fix V1: colMaxVh 58 -> 66 so every required field (plain lead, simulated, known, caveat, body part, movement,
 // muscles, pathway) fits at 1280x720; the legend under it uses its compact key at heights <= 820 px (CSS).
@@ -3906,7 +3835,7 @@ export function infoPanelRect({ width, height } = {}, topPx = 0) {
   return { x0: width - g - w, y0: Math.max(topPx, height - g - h), x1: width - g, y1: height - g, layout: 'corner' };
 }
 
-/** Plain-language row headings of the info overlay (round 3: ns-text INFO.rows, R17/D3). */
+/** Plain-language row headings of the info overlay (round 3: ns-text INFO.rows, /D3). */
 export const INFO_ROW_LABELS = NsText.INFO.rows;
 /** Stable CSS/QA slugs of the rows (ns-infopanel-key-<slug> / ns-infopanel-row-<slug>). */
 const ROW_SLUG = Object.freeze({
@@ -4068,7 +3997,7 @@ export function infoPanelContent(model) {
  *   setArmEnvelope, setBrainHeld, setQuality, qualityState, setBrainDistanceScale (R4-scene) }}
  */
 /* ------------------------------------------------------------------ R5-scene (round 5: D16-D19 rendering, strip relief) */
-// Pure helpers (Node-testable, no THREE). Display choices; nothing here is measured physiology. round5/R5-scene-NOTES.md.
+// Pure helpers (Node-testable, no THREE). Display choices; nothing here is measured physiology. development check.
 // The scene RENDERS the round-5 features; their math has one owner each and is imported, not copied:
 //  - 3D compass arrows: ns-arrows3d (R5-arrows: layout, frames, geometry, lit rig, ray picks);
 //  - mirror body: ns-mirror (R5-mirror: placement, mirror transform, orbit state, chirality, sync contract);
@@ -4083,11 +4012,7 @@ export function infoPanelContent(model) {
  * simplified on a slow renderer. headInPlaceFrom: the ns-camera pose's headInPlace from which the head and
  * face are drawn in place (third person). mirrorPointsPerMesh: vertices sampled per body mesh to measure the posed body
  * for ns-mirror bodyBoundsFromPoints. arrowCaptionPx: caption offset from an arrow's outer end. */
-// R558 (genuine note R33, "that's also for the mirror body"): the 2.5 mm cluster copies were chosen when the mirror
-// body was small and far away (one source mm under half a pixel). Since R22 it is drawn much larger, and at that size
-// the cluster copies drop the thin triangles of sheet-like face and neck muscles, which shows as holes and blotches.
-// At full quality the mirror body is now drawn from the full meshes (mirrorLodFullMm 0 = no copy); the coarser copy
-// used from the first reduced quality level is 3 mm instead of 4 mm. Costs GPU triangles, not frame logic.
+// The mirror uses the same surface-fill settings.
 
 // the render-scale and lite levels too and is simplified only from the first triangle-reducing ('lod') level, index 4,
 // with the glass and the own body: the D8 order (render scale first, then passes, then triangles). The scale levels
@@ -4328,7 +4253,7 @@ export const FRAME_VIS = Object.freeze({ minShare: 0.3, gridX: 4, gridY: 4, ever
 
 export const MUSCLE_HINT_LOOK = Object.freeze({ rimGain: 0.5, rimWhite: 0.35, rimPower: 5 });
 
-/* ---- R5-scene: glow links (D17, R21) --------------------------------------------------------------------------------- */
+/* ---- R5-scene: glow links (D17, ) --------------------------------------------------------------------------------- */
 
 /** Glow-link drawing (display choices; the colours and strengths come from ns-colors glowColor / glowIntensity, owned by
  * R5-access). A link is a soft additive ribbon on a gentle curve from an active brain area to one driven muscle group;
@@ -4352,9 +4277,7 @@ export const MUSCLE_HINT_LOOK = Object.freeze({ rimGain: 0.5, rimWhite: 0.35, ri
 // in the ordinary view). overBrainCore / overBrainHalo: how much of the line shows where it crosses the drawn brain
 // (the core stays readable; the halo is kept low so it does not wash the areas out). Still one line per area and body.
 export const GLOW_LINK = Object.freeze({
-  // 18 November (MAP brief: "a drawn link ... runs from the key to the part — at least to the mirror body, to your own
-  // body where it is in the picture"): own true (was 'no-mirror'): the line to your own body is drawn too, when the part
-  // is in the picture (ns-links LINKS.ownAlpha fainter); it shows the crossing to the other side of your own body.
+  // The line links the key with the corresponding visible body part.
   mode: 'held', holdS: 0.5, fadeS: 0.7, coreWhite: 0.3, minTargetM: 0.45, mirror: true, own: true,
   corePx: 2.2, haloPx: 8, lift: 0.16, segments: 40, brainFade: 0.1, muscleFade: 0.04, pulseS: 1.1, pulseAmp: 0.35, pulseWidth: 0.12,
   maxLinks: 24, minLevel: 0.02, mirrorAlpha: 0.9, nearClipM: 0.06, overBrainCore: 0.9, overBrainHalo: 0.2,
@@ -4516,10 +4439,7 @@ export function patchGlowRimShaders(vertexShader, fragmentShader) {
 
 
 
-// this one patch: no specular light at all (matte), the lit colour stepped into `bands` flat tones with a soft join
-// (bandSoft, as a share of a band), and the dark edge drawn as an ink line (below inkAt of |N.V|, soft over inkSoft,
-// down to inkDark) inside the wider shade (edge, edgeWidth).
-// (later: "much darker blacks instead of ugly grays": the ink line nearly black, inkDark 0.1 -> 0.03, and a deeper edge shade 0.55 -> 0.42.)
+// The material uses a darker black level.
 export const PLAIN_LOOK = Object.freeze({ tendonMix: 0.92, edge: 0.42, edgeWidth: 0.5, matte: true, bands: 4, bandSoft: 0.12, bandTop: 1.15, inkAt: 0.2, inkSoft: 0.05, inkDark: 0.03 });
 export function patchPlainShaders(vertexShader, fragmentShader, kind, boneLinear, o = PLAIN_LOOK) {
   if (typeof vertexShader !== 'string' || typeof fragmentShader !== 'string' || !Array.isArray(boneLinear)) return null;
@@ -4880,9 +4800,7 @@ const COMIC_LINE_GLSL = `float nsLineCov( float h, float sp0, float lf, float ma
 	return c * ( 1.0 - smoothstep( maxL, maxL + 0.6, lf ) );
 }
 `;
-/** 19 November 2026: the comic look's shader patch as it stood before the bodies were painted on 18 November (the
- * early cel look: tone bands, hatching, stipple, rim, ink), restored at the owner's wish (BODY_STYLE 'cel'). Same
- * uniforms as patchComicShaders; the attribute nsHatch carries the hatch frame of hatchFrame() here. */
+/** This restores the earlier cel-shading mode. */
 export const COMIC_HOOKS_CEL = Object.freeze({ vertex: '#include <begin_vertex>', light: '#include <aomap_fragment>' });
 export function patchComicShadersCel(vertexShader, fragmentShader, kind = 'muscle') {
   if (typeof vertexShader !== 'string' || typeof fragmentShader !== 'string') return null;
@@ -5258,8 +5176,8 @@ export function tendonFromStack(rest, full, out = null, o = TENDON_FROM_STACK, i
  * brain's projected bounds, like BODY_OVER_BRAIN), the mirror body is drawn dimmer and a little glass-blue (dim, tint),
  * so it reads as standing BEHIND the glass brain and the brain areas in front of it stay readable; dragged clear of the
  * brain it is drawn at full strength. Display choices. */
-// R5-bigbrain (R26): dim 0.6 -> 0.75 with the more see-through glass (the mirror body reads more clearly through it:
-// its pixel signal at 1280x720 62.8 -> 72.1, round5/R5-bigbrain-NOTES.md); still dimmer and bluer than in the open.
+// R5-bigbrain: dim 0.6 -> 0.75 with the more see-through glass (the mirror body reads more clearly through it:
+// its pixel signal at 1280x720 62.8 -> 72.1, development check); still dimmer and bluer than in the open.
 export const BEHIND_GLASS = Object.freeze({ dim: 0.75, tint: Object.freeze([0.86, 0.93, 1.0]), edge: 0.1 });
 /** Fragment patch (pure): outgoingLight *= mix(1, tint x dim, amount x inside(ellipse nsBgWin) x behind). Hook: before
  * '#include <opaque_fragment>' (r154+) or '#include <output_fragment>'. null when missing.
@@ -5390,7 +5308,7 @@ export function patchMuscleShareShaders(vertexShader, fragmentShader, set = 'o')
 
 /** Plain hover caption of a 3D arrow (pure): ns-text ARROWS when R5-text provides it ({ brain: { tip }, mirror: { tip } }
  * or { tip, mirrorTip }), else the round-4 ORBIT captions for the brain and ARROW_TIP_FALLBACK for the mirror body.
- * (The fallback wording should move to ns-text; listed in round5/R5-scene-NOTES.md.) */
+ * (The fallback wording should move to ns-text; listed in development check.) */
 export const ARROW_TIP_FALLBACK = Object.freeze({
   forward: 'Tilt the mirror body: see it from above', back: 'Tilt the mirror body: see it from below',
   left: 'Turn the mirror body: left side toward you', right: 'Turn the mirror body: right side toward you'
@@ -5504,8 +5422,7 @@ export function createScene({
     const abyssHex = roomClearHex();
     scene.background = bg ? keep(bg) : new THREE.Color(BODY_STYLE === 'raw' ? (abyssHex === null ? 0x040405 : abyssHex) : MATERIAL.background);
   }
-  // 18 November ("something should be done about the endless black space"): the room (ns-room), a dark operating
-  // theatre out of focus, drawn behind everything. The flat colour above stays as the clear colour under it.
+  // The dark surround provides a spatial reference.
   const room = createRoom({ THREE, reducedMotion });
   scene.add(room.group);
   disposables.push(room);
@@ -5649,11 +5566,7 @@ export function createScene({
       nsGHi2: { value: new THREE.Vector4(...v.nsGHi2) }, nsGCel: { value: new THREE.Vector4(...v.nsGCel) }, nsGCel2: { value: new THREE.Vector4(...v.nsGCel2) },
       nsInkG: { value: new THREE.Vector3(...v.nsInkG) } };
   })();
-  // R558 BB2 (target 2, "the glass brain shows its own gyri and sulci"): the glass fold depth (ns-brain-ink foldDepth
-  // over every atlas brain vertex, BRAIN_INK.glassFold) replaces the coarse hull depth in each glass geometry's groove
-  // attribute nsSulc. About 0.5 s of work for the 178,743 glass vertices, so it runs in slices of at most sliceMs on
-  // timer turns while the rest of the anatomy loads; until it is done the glass shows the hull grooves and no inked
-  // sulci (nsGInk2.z = 0). state: 'none' | 'running' | 'done' | 'failed'.
+  // The glass shader uses the surface fold-depth value.
   const glassFold = { state: 'none', vertices: 0, meshes: 0, slices: 0, workMs: 0, gridMs: 0, coverMs: null, covered: 0, wallMs: null, error: null, token: 0 };
   let stripCoverInput = null; // R558 BB2: the strip's vertices and envelope normals (regionBorderSetup), for the glass over the strip
   function startGlassFold(sourceList) {
@@ -6314,7 +6227,7 @@ export function createScene({
   // edges of the picture, with none of its sample points in it)
   let brainBoundsMeet = null;
   let brainSupport = null; // R3-scene: supportPoints of every brain vertex (the silhouette hull basis)
-  let brainDepthBounds = null; // R22 all glass+strip SOURCE positions, conservative AABB cached only on normal load
+  let brainDepthBounds = null; // all glass+strip SOURCE positions, conservative AABB cached only on normal load
   let brainSolid = null, brainSolidMs = 0, brainSolidError = null;
   let brainHullPoints = null; // R3-fix: the segmentation outline points (denser hull basis for the arrow plan)
   let compassBrainSourceRevision = 0; // R345 source replacement identity; no geometry/hash work in the cached getter
@@ -6674,7 +6587,7 @@ export function createScene({
   const faceTwins = [];
   const insetCamera = new THREE.PerspectiveCamera(FACE_LAYER.inset.fovDeg, 1, 0.01, 50);
   const insetPrevColor = new THREE.Color();
-  let faceMode = 'off'; // R558 (R26): the floating own face is never drawn, whatever an old caller passes
+  let faceMode = 'off'; // the floating own face is never drawn, whatever an old caller passes
   let faceAmount = 0;
   let faceHeadCentre = null, facePacketMeshes = 0;
   let faceRadiusMm = 0;
@@ -6720,7 +6633,7 @@ export function createScene({
       const rig = NsArrows.createArrowRig(THREE, { kind, look });
       rig.group.visible = false;
       scene.add(rig.group);
-      // e2e detection contract (round5/R5-e2e-NOTES.md): userData.nsOrbitArrow { dir, target, hover } on each arrow root.
+      // e2e detection contract (development check): userData.nsOrbitArrow { dir, target, hover } on each arrow root.
       for (const d of ARROW_DIRS) { rig.arrows[d].mesh.userData.nsArrow = { target: kind, dir: d }; rig.arrows[d].root.userData.nsOrbitArrow = { dir: d, target: kind, hover: false }; }
       return rig;
     } catch (err) { arrowRigError = String((err && err.message) || err); return null; }
@@ -6815,7 +6728,7 @@ export function createScene({
   // the app root whose data-ns-read says whether that line is shown (labelSubLineShown).
   let labelSubSized = null, labelAppRoot;
   /** R3-scene: label sizes (larger, D3/task 4) as a small injected stylesheet with selectors one class stronger than
-   * neurosurge.css (.ns-region-label.ns-r3), so the CSS owner can move or override them (see R3-scene-NOTES.md). */
+   * neurosurge.css (.ns-region-label.ns-r3), so the CSS owner can move or override them (see development check). */
   function injectSceneStyle() {
     try {
       if (!doc || typeof doc.getElementById !== 'function' || doc.getElementById('ns-scene-three-r3-style')) return;
@@ -6828,7 +6741,7 @@ export function createScene({
     } catch { /* styling is a convenience */ }
   }
   let brainInViewAttr = '';
-  // Info panel (R14): far right, textContent only, never takes pointer events.
+  // Info panel: far right, textContent only, never takes pointer events.
   let info = null;
   if (overlay) {
     const p = el('aside', 'ns-infopanel', overlay);
@@ -6903,12 +6816,7 @@ export function createScene({
   const frustum = typeof THREE.Frustum === 'function' ? new THREE.Frustum() : null;
   const projView = typeof THREE.Matrix4 === 'function' ? new THREE.Matrix4() : null;
 
-  // ---- R5-scene: shared shader-patch composition (each patch keeps the previous onBeforeCompile and cache key) --------
-  // ---- R558 (genuine note R32): the motor areas "should at least look a little fleshy" ------------------------------
-  // One small addition to the lit colour of the area materials (see REGION_RENDER.tissue*). It reads the material's own
-  // final albedo, so an area shown in the activity colours scatters in those colours and the brain-to-muscle colour
-  // match is kept; nothing is added to the emission, the depth or the alpha.
-  // (20 November 2026: none in the raw look, strength 0: the areas take only its one light)
+  // Resting motor areas use flesh tones.
   const tissue = { applied: null, uniforms: { nsTissue: { value: new THREE.Vector4(REGION_RENDER.tissueTint[0], REGION_RENDER.tissueTint[1], REGION_RENDER.tissueTint[2], BODY_STYLE === 'raw' ? 0 : REGION_RENDER.tissueStrength) }, nsTissueShape: { value: new THREE.Vector2(REGION_RENDER.tissueFloor, REGION_RENDER.tissuePower) } } };
   const TISSUE_HOOK = '#include <opaque_fragment>';
   const tissuePatch = m => composePatch(m, 'ns-tissue-r558', shader => {
@@ -7262,7 +7170,7 @@ export function createScene({
     return NsColors.muscleOwnShadeInto(key, out); // 19 November 2026: every muscle its own shade of its tone
   }
   const setMuscleBase = (mat, id) => { if (mat && mat.userData) mat.userData.nsMuscleBase = muscleBaseOf(id); return mat; };
-  // ---- R5-scene (D19, R23): the mirror body (a reflected copy of your body and arm, behind the brain, facing you) -----
+  // ---- R5-scene (D19, ): the mirror body (a reflected copy of your body and arm, behind the brain, facing you) -----
   // mirrorRoot.matrix = mirrorMatrix (player world -> mirror world, det < 0); mirrorBodyGroup carries the body frame and
   // mirrorArmGroup the eye, so every twin takes exactly the player's pose matrices (the arm muscles even share the CPU-
   // skinned buffers). Own opaque materials (no first-person see-through rules), shaded with the same ns-colors rule.
@@ -7640,7 +7548,7 @@ export function createScene({
       const geo = indexedGeometry(tipPos || b.positions, b.indices);
       hatchAttr(geo, geo.attributes.position.array, 'bone');
       geo.computeVertexNormals();
-      weldGeometryNormals(geo); // R558 (R33): no lit seams across the files' duplicated vertices
+      weldGeometryNormals(geo); // no lit seams across the files' duplicated vertices
       const mesh = new THREE.Mesh(geo, boneMaterial);
       mesh.name = String(b.name || b.segment);
       mesh.matrixAutoUpdate = false;
@@ -8081,9 +7989,7 @@ export function createScene({
     mesh.matrix.setPosition(c[0] - eyeTurnShift.x, c[1] - eyeTurnShift.y, c[2] - eyeTurnShift.z); // c - R c
     mesh.matrixWorldNeedsUpdate = true;
   }
-  /** The brain's eyeballs turn with the player's look: by BRAIN_EYE_TURN.gain of the look's turn from where it started,
-   * at most maxDeg either way, about the brain's own up axis (left and right) and its side axis (up and down). A
-   * picture of "which way you are looking", not eye anatomy. Written only when the look has changed. */
+  /** The view indicator shows the current orientation. */
   function updateBrainEyes() {
     if (!brainEyes.on || !brainEyes.balls.length) return;
     // setView follows the player's look in both views. The outside camera has its own tilt.
@@ -8175,7 +8081,7 @@ export function createScene({
       depthMesh.renderOrder = RENDER_ORDER.glassDepth;
       brainGroup.add(depthMesh);
       glassDepth.push(depthMesh);
-      if (!xraySet.has(gi)) return; // A2-render R1: the faint x-ray pass only for the GLASS_XRAY subset
+      if (!xraySet.has(gi)) return; // A2-render the faint x-ray pass only for the GLASS_XRAY subset
       const xrayMesh = still(new THREE.Mesh(geo, glassXrayMaterial));
       xrayMesh.name = `${mesh.name} (x-ray)`;
       xrayMesh.renderOrder = RENDER_ORDER.glassXray;
@@ -8546,7 +8452,7 @@ export function createScene({
       }
       // R5-scene: the lit area keeps its gyral relief under the perspective squash (rigid normals, P2) and can glow (D17).
       glowRimPatch(rigidPatch(material));
-      tissuePatch(material); // R558 (R32): soft tissue scatter (lighting only)
+      tissuePatch(material); // soft tissue scatter (lighting only)
       powerUpPatch(material, 'area');
       if (border) areaInkPatch(material);
       composePatch(material, 'ns-live-r18', shader => { liveCompile(shader); }); // 18 November: the keys move with the living brain
@@ -8618,10 +8524,7 @@ export function createScene({
         rec.markCentre = n >= 1 ? c : null;
       }
 
-      // "Ensure it's precise to its correlates"): the part of this area that does each of its movements (its KEY: the
-      // picker's own rule, ns-brain regionActionAt, asked for each of the area's vertices), as up to BEAM_KEY_POINTS
-      // sample points and their mean, under the movement's id (and its game-arm id). A beam of that movement starts
-      // on exactly these points.
+      // The link uses the mapped motor region.
       {
         const byAct = new Map();
         if (typeof NsBrain.regionActionAt === 'function' && Array.isArray(r.actions) && r.actions.length) {
@@ -8874,7 +8777,7 @@ export function createScene({
     checkMesh(focus, 'focus strip');
     const n = focus.positions.length / 3;
     if (!focus.u || focus.u.length !== n) fail('scene_input', 'focus strip needs one u value per vertex');
-    // A2-render R1: lit, opaque, depth-writing strip. The shader patch draws region tints/borders, the hover outline and
+    // A2-render lit, opaque, depth-writing strip. The shader patch draws region tints/borders, the hover outline and
     // the two-scale simulated glow per fragment from the `nsU` attribute (the same u the picker interpolates); the
     // vertex colours are the CPU fallback (ns-brain stripShade) used only when the patch hooks are missing.
     const geo = indexedGeometry(focus.positions, focus.indices);
@@ -9157,7 +9060,7 @@ export function createScene({
     if (!camPose && !(firstPose && firstPose.turned)) { if (firstPose) { firstPose.yaw = yaw; firstPose.pitch = pitch; } camera.rotation.set(pitch, yaw, 0, 'YXZ'); camera.updateMatrixWorld(true); }
   }
 
-  /** R5-scene (D18, R22): the render camera from an ns-camera cameraPose (R5-camera) result, or null for first person.
+  /** R5-scene (D18, ): the render camera from an ns-camera cameraPose (R5-camera) result, or null for first person.
    * pose: { position: [x, y, z] (world m), yaw, pitch (rad; rotation.set(pitch, yaw, 0, 'YXZ')), headInPlace 0..1,
    * faceGhost 0..1, overBrainSeeThrough 0..1, nearM } (the multipliers are optional: without them a camera at least 0.35 m
    * from the eye counts as third person). pose.firstPerson === true, blend 0 or mode 'first' = first person: the camera
@@ -10207,7 +10110,7 @@ export function createScene({
     return changed;
   }
 
-  /** Enlarge and brighten the marker of the action under the crosshair (null clears). A2-render R1: the same action's
+  /** Enlarge and brighten the marker of the action under the crosshair (null clears). A2-render the same action's
    * control region gets the strip hover outline/tint, and (armGhost 'auto') the arm ghost window fades in while an
    * action is under the crosshair. */
   function highlightMarker(actionId) {
@@ -10611,7 +10514,7 @@ export function createScene({
 
   /* ---------------------------------------------------------------- U2b-scene: info overlay */
 
-  /** Far-right information overlay (R14) for an ns-app infoOverlayModel. Rewrites text only when the content changes;
+  /** Far-right information overlay for an ns-app infoOverlayModel. Rewrites text only when the content changes;
    * null hides the panel. Returns true when something was written. */
   /** 22 November 2026 (WORDS2, second pass, INFO_FIT): drop whole "Keep in mind" lines a card without More detail cannot
    * show (in an animation frame, after the card's new words are laid out; a line shown again and dropped again in the
@@ -10889,7 +10792,7 @@ export function createScene({
       if (tipPos) boneTips.meshes++;
       const geo = indexedGeometry(tipPos || (m.positions instanceof Float32Array ? m.positions : Float32Array.from(m.positions)), m.indices instanceof Uint32Array ? m.indices : Uint32Array.from(m.indices));
       geo.computeVertexNormals();
-      const welded = weldGeometryNormals(geo); // R558 (R33): own body, its in-place head and the mirror twin all draw this geometry
+      const welded = weldGeometryNormals(geo); // own body, its in-place head and the mirror twin all draw this geometry
       if (geo.attributes.normal && geo.index) { smoothNormalField(geo.attributes.position.array, geo.index.array, geo.attributes.normal.array, { groups: welded && welded.groups }); geo.attributes.normal.needsUpdate = true; } // 18 November 2026 (DETAIL)
       hatchAttr(geo, geo.attributes.position.array, kind === 'muscle' ? 'muscle' : 'bone', id);
       if (kind === 'bone' && boneEnds && boneEnds.has(id) && boneEnds.get(id).length === 2 * geo.attributes.position.count) geo.setAttribute('nsBoneEnd', new THREE.BufferAttribute(boneEnds.get(id), 2)); // 18 November 2026 (DETAIL)
@@ -12098,7 +12001,7 @@ export function createScene({
   /** Face layer mode: 'ghost' (default) | 'inset' | 'off' (FACE_VIEW_MODES). */
   function setFaceView(mode) {
     if (!FACE_VIEW_MODES.includes(mode) && !RETIRED_FACE_VIEW_MODES.includes(mode)) fail('scene_args', `face view must be one of ${FACE_VIEW_MODES.join(', ')}`);
-    faceMode = 'off'; // R558 (R26): no control can turn the floating own face back on
+    faceMode = 'off'; // no control can turn the floating own face back on
     faceStateKey = '';
     overlayDirty = true;
     return faceMode;
@@ -12335,20 +12238,7 @@ export function createScene({
     bodyBoxCache = { own, mirror: mir }; bodyBoxKey = key;
     return bodyBoxCache;
   }
-  /* 20 November 2026 (package LAYOUT; the owner's standing wish for the strip's labels: sparse, and never over a body).
-   * The labels kept clear of your left arm only, by shapes ns-app works out from the arm's fit as seen FROM THE EYE
-   * (armAvoidShapes). Since the eye view's camera stands half a metre behind and above the eye (ns-camera EYE_DOLLY)
-   * those shapes lie far from the arm as drawn: at 1280 x 720 they covered the face areas of the brain's left half, so
-   * "Face and neck" could not sit on its own areas and moved into the hollow of the strip, over the mirror body's arms,
-   * where "Belly and back" already sat (the mirror body was no obstacle at all). bodyLabelBoxes: what the two bodies
-   * cover on screen as drawn NOW, as boxes the labels keep clear of: every bone of your body (your left arm's too) and
-   * of the mirror body (arm included), projected with the camera as it draws, padded by fleshM of flesh round the bone
-   * (as px at the bone's nearest depth), gathered on a grid of cellPx cells and handed on as runs of cells (a few dozen
-   * boxes, not hundreds). Bones only: they are rigid meshes posed on the processor every frame, so the boxes follow the
-   * bodies (the muscles' skins are made on the graphics card). Left out: what the eye view does not draw of your own
-   * body (above the collar, EYE_COLLAR), bones nearer the camera than nearM, and a bone box larger than maxShare of the
-   * view (a rib seen from close by). Made again when the camera, a pose or the mirror body changes, at most every
-   * everyFrames drawn frames while that goes on. An outline for placing words, not a silhouette. */
+  /* Labels leave the visible limbs unobstructed. */
   const LABEL_BODY = Object.freeze({ cellPx: 4, fleshM: 0.025, nearM: 0.3, maxShare: 0.5, everyFrames: 4 });
   let labelBodyOut = null, labelBodyKey = '', labelBodyAt = -1e9, labelBodyGrid = null, labelBodyCols = 0, labelBodyRows = 0;
   const labelBodyBox = new THREE.Box3(), labelBodyStats = { bones: 0, cells: 0, boxes: 0, ms: 0 };
@@ -12456,7 +12346,7 @@ export function createScene({
     }
     return coverCache.hull ? rectHitsConvexHull(coverCache.hull, rect) : false;
   }
-  /** R5-integrate-core (R25 / R26): does a CSS px rect cover a MOTOR AREA as drawn now (the region meshes' projected
+  /** R5-integrate-core (): does a CSS px rect cover a MOTOR AREA as drawn now (the region meshes' projected
    * triangles, ns-arrows3d occupancyGrid, 4 px cells, 1 cell margin; first or third person camera)? With the round-5 brain
    * filling the view, the see-through glass lies under almost every HUD place; a HUD line (the "Try this" guide) may sit
    * over glass but never over a motor area. Falls back to brainCoversRect without a region segmentation. */
@@ -13001,7 +12891,7 @@ export function createScene({
     }
     const key = `${cssW}x${cssH}`;
     out.push(toastSeen && toastSeen.key === key ? { ...toastSeen.rect } : { x0: cssW / 2 - Math.min(310, 0.46 * cssW), y0: cssH - 50, x1: cssW / 2 + Math.min(310, 0.46 * cssW), y1: cssH - 8 });
-    // R5-bigbrain (R25): no arrow at the crosshair at the default look (the brain now fills the view, so an arrow pushed
+    // R5-bigbrain: no arrow at the crosshair at the default look (the brain now fills the view, so an arrow pushed
     // off a motor area could otherwise land where the player aims)
     const ch = R5_BIGBRAIN.crosshairKeepPx;
     out.push({ x0: cssW / 2 - ch, y0: cssH / 2 - ch, x1: cssW / 2 + ch, y1: cssH / 2 + ch, crosshair: true });
@@ -13075,7 +12965,7 @@ export function createScene({
   const copyCompassEvidence = value => typeof value === 'number' ? (Number.isFinite(value) ? value : { nonfinite: String(value) })
     : Array.isArray(value) ? value.map(copyCompassEvidence)
     : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k, copyCompassEvidence(v)])) : value;
-  /** R5-bigbrain (R25): sample points of every motor area (source mm, the region meshes' vertices, at most
+  /** R5-bigbrain: sample points of every motor area (source mm, the region meshes' vertices, at most
    * R5_BIGBRAIN.motorSamples), built once: an arrow at the screen edge never covers a motor area, and the mirror body's
    * default place keeps clear of them (ns-arrows3d occupancyGrid / compassLayout avoid). */
   let motorSamples = null, motorIndices = null;
@@ -14528,7 +14418,7 @@ export function createScene({
   }
 
   /* ---- R5-scene (D19): mirror body (ns-mirror placement, transform and orbit; the scene draws the twins) ------------ */
-  // R22 conservative enclosure of BOTH full-source and current live position buffers.
+  // conservative enclosure of BOTH full-source and current live position buffers.
   // Primary body LOD may use a different array; no identity or decimator-enclosure assumption.
   const mirrorPositionBounds = new WeakMap();
   function mirrorMeshCorners(mesh, matrix, append) {
@@ -14666,7 +14556,7 @@ export function createScene({
     }
     if (!(envelope.minCameraDepthM >= camera.near)) fail('scene_input', 'bounded strict current mirror near-plane check failed');
     return { status: 'current-pose-near-checked', movementWorldM: mirror.worldCentre.map((x, i) => x - before[i]), worldCentreM: mirror.worldCentre.slice(), envelope,
-      scope: 'Object translation only before render; no active-camera switch. Released placement never silently moved. Refusal is a failed/unresolved ordinary pose, not working R22 acceptance.' };
+      scope: 'Object translation only before render; no active-camera switch. Released placement never silently moved. Refusal is a failed/unresolved ordinary pose, the placement check has not passed.' };
   }
 
   /** The player's posed body as world points (the 8 box corners of every body mesh in its posed place, head included,
@@ -14978,7 +14868,7 @@ export function createScene({
       camera.updateMatrixWorld(true);
       brainCoversRect({ x0: 0, y0: 0, x1: 1, y1: 1 }); // refreshes the outline hull cache for this camera
       const hull = coverCache.valid ? coverCache.hull : null;
-      // R5-bigbrain (R25 / R26): share of the body's sample points behind a motor area (first person: the motor
+      // R5-bigbrain (): share of the body's sample points behind a motor area (first person: the motor
       // areas' occupancy grid at the current look; a motor area's backing darkens what is behind it)
       let grid = null;
       try { grid = camPose ? null : motorGridFor({ yaw: firstPose ? firstPose.yaw : lookYaw, pitch: firstPose ? firstPose.pitch : lookPitch }); } catch { grid = null; }
@@ -15000,7 +14890,7 @@ export function createScene({
     }
     return out;
   }
-  /** R5-camera (round5/R5-camera-NOTES.md 4.3): keep-out spheres [{ centre: [x, y, z], radius }] (world m) of your body
+  /** R5-camera (development check 4.3): keep-out spheres [{ centre: [x, y, z], radius }] (world m) of your body
    * for the third-person boom (ns-camera cameraPose opts.avoid): one per body mesh (head and face IN PLACE: body frame x
    * mesh matrix), one per arm bone and one per arm muscle (from its CPU-skinned points). Cached until the body pose, the
    * arm pose, the body frame or the look changes. */
@@ -15288,14 +15178,7 @@ export function createScene({
   }
 
 
-  // "Ensure that your body, the brain and the mirror do not touch or collide ... they can be moved to and around each
-  // other but not through." Each drawn mesh gets a sphere table once (cached by geometry). A body mesh whose vertices
-  // are rewritten afterwards (the look, the arm, the Body Worlds lift) gets a lazy table: see collideLazyTable.
-  // collisionItems() gives the three items with the
-  // world matrices as drawn now; the app decides what may move (it only reads). Your own body: every body mesh where it
-  // is drawn (the head and face IN PLACE, not the face layer at the eye) and the left arm's bones with a pad for the
-  // muscle round them (its muscles are skinned on the CPU every frame); the mirror body: the same tables through the
-  // twins' matrices; the brain: its glass meshes.
+  // The body, brain and mirror have collision boundaries.
   const collideTables = new WeakMap();
   let collideRebuilds = 0, collidePass = 0, collideLazyMade = 0, collideLazyBuilt = 0, collideLate = 0, collideMirrorBuilds = 0;
   /* R558 (performance): a body mesh whose vertices were rewritten since its table was made (a look re-skins shoulder,
@@ -15506,7 +15389,7 @@ export function createScene({
   }
 
   /* ---- R5-scene (D17): glow links ------------------------------------------------------------------------------------ */
-  /** R5-scene (D17, R21): the links to draw now, from the simulation (glowLinksFromActions builds them from ns-actions /
+  /** R5-scene (D17, ): the links to draw now, from the simulation (glowLinksFromActions builds them from ns-actions /
    * ns-body): [{ regionId, level 0..1 (the area's activity, which fades with the 1 s activation), bodyMeshIds,
    * armMuscleKeys, armMuscleNames }]. Call every frame (or whenever they change); [] or null clears. The area and its
    * muscles get the same fluorescent glow colour (ns-colors glowColor) and a soft additive ribbon joins them, on your
@@ -17091,12 +16974,12 @@ export function createScene({
           body: { set: bodyVessels.set, points: bodyVessels.points, triangles: bodyVessels.triangles, updates: bodyVessels.updates, lastMs: bodyVessels.lastMs, names: bodyVessels.names.slice(), dropped: bodyVessels.dropped.slice(),
             stretch: bodyVessels.parts.map(p => Math.round((p.stretch || 1) * 100) / 100), stretchMm: bodyVessels.parts.map(p => Math.round((p.stretchMm || 0) * 10) / 10), stretchAt: bodyVessels.parts.map(p => p.stretchAt || null) } } };
       },
-      /** A2-render R1: { applied (null until the strip compiles, then whether the shader hooks were found), shimmer,
+      /** A2-render { applied (null until the strip compiles, then whether the shader hooks were found), shimmer,
        * reducedMotion }. applied === false means the CPU vertex-colour fallback is drawn. */
       stripShader,
-      /** A2-render R1: { applied (null until an arm material compiles), mode ('auto' or 0..1), amount (current 0..1) }. */
+      /** A2-render { applied (null until an arm material compiles), mode ('auto' or 0..1), amount (current 0..1) }. */
       armGhost: armGhostState,
-      /** A2-render R1: the glass x-ray mode, whether the front-to-back depth sort is installed, and the adaptive
+      /** A2-render the glass x-ray mode, whether the front-to-back depth sort is installed, and the adaptive
        * pixel-ratio state ({ level, cap, smoothMs, ... } or null when disabled). */
       glassXrayMode,
       transparentSortApplied,
@@ -17176,7 +17059,7 @@ export function createScene({
     guideCueKeepOut, // (24 November 2026, UI5: what the tutorial cue's words keep clear of)
     qualityState,
     setBrainDistanceScale,
-    // R5-scene (round 5: D16 arrows, D17 glow, D18 third person, D19 mirror body; round5/R5-scene-NOTES.md)
+    // R5-scene (round 5: D16 arrows, D17 glow, D18 third person, D19 mirror body; development check)
     pickArrows,
     setArrowHover, setKeyboardAreaTip,
     arrowsState,
@@ -17186,7 +17069,7 @@ export function createScene({
     setCameraPose, releaseCameraProjectionPlan, abandonCameraProjectionPlan, muscleAt,
     cameraState,
     setMirrorView,
-    /** R5-mirror's name for it (round5/R5-mirror-NOTES.md 4.1: scene.setMirror(NM.mirrorTransform(state))). */
+    /** R5-mirror's name for it (development check 4.1: scene.setMirror(NM.mirrorTransform(state))). */
     setMirror: setMirrorView,
     mirrorState,
     mirrorPartAt, graspTargetAt, controlLayersAt, rayAt, reconcileMirrorCarry, setHeldItem, setLimbFlash, setPartGlows,
@@ -17408,24 +17291,8 @@ export const STATUS_CARD_PLAN = Object.freeze({ columnVh: 0.37, portraitVh: 0.11
  * key directly above it. statusShare: the most of the stack's height the status card may take; minPx: the least height
  * either keeps. */
 export const CORNER_STACK = Object.freeze({ footPx: 20, statusShare: 0.55, minPx: 48, statusFirst: true });
-/* 22 November 2026 (WORDS2, hunt H11: at 800 by 600 with the full cards and the tutorial, "the bottom-left card is cut
- * mid-sentence and the model-name honesty line ends at 'NeuroTranslate 0.0 is'"; the colour key was cut at its foot as
- * well). The status card had at most statusShare (55 %) of the stack and was cut at its foot, where its brand and
- * model-name line stands (neurosurge.css order 20), whenever its lines were taller: the "Try this" line in the card
- * made it 359 px against a cap of 297 at 800 by 600, the end-of-strip note 311. statusFirst (true): the status card has
- * the whole stack before the colour key takes anything, so at the supported window sizes it is never cut; the key takes
- * what is left and drops whole parts to fit (LEGEND_FIT), never a line in the middle. A window too small for even the
- * status card still caps it, and its model-name line then stays at its foot, whole (quiet.css). statusFirst false = the
- * share rule. */
-/** 22 November 2026 (WORDS2, hunt H11): the colour key of the corner stack, in the height cornerStackFit leaves it:
- * level 0 whole; 1 without its credits line (the line of anatomy credits; "Sources and rights", the HUD's one control,
- * stays, and the credits are also behind "notes and credits" at the bottom of the game); 2 also without the two key
- * items (switched on, arm spots) and the rough-map note (the limits line at the top says "a rough map"); 3 not shown.
- * While "Sources and rights" is open or has the keyboard focus the key stays whole (level 0: the player asked for it;
- * the cap then fades it at its foot, as before). marginPx: the space each dropped part takes beyond its own box
- * (the credits line: none, it is a block of its own in the HUD, quiet.css; neurosurge.css .ns-hud .ns-legend-key
- * margin 5 and 3, the note's margin-top 2); slackPx: kept spare, so an estimate a few pixels short never leaves the key
- * a line too tall; settleCalls: see setLegendLevel. on false = the key is capped and fades at its foot, as before. */
+/* The status layout keeps its final line visible. */
+/** The status stack fits the colour legend within the available height. */
 export const LEGEND_FIT = Object.freeze({ on: true, marginPx: Object.freeze([0, 10]), slackPx: 4, settleCalls: 12 });
 /** PURE (LEGEND_FIT): the colour key's level for a greatest height maxPx, its whole height fullPx and the heights of
  * the parts each level drops (dropPx[0]: the rights row; dropPx[1]: the key items and the note, together): 0, 1, 2, or
@@ -17477,7 +17344,7 @@ export const HUD_LAYOUT = Object.freeze({
   portraitAspect: 1,
   wide: Object.freeze({ colPx: 300, colVw: 26, infoPx: 300, noticePx: 370 }),
   shortHeight: Object.freeze({ maxPx: 600, infoPx: 300 }),
-  compact: Object.freeze({ colPx: 250, colVw: 30, infoPx: 340, noticePx: 460 }), // A2-render R1: narrower (CSS mirror)
+  compact: Object.freeze({ colPx: 250, colVw: 30, infoPx: 340, noticePx: 460 }), // A2-render narrower (CSS mirror)
   portrait: Object.freeze({ infoPx: 320, noticePx: 400, noticeWPx: 320, noticeWVw: 86 }),
   label: Object.freeze({ sideW: 150, sideShortW: 48, axisW: 104, h: 24, shortBelowAspect: 1, pxPerChar: 7.4, padPx: 4 }),
   essential: Object.freeze({ fontPx: 12, lineHeight: 1.3, padY: 2, padX: 6, charEm: 0.55, colGapPx: 8 })
@@ -17644,7 +17511,7 @@ export function createHud(hudRoot) {
   slots.banner = make('div', 'ns-banner', root);
   slots.error = make('div', 'ns-error', root);
   slots.error.setAttribute('role', 'alert');
-  // A2-render R1: both start hidden; an empty padded error box used to sit over the crosshair until an error arrived.
+  // A2-render both start hidden; an empty padded error box used to sit over the crosshair until an error arrived.
   slots.banner.hidden = true;
   slots.error.hidden = true;
 
@@ -17732,7 +17599,7 @@ export function createHud(hudRoot) {
   let crossActive = false, crossHold = '', crossAway = false;
   make('span', 'ns-crosshair-h', cross);
   make('span', 'ns-crosshair-v', cross);
-  // A2-render R1: label of the control region under the crosshair (explicit `hover` text, else derived from `gaze`).
+  // A2-render label of the control region under the crosshair (explicit `hover` text, else derived from `gaze`).
   const hover = make('div', 'ns-hover', root);
   let hoverTransform = '';
   hover.hidden = true;
@@ -17842,7 +17709,7 @@ export function createHud(hudRoot) {
 
   // Measure at the existing bounded cadence. Placement uses cached sizes between these reads.
   // The existing arm-avoid shapes are approximate; clear-estimate is not native silhouette proof.
-  // A2-render R1: when the window has a ResizeObserver, sizes come from it (delivered after layout), so placement never
+  // A2-render when the window has a ResizeObserver, sizes come from it (delivered after layout), so placement never
   // forces a synchronous layout right after render()'s text writes; otherwise the R3 bounded-cadence reads remain.
   const panelEls = [info, legend];
   let panelRects = null, panelSizes = null, panelPick = [null, null];
@@ -18099,7 +17966,7 @@ export function createHud(hudRoot) {
   /** projected anchors and approximate arm-avoid shapes are unchanged. Cards seek clear edge positions;
    * labels retain their existing hemisphere/pole anchors and choose a clear alternate when available.
    * Native tissue/glyph occlusion and all-pose clearance remain unverified; limited cases stay bright.
-   * A2-render R1: opts.bandRect (viewport fractions; null = none) is the band's projected box; when omitted it is
+   * A2-render opts.bandRect (viewport fractions; null = none) is the band's projected box; when omitted it is
    * derived from the projected orientation anchors (bandRectFromAnchors). While the band is looked at (its box
    * contains the crosshair) the cards also avoid it, so the HUD does not cover the strip where space allows. */
   function placeOrientation(projected, size, avoid, opts = {}) {
@@ -18182,7 +18049,7 @@ export function createHud(hudRoot) {
     let sidePairIndex = null, sidePairY = null, firstSide = null;
     const sideHide = {};
     const candIndex = key => { const d = key.indexOf('.'); return d < 0 ? 0 : Number(key.slice(d + 1)); };
-    // write one label's place (A2-render R1: attribute and style writes only when the value changes, no per-frame DOM
+    // write one label's place (A2-render attribute and style writes only when the value changes, no per-frame DOM
     // invalidation) and record its box for this call (a label placed again replaces its earlier box)
     const commitOrient = (k, el, use, chosen) => {
       setClass(el, `ns-orient ns-orient-${k}`);
