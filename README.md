@@ -5,7 +5,7 @@
 
 **NeuroSurge** · [Play Full](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Download Lite for offline play](https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-body-81-2026-11-28/NeuroSurge-Lite.zip) · [Player guide](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/PLAYER-GUIDE.html)
 
-[Download the 0.1 walking checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip) · [0.1 setup and requirements](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24) · [All model downloads](models/#current-downloads)
+[Download the 0.1 walking checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip) · [0.1 setup and requirements](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24) · [All model downloads](models/#current-downloads) · [Model versions explained](models/versions/SIMPLE.md) · [Technical version guide](models/versions/TECHNICAL.md)
 
 [Run the new walking checkpoints and read the cortical forecast results](benchmarks/walking-neural-scaling/)
 

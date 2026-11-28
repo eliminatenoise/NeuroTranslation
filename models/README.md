@@ -1,5 +1,7 @@
 # NeuroTranslate models
 
+**Model versions** · 0.0 browser forecasts, 0.1 walking fits and the 0.2 pooled training study. [Simple guide](versions/SIMPLE.md) · [Technical guide](versions/TECHNICAL.md)
+
 ## Current downloads
 
 [NeuroTranslate 0.1 walking checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip). The ZIP contains the saved training changes and a runnable example with invented readings for two force plates. Run the forecast on Linux with a separately downloaded 19.53 GB base model. [Setup](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24) · [Simple results](../benchmarks/expanded-walking-research/SIMPLE.md) · [Technical results](../benchmarks/expanded-walking-research/TECHNICAL.md)
@@ -70,7 +72,9 @@ The movement viewer compares right-wrist angles with different combinations of m
 
 [Download the browser predictor](movement-browser.zip) · [Rebuild the browser model and trace viewer](browser-source/)
 
-### What did firing add to the shared model?
+<a name="what-did-firing-add-to-the-shared-model"></a>
+
+### Brain-cell firing in the shared movement model
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
 
@@ -86,7 +90,9 @@ A turn of the virtual scene gives two clocks the same starting point. Electrodes
 
 The walker sees the scene tilt. What can the voltage recorded at the scalp tell us about the next 125 ms of motion? Change the inputs to a Transformer trained on beam-walking recordings. On 880 qualifying rotations from six people outside the fit, the separately trained model without scalp voltage had the lower average error at both markers. [Try the forecast](https://eliminatenoise.github.io/NeuroTranslation/visual-balance/) · [Source, weights and scores](visual-balance/) · [Download the model](visual-balance-model.zip) · [Compare the shared model](https://eliminatenoise.github.io/NeuroTranslation/visual-balance-controls/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/visual-balance/)
 
-## What do two walking instructions add?
+<a name="what-do-two-walking-instructions-add"></a>
+
+## Walking forecasts with and without a movement instruction
 
 The walker crosses a level floor barefoot, with one instruction for each walk. A Transformer uses 200 ms of pelvis and right-heel motion and the instruction for that walk to forecast the next 100 ms. A second fit sees the movement alone. On the ten historical assessment participants the two fits differed by less than a tenth of a millimetre in average error at either landmark. [Try the forecast](https://eliminatenoise.github.io/NeuroTranslation/walking-instructions/) · [Source, weights and scores](walking-instructions/) · [Model download](walking-instructions-model.zip) · [Compare the general model](https://eliminatenoise.github.io/NeuroTranslation/walking-instruction-controls/) · [Study](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-instructions/)
 
@@ -110,7 +116,9 @@ Two 32-electrode grids measured voltage at the skin while a sensor recorded whic
 
 The Transformer takes five milliseconds of baseline and three milliseconds of early readings. Its target is the change in the neck electrode's voltage from baseline, four milliseconds after the early window closes. A second model starts from the last millisecond of neck voltage and estimates a correction. Compare the arm signal from the matching stimulus with one from the wrong stimulus. [Try the Transformer](https://eliminatenoise.github.io/NeuroTranslation/cervical-forecast/) · [Weights, source and scores](cervical-forecast/) · [Download the model](cervical-forecast-model.zip) · [Try the second model](https://eliminatenoise.github.io/NeuroTranslation/neck-voltage/) · [Study](https://eliminatenoise.github.io/NeuroTranslation/papers/cervical-forecast/)
 
-## What can scalp electrodes add to an arm forecast?
+<a name="what-can-scalp-electrodes-add-to-an-arm-forecast"></a>
+
+## Arm forecasts with scalp electrodes
 
 A visual cue and early arm movements already give a model clues about where the arm is going. One experiment trains a small Transformer to use those clues alongside electrical recordings from the scalp and around the eyes. Another starts with the usual response to the cue and asks the shared NeuroTranslate movement model to correct it. Some forecasts remove the part of the scalp pattern a fitted equation can predict from the eye readings. Five people outside the fitting group supplied the test. [Try the Transformer](https://eliminatenoise.github.io/NeuroTranslation/scalp-forecast/) · [Weights, code and scores](scalp-forecast/) · [Download the Transformer](scalp-forecast-model.zip) · [Try the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#early-signals) · [Shared model method](neurotranslate-0.0/scalp-residual/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/scalp-forecast/)
 
@@ -154,13 +162,17 @@ A glove recorded how far each finger bent in the device’s own units. Recent gl
 
 An earlier stride supplies the starting answer. A correction trained specifically for the knees averaged 2.679° of error, against 3.535° for stride replay. The new knee output on the shared movement model gave 3.465°. Both evaluations used the same 12 previously studied walkers. In ten walkers measured with optical markers in a second laboratory, the unchanged task-trained model averaged 3.242°, replay 3.398° and the linear correction 3.602°. The advantage over replay was uncertain. [External test](knee-stride/external-optical/) [Task-trained model](knee-stride/) · [Download the standalone predictor](knee-stride-model.zip) · [Offline reader](knee-stride.zip) · [Reader source](knee-stride-source.zip)
 
-## Do the muscles and knees repeat at the same rate?
+<a name="do-the-muscles-and-knees-repeat-at-the-same-rate"></a>
+
+## Repetition rates of muscle activity and knee motion
 
 For 11 held-out walkers at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by 0.027 cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to 3.055. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved. The peaks landed on the same search frequency for nine people and one 0.15-cycle-per-minute grid interval apart for two. A 40-second window has a natural frequency spacing of about 1.5 cycles per minute. These comparisons measure agreement between estimates made with the same method.
 
 [Compare the rhythms](https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/) · [Study and results](gait-rhythm/) · [Offline reader and source (ZIP)](gait-rhythm.zip) · [Read the supplement](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-rhythm/)
 
-## Where will the knees be 15 stored frames later?
+<a name="where-will-the-knees-be-15-stored-frames-later"></a>
+
+## Knee angles 15 recorded frames ahead
 
 Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. At the same five input times, the transformer averaged 4.47° across all 42,781 eligible windows and a six-joint linear fit averaged 5.60°. Each walker counts equally.
 
@@ -168,13 +180,17 @@ Six of the 51 recordings used whole-file Xsens HD processing, including test rec
 
 [Try the knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/) · [Model and results](knee-motion/) · [Offline viewer and model (ZIP)](knee-motion.zip)
 
-## Where will the next step land?
+<a name="where-will-the-next-step-land"></a>
+
+## Body-marker forecasts during walking and running
 
 Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. The walk or run label reduced average error at points measured relative to the pelvis from 71.9 to 69.1 mm across six fresh recording groups. A linear forecast tracked the pelvis through the room more closely. Only one of the six groups ran.
 
 [Continue a measured stride](https://eliminatenoise.github.io/NeuroTranslation/stride/) · [Model and results](stride-continuation/) · [Offline viewer and model (ZIP)](stride-continuation.zip)
 
-## Can brain activity sharpen a rat’s movement forecast?
+<a name="can-brain-activity-sharpen-a-rats-movement-forecast"></a>
+
+## Rat movement forecasts with and without brain activity
 
 Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three held-out rats the average miss fell from 2.898 to 2.870 cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.
 
@@ -186,7 +202,9 @@ Enter **walk** or **run**. A small network fitted to 31 motion-capture recording
 
 [Try the two commands](https://eliminatenoise.github.io/NeuroTranslation/word-motion/) · [Python and JavaScript inference, weights and study](word-motion/) · [Offline viewer and model (ZIP)](word-motion.zip)
 
-## Which wrist forecast should I run?
+<a name="which-wrist-forecast-should-i-run"></a>
+
+## Choosing a wrist-angle forecast
 
 Both downloads below forecast how far the right wrist will bend back and tilt towards the thumb a quarter-second later. Each accepts recent wrist motion and optional measurements of electrical activity at the forearm. Both run locally with Python and NumPy.
 
@@ -217,7 +235,9 @@ The two tasks use **one fitted Transformer checkpoint**. The same attention laye
 
 The original two-domain browser module remains available for reproducing the comparison below. It accepts four motion intervals or derives them from time-stamped tracking points. Its two distributed examples are invented. [Browser runtime and API](shared-motion-browser/) · [Download the standalone JavaScript package](shared-motion-browser.zip)
 
-## Did learning together help?
+<a name="did-learning-together-help"></a>
+
+## Shared and single-task training on human wrist and rat movement
 
 | Quarter-second forecast | Human wrist | Rat position |
 | --- | ---: | ---: |
