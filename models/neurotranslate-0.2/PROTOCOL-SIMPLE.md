@@ -1,12 +1,12 @@
 # NeuroTranslate 0.2 protocol, Simple edition: one shared movement model, tested on people and sessions no earlier fit has used
 
-Simple edition of protocol version 1, revision 2, 27 November 2026 · [Technical edition](PROTOCOL.md) · [Machine-readable protocol](PROTOCOL.json) · [Allocation script](allocate.py) · [Allocation output](ALLOCATION.json)
+Simple edition of protocol version 1, revision 3, 28 November 2026 · [Technical edition](PROTOCOL.md) · [Machine-readable protocol](PROTOCOL.json) · [Allocation script](allocate.py) · [Allocation output](ALLOCATION.json)
 
 This is the Simple edition of the NeuroTranslate 0.2 protocol. It explains the same plan as the Technical edition, [PROTOCOL.md](PROTOCOL.md), in more words and with examples, and changes none of the rules; if a sentence here reads differently, PROTOCOL.md and PROTOCOL.json govern. Sections 1 to 16 have the same numbers and subjects as the Technical edition, so a reader can move between the two. Examples are labelled, and made-up numbers are labelled as made up.
 
 ## The plan in brief
 
-**What is built.** NeuroTranslate 0.2 is one computer model, a neural network, that reads the recent past of recordings from the body and the nervous system and forecasts movement from 20 milliseconds up to half a second ahead. The recordings include electrical pulses of single nerve cells in animals, voltages measured on the scalp or on the surface of the brain, the electrical activity of muscles (EMG), the positions of body markers, joints or hands, and forces. The model is trained on the training parts of 13 openly licensed datasets together, in one combined training rather than one dataset after another. The final model is trained with three seeds (section 6). Two more datasets (area2 and FALCON M1) join if an audit in step P2, before the freeze, confirms that their units have training roles, and further "wave 2" datasets join only if they pass the same checks. A model trained on many sources together is called pooled. The part of the network that turns recordings into an internal summary is called the encoder, and 0.2 has one encoder shared by every dataset.
+**What is built.** NeuroTranslate 0.2 is one computer model, a neural network, that reads the recent past of recordings from the body and the nervous system and forecasts movement from 20 milliseconds up to half a second ahead. The recordings include electrical pulses of single nerve cells in animals, voltages measured on the scalp or on the surface of the brain, the electrical activity of muscles (EMG), the positions of body markers, joints or hands, and forces. The model is trained on the training parts of 14 openly licensed datasets together, in one combined training rather than one dataset after another. The final model is trained with three seeds (section 6). The 14 are the 13 datasets of "wave 1" and Area2_Bump, a set of monkey recordings that an audit in step P2 admitted. The same audit did not admit a second candidate, FALCON M1 (section 4.2). Further "wave 2" datasets join only if they pass the same checks before the freeze. A model trained on many sources together is called pooled. The part of the network that turns recordings into an internal summary is called the encoder, and 0.2 has one encoder shared by every dataset.
 
 **How it is tested.** After training, the encoder is frozen: its learned numbers no longer change. For each test set it receives only small add-on parts, called adapters, fitted on separate data from that set. It is then scored once on people and sessions that no NeuroTranslation model has used, in three test sets:
 
@@ -28,7 +28,15 @@ This is the Simple edition of the NeuroTranslate 0.2 protocol. It explains the s
 
 **What is published.** Now: this protocol and its machine-readable files. Before the freeze, and so before any test data are downloaded: the counts of the training data and the fingerprint of a sealed prediction. At the freeze: the fingerprints of every weight file, adapter and scoring script. After scoring: the model weights, every planned result (wins and losses alike) and reports in a Technical and a Simple edition (section 15).
 
-**Where things stand.** When this edition was written, no test value had been decoded and this protocol had downloaded no test data. The one exception was incidental. Two reads of the end of the E1 archive, made while the designs were drafted, also caught compressed bytes of 23 marker files of participant S010. They were never decompressed. In the clean-up step P0, done on 27 November, the two files that held them were replaced by copies without them and the originals were deleted, and a sensitivity row repeats E1 without those 23 files (section 3). Revision 1 of the protocol (commit 17f956b) was read by a separate reviewer, who admitted it with a list of minor corrections. Revision 2 applies those corrections and records the lead's decisions on seven questions that revision 1 left to the owner (section 14). Training and downloads start only after a separate reviewer admits this protocol and the lead commits it.
+**Where things stand.** This is revision 3 of the protocol, dated 28 November 2026. No training run has started, apart from one speed trial of the training code of about 6 seconds (section 16.1). No test value has been decoded, and this protocol has downloaded no test data. The one exception was incidental. Two reads of the end of the E1 archive, made while the designs were drafted, also caught compressed bytes of 23 marker files of participant S010. They were never decompressed. In the clean-up step P0, done on 27 November, the two files that held them were replaced by copies without them and the originals were deleted, and a sensitivity row repeats E1 without those 23 files (section 3).
+
+The protocol has had three revisions. Each is kept as a commit, a saved and numbered state of the project's files.
+
+- **Revision 1** (commit c0e522f) was read by a separate reviewer, who admitted it with a list of minor corrections. The same commit had the number 17f956b before the branch that holds it was rebuilt on top of other work, and the download records use that older number.
+- **Revision 2** (commit 554c59c) applies those corrections and records the lead's decisions on seven questions that revision 1 left to the owner (section 14). Under revisions 1 and 2 the training data were downloaded (step P1), then turned into model inputs and counted (step P2). A second review of the training data passed them.
+- **Revision 3** records the decisions the lead made on 28 November after that review. It corrects the rule for one group of runs in the quantity-versus-diversity study, the D arms (section 11). It states the numbers computed from the counted data, with their limits. It lists the points where the counted data differ from what revision 2 expected, the records that were corrected, and five process incidents of steps P1 and P2 (section 16.1).
+
+A separate reviewer must admit revision 3 before step P3, the first training step, starts.
 
 ## Words used in this plan
 
@@ -212,14 +220,16 @@ A dataset, or part of one, enters the training mixture only if all six checks be
 
 Wave 1 is the set of datasets admitted now. Every role below was read from a roster or manifest on disk. The unit lists and inner folds are in `ALLOCATION.json`; the DOIs, licences, signals and checksums are in PROTOCOL.json (`data_sources`).
 
-1. **Gait120** (figshare 27677016 v1, CC BY 4.0). People recorded in seven tasks: level walking, walking up and down a slope, up and down stairs, sitting down and standing up. **Training:** the 66 development people. **Signals:** 39 markers at 100 Hz (filtered by the authors), OpenSim joint angles (derived), 12-channel EMG at 2 kHz, and force-plate data for three tasks. **Left out:** the 22 validation and 22 confirmation people (consumed), and S001 to S010, who form test set E1.
+Revision 3 corrects five entries of this section, so that they describe the data as they were read at step P2: the Gait120, Katmah and Ofner items and the two conditional members at the end (section 16.1). The counts for every dataset are in `MIXTURE-MANIFEST.json`.
+
+1. **Gait120** (figshare 27677016 v1, CC BY 4.0). People recorded in seven tasks: level walking, walking up and down a slope, up and down stairs, sitting down and standing up. **Training:** the 66 development people. Their data enter as 3,827 recordings of two kinds. The first kind is the step segment, which the dataset's authors cut out of a trial so that it covers one walking step or one movement (section 3). Each of the 3,761 step segments is one recording. The second kind is the static trial, a recording of the task that the dataset names Static, in which the person holds still. There is one per person, 66 in all. **Signals:** 39 markers at 100 Hz (filtered by the authors), OpenSim joint angles (derived), 12-channel EMG at 2 kHz, and force-plate data for three tasks. The static trials hold markers only, with no EMG and no force. **Left out:** the 22 validation and 22 confirmation people (consumed), and S001 to S010, who form test set E1.
 2. **Schreiber-Moissenet** (figshare 7734767 v8, CC BY 4.0). Walking at different speeds. **Training:** ordinals 1 to 30, with 685 walks and 30 static trials. **Signals:** 52 markers at 100 Hz, EMG at 1,500 Hz, force plates. **Left out:** ordinals 31 to 40 (consumed) and 41 to 50 (reserve).
 3. **Moreira** (figshare 14241812 v1, CC0 1.0). Walking at controlled speeds. **Training:** 8 development people, 551 trials over 7 speeds. **Signals:** markers, EMG and force plates. **Left out:** 4 validation and 4 confirmation people.
 4. **İzmir** (Aperta 286866, CC BY 4.0). Walking motion capture. **Training:** the 16 people of the fitting group and the engineering person S01, with 51 walking cycles in all. **Signals:** markers. **Left out:** 6 development and 6 final people.
 5. **Van Criekinge** (figshare 24192480 v1, CC0 1.0). Healthy adults walking. **Training:** 12 people of the fitting group (36 walks). **Signals:** markers, force plates, and 14 EMG channels at 1 kHz. **Left out:** 6 validation people, the 12-person test group, the pool of people never given a role, and the stroke survivors in the same release.
-6. **Katmah** (PhysioNet r0ea-7161, CC BY 4.0). Treadmill walking. **Training:** identifiers 1 to 40, at 0.5 metres per second only. **Signals:** an EMG envelope shipped by the authors (derived; 38 people), IMU signals (39 people) and force plates. EMG and IMU are kept as separate recordings, because no shared clock between them has been verified. **Left out:** identifiers 41 to 52 (consumed), 53 to 59 (reserved), and the other walking speeds.
+6. **Katmah** (PhysioNet r0ea-7161, CC BY 4.0). Treadmill walking. **Training:** identifiers 1 to 40, at 0.5 metres per second only. **Signals:** three streams. The first is a 12-channel EMG envelope at about 16 Hz, shipped by the authors (derived; 38 people). The second is joint angles at 60 Hz, which the Xsens MVN body model computed from the IMU sensors (derived; 39 people). The third is the force on the treadmill, 2 belts with 3 axes each, at 1,000 Hz (measured; 40 people). The three were recorded as separate acquisitions and no shared clock between them has been verified, so they are kept as separate recordings and are never put side by side in one window. **Left out:** identifiers 41 to 52 (consumed), 53 to 59 (reserved), and the other walking speeds.
 7. **ds003739** (OpenNeuro 1.0.3, CC0 1.0). A perturbed beam-walking task, with two kinds of perturbation called pull and rotate in the archive. **Training:** 18 development people with 4 sessions each (pull-stand, pull-walk, rotate-stand and rotate-walk, about 10 minutes each). **Signals:** 128-channel EEG at 256 Hz (preprocessed by the authors, so derived), 10 EMG channels, 3 EOG channels and motion capture, all in one file. **Left out:** 6 assessment people (consumed) and 6 reserve people.
-8. **Ofner** (Zenodo 834976, CC BY 4.0). Arm and hand movements recorded with EEG. **Training:** people S1 to S7, movement runs 1 to 10. These are the runs in which people really moved; runs in which they only imagined moving are in wave 2. **Signals:** 61 EEG and 3 EOG channels at 512 Hz, with arm and glove sensors in the same file. **Left out:** S8 to S12 (consumed, including their unopened runs 5 to 10) and S13 to S15 (reserve).
+8. **Ofner** (Zenodo 834976, CC BY 4.0). Arm and hand movements recorded with EEG. **Training:** people S1 to S7, movement runs 1 to 10. These are the runs in which people really moved; runs in which they only imagined moving are in wave 2. **Signals:** 61 EEG and 3 EOG channels at 512 Hz, with 27 arm and glove sensor channels at 64 Hz in the same file. The arm and glove channels are not calibrated. Their tokens are delayed by one 20 ms step, because the file does not say exactly when each of their readings was taken; section 16.1 gives the reasoning. The EEG and EOG tokens are not delayed. **Left out:** S8 to S12 (consumed, including their unopened runs 5 to 10) and S13 to S15 (reserve).
 9. **Hyser 2.0.0** (PhysioNet, ODC-By 1.0). Finger tasks recorded with high-density EMG. **Training:** 12 TRAIN people, 120 recordings of about 25 seconds. **Signals:** 256-channel HD-EMG at 2,048 Hz, and finger force at 100 Hz. **Left out:** 4 DEV people (consumed; never read) and 4 final people (never fetched).
 10. **HYGRIP** (figshare 12383639 v1, MIT). A hand-grip task. **Training:** 7 eligible TRAIN groups. **Signals:** 24 EEG channels at 1 kHz; 4 EMG channels at 1 kHz whose electrode positions are not mapped, so they enter as unnamed channels; and grip-transducer voltage at 50 Hz, which is not calibrated to newtons. **Left out:** group /N, held back by its timing check, and 3 development and 3 final groups.
 11. **CEMHSEY GRASP** (Zenodo 15077957, CC BY 4.0). Hand grasp recordings. **Training:** S1 to S3, 12 pinch recordings. **Signals:** 320-channel HD-EMG at 2,048 Hz, and pinch force at 200 Hz expressed as a fraction of each person's maximum voluntary contraction (MVC, their strongest pinch). The offset in samples between the EMG and the force has not been verified, and this is flagged. **Left out:** DEV people S10 to S13 and every other group.
@@ -230,10 +240,12 @@ Labels such as trip, recording epoch, ZT2 and the August held days, and "held-in
 
 Two special rules apply. HYGRIP left-hand trials enter only after they pass the same inter-Go clock screen (threshold 40 ms) that was used for the right hand. The screen compares the intervals between the "Go" trial markers as recorded by each device, and requires them to agree to within 40 ms. W-track files are read by HDF5 byte ranges, taking only spike times and position.
 
-Two more datasets are conditional members of wave 1. An audit in step P2, before the freeze, decides whether they enter:
+Two more datasets were conditional members of wave 1: each could enter only if an audit in step P2, before the freeze, found that its units have training roles. The audit has been done. It admitted the first and not the second.
 
-- **Area2_Bump** (DANDI 000127, CC BY 4.0). Only the 290 trials of the monkey Han on 7 December 2017 that an earlier area2 study used for fitting (218 trials) and configuration (72 trials). The 74 trials assessed in that study's original comparison stay out. So does the laboratory's Dryad deposit, because several of its sessions are consumed and it repeats this laboratory's recordings.
-- **FALCON M1** (DANDI 000941, CC BY 4.0). Only the "held-in-calib" days (the benchmark's own name for one of its data splits) that no earlier evaluation scored.
+- **Area2_Bump** (DANDI 000127, CC BY 4.0) **is admitted.** It enters only with the 290 trials of the monkey Han on 7 December 2017 that an earlier area2 study used for fitting (218 trials) and configuration (72 trials). These trials give 458 inner-training windows. The 74 trials assessed in that study's original comparison stay out. So does the laboratory's Dryad deposit, because several of its sessions are consumed and it repeats this laboratory's recordings.
+- **FALCON M1** (DANDI 000941, CC BY 4.0) **is not admitted.** Its condition was that it could enter only with "held-in-calib" days (the benchmark's own name for one of its data splits) that no earlier evaluation had scored. The audit found no such day free, so the dataset fails check Q2. The day 20120928 was scored by earlier project work. The days 20120924, 20120926 and 20120927 are the candidate pool of a cross-session contract that belongs to a line of work on hold. No FALCON M1 recording was turned into model inputs.
+
+The mixture therefore has 14 qualified sources: the 13 datasets of the list above and Area2_Bump.
 
 The IBL Brain-Wide Map stays with the earlier maintainer. No IBL subject, lab or session enters training or testing (section 14).
 
@@ -252,6 +264,8 @@ Wave 2 datasets enter only if they pass Q1 to Q6 before the freeze. The candidat
 - Katmah EEG, after a clock check.
 
 Simulated windows from the project's physics-source track, which produces movement from physics simulations of the body, may enter only in a separately flagged, predeclared add-on arm (see "Arm" in the word list), never as part of the primary mixture.
+
+No wave 2 dataset was qualified at step P2, and from revision 3 none enters version 0.2 (section 16.1).
 
 The following are left out, with the reason for each:
 
@@ -280,7 +294,7 @@ For each dataset, `MIXTURE-MANIFEST.json` records:
 - spikes;
 - and the derived and simulated flags.
 
-The designs estimated 8 to 30 million steps in total. The manifest replaces this estimate with real counts before any model choice. The largest model size must be justified by inner validation (section 6), not by the size of the mixture.
+The designs estimated 8 to 30 million steps in total. The manifest replaces this estimate with real counts before any model choice. The count made at step P2 is 8,312,952 unique steps and 135,840 windows, from 227 individuals in the 14 qualified sources. This is near the low end of the estimate, and section 13 says what it means for the time estimates. The largest model size must be justified by inner validation (section 6), not by the size of the mixture.
 
 ## 5. Model
 
@@ -325,7 +339,7 @@ The network comes in six sizes. Width is the number of values per token; layers 
 
 XXL runs only if XL beats L by at least 1% relative on the selection score. Example with made-up numbers: if L scores 0.800, XL must score 0.792 or lower for XXL to run.
 
-The context length T is how many past steps the network sees: 64, 128, 256 or 512 steps (1.28, 2.56, 5.12 or 10.24 seconds), chosen by the inner folds. Shorter segments are padded and the padding is masked. Recordings differ a lot in length: Gait120 step segments last 1.5 to 1.65 s, while ds003739 sessions last 10 minutes.
+The context length T is how many past steps the network sees: 64, 128, 256 or 512 steps (1.28, 2.56, 5.12 or 10.24 seconds), chosen by the inner folds. Shorter segments are padded and the padding is masked. Recordings differ a lot in length. The Gait120 training step segments, as counted at step P2, last 0.86 to 3.27 s, and half of them last 1.26 s or less (the median). Revision 2 expected 1.5 to 1.65 s. A ds003739 session lasts 10 minutes.
 
 ### 5.3 What the model learns to do
 
@@ -372,7 +386,7 @@ Issuing forecasts is split between the processors in four rules.
 
 1. **CPU for forecasts that decide a pass.** Every forecast that enters a set-pass rule is issued in FP32 on the CPU, from an FP32 copy of the model, at a fixed batch shape of 32. These are the E1 and E2 scoring windows with primary inputs, for 0.2 and for every set-pass control.
 2. **GPU for all other passes, with a CPU check.** All other encoder passes run on the GPU in FP32 with the plain attention method and fixed padded shapes. These are the adaptation windows from which adapters and readouts are fitted, E3, the secondary inputs, the wrong-pairing rows, the secondary arms and the quantity-versus-diversity arms. For each encoder, 1,000 of these windows are repeated in FP32 on the CPU, and the largest absolute and relative differences are reported. The 1,000 windows are drawn by ascending sha256 of `pooled-encoder-0.2|cpu-check|` + encoder + `|` + set + `|` + window id, in equal shares over the sets. The relative difference is the largest absolute difference in any feature divided by the largest absolute CPU feature value over the same windows. If it exceeds 1e-4 for an encoder, all of that encoder's passes are repeated on the CPU. Example with made-up numbers: if the largest CPU feature value is 10, the largest difference may be at most 0.001. Revision 1 issued everything on the CPU; section 13 shows that this would take weeks at a 512-step context.
-3. **A shorter fixed length for E1.** E1 primary inputs lie inside one step segment, and Gait120 step segments hold at most 83 steps of 20 ms. E1 primary passes therefore use a fixed length of min(T, 128) steps, the smaller of T and 128, padded on the left and masked as in training. An E1 issue time with more than 128 input steps uses T. Because padding is masked and the position embedding only uses distances between steps, this gives the same function as padding to T in exact arithmetic. A CPU check on 1,000 Gait120 inner-validation windows reports the largest difference before the freeze.
+3. **A shorter fixed length for E1.** E1 primary inputs lie inside one step segment. E1 primary passes therefore use a fixed length of min(T, 128) steps, the smaller of T and 128, padded on the left and masked as in training. An E1 issue time with more than 128 input steps uses T. Revision 2 expected Gait120 step segments to hold at most 83 steps of 20 ms. The count at step P2 shows otherwise for the training people: their 3,761 segments hold 43 to 163 steps, with a median of 63, and 10 of them hold more than 128. The lengths of the E1 segments are not known, because no E1 file has been read, and the rule covers every length, so it is not changed. Because padding is masked and the position embedding only uses distances between steps, this gives the same function as padding to T in exact arithmetic. A CPU check on 1,000 Gait120 inner-validation windows reports the largest difference before the freeze.
 4. **A repeated arm.** One arm is repeated with identical settings to report how much GPU results vary from run to run.
 
 ## 6. Model choice inside the training people
@@ -627,24 +641,106 @@ Everything else is secondary and is reported whatever the result. If H1 fails, t
 
 This study asks whether a fixed number of training windows drawn from many sources gives better forecasts than the same number of windows drawn from one source. That comparison is H2 (section 10). The study also measures how the score changes with more windows from one source (the Q arms below) and with more people within one source at the same number of windows (the P arms).
 
+Revision 3 corrects the rule that picks the sources of the D arms (section 16.1). The other rules are those of revision 2. The numbers in this section were computed at step P2 from the counted training data. They are recorded in `MIXTURE-MANIFEST.json` and `D-ARM-ORDERS.json`, and the script `run/check_d_arm_orders.py` recomputes the D arms from the published rules and the counts. No arm has been run.
+
 ### Common settings
 
 All arms use the size-M transformer with the chosen τ and context. Training crops are 60 steps long (1.2 s, one counted window) and aligned to the counted windows. Batches hold 128 crops. Every arm gets U = 40 × W_max / 128 updates, so every arm sees the same number of steps times batch, and the effective number of passes is reported.
 
-W_max is the smallest number of unique inner-training windows in any Q anchor (below), rounded down to a power of 2. It is computed at step P2.
+W_max is the largest number of windows that an arm trains on. The rule for it is: take the smallest number of unique inner-training windows in any Q anchor (below), and round it down to a power of 2, that is, to a number of the series 1, 2, 4, 8 and so on up to 1,024, 2,048, 4,096. "Unique" means that each window counts once and no arm uses a window twice.
+
+**The computed value.** The four Q anchors have these numbers of inner-training windows:
+
+| Q anchor | Inner-training windows |
+| --- | ---: |
+| Gait120 | 2,072 |
+| Ofner | 13,532 |
+| ds003739 | 29,004 |
+| W-track | 51,772 |
+
+Gait120 has the fewest. The largest power of 2 that does not exceed 2,072 is 2,048, so W_max is 2,048 windows, and every arm gets U = 40 × 2,048 / 128 = 640 updates.
+
+**What the Gait120 count is made of.** The 2,072 windows come from Gait120's 52 inner-training people: 1,923 windows from step segments and 149 from static trials. Static trials are recordings with a training role, so the rule as written counts them. Their windows hold markers only, with no EMG and no force. The limits at the end of this section say what this means for W_max.
 
 ### The arms
 
-- **Q arms (more data from one source):** the anchors are Gait120, ds003739, Ofner and W-track. Each is trained at W_max/16, W_max/4 and W_max windows, drawn in a fixed hash order.
-- **D arms (more sources at the same number of windows):** k = 2, 4 or 8 sources, with 3 hash-ordered draws for each k, from the sources that have at least W_max/8 inner-training windows. Each source gives W_max/k windows. A D_all arm uses every eligible source.
-- **P arms (more people within one source at the same number of windows):** Gait120 with 3, 13 or 52 inner-training people, and ds003739 with 2, 4 or 14. The number of windows, W_P, is the largest power of 2 that exceeds neither W_max/4 nor the windows of the smallest level. The people of each level are listed in `ALLOCATION.json`.
+- **Q arms (more data from one source):** the anchors are Gait120, ds003739, Ofner and W-track. Each is trained at W_max/16, W_max/4 and W_max windows, which is 128, 512 and 2,048 windows, drawn in a fixed hash order. The Gait120 arm at W_max uses 2,048 of its 2,072 windows. Every report of a Q arm gives the number of static-trial windows drawn at each level.
+- **D arms (more sources at the same number of windows):** k = 2, 4 or 8 sources, with 3 hash-ordered draws for each k, so nine arms. Each source of a k-source arm gives W_max/k windows, called its share below: 1,024 windows for k = 2, 512 for k = 4 and 256 for k = 8. Every D arm therefore has exactly 2,048 unique windows, the same number as each Q arm at W_max. The next subsection gives the rule that picks the sources.
+- **D_all (every eligible source at once):** 11 sources are eligible (below). Each gives floor(2,048 / 11) = 186 unique windows; floor means rounding down, and 2,048 / 11 is about 186.2. The arm has 11 × 186 = 2,046 windows, 2 fewer than W_max, and gets the same 640 updates as every other arm. The "D_all arm at W_max" of H2 (section 10) is this arm.
+- **P arms (more people within one source at the same number of windows):** Gait120 with 3, 13 or 52 inner-training people, and ds003739 with 2, 4 or 14. The number of windows, W_P, is the largest power of 2 that exceeds neither W_max/4 nor the windows of the smallest level. The people of each level are listed in `ALLOCATION.json`. The computed values are:
+  - **Gait120: W_P = 64.** Its three levels have 105, 488 and 2,072 windows. The smallest level has 105 windows, and the largest power of 2 that does not exceed 105 is 64.
+  - **ds003739: W_P = 512.** Its three levels have 4,188, 8,284 and 29,004 windows. Here W_max/4 = 512 is the smaller of the two limits.
 
-**A worked example.** Section 13 expects W_max to be about 2,048 windows, because Gait120's inner-training step segments give about 3,000 windows; the real value is computed at P2. With W_max = 2,048:
+### How the sources of a D arm are picked
 
-- the Q arms use 128, 512 and 2,048 windows of one source;
-- the D arms use sources with at least 256 inner-training windows, taking 1,024 windows from each of 2 sources, 512 from each of 4, or 256 from each of 8;
-- for the P arms, W_P is at most 512;
-- every arm gets U = 40 × 2,048 / 128 = 640 updates.
+Two conditions apply to a source.
+
+1. **Eligible.** A source is eligible for the D arms if it has at least W_max/8 = 256 unique inner-training windows. 11 of the 14 sources are eligible.
+2. **A whole share.** A source enters a k-source arm only if it has at least W_max/k unique inner-training windows: 1,024 for k = 2, 512 for k = 4 and 256 for k = 8. A source that enters an arm can then give its whole share without using any window twice.
+
+For each k and each draw, `D-ARM-ORDERS.json` holds one fixed order of the 14 sources. The order comes from sha256 fingerprints of the source names, so it is not chosen by a person and anyone can recompute it. The arm is found by walking this order from the top:
+
+- a source that is not eligible is skipped;
+- a source that is eligible but has fewer than W_max/k windows is skipped as well (the files call this "short for this k");
+- the first k sources that are left form the arm.
+
+Each source of the arm gives its first W_max/k unique windows in the fixed hash order of its windows. A skipped source is not lost to the study: it stays available to the arms with a larger k, where the share is smaller, and to D_all.
+
+The table gives the unique inner-training windows of each qualified source and the D arms it can enter. The identifiers are the names used in `D-ARM-ORDERS.json`.
+
+| Source | Identifier | Inner-training windows | D arms it can enter |
+| --- | --- | ---: | --- |
+| W-track | `wtrack` | 51,772 | k = 2, 4, 8 and D_all |
+| ds003739 | `ds003739` | 29,004 | k = 2, 4, 8 and D_all |
+| Ofner | `ofner` | 13,532 | k = 2, 4, 8 and D_all |
+| Katmah | `katmah` | 4,664 | k = 2, 4, 8 and D_all |
+| HYGRIP | `hygrip` | 4,527 | k = 2, 4, 8 and D_all |
+| Gait120 | `gait120` | 2,072 | k = 2, 4, 8 and D_all |
+| Moreira | `moreira` | 1,982 | k = 2, 4, 8 and D_all |
+| Hyser | `hyser` | 1,800 | k = 2, 4, 8 and D_all |
+| O'Doherty/Sabes | `sabes` | 1,281 | k = 2, 4, 8 and D_all |
+| Schreiber-Moissenet | `schreiber_moissenet` | 897 | k = 4, 8 and D_all |
+| Area2_Bump | `area2` | 458 | k = 8 and D_all |
+| CEMHSEY GRASP | `cemhsey` | 200 | none (below 256) |
+| Van Criekinge | `van_criekinge` | 52 | none (below 256) |
+| İzmir | `izmir` | 31 | none (below 256) |
+
+**A worked example with the real numbers.** Take the arm k = 2, draw 1. Each of its 2 sources must give 1,024 windows. The order of this draw begins `area2`, `sabes`, `ofner`, `van_criekinge`.
+
+1. `area2` comes first. It has 458 windows. That is enough to be eligible (at least 256) but less than the 1,024 this arm needs, so it is skipped.
+2. `sabes` has 1,281 windows, at least 1,024. It is the first source of the arm.
+3. `ofner` has 13,532 windows. It is the second source, and the arm is complete.
+
+The arm is `sabes` and `ofner`, with 2 × 1,024 = 2,048 unique windows. Under the rule of revision 2, which asked only for eligibility, this arm would have been `area2` and `sabes`, and `area2` could have supplied only 458 of its 1,024 windows.
+
+The same source is treated differently when the share is smaller. In the arm k = 8, draw 0, each source gives 256 windows, so `area2` with its 458 windows is taken as the second source. In that order `izmir` (31 windows) and `cemhsey` (200 windows) are skipped because they are not eligible.
+
+The nine D arms that the rule gives are listed below, with the sources in the order in which they are taken.
+
+| Arm | Sources | Windows per source | Skipped while walking the order |
+| --- | --- | ---: | --- |
+| k = 2, draw 0 | `ofner`, `katmah` | 1,024 | none |
+| k = 2, draw 1 | `sabes`, `ofner` | 1,024 | `area2` (458 windows, short for k = 2) |
+| k = 2, draw 2 | `hygrip`, `katmah` | 1,024 | `area2` (short for k = 2) |
+| k = 4, draw 0 | `ds003739`, `katmah`, `gait120`, `schreiber_moissenet` | 512 | `izmir` (not eligible), `area2` (short for k = 4) |
+| k = 4, draw 1 | `ofner`, `gait120`, `ds003739`, `hygrip` | 512 | `cemhsey` (not eligible) |
+| k = 4, draw 2 | `ds003739`, `ofner`, `hyser`, `sabes` | 512 | `van_criekinge` (not eligible) |
+| k = 8, draw 0 | `sabes`, `area2`, `gait120`, `hyser`, `moreira`, `ofner`, `ds003739`, `wtrack` | 256 | `izmir`, `cemhsey` (not eligible) |
+| k = 8, draw 1 | `ofner`, `wtrack`, `moreira`, `schreiber_moissenet`, `hyser`, `sabes`, `ds003739`, `gait120` | 256 | `van_criekinge`, `cemhsey` (not eligible) |
+| k = 8, draw 2 | `sabes`, `ofner`, `katmah`, `schreiber_moissenet`, `wtrack`, `area2`, `ds003739`, `hyser` | 256 | `van_criekinge` (not eligible) |
+
+Every arm in this table has 2,048 unique windows: 2 × 1,024, 4 × 512 or 8 × 256. D_all has the 11 eligible sources of the first table, at 186 windows each.
+
+### Limits that the counts set
+
+These limits follow from the counted data. They are stated here so that the results of the study are read with them.
+
+- **W_max rests on Gait120 by a small margin.** Gait120 has 2,072 windows, only 24 more than 2,048. 149 of the 2,072 come from static trials, which hold markers only. Its step segments alone give 1,923 windows, and that number would round down to 1,024, half of the value used.
+- **The pool of sources differs with k.** The k = 2 arms draw only from the 9 sources with at least 1,024 windows. The k = 4 arms draw from 10 sources, because Schreiber-Moissenet joins. The k = 8 arms draw from all 11 eligible sources, because Area2_Bump joins. Small sources therefore appear only in the arms with more sources. A difference between the k levels can then come from the number of sources, and it can also come from which sources were available.
+- **D_all is 2 windows short.** It has 2,046 unique windows, and the Q arms at W_max that H2 compares it with have 2,048.
+- **The Gait120 P arms are small.** W_P is 64 windows for them, because the 3-person level has only 105 windows. The rule is not changed. The small budget is a limit of those arms.
+- **Three sources are in no D arm.** CEMHSEY GRASP, Van Criekinge and İzmir have fewer than 256 inner-training windows. They enter no D arm and not D_all. They stay in the main training mixture.
+- **Gait120's window count understates its data.** 1,383 of the 3,761 Gait120 step segments are shorter than one 1.2 s window. They give training steps but no counted window.
 
 ### Runs, the sealed prediction and scoring
 
@@ -675,7 +771,7 @@ The work runs in ten steps, P0 to P9. The estimates are GPU-hours (hours of GPU 
 | P2 | Readers for the file formats (MATLAB table objects, NWB, C3D, GDF, WFDB, EEGLAB, HDF5) in the track's own software environment; tokenisation; the role audits of area2 and FALCON M1; the Q1-Q6 records; `MIXTURE-MANIFEST.json` with the re-estimate described below | 1.5-2.5 days of CPU time |
 | P3 | Parity checks on the real mixture 1-2 h; τ 4-6 h; size ladder XS-XL about 14 h; core arms about 4 h; context arms 2-4 h; XXL another 10.5 h, only if earned | 25-41 GPU-hours at 16 million steps |
 | P4 | Matched BF16 and FP32 runs at S and M | about 10 GPU-hours at 16 million steps |
-| P5 | Quantity and diversity arms, the sealed prediction, scoring in distribution | 1-3 GPU-hours if W_max is 2,048 windows (expected, because Gait120's inner-training step segments give about 3,000 windows); otherwise in proportion to W_max (8-14 h at 16,384) |
+| P5 | Quantity and diversity arms, the sealed prediction, scoring in distribution | 1-3 GPU-hours. W_max is 2,048 windows, as computed at step P2: Gait120 has 2,072 inner-training windows, where revision 2 expected about 3,000 (section 11) |
 | P6 | Final 0.2, 3 seeds | at T ≤ 256: L about 11 h, XL about 21 h, L in FP32 about 42 h; at T = 512: up to about 22 h (L), 42 h (XL) and 84 h (L in FP32) |
 | P7 | Single-source screen (about 2 h) and full-size retrains of up to 4 sources (the best and the three nearest); random and scrambled encoders; specialists | 14-31 GPU-hours at T ≤ 256 (L or XL); up to about 60 at T = 512 |
 | P8 | Freeze: the lead commits `FREEZE.json` with the sha256 of every weight file, adapter and scoring script; then the evaluation downloads (Gait120 S001-S010 members 759 MB; MC_Maze 839 MB; AJILE12 participants 03-07 by byte ranges, about 4-6 GB, measured on the first session) | 2-5 h |
@@ -690,8 +786,17 @@ Disk use in the home folder stays under 26 GB: 3-6 GB of tokens and under 5 GB o
 ### How the estimates were made, and how uncertain they are
 
 - **GPU training.** The measured BF16 rates at 128 steps and batch 128 (section 3) are multiplied by 40 passes of 16 million steps. Example: one L seed takes 40 × 5.6 minutes = 224 minutes, about 3.7 hours, so three seeds take about 11 hours. With batches of 32, the 256-step runs were faster per step-token than the 128-step runs, so the 128-step rates are used for every T up to 256. No run at 512 steps was measured. At widths 384-512, attention takes a larger share of the arithmetic at 512 steps (about 14-18%) than at 128 steps (about 4-5%), and the plain attention method stores score tables that grow with the square of T. A 512-step run is therefore taken to cost 1 to 2 times as much per step-token. This factor is an estimate, not a measurement.
-- **Mixture size and passes.** Every training figure scales in proportion to the unique steps of the mixture, and the design range of 8 to 30 million steps is 0.5 to 1.9 times the figures above. The figures also scale with the number of passes the folds choose, at most 40.
-- **Padding.** Segments shorter than T are padded, and padded positions cost compute without adding steps. Gait120 step segments hold about 80 steps, so at T = 512 most of a Gait120 row is padding. The padded share at each T is counted at P2 and is not included above.
+- **Mixture size and passes.** Every training figure scales in proportion to the unique steps of the mixture, and the design range of 8 to 30 million steps is 0.5 to 1.9 times the figures above. The figures also scale with the number of passes the folds choose, at most 40. The count at step P2 gives 8,312,952 unique steps. That is 0.52 times the central assumption of 16 million and close to the low end of the design range. The figures in the table above are not recomputed here; the re-estimate at the end of this list does that.
+- **Padding.** Segments shorter than T are padded, and padded positions cost compute without adding steps. As counted at step P2, the Gait120 training step segments hold 43 to 163 steps, with a median of 63. Revision 2 assumed about 80. For training, each recording is cut into rows of T steps, and a row that the recording does not fill is padded. The table gives the padded share of all row positions for each T:
+
+  | T (steps) | Gait120 rows | Rows of all 14 qualified sources |
+  | ---: | ---: | ---: |
+  | 64 | 28.7% | 2.1% |
+  | 128 | 48.5% | 4.3% |
+  | 256 | 73.7% | 10.6% |
+  | 512 | 86.9% | 22.5% |
+
+  At T = 512, then, most of a Gait120 row is padding. These shares are not included in the figures above.
 - **Load.** All rates were measured with the GPU about two-thirds busy with other work and a load average of about 18. Quieter or busier periods can change every time by about ±50%.
 - **CPU issuing.** The measured forward rates (6.9 windows per second at M and 2.35 at L, at 256 steps on 4 shared threads) are scaled in three ways. By core parameters, they give about 1.0 window per second at XL and about 0.45 at XXL. For 16 threads, which were not measured, the rates are multiplied by 1 to 3. For the attention share at 512 steps, they are multiplied by 1/1.3 to 1/1.1. The kinematic anchor moves with each issue time, so every issue time needs its own encoder pass. The counts per final-size encoder are:
   - E1: about 9,700-11,400 scored windows (about 570 step segments × 17-20 issue times) and about 64,000-75,000 adaptation windows per input variant;
@@ -699,8 +804,10 @@ Disk use in the home folder stays under 26 GB: 3-6 GB of tokens and under 5 GB o
   - E3: about 24-54 issue times per trial (for trials of 1.5-3 s, whose real lengths are unknown until the freeze) over 2,795 train and val trials.
 
   Seven final-size encoders are scored on each set: 0.2 with 3 seeds, the random and scrambled encoders, and the best and the nearest single-source encoders.
+
+  The E1 counts assume step segments of 1.5 to 1.65 s. The training segments counted at step P2 are shorter, with a median of 1.26 s. If the E1 segments are similar, E1 has fewer issue times per segment than assumed. The E1 counts are not recomputed, because no E1 file has been read.
 - **Why the issuing route changed.** Issuing every pass on the CPU, as revision 1 required, would take about 45-450 hours at size L with T ≤ 256, and about 200-1,200 hours at T = 512, mostly for E3 and the adaptation windows. Revision 2 keeps every forecast that enters a set-pass rule on the CPU and moves the rest to GPU FP32 with a CPU check (section 5.5).
-- **Re-estimate.** Before any model choice, `MIXTURE-MANIFEST.json` records four things: the counted unique steps, the padded share at each T, a GPU speed measurement at 512 steps, and a CPU issuing measurement on 16 threads at sizes M and L on training data. Steps P3 to P9 are then recomputed from them.
+- **Re-estimate.** Before any model choice, `MIXTURE-MANIFEST.json` records four things: the counted unique steps, the padded share at each T, a GPU speed measurement at 512 steps, and a CPU issuing measurement on 16 threads at sizes M and L on training data. Steps P3 to P9 are then recomputed from them. The counted steps and the padded shares are in the manifest now. The two speed measurements and the recomputed times are not made yet. They come before any model choice. The speed trial named in section 16.1 ran at 64 steps and at size XS, so it is neither of them.
 
 ## 14. Decisions on the items left to the owner
 
@@ -729,7 +836,7 @@ Kept out of the public weights:
 
 ### What is published, and when
 
-- **Now:** this protocol (PROTOCOL.md), PROTOCOL.json, `allocate.py` and `ALLOCATION.json`, with this Simple edition beside them. PROTOCOL.md and PROTOCOL.json say that the Simple edition comes with the results. This edition of the protocol was added early, before any test data were opened, and those files were not changed. The results will get their own Technical and Simple editions.
+- **Now:** this protocol in its two editions (PROTOCOL.md and this Simple edition, PROTOCOL-SIMPLE.md), PROTOCOL.json, `allocate.py` and `ALLOCATION.json`. Revision 2 of PROTOCOL.md and PROTOCOL.json said that the Simple edition would come with the results. This edition was written earlier than that, on 27 November 2026, before any test data were opened. From revision 3, both files name it (section 16.1). The results will still get their own Technical and Simple editions.
 - **Before the freeze:** `MIXTURE-MANIFEST.json` (counts, flags, licences and file fingerprints, with no recording values) and the fingerprint of the sealed scaling prediction (section 11).
 - **At the freeze:** `FREEZE.json`.
 - **After scoring:**
@@ -744,7 +851,73 @@ Kept out of the public weights:
 
 ## 16. Departures and revisions
 
-### 16.1 Revision 2
+### 16.1 Revision 3
+
+Revision 3 records the decisions that the lead took on 28 November 2026. They followed the second review of the training data, whose verdict was "pass". They were taken before any training run and before any evaluation byte was read, so no model result existed when they were made. A separate reviewer must admit revision 3 before step P3 starts.
+
+**The rule that changed: how the sources of a D arm are picked (section 11).**
+
+- **The gap.** Revisions 1 and 2 made a source eligible for the D arms once it had W_max/8 = 256 unique inner-training windows. But each source of a k-source arm has to give W_max/k windows, its share: 1,024 for k = 2 and 512 for k = 4. A source with at least 256 windows but fewer than its share could be drawn into an arm whose share it cannot fill. This happened to Area2_Bump. It has 458 windows and was drawn into two k = 2 arms and one k = 4 arm.
+- **The new rule.** From revision 3, a source enters a k-source arm only if it has at least W_max/k windows. Every D arm then has exactly W_max = 2,048 unique windows, as each Q arm at W_max does. Without the new rule, an arm would have to use some windows more than once or run with fewer windows. Either would mix quantity (how much data) with diversity (how many sources), and the study is there to separate the two.
+- **Three arms change.** The other six are unchanged.
+  - k = 2, draw 1 is now `sabes`, `ofner`. It was `area2`, `sabes`.
+  - k = 2, draw 2 is now `hygrip`, `katmah`. It was `area2`, `hygrip`.
+  - k = 4, draw 0 is now `ds003739`, `katmah`, `gait120`, `schreiber_moissenet`. It was `ds003739`, `katmah`, `gait120`, `area2`.
+
+  The arms follow from the window counts and the nine orders alone.
+- **What stays as it was.** The nine orders are unchanged, and `ALLOCATION.json` is not edited. Section 11 replaces the last part of the D-arm rule written in that file, "the first k sources in that order that are eligible". The arms are held in `D-ARM-ORDERS.json` and `MIXTURE-MANIFEST.json`, and `run/check_d_arm_orders.py` recomputes them.
+- **D_all** keeps the 11 eligible sources at floor(2,048 / 11) = 186 windows each, 2,046 in total. It is 2 windows short of W_max. Section 11 states this, and the results will state it again.
+
+**Numbers computed at step P2 and applied as the rules give them.**
+
+- **W_max stays 2,048.** Gait120, the smallest Q anchor, has 2,072 unique inner-training windows: 1,923 from step segments and 149 from static trials. Static trials are recordings with a training role, and the first count included them as well, so the rule is applied as written. Four statements go with the value, in the manifest and in section 11:
+  1. The 149 static-trial windows hold markers only, with no EMG and no force.
+  2. Step segments alone give 1,923 windows, which would round down to 1,024. The margin over 2,048 is 24 windows.
+  3. The Gait120 Q arm at W_max uses 2,048 of the 2,072 windows.
+  4. Every report of a Q arm gives the number of static-trial windows drawn at each level.
+- **The Q levels** are 128, 512 and 2,048 windows, and every arm gets U = 640 updates.
+- **The P arms stay as computed.** W_P is 64 windows for Gait120, whose 3-person level has 105 windows, and 512 windows for ds003739. The small Gait120 budget is stated as a limit of those arms. It is not changed.
+
+**Where the counted data differ from what revision 2 expected.**
+
+- **Gait120 step segments are shorter than expected.** The 3,761 training segments last 0.86 to 3.27 s, with a median of 1.26 s. In steps of 20 ms, that is 43 to 163 steps, with a median of 63. Revision 2 expected 1.5 to 1.65 s and at most 83 steps (sections 5.2, 5.5 and 13). 10 segments hold more than 128 steps. The E1 rule of section 5.5 is not changed.
+- **Many segments are shorter than a window.** 1,383 of the 3,761 segments are shorter than one 1.2 s window. They give training steps but no counted window.
+- **Gait120 has fewer windows than expected.** It has 2,072 inner-training windows. Section 13 of revision 2 expected about 3,000.
+- **The mixture is smaller than the central assumption.** It has 8,312,952 unique steps. The time estimates of section 13 assumed 16 million, inside a design range of 8 to 30 million.
+- **Section 4.2 now states the Gait120 training unit:** one recording for each step segment that the authors cut (3,761) and one static trial per person (66). Revision 2 counted the 3,761 step segments (section 3) and did not mention the static trials, whose windows are counted (see W_max above).
+- **Area2_Bump is admitted and FALCON M1 is not.** Area2_Bump enters with its 290 fitting and configuration trials. FALCON M1 is not admitted, because the audit found no "held-in-calib" day that is free (section 4.2). The mixture has 14 qualified sources.
+- **The Ofner arm and glove tokens are delayed by one 20 ms step.** The Ofner files run on a clock of 512 ticks per second, the rate of the EEG. The arm and glove sensors give 64 readings per second, so each reading spans 8 ticks. The dataset does not document at which moment inside those 8 ticks a reading was taken. A reading may therefore have been taken up to 13.7 ms after the time that its position in the file gives. Without a delay, the token of a step could hold a reading that was taken after that step had ended. The token of step k therefore holds the last reading whose file time lies in step k - 1. That reading was taken before step k ends in every case. The EEG and EOG tokens are not delayed.
+- **The Katmah item names its three streams as they were read:** an EMG envelope (derived), joint angles from the IMU sensors (derived by the Xsens MVN body model) and the treadmill force (measured). They are separate acquisitions and are never put side by side in one window. Revision 2 required this of the EMG and IMU streams. The force stream was read in the same way at step P2.
+
+**Process incidents of steps P1 and P2.** A process incident is a point where the work did not go as the plan or an earlier decision said. There were five. All five are in the private incident and download records. None changed a role or a count, and none touched E1, E2 or E3. The Gait120 training tokens are built from the download of incident 1. No token is built from the bytes of the other four.
+
+1. **Gait120 was downloaded a third time** (262 byte ranges, 427,525,976 bytes). A new cut from the stored shards was possible instead; shards are the files that hold the tokenised training data. The reason for the download was logged afterwards. The download holds only the 66 development people.
+2. **Ofner runs 4 to 10 were requested again** (30 whole files, 2,720,902,568 bytes, and 23,068,672 bytes of a 31st), although the lead's decision said "without a new download". The fetch was stopped, and no token comes from it. The 30 whole files were read once, for a check: the corrected shards were compared with a fresh run of the program that reads the Ofner files. Together with the 21 files of runs 1 to 3 that were already on disk, the check covered 51 of the 70 runs, and every table of numbers was equal. The other 19 runs were checked against a copy of the shards from before the delay. All 31 files were deleted at 08:50 on 28 November 2026. All of the files are training runs of S1 to S7.
+3. **A probe of the W-track JS14 file transferred position rows from after the cut.** The probe was meant to read metadata, the file's description of its own contents. It transferred 59,424 bytes that hold the last 2,476 stored position rows of the file. These rows lie after the JS14 cut (the start of trip 79), in the part of JS14 that this protocol leaves out. The bytes were never decoded and never written to disk, and they were discarded when the probe ended. Which trips the rows belong to is not established, because their timestamps were not read. Every later read of JS14 forbids those byte intervals.
+4. **A search in the Area2_Bump file read spike times from after the cut.** For each sorted unit, the reader searched for the last spike before the cut at 1,809.676 s. In doing so it read 408 single spike times at or after the cut. They lie in the region of the 74 held trials, which earlier project work consumed, or later. Each value was only compared with the cut and then discarded. The reader now scans forward and stops at the first value at or after the cut. It was not run again on the file, and the tokens are unchanged.
+5. **Two processes together sent requests too quickly.** They sent 6 requests to the figshare API, the archive's interface for programs, in about 5 s, because each process paced only its own requests. No request was refused. The pacer is now shared by every process, per host.
+
+Incidents 1 and 2 were made against earlier decisions of the lead. They cover training units only and cannot be undone. They will be stated in the results in both editions. From here on, no step downloads anything until the freeze (step P8), and a repeated download needs its reason logged first. This rule also binds wave 2 (section 4.3). No wave 2 dataset was qualified at step P2, and a wave 2 dataset whose training files are not already on disk cannot enter version 0.2. Training reads only the 227 reviewed shards (see below), so the training mixture of version 0.2 is the 14 qualified sources. Wave 2 waits for a later version.
+
+**Records corrected, in the manifest and its private parts.**
+
+- **The wording of `field_storage`.** This entry names the number format in which the values of the field group are stored. Four manifest parts (Area2_Bump, ds003739, O'Doherty/Sabes and W-track) carried an older wording: "float16" followed by a pointer in brackets. They now carry the current wording, "float16".
+- **A field of the Gait120 clock check is renamed.** The field was named `steps_inside_emg_span`. It is filled from the frame-range check, which tests that the frames of each step segment lie inside the frames of its trial. It is not filled from EMG cover. Its new name is `segment_frames_inside_trial_frames`.
+- **16 steps have no EMG.** 16 of the 244,423 step-segment steps of Gait120 have no EMG token: the last 15 of the 90 steps of S063_StandToSit_T02_S01 and the first step of S107_SlopeDescent_T04_S01. Those steps are masked for EMG, and nothing is filled in.
+- **Some neighbouring segments share a frame.** 1,505 pairs of consecutive Gait120 step segments share one boundary frame, and 748 of those frames are tokenised in both recordings. Both recordings of a pair belong to the same person, so nothing crosses a fold.
+- **The revision that governed each step is recorded.** Revision 1 governed the Katmah force-plate download and the first Gait120 pass. It is commit c0e522f, which was 17f956b before the branch was rebased, that is, rebuilt on top of other work. Revision 2 governed the rest of step P1 and all of step P2. It is commit 554c59c, which was 7d09f33 before the rebase. Revision 3 governs step P3 onwards.
+
+**Training data, editions and state.**
+
+- **Training reads the 227 shards that the second review checked.** Their sha256 fingerprints are in the private token records as they stood at commit 4e0829d of the data branch, and `MIXTURE-MANIFEST.json` gives the fingerprint of each source's shard list. No shard was changed for revision 3.
+- **The training code.** The lead moves the training code onto the data branch before any run.
+- **The older Ofner copy.** A copy of the Ofner shards from before the delay was kept in a scratch folder held in memory (RAM). It was deleted on 28 November 2026, after revision 3 was admitted.
+- **Editions.** PROTOCOL.md and PROTOCOL.json now name this Simple edition, `PROTOCOL-SIMPLE.md`, which was written on 27 November 2026 after revision 2. Revision 2 said that the Simple edition would be written with the results. The results still get their own two editions (section 15).
+- **State.** No training run of this protocol has started and no evaluation byte has been read.
+- **One speed trial.** The training code was tried once for speed on training tokens, on 28 November 2026 at 10:06. That was ten minutes before revision 3 was committed and before its admission. The trial first made a few updates before the timing began, so that start-up costs were not timed. They took about 3 s. Their count is not in the record; the script's usual number is 2. It then made 7 timed updates of a size XS network at T = 64 in BF16, which took about 3 s more. It used the tokens of 12 sources; Gait120 and Ofner were left out. It measured speed only and saved no weights. It is not one of the 84 runs of the quantity-versus-diversity study, not a run of step P3 and not one of the two speed measurements of section 13. No choice rests on it. Any other run of the training code on training tokens before step P3 will be stated in the results in the same way.
+- **Points of the admission review.** The separate review that admitted revision 3 on 28 November 2026 listed five minor points of wording. They are applied in this text: the sentences on wave 2 (sections 4.3 and 16.1), the Katmah force stream, the one read of the re-fetched Ofner files, the speed trial, and fields of `PROTOCOL.json` that still carried the wording of revision 2. No rule, count or arm changed. The admitting review suggested these changes, and a separate reader checked them before this text was published. That check added three things: the updates made before the timing began in the speed trial, the record that the older Ofner copy was deleted, and the sentence on any other run of the training code. All of these are part of revision 3.
+
+### 16.2 Revision 2
 
 Revision 2 records the decisions in section 14 and applies the minor points of the separate admission review of revision 1:
 
@@ -759,7 +932,7 @@ Revision 2 records the decisions in section 14 and applies the minor points of t
 - **The time estimates state what was measured** and how far they extend it (section 13). Because issuing everything on the CPU would take weeks at a 512-step context, only the forecasts that enter a set-pass rule are issued on the CPU. The other passes run in GPU FP32 with a CPU check, and E1 primary passes use a fixed length of min(T, 128) steps (section 5.5).
 - **A leak check confirms** that no file of AJILE12 participants 08-12 and no IBL file was downloaded.
 
-### 16.2 Revision 1
+### 16.3 Revision 1
 
 The plan that was reviewed before revision 1 merged two draft designs. These points were settled while revision 1 was written:
 

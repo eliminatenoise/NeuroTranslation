@@ -1,0 +1,4340 @@
+{
+ "datasets": {
+  "cemhsey": {
+   "dataset": "cemhsey",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "CEMHSEY GRASP, version 2, part I",
+   "doi": "10.5281/zenodo.15077957",
+   "licence": "CC-BY-4.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:12:13+1100"
+   },
+   "built_at": "2026-11-27T22:12:18+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 3,
+    "individuals_in_roster": 3,
+    "animals": 0,
+    "people": 3,
+    "sites": 1,
+    "sessions": 6,
+    "recordings": 12,
+    "tasks": {
+     "pinch_30pct_mvc": 12
+    },
+    "conditions": {},
+    "unique_steps_20ms": 18012,
+    "steps_with_any_channel": 18012,
+    "windows_1200ms": 300,
+    "windows_1200ms_every_step_with_data": 300,
+    "windows_inner_training": 200,
+    "windows_inner_validation": 100,
+    "channel_seconds": {
+     "emg:hd_emg": 115276.8,
+     "force:pinch_force": 360.24
+    },
+    "spikes": 0,
+    "events": {
+     "count": 0,
+     "definition": "none annotated (each recording is one pinch trial)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "inner_validation_units": [
+    "S1"
+   ],
+   "streams": [
+    {
+     "group": "emg",
+     "kind": "hd_emg",
+     "channels": 320,
+     "rate_hz": 2048,
+     "units": "source units as stored; log RMS per step",
+     "value_type": "measured",
+     "rows": "learned per recording; electrode positions not verified here"
+    },
+    {
+     "group": "force",
+     "kind": "pinch_force",
+     "channels": 1,
+     "rate_hz": 200,
+     "units": "fraction of MVC (dimensionless)",
+     "value_type": "measured (scaled by the session MVC)"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": "nominal (one file, simultaneous acquisition stated; sample offset unverified, flagged)"
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://zenodo.org/api/records/15077957",
+     "response_sha256": "29f81c81a8b9ca04cad89df84c4e970263ef2b1ab48a060153ff8917c9fa9b5e",
+     "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.5281/zenodo.15077957",
+      "url": "https://doi.org/10.5281/zenodo.15077957",
+      "title": "Dataset: CEMHSEY (ConsecutivE Multi-day High-density Surface ElectromyographY), Part I",
+      "creators": [
+       "Yang, Shutian",
+       "Li, Dongxuan",
+       "Chen, Chen",
+       "Zhu, Xiangyang"
+      ],
+      "publisher": "Zenodo",
+      "year": 2025,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.5281/zenodo.15077957",
+      "response_sha256": "91bb3626df858b00a6967b952ae17f35ab9a5456586a281f2757094e7d2cda67",
+      "read_at": "2026-11-28T01:12:48+1100"
+     },
+     "notice": {
+      "citation": "Yang, Shutian; Li, Dongxuan; Chen, Chen; Zhu, Xiangyang (2025). Dataset: CEMHSEY (ConsecutivE Multi-day High-density Surface ElectromyographY), Part I. Zenodo. https://doi.org/10.5281/zenodo.15077957",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:48+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 3,
+     "roster_files": [
+      {
+       "file": "cemhsey TRAIN-MANIFEST-R2.json",
+       "sha256": "0d062df51d3a4089c8a6b8ba3f55338e29eb9cb46c5c5e784f7e00b6069ac83c"
+      },
+      {
+       "file": "cemhsey DEV-MANIFEST-R2.json",
+       "sha256": "4aaeaeb662feb852216b57b336ef76c7c3dd6cab6881530e0b50155208a64234"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "recordings": 12,
+      "expected_from_protocol": 12,
+      "members_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local selected members fetched earlier by ranged reads; sha256 checked against each receipt; DEV files not opened"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "one MAT file per trial, simultaneous acquisition stated by the authors; paired on nominal clocks from sample 0 (protocol: sample offset unverified, flagged)",
+     "flag": "duration difference force minus EMG per recording (s): [0.1107, 0.1307, 0.1507, 0.1707, 0.1907, 0.2707]"
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "HD-EMG measured surface EMG (not a nerve recording); pinch force measured on the MVC-normalised scale"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "not documented for the released arrays; flagged unknown",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 3,
+    "roster_files": [
+     {
+      "file": "cemhsey TRAIN-MANIFEST-R2.json",
+      "sha256": "0d062df51d3a4089c8a6b8ba3f55338e29eb9cb46c5c5e784f7e00b6069ac83c"
+     },
+     {
+      "file": "cemhsey DEV-MANIFEST-R2.json",
+      "sha256": "4aaeaeb662feb852216b57b336ef76c7c3dd6cab6881530e0b50155208a64234"
+     }
+    ],
+    "excluded_groups_checked": {
+     "DEV": 4
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-27T22:15:04+1100",
+    "roles_seen": [
+     "TRAIN"
+    ]
+   },
+   "tokens": {
+    "shards": 3,
+    "bytes": 29006118,
+    "shard_list_sha256": "3aba36ef02320e973e4ac61024eb4fcc47f39759d15a1c6da97abe05f847ee21",
+    "channels": {
+     "emg": 320,
+     "kin": 0,
+     "force": 1
+    },
+    "shared_vocabulary_channels": {
+     "emg": 0,
+     "kin": 0,
+     "force": 1
+    }
+   },
+   "source_files": {
+    "files": 12,
+    "member_list_sha256": "cde73aa52621bfe6c4505ab4f6b41aa86f4afe5f4d2fe0dbad7f967f28d79422"
+   },
+   "notes": [
+    "Force and EMG sample counts imply different durations; tokens use the shorter span and the nominal clocks."
+   ],
+   "seconds": 4.6,
+   "licence_as_declared": "cc-by-4.0"
+  },
+  "gait120": {
+   "dataset": "gait120",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "Comprehensive Human Locomotion and Electromyography Dataset: Gait120",
+   "doi": "10.6084/m9.figshare.27677016.v1",
+   "licence": "CC-BY-4.0",
+   "licence_as_declared": "CC BY",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-28T01:24:08+1100"
+   },
+   "built_at": "2026-11-28T01:24:14+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 66,
+    "individuals_in_roster": 66,
+    "animals": 0,
+    "people": 66,
+    "sites": 1,
+    "sessions": 66,
+    "recordings": 3827,
+    "tasks": {
+     "LevelWalking": 585,
+     "SitToStand": 301,
+     "SlopeAscent": 637,
+     "SlopeDescent": 631,
+     "StairAscent": 652,
+     "StairDescent": 649,
+     "StandToSit": 306,
+     "Static": 66
+    },
+    "conditions": {},
+    "unique_steps_20ms": 257346,
+    "steps_with_any_channel": 257346,
+    "windows_1200ms": 2581,
+    "windows_1200ms_every_step_with_data": 2581,
+    "windows_inner_training": 2072,
+    "windows_inner_validation": 509,
+    "channel_seconds": {
+     "emg:surface_emg": 58657.38,
+     "force:plate_force": 6616.32,
+     "kin:joint_angle": 173693.52,
+     "kin:marker": 602189.64
+    },
+    "spikes": 0,
+    "events": {
+     "count": 3761,
+     "definition": "author step segments (TargetFrame ranges in raw.mat): one per recording; the static trials have none"
+    },
+    "sources_read_without_a_full_step": 0,
+    "windows_inner_training_by_recording_kind": {
+     "step_segments": 1923,
+     "static_trials": 149,
+     "static_trial_signal_kinds": [
+      "kin:marker"
+     ],
+     "note": "the static-trial windows hold markers only (no EMG, no force)"
+    }
+   },
+   "inner_validation_units": [
+    "S108",
+    "S033",
+    "S036",
+    "S115",
+    "S050",
+    "S011",
+    "S092",
+    "S046",
+    "S098",
+    "S104",
+    "S066",
+    "S020",
+    "S119",
+    "S053"
+   ],
+   "streams": [
+    {
+     "group": "kin",
+     "kind": "marker",
+     "channels": "39 Plug-in-Gait markers x 3 axes",
+     "rate_hz": 100,
+     "units": "mm",
+     "value_type": "measured",
+     "filtering": "author-filtered (file paths name 'Filtered_trc')"
+    },
+    {
+     "group": "kin",
+     "kind": "joint_angle",
+     "channels": "OpenSim coordinates",
+     "rate_hz": 100,
+     "units": "degrees (rotations), m (pelvis translations)",
+     "value_type": "derived (OpenSim inverse kinematics)"
+    },
+    {
+     "group": "emg",
+     "kind": "surface_emg",
+     "channels": 12,
+     "rate_hz": 2000,
+     "units": "source units; log RMS per step",
+     "value_type": "measured",
+     "side": "right leg"
+    },
+    {
+     "group": "force",
+     "kind": "plate_force",
+     "channels": "2 plates x 3 axes",
+     "rate_hz": 2000,
+     "units": "N",
+     "value_type": "measured",
+     "tasks": "LevelWalking, SitToStand, StandToSit"
+    }
+   ],
+   "flags": {
+    "derived_values_present": true,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "CC BY",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://api.figshare.com/v2/articles/27677016/versions/1",
+     "response_sha256": "7fa0249cf176ccbf682e9a82984cb96c936c94d76b4d5537c6c2afddd366c38e",
+     "licence_object_sha256": "271d9ed3ed83d5d49269642703b6c37f18a619347935d6b8b623ccf7b636d952",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.6084/m9.figshare.27677016.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.27677016.v1",
+      "title": "Comprehensive Human Locomotion and Electromyography Dataset: Gait120",
+      "creators": [
+       "Koo, Seungbum",
+       "Boo, Junyo",
+       "Seo, Dongwook",
+       "Kim, Minseung"
+      ],
+      "publisher": "figshare",
+      "year": 2025,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.27677016.v1",
+      "response_sha256": "ec1f1808a914d5d7829f131170b525bd53d972a92e94c40e43fa3028af734807",
+      "read_at": "2026-11-28T01:12:29+1100"
+     },
+     "notice": {
+      "citation": "Koo, Seungbum; Boo, Junyo; Seo, Dongwook; Kim, Minseung (2025). Comprehensive Human Locomotion and Electromyography Dataset: Gait120. figshare. https://doi.org/10.6084/m9.figshare.27677016.v1",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:29+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 66,
+     "roster_files": [
+      {
+       "file": "Gait120 chair-rise ROSTER.json (earlier study)",
+       "sha256": "2da4180ba71161146be22125bd4e9994686ba6585024f69220768d957cebbf12"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "dynamic_trc_files_read": 3761,
+      "protocol_count_marker_trial_steps": 3761,
+      "files_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "raw.mat and SitToStand members local (sha256 checked against their transfer records); other members fetched at P1 by ranged reads covering only development people's wanted members, each CRC-32 checked"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "trial timestamp and frame-identifier match of the chair-rise study, on every training step segment; one recording per author step segment",
+     "step_segment_recordings": 3761,
+     "segment_emg_inside_trial_emg": [
+      true,
+      3761
+     ],
+     "step_segment_durations": {
+      "segments": 3761,
+      "min_s": 0.86,
+      "median_s": 1.26,
+      "max_s": 3.27,
+      "shorter_than_one_1200ms_window": 1383,
+      "note": "N frames give floor(N / 2) steps; a segment of fewer than 120 frames holds no counted window"
+     },
+     "boundary_frames_in_two_recordings": 748,
+     "trc_frames_equal_target": [
+      true,
+      3761
+     ],
+     "trc_time_equals_frame_clock": [
+      true,
+      3761
+     ],
+     "joint_angle_time_equals_trc": [
+      true,
+      3460
+     ],
+     "plate_starts_at_trc_time": [
+      true,
+      1192
+     ],
+     "plate_on_2khz_grid": [
+      true,
+      1192
+     ],
+     "segment_frames_inside_trial_frames": [
+      true,
+      3761
+     ],
+     "emg_length_equals_frames_x_20": [
+      true,
+      2256
+     ],
+     "step_files_missing": 0,
+     "vertical_axis_rechecks_disagreeing": 0,
+     "segment_frames_inside_trial_frames_checks": "the first and last frame of each step segment lie inside the frame range of its trial; it says nothing about EMG cover (the field was named steps_inside_emg_span before revision 3)",
+     "emg_cover_of_step_segments": {
+      "step_segment_steps": 244423,
+      "steps_without_an_emg_token": 16,
+      "recordings": {
+       "S063_StandToSit_T02_S01": "the last 15 steps of 90 steps",
+       "S107_SlopeDescent_T04_S01": "the first step of 56 steps"
+      },
+      "counted_by": "the second data review, in the shard masks; the step total and the two recordings agree with the channel-seconds in TOKENS.json",
+      "effect": "those steps are masked for EMG and carry markers; nothing is filled in"
+     },
+     "consecutive_segments_sharing_one_boundary_frame": {
+      "trials": 2256,
+      "pairs": 1505,
+      "boundary_frames_tokenised_in_both_recordings": 748,
+      "why_not_all": "N frames give floor(N / 2) steps, so the last frame of a segment with an odd number of frames is in no step",
+      "fold": "both recordings of a pair belong to the same person, so no shared frame crosses a fold"
+     }
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "markers mm (measured), OpenSim coordinates degrees or m (derived), EMG measured surface EMG of right-leg muscles (not a nerve recording), plate forces N (measured; loaded vertical force positive in every plate file, checked; no sign change made)",
+     "plate_files_with_negative_loaded_vertical_median": [],
+     "plate_files_masked_whole_for_samples_above_10kN": {
+      "S014_SitToStand_T02 step 1 plate 1": 600,
+      "S014_SitToStand_T04 step 1 plate 1": 592,
+      "S014_StandToSit_T05 step 1 plate 1": 420
+     }
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "marker files are the authors' filtered TRC exports; joint angles come from the authors' inverse kinematics on them; filter phase not documented in the deposit",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 66,
+    "roster_files": [
+     {
+      "file": "Gait120 chair-rise ROSTER.json (earlier study)",
+      "sha256": "2da4180ba71161146be22125bd4e9994686ba6585024f69220768d957cebbf12"
+     }
+    ],
+    "excluded_groups_checked": {
+     "validation": 22,
+     "confirmation": 22,
+     "E1_S001_S010": 10
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "development"
+    ]
+   },
+   "tokens": {
+    "shards": 66,
+    "bytes": 432904416,
+    "shard_list_sha256": "d6825950a2d20692349411e9485054aec4a0e9877eeee48e4e326af934e704bc",
+    "channels": {
+     "emg": 12,
+     "kin": 156,
+     "force": 6
+    },
+    "shared_vocabulary_channels": {
+     "emg": 12,
+     "kin": 132,
+     "force": 6
+    }
+   },
+   "source_files": {
+    "files": 8545,
+    "file_list_sha256": "d1f139c6d00de24585c039dffd7f7a729483add3a9d934306c1684ca58d9211c"
+   },
+   "notes": [
+    "Joint angles of SitToStand were not part of the P1 member list, so SitToStand trials carry markers, EMG and plates only.",
+    "One recording per author step segment (the TargetFrame range of one step file), the unit that protocol sections 5.2 and 13 and step P5 use for Gait120; the static trial is one recording. EMG outside every step segment of a trial is not tokenised.",
+    "The 20 Hz EMG high-pass runs forward over the whole trial from its first sample, so a segment's EMG features use only samples before each step end, including samples before the segment start.",
+    "Consecutive step segments share one boundary frame (the authors' segmentation). Where a segment has an even number of frames, its last 20 ms step holds that frame, which the next segment's first step also holds; the number of such boundaries is in the Q4 record."
+   ],
+   "seconds": 6.4,
+   "records_corrected": {
+    "by": "record_r3_corrections.py (protocol revision 3)",
+    "at": "2026-11-28T09:48:25+1100"
+   }
+  },
+  "hyser": {
+   "dataset": "hyser",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "Hyser high-density surface EMG, random finger task, version 2.0.0",
+   "doi": "10.13026/hxan-pe94",
+   "licence": "ODC-By-1.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:12:18+1100"
+   },
+   "built_at": "2026-11-27T22:12:42+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 12,
+    "individuals_in_roster": 12,
+    "animals": 0,
+    "people": 12,
+    "sites": 1,
+    "sessions": 24,
+    "recordings": 120,
+    "tasks": {
+     "random_finger": 120
+    },
+    "conditions": {},
+    "unique_steps_20ms": 150000,
+    "steps_with_any_channel": 150000,
+    "windows_1200ms": 2400,
+    "windows_1200ms_every_step_with_data": 2400,
+    "windows_inner_training": 1800,
+    "windows_inner_validation": 600,
+    "channel_seconds": {
+     "emg:hd_emg": 767999.94,
+     "force:finger_force": 15000.0
+    },
+    "spikes": 0,
+    "events": {
+     "count": 0,
+     "definition": "none annotated (each recording is one 25 s trial)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "inner_validation_units": [
+    "S09",
+    "S05",
+    "S17"
+   ],
+   "streams": [
+    {
+     "group": "emg",
+     "kind": "hd_emg",
+     "channels": 256,
+     "rate_hz": 2048,
+     "units": "V (source); log RMS per step",
+     "value_type": "measured",
+     "rows": "learned per recording, grid position recorded (grid, row, column)"
+    },
+    {
+     "group": "force",
+     "kind": "finger_force",
+     "channels": 5,
+     "rate_hz": 100,
+     "units": "V (transducer output, no verified conversion to newtons)",
+     "value_type": "measured"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "# ODC Attribution License (ODC-By)",
+     "spdx": "ODC-By-1.0",
+     "deposit_endpoint": "https://physionet.org/files/hd-semg/2.0.0/LICENSE.txt",
+     "response_sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
+     "licence_object_sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
+     "licence_text": {
+      "url": "https://physionet.org/files/hd-semg/2.0.0/LICENSE.txt",
+      "final_url": "https://physionet-open.s3.amazonaws.com/hd-semg/2.0.0/LICENSE.txt",
+      "status": 200,
+      "bytes": 20402,
+      "sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
+      "what": "the deposit's own LICENSE.txt (the licence text)"
+     },
+     "attribution": {
+      "doi": "10.13026/hxan-pe94",
+      "url": "https://doi.org/10.13026/hxan-pe94",
+      "title": "Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings",
+      "creators": [
+       "Jiang, Xinyu",
+       "Dai, Chenyun",
+       "Liu, Xiangyu",
+       "Fan, Jiahao"
+      ],
+      "publisher": "PhysioNet",
+      "year": 2023,
+      "version": "2.0.0",
+      "rights": [],
+      "source": "https://api.datacite.org/dois/10.13026/hxan-pe94",
+      "response_sha256": "439c24689720ea725eb676848a810efe289c8195e359a4822eb1656ce060c2ae",
+      "read_at": "2026-11-28T01:12:46+1100"
+     },
+     "notice": {
+      "citation": "Jiang, Xinyu; Dai, Chenyun; Liu, Xiangyu; Fan, Jiahao (2023). Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings. PhysioNet. https://doi.org/10.13026/hxan-pe94",
+      "rule": "keep the licence notice and attribute the database as its makers ask (ODC-By 1.0 section 4.3), for example: 'Contains information from TITLE (DOI), which is made available under the Open Data Commons Attribution License v1.0'",
+      "attribution_statement": "Contains information from Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings (https://doi.org/10.13026/hxan-pe94), which is made available under the Open Data Commons Attribution License v1.0."
+     },
+     "checked_at": "2026-11-28T01:12:46+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 12,
+     "roster_files": [
+      {
+       "file": "hyser SOURCE-MANIFEST.json (earlier source custody)",
+       "sha256": "8c8fdf5629291ca1dbeb9e088200aeff7ed2dfae4bdb3efcf869e95cca9a02c9"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "recordings": 120,
+      "expected_from_protocol": 120,
+      "files_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local TRAIN files; sha256 of every file checked against the source manifest"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "one trigger at task onset starts both systems (authors); nominal clocks k/2048 s and j/100 s; both streams last exactly 25 s in every training recording",
+     "recordings_checked": 120,
+     "flag": "sample-level trigger skew and drift are not independently established"
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "HD-EMG in volts (log RMS), measured, surface EMG of forearm muscles (not a nerve recording); finger force as uncalibrated transducer volts, measured"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "force filtering history of the release unresolved (authors describe zero-phase 10 Hz low-pass for their benchmark, applied after loading); flagged",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 12,
+    "roster_files": [
+     {
+      "file": "hyser SOURCE-MANIFEST.json (earlier source custody)",
+      "sha256": "8c8fdf5629291ca1dbeb9e088200aeff7ed2dfae4bdb3efcf869e95cca9a02c9"
+     }
+    ],
+    "excluded_groups_checked": {
+     "DEV": 4,
+     "FINAL_never_fetched": 0
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-27T22:15:03+1100",
+    "roles_seen": [
+     "TRAIN"
+    ]
+   },
+   "tokens": {
+    "shards": 12,
+    "bytes": 199526568,
+    "shard_list_sha256": "8e3f16cb2b8415873c128c42ea293a6724b9030e0d80feac09da652984234b56",
+    "channels": {
+     "emg": 256,
+     "kin": 0,
+     "force": 5
+    },
+    "shared_vocabulary_channels": {
+     "emg": 0,
+     "kin": 0,
+     "force": 5
+    }
+   },
+   "source_files": {
+    "files": 480,
+    "file_list_sha256": "10ac1dccb42ec02b0951a8e81ffdb4de43ed5f340b6668a73988d75c670eda04"
+   },
+   "notes": [
+    "Finger force is uncalibrated transducer voltage; its filtering history in the release is unresolved."
+   ],
+   "seconds": 23.8,
+   "licence_as_declared": "# ODC Attribution License (ODC-By)"
+  },
+  "izmir": {
+   "dataset": "izmir",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "Izmir walking motion capture (Aperta)",
+   "doi": "10.48623/aperta.286865 (record 286866)",
+   "licence": "CC-BY-4.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:12:13+1100"
+   },
+   "built_at": "2026-11-27T22:12:13+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 17,
+    "individuals_in_roster": 17,
+    "animals": 0,
+    "people": 17,
+    "sites": 1,
+    "sessions": 17,
+    "recordings": 51,
+    "tasks": {
+     "walk": 51
+    },
+    "conditions": {},
+    "unique_steps_20ms": 3254,
+    "steps_with_any_channel": 3254,
+    "windows_1200ms": 40,
+    "windows_1200ms_every_step_with_data": 40,
+    "windows_inner_training": 31,
+    "windows_inner_validation": 9,
+    "channel_seconds": {
+     "kin:marker": 9175.74
+    },
+    "spikes": 0,
+    "events": {
+     "count": 99,
+     "definition": "author cycle start and end events in each C3D file"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "inner_validation_units": [
+    "S08",
+    "S28",
+    "S29",
+    "S15"
+   ],
+   "streams": [
+    {
+     "group": "kin",
+     "kind": "marker",
+     "channels": "47 markers x 3 axes",
+     "rate_hz": 100,
+     "units": "mm",
+     "value_type": "measured",
+     "filtering": "not documented in the deposit README"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": false
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://aperta.ulakbim.gov.tr/api/records/286866",
+     "response_sha256": "77104d3bd02d6888884730883d55744358aff764d8599b119e3141e2ccbffc20",
+     "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.48623/aperta.286865",
+      "url": "https://doi.org/10.48623/aperta.286865",
+      "title": "A multimodal dataset of lower-limb kinematics, kinetics, electromyography, and musculoskeletal simulations from healthy adults during overground walking",
+      "creators": [
+       "Mihcin, \u015eenay",
+       "Y\u0131lmaz, Mehmet",
+       "\u015eahin, Ahmet Mert",
+       "Akdeniz, Sevin\u00e7"
+      ],
+      "publisher": "Nature Scientific Data",
+      "year": 2026,
+      "version": "1.0",
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48623/aperta.286865",
+      "response_sha256": "314ea83bf8fb7357e878f98870cbc3efb02223c22504488dda391ebc3d4a0e31",
+      "read_at": "2026-11-28T01:13:21+1100"
+     },
+     "notice": {
+      "citation": "Mihcin, \u015eenay; Y\u0131lmaz, Mehmet; \u015eahin, Ahmet Mert; Akdeniz, Sevin\u00e7 (2026). A multimodal dataset of lower-limb kinematics, kinetics, electromyography, and musculoskeletal simulations from healthy adults during overground walking. Nature Scientific Data. https://doi.org/10.48623/aperta.286865",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:21+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 17,
+     "roster_files": [
+      {
+       "file": "izmir ROSTER.json (earlier walking study)",
+       "sha256": "471b2c5a4274f24f51654ec0759cf17475ec33f2b995664677729ca2de1cbf08"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "files": 51,
+      "expected_from_protocol": 51,
+      "members_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local archive; the 51 roster members inflated by name, CRC-32 checked",
+     "archive_sha256": "ea6fefd5a80b1b46497ba8e6bd95da028b2c6cbf9bd3a77557997c9ef15bbcaf"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "markers only, one file per cycle (no pairing needed)",
+     "files_checked": 51,
+     "vertical_axis_rechecks_disagreeing": 0
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "markers in mm, measured; cluster markers kept as dataset-specific rows"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "not documented in the deposit README; flagged unknown",
+     "our_features": "causal (last sample and change per step)"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 17,
+    "roster_files": [
+     {
+      "file": "izmir ROSTER.json (earlier walking study)",
+      "sha256": "471b2c5a4274f24f51654ec0759cf17475ec33f2b995664677729ca2de1cbf08"
+     }
+    ],
+    "excluded_groups_checked": {
+     "development": 6,
+     "final": 6
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-27T22:15:02+1100",
+    "roles_seen": [
+     "engineering",
+     "fit"
+    ]
+   },
+   "tokens": {
+    "shards": 17,
+    "bytes": 4614694,
+    "shard_list_sha256": "d7710f8b8ebb0d88ac88f2994b9529df7b70879f8beab7d6cd6fd6b9a6c4554c",
+    "channels": {
+     "emg": 0,
+     "kin": 141,
+     "force": 0
+    },
+    "shared_vocabulary_channels": {
+     "emg": 0,
+     "kin": 87,
+     "force": 0
+    }
+   },
+   "source_files": {
+    "files": 51,
+    "member_list_sha256": "c97cc496d482f957c9ebb9b4dfa275896d12b1521559c5f5395887d7c3c528ff",
+    "archive": "MoCap.zip, 25,457,104 B, sha256 ea6fefd5a80b1b46497ba8e6bd95da028b2c6cbf9bd3a77557997c9ef15bbcaf"
+   },
+   "notes": [
+    "Each file holds one gait cycle of about 1.1-1.6 s, so most files give one counted 1.2 s window.",
+    "The C3D files also hold a force plate and four unlabelled EMG sensors; the protocol admits markers only."
+   ],
+   "seconds": 0.1,
+   "licence_as_declared": "cc-by-4.0"
+  },
+  "katmah": {
+   "dataset": "katmah",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "Katmah et al. multimodal treadmill gait",
+   "doi": "10.13026/r0ea-7161",
+   "licence": "CC-BY-4.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:07:41+1100"
+   },
+   "built_at": "2026-11-27T22:07:44+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 40,
+    "individuals_in_roster": 40,
+    "animals": 0,
+    "people": 40,
+    "sites": 1,
+    "sessions": 40,
+    "recordings": 117,
+    "tasks": {
+     "treadmill_walk": 117
+    },
+    "conditions": {
+     "0.5 m/s": 117
+    },
+    "unique_steps_20ms": 353298,
+    "steps_with_any_channel": 352727,
+    "windows_1200ms": 5860,
+    "windows_1200ms_every_step_with_data": 5822,
+    "windows_inner_training": 4664,
+    "windows_inner_validation": 1196,
+    "channel_seconds": {
+     "emg:emg_envelope": 27582.24,
+     "force:treadmill_force": 14367.6,
+     "kin:imu_joint_angle": 147684.76
+    },
+    "spikes": 0,
+    "events": {
+     "count": 0,
+     "definition": "none annotated in the files used"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "inner_validation_units": [
+    "S12",
+    "S20",
+    "S4",
+    "S25",
+    "S30",
+    "S13",
+    "S22",
+    "S33"
+   ],
+   "streams": [
+    {
+     "group": "emg",
+     "kind": "emg_envelope",
+     "channels": 12,
+     "rate_hz": 16.05,
+     "units": "V (MAV); log per step",
+     "value_type": "derived",
+     "recording": "separate acquisition"
+    },
+    {
+     "group": "kin",
+     "kind": "imu_joint_angle",
+     "rate_hz": 60,
+     "units": "degrees",
+     "value_type": "derived (Xsens MVN model)",
+     "recording": "separate acquisition"
+    },
+    {
+     "group": "force",
+     "kind": "treadmill_force",
+     "channels": "2 belts x 3 axes",
+     "rate_hz": 1000,
+     "units": "N",
+     "value_type": "measured",
+     "recording": "separate acquisition"
+    }
+   ],
+   "flags": {
+    "derived_values_present": true,
+    "simulated_values_present": false,
+    "paired_streams": false
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "Creative Commons Attribution 4.0 International Public License",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/LICENSE.txt",
+     "response_sha256": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2",
+     "licence_object_sha256": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2",
+     "licence_text": {
+      "url": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/LICENSE.txt",
+      "final_url": "https://physionet-open.s3.amazonaws.com/multimodal-gait-dataset/1.0.0/LICENSE.txt",
+      "status": 200,
+      "bytes": 14842,
+      "sha256": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2",
+      "what": "the deposit's own LICENSE.txt (the licence text)"
+     },
+     "attribution": {
+      "doi": "10.13026/r0ea-7161",
+      "url": "https://doi.org/10.13026/r0ea-7161",
+      "title": "A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults",
+      "creators": [
+       "Katmah, Rateb",
+       "AlShehhi, Aamna",
+       "Kosaji, Doua",
+       "Al-Rahmani, Nour",
+       "Abdullah, Muhammad",
+       "Hulleck, Abdul Aziz Vaqar",
+       "Khalaf, Kinda"
+      ],
+      "publisher": "PhysioNet",
+      "year": 2026,
+      "version": "1.0.0",
+      "rights": [],
+      "source": "https://api.datacite.org/dois/10.13026/r0ea-7161",
+      "response_sha256": "b7d9565227f0d95673ae8a6857b507a5cfac84ddbc955a8d00687948b3994f3b",
+      "read_at": "2026-11-28T01:12:43+1100"
+     },
+     "notice": {
+      "citation": "Katmah, Rateb; AlShehhi, Aamna; Kosaji, Doua; Al-Rahmani, Nour; Abdullah, Muhammad; Hulleck, Abdul Aziz Vaqar; Khalaf, Kinda (2026). A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults. PhysioNet. https://doi.org/10.13026/r0ea-7161",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:43+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 40,
+     "roster_files": [
+      {
+       "file": "models/knee-motion/sources.json (published knee study)",
+       "sha256": "695d0ff23daba2093e04467aeb3900de2a4735843baec54bf3ca4bab51e731c1"
+      },
+      {
+       "file": "models/knee-motion/REPRODUCE.md (published knee study, split rule)",
+       "sha256": "303f43be570849b3bf3e80ea3ecec3b931f08a99a3249f39b98ab12365731eae"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "acquisitions": {
+       "emg_envelope": 38,
+       "imu": 39,
+       "force_plates": 40
+      },
+      "expected": {
+       "emg_envelope": 38,
+       "imu": 39,
+       "force_plates": 40
+      },
+      "files_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "EMG CSVs and already-extracted IMU members local (IMU.tar.gz not extracted further); force CSVs downloaded per file at P1, each matching the publisher SHA256SUMS digest"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "EMG, IMU and force plates enter as separate acquisitions (separate recordings), never paired within a window, as the protocol requires; no shared-clock claim is made"
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "EMG envelope labelled derived surface EMG (not a nerve recording); MVN joint angles labelled derived; plate forces measured"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "Delsys MAV envelope stamped at window centre: values shifted to the window end (+62.3 ms, inferred window 124.6 ms); Xsens MVN outputs at processing quality 'HD' (vendor reprocessing, phase not documented; flagged)",
+     "our_features": "causal on the shifted clock"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 40,
+    "roster_files": [
+     {
+      "file": "models/knee-motion/sources.json (published knee study)",
+      "sha256": "695d0ff23daba2093e04467aeb3900de2a4735843baec54bf3ca4bab51e731c1"
+     },
+     {
+      "file": "models/knee-motion/REPRODUCE.md (published knee study, split rule)",
+      "sha256": "303f43be570849b3bf3e80ea3ecec3b931f08a99a3249f39b98ab12365731eae"
+     }
+    ],
+    "excluded_groups_checked": {
+     "knee_test_41_52": 12,
+     "reserved_53_59": 7
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-28T01:15:25+1100",
+    "roles_seen": [
+     "train",
+     "train (knee study ID range 1-40, REPRODUCE.md; recording listed as missing there, no IMU file)"
+    ]
+   },
+   "tokens": {
+    "shards": 40,
+    "bytes": 275669020,
+    "shard_list_sha256": "b0a12d726f6281ab2b8aeed5365c42ddc77d915503e5c138ddbb31b8c05ceb0a",
+    "channels": {
+     "emg": 12,
+     "kin": 66,
+     "force": 6
+    },
+    "shared_vocabulary_channels": {
+     "emg": 12,
+     "kin": 66,
+     "force": 6
+    }
+   },
+   "source_files": {
+    "files": 117,
+    "file_list_sha256": "a3a16bb65f265f3495f7a460d6e8f39ab5ac286015a7fd25827146dad27f319c"
+   },
+   "notes": [
+    "Only Joint_Angles_ZXY is extracted for every person; identifier 1's extra extracted members (segment positions, free acceleration) are not used, so all people carry the same IMU channels.",
+    "Identifier 24 has no IMU folder and identifiers 8 and 24 have no EMG file at 0.5 m/s; each gives the acquisitions it has.",
+    "Identifier 24 is a training person by the knee study's own split rule: its REPRODUCE.md assigns IDs 1-40 to training and lists the S24 recording as missing (it has no IMU file), so it is absent from the study's member list but holds no evaluation role."
+   ],
+   "seconds": 3.3,
+   "licence_as_declared": "Creative Commons Attribution 4.0 International Public License"
+  },
+  "moreira": {
+   "dataset": "moreira",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "Lower limb kinematic, kinetic and EMG data from young healthy humans during walking at controlled speeds (C3D files)",
+   "doi": "10.6084/m9.figshare.14241812.v1",
+   "licence": "CC0-1.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:10:40+1100"
+   },
+   "built_at": "2026-11-27T22:10:47+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 8,
+    "individuals_in_roster": 8,
+    "animals": 0,
+    "people": 8,
+    "sites": 1,
+    "sessions": 8,
+    "recordings": 551,
+    "tasks": {
+     "walk": 551
+    },
+    "conditions": {
+     "1.0 km/h": 77,
+     "1.5 km/h": 80,
+     "2.0 km/h": 79,
+     "2.5 km/h": 79,
+     "3.0 km/h": 80,
+     "3.5 km/h": 80,
+     "4.0 km/h": 76
+    },
+    "unique_steps_20ms": 173995,
+    "steps_with_any_channel": 173995,
+    "windows_1200ms": 2650,
+    "windows_1200ms_every_step_with_data": 2650,
+    "windows_inner_training": 1982,
+    "windows_inner_validation": 668,
+    "channel_seconds": {
+     "emg:surface_emg": 27836.32,
+     "force:plate_force": 62631.72,
+     "kin:marker": 247974.24
+    },
+    "spikes": 0,
+    "events": {
+     "count": 0,
+     "definition": "author events stored in the C3D files (none present in this release)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "inner_validation_units": [
+    "8",
+    "10"
+   ],
+   "streams": [
+    {
+     "group": "kin",
+     "kind": "marker",
+     "channels": "24 markers x 3 axes",
+     "rate_hz": 200,
+     "units": "mm",
+     "value_type": "measured",
+     "filtering": "publisher reports polynomial gap filling"
+    },
+    {
+     "group": "emg",
+     "kind": "surface_emg",
+     "channels": 8,
+     "rate_hz": 2000,
+     "units": "V (source); log RMS per step",
+     "value_type": "measured",
+     "side": "both legs, 4 muscles each"
+    },
+    {
+     "group": "force",
+     "kind": "plate_force",
+     "channels": "6 plates x 3 axes",
+     "rate_hz": 2000,
+     "units": "N",
+     "value_type": "measured",
+     "frame": "laboratory, ground reaction; calibrated from volts with the C3D calibration"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "CC0",
+     "spdx": "CC0-1.0",
+     "deposit_endpoint": "https://api.figshare.com/v2/articles/14241812/versions/1",
+     "response_sha256": "670413fa71afeddff65018aaef632a130da7bcac9bd6b809898f63e8b48ea3cd",
+     "licence_object_sha256": "4ed7337b16345f53968e02757805595395ede4da489e8847632854e3832fc4fe",
+     "licence_text": {
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "status": 200,
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "what": "plain-text legal code of CC0-1.0"
+     },
+     "attribution": {
+      "doi": "10.6084/m9.figshare.14241812.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.14241812.v1",
+      "title": "C3D files",
+      "creators": [
+       "Santos, Cristina",
+       "Joao Paulo Vilas-Boas",
+       "Moreira, Lu\u00eds Carlos",
+       "Figueiredo, Joana",
+       "Fonseca, Pedro"
+      ],
+      "publisher": "figshare",
+      "year": 2021,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Zero v1.0 Universal",
+        "uri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+        "spdx": "cc0-1.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.14241812.v1",
+      "response_sha256": "dfca424f3669f6adbf0903f9649ef4f54288e85e44da37c6bca30168c04eb649",
+      "read_at": "2026-11-28T01:12:34+1100"
+     },
+     "notice": {
+      "citation": "Santos, Cristina; Joao Paulo Vilas-Boas; Moreira, Lu\u00eds Carlos; Figueiredo, Joana; Fonseca, Pedro (2021). C3D files. figshare. https://doi.org/10.6084/m9.figshare.14241812.v1",
+      "rule": "no attribution is required; the source is credited as good practice"
+     },
+     "checked_at": "2026-11-28T01:12:34+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 8,
+     "roster_files": [
+      {
+       "file": "SOURCE-SPLIT.json (earlier Moreira study)",
+       "sha256": "615b9b332581558ee25eec4828f2ee5e24d342aa45059eb4648cdaa7b390467b"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "trials": 551,
+      "expected_from_protocol": 551,
+      "members_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local archive read by member name; only development people's members inflated",
+     "archive_sha256": "f042eebb8e67e71b2db54d4c1517661800f22b45fd947f1fc5592facddafad48"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "markers, EMG and plates share one C3D clock; checked on every file",
+     "files_checked": 551,
+     "vertical_axis_rechecks_disagreeing": 0
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "units and modality per channel in TOKENS.json; all measured; EMG labelled surface EMG of muscles, not nerve recordings",
+     "force_calibration_check": {
+      "trial": "Participant1/Raw_Data/V1/T1 (development)",
+      "reference_sha256": "763c69a731bd4eb17bbce8c7b569e303f187ef3e14c28b4a985999325e7d4502",
+      "loaded_frames": 1768,
+      "vertical_mae_n": 4.24,
+      "vertical_correlation": 0.99863
+     }
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "publisher reports polynomial gap filling of trajectories",
+     "our_features": "causal (last sample, change, step mean, forward-only high-pass and log RMS)"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 8,
+    "roster_files": [
+     {
+      "file": "SOURCE-SPLIT.json (earlier Moreira study)",
+      "sha256": "615b9b332581558ee25eec4828f2ee5e24d342aa45059eb4648cdaa7b390467b"
+     }
+    ],
+    "excluded_groups_checked": {
+     "validation": 4,
+     "confirmation": 4
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-27T22:15:02+1100",
+    "roles_seen": [
+     "development"
+    ]
+   },
+   "tokens": {
+    "shards": 8,
+    "bytes": 163599008,
+    "shard_list_sha256": "a01a422b8f979966ebe47550189a8baa7adf90d3e2b67fb15e9ca26234526f5f",
+    "channels": {
+     "emg": 8,
+     "kin": 72,
+     "force": 18
+    },
+    "shared_vocabulary_channels": {
+     "emg": 8,
+     "kin": 60,
+     "force": 18
+    }
+   },
+   "source_files": {
+    "files": 551,
+    "member_list_sha256": "d6f27b88478a111d4e06db876a9e20d19e01a8f32fc7b2f97252c7a2fa30ebad",
+    "archive": "c3d files.zip, 1,804,755,126 B, publisher md5 7fa9bc94db2a9df5e01301f1be184b38"
+   },
+   "notes": [
+    "No FORCE_PLATFORM:ZERO range is stored; unloaded plates keep offsets of up to about 20 N.",
+    "Force calibration follows the C3D type 4 and type 3 definitions; one development trial's vertical force was compared with the authors' ASCII export (Q5 evidence)."
+   ],
+   "seconds": 7.4,
+   "licence_as_declared": "CC0"
+  },
+  "schreiber_moissenet": {
+   "dataset": "schreiber_moissenet",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "A multimodal dataset of human gait at different walking speeds (Rehazenter), version 8",
+   "doi": "10.6084/m9.figshare.7734767.v8",
+   "licence": "CC-BY-4.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:07:27+1100"
+   },
+   "built_at": "2026-11-27T22:07:30+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 30,
+    "individuals_in_roster": 30,
+    "animals": 0,
+    "people": 30,
+    "sites": 1,
+    "sessions": 30,
+    "recordings": 685,
+    "tasks": {
+     "walk": 685
+    },
+    "conditions": {
+     "C1": 146,
+     "C2": 135,
+     "C3": 129,
+     "C4": 139,
+     "C5": 136
+    },
+    "unique_steps_20ms": 85355,
+    "steps_with_any_channel": 85355,
+    "windows_1200ms": 1131,
+    "windows_1200ms_every_step_with_data": 1131,
+    "windows_inner_training": 897,
+    "windows_inner_validation": 234,
+    "channel_seconds": {
+     "emg:surface_emg": 13656.8,
+     "force:plate_force": 10242.6,
+     "kin:marker": 264739.92
+    },
+    "spikes": 0,
+    "events": {
+     "count": 4795,
+     "definition": "author gait events in each C3D file (EVENT parameters: foot strikes and foot offs)"
+    },
+    "sources_read_without_a_full_step": 30
+   },
+   "inner_validation_units": [
+    "2014005",
+    "2014049",
+    "2014024",
+    "2014034",
+    "2014048",
+    "2014013"
+   ],
+   "streams": [
+    {
+     "group": "kin",
+     "kind": "marker",
+     "channels": "52 markers x 3 axes",
+     "rate_hz": 100,
+     "units": "mm",
+     "value_type": "measured",
+     "filtering": "author-processed trajectories (every sample flagged as modelled, residual 0)"
+    },
+    {
+     "group": "emg",
+     "kind": "surface_emg",
+     "channels": 8,
+     "rate_hz": 1500,
+     "units": "V (source); log RMS per step",
+     "value_type": "measured",
+     "side": "right leg"
+    },
+    {
+     "group": "force",
+     "kind": "plate_force",
+     "channels": "2 plates x 3 axes",
+     "rate_hz": 1500,
+     "units": "N",
+     "value_type": "measured",
+     "frame": "laboratory, ground reaction"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "CC BY 4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://api.figshare.com/v2/articles/7734767/versions/8",
+     "response_sha256": "af2f54dd03a007043e09c0c4855ab9eeaa761942cb7e21b801a265ed8fe620a8",
+     "licence_object_sha256": "3b0929191e59f10fd279fe2ce7fe73e486ec86f73a16c578dcce33f6884943c4",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.6084/m9.figshare.7734767.v8",
+      "url": "https://doi.org/10.6084/m9.figshare.7734767.v8",
+      "title": "A multimodal dataset of human gait at different walking speeds established on injury-free adult participants",
+      "creators": [
+       "Moissenet, Florent",
+       "Schreiber, C\u00e9line"
+      ],
+      "publisher": "figshare",
+      "year": 2020,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.7734767.v8",
+      "response_sha256": "74c03473ecb55c297c3eefc725f6bcfb76707f9d081dc6a508675b5522454920",
+      "read_at": "2026-11-28T01:12:31+1100"
+     },
+     "notice": {
+      "citation": "Moissenet, Florent; Schreiber, C\u00e9line (2020). A multimodal dataset of human gait at different walking speeds established on injury-free adult participants. figshare. https://doi.org/10.6084/m9.figshare.7734767.v8",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:31+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 30,
+     "roster_files": [
+      {
+       "file": "split-three.json (earlier overground study)",
+       "sha256": "e0ccb1ae4a37c12d47c5e63ce3c9372efa212fa475275eef4dc40c2143aeda32"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "walks_read": 685,
+      "static_read": 30,
+      "static_with_tokens": 0,
+      "note": "each static trial holds a single 100 Hz frame (10 ms), shorter than one 20 ms step, so it gives no token",
+      "expected_from_protocol": {
+       "walks": 685,
+       "static": 30
+      },
+      "members_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local archive read by member name; only the 715 members of the 30 training participants were inflated",
+     "archive_sha256": "e11f0f85424e7630d32dbeb8b37bf78d470dcb34c0f461417671ce7d146eaec5"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "markers, EMG and plates share one C3D clock; analog samples = frames x samples per frame checked on every file",
+     "files_checked": 715,
+     "vertical_axis_rechecks_disagreeing": 0
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "units and modality per channel in TOKENS.json; markers mm, EMG volts (log RMS), forces N; all measured; EMG labelled surface EMG of muscles, not nerve recordings"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "trajectories are author-processed (residual 0 on all samples: filtered or gap-filled); the filter's phase is not documented in the deposit",
+     "our_features": "causal: last sample, change, step mean, forward-only 20 Hz high-pass then log RMS"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 30,
+    "roster_files": [
+     {
+      "file": "split-three.json (earlier overground study)",
+      "sha256": "e0ccb1ae4a37c12d47c5e63ce3c9372efa212fa475275eef4dc40c2143aeda32"
+     }
+    ],
+    "excluded_groups_checked": {
+     "assessment_ordinals_31_40": 10,
+     "reserve_ordinals_41_50": 10
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-27T22:15:01+1100",
+    "roles_seen": [
+     "train"
+    ]
+   },
+   "tokens": {
+    "shards": 30,
+    "bytes": 141798860,
+    "shard_list_sha256": "dfad3c36c8cbe000573a50e254b7ea610922aa918ab5847ced42799645a921fe",
+    "channels": {
+     "emg": 8,
+     "kin": 156,
+     "force": 6
+    },
+    "shared_vocabulary_channels": {
+     "emg": 8,
+     "kin": 156,
+     "force": 6
+    }
+   },
+   "source_files": {
+    "files": 715,
+    "member_list_sha256": "08f543677625d04c011b7c624b99f9c804c7ca7d0f7dc9ecd317a857431c9e75",
+    "archive": "source.zip, 381,392,112 B, sha256 e11f0f85424e7630d32dbeb8b37bf78d470dcb34c0f461417671ce7d146eaec5"
+   },
+   "notes": [
+    "Plate moments are not tokenised (the force group holds the three force axes per plate).",
+    "Each static trial holds one 100 Hz frame, shorter than one 20 ms step, so the 30 static trials are read and audited but give no token."
+   ],
+   "seconds": 3.0,
+   "licence_as_declared": "CC BY 4.0"
+  },
+  "van_criekinge": {
+   "dataset": "van_criekinge",
+   "part": "motion-and-emg",
+   "wave": 1,
+   "name": "Van Criekinge et al. healthy adult gait (138_HealthyPiG)",
+   "doi": "10.6084/m9.figshare.24192480.v1",
+   "licence": "CC0-1.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "branch_head": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:07:40+1100"
+   },
+   "built_at": "2026-11-27T22:07:41+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 12,
+    "individuals_in_roster": 12,
+    "animals": 0,
+    "people": 12,
+    "sites": 1,
+    "sessions": 12,
+    "recordings": 36,
+    "tasks": {
+     "walk": 36
+    },
+    "conditions": {},
+    "unique_steps_20ms": 5297,
+    "steps_with_any_channel": 5297,
+    "windows_1200ms": 70,
+    "windows_1200ms_every_step_with_data": 70,
+    "windows_inner_training": 52,
+    "windows_inner_validation": 18,
+    "channel_seconds": {
+     "emg:surface_emg": 1311.0,
+     "force:plate_force": 1271.28,
+     "kin:marker": 10477.62
+    },
+    "spikes": 0,
+    "events": {
+     "count": 398,
+     "definition": "author gait events in each C3D file (foot strikes and foot offs)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "inner_validation_units": [
+    "SUBJ096",
+    "SUBJ082",
+    "SUBJ039"
+   ],
+   "streams": [
+    {
+     "group": "kin",
+     "kind": "marker",
+     "channels": "Plug-in-Gait markers x 3 axes",
+     "rate_hz": 100,
+     "units": "mm",
+     "value_type": "measured",
+     "filtering": "author-processed (most samples flagged modelled)"
+    },
+    {
+     "group": "emg",
+     "kind": "surface_emg",
+     "channels": "up to 14 named channels",
+     "rate_hz": 1000,
+     "units": "V (source); log RMS per step",
+     "value_type": "measured"
+    },
+    {
+     "group": "force",
+     "kind": "plate_force",
+     "channels": "4 plates x 3 axes",
+     "rate_hz": 1000,
+     "units": "N",
+     "value_type": "measured",
+     "frame": "laboratory, ground reaction"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "CC0",
+     "spdx": "CC0-1.0",
+     "deposit_endpoint": "https://api.figshare.com/v2/articles/24192480/versions/1",
+     "response_sha256": "1bc1a86a0937e317ffb95b8355ab5184b0a1fdbb46f4fdd0b0704cb40a9ccc6a",
+     "licence_object_sha256": "4ed7337b16345f53968e02757805595395ede4da489e8847632854e3832fc4fe",
+     "licence_text": {
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "status": 200,
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "what": "plain-text legal code of CC0-1.0"
+     },
+     "attribution": {
+      "doi": "10.6084/m9.figshare.24192480.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.24192480.v1",
+      "title": "c3d files of 3D full-body gait kinematics, kinetics and EMG of 138 able-bodied adults",
+      "creators": [
+       "Van Criekinge, Tamaya",
+       "Saeys, Wim",
+       "Truijen, Steven",
+       "Vereeck, Luc",
+       "Sloot, Lizeth",
+       "Hallemans, Ann"
+      ],
+      "publisher": "figshare",
+      "year": 2023,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Zero v1.0 Universal",
+        "uri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+        "spdx": "cc0-1.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.24192480.v1",
+      "response_sha256": "3b0477de5555a4a15897e3e5a79b6cf85f792ef01d00e095be1d311a921aeb3c",
+      "read_at": "2026-11-28T01:12:37+1100"
+     },
+     "notice": {
+      "citation": "Van Criekinge, Tamaya; Saeys, Wim; Truijen, Steven; Vereeck, Luc; Sloot, Lizeth; Hallemans, Ann (2023). c3d files of 3D full-body gait kinematics, kinetics and EMG of 138 able-bodied adults. figshare. https://doi.org/10.6084/m9.figshare.24192480.v1",
+      "rule": "no attribution is required; the source is credited as good practice"
+     },
+     "checked_at": "2026-11-28T01:12:37+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 12,
+     "roster_files": [
+      {
+       "file": "van-criekinge prospective ROSTER.json (earlier study)",
+       "sha256": "34bf97f35e434357c5f9ff7fb945a0743dbbd0c5558fc99b64fe8248485b8f2c"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "walks": 36,
+      "expected_from_protocol": 36,
+      "local_files_match_transport_sha256": true
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local fit members fetched earlier by per-member ranged reads; sha256 checked against the transport record before reading"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "markers, EMG and plates share one C3D clock (analog 1 kHz = 10 x 100 Hz); checked on every file",
+     "files_checked": 36,
+     "vertical_axis_rechecks_disagreeing": 0
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "units and modality per channel; all measured; EMG labelled surface EMG of muscles"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "trajectories author-processed (residual 0 on most samples)",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 12,
+    "roster_files": [
+     {
+      "file": "van-criekinge prospective ROSTER.json (earlier study)",
+      "sha256": "34bf97f35e434357c5f9ff7fb945a0743dbbd0c5558fc99b64fe8248485b8f2c"
+     }
+    ],
+    "excluded_groups_checked": {
+     "validation": 6,
+     "test": 12
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "redone_at": "2026-11-27T22:15:03+1100",
+    "roles_seen": [
+     "fit"
+    ]
+   },
+   "tokens": {
+    "shards": 12,
+    "bytes": 7392518,
+    "shard_list_sha256": "362eac3f215c092564279dadf3755a1a61c349315f59129992160bfd948b0d0b",
+    "channels": {
+     "emg": 14,
+     "kin": 120,
+     "force": 12
+    },
+    "shared_vocabulary_channels": {
+     "emg": 12,
+     "kin": 96,
+     "force": 12
+    }
+   },
+   "source_files": {
+    "files": 36,
+    "member_list_sha256": "fe87925034c2e23c16ae935030965d89b94bec230761466d9074d9f10d205dd7",
+    "archive": "138_HealthyPiG.zip, 463,159,769 B, md5 85235c73455d4df8434810d61517efbb"
+   },
+   "notes": [
+    "Gastrocnemius channels (GAS) do not name the head, so they get dataset rows.",
+    "Plug-in-Gait model outputs stored in the C3D point section are not used."
+   ],
+   "seconds": 0.8,
+   "licence_as_declared": "CC0"
+  },
+  "area2": {
+   "dataset": "area2",
+   "part": "neural",
+   "wave": "1 (conditional, admitted by the P2 role audit)",
+   "name": "Area2_Bump (Neural Latents Benchmark)",
+   "doi": "10.48324/dandi.000127/0.220113.0359",
+   "licence": "CC-BY-4.0",
+   "species": "macaque",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T23:14:32+1100"
+   },
+   "built_at": "2026-11-27T23:14:34+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 1,
+    "individuals_in_roster": 1,
+    "animals": 1,
+    "people": 0,
+    "sites": 1,
+    "sessions": 1,
+    "recordings": 291,
+    "tasks": {
+     "centre_out_bump": 291
+    },
+    "conditions": {
+     "active": 155,
+     "bump": 136
+    },
+    "unique_steps_20ms": 42154,
+    "steps_with_any_channel": 42154,
+    "windows_1200ms": 560,
+    "windows_1200ms_every_step_with_data": 560,
+    "windows_inner_training": 458,
+    "windows_inner_validation": 102,
+    "channel_seconds": {
+     "force:handle_force": 2529.24,
+     "kin:hand_position": 1686.16,
+     "spikes:sorted_unit": 54800.2
+    },
+    "spikes": 373897,
+    "events": {
+     "count": 290,
+     "definition": "trials (one per tokenised trial; trial pieces cut by a block boundary count once)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "unit_kind": "time_block",
+   "inner_validation_units": "latest time block (fold 4) of each recording",
+   "streams": [
+    {
+     "group": "spikes",
+     "kind": "sorted_unit",
+     "channels": 65,
+     "units": "events per 20 ms step",
+     "value_type": "measured",
+     "rows": "learned per recording",
+     "masking": "outside each unit's observation intervals"
+    },
+    {
+     "group": "kin",
+     "kind": "hand_position",
+     "channels": 2,
+     "rate_hz": 1000,
+     "units": "mm (file: cm)",
+     "value_type": "measured (low-pass filtered at 100 Hz by the authors)"
+    },
+    {
+     "group": "force",
+     "kind": "handle_force",
+     "channels": 3,
+     "rate_hz": 1000,
+     "units": "N",
+     "value_type": "measured"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "spdx:CC-BY-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://api.dandiarchive.org/api/dandisets/000127/versions/0.220113.0359/",
+     "response_sha256": "aa708afb3c348ac3a476040047f0499433391f345d1b3b47253bce7c88e5ef07",
+     "licence_object_sha256": "d8c53d09969cbcddfcb565964291f0aa5084ddb03bf8cd82e3586ca33b84bc1e",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.48324/dandi.000127/0.220113.0359",
+      "url": "https://doi.org/10.48324/dandi.000127/0.220113.0359",
+      "title": "Area2_Bump: macaque somatosensory area 2 spiking activity during reaching with perturbations",
+      "creators": [
+       "Miller, Lee"
+      ],
+      "publisher": "DANDI Archive",
+      "year": 2022,
+      "version": null,
+      "rights": [
+       {
+        "rights": null,
+        "uri": null,
+        "spdx": "cc_by_40"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48324/dandi.000127/0.220113.0359",
+      "response_sha256": "47d94161310b0459c6e32023000e5c5df9c8e8f5fe3f2d308cb14a1c28691007",
+      "read_at": "2026-11-28T01:13:03+1100"
+     },
+     "notice": {
+      "citation": "Miller, Lee (2022). Area2_Bump: macaque somatosensory area 2 spiking activity during reaching with perturbations. DANDI Archive. https://doi.org/10.48324/dandi.000127/0.220113.0359",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:03+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 1,
+     "roster_files": [
+      {
+       "file": "area2 force-forecast INPUTS.json (earlier study; fit and configuration trial lists)",
+       "sha256": "778b2074801dad7d0d3b261f86f32b46e6d7766744519ffb548fd8b60b08aecd"
+      },
+      {
+       "file": "area2 force-forecast PROTOCOL.json (split rule)",
+       "sha256": "e6a17b50fd3bd67632922f96ee73ce3f90e1b7b48ae9ded8179786caa93677d0"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "trials": 290,
+      "held_trials_tokenised": 0,
+      "read_until_s": 1809.676,
+      "first_held_trial_s": 1815.644,
+      "spike_values_read_at_or_after_cut": 408,
+      "how_read": "binary search over each unit's spike times (27 November 2026); the reader now scans forward (see notes)"
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local training file (size and sha256 against the DANDI asset); only rows and spike times before the end of the last configuration trial are read"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "one NWB file; spike times and the 1 kHz behaviour series share its clock (starting time 0, rate 1000 Hz checked)"
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "spikes as event counts per sorted unit (masked outside observation intervals); hand position in mm (file cm, conversion 0.01 to m checked); handle force in N; all measured",
+     "nonfinite_rows": {
+      "hand": 286,
+      "force": 286
+     }
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "hand position low-pass filtered at 100 Hz by the authors (phase not documented)",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 1,
+    "roster_files": [
+     {
+      "file": "area2 force-forecast INPUTS.json (earlier study; fit and configuration trial lists)",
+      "sha256": "778b2074801dad7d0d3b261f86f32b46e6d7766744519ffb548fd8b60b08aecd"
+     },
+     {
+      "file": "area2 force-forecast PROTOCOL.json (split rule)",
+      "sha256": "e6a17b50fd3bd67632922f96ee73ce3f90e1b7b48ae9ded8179786caa93677d0"
+     }
+    ],
+    "excluded_groups_checked": {
+     "held_74_assessed": 74,
+     "dryad_deposit": 1,
+     "nlb_test_file": 1
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "fitting and configuration trials"
+    ]
+   },
+   "tokens": {
+    "shards": 1,
+    "bytes": 2019944,
+    "shard_list_sha256": "5acc129381421d8ea456b3bc4dda5b10760efb8f2e49eba7753d625e7d3640af",
+    "channels": {
+     "kin": 2,
+     "force": 3,
+     "spikes": 65
+    },
+    "shared_vocabulary_channels": {
+     "kin": 0,
+     "force": 0
+    },
+    "field_storage": "float16",
+    "float16_rms_error_over_channel_sd_max": {}
+   },
+   "source_files": {
+    "files": 1,
+    "file_sha256": "639b1a03ab813f96fec76681110a1634942476badc0fd4c93d406c24701f5db2"
+   },
+   "notes": [
+    "Only the 290 fitting and configuration trials are tokenised; inter-trial time and other trials are not.",
+    "Hand position was low-pass filtered at 100 Hz by the authors (phase not documented).",
+    "The tokens of 27 November 2026 were built with a binary search that read 408 spike times at or after the 1809.676 s cut (each compared with the cut and discarded; no token was built from them). The reader now scans forward and stops at the first value at or after the cut (at most one per unit in check_area2_scan.py); it returns the same boundary, so the tokens are unchanged, and it was not re-run on the file so that no value past the cut is read again."
+   ],
+   "seconds": 2.1,
+   "licence_as_declared": "spdx:CC-BY-4.0",
+   "records_corrected": {
+    "by": "record_r3_corrections.py (protocol revision 3)",
+    "at": "2026-11-28T09:48:06+1100"
+   }
+  },
+  "ds003739": {
+   "dataset": "ds003739",
+   "part": "neural",
+   "wave": 1,
+   "name": "Perturbed beam-walking task (OpenNeuro ds003739)",
+   "doi": "10.18112/openneuro.ds003739.v1.0.3",
+   "licence": "CC0-1.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T22:59:55+1100"
+   },
+   "built_at": "2026-11-27T23:02:09+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 18,
+    "individuals_in_roster": 18,
+    "animals": 0,
+    "people": 18,
+    "sites": 1,
+    "sessions": 72,
+    "recordings": 72,
+    "tasks": {
+     "pullstand": 18,
+     "pullwalk": 18,
+     "rotatestand": 18,
+     "rotatewalk": 18
+    },
+    "conditions": {
+     "pull-stand": 18,
+     "pull-walk": 18,
+     "rotate-stand": 18,
+     "rotate-walk": 18
+    },
+    "unique_steps_20ms": 2214296,
+    "steps_with_any_channel": 2214296,
+    "windows_1200ms": 36870,
+    "windows_1200ms_every_step_with_data": 36870,
+    "windows_inner_training": 29004,
+    "windows_inner_validation": 7866,
+    "channel_seconds": {
+     "emg:surface_emg": 427376.82,
+     "field:eeg": 5663989.76,
+     "field:eog": 132749.76,
+     "kin:marker": 265715.52
+    },
+    "spikes": 0,
+    "events": {
+     "count": 10622,
+     "definition": "author-annotated perturbation onsets (events.tsv rows with trial_type 'stimulus': pull_left, pull_right, rotate_cw, rotate_ccw)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "unit_kind": "person",
+   "inner_validation_units": [
+    "sub-028",
+    "sub-006",
+    "sub-023",
+    "sub-010"
+   ],
+   "streams": [
+    {
+     "group": "field",
+     "kind": "eeg",
+     "channels": 128,
+     "rate_hz": 256,
+     "units": "microV (source); log band power and low-pass value per step",
+     "value_type": "derived (author-preprocessed: 1 Hz high-pass, line-noise removal, common median reference)",
+     "rows": "learned per recording (Biosemi A1-D32 labels are not 10-10 names); digitised positions kept"
+    },
+    {
+     "group": "field",
+     "kind": "eog",
+     "channels": 3,
+     "rate_hz": 256,
+     "units": "microV",
+     "value_type": "measured (in the author-preprocessed file)"
+    },
+    {
+     "group": "emg",
+     "kind": "surface_emg",
+     "channels": 10,
+     "rate_hz": 256,
+     "units": "microV (source); log RMS per step",
+     "value_type": "measured (in the author-preprocessed file, 256 Hz)"
+    },
+    {
+     "group": "kin",
+     "kind": "marker",
+     "channels": 6,
+     "rate_hz": 256,
+     "units": "mm",
+     "value_type": "measured (sacrum and head positions on the EEG clock)"
+    }
+   ],
+   "flags": {
+    "derived_values_present": true,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "CC0",
+     "spdx": "CC0-1.0",
+     "deposit_endpoint": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds003739/1.0.3/dataset_description.json",
+     "response_sha256": "68cc24287f1378fc0372a1638acc3296435f32799c63e4b4b0d86b887153fd27",
+     "licence_object_sha256": "6d062db88d494c5fcf50f621bdf233b5665d3f1adcfac7a824e99a29d2977011",
+     "licence_text": {
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "status": 200,
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "what": "plain-text legal code of CC0-1.0"
+     },
+     "attribution": {
+      "doi": "10.18112/openneuro.ds003739.v1.0.3",
+      "url": "https://doi.org/10.18112/openneuro.ds003739.v1.0.3",
+      "title": "Perturbed beam-walking task",
+      "creators": [
+       "Steven Peterson",
+       "Daniel Ferris"
+      ],
+      "publisher": "OpenNeuro",
+      "year": 2021,
+      "version": null,
+      "rights": [],
+      "source": "https://api.datacite.org/dois/10.18112/openneuro.ds003739.v1.0.3",
+      "response_sha256": "7f1b31ab7d6cd41024b5b53fe4423522fdc90f49b146c50b7e88a36c86d470b6",
+      "read_at": "2026-11-28T01:12:49+1100"
+     },
+     "notice": {
+      "citation": "Steven Peterson; Daniel Ferris (2021). Perturbed beam-walking task. OpenNeuro. https://doi.org/10.18112/openneuro.ds003739.v1.0.3",
+      "rule": "no attribution is required; the source is credited as good practice"
+     },
+     "checked_at": "2026-11-28T01:12:49+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 18,
+     "roster_files": [
+      {
+       "file": "ds003739 development receipt (development-files.json, earlier study)",
+       "sha256": "fe6bf5130d154edc14a98ead344a0c26ea297a31bbc6f844058b78172ec91ca8"
+      },
+      {
+       "file": "models/visual-balance/source/integrity.json (repository)",
+       "sha256": "c48ce3446cac6dff92c78fd6fcee4d9b267d70bc3a50eedde28647ed3ffaf71e"
+      },
+      {
+       "file": "ds003739 1.0.3 git catalogue",
+       "commit": "f15449b6aecb83044b49a1798955e8a212a68fc1"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "recordings": 72,
+      "expected_from_protocol": 72,
+      "files_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "session 4 local (sha256 against the earlier receipt); sessions 1-3 downloaded whole at P1 (annex MD5 and size); sidecars from the pinned git catalogue (blob hashes)"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "one EEGLAB file per session; every channel (EEG, EOG, EMG, motion capture) shares the file's 256 Hz sample grid",
+     "recordings_checked": 72
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "units from channels.tsv: EEG, EOG, EMG microV; motion capture mm; EEG labelled derived (author-preprocessed), EOG/EMG/motion capture measured; EMG is muscle activity, not a nerve recording",
+     "nonfinite_samples": 0
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "EEG: 1 Hz high-pass, line-noise removal (cleanline) and common median reference by the authors (phase of the high-pass not documented; treated as possibly non-causal); motion capture on the EEG clock with session means within a few mm of zero, so it may carry the same high-pass (not documented; flagged)",
+     "our_features": "causal (forward-only filters; trailing windows end at each step end)"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 18,
+    "roster_files": [
+     {
+      "file": "ds003739 development receipt (development-files.json, earlier study)",
+      "sha256": "fe6bf5130d154edc14a98ead344a0c26ea297a31bbc6f844058b78172ec91ca8"
+     },
+     {
+      "file": "models/visual-balance/source/integrity.json (repository)",
+      "sha256": "c48ce3446cac6dff92c78fd6fcee4d9b267d70bc3a50eedde28647ed3ffaf71e"
+     },
+     {
+      "file": "ds003739 1.0.3 git catalogue",
+      "commit": "f15449b6aecb83044b49a1798955e8a212a68fc1"
+     }
+    ],
+    "excluded_groups_checked": {
+     "assessment_consumed": 6,
+     "reserve": 6
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "development"
+    ]
+   },
+   "tokens": {
+    "shards": 18,
+    "bytes": 4275823148,
+    "shard_list_sha256": "36b45f02e5f2f6a41d9dbf2a2c4d6e242192fff5b3eccb6b966961c29dfaa816",
+    "channels": {
+     "field": 131,
+     "emg": 10,
+     "kin": 6
+    },
+    "shared_vocabulary_channels": {
+     "field": 3,
+     "emg": 8,
+     "kin": 6
+    },
+    "field_storage": "float16",
+    "float16_rms_error_over_channel_sd_max": {
+     "field": {
+      "bp100_theta": 0.000793,
+      "bp100_alpha": 0.000666,
+      "bp100_beta": 0.00106,
+      "bp100_high": 0.0,
+      "bp200_theta": 0.000834,
+      "bp200_alpha": 0.000758,
+      "bp200_beta": 0.00129,
+      "bp200_high": 0.0,
+      "lp10_last": 0.00027
+     }
+    },
+    "electrode_positions": {
+     "file": "ELECTRODES.json",
+     "sha256": "efeaeca9337ffe8ea80400863706fec138afec7aea982809303c34f6a5ec18f6",
+     "recordings": 72
+    }
+   },
+   "source_files": {
+    "files": 288,
+    "file_list_sha256": "582bceeae4a97c626656bcb9ba56481f584e92a7eee9f47b4ca433d9f68161d1"
+   },
+   "notes": [
+    "The two load cells (N) in the same files are not tokenised; the protocol lists EEG, EMG, EOG and motion capture for this dataset.",
+    "EMG at 256 Hz: the causal 20 Hz high-pass and the log RMS per step use about 5 samples per step.",
+    "The 70-150 Hz band is masked (sampling below 400 Hz).",
+    "Motion-capture coordinates have session means within a few mm of zero; they may be high-pass filtered by the authors (not documented), so they carry movement about a moving mean, not absolute position."
+   ],
+   "seconds": 133.9,
+   "licence_as_declared": "CC0",
+   "records_corrected": {
+    "by": "record_r3_corrections.py (protocol revision 3)",
+    "at": "2026-11-28T09:48:06+1100"
+   }
+  },
+  "falcon_m1": {
+   "dataset": "falcon_m1",
+   "part": "neural",
+   "wave": "1 (conditional; not admitted by the P2 role audit)",
+   "name": "FALCON Benchmark M1-A",
+   "doi": "10.48324/dandi.000941/0.241029.1405",
+   "licence": "CC-BY-4.0",
+   "species": "macaque",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T23:21:04+1100"
+   },
+   "built_at": "2026-11-27T23:21:05+1100",
+   "qualified": false,
+   "not_qualified_because": "Q2 role: no held-in-calib day is free. 20120928 was scored by earlier project work; 20120924, 20120926 and 20120927 are the primary candidate pool of an author-frozen cross-session contract of a line on hold.",
+   "counts": {
+    "individuals": 0,
+    "individuals_in_roster": 0,
+    "animals": 0,
+    "people": 0,
+    "sites": 1,
+    "sessions": 0,
+    "recordings": 0,
+    "tasks": {},
+    "conditions": {},
+    "unique_steps_20ms": 0,
+    "steps_with_any_channel": 0,
+    "windows_1200ms": 0,
+    "windows_1200ms_every_step_with_data": 0,
+    "windows_inner_training": 0,
+    "windows_inner_validation": 0,
+    "channel_seconds": {},
+    "spikes": 0,
+    "events": {
+     "count": 0,
+     "definition": "none (not admitted)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "spdx:CC-BY-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://api.dandiarchive.org/api/dandisets/000941/versions/0.241029.1405/",
+     "response_sha256": "8c7d1b1ec08714ebe69ade9147c170dc155e2c1d950eec34b861adf60cf461f9",
+     "licence_object_sha256": "d8c53d09969cbcddfcb565964291f0aa5084ddb03bf8cd82e3586ca33b84bc1e",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.48324/dandi.000941/0.241029.1405",
+      "url": "https://doi.org/10.48324/dandi.000941/0.241029.1405",
+      "title": "FALCON Benchmark M1-A: primary motor cortex recordings in primate during reach-to-grasp task",
+      "creators": [
+       "Rouse, Adam G",
+       "Schieber, Marc H"
+      ],
+      "publisher": "DANDI Archive",
+      "year": 2024,
+      "version": null,
+      "rights": [
+       {
+        "rights": null,
+        "uri": null,
+        "spdx": "cc_by_40"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48324/dandi.000941/0.241029.1405",
+      "response_sha256": "dd76b85845e89674721a56b5c8d8ff331f8e40c6ad4626e6e8057b9c5325eacd",
+      "read_at": "2026-11-28T01:13:04+1100"
+     },
+     "notice": {
+      "citation": "Rouse, Adam G; Schieber, Marc H (2024). FALCON Benchmark M1-A: primary motor cortex recordings in primate during reach-to-grasp task. DANDI Archive. https://doi.org/10.48324/dandi.000941/0.241029.1405",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:04+1100"
+    },
+    "Q2_role": {
+     "pass": false,
+     "days": [
+      {
+       "unit": "held-in-calib ses-20120924",
+       "eligible": false,
+       "reason": "held line: primary candidate pool of an author-frozen FALCON M1-A cross-session contract that awaits independent review and reserves previously unused days for future external-session tests; its owning line is on hold"
+      },
+      {
+       "unit": "held-in-calib ses-20120926",
+       "eligible": false,
+       "reason": "held line: primary candidate pool of an author-frozen FALCON M1-A cross-session contract that awaits independent review and reserves previously unused days for future external-session tests; its owning line is on hold"
+      },
+      {
+       "unit": "held-in-calib ses-20120927",
+       "eligible": false,
+       "reason": "held line: primary candidate pool of an author-frozen FALCON M1-A cross-session contract that awaits independent review and reserves previously unused days for future external-session tests; its owning line is on hold"
+      },
+      {
+       "unit": "held-in-calib ses-20120928",
+       "eligible": false,
+       "reason": "consumed: acquired and scored by earlier project work (earlier muscle decoder, session 20120928; first-fit study test trials 350-411 exposed)"
+      }
+     ],
+     "evidence_sha256": {
+      "earlier_fit_map": "2419682f3895c10799e9b635d7ff2378d7f30299a31d8fcccc7da0b8afb0f25d",
+      "earlier_emg_metrics": "64c6d60ba6e21baf402a382221eb0621489a874c1aa7af98885373fb4eaa6808",
+      "cross_session_contract": "bc00d71665d9833341b0a2bdeabfe685af9f23f81cc4740eb83e0c890df2e376",
+      "cross_session_contract_summary": "2597d505f056c6f75878f6e911225525b7a2cf5e54f2e6e8bb882ad7980512f2"
+     }
+    },
+    "Q3_access": {
+     "pass": false,
+     "how": "not assessed: the role audit admitted no day, so no file was downloaded or opened"
+    },
+    "Q4_clock": {
+     "pass": false,
+     "how": "not assessed: the role audit admitted no day, so no file was downloaded or opened"
+    },
+    "Q5_labels": {
+     "pass": false,
+     "how": "not assessed: the role audit admitted no day, so no file was downloaded or opened"
+    },
+    "Q6_causality": {
+     "pass": false,
+     "how": "not assessed: the role audit admitted no day, so no file was downloaded or opened"
+    }
+   },
+   "role_audit": {
+    "pass": false,
+    "units": 4,
+    "admitted": [],
+    "excluded": [
+     "held-in-calib ses-20120924",
+     "held-in-calib ses-20120926",
+     "held-in-calib ses-20120927",
+     "held-in-calib ses-20120928"
+    ]
+   },
+   "tokens": {
+    "shards": 0,
+    "bytes": 0
+   },
+   "notes": [
+    "Held-in-minival files are subsets of held-in-calib files; held-out-calib days are not held-in-calib and are also in the contract's candidate pool. None is used."
+   ],
+   "licence_as_declared": "spdx:CC-BY-4.0"
+  },
+  "hygrip": {
+   "dataset": "hygrip",
+   "part": "neural",
+   "wave": 1,
+   "name": "HYGRIP",
+   "doi": "10.6084/m9.figshare.12383639.v1",
+   "licence": "MIT",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-28T00:37:45+1100"
+   },
+   "built_at": "2026-11-28T00:37:54+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 7,
+    "individuals_in_roster": 7,
+    "animals": 0,
+    "people": 7,
+    "sites": 1,
+    "sessions": 7,
+    "recordings": 158,
+    "tasks": {
+     "grip_left": 79,
+     "grip_right": 79
+    },
+    "conditions": {
+     "left": 79,
+     "right": 79
+    },
+    "unique_steps_20ms": 388125,
+    "steps_with_any_channel": 388125,
+    "windows_1200ms": 6396,
+    "windows_1200ms_every_step_with_data": 6396,
+    "windows_inner_training": 4527,
+    "windows_inner_validation": 1869,
+    "channel_seconds": {
+     "emg:surface_emg_unmapped": 31050.0,
+     "field:eeg": 184404.0,
+     "force:grip_transducer": 7762.5
+    },
+    "spikes": 0,
+    "events": {
+     "count": 158,
+     "definition": "Go markers (one per tokenised trial; right- or left-hand cue onset)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "unit_kind": "person",
+   "inner_validation_units": [
+    "/B",
+    "/H"
+   ],
+   "streams": [
+    {
+     "group": "field",
+     "kind": "eeg",
+     "channels": 24,
+     "rate_hz": 1000,
+     "units": "mV (source, stored as 'milivolts')",
+     "value_type": "measured",
+     "rows": "learned per recording (positions named around C3 and C4, no 10-10 names)"
+    },
+    {
+     "group": "emg",
+     "kind": "surface_emg_unmapped",
+     "channels": 4,
+     "rate_hz": 1000,
+     "units": "mV (source); log RMS per step",
+     "value_type": "measured",
+     "rows": "learned per recording (electrode positions not mapped)"
+    },
+    {
+     "group": "force",
+     "kind": "grip_transducer",
+     "channels": 1,
+     "rate_hz": 50,
+     "units": "V (signed, uncalibrated)",
+     "value_type": "measured"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "MIT",
+     "spdx": "MIT",
+     "deposit_endpoint": "https://api.figshare.com/v2/articles/12383639/versions/1",
+     "response_sha256": "e85848f56b6818aa53d5b68dfd01400550faa9c5bfdb9ecb364f1e218df50d46",
+     "licence_object_sha256": "3e105a9d00190f9bd8e24c8498c3c47422996f5be40a2df470b62f50baffe661",
+     "licence_text": {
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/MIT.txt",
+      "final_url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/MIT.txt",
+      "status": 200,
+      "bytes": 1078,
+      "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "what": "plain-text legal code of MIT"
+     },
+     "attribution": {
+      "doi": "10.6084/m9.figshare.12383639.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.12383639.v1",
+      "title": "hygrip.h5",
+      "creators": [
+       "Faisal, Aldo A",
+       "Ortega, Pablo"
+      ],
+      "publisher": "figshare",
+      "year": 2020,
+      "version": null,
+      "rights": [
+       {
+        "rights": "MIT License",
+        "uri": "https://opensource.org/licenses/MIT",
+        "spdx": "mit"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.12383639.v1",
+      "response_sha256": "a63af12f6a1ecc8c56ba6427cec9f9818129b306871c7ecc87776fd20c081bb7",
+      "read_at": "2026-11-28T01:12:55+1100"
+     },
+     "notice": {
+      "citation": "Faisal, Aldo A; Ortega, Pablo (2020). hygrip.h5. figshare. https://doi.org/10.6084/m9.figshare.12383639.v1",
+      "rule": "include the copyright notice and the MIT permission notice in all copies or substantial portions",
+      "copyright_line": "Copyright (c) 2020 Faisal, Aldo A; Ortega, Pablo",
+      "copyright_line_source": "formed from the deposit's creators and publication year (the deposit states no separate copyright line)"
+     },
+     "checked_at": "2026-11-28T01:12:55+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 7,
+     "roster_files": [
+      {
+       "file": "HYGRIP TRAIN-SOURCE-MANIFEST.json (earlier source custody)",
+       "sha256": "ac228bd6520083f413e385eeda0a46a23dc9ecd75df843fefddf053cf479790c"
+      },
+      {
+       "file": "HYGRIP source admission r2 (allowed TRAIN paths)",
+       "sha256": "afa7dfdb96f0d387058e77c8d70be271494b78e1b16e94d20b3ca96f64758eab"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "paths_outside_unit": [],
+      "groups_opened": [
+       "/B",
+       "/C",
+       "/D",
+       "/E",
+       "/H",
+       "/I",
+       "/K"
+      ]
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local archive (sha256 checked before access); only the 7 literal TRAIN group paths opened; root keys not enumerated"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "devices aligned at Go markers; consecutive inter-Go interval residuals (force clock minus EEG clock) recomputed over every Go marker of both hands",
+     "max_abs_residual_ms": 2.25,
+     "threshold_ms": 40.0,
+     "right_hand_trials": 79,
+     "left_hand_trials_entered": 79,
+     "left_hand_trials_in_groups": 79
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "EEG and EMG kept in their stored unit (root attributes 'milivolts'), grip in signed volts (uncalibrated); all measured; EMG is muscle activity, not a nerve recording",
+     "flag": "EEG per-channel standard deviations are about 1e-4 to 2e-4 in the stored unit, which fits volts better than millivolts; EMG (about 0.01-0.03) fits millivolts. Values are kept as stored; per-channel z-scores make the scale irrelevant to training, but no physical amplitude is claimed"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "release filter phase of every stream not documented (recorded as unverified)",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 7,
+    "roster_files": [
+     {
+      "file": "HYGRIP TRAIN-SOURCE-MANIFEST.json (earlier source custody)",
+      "sha256": "ac228bd6520083f413e385eeda0a46a23dc9ecd75df843fefddf053cf479790c"
+     },
+     {
+      "file": "HYGRIP source admission r2 (allowed TRAIN paths)",
+      "sha256": "afa7dfdb96f0d387058e77c8d70be271494b78e1b16e94d20b3ca96f64758eab"
+     }
+    ],
+    "excluded_groups_checked": {
+     "withheld_by_timing_gate": 1,
+     "development_3_and_final_3": 0
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "TRAIN"
+    ]
+   },
+   "tokens": {
+    "shards": 7,
+    "bytes": 284623256,
+    "shard_list_sha256": "d82175d08e3a3eebb19df15ef9ca1a0f78480cf735ad7a6b32c6331c51f55458",
+    "channels": {
+     "field": 24,
+     "emg": 4,
+     "force": 1
+    },
+    "shared_vocabulary_channels": {
+     "field": 0,
+     "emg": 0,
+     "force": 0
+    },
+    "field_storage": "float32",
+    "float16_rms_error_over_channel_sd_max": {}
+   },
+   "source_files": {
+    "files": 1,
+    "hdf5_paths": 21,
+    "path_list_sha256": "faa9011950e7698de3780d0e9e4f2eb19193812614e7dae4b9490ba39939d643"
+   },
+   "notes": [
+    "Grip force is uncalibrated transducer voltage (no newton conversion; zero and polarity unverified).",
+    "EEG magnitudes fit volts although the stored unit string is 'milivolts'; values are kept as stored.",
+    "Each device's samples are placed relative to its own Go time; the EEG/EMG and force clocks are not otherwise resampled.",
+    "The first 0.5 s of each trial has no field value (filter warm-up)."
+   ],
+   "seconds": 8.9,
+   "licence_as_declared": "MIT"
+  },
+  "ofner": {
+   "dataset": "ofner",
+   "part": "neural",
+   "wave": 1,
+   "name": "Upper limb movements can be decoded from the time-domain of low-frequency EEG",
+   "doi": "10.5281/zenodo.834976",
+   "licence": "CC-BY-4.0",
+   "licence_as_declared": "cc-by-4.0",
+   "species": "human",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-28T08:47:24+1100"
+   },
+   "built_at": "2026-11-28T08:48:11+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 7,
+    "individuals_in_roster": 7,
+    "animals": 0,
+    "people": 7,
+    "sites": 1,
+    "sessions": 7,
+    "recordings": 70,
+    "tasks": {
+     "motor_execution": 70
+    },
+    "conditions": {},
+    "unique_steps_20ms": 1137600,
+    "steps_with_any_channel": 1135652,
+    "windows_1200ms": 18944,
+    "windows_1200ms_every_step_with_data": 18818,
+    "windows_inner_training": 13532,
+    "windows_inner_validation": 5412,
+    "channel_seconds": {
+     "field:eeg": 1383333.6,
+     "field:eog": 68032.8,
+     "kin:arm_angle": 136278.24,
+     "kin:exoskeleton_position": 136278.24,
+     "kin:glove_sensor": 340695.6
+    },
+    "spikes": 0,
+    "events": {
+     "count": 2940,
+     "definition": "movement and rest cues (event codes 0x600-0x606 in each run's GDF event table)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "unit_kind": "person",
+   "inner_validation_units": [
+    "S4",
+    "S7"
+   ],
+   "streams": [
+    {
+     "group": "field",
+     "kind": "eeg",
+     "channels": 61,
+     "rate_hz": 512,
+     "units": "stored values (header physical unit blank)",
+     "value_type": "measured",
+     "rows": "shared 10-5 site vocabulary"
+    },
+    {
+     "group": "field",
+     "kind": "eog",
+     "channels": 3,
+     "rate_hz": 512,
+     "units": "stored values",
+     "value_type": "measured"
+    },
+    {
+     "group": "kin",
+     "kind": "glove_and_exoskeleton",
+     "channels": 27,
+     "rate_hz": 64,
+     "units": "native, uncalibrated (header physical unit blank)",
+     "value_type": "measured"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://zenodo.org/api/records/834976",
+     "response_sha256": "d8b59e9d27879ea39aec9e5ca9028302d7b699cf98dc716f5687573f93c9f86b",
+     "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.5281/zenodo.834976",
+      "url": "https://doi.org/10.5281/zenodo.834976",
+      "title": "Upper Limb Movements Can Be Decoded From The Time-Domain Of Low-Frequency Eeg",
+      "creators": [
+       "Ofner, Patrick",
+       "Schwarz, Andreas",
+       "Pereira, Joana",
+       "M\u00fcller-Putz, Gernot R."
+      ],
+      "publisher": "Zenodo",
+      "year": 2017,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0",
+        "uri": "https://creativecommons.org/licenses/by/4.0",
+        "spdx": null
+       },
+       {
+        "rights": "Open Access",
+        "uri": "info:eu-repo/semantics/openAccess",
+        "spdx": null
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.5281/zenodo.834976",
+      "response_sha256": "a40fadd4e5405bfb4771668d6ce46607ec0a4220431c195ff2334e56c60e2e48",
+      "read_at": "2026-11-28T01:12:53+1100"
+     },
+     "notice": {
+      "citation": "Ofner, Patrick; Schwarz, Andreas; Pereira, Joana; M\u00fcller-Putz, Gernot R. (2017). Upper Limb Movements Can Be Decoded From The Time-Domain Of Low-Frequency Eeg. Zenodo. https://doi.org/10.5281/zenodo.834976",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:53+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 7,
+     "roster_files": [
+      {
+       "file": "models/arm-transfer/PROTOCOL.md (repository)",
+       "sha256": "f550ce4a9787a00d0a372eea6f05af84c8c4c4a1c9faddbb5588c7a178877aae"
+      },
+      {
+       "file": "transfer-arm-source fitting-receipt.json (earlier source custody)",
+       "sha256": "ea932c4866c53c5c3b8114a2fa29c787e5cfaaf38b964d1a9e05f69bfde4a9c7"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "recordings": 70,
+      "expected_from_protocol": 70,
+      "files_outside_unit": []
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "runs 1-3 local (sha256 against the earlier receipt); runs 4-10 downloaded whole at P1 (publisher MD5 and size)"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "one GDF file per run; the 512 Hz and 64 Hz channels share its 1 s records. Each 64 Hz reading spans 8 ticks of the 512 Hz clock with an undocumented acquisition time inside them (up to 13.7 ms after the time its file position gives), so the arm and glove tokens are delayed by one whole 20 ms step: the token of step k holds the last reading whose file time lies in step k - 1, which was acquired before step k ends in every case",
+     "kin_delay_steps": 1,
+     "kin_delay_s": 0.02,
+     "recordings_checked": 70
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "EEG and EOG as stored (identity scaling, blank unit field), arm channels in native uncalibrated units; all measured; site names from the authors' table",
+     "nonfinite_samples": 1347616
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "amplifier and glove filtering not re-verified; stored samples used as recorded",
+     "our_features": "causal"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 7,
+    "roster_files": [
+     {
+      "file": "models/arm-transfer/PROTOCOL.md (repository)",
+      "sha256": "f550ce4a9787a00d0a372eea6f05af84c8c4c4a1c9faddbb5588c7a178877aae"
+     },
+     {
+      "file": "transfer-arm-source fitting-receipt.json (earlier source custody)",
+      "sha256": "ea932c4866c53c5c3b8114a2fa29c787e5cfaaf38b964d1a9e05f69bfde4a9c7"
+     }
+    ],
+    "excluded_groups_checked": {
+     "assessment_consumed": 5,
+     "reserve": 3
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "fitting"
+    ]
+   },
+   "tokens": {
+    "shards": 7,
+    "bytes": 1183464138,
+    "shard_list_sha256": "0492f3599355dd76a01b9ea73d98693cb44cab069f86155d3f38524b84321c88",
+    "channels": {
+     "field": 64,
+     "kin": 27
+    },
+    "shared_vocabulary_channels": {
+     "field": 61,
+     "kin": 0
+    },
+    "field_storage": "float16",
+    "float16_rms_error_over_channel_sd_max": {
+     "field": {
+      "bp100_theta": 0.000687,
+      "bp100_alpha": 0.000713,
+      "bp100_beta": 0.000787,
+      "bp100_high": 0.0244,
+      "bp200_theta": 0.000816,
+      "bp200_alpha": 0.000799,
+      "bp200_beta": 0.00096,
+      "bp200_high": 0.0321,
+      "lp10_last": 0.0108
+     }
+    },
+    "stream_delays": {
+     "kin": {
+      "steps": 1,
+      "seconds": 0.02,
+      "why": "a 64 Hz reading may have been acquired up to 7 ticks of the 512 Hz clock (13.7 ms) after the time its file position gives it"
+     }
+    },
+    "correction": {
+     "what": "the kin tokens of every recording were delayed by 1 whole 20 ms step(s) in the stored shards; no source file was read; every other array was written back unchanged",
+     "script": "delay_ofner_kin.py",
+     "done_at": "2026-11-28T08:48:11+1100",
+     "tokenised_first_at_protocol_head": {
+      "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+      "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+      "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+      "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+      "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+      "read_at": "2026-11-28T00:34:00+1100"
+     },
+     "shards_before": [
+      {
+       "unit": "S1",
+       "file": "S1.npz",
+       "sha256": "414db5898aa6f8dea0fa686f98467affd15ff3a1622a19487d3c3377099c1c85",
+       "bytes": 164597352
+      },
+      {
+       "unit": "S2",
+       "file": "S2.npz",
+       "sha256": "80ee086573c5480a4614836c049964fb0fc4532db9c7d2c2beba4d5b2e4c29c5",
+       "bytes": 167261210
+      },
+      {
+       "unit": "S3",
+       "file": "S3.npz",
+       "sha256": "decbb6cad82b5f8a59b9053f5ac6fdeccadeb79d1e94ee021dc82fcc48ee2dad",
+       "bytes": 170911295
+      },
+      {
+       "unit": "S4",
+       "file": "S4.npz",
+       "sha256": "7ae3eff9574cb020403aaf84fe6ac445f2fa2b06ad3c101ae836b128e8bfb7d9",
+       "bytes": 171828138
+      },
+      {
+       "unit": "S5",
+       "file": "S5.npz",
+       "sha256": "fab56b1a78b410432825f1414ca5df7ef9c88a888405c7bbb4bb829da1af2e04",
+       "bytes": 171217130
+      },
+      {
+       "unit": "S6",
+       "file": "S6.npz",
+       "sha256": "a2f9a71b1a659bf484fa8cf3b59dfbe8775069221be999ba0934d71bba678bd9",
+       "bytes": 169807566
+      },
+      {
+       "unit": "S7",
+       "file": "S7.npz",
+       "sha256": "16630ed110d7927279392a86be3d90949d96a2e07e87c7937f879acae827329f",
+       "bytes": 167841592
+      }
+     ],
+     "storage_error_summary": "carried over from the first tokenisation (the field arrays are unchanged)"
+    }
+   },
+   "source_files": {
+    "files": 70,
+    "file_list_sha256": "25c2af93c657ab7926a0e9bbd1b4705a15f3d9a971fff7e03470e4375689cde1"
+   },
+   "notes": [
+    "The GDF headers give identity digital-to-physical scaling and blank units, so field band power is in log(stored unit^2) and the arm channels are in native units.",
+    "Five mechanical channels marked '-' in the authors' table are not tokenised.",
+    "Some mechanical channels are constant within a run (for example thumb_palm, elbowPosX and shoulder adduction in S2 run 5); they are kept and carry no variation there."
+   ],
+   "seconds": 46.6
+  },
+  "sabes": {
+   "dataset": "sabes",
+   "part": "neural",
+   "wave": 1,
+   "name": "Nonhuman primate reaching with multichannel sensorimotor cortex electrophysiology",
+   "doi": "10.5281/zenodo.3854034",
+   "licence": "CC-BY-4.0",
+   "species": "macaque",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T23:08:28+1100"
+   },
+   "built_at": "2026-11-27T23:08:31+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 2,
+    "individuals_in_roster": 2,
+    "animals": 2,
+    "people": 0,
+    "sites": 1,
+    "sessions": 2,
+    "recordings": 10,
+    "tasks": {
+     "random_target_reaching": 10
+    },
+    "conditions": {},
+    "unique_steps_20ms": 96395,
+    "steps_with_any_channel": 96395,
+    "windows_1200ms": 1602,
+    "windows_1200ms_every_step_with_data": 1602,
+    "windows_inner_training": 1281,
+    "windows_inner_validation": 321,
+    "channel_seconds": {
+     "kin:fingertip": 3855.8,
+     "spikes:electrode_events": 292214.4
+    },
+    "spikes": 3896382,
+    "events": {
+     "count": 1040,
+     "definition": "target changes (rows where the stored target position changes)"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "unit_kind": "time_block",
+   "inner_validation_units": "latest time block (fold 4) of each recording",
+   "streams": [
+    {
+     "group": "spikes",
+     "kind": "electrode_events",
+     "channels": "96 (Indy, M1) and 192 (Loco, M1 and S1)",
+     "units": "events per 20 ms step (sorted and unsorted partitions summed per electrode)",
+     "value_type": "measured",
+     "rows": "learned per recording"
+    },
+    {
+     "group": "kin",
+     "kind": "fingertip",
+     "channels": 2,
+     "rate_hz": 250,
+     "units": "mm",
+     "value_type": "measured"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://zenodo.org/api/records/3854034",
+     "response_sha256": "5b33e9579bc64c746b49813f351e5d6a5ace083d4b0358ebcae617163f85aed4",
+     "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.5281/zenodo.3854034",
+      "url": "https://doi.org/10.5281/zenodo.3854034",
+      "title": "Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology",
+      "creators": [
+       "O'Doherty, Joseph E.",
+       "Cardoso, Mariana M. B.",
+       "Makin, Joseph G.",
+       "Sabes, Philip N."
+      ],
+      "publisher": "Zenodo",
+      "year": 2020,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.5281/zenodo.3854034",
+      "response_sha256": "a34a4c25ea2c68ebc1438c1794ed509be85de6fb99caecc9616981fe35ac1098",
+      "read_at": "2026-11-28T01:12:59+1100"
+     },
+     "notice": {
+      "citation": "O'Doherty, Joseph E.; Cardoso, Mariana M. B.; Makin, Joseph G.; Sabes, Philip N. (2020). Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology. Zenodo. https://doi.org/10.5281/zenodo.3854034",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:59+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 2,
+     "roster_files": [
+      {
+       "file": "cortical-source-mix PROTOCOL.json (earlier study)",
+       "sha256": "61e04463c078244d2b94f8372b5fa76e52a8c8b47945d87ad44bc6cbd6804312"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "files": [
+       "indy_20170131_02",
+       "loco_20170215_02"
+      ]
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "local copies of the two original files; size, author MD5 and sha256 checked"
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "one file per session; spike times and the fingertip trace share the file's clock t (uniform 4 ms grid checked)",
+     "spike_events_outside_clock": {
+      "indy_20170131_02": 11781,
+      "loco_20170215_02": 31405
+     }
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "spikes as event counts per electrode (measured, sorted and unsorted partitions summed); fingertip position in mm (measured, converted from cm)"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "tracker processing of the fingertip trace not documented",
+     "our_features": "causal (counts and last samples inside each step)"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 2,
+    "roster_files": [
+     {
+      "file": "cortical-source-mix PROTOCOL.json (earlier study)",
+      "sha256": "61e04463c078244d2b94f8372b5fa76e52a8c8b47945d87ad44bc6cbd6804312"
+     }
+    ],
+    "excluded_groups_checked": {
+     "reserved_future_intake": 1,
+     "august_held_days_consumed": 0
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "training"
+    ]
+   },
+   "tokens": {
+    "shards": 2,
+    "bytes": 4756120,
+    "shard_list_sha256": "cb92a5dfc31a277a06aa14ad895dca1e5754bab05355720637d606b7f986666f",
+    "channels": {
+     "kin": 2,
+     "spikes": 288
+    },
+    "shared_vocabulary_channels": {
+     "kin": 0
+    },
+    "field_storage": "float16",
+    "float16_rms_error_over_channel_sd_max": {}
+   },
+   "source_files": {
+    "files": 2,
+    "file_list_sha256": "a69cbe66590b5beb5390a8d3947e19565ca5ded24913979e322ab1254577e3cb"
+   },
+   "notes": [
+    "Per-electrode observation intervals are not documented, so a zero count means no exported event, not verified silence.",
+    "The 1 s around each internal block boundary is not tokenised (fold rule)."
+   ],
+   "seconds": 2.3,
+   "licence_as_declared": "cc-by-4.0",
+   "records_corrected": {
+    "by": "record_r3_corrections.py (protocol revision 3)",
+    "at": "2026-11-28T09:48:25+1100"
+   }
+  },
+  "wtrack": {
+   "dataset": "wtrack",
+   "part": "neural",
+   "wave": 1,
+   "name": "Single Day W-Track Learning",
+   "doi": "10.48324/dandi.000978/0.240511.0307",
+   "licence": "CC-BY-4.0",
+   "species": "rat",
+   "sites": 1,
+   "protocol_head": {
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+    "read_at": "2026-11-27T23:09:26+1100"
+   },
+   "built_at": "2026-11-27T23:09:29+1100",
+   "qualified": true,
+   "counts": {
+    "individuals": 4,
+    "individuals_in_roster": 4,
+    "animals": 4,
+    "people": 0,
+    "sites": 1,
+    "sessions": 4,
+    "recordings": 57,
+    "tasks": {
+     "rest": 30,
+     "wtrack_run": 27
+    },
+    "conditions": {
+     "rest": 30,
+     "run": 27
+    },
+    "unique_steps_20ms": 3387825,
+    "steps_with_any_channel": 3387825,
+    "windows_1200ms": 56436,
+    "windows_1200ms_every_step_with_data": 56436,
+    "windows_inner_training": 51772,
+    "windows_inner_validation": 4664,
+    "channel_seconds": {
+     "kin:tracked_position": 77906.72,
+     "spikes:sorted_unit": 6164842.38
+    },
+    "spikes": 10008220,
+    "events": {
+     "count": 1082,
+     "definition": "W-track trips (trial rows of the archive) starting inside a tokenised recording"
+    },
+    "sources_read_without_a_full_step": 0
+   },
+   "unit_kind": "animal",
+   "inner_validation_units": [
+    "JS14"
+   ],
+   "streams": [
+    {
+     "group": "spikes",
+     "kind": "sorted_unit",
+     "channels": "122 (ER1), 72 (JS14), 81 (JS15), 78 (JS17)",
+     "units": "events per 20 ms step",
+     "value_type": "measured (offline spike sorting by the authors)",
+     "regions": "hippocampal CA1 and prefrontal cortex",
+     "rows": "learned per recording"
+    },
+    {
+     "group": "kin",
+     "kind": "tracked_position",
+     "channels": 2,
+     "rate_hz": "about 30 (camera)",
+     "units": "cm",
+     "value_type": "measured (camera tracking estimate; offline processing and latency not documented)"
+    }
+   ],
+   "flags": {
+    "derived_values_present": false,
+    "simulated_values_present": false,
+    "paired_streams": true
+   },
+   "qualification": {
+    "Q1_licence": {
+     "pass": true,
+     "declared": "spdx:CC-BY-4.0",
+     "spdx": "CC-BY-4.0",
+     "deposit_endpoint": "https://api.dandiarchive.org/api/dandisets/000978/versions/0.240511.0307/",
+     "response_sha256": "175ce694635a6803ea76f28700e13e21ca03291ba92f3e2f2b60b966b19c46a5",
+     "licence_object_sha256": "d8c53d09969cbcddfcb565964291f0aa5084ddb03bf8cd82e3586ca33b84bc1e",
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.48324/dandi.000978/0.240511.0307",
+      "url": "https://doi.org/10.48324/dandi.000978/0.240511.0307",
+      "title": "Single Day W-Track Learning",
+      "creators": [
+       "Jadhav, Shantanu"
+      ],
+      "publisher": "DANDI Archive",
+      "year": 2024,
+      "version": null,
+      "rights": [
+       {
+        "rights": null,
+        "uri": null,
+        "spdx": "cc_by_40"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48324/dandi.000978/0.240511.0307",
+      "response_sha256": "31ad9d601e17cc73fcdaf9365b338ea6645a8ff9c913d380efd0a5703ea36810",
+      "read_at": "2026-11-28T01:13:01+1100"
+     },
+     "notice": {
+      "citation": "Jadhav, Shantanu (2024). Single Day W-Track Learning. DANDI Archive. https://doi.org/10.48324/dandi.000978/0.240511.0307",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:01+1100"
+    },
+    "Q2_role": {
+     "pass": true,
+     "units_checked": 4,
+     "roster_files": [
+      {
+       "file": "models/population-motion/protocol.json (repository)",
+       "sha256": "7638d2055c0b61a1499cf5711ac54142f2b669f69daecbd27f09b2d29a011530"
+      },
+      {
+       "file": "benchmarks/wtrack-neural-motion/recording/split.json (repository)",
+       "sha256": "94f7092d84c27f299c3df660d637ddbe9d3ce6dab61799996e6e81bf3de5a48f"
+      }
+     ],
+     "file_audit": {
+      "pass": true,
+      "rats": [
+       "ER1",
+       "JS14",
+       "JS15",
+       "JS17"
+      ],
+      "js14_spikes_after_cut": 0,
+      "js14_position_rows_after_cut": 0,
+      "js14_range_audit": {
+       "ranges_checked": 95,
+       "held_intervals": 70,
+       "overlaps_outside_the_disclosed_probe": 0,
+       "disclosed_probe_overlap_bytes": 59424,
+       "audit_sha256": "70152d1c9f9102f3a614064012fae7fdc2de6fd616a558a4b467fb2510350be2"
+      }
+     }
+    },
+    "Q3_access": {
+     "pass": true,
+     "how": "HDF5 byte ranges of the spike-time, position and table arrays only (ETag-pinned range requests); JS14 held intervals forbidden before access; per-request log in DOWNLOADS.json",
+     "requests": {
+      "ER1": 132,
+      "JS14": 83,
+      "JS15": 92,
+      "JS17": 89
+     },
+     "network_bytes": {
+      "ER1": 38520696,
+      "JS14": 10590488,
+      "JS15": 39385536,
+      "JS17": 55699376
+     }
+    },
+    "Q4_clock": {
+     "pass": true,
+     "how": "spike and camera tables share each NWB file's seconds (timestamps_reference_time)"
+    },
+    "Q5_labels": {
+     "pass": true,
+     "how": "spikes as event counts per sorted unit (measured; region CA1 or PFC per unit); position in cm relative to the centre well (measured camera estimate)"
+    },
+    "Q6_causality": {
+     "pass": true,
+     "author_filtering": "offline spike sorting and camera tracking; position filtering, interpolation and latency not documented",
+     "our_features": "causal (counts and last camera sample inside each step)"
+    }
+   },
+   "role_audit": {
+    "pass": true,
+    "units": 4,
+    "roster_files": [
+     {
+      "file": "models/population-motion/protocol.json (repository)",
+      "sha256": "7638d2055c0b61a1499cf5711ac54142f2b669f69daecbd27f09b2d29a011530"
+     },
+     {
+      "file": "benchmarks/wtrack-neural-motion/recording/split.json (repository)",
+      "sha256": "94f7092d84c27f299c3df660d637ddbe9d3ce6dab61799996e6e81bf3de5a48f"
+     }
+    ],
+    "excluded_groups_checked": {
+     "consumed_test_rats": 3,
+     "closed": 1
+    },
+    "inner_fold_rule_recomputed_equal": true,
+    "roles_seen": [
+     "train",
+     "train (data before trip 79)"
+    ]
+   },
+   "tokens": {
+    "shards": 4,
+    "bytes": 25867390,
+    "shard_list_sha256": "00336478a4b47e523765ca4f241f8f92c450d0ab7bb16b917ad0082a6d449b2f",
+    "channels": {
+     "kin": 2,
+     "spikes": 353
+    },
+    "shared_vocabulary_channels": {
+     "kin": 0
+    },
+    "field_storage": "float16",
+    "float16_rms_error_over_channel_sd_max": {}
+   },
+   "source_files": {
+    "files": 4,
+    "file_list_sha256": "9a2a985c428e7bd3696e9a7f21b5993bf3dc580bce252bda66b90f92c65241da"
+   },
+   "notes": [
+    "The archive gives no per-unit observation intervals; a zero count means no archived event.",
+    "The stored speed column is not tokenised.",
+    "JS14 contributes its epochs before trip 79, and epoch 5 only up to the start of trip 79."
+   ],
+   "seconds": 2.7,
+   "licence_as_declared": "spdx:CC-BY-4.0",
+   "records_corrected": {
+    "by": "record_r3_corrections.py (protocol revision 3)",
+    "at": "2026-11-28T09:48:25+1100"
+   }
+  }
+ },
+ "schema": "neurotranslate-0.2-mixture-manifest",
+ "protocol": {
+  "file": "PROTOCOL.json",
+  "revision": 3,
+  "head": "f7c54d3a97515164d759fb58920b34196d9a7910",
+  "head_is": "the last commit that changed PROTOCOL.json, PROTOCOL.md, PROTOCOL-SIMPLE.md or ALLOCATION.json when this file was built",
+  "PROTOCOL.json_sha256": "83c4f9dbdd86cdbfcd6a549fc23a786ee41442b2f618ce727e0b3b983869eb5f",
+  "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a"
+ },
+ "counting_rules": {
+  "step": "20 ms; step k covers [20k, 20k + 20) ms of a recording",
+  "window": "non-overlapping 1.2 s (60 steps) from the start of each recording; a final partial window is not counted",
+  "individuals": "people or animals with at least one tokenised recording",
+  "channel_seconds": "per group and kind: channels with a present value x 0.02 s",
+  "events": "dataset-specific, defined in each entry",
+  "sites": "laboratories per dataset (1 each); no two datasets are known to share a laboratory, so the total is the sum",
+  "tasks": "distinct task labels per dataset, summed",
+  "totals": "qualified datasets only; a dataset that is not qualified is listed with its reason",
+  "time_block_datasets": "sabes and area2 (fewer than three individuals) count windows in folds 0-3 as inner training and in fold 4 (the latest block) as inner validation"
+ },
+ "totals": {
+  "datasets": 15,
+  "qualified_datasets": 14,
+  "individuals": 227,
+  "people": 220,
+  "animals": 7,
+  "sites": 14,
+  "recordings": 6057,
+  "tasks": 26,
+  "unique_steps_20ms": 8312952,
+  "windows_1200ms": 135840,
+  "windows_inner_training": 112272,
+  "windows_inner_validation": 23568,
+  "spikes": 14278499,
+  "events": 25185,
+  "channel_seconds_by_group": {
+   "emg": 1470747.3,
+   "force": 120781.5,
+   "kin": 2418351.72,
+   "spikes": 6511856.98,
+   "field": 7432509.92
+  },
+  "species": {
+   "human": 220,
+   "macaque": 3,
+   "rat": 4
+  },
+  "not_qualified": {
+   "falcon_m1": "Q2 role: no held-in-calib day is free. 20120928 was scored by earlier project work; 20120924, 20120926 and 20120927 are the primary candidate pool of an author-frozen cross-session contract of a line on hold."
+  }
+ },
+ "quantity_diversity": {
+  "status": "computed",
+  "anchors_inner_training_windows": {
+   "gait120": 2072,
+   "ds003739": 29004,
+   "ofner": 13532,
+   "wtrack": 51772
+  },
+  "W_max": 2048,
+  "W_max_basis": {
+   "anchor_with_fewest_inner_training_windows": "gait120",
+   "its_inner_training_windows": 2072,
+   "W_max": 2048,
+   "margin_over_W_max_windows": 24,
+   "rule": "the smallest number of unique inner-training windows in any Q anchor, rounded down to a power of 2; every training-role recording of the anchor counts",
+   "gait120": {
+    "inner_training_windows": 2072,
+    "from_step_segments": 1923,
+    "from_static_trials": 149,
+    "static_trial_recordings_inner_training": 52,
+    "signal_kinds_with_values_in_static_trials": [
+     "kin:marker"
+    ],
+    "static_trial_windows_hold": "markers only (no EMG, no force)",
+    "why_static_trials_count": "static trials are training-role recordings of the training people and were counted in the first count as well; the rule is applied as written",
+    "W_max_from_step_segments_alone": 1024,
+    "margin_over_W_max_windows": 24,
+    "Q_arm_at_W_max": {
+     "windows_used": 2048,
+     "windows_available": 2072
+    },
+    "report_rule": "every Q-arm report gives the number of static-trial windows drawn at each level",
+    "step_segments": {
+     "count": 3761,
+     "median_s": 1.26,
+     "min_s": 0.86,
+     "max_s": 3.27,
+     "protocol_expected_s": "1.5-1.65",
+     "shorter_than_one_1200ms_window": 1383,
+     "note": "a departure recorded in revision 3: a segment shorter than one 1.2 s window gives training steps but no counted window"
+    }
+   }
+  },
+  "q_levels": [
+   128,
+   512,
+   2048
+  ],
+  "updates_per_arm_U": 640,
+  "D_arm_eligible_sources": [
+   "area2",
+   "ds003739",
+   "gait120",
+   "hygrip",
+   "hyser",
+   "katmah",
+   "moreira",
+   "ofner",
+   "sabes",
+   "schreiber_moissenet",
+   "wtrack"
+  ],
+  "D_arm_eligibility_threshold_windows": 256,
+  "inner_training_windows_by_source": {
+   "area2": 458,
+   "cemhsey": 200,
+   "ds003739": 29004,
+   "gait120": 2072,
+   "hygrip": 4527,
+   "hyser": 1800,
+   "izmir": 31,
+   "katmah": 4664,
+   "moreira": 1982,
+   "ofner": 13532,
+   "sabes": 1281,
+   "schreiber_moissenet": 897,
+   "van_criekinge": 52,
+   "wtrack": 51772
+  },
+  "D_arm_candidates": {
+   "wave_1": [
+    "cemhsey",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "izmir",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "van_criekinge",
+    "wtrack"
+   ],
+   "conditional_admitted": [
+    "area2"
+   ],
+   "conditional_not_admitted": {
+    "falcon_m1": "Q2 role: no held-in-calib day is free. 20120928 was scored by earlier project work; 20120924, 20120926 and 20120927 are the primary candidate pool of an author-frozen cross-session contract of a line on hold."
+   }
+  },
+  "D_arm_orders": {
+   "k2|draw0": [
+    "ofner",
+    "katmah",
+    "hyser",
+    "schreiber_moissenet",
+    "cemhsey",
+    "area2",
+    "sabes",
+    "moreira",
+    "ds003739",
+    "wtrack",
+    "van_criekinge",
+    "izmir",
+    "hygrip",
+    "gait120"
+   ],
+   "k2|draw1": [
+    "area2",
+    "sabes",
+    "ofner",
+    "van_criekinge",
+    "moreira",
+    "hygrip",
+    "katmah",
+    "ds003739",
+    "wtrack",
+    "gait120",
+    "izmir",
+    "schreiber_moissenet",
+    "hyser",
+    "cemhsey"
+   ],
+   "k2|draw2": [
+    "area2",
+    "hygrip",
+    "katmah",
+    "hyser",
+    "schreiber_moissenet",
+    "gait120",
+    "cemhsey",
+    "sabes",
+    "van_criekinge",
+    "ds003739",
+    "izmir",
+    "wtrack",
+    "moreira",
+    "ofner"
+   ],
+   "k4|draw0": [
+    "ds003739",
+    "izmir",
+    "katmah",
+    "gait120",
+    "area2",
+    "schreiber_moissenet",
+    "hygrip",
+    "sabes",
+    "hyser",
+    "cemhsey",
+    "van_criekinge",
+    "moreira",
+    "wtrack",
+    "ofner"
+   ],
+   "k4|draw1": [
+    "ofner",
+    "gait120",
+    "cemhsey",
+    "ds003739",
+    "hygrip",
+    "hyser",
+    "sabes",
+    "schreiber_moissenet",
+    "van_criekinge",
+    "wtrack",
+    "izmir",
+    "area2",
+    "katmah",
+    "moreira"
+   ],
+   "k4|draw2": [
+    "ds003739",
+    "van_criekinge",
+    "ofner",
+    "hyser",
+    "sabes",
+    "gait120",
+    "cemhsey",
+    "moreira",
+    "schreiber_moissenet",
+    "hygrip",
+    "area2",
+    "katmah",
+    "izmir",
+    "wtrack"
+   ],
+   "k8|draw0": [
+    "sabes",
+    "area2",
+    "gait120",
+    "hyser",
+    "izmir",
+    "moreira",
+    "ofner",
+    "ds003739",
+    "cemhsey",
+    "wtrack",
+    "katmah",
+    "hygrip",
+    "schreiber_moissenet",
+    "van_criekinge"
+   ],
+   "k8|draw1": [
+    "ofner",
+    "wtrack",
+    "moreira",
+    "schreiber_moissenet",
+    "hyser",
+    "sabes",
+    "van_criekinge",
+    "ds003739",
+    "cemhsey",
+    "gait120",
+    "hygrip",
+    "area2",
+    "katmah",
+    "izmir"
+   ],
+   "k8|draw2": [
+    "sabes",
+    "ofner",
+    "katmah",
+    "van_criekinge",
+    "schreiber_moissenet",
+    "wtrack",
+    "area2",
+    "ds003739",
+    "hyser",
+    "hygrip",
+    "cemhsey",
+    "gait120",
+    "izmir",
+    "moreira"
+   ]
+  },
+  "D_arm_orders_restricted_to_wave_1_equal_ALLOCATION_json": true,
+  "D_arm_rule": "A source is eligible for the D arms if it has at least W_max/8 unique inner-training windows. A source enters a k-source arm (k in {2, 4, 8}) only if it has at least W_max/k unique inner-training windows. For each k and each draw, the order of that draw in D-ARM-ORDERS.json is walked from the top: a source that is not eligible, or that has fewer than W_max/k windows (short for this k), is skipped, and the first k sources that remain form the arm. Each source of the arm gives W_max/k unique windows: the first W_max/k of its inner-training windows in the fixed hash order (the window order of ALLOCATION.json q_window_rule, applied to that source). A skipped source stays available to the arms with a larger k and to D_all. D_all takes floor(W_max / n) unique windows from each of the n eligible sources, in the same window order.",
+  "D_arm_windows_per_source": {
+   "2": 1024,
+   "4": 512,
+   "8": 256
+  },
+  "D_arm_sources_with_a_whole_share": {
+   "2": [
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "wtrack"
+   ],
+   "4": [
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ],
+   "8": [
+    "area2",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ]
+  },
+  "D_arms": {
+   "k2|draw0": {
+    "sources": [
+     "ofner",
+     "katmah"
+    ],
+    "windows_per_source": 1024,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k2|draw1": {
+    "sources": [
+     "sabes",
+     "ofner"
+    ],
+    "windows_per_source": 1024,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "area2",
+      "inner_training_windows": 458,
+      "why": "short for this k: fewer than W_max/2"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k2|draw2": {
+    "sources": [
+     "hygrip",
+     "katmah"
+    ],
+    "windows_per_source": 1024,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "area2",
+      "inner_training_windows": 458,
+      "why": "short for this k: fewer than W_max/2"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k4|draw0": {
+    "sources": [
+     "ds003739",
+     "katmah",
+     "gait120",
+     "schreiber_moissenet"
+    ],
+    "windows_per_source": 512,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "izmir",
+      "inner_training_windows": 31,
+      "why": "not eligible: fewer than W_max/8"
+     },
+     {
+      "source": "area2",
+      "inner_training_windows": 458,
+      "why": "short for this k: fewer than W_max/4"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k4|draw1": {
+    "sources": [
+     "ofner",
+     "gait120",
+     "ds003739",
+     "hygrip"
+    ],
+    "windows_per_source": 512,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "cemhsey",
+      "inner_training_windows": 200,
+      "why": "not eligible: fewer than W_max/8"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k4|draw2": {
+    "sources": [
+     "ds003739",
+     "ofner",
+     "hyser",
+     "sabes"
+    ],
+    "windows_per_source": 512,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "van_criekinge",
+      "inner_training_windows": 52,
+      "why": "not eligible: fewer than W_max/8"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k8|draw0": {
+    "sources": [
+     "sabes",
+     "area2",
+     "gait120",
+     "hyser",
+     "moreira",
+     "ofner",
+     "ds003739",
+     "wtrack"
+    ],
+    "windows_per_source": 256,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "izmir",
+      "inner_training_windows": 31,
+      "why": "not eligible: fewer than W_max/8"
+     },
+     {
+      "source": "cemhsey",
+      "inner_training_windows": 200,
+      "why": "not eligible: fewer than W_max/8"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k8|draw1": {
+    "sources": [
+     "ofner",
+     "wtrack",
+     "moreira",
+     "schreiber_moissenet",
+     "hyser",
+     "sabes",
+     "ds003739",
+     "gait120"
+    ],
+    "windows_per_source": 256,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "van_criekinge",
+      "inner_training_windows": 52,
+      "why": "not eligible: fewer than W_max/8"
+     },
+     {
+      "source": "cemhsey",
+      "inner_training_windows": 200,
+      "why": "not eligible: fewer than W_max/8"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k8|draw2": {
+    "sources": [
+     "sabes",
+     "ofner",
+     "katmah",
+     "schreiber_moissenet",
+     "wtrack",
+     "area2",
+     "ds003739",
+     "hyser"
+    ],
+    "windows_per_source": 256,
+    "unique_windows": 2048,
+    "complete": true,
+    "skipped_in_the_order": [
+     {
+      "source": "van_criekinge",
+      "inner_training_windows": 52,
+      "why": "not eligible: fewer than W_max/8"
+     }
+    ],
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   }
+  },
+  "D_arms_changed_from_the_revision_2_rule": {
+   "k2|draw1": {
+    "revision_2_rule": [
+     "area2",
+     "sabes"
+    ],
+    "revision_3_rule": [
+     "sabes",
+     "ofner"
+    ]
+   },
+   "k2|draw2": {
+    "revision_2_rule": [
+     "area2",
+     "hygrip"
+    ],
+    "revision_3_rule": [
+     "hygrip",
+     "katmah"
+    ]
+   },
+   "k4|draw0": {
+    "revision_2_rule": [
+     "ds003739",
+     "katmah",
+     "gait120",
+     "area2"
+    ],
+    "revision_3_rule": [
+     "ds003739",
+     "katmah",
+     "gait120",
+     "schreiber_moissenet"
+    ]
+   }
+  },
+  "D_all": {
+   "sources": [
+    "area2",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ],
+   "windows_per_source": 186,
+   "unique_windows": 2046,
+   "windows_short_of_W_max": 2,
+   "note": "floor(W_max / number of eligible sources) windows from each; the arm is short of W_max by the remainder",
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "P_arms": {
+   "ds003739": {
+    "levels_people": [
+     2,
+     4,
+     14
+    ],
+    "windows_of_smallest_level": {
+     "people": 2,
+     "windows": 4188
+    },
+    "W_P": 512,
+    "W_P_set_by": "W_max/4 (512 windows)",
+    "windows_per_level": {
+     "2": 4188,
+     "4": 8284,
+     "14": 29004
+    }
+   },
+   "gait120": {
+    "levels_people": [
+     3,
+     13,
+     52
+    ],
+    "windows_of_smallest_level": {
+     "people": 3,
+     "windows": 105
+    },
+    "W_P": 64,
+    "W_P_set_by": "the smallest level (3 people, 105 windows)",
+    "windows_per_level": {
+     "3": 105,
+     "13": 488,
+     "52": 2072
+    },
+    "limit": "the 3-person level has 105 windows, so each P arm of this dataset has 64 windows (W_max/4 would be 512); a limit of the arm, kept as the rule gives it"
+   }
+  },
+  "rule": "W_max = smallest anchor inner-training window count rounded down to a power of 2; D-arm orders by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset) over the wave-1 sources and the admitted conditional sources; a source needs at least W_max/8 inner-training windows to be eligible and at least W_max/k to enter a k-source arm, and each arm takes the first k sources of its order that have W_max/k; D_all takes floor(W_max / n) windows from each of the n eligible sources; W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level)"
+ },
+ "updated_at": "2026-11-28T11:03:13+1100",
+ "no_recording_values": true,
+ "padded_share": {
+  "rule": "each recording tiled into ceil(L/T) rows of T steps; share = padded positions / all positions",
+  "all_qualified_datasets": {
+   "64": 0.0208,
+   "128": 0.0434,
+   "256": 0.1059,
+   "512": 0.2248
+  },
+  "per_dataset": {
+   "area2": {
+    "64": 0.1818,
+    "128": 0.3196,
+    "256": 0.4474,
+    "512": 0.7171
+   },
+   "cemhsey": {
+    "64": 0.0228,
+    "128": 0.0228,
+    "256": 0.0228,
+    "512": 0.0228
+   },
+   "ds003739": {
+    "64": 0.0011,
+    "128": 0.0025,
+    "256": 0.0048,
+    "512": 0.0088
+   },
+   "gait120": {
+    "64": 0.2874,
+    "128": 0.4851,
+    "256": 0.7375,
+    "512": 0.8687
+   },
+   "hygrip": {
+    "64": 0.0131,
+    "128": 0.0272,
+    "256": 0.0542,
+    "512": 0.1297
+   },
+   "hyser": {
+    "64": 0.0234,
+    "128": 0.0234,
+    "256": 0.0234,
+    "512": 0.1862
+   },
+   "izmir": {
+    "64": 0.3035,
+    "128": 0.5015,
+    "256": 0.7508,
+    "512": 0.8754
+   },
+   "katmah": {
+    "64": 0.0071,
+    "128": 0.0209,
+    "256": 0.0212,
+    "512": 0.0226
+   },
+   "moreira": {
+    "64": 0.0843,
+    "128": 0.1826,
+    "256": 0.2531,
+    "512": 0.4614
+   },
+   "ofner": {
+    "64": 0.0027,
+    "128": 0.0041,
+    "256": 0.0101,
+    "512": 0.0138
+   },
+   "sabes": {
+    "64": 0.0039,
+    "128": 0.0091,
+    "256": 0.0091,
+    "512": 0.0091
+   },
+   "schreiber_moissenet": {
+    "64": 0.2313,
+    "128": 0.2768,
+    "256": 0.5175,
+    "512": 0.7566
+   },
+   "van_criekinge": {
+    "64": 0.1965,
+    "128": 0.3431,
+    "256": 0.4252,
+    "512": 0.7126
+   },
+   "wtrack": {
+    "64": 0.0004,
+    "128": 0.0011,
+    "256": 0.002,
+    "512": 0.0041
+   }
+  }
+ },
+ "re_estimate": {
+  "unique_steps_20ms": 8312952,
+  "design_range_steps": "8-30 million (PROTOCOL.json time_estimates)",
+  "not_part_of_this_step": "the 512-step GPU throughput and 16-thread CPU issuing measurements and the recomputed P3-P9 times are made before model choice, not in the data step"
+ },
+ "protocol_heads_at_p1": {
+  "note": "Protocol commit and file hashes recorded when each P1 download started. Revision 1 is commit 17f956b (PROTOCOL.json fec43882...). Revision 2 is PROTOCOL.json 9475bad0...: commit 7d09f33 is the revision-2 commit before the protocol branch was rebased (it is 554c59c on the branch; likewise a246e2b is 57c04e8, used by the first Gait120 tokenisation), and cc2cbda is the branch head, whose PROTOCOL.json is the same file. The Katmah force-plate download and Gait120 pass 1 ran under revision 1; their P1 entries are identical in revision 2, which only drops IBL from the conditional line. Every P2 tokenisation ran under revision 2.",
+  "downloads": [
+   {
+    "dataset": "katmah",
+    "what": "force-plate files of identifiers 1-40 at 0.5 m/s",
+    "commit": "17f956b17b23bcc27d30a16d417d2ade23310da0",
+    "PROTOCOL.json_sha256": "fec43882b8972fc0709e967ec4a914a6715ec00201c3a2215bdbdd79568eb6fa",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 1,
+    "read_at": "2026-11-27T21:44:56+1100"
+   },
+   {
+    "dataset": "gait120",
+    "what": "pass 1: 262 member ranges of the 66 development people",
+    "commit": "17f956b17b23bcc27d30a16d417d2ade23310da0",
+    "PROTOCOL.json_sha256": "fec43882b8972fc0709e967ec4a914a6715ec00201c3a2215bdbdd79568eb6fa",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 1,
+    "read_at": "2026-11-27T21:44:31+1100"
+   },
+   {
+    "dataset": "gait120",
+    "what": "pass 2: the same 262 ranges",
+    "commit": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:12:04+1100"
+   },
+   {
+    "dataset": "gait120",
+    "what": "pass 3 (data review round 2): the same 262 ranges, byte-identical to pass 2",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-28T01:05:54+1100"
+   },
+   {
+    "dataset": "ds003739",
+    "what": "sessions 1-3 of the 18 development people",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:50:29+1100"
+   },
+   {
+    "dataset": "ofner",
+    "what": "first fetch: S1-S7 motor-execution runs 4-10",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-28T00:33:47+1100"
+   },
+   {
+    "dataset": "ofner",
+    "what": "second fetch (data review round 2), stopped after 30 whole files and part of a 31st; not used for any token",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": null,
+    "note": "The head was not written down when this fetch started (first request 01:06:01 on 28 Nov). The protocol branch's own log shows its head unchanged from 22:47:06 on 27 Nov to 08:47 on 28 Nov, so the fetch ran at this commit.",
+    "recorded_at": "2026-11-28T08:51:33+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "ER1 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:51:58+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "JS14 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T23:05:11+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "JS15 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:55:56+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "JS17 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T23:03:01+1100"
+   }
+  ]
+ },
+ "protocol_revision_by_step": {
+  "note": "Which protocol revision governed which step. A commit is named as it is on the branch; the hash in brackets is the same commit before the protocol branch was rebased, as the download records hold it.",
+  "steps": [
+   {
+    "steps": "P1: the Katmah force-plate download and the first Gait120 pass",
+    "revision": 1,
+    "commit": "c0e522fcb45183ed98cf54a86af6dc9e8b0fb9ac (17f956b17b23bcc27d30a16d417d2ade23310da0)"
+   },
+   {
+    "steps": "the rest of P1 and all of P2",
+    "revision": 2,
+    "commit": "554c59c219e113e8d8746f7120b5a5699a98188e (7d09f33101f78e79bd42dbda84722a4203f7c1df); the later branch head cc2cbda25ec4243b132cb8badffe4c7d081719fe holds the same PROTOCOL.json"
+   },
+   {
+    "steps": "P3 onwards",
+    "revision": 3,
+    "commit": "the commit named in the protocol entry of MIXTURE-MANIFEST.json"
+   }
+  ]
+ }
+}
