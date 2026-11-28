@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Pinch and hook forecasts | NeuroTranslate</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="gesture.css">
+  <script src="study-data.js" defer></script>
+  <script src="replay.js" defer></script>
+  <script src="model-data.js" defer></script>
+  <script src="trained.js" defer></script>
+  <script src="page.js" defer></script>
+</head>
+<body>
+<header><nav class="frame" aria-label="Study navigation">
+  <a href="../index.html">Back to the short-history forecast</a>
+  <div class="links"><a href="simple.html">Simple guide</a><a href="technical.html">Technical guide</a></div>
+</nav></header>
+<main class="frame">
+  <h1>Pinch and hook forecasts</h1>
+  <p class="intro">Use four seconds of movement to estimate how far a finger will bend at its base 320 milliseconds later.</p>
+  <noscript><p>Enable JavaScript to run the forecasts and display recorded results.</p></noscript>
+  <div class="workbench">
+    <section class="card" aria-labelledby="input-title">
+      <h2 id="input-title">Movement history</h2>
+      <p id="source" class="source">Invented example</p>
+      <fieldset id="example-controls">
+        <legend>Invented movement</legend>
+        <div class="controls">
+          <label>Gesture<select id="example-gesture"><option value="IndPinch">Index pinch</option><option value="Hook">Hook</option></select></label>
+          <label>Speed<select id="example-speed"><option>Slow</option><option selected>Medium</option><option>Fast</option></select></label>
+        </div>
+      </fieldset>
+      <label class="check"><input id="echo" type="checkbox" aria-describedby="echo-note"> Include ultrasound readings</label>
+      <p id="echo-note" class="hint">The example includes invented measurements from sixteen parts of an ultrasound image.</p>
+      <details id="import-help"><summary>Use a local recording</summary>
+        <p>Use 101 readings taken 40 milliseconds apart, oldest first. Each row of <code>history</code> gives four angles in degrees, in index, middle, ring and pinky order. If available, append the sixteen logged ultrasound tile values to every row.</p>
+        <p><a href="example.json" download>Download an example JSON file</a> · <a href="technical.html">Ultrasound input format</a></p>
+        <label for="history-file">Open JSON file (up to 4 MiB)</label><input id="history-file" type="file" accept=".json,application/json">
+        <p class="hint">Your file stays in this browser.</p>
+      </details>
+      <button id="reset" type="button">Restore invented example</button>
+      <p id="input-status" class="hint" role="status" aria-live="polite"></p>
+    </section>
+    <section class="card forecast" aria-labelledby="forecast-title">
+      <h2 id="forecast-title">Forecast 320 ms ahead</h2>
+      <div class="controls chart-controls">
+        <label>Finger<select id="finger"><option value="0">Index</option><option value="1">Middle</option><option value="2">Ring</option><option value="3">Pinky</option></select></label>
+        <label>Method<select id="chart-method"></select></label>
+      </div>
+      <figure><canvas id="chart" role="img" aria-label="Earlier finger angles and the selected forecast" aria-describedby="chart-note forecast-values"></canvas>
+        <figcaption><span><i class="line-key"></i>Earlier angles</span><span id="match-key" hidden><i class="match-key"></i>Earlier match</span><span><i class="point-key"></i>Forecast</span></figcaption>
+      </figure>
+      <dl id="forecast-values">
+        <div><dt>Last reading</dt><dd><output id="now">—</output></dd></div>
+        <div><dt>Forecast</dt><dd><output id="later">—</output></dd></div>
+        <div><dt>Change</dt><dd><output id="change">—</output></dd></div>
+      </dl>
+      <p id="chart-note" class="hint"></p>
+    </section>
+  </div>
+  <section class="card results" aria-labelledby="results-title">
+    <h2 id="results-title">Forecast errors on recorded movements</h2>
+    <p>Four people repeated index pinches and hooks. For each of eight tests, the study trained its models without the test person or the test gesture. The table compares those forecasts with rules that use earlier readings. The interactive fitted models above learned from all 40 development recordings.</p>
+    <div class="controls study-filters">
+      <label>Recorded movement<select id="study-gesture"><option value="All">Both movements</option><option value="IndPinch">Index pinch</option><option value="Hook">Hook</option></select></label>
+      <label>Recorded speed<select id="study-speed"><option value="All">All speeds</option><option>Slow</option><option>Medium</option><option>Fast</option></select></label>
+      <label>Reported fingers<select id="study-finger"><option value="All">Four-finger average</option><option value="0">Index</option><option value="1">Middle</option><option value="2">Ring</option><option value="3">Pinky</option></select></label>
+    </div>
+    <p id="coverage" class="hint" role="status"></p>
+    <table><caption id="score-caption">Average size of the forecast error in degrees. Smaller is better.</caption>
+      <thead><tr><th scope="col">Method</th><th scope="col">Mean error (°)</th></tr></thead>
+      <tbody id="recorded-errors"></tbody>
+    </table>
+    <p>Each person contributes equally to the average. All ten methods use the same forecast times, after four seconds of movement have accumulated. The rule that chooses replay or hold was tested later on the same development recordings.</p>
+  </section>
+</main>
+</body>
+</html>

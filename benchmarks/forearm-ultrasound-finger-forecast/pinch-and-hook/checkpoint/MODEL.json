@@ -1,0 +1,46 @@
+{
+  "name": "Finger angle forecast during a pinch or hook",
+  "format_version": 1,
+  "run": [
+    "Create a Python environment and install the packages from this directory with python -m pip install -r requirements.txt.",
+    "Run python predict.py --example to forecast four finger angles from invented camera and ultrasound measurements.",
+    "Run python predict.py my-history.json to use your own measurements. Use python predict.py - to read the same JSON from standard input."
+  ],
+  "input": {
+    "object": "One JSON object with the field history.",
+    "history": "Supply 101 consecutive frames, earliest first, spanning four seconds at the nominal sampling rate of 25 Hz. Keep every row the same width. All values must be finite numbers.",
+    "first_four": "Optically measured angles in degrees, in the order index, middle, ring, pinky.",
+    "optional_next_sixteen": "For each synchronized 636 by 256 ultrasound frame, apply the stored amplitude scale. Take the mean in each tile of a 4 by 4 grid, then apply log1p to each mean. Append those 16 values in row-major order. Supply the original logged means. The predictor subtracts the first frame's tile value from the rest of that tile's history."
+  },
+  "output": {
+    "values": "Each key has four predicted absolute angles in degrees, ordered index, middle, ring, pinky. The forecast time is eight frames after the last observation, or 320 ms at 25 Hz.",
+    "methods": "past_angle_trend extends a line fitted to the last five angle samples. angle_ridge and angle_recurrent use the 101 angle frames. A 20-column history also yields ultrasound_ridge, ultrasound_recurrent, joint_ridge and joint_recurrent. The ultrasound-only models use the tile history for the change and the latest optical angles as the starting position."
+  },
+  "calibration": "CALIBRATION.npz contains float64 input means and standard deviations (20 each), four target scales for the recurrent predictions, and ridge coefficient matrices called angle, ultrasound and joint. Row zero holds the intercept. Remaining rows follow frame order then the active input columns. Ridge outputs are changes in degrees.",
+  "network": "Each .safetensors file stores one trained set of 8,764 float32 parameters with its original PyTorch names. The causal 3-frame convolution has width 24 and a SiLU activation. A GRU reads the sequence. Three GRUCell updates share the final summary and cell weights before the four-output linear layer. Each modality uses the two seed files in its name group. Multiply each seed's output by the four training target scales, average those changes, then add the last measured angles.",
+  "execution": "All methods use the fixed training means and scales. Standardized inputs are rounded to float32. The native CPU command uses the original issuer's 512-row block shape to preserve its floating-point arithmetic. The command processes one history and returns the first row.",
+  "tested_runtime": {
+    "python": "3.13.15",
+    "numpy": "2.5.3",
+    "torch": "2.14.1+cpu",
+    "safetensors": "0.8.0",
+    "device": "CPU"
+  },
+  "data_attribution": {
+    "recordings": "Keshav Bimbraw",
+    "source": "https://doi.org/10.5281/zenodo.21825018",
+    "methods": "https://doi.org/10.1109/TMRB.2023.3237774",
+    "source_license": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "Recorded angles and ultrasound tiles supplied the inputs for fitting ridge and recurrent angle-change predictors."
+  },
+  "scope": "The weights in this package were fitted on all 40 development recordings. The published errors come from separate fits that excluded the scored person and gesture. The packaged predictions were compared with the original Python calculations on invented inputs. Live sensor latency and performance on additional people need separate measurements.",
+  "sha256": {
+    "CALIBRATION.npz": "c50b8f0b5d96c0ce801c09dc90501ec7e2d6c19e5b07b6147542ddeb7ad7543b",
+    "seed-20261126/angle.safetensors": "3d76f5504742ed1c4fac580d4e162ac0b53faeeca533d5db7ab14dbb8ec32c10",
+    "seed-20261126/ultrasound.safetensors": "92f78f6891ff18fbbb626e1b008c748e2a092ada8e80b8538537b66531ce6dba",
+    "seed-20261126/joint.safetensors": "459c78e64ac2bb57e5cf80bbe338a19b9e206f553a268ff0d41f3e5b193aeefb",
+    "seed-20261127/angle.safetensors": "7b2feffc0cf9c1ef88ab5a279ea069be728196d26014ce7fa6e2c438207aaba1",
+    "seed-20261127/ultrasound.safetensors": "344a8896a258f87b4c173079ad654ff313f725e6a97ccc5bd26a071cd02ab8e3",
+    "seed-20261127/joint.safetensors": "3a74d928c42cea815c1eda7b39bcbfdfbb2f333a796672d1605e3182176b9ee8"
+  }
+}

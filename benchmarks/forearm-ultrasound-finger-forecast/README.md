@@ -1,5 +1,7 @@
 # Finger-angle forecast
 
+The pinch and hook forecast uses four seconds of earlier movement. It compares fitted linear and recurrent models with holding the last angle, extending a trend, replaying earlier motion and choosing between replay and hold. [Pinch and hook forecast](https://eliminatenoise.github.io/NeuroTranslation/finger-angle-forecast/gesture-replay/) · [Recorded comparison](pinch-and-hook/README.md)
+
 [Run online](https://eliminatenoise.github.io/NeuroTranslation/finger-angle-forecast/) · [Download the offline browser model](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/docs/finger-angle-forecast-offline.zip) · [Simple guide](SIMPLE.md) · [Technical guide](TECHNICAL.md) · [Exact errors](RESULTS.json)
 
 The model estimates the change in four finger angles 320 milliseconds ahead. It runs on an invented example or a compatible file in your browser. The offline download includes launchers for Windows, macOS and Linux.
